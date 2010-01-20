@@ -1,0 +1,11 @@
+#!/bin/bash
+#
+# eso.org
+# Copyright 2009 ESO & ESA/Hubble
+#
+# Authors:
+#   Lars Holm Nielsen <lnielsen@eso.org>
+#   Luis Clara Gomes <lcgomes@eso.org>
+#
+source /home/web/media/virtualenv/bin/start_shell.sh
+python projects/eso.org/src/eso/manage.py cron 1>/dev/null

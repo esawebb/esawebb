@@ -1,0 +1,12 @@
+#Tue Jan 19 16:08:33 CET 2010
+eclipse.preferences.version=1
+encoding//docs/conf.py=utf-8
+encoding//src/spacetelescope/admin.py=utf-8
+encoding//src/spacetelescope/appregister.py=utf-8
+encoding//src/spacetelescope/cron.py=utf-8
+encoding//src/spacetelescope/manage.py=utf-8
+encoding//src/spacetelescope/settings.py=utf-8
+encoding//src/spacetelescope/urls.py=utf-8
+encoding//src/spacetelescope/views.py=utf-8
+encoding/fabfile.py=utf-8
+encoding/pavement.py=utf-8

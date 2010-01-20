@@ -1,0 +1,16 @@
+#
+# spacetelescope.org
+# Copyright 2010 ESO & ESA/Hubble
+#
+# Authors:
+#   Lars Holm Nielsen <lnielsen@eso.org>
+#   Luis Clara Gomes <lcgomes@eso.org>
+#
+recursive-include templates *
+recursive-include static *
+recursive-include fixtures *
+recursive-include docs *
+recursive-include bin *
+recursive-include conf *
+include *.py
+prune docs/build

@@ -1,0 +1,23 @@
+[
+    {
+        "pk": 1, 
+        "model": "releases.releasetype", 
+        "fields": {
+            "name": "News Release"
+        }
+    }, 
+    {
+        "pk": 2, 
+        "model": "releases.releasetype", 
+        "fields": {
+            "name": "Organisation Release"
+        }
+    }, 
+    {
+        "pk": 3, 
+        "model": "releases.releasetype", 
+        "fields": {
+            "name": "Photo Release"
+        }
+    }
+]

@@ -1,0 +1,347 @@
+/* default font - site wide */
+body, a, b, i, strong, form, input, span, table, tr, tbody, td, sub, sup, p, li, ul, ol,  h1, h2, h3, h4, h5, h6 {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+}
+
+/* default font size - site wide */
+body, a, b, i, input, tbody, td, p, li, ul, ol {
+	font-size: 11px;
+}
+
+body {
+	background-image: url(../design/bg.gif);
+	margin: 4px;
+	color: #000000;
+}
+
+/* header styles */
+.header {
+	position:relative; 
+	width:842px; 
+	height:151px; 
+	background-image: url(../design/topimage.jpg); 
+}
+
+.headerContent {
+	position:relative; 
+	width: 370px; 
+	left: 372px; 
+	top: 85px;
+	color: #FFFFFF;
+}
+
+.esalogolink{
+	position:relative; 
+	width: 88px;
+	height: 31; 
+	left: 655px; 
+	top: 69px;
+}
+
+/* definitions of menu and content area*/
+.mainarea {
+	width: 802px;
+	margin-top: 0px;
+	margin-right: 0px;
+	margin-bottom: 0px;
+	margin-left: 0px;
+	background-image: url(../design/mainarea_bg.gif);
+	background-repeat: repeat-y;
+	padding: 20px;
+}
+
+.mainend {
+	margin-top: 0px;
+	margin-right: 0px;
+	margin-bottom: 0px;
+	margin-left: 0px;
+}
+
+/* copyright statement */
+.copyright {
+	margin: 4px;
+	color: #595959;
+}
+
+/* copyright statement */
+a:link.copyrightlink, a:active.copyrightlink, a:visited.copyrightlink {
+	margin: 4px;
+	color: #595959;
+	text-decoration: underline;
+}
+
+a:hover.copyrightlink {
+	margin: 4px;
+	color: #FFEF42;
+	text-decoration: underline;
+}
+
+/* main menu styles */
+.mainMenuItemunselected, .mainMenuItemselected {
+	font-weight: bold;
+	background-image: url(../design/menu_unselected_bg.gif);
+	color: #FFFFFF;
+	height: 19px;
+	background-repeat: repeat-x;
+}
+
+.mainMenuItemunselected {
+	background-image: url(../design/menu_unselected_bg.gif);
+}
+
+.mainMenuItemselected {
+	background-image: url(../design/menu_selected_bg.gif);
+	color: #FFEF42; 
+}
+
+.mainMenuArea {
+	background-image: url(../design/menu_bg.gif);
+	margin-top: 4px;
+	margin-right: 0px;
+	margin-bottom: 0px;
+	margin-left: 0px;
+}
+
+/* main menu links */
+a:link.mainmenu, a:visited.mainmenu, a:active.mainmenu {
+	color:#FFFFFF;
+	text-decoration:none;
+}
+
+a:hover.mainmenu {
+	color: #FFEF42;
+	text-decoration:none;
+}
+
+/* contact and sitemap link in header*/
+a:link.headerlink, a:visited.headerlink, a:active.headerlink {
+	color:#FFFFFF;
+	text-decoration:none; 
+}
+
+a:hover.headerlink {
+	color:#FFFFFF;
+	text-decoration:underline;
+}
+
+/* sub menu styles */
+a:link.submenuHeadline, a:link.submenuItem, a:link.submenuSubItem,
+a:visited.submenuHeadline, a:visited.submenuItem, a:visited.submenuSubItem,
+a:active.submenuHeadline, a:active.submenuItem, a:active.submenuSubItem {
+	color: #000000;
+	text-decoration: none;
+}
+
+a:hover.submenuHeadlineSelected, a:hover.submenuItemSelected, a:hover.submenuSubItemSelected,
+a:hover.submenuHeadline, a:hover.submenuItem, a:hover.submenuSubItem,
+a:link, a:active, a:visited, a:hover {
+	/*FFEF42 306DFF*/
+	color: #FFFFFF;
+}
+
+a:hover.submenuHeadlineSelected, a:hover.submenuItemSelected, a:hover.submenuSubItemSelected,
+a:hover.submenuHeadline, a:hover.submenuItem, a:hover.submenuSubItem,
+a:link, a:active, a:visited {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: none; 
+	color: #FFEF42;
+}
+
+a.submenuHeadline, a.submenuHeadlineSelected {
+	font-weight: bold;
+	font-size: 12px;
+	line-height: 40px;
+}
+
+a.submenuItem, a.submenuItemSelected {
+	font-weight: bold;
+	font-size: 11px;
+	line-height: 16px;
+}
+
+a.submenuSubItem {
+	font-weight: normal;
+	font-size: 11px; 
+}
+
+ul.submenuList {
+	margin-top: 2px;
+	margin-bottom: 2px;
+	line-height: 16px;
+}
+
+/* general content boxes */
+.top25imgs {
+	margin-bottom: 0px;
+}
+
+.boxcorner{
+	width: 11px;
+	height: 11px;
+}
+
+.boxtopcen {
+	background-image: url(../design/boxtopcen.gif);
+	background-repeat: repeat-x;
+}
+
+.boxmidleft {
+	background-image: url(../design/boxmidleft.gif);
+	background-repeat: repeat-y;
+}
+
+.boxmidcen, .boxnewsarea, .boxtopimages {
+	background-image: url(../design/boxmidcen.gif);
+	background-repeat: repeat;
+	/* IE 5 and 5.5 will probably have a problem with next property */
+	vertical-align: top;
+}
+
+.boxmidright {
+	background-image: url(../design/boxmidright.gif);
+	background-repeat: repeat-y;
+}
+
+.boxbotcen {
+	background-image: url(../design/boxbotcen.gif);
+	background-repeat: repeat-x;
+}
+
+.boxcontent {
+	background-repeat: repeat-y;
+	padding-left: 15px;
+	padding-right: 15px;
+	padding-bottom: 15px;
+	padding-top: 10px;
+}
+
+/* front page boxes */
+.boxnewsarea, .newsareatable {
+	height: 300px;
+}
+
+.adsareatable {
+	/* this height is equal to boxnewsarea/newareatable height plus 22px*/
+	height: 322px;
+	width: 285px;
+}
+
+.boxtopimages, .boxnewsarea, .newsareatable {
+	width: 475px;
+}
+
+.newstd {
+	height: 100px;
+	/*vertical-align: top;*/
+}
+
+.adstd {
+	height: 161px;
+	width: 50%;
+}
+
+a:link.frontpagenews, a:active.frontpagenews, a:visited.frontpagenews {
+	color: #000000;
+	text-decoration: none;
+}
+
+a:hover.frontpagenews {
+	color: #666666;
+	text-decoration: none;
+}
+
+
+/* image archive front page */
+a:link.imgarc, a:visited.imgarc, a:active.imgarc, a:hover.imgarc {
+    text-decoration: none;
+    color: #000000;
+}
+
+/* page content styles - site wide */
+h1 {
+	font-size: 14px;
+	font-weight: bold;
+	margin-top: 0px;
+	margin-bottom: 14px;
+}
+
+h2 {
+	font-size: 12px;
+	font-weight: bold;
+	margin-top: 0px;
+	margin-bottom: 2px;
+}
+
+p, ul, ol, strong, a, .text {
+	line-height: 16px;
+}
+
+ul, ol {
+	margin-top: 2px;
+	margin-bottom: 2px;
+}
+
+p {
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+
+strong {
+	font-weight: bold;
+}
+.imgfloat {
+	float: left;
+}
+
+/* X Archive classes */
+.archive_table {
+	/*background-color: #000000;*/
+	border: 0;
+	width: 100%;
+	margin-bottom: 20px;
+}
+
+.archive_td, .archive_td_black, archive_td_bottom, archive_td_top {
+	margin: 0px;
+	padding: 0px;
+	border: 0;	
+	text-align: center;
+}
+
+.archive_td, .archive_td_black {
+	vertical-align: middle;
+}
+
+.archive_td_top {
+	vertical-align: top;
+}
+
+.archive_td_bottom {
+	vertical-align: bottom;
+}
+
+.archive_td_black {
+	background-color: #000000;
+}
+
+/* Printing classes */
+.noprint {
+	visibility:visible;
+}
+
+.noscreen, .printheader {
+	visibility: hidden;
+	position:absolute;
+	top: 0px;
+	left: 0px;
+	width: 0px;
+	height: 0px;
+}
+/* Wikipedia Links */
+.wiki a:link {color: #B6EFF6; text-decoration: none}
+.wiki a:visited {text-decoration: none; color: #B6EFF6}
+.wiki a:hover {text-decoration: none; color: #106ED8}
+.wiki a:active {text-decoration: none; color: #B6EFF6}

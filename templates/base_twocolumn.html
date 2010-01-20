@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block content_area %}
+<div id="twocolummcontent">
+<div id="maincolumn">
+{% block content %}{% endblock %}
+</div>
+<div id="rightcolumn">
+{% block rightcolumn %}{% load pages %}{% embed_page spacetelescope.right_column %}{% endblock %}
+</div>
+</div>
+{% endblock %}

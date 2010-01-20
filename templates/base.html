@@ -1,0 +1,177 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><!-- InstanceBegin template="/Templates/News Archive Page.dwt" codeOutsideHTMLIsLocked="false" -->
+<head>
+<link href="http://www.spacetelescope.org/rss/feed.xml" rel="alternate" type="application/rss+xml" title="Hubble Space Telescope News">
+<title>{% block site_title %}spacetelescope.org{% endblock %}</title>
+<link rel="SHORTCUT ICON" href="{{MEDIA_URL}}favicon.ico" />
+<link rel="ICON" href="{{MEDIA_URL}}favicon.ico" />
+<link href="{{MEDIA_URL}}style/style.css" rel="stylesheet" type="text/css" media="screen" />
+<link href="{{MEDIA_URL}}style/printstyle.css" rel="stylesheet" type="text/css" media="print" />
+<meta name="ROBOTS" content="INDEX,FOLLOW" />
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<meta name="Keywords" content="Hubble, Hubble Space Telescope, HST, JWST, James Webb Space Telescope, images, information centre, news, video, European Space Agency, ESA, ACS, WFPC2, WFPC, FOS, FOC, GHRS, NICMOS, STIS, FGS, goodies, wallpaper, calendar, posters">
+{% block extra_header %}{% endblock %}
+<script language="JavaScript" type="text/JavaScript">
+<!--
+if ( (navigator.appName == "Netscape") && (parseInt(navigator.appVersion) == 4)) {
+	window.location.href="{{MEDIA_URL}}netscape.html";
+}
+//-->
+</script>
+{% load menus %}{% init_menu 'Top Menu' as top_menu %}{% init_menu 'Main Menu' as main_menu %}{% init_menu 'Footer Menu' as footer_menu %}
+</head>
+<body>
+<table align="center" width="842"><tr><td>
+<div class="header">
+		<div class="esalogolink"><a href="http://www.esa.int"><img src="{{MEDIA_URL}}design/trans.gif" width="88" height="31" border="0"></a></div>
+        <div class="headerContent"> 
+          <form action="http://www.spacetelescope.org/search/htdig/bin/htsearch" method="get" name="SearchForm">
+		  	<input type="hidden" name="restrict" value="">
+			<input type="hidden" name="method" value="and"><!-- and, or--> 
+			<input type="hidden" name="format" value="builtin-long"><!-- builtin-long, builtin-short --> 
+			<input type="hidden" name="sort" value="score"><!-- score, time, title, revscore, revtime, revtitle -->
+			<input type="hidden" name="config" value="htdig-hubble">
+			<input type="hidden" name="exclude" value="">
+			<input type="hidden" name="isexternal" value="0">
+            <table width="100%" border="0" cellpadding="2">
+              <tr> 
+                <td>{% spaceless %}{% render_menu top_menu horizontal %}{% endspaceless %}</td>
+                <td align="right"><input name="words" type="text" class="searchField" title="Enter your search text" size="10" /> 
+                  &nbsp; <input name="SendSearch" type="submit" value="Search" /></td>
+              </tr>
+            </table>
+          </form>
+        </div>
+      </div>
+<div class="printheader"><img src="{{MEDIA_URL}}design/topimage.jpg" class="noscreen" /></div>
+<div class="mainMenuArea">
+<table cellpadding="0" cellspacing="0">
+<tr>
+<td><img src="{{MEDIA_URL}}design/menu_unselected_left.gif" class="noprint" /></td>
+<td class="mainMenuItemunselected"><a href="{% url spacetelescope.views.main_page %}" class="mainmenu">home</a></td>
+<td><img src="{{MEDIA_URL}}design/menu_unselected_right.gif" class="noprint" /></td>
+
+<td><img src="{{MEDIA_URL}}design/menu_selected_left.gif" class="noprint" /></td>
+<td class="mainMenuItemselected"><a href="/news/" class="mainmenu">news</a></td>
+<td><img src="{{MEDIA_URL}}design/menu_selected_right.gif" class="noprint" /></td>
+
+<td><img src="{{MEDIA_URL}}design/menu_unselected_left.gif" class="noprint" /></td> 
+<td class="mainMenuItemunselected"><a href="/images/" class="mainmenu">images</a></td>
+<td><img src="{{MEDIA_URL}}design/menu_unselected_right.gif" class="noprint" /></td>
+
+<td><img src="{{MEDIA_URL}}design/menu_unselected_left.gif" class="noprint" /></td>
+<td class="mainMenuItemunselected"><a href="/videos/" class="mainmenu">videos</a></td>
+<td><img src="{{MEDIA_URL}}design/menu_unselected_right.gif" class="noprint" /></td>
+
+<td><img src="{{MEDIA_URL}}design/menu_unselected_left.gif" class="noprint" /></td>
+<td class="mainMenuItemunselected"><a href="/goodies/" class="mainmenu">goodies</a></td>
+<td><img src="{{MEDIA_URL}}design/menu_unselected_right.gif" class="noprint" /></td>
+
+<td><img src="{{MEDIA_URL}}design/menu_unselected_left.gif" class="noprint" /></td>
+<td class="mainMenuItemunselected"><a href="/hubbleshop/" class="mainmenu">hubble shop</a></td>
+<td><img src="{{MEDIA_URL}}design/menu_unselected_right.gif" class="noprint" /></td>
+
+<td><img src="{{MEDIA_URL}}design/menu_unselected_left.gif" class="noprint" /></td>
+<td class="mainMenuItemunselected"><a href="/about/" class="mainmenu">about hubble</a></td>
+<td><img src="{{MEDIA_URL}}design/menu_unselected_right.gif" class="noprint" /></td>
+
+<td><img src="{{MEDIA_URL}}design/menu_unselected_left.gif" class="noprint" /></td>
+<td class="mainMenuItemunselected"><a href="/science/" class="mainmenu">science</a></td>
+<td><img src="{{MEDIA_URL}}design/menu_unselected_right.gif" class="noprint" /></td>
+
+<td><img src="{{MEDIA_URL}}design/menu_unselected_left.gif" class="noprint" /></td>
+<td class="mainMenuItemunselected"><a href="/kidsandteachers/" class="mainmenu">kids &amp; teachers</a></td>
+<td><img src="{{MEDIA_URL}}design/menu_unselected_right.gif" class="noprint" /></td>
+
+<td><img src="{{MEDIA_URL}}design/menu_unselected_left.gif" class="noprint" /></td>
+<td class="mainMenuItemunselected"><a href="/pressroom/" class="mainmenu">press</a></td>
+<td><img src="{{MEDIA_URL}}design/menu_unselected_right.gif" class="noprint" /></td>
+
+<td><img src="{{MEDIA_URL}}design/menu_unselected_left.gif" class="noprint" /></td>
+<td class="mainMenuItemunselected"><a href="/projects/" class="mainmenu">projects</a></td>
+<td><img src="{{MEDIA_URL}}design/menu_unselected_right.gif" class="noprint" /></td>
+
+<td><img src="{{MEDIA_URL}}design/menu_unselected_left.gif" class="noprint" /></td>
+<td class="mainMenuItemunselected"><a href="/jobs/" class="mainmenu">jobs</a></td>
+<td><img src="{{MEDIA_URL}}design/menu_unselected_right.gif" class="noprint" /></td>
+</tr>
+</table>
+</div>
+<div class="mainarea">
+
+<table cellpadding="0" cellspacing="0" width="802">
+<tr>
+<td class="boxcorner"><img src="{{MEDIA_URL}}design/boxtopleft.gif" class="noprint" /></td>
+<td class="boxtopcen"></td>
+<td class="boxcorner"><img src="{{MEDIA_URL}}design/boxtopright.gif" class="noprint" /></td>
+<td width="20" rowspan="3">&nbsp;</td>
+<td class="boxcorner"><img src="{{MEDIA_URL}}design/boxtopleft.gif" class="noprint" /></td>
+<td class="boxtopcen"></td>
+<td class="boxcorner"><img src="{{MEDIA_URL}}design/boxtopright.gif" class="noprint" /></td>
+</tr>
+<tr>
+<td class="boxmidleft"></td>
+<td class="boxmidcen" width="185">
+<!-- InstanceParam name="SelectedMenuItem" type="text" value="News Archive" -->
+<!-- InstanceParam name="UseTmpl" type="boolean" value="false" -->
+<a href="/news/" class="submenuHeadline">News Archive</a><br />
+&bull;&nbsp;<a href="/bin/news.pl?searchtype=year&string=2007" class="submenuItem">List by year</a>
+<ul class="submenuList">
+<li><a href="/news/archive/year/2009/" class="submenuSubItem">2009</a></li>
+<li><a href="/news/archive/year/2008/" class="submenuSubItem">2008</a></li>
+<li><a href="/news/archive/year/2007/" class="submenuSubItem">2007</a></li>
+<li><a href="/news/archive/year/2006/" class="submenuSubItem">2006</a></li>
+<li><a href="/news/archive/year/2005/" class="submenuSubItem">2005</a></li>
+<li><a href="/news/archive/year/2004/" class="submenuSubItem">2004</a></li>
+<li><a href="/news/archive/year/2003/" class="submenuSubItem">2003</a></li>
+<li><a href="/news/archive/year/2002/" class="submenuSubItem">2002</a></li>
+<li><a href="/news/archive/year/2001/" class="submenuSubItem">2001</a></li>
+<li><a href="/news/archive/year/2000/" class="submenuSubItem">2000</a></li>
+<li><a href="/news/archive/year/1999/" class="submenuSubItem">1999</a></li>
+</ul>
+&bull;&nbsp;<a href="/bin/updates.pl" class="submenuItem">Hubble Updates</a>
+<ul class="submenuList">
+<li><a href="/bin/updates.pl?searchtype=year&string=2009" class="submenuSubItem">2009</a></li>
+<li><a href="/bin/updates.pl?searchtype=year&string=2008" class="submenuSubItem">2008</a></li>
+<li><a href="/bin/updates.pl?searchtype=year&string=2007" class="submenuSubItem">2007</a></li>
+<li><a href="/bin/updates.pl?searchtype=year&string=2006" class="submenuSubItem">2006</a></li>
+</ul>
+</td>
+<td class="boxmidright"></td>
+<td class="boxmidleft"></td>
+<td class="boxmidcen">
+{% block content_area %}
+<h1><!-- InstanceBeginEditable name="Headline" -->NEWS<!-- InstanceEndEditable --></h1>
+<!-- InstanceBeginEditable name="PageContent" -->MAINCONTENT<!-- InstanceEndEditable -->
+{% endblock %}
+</td>
+<td class="boxmidright"></td>
+</tr>
+<tr>
+<td class="boxcorner"><img src="{{MEDIA_URL}}design/boxbotleft.gif" class="noprint" /></td>
+<td class="boxbotcen"></td>
+<td class="boxcorner"><img src="{{MEDIA_URL}}design/boxbotright.gif" class="noprint" /></td>
+<td class="boxcorner"><img src="{{MEDIA_URL}}design/boxbotleft.gif" class="noprint" /></td>
+<td class="boxbotcen"></td>
+<td class="boxcorner"><img src="{{MEDIA_URL}}design/boxbotright.gif" class="noprint" /></td>
+</tr>
+</table>
+
+<img height="1" width="802" src="{{MEDIA_URL}}design/trans.gif" />
+</div>
+<div class="mainend"><img src="{{MEDIA_URL}}design/mainend.gif" /></div>
+
+<div align="center" class="copyright">{% render_menu footer_menu horizontal %}</div>
+
+</td></tr></table>
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try {
+var pageTracker = _gat._getTracker("UA-2368492-6");
+pageTracker._trackPageview();
+} catch(err) {}</script>
+</body>
+<!-- InstanceEnd --></html>
