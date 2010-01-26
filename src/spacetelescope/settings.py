@@ -256,7 +256,7 @@ INSTALLED_APPS = (
 	#'djangoplicity.cache', 
 	'djangoplicity.media',
 	'djangoplicity.jobs',
-	'djangoplicity.contrib.redirects',
+	'django.contrib.redirects',
 	'djangoplicity.releases',
 	'djangoplicity.search',
 	'djangoplicity.metadata',

@@ -43,7 +43,7 @@ autoregister( admin_site, djangoplicity.media.admin )
 autoregister( admin_site, djangoplicity.releases.admin )
 autoregister( admin_site, djangoplicity.metadata.admin )
 
-autoregister ( adminlogs_site, djangoplicity.contrib.redirects.admin )
+#autoregister ( adminlogs_site, djangoplicity.contrib.redirects.admin )
 autoregister( adminlogs_site, djangoplicity.search.admin )
 autoregister( adminlogs_site, djangodblog.admin )
 autoregister( adminlogs_site, djangoplicity.cron.admin )
@@ -54,8 +54,8 @@ autoregister( adminlogs_site, djangoplicity.authtkt.admin )
 # 
 # Applications that does not support above method.
 #
-#adminlogs_site.register(django.contrib.redirects.models.Redirect, 
-#                        django.contrib.redirects.admin.RedirectAdmin) 
+adminlogs_site.register(django.contrib.redirects.models.Redirect, 
+                        django.contrib.redirects.admin.RedirectAdmin) 
                     
 adminlogs_site.register(django.contrib.sites.models.Site, 
                         django.contrib.sites.admin.SiteAdmin)
