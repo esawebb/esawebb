@@ -71,7 +71,7 @@ options(
 							 '../projects/djangoplicity/apps/paramiko-1.7.4.tar.gz',
 							 '../projects/djangoplicity/apps/fabric-0.9.0.tar.gz',
                              '../projects/djangoplicity/apps/BeautifulSoup.tar.gz',
-                             '../projects/djangoplicity/apps/threadpool-1.2.5.zip',
+                             #'../projects/djangoplicity/apps/threadpool-1.2.5.zip',
                              '../projects/djangoplicity/apps/Django-1.1.1.tar.gz',
                              #'../projects/djangoplicity/apps/Django-1.2-alpha-1.tar.gz',
                              '../projects/djangoplicity/apps/django-extensions-0.4.1.tar.gz',
@@ -79,8 +79,8 @@ options(
                              #'../projects/djangoplicity/apps/django-batchadmin-0.1.tar.gz',
                              '../projects/djangoplicity/apps/django-mptt-0.3_pre.tar.gz',
                              '../projects/djangoplicity/apps/djangodblog-1.0.tar.gz',
-                             '../projects/djangoplicity/apps/django-debug-toolbar-0.7.0.tar.gz',
-                             '../projects/djangoplicity/apps/django-assets-0.1.tar.gz',
+                             '../projects/djangoplicity/apps/django-debug-toolbar-0.8.1.zip',
+                             '../projects/djangoplicity/apps/django-assets-0.2.zip',
                              '../projects/djangoplicity/apps/django-sslmiddleware-dev.tar.gz',
                              #'../projects/djangoplicity/apps/django-spambayes-0.1.tar.gz',
                              '../projects/djangoplicity/apps/recaptcha-client-1.0.3.tar.gz',
@@ -95,8 +95,11 @@ options(
                              '../projects/djangoplicity/apps/celery-0.8.0-patched.tar.gz',
                              '../projects/djangoplicity/apps/python-xmp-toolkit-1.0-rc1.tar.gz',
                              '../projects/djangoplicity/apps/python-avm-library-1.0a1.tar.gz',
-                             #'../projects/djangoplicity/apps/pyexcelerator-0.6.4.1.tar.bz2',
-                             #'../projects/djangoplicity/apps/xlrd-0.7.1.tar.gz',
+                             
+                             # Migration related packages.
+                             'apps/BareNecessities-0.2.4.tar.gz', 
+                             'apps/DreamweaverTemplate-0.1.1.tar.gz',
+                             
                              ], # packages to install
         paver_command_line='', # command to run after installation
         unzip_setuptools = True,
