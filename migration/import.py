@@ -1,12 +1,18 @@
 from django.conf import settings
 from django.contrib.sites.models import Site
+from djangoplicity.logger import define_logger
 from djangoplicity.pages.models import Page, Section
-from spacetelescope.migration import PageMigrationInitialization, PageMigration, SpacetelescopeDocument
+from spacetelescope.migration import PageMigrationInitialization, PageMigration, \
+	SpacetelescopeDocument
+import logging
+
+logger = define_logger( "migration_logger", level=logging.DEBUG, file_logging=False )
 	
 conf = {
 	'root' : '/Volumes/webdocs/spacetelescope/docs/',
 	'default_site' : Site.objects.get(id=settings.SITE_ID),
-	'default_section' : Section.objects.get_or_create( name='Default', append_title='spacetelescope.org', template='pages/page_onecolumn.html' )[0], 
+	'default_section' : Section.objects.get_or_create( name='Default', append_title='spacetelescope.org', template='pages/page_onecolumn.html' )[0],
+	'logger' : 'migration_logger', 
 }
 
 migrations = [
@@ -29,9 +35,13 @@ if __name__ == "__main__":
 	"""
 	Run complete migration 
 	"""
+	
+	
 	state = {}
 	for m in migrations:
+		logger.debug("Running %s..." % m.__class__.__name__ )
+		
 		m.state = state
-		m.migrate()
+		m.run()
 		state = m.state
 		m.state = None

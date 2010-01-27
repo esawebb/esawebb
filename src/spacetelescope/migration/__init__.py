@@ -10,6 +10,7 @@
 from parser import *
 from django.contrib.redirects.models import Redirect
 from djangoplicity.pages.models import Page
+import logging
 
 def nl2space( text ):
 	if text:
@@ -145,8 +146,16 @@ class Migration( object ):
 	"""
 	def __init__( self, conf ):
 		self.conf = conf
+		
+	def _get_logger(self):
+		if 'logger' in self.conf:
+			name = self.conf['logger']
+		
+		return logging.getLogger( name )
+	logger = property( fget=_get_logger )
+	""" Get a logger (either predefined or new). """
 	
-	def migrate(self):
+	def run(self):
 		pass
 	
 	def set_state( self, state ):
@@ -161,7 +170,7 @@ class Migration( object ):
 class PageMigrationInitialization( Migration ):
 	"""
 	"""
-	def migrate(self):
+	def run(self):
 		Page.objects.all().delete()
 		Redirect.objects.all().delete()
 
@@ -220,7 +229,7 @@ class PageMigration( Migration ):
 				r.save()
 	
 
-	def migrate(self):
+	def run(self):
 		"""
 		Migrate document
 		"""
@@ -230,7 +239,8 @@ class PageMigration( Migration ):
 		
 		#
 		# Create page object
-		# 
+		#
+		self.logger.debug("Creating Page object...")
 		p = Page( 
 				title=document.title(),
 				url=new_url,
@@ -242,6 +252,7 @@ class PageMigration( Migration ):
 		#
 		# Create redirects
 		#
+		self.logger.debug("Creating redirects...")
 		self.setup_redirects( self.old_urls(), new_url )
 		
 		#
