@@ -97,8 +97,8 @@ options(
                              '../projects/djangoplicity/apps/python-avm-library-1.0a1.tar.gz',
                              
                              # Migration related packages.
-                             'apps/BareNecessities-0.2.4.tar.gz', 
-                             'apps/DreamweaverTemplate-0.1.1.tar.gz',
+                             '../projects/spacetelescope.org/apps/BareNecessities-0.2.4.tar.gz', 
+                             '../projects/spacetelescope.org/apps/DreamweaverTemplate-0.1.1.tar.gz',
                              
                              ], # packages to install
         paver_command_line='', # command to run after installation
