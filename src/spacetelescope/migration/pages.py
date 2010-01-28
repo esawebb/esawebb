@@ -12,6 +12,7 @@ from BeautifulSoup import BeautifulSoup
 from djangoplicity.migration import MigrationError
 from djangoplicity.migration.apps.pages import PageDocument, nl2space
 from dreamweavertemplate import *
+import tempfile
 
 class SpacetelescopePageDocument( PageDocument ):
 	"""
@@ -30,24 +31,36 @@ class SpacetelescopePageDocument( PageDocument ):
 	#
 	# Parser
 	#
-	def parse(self, conf):
+	def parse(self):
 		"""
 		Parse spacetelescope.org HTML page.
 		"""
-		  
+		filepath = self.filepath( self.conf['pages']['root'] )
 		
-		filepath = self.filepath( conf['pages']['root'] )
 		try:
-			self.logger( conf ).debug( "Parsing %s..." % filepath )
+			self.logger.debug( "Parsing %s..." % filepath )
 			self.dwpage = DreamweaverTemplateInstance( filename=filepath )
 		except UnicodeDecodeError:
-			raise MigrationError( "Couldn't decode page with using UTF8", can_continue=True )
+			# Text encoding problems - let BeautifulSoup convert to UTF8			
+			#try:
+				self.logger.debug( "Problems parsing file - retrying with BeautifulSoup..." )
+				# Read and parse file with BeautifulSoup
+				super( SpacetelescopePageDocument, self ).parse()
+				soup = BeautifulSoup( self._file_contents )
+
+				# Write to temporary file (in UTF8 encoding)
+				f = tempfile.NamedTemporaryFile( )
+				f.write( unicode(soup).encode('utf8') )
+				f.flush()
+				
+				# Read temporary file (which is now converted to UTF8 )
+				self.dwpage = DreamweaverTemplateInstance( filename=f.name )
+				
+				# Close and automatically delete temporary file.
+				f.close()
+			#except:
+			#	raise MigrationError( "Couldn't decode HTML page.", can_continue=True )
 		
-		# Read contents out to let BeautifulSoup detect the encoding
-		#super( SpacetelescopePageDocument, self ).parse( conf )
-		#soup = BeautifulSoup( self._file_contents )
-		#self.encoding = soup.originalEncoding
-		#print self.encoding 
 		self._parsed = True
 		
 	def _get_region( self, name ):
@@ -69,7 +82,11 @@ class SpacetelescopePageDocument( PageDocument ):
 		if not self._title:
 			tmp = self.handle_headline() # First try if there's a template title
 			tmp = tmp if tmp else self.handle_doctitle()
-			self._title = tmp if tmp else self.handle_content_h1() 
+			self._title = tmp if tmp else self.handle_content_h1()
+			
+			if not self._title:
+				self._title = "NO TITLE"
+			 
 		return self._title
 	
 	def content(self):
@@ -91,7 +108,7 @@ class SpacetelescopePageDocument( PageDocument ):
 		elif mainarea:
 			return mainarea
 		else:
-			return None
+			return ""
 	
 	#
 	# Helper method

@@ -201,7 +201,7 @@ tasks = [
 	PageMigrationTask( SpacetelescopePageDocument( 'kidsandteachers/exercises.html') ),
 	PageMigrationTask( SpacetelescopePageDocument( 'kidsandteachers/index.html') ),
 	PageMigrationTask( SpacetelescopePageDocument( 'kidsandteachers/submit_drawings.html') ),
-	PageMigrationTask( SpacetelescopePageDocument( 'index.html') ),
+#	PageMigrationTask( SpacetelescopePageDocument( 'index.html') ),
 #	PageMigrationTask( SpacetelescopePageDocument( 'nvff/intern/index.html') ),
 #	PageMigrationTask( SpacetelescopePageDocument( 'nvff/workshop/billeder/Page.html') ),
 #	PageMigrationTask( SpacetelescopePageDocument( 'nvff/workshop/billeder/Page0002.html') ),
