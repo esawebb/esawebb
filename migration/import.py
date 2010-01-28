@@ -37,11 +37,10 @@ def choose_tasks():
 #
 # Define migration tasks
 #
-
 archivetasks = [
 	ArchiveInitializationTask( Release ),
 	ArchiveInitializationTask( Image ),
-	ArchiveMigrationTask( SpacetelescopeCSVDataSource( '/Volumes/webdocs/spacetelescope/docs/csvfiles/newsdata.csv'), NewsDataMapping, resources=NewsResourceMapping ),
+	ArchiveMigrationTask( SpacetelescopeCSVDataSource( '/Volumes/webdocs/spacetelescope/docs/csvfiles/newsdata.csv'), NewsDataMapping ),
 	ArchiveMigrationTask( SpacetelescopeCSVDataSource( '/Volumes/webdocs/spacetelescope/docs/csvfiles/imagedata.csv'), ImagesDataMapping ),
 ]
 
