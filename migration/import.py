@@ -2,9 +2,15 @@ from django.conf import settings
 from django.contrib.sites.models import Site
 from djangoplicity.logger import define_logger
 from djangoplicity.migration import run_migration
+from djangoplicity.migration.apps.archives import ArchiveInitializationTask, \
+	ArchiveMigrationTask, DataMapping
 from djangoplicity.migration.apps.pages import PageInitializationTask, \
 	PageMigrationTask, HTMLPageDocument
 from djangoplicity.pages.models import Section
+from djangoplicity.releases.models import Release
+from djangoplicity.media.models import Image
+from spacetelescope.migration.archives import SpacetelescopeCSVDataSource, \
+	NewsDataMapping, ImagesDataMapping
 from spacetelescope.migration.pages import SpacetelescopePageDocument
 import logging
 
@@ -25,10 +31,22 @@ conf = {
 	'logger' : 'migration_logger', 
 }
 
+def choose_tasks():
+	return archivetasks
+
 #
 # Define migration tasks
 #
-tasks = [
+
+archivetasks = [
+	ArchiveInitializationTask( Release ),
+	ArchiveInitializationTask( Image ),
+	ArchiveMigrationTask( SpacetelescopeCSVDataSource( '/Volumes/webdocs/spacetelescope/docs/csvfiles/newsdata.csv'), NewsDataMapping, resources=NewsResourceMapping ),
+	ArchiveMigrationTask( SpacetelescopeCSVDataSource( '/Volumes/webdocs/spacetelescope/docs/csvfiles/imagedata.csv'), ImagesDataMapping ),
+]
+
+
+pagestasks = [
 	PageInitializationTask(),
 	PageMigrationTask( SpacetelescopePageDocument( 'about/further_information/presskits/index.html') ),
 	PageMigrationTask( SpacetelescopePageDocument( 'about/further_information/index.html') ),
@@ -832,6 +850,8 @@ tasks = [
 #	PageMigrationTask( SpacetelescopePageDocument( 'test/error.html') ),
 #	PageMigrationTask( SpacetelescopePageDocument( 'google34e371fb40a60c65.html') ), 
 ]
+
+tasks = choose_tasks()
 
 if __name__ == "__main__":
 	"""

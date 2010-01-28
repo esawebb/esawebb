@@ -14,6 +14,15 @@ from djangoplicity.migration.apps.pages import PageDocument, nl2space
 from dreamweavertemplate import *
 import tempfile
 
+#
+# TODO: Extract section for pages
+# TODO: Define menu structure for pages
+# TODO: Remove tags from titles
+# TODO: Remove convert HTML entities in titles
+# TODO: Extract links
+# TODO: Update all interal links (static files, archives, static pages)
+
+
 class SpacetelescopePageDocument( PageDocument ):
 	"""
 	Migration of a HTML page from spacetelescope.org
