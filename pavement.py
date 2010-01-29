@@ -125,7 +125,7 @@ options(
 		
         deploy_layout = [
                         'docs',
-                        'docs/',
+                        'docs/static',
                         'docs/static/djangoplicity',
                         'docs/static/images/',
                         'docs/static/images/original',
