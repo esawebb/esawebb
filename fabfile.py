@@ -11,13 +11,13 @@ from fabric.api import *
 import djangoplicity.fabric
 
 
-SERVERNAME = "spacetelescope"
-SERVERNAMEI = "spacetelescopei"
+SERVERNAME = "hubble"
+SERVERNAMEI = "hubblei"
 DOMAIN = "spacetelescope.org"
-SERVER1I = "spacetelescope1i"
-SERVER2I = "spacetelescope2i"
-SERVER1 = "spacetelescope1"
-SERVER2 = "spacetelescope2"
+SERVER1I = "hubble1i"
+SERVER2I = "hubble2i"
+SERVER1 = "hubble1"
+SERVER2 = "hubble2"
 DEVSERVER = "aweb8"
 BACKENDDEVSERVER = "aweb9"
 BACKENDSERVER = "aweb10"
@@ -27,7 +27,7 @@ PREFIX = '/home/web/%s' % SERVERNAME
 PRJDIR = 'projects/%s' % DOMAIN
 
 integration_clear_installation = djangoplicity.fabric.clear_installation( servers=[DEVSERVER,], prefix=PREFIXI )
-integration_relocate_virtualenv = djangoplicity.fabric.relocate_virtualenv( servers=[DEVSERVER,], prefix=PREFIXI, relocateto='/home/web/spacetelescope' )
+integration_relocate_virtualenv = djangoplicity.fabric.relocate_virtualenv( servers=[DEVSERVER,], prefix=PREFIXI, relocateto='/home/web/hubble' )
 integration_setup = djangoplicity.fabric.setup( servers=[DEVSERVER,], prefix=PREFIXI, mode='integration' )
 integration_fix_perms = djangoplicity.fabric.fix_perms( servers=[SERVER1I], prefix=PREFIX )
 integration = djangoplicity.fabric.deploy( servers=[DEVSERVER,], prefix=PREFIXI, prjdir=PRJDIR )
@@ -41,7 +41,7 @@ integration_appsregister = djangoplicity.fabric.appsregister( servers=[BACKENDDE
 integration_static_deploy = djangoplicity.fabric.static_deploy( servers=[DEVSERVER,], prefix=PREFIXI, prjdir=PRJDIR, staticdir='static' )
 
 production_clear_installation = djangoplicity.fabric.clear_installation( servers=[DEVSERVER,], prefix=PREFIX )
-production_relocate_virtualenv = djangoplicity.fabric.relocate_virtualenv( servers=[DEVSERVER,], prefix=PREFIX, relocateto='/home/web/spacetelescope' )
+production_relocate_virtualenv = djangoplicity.fabric.relocate_virtualenv( servers=[DEVSERVER,], prefix=PREFIX, relocateto='/home/web/hubble' )
 production_setup = djangoplicity.fabric.setup( servers=[DEVSERVER,], prefix=PREFIX, mode='production' )
 production = djangoplicity.fabric.deploy( servers=[DEVSERVER,], prefix=PREFIX, prjdir=PRJDIR )
 production_stop = djangoplicity.fabric.stop( servers=[SERVER1, SERVER2], servername=SERVERNAME )

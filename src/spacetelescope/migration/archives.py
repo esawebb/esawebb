@@ -33,7 +33,19 @@ class SpacetelescopeDataMapping( DataMapping ):
 	archive into a djangoplicity archive. 
 	"""
 	BASE = ""
+	#ROOT = ""
+	#BASE = ""
 	
+	format_mapping = {}
+
+	OLD_FMT_ROOT = ""
+	NEW_FMT_ROOT = ""
+	
+	def run(self):
+		self._create_object()
+		self._create_redirect()
+		self._move_resources()
+		
 	def _parse_date( self, text ):
 		"""
 		Parse a date as used on spacetelescope.org CSV-files
@@ -47,18 +59,50 @@ class SpacetelescopeDataMapping( DataMapping ):
 	
 	def old_urls(self):
 		"""
-		Return a list of old URLs where this resource was accessible.
+		Return a list of old URLs where this archive item was accessible.
 		"""
 		return ["%s/html/%s.html" % (self.BASE, self.obj.id),]
 	
 	def _create_redirect(self):
 		"""
-		Setup redirects for the archive item.
+		Setup redirects for the archive item. Can be overwritten in 
+		subclass if special redirects are needed. If several old URLs
+		needs to be mapped to the one new URL, it's usually enough to 
+		overwrite old_urls() instead.
 		"""
 		new_url = self.obj.get_absolute_url()
 		for url in self.old_urls():
 			r = Redirect( site = self.conf['pages']['site'], old_path=url, new_path=new_url )
 			r.save()
+			
+	def _create_object(self):
+		"""
+		Creating the archive item object and store it in self.obj.
+		Must be overwritten in subclass. 
+		"""
+		pass
+	
+	def _find_old_resource(self, fmt ):
+		old_path = os.path.join( OLD_ROOT, fmt )
+		
+		#look for files named with self.obj.id in old_path 
+	
+	def _move_resources(self):
+		"""
+		"""
+		for old_fmt, new_fmt in format_mapping.iteritems():
+			old_filepaths = self._find_old_resource( old_fmt )
+			
+			for p in old_filepath:
+				filenanme = os.path.basename( p ) 
+				new_dir = os.path.join( NEW_FMT_ROOT, new_fmt )
+				if not os.path.exists( new_dir ):
+					# create new directory 
+					pass
+				new_filepath = os.path.join( new_dir, filename )
+				self.logger.debug( "Moving resource from %s to %s..." % (p,new_filepath) )
+				#os.rename( p, new_filepath )
+				
 
 #
 # TOOD: Remove HTML tags from title
@@ -71,10 +115,6 @@ class SpacetelescopeDataMapping( DataMapping ):
 class NewsDataMapping( SpacetelescopeDataMapping ):
 	BASE = "/news"
 	
-	def run(self):
-		self._create_object()
-		self._create_redirect()
-		
 	def _create_redirect(self):
 		new_url = self.obj.get_absolute_url()
 		for url in self.old_urls():
