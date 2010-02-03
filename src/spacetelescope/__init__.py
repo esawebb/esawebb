@@ -4,6 +4,6 @@ PROJECT_BASES = {
     'hankat.local'          : ['/Users/lnielsen/Workspaces/sites/spacetelescope/projects/spacetelescope.org',],
     'ma014995.local'        : ['/Users/lnielsen/Workspaces/sites/spacetelescope/projects/spacetelescope.org',],
     'ma014995.hq.eso.org'   : ['/Users/lnielsen/Workspaces/sites/spacetelescope/projects/spacetelescope.org',],
-    '_default'              : ['/home/web/spacetelescope/projects/spacetelescope.org',
+    '_default'              : ['/home/web/hubble/projects/spacetelescope.org',
                                ],
 }
