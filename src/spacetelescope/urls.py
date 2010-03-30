@@ -22,6 +22,20 @@ from django.views.generic.simple import redirect_to
 from djangoplicity.releases.models import Release
 from djangoplicity.releases.options import ReleaseOptions
 
+from spacetelescope.archives.educational.models import *
+from spacetelescope.archives.educational.options import *
+from spacetelescope.archives.goodies.models import *
+from spacetelescope.archives.goodies.options import *
+from spacetelescope.archives.products.models import *
+from spacetelescope.archives.products.options import *
+from spacetelescope.archives.org.models import *
+from spacetelescope.archives.org.options import *
+
+
+#from spacetelescope.archives.projects.models import *
+#from spacetelescope.archives.projects.options import *
+
+
 
 urlpatterns = patterns( '',    
     # Djangoplicity Adminstration 
@@ -37,9 +51,43 @@ urlpatterns = patterns( '',
     ( r'^alive-check.dat$', 'djangoplicity.views.alive_check', { 'SSLAllow' : True } ),
 
     ( r'^images/', include('djangoplicity.media.urls_images'), { 'model': Image, 'options': ImageOptions } ),
-    ( r'^news/feed/(?P<url>.*)/?$', 'django.contrib.syndication.views.feed', { 'feed_dict': ReleaseOptions.feeds } ),
+    #( r'^news/feed/(?P<url>.*)/?$', 'django.contrib.syndication.views.feed', { 'feed_dict': ReleaseOptions.feeds } ),
     ( r'^news/', include('djangoplicity.releases.urls'), { 'model': Release, 'options': ReleaseOptions } ),
     ( r'^videos/', include('djangoplicity.media.urls_videos'), { 'model': Video, 'options': VideoOptions } ),
+
+    # Education
+    ( r'^kidsandteachers/education/', include('spacetelescope.archives.educational.urls.education'), { 'model': EducationalMaterial, 'options': EducationalMaterialOptions } ),
+    ( r'^kidsandteachers/drawings/', include('spacetelescope.archives.educational.urls.drawings'), { 'model': KidsDrawing, 'options': KidsDrawingOptions } ),
+
+    # Goodies
+    ( r'^goodies/calendars/', include('spacetelescope.archives.goodies.urls.calendars'), { 'model': Calendar, 'options': CalendarOptions } ),
+    ( r'^goodies/art/', include('spacetelescope.archives.goodies.urls.art'), { 'model': OnlineArt, 'options': OnlineArtOptions } ),
+    
+    # TODO: assess if we can handle print layouts with Release Archive, but just different options
+    #( r'^goodies/printlayouts/', include('spacetelescope.archives.goodies.urls.printlayouts'), { 'model': Release, 'options': PrintLayoutOptions } ),
+    
+    ( r'^goodies/slideshows/', include('spacetelescope.archives.goodies.urls.slideshows'), { 'model': SlideShow, 'options': SlideShowOptions } ),
+
+
+    #TODO: map to ST?
+    # PRODUCTS
+    ( r'^products/cdroms/', include('spacetelescope.archives.products.urls.cdroms'), { 'model': CDROM, 'options': CDROMOptions } ),
+    ( r'^products/books/', include('spacetelescope.archives.products.urls.books'), { 'model': Book, 'options': BookOptions } ),
+    ( r'^products/brochures/', include('spacetelescope.archives.products.urls.brochures'), { 'model': Brochure, 'options': BrochureOptions } ),
+    ( r'^products/merchandise/', include('spacetelescope.archives.products.urls.merchandise'), { 'model': Merchandise, 'options': MerchandiseOptions } ),
+    ( r'^products/newsletters/', include('spacetelescope.archives.products.urls.newsletters'), { 'model': Newsletter, 'options': NewsletterOptions } ),
+    ( r'^products/postcards/', include('spacetelescope.archives.products.urls.postcards'), { 'model': PostCard, 'options': PostCardOptions } ),
+    ( r'^products/posters/', include('spacetelescope.archives.products.urls.posters'), { 'model': Poster, 'options': PosterOptions } ),
+    ( r'^products/presskits/', include('spacetelescope.archives.products.urls.presskits'), { 'model': PressKit, 'options': PressKitOptions } ),
+    ( r'^products/stickers/', include('spacetelescope.archives.products.urls.stickers'), { 'model': Sticker, 'options': StickerOptions } ),
+    
+    
+    # ORG
+    #TODO: is "announcements" gonna be the new prefix?
+    ( r'^announcements/', include('spacetelescope.archives.org.urls.announcements'), { 'model': Announcement, 'options': AnnouncementOptions } ),
+    ( r'^about_us/techdocs/', include('spacetelescope.archives.org.urls.techdocs'), { 'model': TechnicalDocument, 'options': TechnicalDocumentOptions } ),
+    ( r'^about_us/logos/', include('spacetelescope.archives.org.urls.logos'), { 'model': Logo, 'options': LogoOptions } ),
+    ( r'^about_us/conference_posters/', include('spacetelescope.archives.org.urls.conference_posters'), { 'model': ConferencePoster, 'options': ConferencePosterOptions } ),
     
     # User authentication
     ( r'^login/$', 'djangoplicity.authtkt.views.login', { 'template_name': 'login.html', 'SSL' : True } ),

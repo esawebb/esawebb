@@ -1,5 +1,6 @@
 from django.conf import settings
 from django.contrib.sites.models import Site
+from django.contrib.redirects.models import Redirect
 from djangoplicity.logger import define_logger
 from djangoplicity.migration import run_migration
 from djangoplicity.migration.apps.archives import ArchiveInitializationTask, \
@@ -9,8 +10,10 @@ from djangoplicity.migration.apps.pages import PageInitializationTask, \
 from djangoplicity.pages.models import Section
 from djangoplicity.releases.models import Release
 from djangoplicity.media.models import Image
-from spacetelescope.migration.archives import SpacetelescopeCSVDataSource, \
-	NewsDataMapping, ImagesDataMapping
+from spacetelescope.archives.educational.models import *
+from spacetelescope.archives.goodies.models import *
+from spacetelescope.archives.products.models import *
+from spacetelescope.migration.archives import *
 from spacetelescope.migration.pages import SpacetelescopePageDocument
 import logging
 
@@ -38,10 +41,67 @@ def choose_tasks():
 # Define migration tasks
 #
 archivetasks = [
+	# INIT
+	ArchiveInitializationTask( Redirect ),
+	
+	
 	ArchiveInitializationTask( Release ),
 	ArchiveInitializationTask( Image ),
-	ArchiveMigrationTask( SpacetelescopeCSVDataSource( '/Volumes/webdocs/spacetelescope/docs/csvfiles/newsdata.csv'), NewsDataMapping ),
+    
+    # Goodies
+    ArchiveInitializationTask( EducationalMaterial ),
+    ArchiveInitializationTask( KidsDrawing ),
+    ArchiveInitializationTask( Calendar ),
+# OnlineArt
+# OnlineArtAuthor
+# Print Layout
+    ArchiveInitializationTask( SlideShow ),
+    
+    #Products
+    ArchiveInitializationTask( Book ),
+    ArchiveInitializationTask( CDROM ),
+    ArchiveInitializationTask( Brochure ),
+    ArchiveInitializationTask( Merchandise ),
+    ArchiveInitializationTask( Newsletter ),
+    ArchiveInitializationTask( PostCard ),
+    ArchiveInitializationTask( Poster ),
+    ArchiveInitializationTask( PressKit ),
+    ArchiveInitializationTask( Sticker ),
+
+    
+    #ORG
+   
+   
+    # MIG
+    ArchiveMigrationTask( SpacetelescopeCSVDataSource( '/Volumes/webdocs/spacetelescope/docs/csvfiles/newsdata.csv'), NewsDataMapping ),
 	ArchiveMigrationTask( SpacetelescopeCSVDataSource( '/Volumes/webdocs/spacetelescope/docs/csvfiles/imagedata.csv'), ImagesDataMapping ),
+	
+	# Goodies
+	ArchiveMigrationTask( SpacetelescopeCSVDataSource( '/Users/luis/Workspaces/pttu/spacetelescope.org/migration/csvfiles/edumatdata.csv'), EducationalMaterialsDataMapping ),
+	ArchiveMigrationTask( SpacetelescopeCSVDataSource( '/Users/luis/Workspaces/pttu/spacetelescope.org/migration/csvfiles/kidsdrawingdata.csv'), KidsDrawingsDataMapping ),
+	ArchiveMigrationTask( SpacetelescopeCSVDataSource( '/Users/luis/Workspaces/pttu/spacetelescope.org/migration/csvfiles/calendardata.csv'), CalendarsDataMapping ),
+# OnlineArt
+# OnlineArtAuthor
+# Print Layout
+
+    # Products
+    ArchiveMigrationTask( SpacetelescopeCSVDataSource( '/Users/luis/Workspaces/pttu/spacetelescope.org/migration/csvfiles/slideshowdata.csv'), SlideShowDataMapping ),
+    ArchiveMigrationTask( SpacetelescopeCSVDataSource( '/Users/luis/Workspaces/pttu/spacetelescope.org/migration/csvfiles/bookdata.csv'), BookDataMapping ),
+    ArchiveMigrationTask( SpacetelescopeCSVDataSource( '/Users/luis/Workspaces/pttu/spacetelescope.org/migration/csvfiles/cdromdata.csv'), CDROMDataMapping ),
+    ArchiveMigrationTask( SpacetelescopeCSVDataSource( '/Users/luis/Workspaces/pttu/spacetelescope.org/migration/csvfiles/brochuredata.csv'), BrochureDataMapping ),
+    ArchiveMigrationTask( SpacetelescopeCSVDataSource( '/Users/luis/Workspaces/pttu/spacetelescope.org/migration/csvfiles/merchandisedata.csv'), MerchandiseDataMapping ),
+    ArchiveMigrationTask( SpacetelescopeCSVDataSource( '/Users/luis/Workspaces/pttu/spacetelescope.org/migration/csvfiles/newsletterdata.csv'), NewsletterDataMapping ),
+    ArchiveMigrationTask( SpacetelescopeCSVDataSource( '/Users/luis/Workspaces/pttu/spacetelescope.org/migration/csvfiles/postcarddata.csv'), PostCardDataMapping ),
+    ArchiveMigrationTask( SpacetelescopeCSVDataSource( '/Users/luis/Workspaces/pttu/spacetelescope.org/migration/csvfiles/posterdata.csv'), PosterDataMapping ),
+    ArchiveMigrationTask( SpacetelescopeCSVDataSource( '/Users/luis/Workspaces/pttu/spacetelescope.org/migration/csvfiles/presskitdata.csv'), PressKitDataMapping ),
+    ArchiveMigrationTask( SpacetelescopeCSVDataSource( '/Users/luis/Workspaces/pttu/spacetelescope.org/migration/csvfiles/stickerdata.csv'), StickerDataMapping ),
+    
+    # Org
+    #ArchiveMigrationTask( SpacetelescopeCSVDataSource( '/Users/luis/Workspaces/pttu/spacetelescope.org/migration/csvfiles/updatedata.csv'), AnnouncementDataMapping ),
+    #ArchiveMigrationTask( SpacetelescopeCSVDataSource( '/Users/luis/Workspaces/pttu/spacetelescope.org/migration/csvfiles/conferenceposterdata.csv'), ConferencePosterDataMapping ),
+    #ArchiveMigrationTask( SpacetelescopeCSVDataSource( '/Users/luis/Workspaces/pttu/spacetelescope.org/migration/csvfiles/logodata.csv'), LogoDataMapping ),
+    #ArchiveMigrationTask( SpacetelescopeCSVDataSource( '/Users/luis/Workspaces/pttu/spacetelescope.org/migration/csvfiles/techdocsdata.csv'), TechnicalDocumentDataMapping ),
+    
 ]
 
 

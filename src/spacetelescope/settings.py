@@ -268,6 +268,10 @@ INSTALLED_APPS = (
 	'djangodblog',
 	'django_extensions',
 	'django_assets',
+	'spacetelescope.archives.educational',
+	'spacetelescope.archives.goodies',
+	'spacetelescope.archives.products',
+	'spacetelescope.archives.org',
 )
 
 
@@ -389,6 +393,7 @@ ARCHIVE_ICON_PATH = 'icons/'
 RELEASE_ARCHIVE_ROOT = 'releases/'
 IMAGES_ARCHIVE_ROOT = 'images/'
 VIDEOS_ARCHIVE_ROOT = 'videos/'
+EDUMATERIAL_ARCHIVE_ROOT = 'education/'
 
 DEFAULT_CREATOR = u"ESA/Hubble"  
 DEFAULT_CREATOR_URL = "http://www.spacetelescope.org"
