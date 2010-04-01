@@ -9,21 +9,19 @@
 #
 
 from BeautifulSoup import BeautifulSoup
-from djangoplicity.migration import MigrationError
-from djangoplicity.migration.apps.pages import PageDocument, nl2space
+from djangoplicity.migration import MigrationError, MigrationTask
+from djangoplicity.migration.apps.pages import HTMLPageDocument, nl2space
 from dreamweavertemplate import *
+from django.utils.html import strip_tags
 import tempfile
 
 #
-# TODO: Extract section for pages
 # TODO: Define menu structure for pages
-# TODO: Remove tags from titles
-# TODO: Remove convert HTML entities in titles
 # TODO: Extract links
 # TODO: Update all interal links (static files, archives, static pages)
 
 
-class SpacetelescopePageDocument( PageDocument ):
+class SpacetelescopePageDocument( HTMLPageDocument ):
 	"""
 	Migration of a HTML page from spacetelescope.org
 	
@@ -44,6 +42,10 @@ class SpacetelescopePageDocument( PageDocument ):
 		"""
 		Parse spacetelescope.org HTML page.
 		"""
+		# Make sure we also have the entire HTML document in self.soup
+		super( SpacetelescopePageDocument, self ).parse()
+		
+		# Read with dreamweaver
 		filepath = self.filepath( self.conf['pages']['root'] )
 		
 		try:
@@ -53,13 +55,10 @@ class SpacetelescopePageDocument( PageDocument ):
 			# Text encoding problems - let BeautifulSoup convert to UTF8			
 			#try:
 				self.logger.debug( "Problems parsing file - retrying with BeautifulSoup..." )
-				# Read and parse file with BeautifulSoup
-				super( SpacetelescopePageDocument, self ).parse()
-				soup = BeautifulSoup( self._file_contents )
-
+				
 				# Write to temporary file (in UTF8 encoding)
 				f = tempfile.NamedTemporaryFile( )
-				f.write( unicode(soup).encode('utf8') )
+				f.write( unicode( self.soup ).encode( 'utf8' ) )
 				f.flush()
 				
 				# Read temporary file (which is now converted to UTF8 )
@@ -118,10 +117,37 @@ class SpacetelescopePageDocument( PageDocument ):
 			return mainarea
 		else:
 			return ""
+		
+	def section(self):
+		"""
+		Determine the template section of the document.
+		"""
+		menuitem = self.handle_selected_menu()
+		if menuitem:
+			try:
+				sectionname = self.conf['pages']['section_mapping'][menuitem]
+				section = self.conf['pages']['sections'][sectionname]
+				return section				
+			except KeyError:
+				pass
+		
+		# Default section
+		return self.conf['pages']['section']
 	
 	#
 	# Helper method
 	#
+	def handle_selected_menu(self):
+		"""
+		Extract the title of the selected main menu item  
+		"""
+		try:
+			div = self.soup.find( attrs = { "class" : "mainMenuArea" } )
+			menu = div.find( attrs = { "class" : "mainMenuItemselected" } )
+			return strip_tags( "".join( [unicode( x ) for x in menu.contents] ) ).strip()
+		except (KeyError, AttributeError):
+			return None
+
 	def handle_doctitle(self):
 		""" 
 		Extract doctitle from Dreamweaver template 
@@ -149,6 +175,7 @@ class SpacetelescopePageDocument( PageDocument ):
 		Extract Headline region from Dreamweaver template 
 		"""
 		val = self._get_region( "Headline" )
+		val = self.clean_title( val )
 		return nl2space(val)
 
 	def parse_doctitle( self, html ):
@@ -191,5 +218,7 @@ class SpacetelescopePageDocument( PageDocument ):
 				if text.startswith( t ):
 					text = text.replace( t, "" )
 				
-			return text.strip()
+			text = text.strip()
+			text = self.convert_entities( strip_tags( text ) )
+			
 		return text
