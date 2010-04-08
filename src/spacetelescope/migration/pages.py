@@ -9,17 +9,34 @@
 #
 
 from BeautifulSoup import BeautifulSoup
-from djangoplicity.migration import MigrationError, MigrationTask
-from djangoplicity.migration.apps.pages import HTMLPageDocument, nl2space
-from dreamweavertemplate import *
 from django.utils.html import strip_tags
+from djangoplicity.migration import MigrationError, MigrationTask
+from djangoplicity.migration.apps.pages import HTMLPageDocument, nl2space, \
+	PageLinksCleanupTask, PageFilesCopyTask
+from djangoplicity.migration.utils import links
+from dreamweavertemplate import *
 import tempfile
-
+import re
 #
 # TODO: Define menu structure for pages
 # TODO: Extract links
 # TODO: Update all interal links (static files, archives, static pages)
 
+STATIC_PATTERN = re.compile( '^/(images|updates|goodies/posters|about_us/logos|about/further_information/techdocs)/(pdf|thumbs|medium|screen|news|web)/([a-z0-9-_]+)\.(jpg|pdf|swf)$' )
+
+class SpacetelescopePageLinksCleanupTask( PageLinksCleanupTask ):
+	def _is_page_link(self, link):
+		return True
+
+class SpacetelescopePageFilesCopyTask( PageFilesCopyTask ):
+	def __init__( self, include_list=[], exclude_list=[], **kwargs ):
+		super(SpacetelescopePageFilesCopyTask, self).__init__( **kwargs )
+	
+	def _is_static_file(self, link):
+		if links.is_ext( link, ['.jpg', '.png', '.zip', '.pdf', '.dll', '.exe', '.dmg', '.txt', '.gif', '.swf', '.mpeg', '.fits', '.psd', '.8bi', '.atn', '.xls', '.8Bi', '.doc', '.mov', '.tif'] ):
+			if not STATIC_PATTERN.match( link ):
+				return True
+		return False
 
 class SpacetelescopePageDocument( HTMLPageDocument ):
 	"""
@@ -29,8 +46,8 @@ class SpacetelescopePageDocument( HTMLPageDocument ):
 	we can extract the relevant parts pretty easily.
 	"""
 	
-	def __init__( self, filename ):
-		super( SpacetelescopePageDocument, self ).__init__( filename )
+	def __init__( self, *args, **kwargs ):
+		super( SpacetelescopePageDocument, self ).__init__( *args, **kwargs )
 		self._title = None
 		self.encoding = None
 		self.dwpage = None
