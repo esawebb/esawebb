@@ -38,13 +38,8 @@ def release_date( obj ):
 	else:
 		return None
 
-#__all__ = ('EducationalMaterialOptions', 
-#		   )
-#	( _(u'Logos'), {'resources' : ( 'png', 'eps', 'illustrator', 'illustrator_text', ), 'icons' : { 'png' : 'phot', 'eps' : 'phot', 'illustrator' : 'phot', 'illustrator_text' : 'phot'} } ),
+#TODO: feeds for models
 		
-		
-#TODO: nice strings
-
 class StandardOptions (ArchiveOptions):
 	"""
 	Defines common options across all ST archives	
@@ -57,16 +52,7 @@ class StandardOptions (ArchiveOptions):
 	search_fields = ( 
 		'id', 'title', 'description', 'credit',
 	)
-	
-	#TODO
-	#feeds = {
-	#	'' :	get_latest_images_class(),
-	#	'category' : get_latest_images_class(), 
-	#}
 		
-	#TODO
-	#import_form = ImageImportForm
-	
 	class Browsers(object):
 		normal = NormalBrowser( index_template='archives/index_normal.html', paginate_by=16 )
 		viewall = ViewAllBrowser( index_template='archives/index_viewall.html', paginate_by=100 )

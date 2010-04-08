@@ -44,8 +44,16 @@ class Exhibition (archives.ArchiveModel, StandardArchiveInfo, ):
             last_modified = True
             created = True
             published = True  
+            
+    @permalink
+    def get_absolute_url(self):
+        return ('exhibitions_detail', [str(self.id)])   
 
 class FITSImage (archives.ArchiveModel, StandardArchiveInfo, ):
+
+    #TODO convert to metadata model
+    country = models.CharField (max_length = 50)
+    city = models.CharField (max_length = 50)
     
     class Archive:
         original = archives.ImageResourceManager( type=types.OriginalImageType )
@@ -63,12 +71,8 @@ class FITSImage (archives.ArchiveModel, StandardArchiveInfo, ):
             last_modified = True
             created = True
             published = True  
-
-class FITSImageAuthor( ExtendedContact ):
-    drawing = models.ForeignKey( FITSIMage )
-    
-    class Meta:
-        verbose_name = _('Author')
         
-
+    @permalink
+    def get_absolute_url(self):
+        return ('fitsimages_detail', [str(self.id)])   
 

@@ -66,7 +66,6 @@ class ConferencePosterOptions (StandardOptions):
 	
 	downloads = ( 
 		( _(u'Images'), {'resources' : ( 'original', 'large', 'medium', 'screen' ), 'icons' : { 'original' : 'phot', 'large' : 'phot', 'medium' : 'phot', 'screen': 'phot' } } ),
-		#( _(u'Files') TODO: include 'zip' resource? see model CDROM !!
 		)
 
 	class Queries(object):

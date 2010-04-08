@@ -42,7 +42,6 @@ MONTHS_CHOICES = (
                   )
     
 
-# TODO: include WHOLE YEAR somehow -> one new entry for the whole year
         
 class Calendar(archives.ArchiveModel, StandardArchiveInfo):
     
@@ -62,8 +61,10 @@ class Calendar(archives.ArchiveModel, StandardArchiveInfo):
         thumb = archives.ImageResourceManager( derived='original', type=types.ThumbnailJpegType )
         
         pdf = archives.ResourceManager( type=types.PDFType, verbose_name=_('A3 PDF'))
-        pdfsm = archives.ResourceManager( type=types.PDFType, verbose_name=_('A4 PDF') )
-           
+        pdfsm = archives.ResourceManager( type=types.PDFType, verbose_name=_('A4 PDF') )   
+        #pdf = archives.ResourceManager( type=types.PDFType, verbose_name=_('A3 PDF (Whole Year)'))
+        
+        
         class Meta:
             root = archive_settings.CALENDAR_ROOT
             release_date = True
@@ -80,17 +81,47 @@ class Calendar(archives.ArchiveModel, StandardArchiveInfo):
     def __unicode__(self):
         return 'Calendar %s %s' % (date(year=1901,month=self.month,day=1).strftime('%b'),self.year)     
 
-#TODO: should we use authors as categories!??!
-class OnlineArtAuthor (ExtendedContact):
-    description = archives.DescriptionField( )
+
+class OnlineArtAuthor (archives.ArchiveModel, ExtendedContact):
+    id = archives.IdField( )
     
+    description = archives.DescriptionField( )
+
+    credit = metadatafields.AVMCreditField( )
+    """ """
+    
+    priority = archives.PriorityField( default = 0)
+    """ """
+    
+    credit = metadatafields.AVMCreditField( )
+
+    links = models.TextField()
+
     class Meta:
         verbose_name = 'Author'
         verbose_name_plural = 'Authors'
+
+    class Archive:
+        original = archives.ImageResourceManager( type=types.OriginalImageType )
+        screen = archives.ImageResourceManager( derived='original', type=types.ScreensizeJpegType )
         
+        thumb = archives.ImageResourceManager( derived='original', type=types.ThumbnailJpegType )
+        
+               
+        class Meta:
+            root = archive_settings.ONLINE_ART_AUTHOR_ROOT
+            release_date = True
+            embargo_date = True
+            last_modified = True
+            created = True
+            published = True
+            
     def __unicode__(self): 
         return self.name
-    
+
+    @permalink
+    def get_absolute_url(self):
+        return ('artists_detail', [str(self.id)])
     
 class OnlineArt (archives.ArchiveModel, StandardArchiveInfo, ):
     

@@ -17,8 +17,9 @@ class archive_settings:
     KIDS_DRAWING_ROOT = 'drawings'
     EDUMATERIAL_ROOT = 'education'
     ONLINE_ART_ROOT = 'art'
+    ONLINE_ART_AUTHOR_ROOT = 'artists'
     POSTCARD_ROOT = 'postcards'
-    EXHIBITIONS_ROOT = 'exhibitions'
+    EXHIBITION_ROOT = 'exhibitions'
     USER_VIDEO_ROOT = 'user_videos'
     PRINT_LAYOUT_ROOT = 'printlayouts'
     

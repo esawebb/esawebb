@@ -32,6 +32,10 @@ class EducationalMaterial (archives.ArchiveModel, StandardArchiveInfo, PrintInfo
         
         thumb = archives.ImageResourceManager( derived='original', type=types.ThumbnailJpegType )
             
+        pdf = archives.ResourceManager( type=types.PDFType )
+        pdfsm = archives.ResourceManager( type=types.PDFType )
+            
+        
         class Meta:
             root = archive_settings.EDUMATERIAL_ROOT
             release_date = True

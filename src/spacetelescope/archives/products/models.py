@@ -89,7 +89,7 @@ class Brochure(archives.ArchiveModel, StandardArchiveInfo, PhysicalInfo, ShopInf
         thumb = archives.ImageResourceManager( derived='original', type=types.ThumbnailJpegType )
         
         pdf = archives.ResourceManager( type=types.PDFType )
-        pdfsm = archives.ResourceManager( type=types.PDFType )
+        pdfsm = archives.ResourceManager( type=types.PDFType, verbose_name= _('PDF File (Small)') )
         
                 
         class Meta:
@@ -131,13 +131,16 @@ class Merchandise (archives.ArchiveModel, StandardArchiveInfo, PhysicalInfo, Sho
 class Newsletter (archives.ArchiveModel, StandardArchiveInfo, PhysicalInfo, ShopInfo, PrintInfo):
     class Archive:
         original = archives.ImageResourceManager( type=types.OriginalImageType )
+        large = archives.ImageResourceManager( derived='original', verbose_name=_('Large JPEG'), type=types.JpegType )
+        medium = archives.ImageResourceManager( derived='original', type=types.MediumJpegType )
+        screen = archives.ImageResourceManager( derived='original', type=types.ScreensizeJpegType )
         thumb = archives.ImageResourceManager( derived='original', type=types.ThumbnailJpegType )
-        
 
         pdf = archives.ResourceManager( type=types.PDFType )
-        doc = archives.ResourceManager( type=types.DocType )
-        sciencepaper = archives.ResourceManager( type=types.PDFType )
-        text = archives.ResourceManager( type=types.TxtType )
+        #Deprecated
+        #doc = archives.ResourceManager( type=types.DocType )
+        #sciencepaper = archives.ResourceManager( type=types.PDFType )
+        #text = archives.ResourceManager( type=types.TxtType )
              
         class Meta:
             root = archive_settings.NEWSLETTER_ROOT

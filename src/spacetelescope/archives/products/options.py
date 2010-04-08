@@ -37,7 +37,7 @@ class CDROMOptions (StandardOptions):
 	
 	downloads = ( 
 		( _(u'Images'), {'resources' : ( 'original', 'large', 'medium',  ), 'icons' : { 'original' : 'phot', 'large' : 'phot', 'medium' : 'phot', } } ),
-		#( _(u'Files') TODO: include 'zip' resource? see model yes
+		( _(u'Files'), {'resources' : ( 'zip',   ), 'icons' : { 'zip' : 'zip', } } ),
 		)
 	
 
@@ -92,6 +92,7 @@ class MerchandiseOptions (StandardOptions):
 	
 	downloads = ( 
 		( _(u'Images'), {'resources' : ( 'original', 'large', 'medium', 'screen'  ), 'icons' : { 'original' : 'phot', 'large' : 'phot', 'medium' : 'phot', 'screen' : 'phot'  } } ),
+		( _(u'File Formats'), {'resources' : ( 'pdf' ), 'icons' : { 'pdf' : 'pdf',} } ),
 		)
 	
 	class Queries(object):
@@ -105,7 +106,7 @@ class NewsletterOptions (StandardOptions):
 	)
 	
 	downloads = ( 
-		( _(u'Files'), {'resources' : ( 'pdf', 'doc', 'sciencepaper', 'text'  ), 'icons' : { 'pdf' : 'pdf', 'doc' : 'word', 'sciencepaper' : 'pdf', 'text' : 'txt'  } } ),
+		( _(u'Images'), {'resources' : ( 'original', 'large', 'medium', 'screen'  ), 'icons' : { 'original' : 'phot', 'large' : 'phot', 'medium' : 'phot', 'screen' : 'phot'  } } ),
 		)
 	
 	class Queries(object):

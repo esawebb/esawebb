@@ -272,6 +272,7 @@ INSTALLED_APPS = (
 	'spacetelescope.archives.goodies',
 	'spacetelescope.archives.products',
 	'spacetelescope.archives.org',
+	'spacetelescope.archives.projects',
 )
 
 

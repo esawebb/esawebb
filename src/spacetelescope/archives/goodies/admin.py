@@ -36,7 +36,6 @@ class CalendarAdmin( DjangoplicityModelAdmin, RenameAdmin, ArchiveAdmin ):
 def artist (obj):
 	return 	obj.artist.name.encode('ascii')
 
-#TODO: artist unicode problems on ADMIN!?!?
 class OnlineArtAdmin( DjangoplicityModelAdmin, RenameAdmin, ArchiveAdmin ):
 	list_display = ( 'id', 'title', 'published','priority','last_modified', view_link('art') )
 	list_filter = ( 'title', 'published', 'last_modified', )
@@ -50,18 +49,20 @@ class OnlineArtAdmin( DjangoplicityModelAdmin, RenameAdmin, ArchiveAdmin ):
 					( 'Compatibility', {'fields': ('old_ids', ), }),
 				)
 	ordering = ('id', )
-	raw_id_fields = ('artist', )
+	#raw_id_fields = ('artist', )
 	richtext_fields = ('description',)
 
 	links = ()
 	
 class OnlineArtAuthorAdmin( DjangoplicityModelAdmin, RenameAdmin, ArchiveAdmin ):
-	list_display = ( 'name', 'city', 'country', 'email', )
+	list_display = ( 'id', 'name', 'city', 'country', 'email', 'published','priority','last_modified', view_link('artists') ) 
 	list_filter = ( 'city', 'country',)
 	search_fields = ( 'name', 'city', 'country', 'email',)
+	date_hierarchy = 'last_modified'
 	fieldsets = (
-					( None,  {'fields': ( 'name', 'description', 'city', 'country', 'email', ), } ),
-					
+					( None, {'fields': ( 'id', ) } ),
+					( 'Publishing', {'fields': ( 'published', 'priority', ), } ),
+					( 'Archive', {'fields': ( 'name', 'description', 'credit', 'city', 'country', 'links'), } ),
 				)
 	ordering = ('name', )
 	richtext_fields = ('description',)

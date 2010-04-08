@@ -107,9 +107,6 @@ class PrintInfo ( models.Model ):
     
     pages = models.PositiveSmallIntegerField ( blank=True, help_text=_(u'Number of pages') , null=True)
 
-    #TODO:
-    #type = # Glossy etc
-
     class Meta:
         abstract = True
 

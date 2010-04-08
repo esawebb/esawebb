@@ -27,15 +27,12 @@ from spacetelescope.archives.base import *
 Archive for the organizational section of ST (about us)
 """
 
-#TODO: with contacts
-#TODO: move this to djangoplicity.releases ?
-#TODO: associated with resources. basically an image archive
 class Announcement (archives.ArchiveModel,StandardArchiveInfo,):
 
-    # TODO: has topic! set(['', 'Nebula', 'Cosmology'])
-
-    #TODO should this be appended to description? -> Two seperate
     links = models.TextField( blank=True, help_text=_(u'Associated Links') )
+    """ """
+    
+    contacts = models.TextField( blank=True, help_text=_(u'Associated Contacts') )
     """ """
 
     subject_category = metadatafields.AVMSubjectCategoryField()
@@ -45,6 +42,8 @@ class Announcement (archives.ArchiveModel,StandardArchiveInfo,):
     """ """
     
     facility = metadatafields.FacilityManyToManyField()
+
+
 
     class Archive:
         original = archives.ImageResourceManager( type=types.OriginalImageType )
@@ -63,18 +62,14 @@ class Announcement (archives.ArchiveModel,StandardArchiveInfo,):
             last_modified = True
             created = True
             published = True  
-            
 
-class AnnouncementContact( ExtendedContact ):
-    announcement = models.ForeignKey( Announcement )
-    
-    class Meta:
-        verbose_name = _(u'Contact')
+    @permalink
+    def get_absolute_url(self):
+        return ('announcements_detail', [str(self.id)])  
 
-class ConferencePoster(archives.ArchiveModel, StandardArchiveInfo, PhysicalInfo):
-    
-    # TODO: has topic!! set(['hubble'])
-    
+
+class ConferencePoster(archives.ArchiveModel, StandardArchiveInfo, PhysicalInfo,ScreenInfo):
+        
     class Archive:
         original = archives.ImageResourceManager( type=types.OriginalImageType )
         large = archives.ImageResourceManager( derived='original', verbose_name=_('Large JPEG'), type=types.JpegType )
@@ -89,12 +84,12 @@ class ConferencePoster(archives.ArchiveModel, StandardArchiveInfo, PhysicalInfo)
             last_modified = True
             created = True
             published = True  
-
-class Logo(archives.ArchiveModel, StandardArchiveInfo, PhysicalInfo,ScreenInfo):
-    # TODO added screeninfo which wasn't originally in Archive
     
-    # Didn't find any topic, but key was there
-    # topic = None
+    @permalink
+    def get_absolute_url(self):
+        return ('conference_posters_detail', [str(self.id)])  
+
+class Logo(archives.ArchiveModel, StandardArchiveInfo, PhysicalInfo,ScreenInfo):    
     
     class Archive:
         original = archives.ImageResourceManager( type=types.OriginalImageType )
@@ -104,8 +99,6 @@ class Logo(archives.ArchiveModel, StandardArchiveInfo, PhysicalInfo,ScreenInfo):
         thumb = archives.ImageResourceManager( derived='original', type=types.ThumbnailJpegType )
            
         eps = archives.ResourceManager(type = types.EpsType)
-        # banner = ### TODO: is empty at the moment
-        # businesscard = ### TODO: is empty at the moment
         illustrator = archives.ResourceManager( type=types.IllustratorType )
         transparent = archives.ResourceManager( type=ImageFileType )
         
@@ -116,6 +109,11 @@ class Logo(archives.ArchiveModel, StandardArchiveInfo, PhysicalInfo,ScreenInfo):
             last_modified = True
             created = True
             published = True  
+            
+            
+    @permalink
+    def get_absolute_url(self):
+        return ('logos_detail', [str(self.id)])  
             
 class TechnicalDocument (archives.ArchiveModel, StandardArchiveInfo, PhysicalInfo, ShopInfo,PrintInfo):
     
@@ -137,5 +135,7 @@ class TechnicalDocument (archives.ArchiveModel, StandardArchiveInfo, PhysicalInf
             created = True
             published = True  
 
-
+    @permalink
+    def get_absolute_url(self):
+        return ('techdocs_detail', [str(self.id)])  
 

@@ -39,6 +39,7 @@ class EducationalMaterialOptions ( StandardOptions ):
 	
 	downloads = ( 
 		( _(u'Images'), {'resources' : ( 'original', 'large', 'medium', 'screen'  ), 'icons' : { 'original' : 'phot', 'large' : 'phot', 'medium' : 'phot', 'screen' : 'phot'  } } ),
+		( _(u'File Formats'), {'resources' : ( 'pdf', 'pdfsm' ), 'icons' : { 'pdf' : 'pdf',  'pdfsm' : 'pdf' } } ),
 		)
 	
 	class Queries(object):
@@ -49,7 +50,6 @@ class KidsDrawingOptions ( StandardOptions ):
 	   
 	urlname_prefix = 'drawings'
 
-	#TODO add author entries to info?
 	info = ( 
 		( _(u'Author'), { 'fields' : ( 'author_name', 'author_age', 'author_city' ), } ),
 		( _(u'About the Drawing'), { 'fields' : ( 'id', release_date,  ), } ),

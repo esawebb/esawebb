@@ -28,6 +28,8 @@ from spacetelescope.archives.goodies.models import *
 from spacetelescope.archives.goodies.options import *
 from spacetelescope.archives.products.models import *
 from spacetelescope.archives.products.options import *
+from spacetelescope.archives.projects.models import *
+from spacetelescope.archives.projects.options import *
 from spacetelescope.archives.org.models import *
 from spacetelescope.archives.org.options import *
 
@@ -62,6 +64,7 @@ urlpatterns = patterns( '',
     # Goodies
     ( r'^goodies/calendars/', include('spacetelescope.archives.goodies.urls.calendars'), { 'model': Calendar, 'options': CalendarOptions } ),
     ( r'^goodies/art/', include('spacetelescope.archives.goodies.urls.art'), { 'model': OnlineArt, 'options': OnlineArtOptions } ),
+    ( r'^goodies/artists/', include('spacetelescope.archives.goodies.urls.artists'), { 'model': OnlineArtAuthor, 'options': OnlineArtAuthorOptions } ),
     
     # TODO: assess if we can handle print layouts with Release Archive, but just different options
     #( r'^goodies/printlayouts/', include('spacetelescope.archives.goodies.urls.printlayouts'), { 'model': Release, 'options': PrintLayoutOptions } ),
@@ -88,6 +91,10 @@ urlpatterns = patterns( '',
     ( r'^about_us/techdocs/', include('spacetelescope.archives.org.urls.techdocs'), { 'model': TechnicalDocument, 'options': TechnicalDocumentOptions } ),
     ( r'^about_us/logos/', include('spacetelescope.archives.org.urls.logos'), { 'model': Logo, 'options': LogoOptions } ),
     ( r'^about_us/conference_posters/', include('spacetelescope.archives.org.urls.conference_posters'), { 'model': ConferencePoster, 'options': ConferencePosterOptions } ),
+    
+    # Projects
+    ( r'^projects/exhibitions/', include('spacetelescope.archives.projects.urls.exhibitions'), { 'model': Exhibition, 'options': ExhibitionOptions } ),
+    ( r'^projects/fits_liberator/fitsimages/', include('spacetelescope.archives.projects.urls.fitsimages'), { 'model': FITSImage, 'options': FITSImageOptions } ),
     
     # User authentication
     ( r'^login/$', 'djangoplicity.authtkt.views.login', { 'template_name': 'login.html', 'SSL' : True } ),

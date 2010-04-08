@@ -18,11 +18,14 @@ from djangoplicity.releases.models import Image
 from spacetelescope.archives.educational.models import *
 from spacetelescope.archives.goodies.models import *
 from spacetelescope.archives.products.models import *
+from spacetelescope.archives.projects.models import *
 from spacetelescope.archives.org.models import *
 
 import csv
 
 COPY_INSTEAD_OF_MOVE = True
+#for all resources except THUMBS, only touch new ones instead of copy
+DEBUG_ONLY_TOUCH = True
 
 csv.register_dialect( 'spacetelescope', delimiter='|' )
 
@@ -89,13 +92,20 @@ class SpacetelescopeDataMapping( DataMapping ):
 		"""
 		pass
 	
+	VALID_EXTS = ['.jpg','.gif','.tif','.pdf','.zip','.eps','.ai','.png']
 	def _find_old_resource(self, fmt ):
 		old_path = os.path.join( self.OLD_FMT_ROOT, fmt )
-		old_path = os.path.join(old_path, self.obj.id + '.jpg')
+		
+		
+		
 		#look for files named with self.obj.id in old_path 
 		
-		if os.path.exists(old_path):
-			return old_path
+		p = old_path
+		for ext in self.VALID_EXTS:
+			old_path = os.path.join(p, self.obj.id + ext)
+			if os.path.exists(old_path):
+				return old_path
+		
 		
 	
 	def _move_resources(self,copy=COPY_INSTEAD_OF_MOVE):
@@ -119,10 +129,15 @@ class SpacetelescopeDataMapping( DataMapping ):
 			if not os.path.exists( new_dir ):
 				# create new directory 
 				os.makedirs(new_dir)
+				
+			
 			
 			new_filepath = os.path.join( new_dir, self.obj.id+ext )
-			self.logger.debug( "%s resource from %s to %s..." % (action,old_filepath,new_filepath) )
-			if copy:
+			f,ext = os.path.splitext(new_filepath)
+			self.logger.debug( "%s: %s >> %s... [%s]" % (self.obj.id,old_fmt,new_fmt,ext) )
+			if DEBUG_ONLY_TOUCH and new_fmt != 'thumb':
+			     open(new_filepath, 'w').close() 
+			elif copy:
 				shutil.copy(old_filepath,new_filepath)
 			else:
 				pass
@@ -286,11 +301,17 @@ class NewsDataMapping( SpacetelescopeDataMapping ):
 		
 		
 
-# TODO
 class EducationalMaterialsDataMapping( SpacetelescopeDataMapping ):
 	BASE = "/kidsandteachers/educational"
 	
-	format_mapping = {'thumbs':'thumb'}
+	format_mapping = {'thumbs':'thumb',
+					  'original':'original',
+					  'screen':'screen',
+					  'medium':'medium',
+					  'large':'large',
+					  'highres_pdf':'pdf',
+					  'lowres_pdf':'pdfsm',
+					  }
 
 	OLD_FMT_ROOT = "/Volumes/webdocs/spacetelescope/docs/kidsandteachers/education/"
 	NEW_FMT_ROOT = "/Users/luis/Workspaces/pttu/spacetelescope.org/static/education/"
@@ -364,7 +385,12 @@ class EducationalMaterialsDataMapping( SpacetelescopeDataMapping ):
 class KidsDrawingsDataMapping( SpacetelescopeDataMapping ):
 	BASE = "/kidsandteachers/drawings"
 	
-	format_mapping = {'thumbs':'thumb'}
+	format_mapping = {'thumbs':'thumb',
+					  'original':'original',
+					  'screen':'screen',
+					  'medium':'medium',
+					  'large':'large',
+					  }
 
 	OLD_FMT_ROOT = "/Volumes/webdocs/spacetelescope/docs/kidsandteachers/drawings/"
 	NEW_FMT_ROOT = "/Users/luis/Workspaces/pttu/spacetelescope.org/static/drawings/"
@@ -418,69 +444,19 @@ class KidsDrawingsDataMapping( SpacetelescopeDataMapping ):
 	def author_city(self):
 		return unicode(self.dataentry['Town'].decode('iso-8859-1'))
 
-class KidsDrawingsDataMapping( SpacetelescopeDataMapping ):
-	BASE = "/kidsandteachers/drawings"
-	
-	format_mapping = {'thumbs':'thumb'}
-
-	OLD_FMT_ROOT = "/Volumes/webdocs/spacetelescope/docs/kidsandteachers/drawings/"
-	NEW_FMT_ROOT = "/Users/luis/Workspaces/pttu/spacetelescope.org/static/drawings/"
-	
-	def _create_redirect(self):
-		new_url = self.obj.get_absolute_url()
-		for url in self.old_urls():
-			r,created = Redirect.objects.get_or_create( site = self.conf['pages']['site'], old_path=url )
-			if created:
-				r.new_path = new_url
-			r.save()
-
-	
-	def _create_object(self):
-		# id, releasetype, title
-		self.obj = KidsDrawing( 
-				id=self.id(),
-				title=self.title(), 
-				description=self.description(),
-				priority=self.priority(),
-				credit=self.credit(),
-				author_name = self.author_name(),
-				author_age = self.author_age(),
-				author_city = self.author_city(),
-			)
-		self.obj.save()
-		
-	
-	def id(self):
-		return self.dataentry['id']
-
-	def title(self):
-		return self.dataentry['Title']
-			
-	def description(self):
-		soup = BeautifulSoup( self.dataentry['Description'] )
-		return unicode( soup )
-		
-	def priority(self):
-		return self.dataentry['priority']
-		
-	def credit(self):
-		return unicode(self.dataentry['credit'].decode('iso-8859-1'))
-		
-	def author_name(self):
-		return unicode(self.dataentry['Name'].decode('iso-8859-1'))
-		
-	def author_age(self):
-		return self.dataentry['Age']
-
-	def author_city(self):
-		return unicode(self.dataentry['Town'].decode('iso-8859-1'))
 
 
-
+#TODO copy pdf resources ALL to each month/year
 class CalendarsDataMapping( SpacetelescopeDataMapping ):
 	BASE = "/goodies/calendars"
 	
-	format_mapping = {'thumbs':'thumb'}
+	format_mapping = {'thumbs':'thumb',
+					  'original':'original',
+					  'medium':'medium',
+					  'large':'large',
+					  'pdf_a3':'pdf',
+					  'pdf_a4':'pdfsm',
+					  }
 
 	OLD_FMT_ROOT = "/Volumes/webdocs/spacetelescope/docs/goodies/calendar/"
 	NEW_FMT_ROOT = "/Users/luis/Workspaces/pttu/spacetelescope.org/static/calendars/"
@@ -501,13 +477,19 @@ class CalendarsDataMapping( SpacetelescopeDataMapping ):
 	
 	def _find_old_resource(self, fmt ):
 		old_path = os.path.join( self.OLD_FMT_ROOT, fmt )
-		id = "%s%02d.jpg" % (unicode(self.obj.year)[2:],self.obj.month)
+		id = "%s%02d" % (unicode(self.obj.year)[2:],self.obj.month)
 		old_path = os.path.join(old_path, id)
-		print old_path
 		#look for files named with self.obj.id in old_path 
 		
-		if os.path.exists(old_path):
-			return old_path
+		p = old_path
+		for ext in self.VALID_EXTS:
+			old_path = p+ ext
+			print old_path
+			if os.path.exists(old_path):
+				return old_path	
+	
+		
+		
 	
 	def _create_redirect(self):
 		new_url = self.obj.get_absolute_url()
@@ -554,7 +536,11 @@ class CalendarsDataMapping( SpacetelescopeDataMapping ):
 class SlideShowDataMapping( SpacetelescopeDataMapping ):
 	BASE = "/goodies/slideshows"
 	
-	format_mapping = {'thumbs':'thumb'}
+	format_mapping = {'thumbs':'thumb',
+					  #'flash':'flash',
+					  #TODO: handle flash
+
+					  }
 
 	OLD_FMT_ROOT = "/Volumes/webdocs/spacetelescope/docs/goodies/slideshows/"
 	NEW_FMT_ROOT = "/Users/luis/Workspaces/pttu/spacetelescope.org/static/slideshows/"
@@ -694,12 +680,27 @@ class CDROMDataMapping(ProductDataMapping):
 	model = CDROM
 	BASE = "/products/cdroms"
 	
+	format_mapping = {'thumbs':'thumb',
+					  'original':'original',
+					  'medium':'medium',
+					  'large':'large',
+					  'zip':'zip',
+					  }
+	
 	OLD_FMT_ROOT = "/Volumes/webdocs/spacetelescope/docs/goodies/cdroms/"
 	NEW_FMT_ROOT = "/Users/luis/Workspaces/pttu/spacetelescope.org/static/cdroms/"
 	
 class BookDataMapping(ProductDataMapping):
 	model = Book
 	BASE = "/products/books"
+	format_mapping = {'thumbs':'thumb',
+				  'original':'original',
+				  'medium':'medium',
+				  'large':'large',
+				  'screen':'screen',
+				  'pdf':'pdf',
+				  }
+	
 	has_pages=True
 	OLD_FMT_ROOT = "/Volumes/webdocs/spacetelescope/docs/about/further_information/books/"
 	NEW_FMT_ROOT = "/Users/luis/Workspaces/pttu/spacetelescope.org/static/books/"
@@ -707,6 +708,15 @@ class BookDataMapping(ProductDataMapping):
 class BrochureDataMapping(ProductDataMapping):
 	model = Brochure
 	BASE = "/products/brochures"
+	format_mapping = {'thumbs':'thumb',
+					  'original':'original',
+					  'screen':'screen',
+					  'medium':'medium',
+					  'large':'large',
+					  'pdf':'pdf',
+					  'pdfsm':'pdfsm',
+					  }
+	
 	has_pages=True
 	OLD_FMT_ROOT = "/Volumes/webdocs/spacetelescope/docs/about/further_information/brochures/"
 	NEW_FMT_ROOT = "/Users/luis/Workspaces/pttu/spacetelescope.org/static/brochures/"
@@ -714,6 +724,12 @@ class BrochureDataMapping(ProductDataMapping):
 class MerchandiseDataMapping(ProductDataMapping):
 	model = Merchandise
 	BASE = "/products/merchandise"
+	format_mapping = {'thumbs':'thumb',
+					  'original':'original',
+					  'screen':'screen',
+					  'medium':'medium',
+					  'large':'large',
+					  }
 
 	OLD_FMT_ROOT = "/Volumes/webdocs/spacetelescope/docs/goodies/merchandise/"
 	NEW_FMT_ROOT = "/Users/luis/Workspaces/pttu/spacetelescope.org/static/merchandise/"
@@ -721,6 +737,13 @@ class MerchandiseDataMapping(ProductDataMapping):
 class NewsletterDataMapping(ProductDataMapping):
 	model = Newsletter
 	BASE = "/products/newsletters"
+	format_mapping = {'thumbs':'thumb',
+					  'original':'original',
+					  'screen':'screen',
+					  'medium':'medium',
+					  'large':'large',
+					  'pdf':'pdf',
+					  }
 	has_pages=True
 	OLD_FMT_ROOT = "/Volumes/webdocs/spacetelescope/docs/about/further_information/newsletters/"
 	NEW_FMT_ROOT = "/Users/luis/Workspaces/pttu/spacetelescope.org/static/newsletters/"
@@ -728,21 +751,36 @@ class NewsletterDataMapping(ProductDataMapping):
 class PostCardDataMapping(ProductDataMapping):
 	model = PostCard
 	BASE = "/products/postcards"
-
+	format_mapping = {'thumbs':'thumb',
+					  'original':'original',
+					  'screen':'screen',
+					  'medium':'medium',
+					  'large':'large',
+					  }
 	OLD_FMT_ROOT = "/Volumes/webdocs/spacetelescope/docs/goodies/postcards/"
 	NEW_FMT_ROOT = "/Users/luis/Workspaces/pttu/spacetelescope.org/static/postcards/"
 
 class PosterDataMapping(ProductDataMapping):
 	model = Poster
 	BASE = "/products/posters"
-
+	format_mapping = {'thumbs':'thumb',
+					  'original':'original',
+					  'screen':'screen',
+					  'medium':'medium',
+					  'large':'large',
+					  }
 	OLD_FMT_ROOT = "/Volumes/webdocs/spacetelescope/docs/goodies/posters/"
 	NEW_FMT_ROOT = "/Users/luis/Workspaces/pttu/spacetelescope.org/static/posters/"
 
 class StickerDataMapping(ProductDataMapping):
 	model = Sticker
 	BASE = "/products/stickers"
-
+	format_mapping = {'thumbs':'thumb',
+					  'original':'original',
+					  'screen':'screen',
+					  'medium':'medium',
+					  'large':'large',
+					  }
 	OLD_FMT_ROOT = "/Volumes/webdocs/spacetelescope/docs/goodies/stickers/"
 	NEW_FMT_ROOT = "/Users/luis/Workspaces/pttu/spacetelescope.org/static/stickers/"
 
@@ -750,27 +788,33 @@ class StickerDataMapping(ProductDataMapping):
 class PressKitDataMapping(ProductDataMapping):
 	model = PressKit
 	BASE = "/products/presskits"
+	format_mapping = {'thumbs':'thumb',
+					  'original':'original',
+					  'screen':'screen',
+					  'medium':'medium',
+					  'large':'large',
+					  'pdf':'pdf'
+					  }
 	has_pages=True
 	OLD_FMT_ROOT = "/Volumes/webdocs/spacetelescope/docs/about/further_information/presskits/"
 	NEW_FMT_ROOT = "/Users/luis/Workspaces/pttu/spacetelescope.org/static/presskits/"
 	
 	
 	
-class TechnicalDocumentDataMapping(ProductDataMapping):
-	model = TechnicalDocument
-	BASE = "/about_us/techdocs"
-	has_pages=True
-	OLD_FMT_ROOT = "/Volumes/webdocs/spacetelescope/docs/about/further_information/techdocs/"
-	NEW_FMT_ROOT = "/Users/luis/Workspaces/pttu/spacetelescope.org/static/techdocs/"
-	
 
 # ORG
-
+#TODO copy image resources
 class AnnouncementDataMapping (ProductDataMapping):
+
 	BASE = "/updates"
 	
-	format_mapping = {'thumbs':'thumb'}
-
+	format_mapping = {'thumbs':'thumb',
+					  'original':'original',
+					  'screen':'screen',
+					  'medium':'medium',
+					  'large':'large',
+					  'newsmini':'newsmini',
+					  }
 	OLD_FMT_ROOT = "/Volumes/webdocs/spacetelescope/docs/updates/"
 	NEW_FMT_ROOT = "/Users/luis/Workspaces/pttu/spacetelescope.org/static/announcements/"
 	
@@ -783,42 +827,361 @@ class AnnouncementDataMapping (ProductDataMapping):
 			if created:
 				r.new_path = new_url
 			r.save()
-
+	
+	
+	#def copy_image_resource (self):
+		
 	
 	def _create_object(self):
 		self.obj = Announcement( 
 				id=self.id(),
 				title = self.title(),
 				description=self.description(),
-				priority=self.priority(),
-				credit=self.credit(),
-				x_size = self.x_size(),
-				y_size = self.y_size(),
+				contacts=self.contacts(),
+				links = self.links (),
 			)
 		self.obj.save()
 		
-		self.contact_obj = AnnouncementContact()
-		
-		self.contact_obj.save()
 		
 	def id(self):
 		return self.dataentry['id']
 	
 	def title(self):
-		return self.dataentry['Title']
+		return self.dataentry['Title'].decode('iso-8859-1').encode('utf8') 
+			
+	def description(self):
+		soup = BeautifulSoup( self.dataentry['text'] )
+		return unicode( soup )
+		
+	def contacts(self):
+		return BeautifulSoup(self.dataentry['contacts'].decode('iso-8859-1').encode('utf8'))
+	
+	def links (self):
+		soup = BeautifulSoup( self.dataentry['links'] )
+		return unicode( soup )
+	
+class ConferencePosterDataMapping(SpacetelescopeDataMapping):
+	BASE = "/about_us/conference_posters"
+	
+	format_mapping = {'thumbs':'thumb',
+					  'original':'original',
+					  'screen':'screen',
+					  'medium':'medium',
+					  'large':'large',
+					  }
+	
+	OLD_FMT_ROOT = "/Volumes/webdocs/spacetelescope/docs/about_us/conference_posters/"
+	NEW_FMT_ROOT = "/Users/luis/Workspaces/pttu/spacetelescope.org/static/conference_posters/"
+
+	def _create_object(self):
+		
+		self.obj = ConferencePoster( 
+				id=self.id(),
+				title=self.title(), 
+				description=self.description(),
+				width=self.width(),
+				height=self.height(),
+				resolution=self.resolution(),
+				priority=self.priority(),
+				credit=self.credit(),
+				x_size = 0,
+				y_size = 0,
+				)
+		self.obj.save()	
+
+	def id(self):
+		return self.dataentry['id']
+	
+	def title(self):
+		return self.dataentry['Title'].decode('iso-8859-1').encode('utf8') 
 			
 	def description(self):
 		soup = BeautifulSoup( self.dataentry['Description'] )
 		return unicode( soup )
+
+	def width(self):
+		return self.dataentry['width']
+		
+	def height(self):
+		return self.dataentry['height']
+	
+	def resolution(self):
+		return self.dataentry['dpi']
 		
 	def priority(self):
 		return self.dataentry['priority']
 		
 	def credit(self):
-		return unicode(self.dataentry['Credit'])
+		return self.dataentry['credit'].decode('iso-8859-1').encode('utf8') 
+
+class LogoDataMapping(SpacetelescopeDataMapping):
+	BASE = "/about_us/logos"
 	
-	def x_size (self):
-		return self.dataentry['xsize']
+	format_mapping = {'thumbs':'thumb',
+					  'original':'original',
+					  'screen':'screen',
+					  'medium':'medium',
+					  'large':'large',
+					  'eps':'eps',
+					  'illustrator':'illustrator',
+					  'transparent':'transparent',
+					  }
+
+	OLD_FMT_ROOT = "/Volumes/webdocs/spacetelescope/docs/about_us/logos/"
+	NEW_FMT_ROOT = "/Users/luis/Workspaces/pttu/spacetelescope.org/static/logos/"
+
+	def _create_object(self):
+		
+		self.obj = Logo( 
+				id=self.id(),
+				title=self.title(), 
+				description=self.description(),
+				priority=self.priority(),
+				credit=self.credit(),
+				x_size =0,
+				y_size =0,
+				resolution = 0,
+				)
+		self.obj.save()	
+
+	def id(self):
+		return self.dataentry['id']
 	
-	def y_size (self):
-		return self.dataentry['ysize']
+	def title(self):
+		return self.dataentry['Title'].decode('iso-8859-1').encode('utf8') 
+			
+	def description(self):
+		soup = BeautifulSoup( self.dataentry['Description'] )
+		return unicode( soup )
+
+		
+	def priority(self):
+		return self.dataentry['priority']
+		
+	def credit(self):
+		return self.dataentry['credit'].decode('iso-8859-1').encode('utf8') 
+
+class TechnicalDocumentDataMapping(ProductDataMapping):
+	model = TechnicalDocument
+	BASE = "/about_us/techdocs"
+	format_mapping = {'thumbs':'thumb',
+					  'original':'original',
+					  'screen':'screen',
+					  'medium':'medium',
+					  'large':'large',
+					  'pdf':'pdf',
+					  }
+	has_pages=True
+	OLD_FMT_ROOT = "/Volumes/webdocs/spacetelescope/docs/about/further_information/techdocs/"
+	NEW_FMT_ROOT = "/Users/luis/Workspaces/pttu/spacetelescope.org/static/techdocs/"
+	
+
+
+class ExhibitionDataMapping(SpacetelescopeDataMapping):
+	BASE = "/projects/exhibitions/"
+	
+	format_mapping = {'thumbs':'thumb',
+					  'original':'original',
+					  'screen':'screen',
+					  'medium':'medium',
+					  'large':'large',
+					  }
+
+	OLD_FMT_ROOT = "/Volumes/webdocs/spacetelescope/docs/projects/exhibitions/"
+	NEW_FMT_ROOT = "/Users/luis/Workspaces/pttu/spacetelescope.org/static/exhibitions/"
+
+	def _create_object(self):
+		
+		self.obj = Exhibition( 
+				id=self.id(),
+				title=self.title(), 
+				description=self.description(),
+				priority=self.priority(),
+				credit=self.credit(),
+				)
+		self.obj.save()	
+
+	def id(self):
+		return self.dataentry['id']
+	
+	def title(self):
+		return self.dataentry['Title'].decode('iso-8859-1').encode('utf8') 
+			
+	def description(self):
+		soup = BeautifulSoup( self.dataentry['Description'] )
+		return unicode( soup )
+
+	def priority(self):
+		return self.dataentry['priority']
+		
+		
+	def credit(self):
+		return self.dataentry['credit'].decode('iso-8859-1').encode('utf8') 
+
+class FITSImageDataMapping(SpacetelescopeDataMapping):
+	BASE = "/projects/fits_liberator/fitsimages/"
+	
+	format_mapping = {'thumbs':'thumb',
+					  'original':'original',
+					  'screen':'screen',
+					  'medium':'medium',
+					  'large':'large',
+					  }
+
+	OLD_FMT_ROOT = "/Volumes/webdocs/spacetelescope/docs/projects/fits_liberator/fitsimages/"
+	NEW_FMT_ROOT = "/Users/luis/Workspaces/pttu/spacetelescope.org/static/fitsimages/"
+
+	def _create_object(self):
+		
+		self.obj = FITSImage( 
+				id=self.id(),
+				title=self.title(), 
+				description=self.description(),
+				priority=self.priority(),
+				credit=self.credit(),
+				city = self.city(),
+				country = self.country(),
+				)
+		self.obj.save()	
+
+	def id(self):
+		return self.dataentry['id']
+	
+	def title(self):
+		return self.dataentry['Title'].decode('iso-8859-1').encode('utf8') 
+			
+	def description(self):
+		soup = BeautifulSoup( self.dataentry['Description'] )
+		return unicode( soup )
+
+	def city(self):
+		return self.dataentry['City'].decode('iso-8859-1').encode('utf8') 
+
+	def country(self):
+		return self.dataentry['Country'].decode('iso-8859-1').encode('utf8') 
+
+		
+	def priority(self):
+		return self.dataentry['priority']
+		
+	def credit(self):
+		return self.dataentry['credit'].decode('iso-8859-1').encode('utf8') 
+	
+
+class OnlineArtAuthorDataMapping(SpacetelescopeDataMapping):
+	BASE = "/goodies/art/"
+	
+	format_mapping = {'thumbs':'thumb',
+					  'original':'original',
+					  'screen':'screen',
+					  'medium':'medium',
+					  'large':'large',
+					  }
+
+
+
+	OLD_FMT_ROOT = "/Volumes/webdocs/spacetelescope/docs/goodies/art/"
+	NEW_FMT_ROOT = "/Users/luis/Workspaces/pttu/spacetelescope.org/static/artists/"
+
+	def _create_object(self):
+		
+		self.obj = OnlineArtAuthor( 
+				id=self.id(),
+				name=self.name(), 
+				description=self.description(),
+				city = self.city(),
+				country = self.country(),
+				email = self.email(),
+				links = self.links(),
+				priority = self.priority()
+				)
+		self.obj.save()	
+		
+		
+
+	def id(self):
+		return self.dataentry['id']
+	
+
+	
+	def name(self):
+		return self.dataentry['Name'].decode('iso-8859-1').encode('utf8') 
+			
+	def description(self):
+		soup = BeautifulSoup( self.dataentry['Description'] )
+		return unicode( soup )
+	
+	def priority(self):
+		return self.dataentry['priority']
+	
+	def city(self):
+		return self.dataentry['City'].decode('iso-8859-1').encode('utf8') 
+
+	def country(self):
+		return self.dataentry['Country'].decode('iso-8859-1').encode('utf8') 
+
+	def email(self):
+		return self.dataentry['e-mail'].decode('iso-8859-1').encode('utf8') 
+		
+	def credit(self):
+		return self.dataentry['credit'].decode('iso-8859-1').encode('utf8') 
+	
+	def links(self):
+		soup = BeautifulSoup( self.dataentry['link'] )
+		return unicode( soup )
+	
+class OnlineArtDataMapping(SpacetelescopeDataMapping):
+	BASE = "/goodies/art/"
+	
+	format_mapping = {'thumbs':'thumb',
+					  'original':'original',
+					  'screen':'screen',
+					  'medium':'medium',
+					  'large':'large',
+					  }
+
+	OLD_FMT_ROOT = "/Volumes/webdocs/spacetelescope/docs/goodies/art"
+	NEW_FMT_ROOT = "/Users/luis/Workspaces/pttu/spacetelescope.org/static/art/"
+
+	def _create_object(self):
+		
+		self.obj = OnlineArt( 
+				id=self.id(),
+				title=self.title(), 
+				description=self.description(),
+				priority = self.priority(),
+				artist = OnlineArtAuthor.objects.get(id=self.artist())
+				)
+		self.obj.save()	
+
+	def artist (self):
+		return self.dataentry['artist_id']
+	
+	def id(self):
+		return self.dataentry['id']
+	
+	def title(self):
+		return self.dataentry['Title'].decode('iso-8859-1').encode('utf8') 
+			
+	def description(self):
+		soup = BeautifulSoup( self.dataentry['Description'] )
+		return unicode( soup )
+	
+	def priority(self):
+		return self.dataentry['priority']
+	
+	def city(self):
+		return self.dataentry['City'].decode('iso-8859-1').encode('utf8') 
+
+	def country(self):
+		return self.dataentry['Country'].decode('iso-8859-1').encode('utf8') 
+
+	def email(self):
+		return self.dataentry['e-mail'].decode('iso-8859-1').encode('utf8') 
+		
+	def credit(self):
+		return self.dataentry['credit'].decode('iso-8859-1').encode('utf8') 
+	
+	def links(self):
+		soup = BeautifulSoup( self.dataentry['link'] )
+		return unicode( soup )

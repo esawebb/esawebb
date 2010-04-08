@@ -21,7 +21,7 @@ from djangoplicity.archives import ArchiveOptions
 from djangoplicity.archives.contrib import security
 from djangoplicity.archives.contrib.browsers import *
 from djangoplicity.archives.contrib.info import *
-from djangoplicity.archives.contrib.queries import AllPublicQuery, UnpublishedQuery, YearQuery, EmbargoQuery, StagingQuery
+from djangoplicity.archives.contrib.queries import AllPublicQuery, UnpublishedQuery, YearQuery, EmbargoQuery, StagingQuery,  param_extra_templates
 from djangoplicity.archives.importer.forms import GenericImportForm
 from djangoplicity.templatetags.djangoplicity_datetime import datetime as datetime_format
 from djangoplicity.metadata.archives.info import *
@@ -51,6 +51,65 @@ class CalendarYearQuery( YearQuery ):
 		qs = qs.filter( year=year )
 		return ( qs , { 'year' : year } ) 
 
+
+class ArtistQuery( AllPublicQuery ):
+	"""
+	Query for displaying all entries for a certain Artist
+	
+	May be defined in an Options class as:
+	
+	class Queries(object):
+		artist = ArtistQuery(
+						  browsers=( ... ), 
+						  verbose_name="..." )
+								  
+
+	
+	Keyword argument "use_year_title" determines if the year should be
+	substituted into verbose name. 
+	"""
+	
+	def __init__(self, **kwargs):
+		
+		defaults = { 'include_in_urlpatterns' : True, 'url_template' : 'djangoplicity.archives.contrib.queries.urls.simple', 'extra_templates' :  param_extra_templates( param='artist' ), 'searchable' : False }
+		defaults.update( kwargs )
+		super(ArtistQuery,self).__init__( **defaults )
+			
+	def queryset( self, model, options, request, stringparam=None, **kwargs ):
+		if not stringparam:
+			(qs, args) = super( ArtistQuery,self ).queryset( model, options, request, **kwargs )
+			return ( qs , { 'artist' : 'Online Art' } ) 
+		
+
+	
+		try:
+			artist = OnlineArtAuthor.objects.get(id=stringparam)	
+		except OnlineArtAuthor.DoesNotExist:
+			raise Http404
+		(qs, args) = super( ArtistQuery,self ).queryset( model, options, request, **kwargs )
+		
+		try:
+			qs = qs.filter(artist = artist)
+			return ( qs , { 'artist' : artist } ) 
+		except FieldError:
+			raise ImproperlyConfigured( 'The specified artist field is not available for the current archive.' )
+
+	
+	def url_args(self, model, options, request, stringparam=None, **kwargs ):
+		"""
+		Hook for query to specify extra reverse URL lookup arguments.
+		"""
+		return [ stringparam ]
+	
+	def verbose_name(self, artist=None, **kwargs ):
+		"""
+		Method that can be overwritten to customize the archive title.
+		"""
+		try:
+			if artist :
+				return self._verbose_name % artist
+		except TypeError:
+			raise ImproperlyConfigured( 'Title for ArtistQuery does not include substitution string - set "use_year_title" to False or include one and only one %d in the verbose_name.')
 
 
 # TODO: display according to year, then month		
@@ -83,11 +142,26 @@ class OnlineArtOptions ( StandardOptions ):
 		)
 	
 	class Queries(object):
-		default = AllPublicQuery( browsers=( 'normal', 'viewall' ), verbose_name="Art: View All" )
-		#artist = ArtistQuery ( browsers=( 'normal', 'viewall' ),  verbose_name="Art by %s: View All" )
+		#default = AllPublicQuery( browsers=( 'normal', 'viewall' ), verbose_name="Art: View All" )
+		default = ArtistQuery ( browsers=( 'normal', 'viewall' ),  verbose_name="%s" )
+		
+
+class OnlineArtAuthorOptions ( StandardOptions ):
+	   
+	urlname_prefix = 'artists'
+
+	info = ( 
+		( _(u'About the Piece'), { 'fields' : ( 'id', release_date,  ), } ),
+	)
+	
+	downloads = ( 
+		( _(u'Images'), {'resources' : ( 'original', 'screen'  ), 'icons' : { 'original' : 'phot', 'screen' : 'phot'  } } ),
+		)
+	
+	class Queries(object):
+		default = AllPublicQuery( browsers=( 'normal', 'viewall' ), verbose_name="Artists: View All" )
 		
 		
-# TODO: how to model? Current Release model is not generic enough to support this
 # Print
 class PrintLayoutOptions ( StandardOptions ):
 	   

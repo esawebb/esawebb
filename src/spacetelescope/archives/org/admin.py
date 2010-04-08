@@ -14,21 +14,11 @@ from django.forms import ModelForm
 from django.core.urlresolvers import NoReverseMatch, reverse
 from django.utils.safestring import mark_safe
 
-class AnnouncementContactInlineForm( ModelForm ):
-	class Meta:
-		model = AnnouncementContact
-		# Decision 26 Oct: Show only the following elements.	
-		fields = ( 'name', 'affiliation', 'city', 'country', 'telephone', 'cellular', 'email' )
-
-class AnnouncementContactInlineAdmin( admin.StackedInline ):
-	model = AnnouncementContact
-	extra = 1
-	form = AnnouncementContactInlineForm
 
 
 
 class AnnouncementAdmin (DjangoplicityModelAdmin, RenameAdmin, ArchiveAdmin ):
-	list_display = ( 'id', 'title', 'published','priority','last_modified', view_link('updates') )
+	list_display = ( 'id', 'title', 'published','priority','last_modified', view_link('announcements') )
 	list_filter = ( 'title', 'published', 'last_modified',  )
 	list_editable = ( 'title', 'published', )
 	search_fields = ( 'id', 'old_ids', 'title', 'description', 'credit' )
@@ -36,13 +26,12 @@ class AnnouncementAdmin (DjangoplicityModelAdmin, RenameAdmin, ArchiveAdmin ):
 	fieldsets = (
 					( None, {'fields': ( 'id', ) } ),
 					( 'Publishing', {'fields': ( 'published', 'priority', ), } ),
-					( 'Archive', {'fields': ( 'title', 'description', 'credit', 'links'), } ),
+					( 'Archive', {'fields': ( 'title', 'description', 'credit', 'links','contacts'), } ),
 					( 'Metadata', {'fields': ( 'subject_category', 'subject_name', 'facility', ), } ),
 					( 'Compatibility', {'fields': ('old_ids', ), }),
 				)	
 	
 	ordering = ('id', )
-	inlines = [ AnnouncementContactInlineAdmin, ]
 	richtext_fields = ('description',)
 	links = ()
 
@@ -65,15 +54,16 @@ class LogoAdmin( DjangoplicityModelAdmin, RenameAdmin, ArchiveAdmin ):
 	links = ()
 
 class ConferencePosterAdmin( DjangoplicityModelAdmin, RenameAdmin, ArchiveAdmin ):
-	list_display = ( 'id', 'title', 'published','priority','last_modified', view_link('conference_posters') )
-	list_filter = ( 'title', 'published', 'last_modified',  )
-	list_editable = ( 'title', 'published', )
+	list_display = ( 'id', 'title', 'published','priority','last_modified',  'resolution','x_size','y_size', view_link('conference_posters') )
+	list_filter = ( 'title', 'published', 'last_modified',  'resolution','x_size','y_size')
+	list_editable = ( 'title', 'published',  'resolution','x_size','y_size')
 	search_fields = ( 'id', 'old_ids', 'title', 'description', 'credit' )
 	date_hierarchy = 'last_modified'
 	fieldsets = (
 					( None, {'fields': ( 'id', ) } ),
 					( 'Publishing', {'fields': ( 'published', 'priority', ), } ),
 					( 'Archive', {'fields': ( 'title', 'description', 'width', 'height', 'weight', 'credit', ), } ),
+					( 'Screen', {'fields': ( 'resolution', 'x_size', 'y_size'), } ),
 					( 'Compatibility', {'fields': ('old_ids', ), }),
 				)
 	ordering = ('id', )
