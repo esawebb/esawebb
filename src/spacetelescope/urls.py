@@ -12,7 +12,7 @@ from django.conf import settings
 from django.conf.urls.defaults import *
 from django.utils.translation import ugettext as _
 from django.contrib import admin
-from spacetelescope.admin import admin_site, adminlogs_site
+from spacetelescope.admin import admin_site, adminlogs_site, adminshop_site
 
 
 from djangoplicity.media.models import Image, Video
@@ -33,21 +33,25 @@ from spacetelescope.archives.projects.options import *
 from spacetelescope.archives.org.models import *
 from spacetelescope.archives.org.options import *
 
+basepatterns = []
+#from satchmo_store.urls import basepatterns
 
 #from spacetelescope.archives.projects.models import *
 #from spacetelescope.archives.projects.options import *
 
+urlpatterns = []
 
-
-urlpatterns = patterns( '',    
+urlpatterns += basepatterns + patterns( '',    
     # Djangoplicity Adminstration 
     ( r'^admin/cache/', include( 'djangoplicity.cache.urls', namespace="admincache_site", app_name="cache" ), { 'SSL': True } ),
     ( r'^admin/log/', include( 'djangoplicity.contrib.admin.log.urls', namespace="adminhistory_site", app_name="history" ), { 'SSL': True } ),
     ( r'^admin/doc/', include( 'django.contrib.admindocs.urls' ), { 'SSL': True } ),
     ( r'^admin(.*)({{\s?MEDIA_URL\s?}})(?P<path>.*)', 'djangoplicity.views.adm_translate_static_media_path', { 'SSL' : True } ),
+	( r'^admin/shop/', include(adminshop_site.urls), { 'SSL': True } ),
 	( r'^admin/system/', include(adminlogs_site.urls), { 'SSL': True } ),
 	( r'^admin/', include(admin_site.urls), { 'SSL': True } ),
 	( r'^admin/import/', include('djangoplicity.archives.importer.urls'), { 'SSL': True } ),
+	
 	 
     # Server alive check (used for load balancers - called every 5 secs )
     ( r'^alive-check.dat$', 'djangoplicity.views.alive_check', { 'SSLAllow' : True } ),
@@ -103,6 +107,10 @@ urlpatterns = patterns( '',
  	# Main view
  	( r'^$', 'spacetelescope.views.main_page' ),
  )
+
+#urlpatterns += basepatterns + patterns('',
+#        (r'^shop/', include('satchmo_store.shop.urls')),
+#    )
 
 #handler404 = 'spacetelescope.views.page_not_found'
 

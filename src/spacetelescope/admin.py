@@ -39,6 +39,7 @@ import spacetelescope.archives.products.admin
 # an admin site.
 admin_site = authtkt_decorator( AdminSite( name="admin_site" ) )
 adminlogs_site = authtkt_decorator( AdminSite( name="adminlogs_site" ) )
+adminshop_site = authtkt_decorator( AdminSite( name="adminshop_site" ) )
 
 autoregister( admin_site, django.contrib.auth.admin )
 autoregister( admin_site, django.contrib.sites.admin )
@@ -77,3 +78,9 @@ admin_site.register(django.contrib.auth.models.User,
 
 admin_site.register(django.contrib.auth.models.Group, 
                         django.contrib.auth.admin.GroupAdmin)
+
+
+# Hack to register Satchmo admin interface
+from django.contrib import admin
+admin.site = adminshop_site
+admin.autodiscover()  

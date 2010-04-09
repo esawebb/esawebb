@@ -60,7 +60,7 @@ DEBUG_TOOLBAR_PANELS = (
     #'debug_toolbar.panels.settings_vars.SettingsVarsDebugPanel',
     'debug_toolbar.panels.headers.HeaderDebugPanel',
     'debug_toolbar.panels.request_vars.RequestVarsDebugPanel',
-    #'debug_toolbar.panels.template.TemplateDebugPanel',
+    'debug_toolbar.panels.template.TemplateDebugPanel',
     'debug_toolbar.panels.sql.SQLDebugPanel',
     #'debug_toolbar.panels.signals.SignalDebugPanel',
     'debug_toolbar.panels.cache.CacheDebugPanel',
@@ -146,8 +146,10 @@ CACHE_MIDDLEWARE_SECONDS = 600
 CACHE_BACKEND = config.get('cache', 'CACHE_BACKEND')
 CACHE_MIDDLEWARE_KEY_PREFIX = config.get('cache', 'CACHE_MIDDLEWARE_KEY_PREFIX')
 CACHE_KEY_PREFIX = config.get('cache', 'CACHE_KEY_PREFIX') if config.has_option('cache', 'CACHE_KEY_PREFIX') else ''
+CACHE_PREFIX = CACHE_KEY_PREFIX 
 CACHE_MIDDLEWARE_ANONYMOUS_ONLY = True
 CACHE_TEMPLATES = config.getboolean('cache', 'CACHE_TEMPLATES')
+#CACHE_TIMEOUT = 60*5
 
 USE_ETAGS = True
 
@@ -243,6 +245,7 @@ MIDDLEWARE_CLASSES += (
 )
 
 INSTALLED_APPS = (
+#	'satchmo_store.shop',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
@@ -250,6 +253,7 @@ INSTALLED_APPS = (
     'django.contrib.admin',
     'django.contrib.admindocs',
 	'django.contrib.humanize',
+	'django.contrib.sitemaps',
 	'djangoplicity.menus',
 	'djangoplicity.pages',
 	'djangoplicity.cron',
@@ -272,7 +276,23 @@ INSTALLED_APPS = (
 	'spacetelescope.archives.goodies',
 	'spacetelescope.archives.products',
 	'spacetelescope.archives.org',
-	'spacetelescope.archives.projects',
+	'spacetelescope.archives.projects',	
+	# Satchmo
+#	 'registration',
+#    'keyedcache',
+#	 'livesettings',
+#	 'l10n',
+#    'sorl.thumbnail',
+#    'satchmo_store.contact',
+#    'tax',
+#    'tax.modules.no',
+#    'tax.modules.area',
+#    'tax.modules.percent',
+#    'shipping',
+#    'product',
+#    'payment',
+#    'satchmo_utils',
+#    'app_plugins',
 )
 
 
@@ -450,6 +470,53 @@ JQUERY_UI_CSS = "djangoplicity/css/ui-lightness/jquery-ui-1.7.2.custom.css"
 DJANGOPLICITY_ADMIN_CSS = "djangoplicity/css/admin.css"
 DJANGOPLICITY_ADMIN_JS = "djangoplicity/js/admin.js"
 SUBJECT_CATEGORY_CSS = "djangoplicity/css/widgets.css"
+
+###########
+# SATCHMO #
+###########
+#import os
+#DIRNAME = os.path.abspath( os.path.dirname( __file__ ) )
+#LOCAL_DEV = True
+#
+#MIDDLEWARE_CLASSES += ( 
+#					"threaded_multihost.middleware.ThreadLocalMiddleware",
+#					"satchmo_store.shop.SSLMiddleware.SSLRedirect", 
+#					)
+#
+#TEMPLATE_CONTEXT_PROCESSORS += ( 'satchmo_store.shop.context_processors.settings', )
+#
+#AUTHENTICATION_BACKENDS += ( 'satchmo_store.accounts.email-auth.EmailBackend', )
+#
+#SATCHMO_SETTINGS = {
+#                    'SHOP_BASE' : '/shop',
+#                    'MULTISHOP' : True,
+#                    #'SHOP_URLS' : patterns('satchmo_store.shop.views',)
+#                    }
+#
+#
+#SITE_NAME = ""
+#SITE_DOMAIN = ""
+#LOGDIR = LOG_DIR
+#LOGFILE = 'satchmo.log'
+#CHECKOUT_SSL=True
+#
+#L10N_SETTINGS = {
+#  'currency_formats' : {
+#     'EURO' : {'symbol': u'€', 'positive' : u"€ %(val)0.2f", 'negative': u"€ (%(val)0.2f)", 'decimal' : ','},
+#  },
+#  'default_currency' : 'EURO',
+#  'show_translations': False,
+#  'allow_translations': False,
+#}
+#
+#import logging
+#logging.basicConfig(level=logging.DEBUG,
+#                    format='%(asctime)s %(name)-12s %(levelname)-8s %(message)s',
+#                    datefmt='%a, %d %b %Y %H:%M:%S')
+#
+#logging.getLogger( 'keyedcache' ).setLevel( logging.INFO )
+#logging.getLogger( 'l10n' ).setLevel( logging.INFO )
+#logging.info( "Satchmo Started" )
 
 # ======================================================================
 # SITE SPECIFIC SECTIONS 
