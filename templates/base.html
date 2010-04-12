@@ -14,7 +14,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
 <meta name="Keywords" content="Hubble, Hubble Space Telescope, HST, JWST, James Webb Space Telescope, images, information centre, news, video, European Space Agency, ESA, ACS, WFPC2, WFPC, FOS, FOC, GHRS, NICMOS, STIS, FGS, goodies, wallpaper, calendar, posters">
 {% block extra_header %}{% endblock %}
-{% load menus %}{% init_menu 'Top Menu' as top_menu %}{% init_menu 'Main Menu' as main_menu %}{% init_menu 'Footer Menu' as footer_menu %}
+{% load menus %}{% init_menu 'Top Menu' as top_menu %}{%init_menu 'Top Right Menu' as top_right_menu %}{% init_menu 'Footer Menu' as footer_menu %}
 </head>
 <div id="header" class="container_16">
 
@@ -22,9 +22,7 @@
 		<a href="#todo" id='hubblelogo'></a>
 	</div>
 	<div class='trmenu'>
-		<a href='#todo'>Contact</a>
-		<a href='#todo'>Subscribe</a>
-		<a href='#todo'>Sitemap</a>
+		{% spaceless %}{% render_menu top_right_menu horizontal %}{% endspaceless %}
 	</div>
 </div>
                
@@ -32,12 +30,12 @@
 
 <div id="content" class="container_16">
 	<div id='topcontent' class=''>
-		<div id='mainmenu' class='grid_16'>
+		<div id='mainmenu' class='grid_16 nomarg'>
 		{% spaceless %}{% render_menu top_menu horizontal %}{% endspaceless %}
 		</div>
 		<div class='grid_12'>
 			<div id='breadcrumb'>
-{% block breadcrumb %}<a href="/">Home</a> {% breadcrumb main_menu top_menu footer_menu %}{% endblock %}
+{% block breadcrumb %}<a href="/">Home</a> {% breadcrumb top_menu footer_menu top_right_menu %}{% endblock %}
 			</div>
 		</div>
 		<div id='googlesearch' class='grid_4'>
@@ -59,12 +57,19 @@
 		
 	</div>
 	
-	<div id='maincontent' class='container_16 bodygradient'>
-	{% block content_area %}
-{% block content %}
-{% endblock %}
-{% endblock %}
-		
+	<div  id='maincontent' class='container_16 bodygradient'>
+
+	
+		<div id='leftmenu' class='grid_3'>
+		{% spaceless %}{% render_menu top_menu default %}{% endspaceless %}
+		</div>
+		<div class='grid_13'>
+		{% block content_area %}
+	{% block content %}
+	{% endblock %}
+	{% endblock %}
+		</div>
+	
 		
 	
 	</div>
@@ -73,25 +78,17 @@
 
 
 <div id="footer" class="container_16">
+<div class='clear'></div>
 <div id="ftcol1" class="grid_3 ">
-	<p><b>Image Use Policy</b></p>
-	<p>Space Telescope imagery is free for anyone to use</p>
+	<strong><a href='#todo'>Image Use Policy</a></strong>
+	<a href="#todo">Space Telescope imagery is free for anyone to use.</a>
 </div>
 
-<div id="ftcol2" class="grid_3 ">
-	test2
-</div>
-
-<div id="ftcol3" class="grid_3 ">
-	test3
-</div>
-
-<div id="ftcol4" class="grid_3 ">
-	test4
-</div>
+{% spaceless %}{% render_menu footer_menu footer %}{% endspaceless %}
 
 <div id="ftcol5" class="grid_4">
-	test5
+	<strong>Social Networking</strong><br/>
+	[todo]
 </div>
 
 </div>

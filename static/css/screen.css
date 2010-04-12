@@ -6,6 +6,8 @@ body {
 	background-color:;
 	background: #051226 url('../img/background.jpg') no-repeat top center;
 	font-family: Helvetica, Arial, "MS Trebuchet", sans-serif;
+	font-size:12px;
+	
 }
 
 a {
@@ -98,7 +100,7 @@ a:hover {
 }
 
 #breadcrumb {
-	padding-left:10px;
+
 	padding-bottom:27px; /* spacing! */
 }
 
@@ -212,6 +214,15 @@ a:hover {
 .trmenu a:hover {
 	text-decoration: underline
 }
+/************/
+/* LEFTMENU */
+/************/
+
+#leftmenu a {
+	font-size: 12px;
+	color: #515151;
+
+}
 
 
 /***********/
@@ -222,14 +233,26 @@ a:hover {
 		background: white url('../img/body-gradient.png') repeat-x;
 }
 
+p {
+	font-size:12px;
+	line-height:1.5;
+	margin-bottom:10px;
+}
+
+h1, h2{
+	line-height:2;
+}
+
 #maincontent {
-	padding-top:-200px;
+	overflow: auto;
+	padding-top:20px;
 	background-color:white;
 	width:960px;
-	min-height:100px;
+	min-height:200px;
 	clear:both;
 	color:#515151;
 }
+
 
 /* frontpage headlines */
 .fp_news {
@@ -253,4 +276,11 @@ a:hover {
 	height:280px;
 	background: url('../img/footer-gradient.png') repeat-x;
 	color:white;
+	font-size:12px;
+
+}
+#footer a {
+	color:white;
+	line-height:1.5;
+
 }

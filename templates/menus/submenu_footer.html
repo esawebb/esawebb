@@ -1,0 +1,12 @@
+{% load menus %}
+{% for entry in submenu %}
+{%ifequal entry.level 1 %}
+<div class="grid_3 ">
+<strong><a href="{{ entry.link }}">{{ entry.title }}</a></strong><br/>
+{% render_submenu entry.children %}
+</div>
+{%else%}
+<a href="{{ entry.link }}">{{ entry.title }}</a><br/>
+{%endifequal%}
+
+{% endfor %}
