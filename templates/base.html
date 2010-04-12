@@ -57,13 +57,13 @@
 		
 	</div>
 	
-	<div  id='maincontent' class='container_16 bodygradient'>
+	<div  id='mainblock' class='container_16 bodygradient'>
 
 	
-		<div id='leftmenu' class='grid_3'>
+		<div id='leftmenu' class='grid_4'>
 		{% spaceless %}{% render_menu top_menu default %}{% endspaceless %}
 		</div>
-		<div class='grid_13'>
+		<div id='content_area' class='grid_12 ' >
 		{% block content_area %}
 	{% block content %}
 	{% endblock %}

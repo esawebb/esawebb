@@ -1,0 +1,17 @@
+{% include 'archives/embargo_notice.html' %}
+<h1>{{ object.title }}</h1>
+{% if object.resource_medium %}
+<div class="archive_image">
+<div class="image_container">{% if object.resource_screen %}<a href="{{object.resource_screen.url}}" rel="shadowbox" title="{{object}}" />
+<img src="{{object.resource_medium.url}}" width="320" border="0" alt="{{object}}" />
+<br/><p>Click to Enlarge</p></a>
+{% else %}
+<img src="{{object.resource_medium.url}}" width="320" border="0" alt="{{object}}" />
+{% endif %}
+</div>
+</div>
+{% endif %}
+{% if object.headline %}<p>{{ object.headline }}</p>{% endif %}
+<p>{{ object.description|safe }}</p>
+<p><strong>Credit:</strong><div class="credit"><p>{{ object.credit|safe|default:"ESO" }}</p></div></p>
+{% include 'archives/extra_footer.html' %}
