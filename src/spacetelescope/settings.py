@@ -149,7 +149,7 @@ CACHE_KEY_PREFIX = config.get('cache', 'CACHE_KEY_PREFIX') if config.has_option(
 CACHE_PREFIX = CACHE_KEY_PREFIX 
 CACHE_MIDDLEWARE_ANONYMOUS_ONLY = True
 CACHE_TEMPLATES = config.getboolean('cache', 'CACHE_TEMPLATES')
-#CACHE_TIMEOUT = 60*5
+CACHE_TIMEOUT = 60*5
 
 USE_ETAGS = True
 
@@ -170,6 +170,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
 	'djangoplicity.utils.context_processors.site_environment',
 	'djangoplicity.utils.context_processors.project_environment',
 	'djangoplicity.utils.context_processors.google_analytics_id',
+	'djangoplicity.utils.context_processors.djangoplicity_environment'
 	#'eso.context_processors.test_environment',
 )
 
@@ -245,11 +246,11 @@ MIDDLEWARE_CLASSES += (
 )
 
 INSTALLED_APPS = (
-#	'satchmo_store.shop',
+	'django.contrib.sites',
+	'satchmo_store.shop',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
-    'django.contrib.sites',
     'django.contrib.admin',
     'django.contrib.admindocs',
 	'django.contrib.humanize',
@@ -278,21 +279,21 @@ INSTALLED_APPS = (
 	'spacetelescope.archives.org',
 	'spacetelescope.archives.projects',	
 	# Satchmo
-#	 'registration',
-#    'keyedcache',
-#	 'livesettings',
-#	 'l10n',
-#    'sorl.thumbnail',
-#    'satchmo_store.contact',
-#    'tax',
-#    'tax.modules.no',
-#    'tax.modules.area',
-#    'tax.modules.percent',
-#    'shipping',
-#    'product',
-#    'payment',
-#    'satchmo_utils',
-#    'app_plugins',
+	#'registration',
+	'sorl.thumbnail',
+	'keyedcache',
+	'livesettings',
+	'satchmo_utils',
+	'satchmo_store.contact',
+	'product',
+	'shipping',
+	'payment',
+	'payment.modules.giftcertificate',
+    'l10n',
+    'tax',
+    'tax.modules.no',
+    'app_plugins',
+    'shipping.modules.tiered'
 )
 
 
@@ -474,49 +475,49 @@ SUBJECT_CATEGORY_CSS = "djangoplicity/css/widgets.css"
 ###########
 # SATCHMO #
 ###########
-#import os
-#DIRNAME = os.path.abspath( os.path.dirname( __file__ ) )
-#LOCAL_DEV = True
-#
-#MIDDLEWARE_CLASSES += ( 
-#					"threaded_multihost.middleware.ThreadLocalMiddleware",
-#					"satchmo_store.shop.SSLMiddleware.SSLRedirect", 
-#					)
-#
-#TEMPLATE_CONTEXT_PROCESSORS += ( 'satchmo_store.shop.context_processors.settings', )
-#
-#AUTHENTICATION_BACKENDS += ( 'satchmo_store.accounts.email-auth.EmailBackend', )
-#
-#SATCHMO_SETTINGS = {
-#                    'SHOP_BASE' : '/shop',
-#                    'MULTISHOP' : True,
-#                    #'SHOP_URLS' : patterns('satchmo_store.shop.views',)
-#                    }
-#
-#
-#SITE_NAME = ""
-#SITE_DOMAIN = ""
-#LOGDIR = LOG_DIR
-#LOGFILE = 'satchmo.log'
-#CHECKOUT_SSL=True
-#
-#L10N_SETTINGS = {
-#  'currency_formats' : {
-#     'EURO' : {'symbol': u'€', 'positive' : u"€ %(val)0.2f", 'negative': u"€ (%(val)0.2f)", 'decimal' : ','},
-#  },
-#  'default_currency' : 'EURO',
-#  'show_translations': False,
-#  'allow_translations': False,
-#}
-#
-#import logging
-#logging.basicConfig(level=logging.DEBUG,
-#                    format='%(asctime)s %(name)-12s %(levelname)-8s %(message)s',
-#                    datefmt='%a, %d %b %Y %H:%M:%S')
-#
-#logging.getLogger( 'keyedcache' ).setLevel( logging.INFO )
-#logging.getLogger( 'l10n' ).setLevel( logging.INFO )
-#logging.info( "Satchmo Started" )
+import os
+DIRNAME = os.path.abspath( os.path.dirname( __file__ ) )
+LOCAL_DEV = True
+
+MIDDLEWARE_CLASSES += ( 
+					"threaded_multihost.middleware.ThreadLocalMiddleware",
+					"satchmo_store.shop.SSLMiddleware.SSLRedirect", 
+					)
+
+TEMPLATE_CONTEXT_PROCESSORS += ( 'satchmo_store.shop.context_processors.settings', )
+
+AUTHENTICATION_BACKENDS += ( 'satchmo_store.accounts.email-auth.EmailBackend', )
+
+SATCHMO_SETTINGS = {
+                    'SHOP_BASE' : '/shop',
+                    'MULTISHOP' : False,
+                    #'SHOP_URLS' : patterns('satchmo_store.shop.views',)
+                    }
+
+
+SITE_NAME = "Hubbleshop"
+SITE_DOMAIN = "www.spacetelescope.org"
+LOGDIR = LOG_DIR
+LOGFILE = 'satchmo.log'
+CHECKOUT_SSL=True
+
+L10N_SETTINGS = {
+  'currency_formats' : {
+     'EURO' : {'symbol': u'€', 'positive' : u"€ %(val)0.2f", 'negative': u"€ (%(val)0.2f)", 'decimal' : ','},
+  },
+  'default_currency' : 'EURO',
+  'show_translations': False,
+  'allow_translations': False,
+}
+
+import logging
+logging.basicConfig(level=logging.DEBUG,
+                    format='%(asctime)s %(name)-12s %(levelname)-8s %(message)s',
+                    datefmt='%a, %d %b %Y %H:%M:%S')
+
+logging.getLogger( 'keyedcache' ).setLevel( logging.INFO )
+logging.getLogger( 'l10n' ).setLevel( logging.INFO )
+logging.info( "Satchmo Started" )
 
 # ======================================================================
 # SITE SPECIFIC SECTIONS 

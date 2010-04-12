@@ -33,11 +33,7 @@ from spacetelescope.archives.projects.options import *
 from spacetelescope.archives.org.models import *
 from spacetelescope.archives.org.options import *
 
-basepatterns = []
-#from satchmo_store.urls import basepatterns
-
-#from spacetelescope.archives.projects.models import *
-#from spacetelescope.archives.projects.options import *
+from satchmo_store.urls import basepatterns
 
 urlpatterns = []
 
@@ -108,9 +104,9 @@ urlpatterns += basepatterns + patterns( '',
  	( r'^$', 'spacetelescope.views.main_page' ),
  )
 
-#urlpatterns += basepatterns + patterns('',
-#        (r'^shop/', include('satchmo_store.shop.urls')),
-#    )
+urlpatterns += basepatterns + patterns('',
+        (r'^shop/', include('satchmo_store.shop.urls')),
+    )
 
 #handler404 = 'spacetelescope.views.page_not_found'
 

@@ -67,7 +67,7 @@ options(
 							 '../projects/djangoplicity/apps/MySQL-python-1.2.2-patched.tar.gz',
 							 #'../projects/djangoplicity/apps/cmemcache-0.95-patched.tar.bz2',
 							 '../projects/djangoplicity/apps/python-memcached-1.45.tar.gz',
-                             '../projects/djangoplicity/apps/pycrypto-2.0.1.tar.gz',
+                             '../projects/djangoplicity/apps/pycrypto-2.1.0.tar.gz',
 							 '../projects/djangoplicity/apps/paramiko-1.7.4.tar.gz',
 							 '../projects/djangoplicity/apps/fabric-0.9.0.tar.gz',
                              '../projects/djangoplicity/apps/BeautifulSoup.tar.gz',
@@ -100,6 +100,19 @@ options(
                              '../projects/spacetelescope.org/apps/BareNecessities-0.2.4.tar.gz', 
                              '../projects/spacetelescope.org/apps/DreamweaverTemplate-0.1.1.tar.gz',
                              
+                             # Satchmo packages
+                             '../projects/spacetelescope.org/apps/trml2pdf-1.2.tar.gz',
+                             '../projects/spacetelescope.org/apps/setuptools_hg-0.2.tar.gz',
+                             '../projects/spacetelescope.org/apps/sorl-thumbnail-3.2.5.tar.gz',
+                             '../projects/spacetelescope.org/apps/PyYAML-3.09.zip',
+                             '../projects/spacetelescope.org/apps/django-livesettings-1.4-3.tar.gz',
+                             '../projects/spacetelescope.org/apps/django-registration-0.7.tar.gz',
+                             '../projects/spacetelescope.org/apps/django-signals-ahoy-0.1-1.tar.gz',
+                             '../projects/spacetelescope.org/apps/django-caching-app-plugins-0.1.1.tar.gz',
+                             '../projects/spacetelescope.org/apps/django-keyedcache-1.4-2.tar.gz',
+                             '../projects/spacetelescope.org/apps/django_threaded_multihost-1.3_2-py2.5.egg',
+                             '../projects/spacetelescope.org/apps/reportlab-2.4.tar.gz',
+                             '../projects/spacetelescope.org/apps/satchmo-v0.9.zip',
                              ], # packages to install
         paver_command_line='', # command to run after installation
         unzip_setuptools = True,

@@ -158,14 +158,14 @@ link_replacements = {
 #
 
 def choose_tasks():
-	return archivetasks
+	return archivetasks + pagestasks 
 
 #
 # Define migration tasks
 #
 archivetasks = [
 	# INIT - reset all redirects!!
-	ArchiveInitializationTask( Redirect ),
+	#ArchiveInitializationTask( Redirect ),
 	
 	
 	#ArchiveInitializationTask( Release ),
@@ -175,9 +175,9 @@ archivetasks = [
     #ArchiveInitializationTask( EducationalMaterial ),
     #ArchiveInitializationTask( KidsDrawing ),
     #ArchiveInitializationTask( Calendar ),
-    ArchiveInitializationTask( OnlineArt ),
-    ArchiveInitializationTask( OnlineArtAuthor ),
-# Print Layout
+    #ArchiveInitializationTask( OnlineArt ),
+    #ArchiveInitializationTask( OnlineArtAuthor ),
+	# Print Layout
     #ArchiveInitializationTask( SlideShow ),
     
     #Products
@@ -202,40 +202,39 @@ archivetasks = [
     #ArchiveInitializationTask ( FITSImage ),
     
     # MIG
-    #ArchiveMigrationTask( SpacetelescopeCSVDataSource( '/Volumes/webdocs/spacetelescope/docs/csvfiles/newsdata.csv'), NewsDataMapping ),
-	#ArchiveMigrationTask( SpacetelescopeCSVDataSource( '/Volumes/webdocs/spacetelescope/docs/csvfiles/imagedata.csv'), ImagesDataMapping ),
+    ArchiveMigrationTask( SpacetelescopeCSVDataSource( '/Volumes/webdocs/spacetelescope/docs/csvfiles/newsdata.csv'), NewsDataMapping ),
+	ArchiveMigrationTask( SpacetelescopeCSVDataSource( '/Volumes/webdocs/spacetelescope/docs/csvfiles/imagedata.csv'), ImagesDataMapping ),
 	
 	# Goodies
-	#ArchiveMigrationTask( SpacetelescopeCSVDataSource( '/Users/luis/Workspaces/pttu/spacetelescope.org/migration/csvfiles/edumatdata.csv'), EducationalMaterialsDataMapping ),
-	#ArchiveMigrationTask( SpacetelescopeCSVDataSource( '/Users/luis/Workspaces/pttu/spacetelescope.org/migration/csvfiles/kidsdrawingdata.csv'), KidsDrawingsDataMapping ),
-	#ArchiveMigrationTask( SpacetelescopeCSVDataSource( '/Users/luis/Workspaces/pttu/spacetelescope.org/migration/csvfiles/calendardata.csv'), CalendarsDataMapping ),
-	ArchiveMigrationTask( SpacetelescopeCSVDataSource( '/Users/luis/Workspaces/pttu/spacetelescope.org/migration/csvfiles/artdata_artists.csv'), OnlineArtAuthorDataMapping ),
-	ArchiveMigrationTask( SpacetelescopeCSVDataSource( '/Users/luis/Workspaces/pttu/spacetelescope.org/migration/csvfiles/artdata_pictures.csv'), OnlineArtDataMapping ),
+	ArchiveMigrationTask( SpacetelescopeCSVDataSource( '/Volumes/webdocs/spacetelescope/docs/csvfiles/edumatdata.csv'), EducationalMaterialsDataMapping ),
+	ArchiveMigrationTask( SpacetelescopeCSVDataSource( '/Volumes/webdocs/spacetelescope/docs/csvfiles/kidsdrawingdata.csv'), KidsDrawingsDataMapping ),
+	ArchiveMigrationTask( SpacetelescopeCSVDataSource( '/Volumes/webdocs/spacetelescope/docs/csvfiles/calendardata.csv'), CalendarsDataMapping ),
+	#ArchiveMigrationTask( SpacetelescopeCSVDataSource( '/Volumes/webdocs/spacetelescope/docs/csvfiles/artdata_artists.csv'), OnlineArtAuthorDataMapping ),
+	#ArchiveMigrationTask( SpacetelescopeCSVDataSource( '/Volumes/webdocs/spacetelescope/docs/csvfiles/artdata_pictures.csv'), OnlineArtDataMapping ),
 	
-# Print Layout
+	# Print Layout
 
     # Products
-#    ArchiveMigrationTask( SpacetelescopeCSVDataSource( '/Users/luis/Workspaces/pttu/spacetelescope.org/migration/csvfiles/slideshowdata.csv'), SlideShowDataMapping ),
-#    ArchiveMigrationTask( SpacetelescopeCSVDataSource( '/Users/luis/Workspaces/pttu/spacetelescope.org/migration/csvfiles/bookdata.csv'), BookDataMapping ),
-#    ArchiveMigrationTask( SpacetelescopeCSVDataSource( '/Users/luis/Workspaces/pttu/spacetelescope.org/migration/csvfiles/cdromdata.csv'), CDROMDataMapping ),
-#    ArchiveMigrationTask( SpacetelescopeCSVDataSource( '/Users/luis/Workspaces/pttu/spacetelescope.org/migration/csvfiles/brochuredata.csv'), BrochureDataMapping ),
-#    ArchiveMigrationTask( SpacetelescopeCSVDataSource( '/Users/luis/Workspaces/pttu/spacetelescope.org/migration/csvfiles/merchandisedata.csv'), MerchandiseDataMapping ),
-#    ArchiveMigrationTask( SpacetelescopeCSVDataSource( '/Users/luis/Workspaces/pttu/spacetelescope.org/migration/csvfiles/newsletterdata.csv'), NewsletterDataMapping ),
-#    ArchiveMigrationTask( SpacetelescopeCSVDataSource( '/Users/luis/Workspaces/pttu/spacetelescope.org/migration/csvfiles/postcarddata.csv'), PostCardDataMapping ),
-#    ArchiveMigrationTask( SpacetelescopeCSVDataSource( '/Users/luis/Workspaces/pttu/spacetelescope.org/migration/csvfiles/posterdata.csv'), PosterDataMapping ),
-#    ArchiveMigrationTask( SpacetelescopeCSVDataSource( '/Users/luis/Workspaces/pttu/spacetelescope.org/migration/csvfiles/presskitdata.csv'), PressKitDataMapping ),
-#    ArchiveMigrationTask( SpacetelescopeCSVDataSource( '/Users/luis/Workspaces/pttu/spacetelescope.org/migration/csvfiles/stickerdata.csv'), StickerDataMapping ),
+    ArchiveMigrationTask( SpacetelescopeCSVDataSource( '/Volumes/webdocs/spacetelescope/docs/csvfiles/slideshowdata.csv'), SlideShowDataMapping ),
+    ArchiveMigrationTask( SpacetelescopeCSVDataSource( '/Volumes/webdocs/spacetelescope/docs/csvfiles/bookdata.csv'), BookDataMapping ),
+    ArchiveMigrationTask( SpacetelescopeCSVDataSource( '/Volumes/webdocs/spacetelescope/docs/csvfiles/cdromdata.csv'), CDROMDataMapping ),
+    ArchiveMigrationTask( SpacetelescopeCSVDataSource( '/Volumes/webdocs/spacetelescope/docs/csvfiles/brochuredata.csv'), BrochureDataMapping ),
+    ArchiveMigrationTask( SpacetelescopeCSVDataSource( '/Volumes/webdocs/spacetelescope/docs/csvfiles/merchandisedata.csv'), MerchandiseDataMapping ),
+    ArchiveMigrationTask( SpacetelescopeCSVDataSource( '/Volumes/webdocs/spacetelescope/docs/csvfiles/newsletterdata.csv'), NewsletterDataMapping ),
+    ArchiveMigrationTask( SpacetelescopeCSVDataSource( '/Volumes/webdocs/spacetelescope/docs/csvfiles/postcarddata.csv'), PostCardDataMapping ),
+    ArchiveMigrationTask( SpacetelescopeCSVDataSource( '/Volumes/webdocs/spacetelescope/docs/csvfiles/posterdata.csv'), PosterDataMapping ),
+    ArchiveMigrationTask( SpacetelescopeCSVDataSource( '/Volumes/webdocs/spacetelescope/docs/csvfiles/presskitdata.csv'), PressKitDataMapping ),
+    ArchiveMigrationTask( SpacetelescopeCSVDataSource( '/Volumes/webdocs/spacetelescope/docs/csvfiles/stickerdata.csv'), StickerDataMapping ),
     
     # Org
-    #ArchiveMigrationTask( SpacetelescopeCSVDataSource( '/Users/luis/Workspaces/pttu/spacetelescope.org/migration/csvfiles/updatedata.csv'), AnnouncementDataMapping ),
-    #ArchiveMigrationTask( SpacetelescopeCSVDataSource( '/Users/luis/Workspaces/pttu/spacetelescope.org/migration/csvfiles/conferenceposterdata.csv'), ConferencePosterDataMapping ),
-    #ArchiveMigrationTask( SpacetelescopeCSVDataSource( '/Users/luis/Workspaces/pttu/spacetelescope.org/migration/csvfiles/logodata.csv'), LogoDataMapping ),
-    #ArchiveMigrationTask( SpacetelescopeCSVDataSource( '/Users/luis/Workspaces/pttu/spacetelescope.org/migration/csvfiles/techdocsdata.csv'), TechnicalDocumentDataMapping ),
+    ArchiveMigrationTask( SpacetelescopeCSVDataSource( '/Volumes/webdocs/spacetelescope/docs/csvfiles/updatedata.csv'), AnnouncementDataMapping ),
+    ArchiveMigrationTask( SpacetelescopeCSVDataSource( '/Volumes/webdocs/spacetelescope/docs/csvfiles/conferenceposterdata.csv'), ConferencePosterDataMapping ),
+    ArchiveMigrationTask( SpacetelescopeCSVDataSource( '/Volumes/webdocs/spacetelescope/docs/csvfiles/logodata.csv'), LogoDataMapping ),
+    ArchiveMigrationTask( SpacetelescopeCSVDataSource( '/Volumes/webdocs/spacetelescope/docs/csvfiles/techdocsdata.csv'), TechnicalDocumentDataMapping ),
     
-    # projects
-    #ArchiveMigrationTask( SpacetelescopeCSVDataSource( '/Users/luis/Workspaces/pttu/spacetelescope.org/migration/csvfiles/exhibitiondata.csv'), ExhibitionDataMapping ),
-    #ArchiveMigrationTask( SpacetelescopeCSVDataSource( '/Users/luis/Workspaces/pttu/spacetelescope.org/migration/csvfiles/fitsimagedata.csv'), FITSImageDataMapping ),
-    
+    # Projects
+    ArchiveMigrationTask( SpacetelescopeCSVDataSource( '/Volumes/webdocs/spacetelescope/docs/csvfiles/exhibitiondata.csv'), ExhibitionDataMapping ),
+    ArchiveMigrationTask( SpacetelescopeCSVDataSource( '/Volumes/webdocs/spacetelescope/docs/csvfiles/fitsimagedata.csv'), FITSImageDataMapping ),
 ]
 
 #
@@ -243,7 +242,7 @@ archivetasks = [
 # find . | grep -E '\.(html|htm)$' | grep -v /html/ | grep -v -E '^\./(about/history/sm4blog/|bin/|bugs/|goodies/slideshows/flash/|goodies/mergingGalaxiesSite/|error_401.html$|pressroom/error_401.html$|error_404.html$|nvff/|projects/fits_liberator/bugs/|projects/python-xmp-toolkit/|q/|search/|xmm/|internal/|sitemap.html$|index.html$|internal_old/|testphp/|mn/|googlea95441ee32fbe5c8.html$|googlead94a0599adf8109.html$|index_test.html$|maptest/|tests/|unavailable.html$|test/|google34e371fb40a60c65.html$|images/search2.html$|integral/|netscape.html$|pressroom/embargo/index.html$|projects/web/article2.html$|projects/anniversary/index2.html$|goodies/interactive_hubble/index_old.html$|projects/fits_liberator/v23files/releasenotes.html$|images/zoom/Template.htm$|projects/av_lab/Summary of Interviews_files/header.htm$|projects/av_lab/Summary of Interviews.htm$|projects/credibility/Summary of Interviews_files/header.htm$|projects/credibility/Summary%20of%20Interviews.htm$|iyalogos.htm$|pressroom/presskits/index.html$)'
 #
 pagestasks = [
-	PageInitializationTask(),
+	#PageInitializationTask(),
 	PageMigrationTask( SpacetelescopePageDocument( 'about/further_information/presskits/index.html' ) ),
 	PageMigrationTask( SpacetelescopePageDocument( 'about/further_information/index.html' ) ),
 	PageMigrationTask( SpacetelescopePageDocument( 'about/further_information/links.html' ) ),
@@ -330,7 +329,7 @@ pagestasks = [
 	PageMigrationTask( SpacetelescopePageDocument( 'about/history/crew.html' ) ),
 	PageMigrationTask( SpacetelescopePageDocument( 'about/history/sm4_timeline.html' ) ),
 	PageMigrationTask( SpacetelescopePageDocument( 'about/history/sm4_tv.html' ) ),
-	PageMigrationTask( SpacetelescopePageDocument( 'about/history/timeline_test.html' ) ),
+#	PageMigrationTask( SpacetelescopePageDocument( 'about/history/timeline_test.html' ) ),
 	PageMigrationTask( SpacetelescopePageDocument( 'about/glossary.html' ) ),
 	PageMigrationTask( SpacetelescopePageDocument( 'about/faq.html' ) ),
 	PageMigrationTask( SpacetelescopePageDocument( 'about/index.html' ) ),
