@@ -288,7 +288,6 @@ INSTALLED_APPS = (
 	'product',
 	'shipping',
 	'payment',
-	'payment.modules.giftcertificate',
     'l10n',
     'tax',
     'tax.modules.no',
@@ -475,6 +474,13 @@ SUBJECT_CATEGORY_CSS = "djangoplicity/css/widgets.css"
 ###########
 # SATCHMO #
 ###########
+SHOP_CONF = {
+	'DEFAULT_NAVISION_JOB' : '280E',
+	'DEFAULT_NAVISION_JSP' : 6265,
+	'ORDER_FILE_PREFX' : 'hb',
+}
+
+
 import os
 DIRNAME = os.path.abspath( os.path.dirname( __file__ ) )
 LOCAL_DEV = True
@@ -491,6 +497,7 @@ AUTHENTICATION_BACKENDS += ( 'satchmo_store.accounts.email-auth.EmailBackend', )
 SATCHMO_SETTINGS = {
                     'SHOP_BASE' : '/shop',
                     'MULTISHOP' : False,
+                    #'CUSTOM_PRODUCT_MODULES' : ['spacetelescope.archives.products',],
                     #'SHOP_URLS' : patterns('satchmo_store.shop.views',)
                     }
 

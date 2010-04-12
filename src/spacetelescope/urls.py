@@ -51,6 +51,7 @@ urlpatterns += basepatterns + patterns( '',
 	 
     # Server alive check (used for load balancers - called every 5 secs )
     ( r'^alive-check.dat$', 'djangoplicity.views.alive_check', { 'SSLAllow' : True } ),
+    ( r'^sitemap/', 'djangoplicity.menus.views.sitemap' ),
 
     ( r'^images/', include('djangoplicity.media.urls_images'), { 'model': Image, 'options': ImageOptions } ),
     #( r'^news/feed/(?P<url>.*)/?$', 'django.contrib.syndication.views.feed', { 'feed_dict': ReleaseOptions.feeds } ),

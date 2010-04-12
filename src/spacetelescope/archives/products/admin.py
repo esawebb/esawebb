@@ -60,11 +60,18 @@ def _getDefaultShopAdmin(prefix,with_pages=False):
 	else:
 		return DefaultShopAdmin
 
-
+BookAdmin = _getDefaultShopAdmin('books',with_pages=True)
+BookAdmin.fieldsets = (
+						( None, {'fields': ( 'id', ) } ),
+						( 'Publishing', {'fields': ( 'published', 'priority', ), } ),
+						( 'Archive', {'fields': ( 'title', 'description', 'pages', 'width', 'height', 'weight', 'credit', ), } ),
+						( 'Shop', {'fields': ( 'sale', 'price', ), }),
+						( 'Compatibility', {'fields': ('old_ids', ), }),
+					)
 
 def register_with_admin( admin_site ):
 	admin_site.register( CDROM, _getDefaultShopAdmin('cdroms',with_pages=False) )
-	admin_site.register( Book, _getDefaultShopAdmin('books',with_pages=True) )
+	admin_site.register( Book, BookAdmin )
 	admin_site.register( Brochure, _getDefaultShopAdmin('brochures',with_pages=True) )
 	admin_site.register( Merchandise, _getDefaultShopAdmin('merchandise',with_pages=False) )
 	admin_site.register( Newsletter, _getDefaultShopAdmin('newsletters',with_pages=True) )
