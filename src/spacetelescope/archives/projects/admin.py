@@ -25,8 +25,7 @@ class ExhibitionAdmin (DjangoplicityModelAdmin, RenameAdmin, ArchiveAdmin ):
 	fieldsets = (
 					( None, {'fields': ( 'id', ) } ),
 					( 'Publishing', {'fields': ( 'published', 'priority', ), } ),
-					( 'Archive', {'fields': ( 'title', 'description', 'credit', 'links','contacts'), } ),
-					( 'Metadata', {'fields': ( 'subject_category', 'subject_name', 'facility', ), } ),
+					( 'Archive', {'fields': ( 'title', 'description', 'credit',), } ),
 					( 'Compatibility', {'fields': ('old_ids', ), }),
 				)	
 	
@@ -43,8 +42,7 @@ class FITSImageAdmin( DjangoplicityModelAdmin, RenameAdmin, ArchiveAdmin ):
 	fieldsets = (
 					( None, {'fields': ( 'id', ) } ),
 					( 'Publishing', {'fields': ( 'published', 'priority', ), } ),
-					( 'Archive', {'fields': ( 'title', 'description', 'credit', 'country','city', 'links','contacts'), } ),
-					( 'Metadata', {'fields': ( 'subject_category', 'subject_name', 'facility', ), } ),
+					( 'Archive', {'fields': ( 'title', 'description', 'credit', 'country','city' ), } ),
 					( 'Compatibility', {'fields': ('old_ids', ), }),
 				)	
 	
