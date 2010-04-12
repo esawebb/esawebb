@@ -1,0 +1,256 @@
+/*********************/
+/* body, global defs */
+/*********************/
+
+body {
+	background-color:;
+	background: #051226 url('../img/background.jpg') no-repeat top center;
+	font-family: Helvetica, Arial, "MS Trebuchet", sans-serif;
+}
+
+a {
+	text-decoration:none;
+	color:#1596c1;
+}
+
+a:hover {
+	text-decoration:underline;
+}
+
+
+/* containers */
+#header {
+	display:block;
+	width:960px;
+	height:139px;
+	
+}
+
+#topcontent {
+	color:#42aed4;
+	font-size:12px;
+	overflow: hidden;
+	
+}
+
+.featured {
+	padding-bottom:26px;
+	height:379px;
+}
+
+
+.nomarg {
+	margin-left:0px;
+	margin-right:0px;
+}
+
+.topgutter {
+	display:block;
+	float:left;
+	width:10px;	
+}
+
+.gutter {
+	display:block;
+	float:left;
+	width:10px;
+	height:400px;
+	margin:0px;
+}
+
+.gutter .whitegutter {
+	display:block;
+	width:4000px;
+	height:200px;
+	margin-top:220px;
+	background-color:white;
+}
+
+/*******************/
+/* Feature Section */
+/*******************/
+/* contains main menu, breadcrumb, featured media, search, POTW etc */
+
+/* common */
+
+#topcontent .shadow {
+	margin-left:1px;
+	margin-top:-3px;
+	border: none;
+}
+
+#topcontent h1 {
+	font-size:24px;
+}
+
+#topcontent a {
+	text-decoration: none;	
+	color: #fff;
+}
+#topcontent a:hover {
+	text-decoration: underline;
+}
+
+
+/* breadcrumb */
+#breadcrumb a {
+	color:#fff;
+}
+
+#breadcrumb {
+	padding-left:10px;
+	padding-bottom:27px; /* spacing! */
+}
+
+/* potw */
+#potw_box p {
+	font-size:11px;
+	line-height:1.5
+}
+#potw_box h1 {
+	margin-top:10px;
+	font-size:14px;
+}
+
+
+/* terms of use text */
+#usage, #usage a{
+	font-size:11px;
+	padding-top:20px;
+	color:#6b6b6b;
+}
+
+#usage a {
+	font-weight:bold;
+}
+
+/* featured media box */
+.featuredmedia {
+	background-color:#fff;
+
+}
+
+.featuredmedia .description {
+	margin: 170px 0px 0px 0px;
+	padding: 0px 10px 10px 20px;
+	position: absolute;
+	color:white;
+	font-size:12px;
+	background-image: url('../img/feature-gradient.png');
+		
+}
+
+.featuredmedia .description * {
+	margin-bottom:8px;
+}
+.featuredmedia .description p {
+	line-height:1.5
+}
+
+
+
+/* main menu */
+
+#mainmenu a{
+	float:left;
+
+	padding: 13px 10px;
+	font-size: 14px;
+	display:block;
+}
+#mainmenu a:hover {
+	text-decoration:underline;
+
+}
+
+#mainmenu #mmselected {
+	background: url('../img/mmhl.png') repeat-x;
+}
+
+/* breadcrumb */
+
+/**********/
+/* header */
+/**********/
+
+#hubblelogo {
+	display:block;
+	width:720px;
+	height:139px;
+}
+
+
+/* top right menu */
+.trmenu {
+	/*todo: overflow, right-align to logo! */
+	margin-top:108px;
+	margin-left:10px;
+	width:230px;
+	display:inline;
+	float: left;
+	position: relative;
+	vertical-align:bottom;
+	text-align:right;
+	vertical-align: middle;
+	font-family: Arial, "MS Trebuchet", sans-serif;
+	
+}
+/* top right menu entries */
+.trmenu a {
+	background: url('../img/trm-grad.png');
+	float:right;
+	color: #234357;
+	padding: 10px 12px 6px 12px;
+	font-size: 12px;
+	font-weight: bold;
+	border: 1px solid #e0eef5;
+	text-decoration: none;
+	display:block;
+	
+}
+/* top right menu on hover */
+.trmenu a:hover {
+	text-decoration: underline
+}
+
+
+/***********/
+/* CONTENT */
+/***********/
+
+.bodygradient {
+		background: white url('../img/body-gradient.png') repeat-x;
+}
+
+#maincontent {
+	padding-top:-200px;
+	background-color:white;
+	width:960px;
+	min-height:100px;
+	clear:both;
+	color:#515151;
+}
+
+/* frontpage headlines */
+.fp_news {
+	
+}
+
+.fp_news h1  {
+	display:block;
+	font-size:18px;
+	text-transform: uppercase;
+	padding-bottom:20px;
+	background: url('../img/fp-news-bg.png') no-repeat 0px 26px;
+}
+
+/***********/
+/* FOOTER  */
+/***********/
+
+#footer {
+	padding-top:27px;
+	height:280px;
+	background: url('../img/footer-gradient.png') repeat-x;
+	color:white;
+}

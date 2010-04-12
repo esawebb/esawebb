@@ -162,22 +162,22 @@ class OnlineArtAuthorOptions ( StandardOptions ):
 		default = AllPublicQuery( browsers=( 'normal', 'viewall' ), verbose_name="Artists: View All" )
 		
 		
-# Print
-class PrintLayoutOptions ( StandardOptions ):
-	   
-	urlname_prefix = 'printlayouts'
-
-	info = ( 
-		( _(u'About the Print Layout'), { 'fields' : ( 'id', release_date,  ), } ),
-	)
-	
-	downloads = ( 
-		( _(u'Images'), {'resources' : ( 'original', 'large', 'medium', 'screen'  ), 'icons' : { 'original' : 'phot', 'large' : 'phot', 'medium' : 'phot', 'screen' : 'phot'  } } ),
-		)
-	
-	class Queries(object):
-		default = AllPublicQuery( browsers=( 'normal', 'viewall' ), verbose_name="Print Layouts: View All" )
-	
+## Print
+#class PrintLayoutOptions ( StandardOptions ):
+#	   
+#	urlname_prefix = 'printlayouts'
+#
+#	info = ( 
+#		( _(u'About the Print Layout'), { 'fields' : ( 'id', release_date,  ), } ),
+#	)
+#	
+#	downloads = ( 
+#		( _(u'Images'), {'resources' : ( 'original', 'large', 'medium', 'screen'  ), 'icons' : { 'original' : 'phot', 'large' : 'phot', 'medium' : 'phot', 'screen' : 'phot'  } } ),
+#		)
+#	
+#	class Queries(object):
+#		default = AllPublicQuery( browsers=( 'normal', 'viewall' ), verbose_name="Print Layouts: View All" )
+#	
 
 
 class SlideShowOptions (StandardOptions):

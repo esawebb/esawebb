@@ -70,8 +70,9 @@ class StandardOptions (ArchiveOptions):
 		"""
 		return model._default_manager.all()
 	
-	#@staticmethod
-	#def handle_import( obj, id=None, file_path=None, title=None, priority=None, published=None, wallpapers=None, zoomify=None, **kwargs ):
+	@staticmethod
+	def handle_import( obj, id=None, file_path=None, title=None, priority=None, published=None, wallpapers=None, zoomify=None, **kwargs ):
+		pass
 
 
 	

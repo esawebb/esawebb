@@ -6,8 +6,8 @@
 #   Luis Clara Gomes <lcgomes@eso.org>
 #
 
-from djangoplicity.archives import urlpatterns_for_options
-from spacetelescope.archives.goodies.options import *
+#from djangoplicity.archives import urlpatterns_for_options
+#from spacetelescope.archives.goodies.options import *
 
 
-urlpatterns = urlpatterns_for_options( PrintLayoutOptions )
+#urlpatterns = urlpatterns_for_options( PrintLayoutOptions )

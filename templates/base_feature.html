@@ -31,7 +31,7 @@
 <div class='clear'></div> 
 
 <div id="content" class="container_16">
-	<div id='topcontent' class=''>
+	<div id='topcontent' class='featured'>
 		<div id='mainmenu' class='grid_16'>
 		{% spaceless %}{% render_menu top_menu horizontal %}{% endspaceless %}
 		</div>
@@ -54,17 +54,72 @@
 		
 		<div class='clear'></div>
 	
+		<div class='gutter'>
+			<div class='whitegutter bodygradient'>
+			</div>
+		</div>
+				
+		<div class='grid_12 nomarg featuredmedia'>
+			
+			<div class="description">
+				<p><a href="#todo">29 January 2010</a></p>
+				<h1><a href="#todo">Vampires and collisions rejuvenate stars</h1>
+				<p>Using the NASA/ESA Hubble Space Telescope, astronomers have uncovered two distinct kinds of "rejuvenated" stars in the globular cluster Messier 30. A new study shows that both stellar collisions and a...</a></p>
+			</div>
+			<img src='{{MEDIA_URL}}img/placeholders/feature1.png' />
+
+			<img src='{{MEDIA_URL}}img/featureshadow.png' class="shadow"/>
+
+		</div>
 		
+		<div class='gutter'>
+			<div class='whitegutter bodygradient'>
+			</div>
+		</div>
+		
+		<div id='potw_box' class='grid_4'>
+			<a href="#todo"><img src='{{MEDIA_URL}}img/placeholders/potw.png' /></a>
+			<h1><a href="#todo">Picture Of The Week</a></h1>
+			<p>heic0917: Born in beauty: proplyds in the Orion Nebula
+			<br/>
+			<a href="#todo">View All</a></p>
+			
+			<div id="usage">
+			SpaceTelescope imagery is free for anyone to use. <a href="#todo">Read our complete image usage policy.</a>
+			</div>	
+		</div>
+
 
 		
 	</div>
 	
-	<div id='maincontent' class='container_16 bodygradient'>
+	<div id='maincontent' class='container_16'>
 	{% block content_area %}
 {% block content %}
 {% endblock %}
 {% endblock %}
-		
+		<div class='grid_6 fp_news'>
+			<h1>
+				<a href="#todo">Announcements</a>
+				<a href="#todo"><img src="{{MEDIA_URL}}img/rssicon.png" /></a>
+			</h1>
+			<img src='{{MEDIA_URL}}img/placeholders/news.png' />
+			<img src='{{MEDIA_URL}}img/placeholders/news2.png' />
+			<img src='{{MEDIA_URL}}img/placeholders/news.png' />
+			<img src='{{MEDIA_URL}}img/placeholders/news.png' />
+			<img src='{{MEDIA_URL}}img/placeholders/news2.png' />
+			
+		</div>
+		<div class='grid_6 fp_news'>
+			<h1>
+				<a href="#todo">Hubblecast</a>
+				<a href="#todo"><img src="{{MEDIA_URL}}img/rssicon.png" /></a>
+				[icon]
+			</h1>
+		</div>
+		<div class='grid_4'>
+			<h1>POTD</h1>
+		</div>
 		
 	
 	</div>

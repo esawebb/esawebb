@@ -156,28 +156,28 @@ class OnlineArt (archives.ArchiveModel, StandardArchiveInfo, ):
 
 #TODO Print Layout? Resources
 # Release Resource
-class PrintLayout (archives.ArchiveModel, StandardArchiveInfo, ):
-    
-    class Archive:
-        original = archives.ImageResourceManager( type=types.OriginalImageType )
-        large = archives.ImageResourceManager( derived='original', verbose_name=_('Large JPEG'), type=types.JpegType )
-        medium = archives.ImageResourceManager( derived='original', type=types.MediumJpegType )
-        screen = archives.ImageResourceManager( derived='original', type=types.ScreensizeJpegType )
-        
-        thumb = archives.ImageResourceManager( derived='original', type=types.ThumbnailJpegType )
-        newsmini = archives.ImageResourceManager( derived='original', type=types.NewsMiniJpegType )
-               
-        class Meta:
-            root = archive_settings.PRINT_LAYOUT_ROOT
-            release_date = True
-            embargo_date = True
-            last_modified = True
-            created = True
-            published = True  
-            
-    @permalink
-    def get_absolute_url(self):
-        return ('printlayouts_detail', [str(self.id)])
+#class PrintLayout (archives.ArchiveModel, StandardArchiveInfo, ):
+#    
+#    class Archive:
+#        original = archives.ImageResourceManager( type=types.OriginalImageType )
+#        large = archives.ImageResourceManager( derived='original', verbose_name=_('Large JPEG'), type=types.JpegType )
+#        medium = archives.ImageResourceManager( derived='original', type=types.MediumJpegType )
+#        screen = archives.ImageResourceManager( derived='original', type=types.ScreensizeJpegType )
+#        
+#        thumb = archives.ImageResourceManager( derived='original', type=types.ThumbnailJpegType )
+#        newsmini = archives.ImageResourceManager( derived='original', type=types.NewsMiniJpegType )
+#               
+#        class Meta:
+#            root = archive_settings.PRINT_LAYOUT_ROOT
+#            release_date = True
+#            embargo_date = True
+#            last_modified = True
+#            created = True
+#            published = True  
+#            
+#    @permalink
+#    def get_absolute_url(self):
+#        return ('printlayouts_detail', [str(self.id)])
 
 class SlideShow (archives.ArchiveModel, StandardArchiveInfo,ScreenInfo):
     

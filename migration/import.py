@@ -158,7 +158,7 @@ link_replacements = {
 #
 
 def choose_tasks():
-	return archivetasks + pagestasks 
+	return archivetasks + pagestasks
 
 #
 # Define migration tasks
@@ -168,7 +168,7 @@ archivetasks = [
 	#ArchiveInitializationTask( Redirect ),
 	
 	
-	#ArchiveInitializationTask( Release ),
+	ArchiveInitializationTask( Release ),
 	#ArchiveInitializationTask( Image ),
     
     # Goodies
@@ -202,39 +202,40 @@ archivetasks = [
     #ArchiveInitializationTask ( FITSImage ),
     
     # MIG
-    ArchiveMigrationTask( SpacetelescopeCSVDataSource( '/Volumes/webdocs/spacetelescope/docs/csvfiles/newsdata.csv'), NewsDataMapping ),
-	ArchiveMigrationTask( SpacetelescopeCSVDataSource( '/Volumes/webdocs/spacetelescope/docs/csvfiles/imagedata.csv'), ImagesDataMapping ),
+    #ArchiveMigrationTask( SpacetelescopeCSVDataSource( '/Volumes/webdocs/spacetelescope/docs/csvfiles/newsdata.csv'), NewsDataMapping ),
+	#ArchiveMigrationTask( SpacetelescopeCSVDataSource( '/Volumes/webdocs/spacetelescope/docs/csvfiles/imagedata.csv'), ImagesDataMapping ),
 	
 	# Goodies
-	ArchiveMigrationTask( SpacetelescopeCSVDataSource( '/Volumes/webdocs/spacetelescope/docs/csvfiles/edumatdata.csv'), EducationalMaterialsDataMapping ),
-	ArchiveMigrationTask( SpacetelescopeCSVDataSource( '/Volumes/webdocs/spacetelescope/docs/csvfiles/kidsdrawingdata.csv'), KidsDrawingsDataMapping ),
-	ArchiveMigrationTask( SpacetelescopeCSVDataSource( '/Volumes/webdocs/spacetelescope/docs/csvfiles/calendardata.csv'), CalendarsDataMapping ),
-	#ArchiveMigrationTask( SpacetelescopeCSVDataSource( '/Volumes/webdocs/spacetelescope/docs/csvfiles/artdata_artists.csv'), OnlineArtAuthorDataMapping ),
-	#ArchiveMigrationTask( SpacetelescopeCSVDataSource( '/Volumes/webdocs/spacetelescope/docs/csvfiles/artdata_pictures.csv'), OnlineArtDataMapping ),
+	#ArchiveMigrationTask( SpacetelescopeCSVDataSource( '/Users/luis/Workspaces/pttu/spacetelescope.org/migration/csvfiles/edumatdata.csv'), EducationalMaterialsDataMapping ),
+	#ArchiveMigrationTask( SpacetelescopeCSVDataSource( '/Users/luis/Workspaces/pttu/spacetelescope.org/migration/csvfiles/kidsdrawingdata.csv'), KidsDrawingsDataMapping ),
+	#ArchiveMigrationTask( SpacetelescopeCSVDataSource( '/Users/luis/Workspaces/pttu/spacetelescope.org/migration/csvfiles/calendardata.csv'), CalendarsDataMapping ),
+	#ArchiveMigrationTask( SpacetelescopeCSVDataSource( '/Users/luis/Workspaces/pttu/spacetelescope.org/migration/csvfiles/artdata_artists.csv'), OnlineArtAuthorDataMapping ),
+	#ArchiveMigrationTask( SpacetelescopeCSVDataSource( '/Users/luis/Workspaces/pttu/spacetelescope.org/migration/csvfiles/artdata_pictures.csv'), OnlineArtDataMapping ),
 	
-	# Print Layout
+# Print Layout
 
     # Products
-    ArchiveMigrationTask( SpacetelescopeCSVDataSource( '/Volumes/webdocs/spacetelescope/docs/csvfiles/slideshowdata.csv'), SlideShowDataMapping ),
-    ArchiveMigrationTask( SpacetelescopeCSVDataSource( '/Volumes/webdocs/spacetelescope/docs/csvfiles/bookdata.csv'), BookDataMapping ),
-    ArchiveMigrationTask( SpacetelescopeCSVDataSource( '/Volumes/webdocs/spacetelescope/docs/csvfiles/cdromdata.csv'), CDROMDataMapping ),
-    ArchiveMigrationTask( SpacetelescopeCSVDataSource( '/Volumes/webdocs/spacetelescope/docs/csvfiles/brochuredata.csv'), BrochureDataMapping ),
-    ArchiveMigrationTask( SpacetelescopeCSVDataSource( '/Volumes/webdocs/spacetelescope/docs/csvfiles/merchandisedata.csv'), MerchandiseDataMapping ),
-    ArchiveMigrationTask( SpacetelescopeCSVDataSource( '/Volumes/webdocs/spacetelescope/docs/csvfiles/newsletterdata.csv'), NewsletterDataMapping ),
-    ArchiveMigrationTask( SpacetelescopeCSVDataSource( '/Volumes/webdocs/spacetelescope/docs/csvfiles/postcarddata.csv'), PostCardDataMapping ),
-    ArchiveMigrationTask( SpacetelescopeCSVDataSource( '/Volumes/webdocs/spacetelescope/docs/csvfiles/posterdata.csv'), PosterDataMapping ),
-    ArchiveMigrationTask( SpacetelescopeCSVDataSource( '/Volumes/webdocs/spacetelescope/docs/csvfiles/presskitdata.csv'), PressKitDataMapping ),
-    ArchiveMigrationTask( SpacetelescopeCSVDataSource( '/Volumes/webdocs/spacetelescope/docs/csvfiles/stickerdata.csv'), StickerDataMapping ),
+#    ArchiveMigrationTask( SpacetelescopeCSVDataSource( '/Users/luis/Workspaces/pttu/spacetelescope.org/migration/csvfiles/slideshowdata.csv'), SlideShowDataMapping ),
+#    ArchiveMigrationTask( SpacetelescopeCSVDataSource( '/Users/luis/Workspaces/pttu/spacetelescope.org/migration/csvfiles/bookdata.csv'), BookDataMapping ),
+#    ArchiveMigrationTask( SpacetelescopeCSVDataSource( '/Users/luis/Workspaces/pttu/spacetelescope.org/migration/csvfiles/cdromdata.csv'), CDROMDataMapping ),
+#    ArchiveMigrationTask( SpacetelescopeCSVDataSource( '/Users/luis/Workspaces/pttu/spacetelescope.org/migration/csvfiles/brochuredata.csv'), BrochureDataMapping ),
+#    ArchiveMigrationTask( SpacetelescopeCSVDataSource( '/Users/luis/Workspaces/pttu/spacetelescope.org/migration/csvfiles/merchandisedata.csv'), MerchandiseDataMapping ),
+#    ArchiveMigrationTask( SpacetelescopeCSVDataSource( '/Users/luis/Workspaces/pttu/spacetelescope.org/migration/csvfiles/newsletterdata.csv'), NewsletterDataMapping ),
+#    ArchiveMigrationTask( SpacetelescopeCSVDataSource( '/Users/luis/Workspaces/pttu/spacetelescope.org/migration/csvfiles/postcarddata.csv'), PostCardDataMapping ),
+#    ArchiveMigrationTask( SpacetelescopeCSVDataSource( '/Users/luis/Workspaces/pttu/spacetelescope.org/migration/csvfiles/posterdata.csv'), PosterDataMapping ),
+#    ArchiveMigrationTask( SpacetelescopeCSVDataSource( '/Users/luis/Workspaces/pttu/spacetelescope.org/migration/csvfiles/presskitdata.csv'), PressKitDataMapping ),
+#    ArchiveMigrationTask( SpacetelescopeCSVDataSource( '/Users/luis/Workspaces/pttu/spacetelescope.org/migration/csvfiles/stickerdata.csv'), StickerDataMapping ),
     
     # Org
-    ArchiveMigrationTask( SpacetelescopeCSVDataSource( '/Volumes/webdocs/spacetelescope/docs/csvfiles/updatedata.csv'), AnnouncementDataMapping ),
-    ArchiveMigrationTask( SpacetelescopeCSVDataSource( '/Volumes/webdocs/spacetelescope/docs/csvfiles/conferenceposterdata.csv'), ConferencePosterDataMapping ),
-    ArchiveMigrationTask( SpacetelescopeCSVDataSource( '/Volumes/webdocs/spacetelescope/docs/csvfiles/logodata.csv'), LogoDataMapping ),
-    ArchiveMigrationTask( SpacetelescopeCSVDataSource( '/Volumes/webdocs/spacetelescope/docs/csvfiles/techdocsdata.csv'), TechnicalDocumentDataMapping ),
+    #ArchiveMigrationTask( SpacetelescopeCSVDataSource( '/Users/luis/Workspaces/pttu/spacetelescope.org/migration/csvfiles/updatedata.csv'), AnnouncementDataMapping ),
+    #ArchiveMigrationTask( SpacetelescopeCSVDataSource( '/Users/luis/Workspaces/pttu/spacetelescope.org/migration/csvfiles/conferenceposterdata.csv'), ConferencePosterDataMapping ),
+    #ArchiveMigrationTask( SpacetelescopeCSVDataSource( '/Users/luis/Workspaces/pttu/spacetelescope.org/migration/csvfiles/logodata.csv'), LogoDataMapping ),
+    #ArchiveMigrationTask( SpacetelescopeCSVDataSource( '/Users/luis/Workspaces/pttu/spacetelescope.org/migration/csvfiles/techdocsdata.csv'), TechnicalDocumentDataMapping ),
     
-    # Projects
-    ArchiveMigrationTask( SpacetelescopeCSVDataSource( '/Volumes/webdocs/spacetelescope/docs/csvfiles/exhibitiondata.csv'), ExhibitionDataMapping ),
-    ArchiveMigrationTask( SpacetelescopeCSVDataSource( '/Volumes/webdocs/spacetelescope/docs/csvfiles/fitsimagedata.csv'), FITSImageDataMapping ),
+    # projects
+    #ArchiveMigrationTask( SpacetelescopeCSVDataSource( '/Users/luis/Workspaces/pttu/spacetelescope.org/migration/csvfiles/exhibitiondata.csv'), ExhibitionDataMapping ),
+    #ArchiveMigrationTask( SpacetelescopeCSVDataSource( '/Users/luis/Workspaces/pttu/spacetelescope.org/migration/csvfiles/fitsimagedata.csv'), FITSImageDataMapping ),
+    
 ]
 
 #

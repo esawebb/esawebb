@@ -106,8 +106,7 @@ class SpacetelescopeDataMapping( DataMapping ):
 			if os.path.exists(old_path):
 				return old_path
 		
-		
-	
+
 	def _move_resources(self,copy=COPY_INSTEAD_OF_MOVE):
 		"""
 		DEBUG: default copy and not move
@@ -154,6 +153,14 @@ class SpacetelescopeDataMapping( DataMapping ):
 
 class NewsDataMapping( SpacetelescopeDataMapping ):
 	BASE = "/news"
+	#format_mapping = {'thumbs':'thumb'}
+	
+	# handle layouts
+	#TODO handle print layouts
+	def _move_resources(self,copy=COPY_INSTEAD_OF_MOVE):
+		super(SpaceTelescopeDataMapping,self)._move_resources(copy)
+		
+		
 	
 	def _create_redirect(self):
 		new_url = self.obj.get_absolute_url()
