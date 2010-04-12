@@ -1,0 +1,1 @@
+{% load menus %}{% for entry in submenu %}<a href='{{entry.link}}' {%if entry.selected %}id='mmselected'{%endif%}>{{ entry.title }}</a>{% endfor %} 
