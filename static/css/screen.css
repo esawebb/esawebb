@@ -4,7 +4,7 @@
 
 body {
 	background-color:;
-	background: #051226 url('../img/background.jpg') no-repeat top center;
+	background: #051226 url('../images/background.jpg') no-repeat top center;
 	font-family: Helvetica, Arial, "MS Trebuchet", sans-serif;
 	font-size:12px;
 	
@@ -17,6 +17,15 @@ a {
 
 a:hover {
 	text-decoration:underline;
+}
+
+/* external link decoration */
+.extlink {
+    background-image: url(../images/extlink.png);
+    background-repeat: no-repeat;
+    background-position: left 3px;
+    padding-left: 12px;
+    margin-left: 5px;
 }
 
 
@@ -145,7 +154,7 @@ a:hover {
 	position: absolute;
 	color:white;
 	font-size:12px;
-	background-image: url('../img/feature-gradient.png');
+	background-image: url('../images/feature-gradient.png');
 		
 }
 
@@ -172,7 +181,7 @@ a:hover {
 }
 
 #mainmenu #mmselected {
-	background: url('../img/mmhl.png') repeat-x;
+	background: url('../images/mmhl.png') repeat-x;
 }
 
 /* breadcrumb */
@@ -205,7 +214,7 @@ a:hover {
 }
 /* top right menu entries */
 .trmenu a {
-	background: url('../img/trm-grad.png');
+	background: url('../images/trm-grad.png');
 	float:right;
 	color: #234357;
 	padding: 10px 12px 6px 12px;
@@ -279,7 +288,7 @@ a:hover {
 /***********/
 
 .bodygradient {
-		background: white url('../img/body-gradient.png') repeat-x;
+		background: white url('../images/body-gradient.png') repeat-x;
 }
 
 p {
@@ -316,7 +325,7 @@ h1, h2{
 	font-size:18px;
 	text-transform: uppercase;
 	padding-bottom:20px;
-	background: url('../img/fp-news-bg.png') no-repeat 0px 26px;
+	background: url('../images/fp-news-bg.png') no-repeat 0px 26px;
 }
 
 /***********/
@@ -326,7 +335,7 @@ h1, h2{
 #footer {
 	padding-top:27px;
 	height:280px;
-	background: url('../img/footer-gradient.png') repeat-x;
+	background: url('../images/footer-gradient.png') repeat-x;
 	color:white;
 	font-size:12px;
 

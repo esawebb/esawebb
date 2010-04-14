@@ -158,7 +158,7 @@ link_replacements = {
 #
 
 def choose_tasks():
-	return archivetasks + pagestasks
+	return  pagestasks # + archivetasks
 
 #
 # Define migration tasks
@@ -172,69 +172,69 @@ archivetasks = [
 	#ArchiveInitializationTask( Image ),
     
     # Goodies
-    #ArchiveInitializationTask( EducationalMaterial ),
-    #ArchiveInitializationTask( KidsDrawing ),
-    #ArchiveInitializationTask( Calendar ),
-    #ArchiveInitializationTask( OnlineArt ),
-    #ArchiveInitializationTask( OnlineArtAuthor ),
-	# Print Layout
-    #ArchiveInitializationTask( SlideShow ),
+    ArchiveInitializationTask( EducationalMaterial ),
+    ArchiveInitializationTask( KidsDrawing ),
+    ArchiveInitializationTask( Calendar ),
+    ArchiveInitializationTask( OnlineArt ),
+    ArchiveInitializationTask( OnlineArtAuthor ),
+	#Print Layout
+    ArchiveInitializationTask( SlideShow ),
     
     #Products
-#    ArchiveInitializationTask( Book ),
-#    ArchiveInitializationTask( CDROM ),
-#    ArchiveInitializationTask( Brochure ),
-#    ArchiveInitializationTask( Merchandise ),
-#    ArchiveInitializationTask( Newsletter ),
-#    ArchiveInitializationTask( PostCard ),
-#    ArchiveInitializationTask( Poster ),
-#    ArchiveInitializationTask( PressKit ),
-#    ArchiveInitializationTask( Sticker ),
+    ArchiveInitializationTask( Book ),
+    ArchiveInitializationTask( CDROM ),
+    ArchiveInitializationTask( Brochure ),
+    ArchiveInitializationTask( Merchandise ),
+    ArchiveInitializationTask( Newsletter ),
+    ArchiveInitializationTask( PostCard ),
+    ArchiveInitializationTask( Poster ),
+    ArchiveInitializationTask( PressKit ),
+    ArchiveInitializationTask( Sticker ),
 
     #ORG
-    #ArchiveInitializationTask ( Announcement ),
-   # ArchiveInitializationTask ( ConferencePoster ),
- #   ArchiveInitializationTask ( Logo ),
-#    ArchiveInitializationTask ( TechnicalDocument ),  
+    ArchiveInitializationTask ( Announcement ),
+    ArchiveInitializationTask ( ConferencePoster ),
+    ArchiveInitializationTask ( Logo ),
+    ArchiveInitializationTask ( TechnicalDocument ),  
  
     #Projects
-    #ArchiveInitializationTask ( Exhibition ),
-    #ArchiveInitializationTask ( FITSImage ),
+    ArchiveInitializationTask ( Exhibition ),
+    ArchiveInitializationTask ( FITSImage ),
     
     # MIG
-    #ArchiveMigrationTask( SpacetelescopeCSVDataSource( '/Volumes/webdocs/spacetelescope/docs/csvfiles/newsdata.csv'), NewsDataMapping ),
-	#ArchiveMigrationTask( SpacetelescopeCSVDataSource( '/Volumes/webdocs/spacetelescope/docs/csvfiles/imagedata.csv'), ImagesDataMapping ),
+    ArchiveMigrationTask( SpacetelescopeCSVDataSource( '/Volumes/webdocs/spacetelescope/docs/csvfiles/newsdata.csv'), NewsDataMapping ),
+	ArchiveMigrationTask( SpacetelescopeCSVDataSource( '/Volumes/webdocs/spacetelescope/docs/csvfiles/imagedata.csv'), ImagesDataMapping ),
 	
 	# Goodies
-	#ArchiveMigrationTask( SpacetelescopeCSVDataSource( '/Users/luis/Workspaces/pttu/spacetelescope.org/migration/csvfiles/edumatdata.csv'), EducationalMaterialsDataMapping ),
-	#ArchiveMigrationTask( SpacetelescopeCSVDataSource( '/Users/luis/Workspaces/pttu/spacetelescope.org/migration/csvfiles/kidsdrawingdata.csv'), KidsDrawingsDataMapping ),
-	#ArchiveMigrationTask( SpacetelescopeCSVDataSource( '/Users/luis/Workspaces/pttu/spacetelescope.org/migration/csvfiles/calendardata.csv'), CalendarsDataMapping ),
-	#ArchiveMigrationTask( SpacetelescopeCSVDataSource( '/Users/luis/Workspaces/pttu/spacetelescope.org/migration/csvfiles/artdata_artists.csv'), OnlineArtAuthorDataMapping ),
-	#ArchiveMigrationTask( SpacetelescopeCSVDataSource( '/Users/luis/Workspaces/pttu/spacetelescope.org/migration/csvfiles/artdata_pictures.csv'), OnlineArtDataMapping ),
+	ArchiveMigrationTask( SpacetelescopeCSVDataSource( '/Users/luis/Workspaces/pttu/spacetelescope.org/migration/csvfiles/edumatdata.csv'), EducationalMaterialsDataMapping ),
+	ArchiveMigrationTask( SpacetelescopeCSVDataSource( '/Users/luis/Workspaces/pttu/spacetelescope.org/migration/csvfiles/kidsdrawingdata.csv'), KidsDrawingsDataMapping ),
+	ArchiveMigrationTask( SpacetelescopeCSVDataSource( '/Users/luis/Workspaces/pttu/spacetelescope.org/migration/csvfiles/calendardata.csv'), CalendarsDataMapping ),
+	ArchiveMigrationTask( SpacetelescopeCSVDataSource( '/Users/luis/Workspaces/pttu/spacetelescope.org/migration/csvfiles/artdata_artists.csv'), OnlineArtAuthorDataMapping ),
+	ArchiveMigrationTask( SpacetelescopeCSVDataSource( '/Users/luis/Workspaces/pttu/spacetelescope.org/migration/csvfiles/artdata_pictures.csv'), OnlineArtDataMapping ),
 	
-# Print Layout
+    #Print Layout
 
     # Products
-#    ArchiveMigrationTask( SpacetelescopeCSVDataSource( '/Users/luis/Workspaces/pttu/spacetelescope.org/migration/csvfiles/slideshowdata.csv'), SlideShowDataMapping ),
-#    ArchiveMigrationTask( SpacetelescopeCSVDataSource( '/Users/luis/Workspaces/pttu/spacetelescope.org/migration/csvfiles/bookdata.csv'), BookDataMapping ),
-#    ArchiveMigrationTask( SpacetelescopeCSVDataSource( '/Users/luis/Workspaces/pttu/spacetelescope.org/migration/csvfiles/cdromdata.csv'), CDROMDataMapping ),
-#    ArchiveMigrationTask( SpacetelescopeCSVDataSource( '/Users/luis/Workspaces/pttu/spacetelescope.org/migration/csvfiles/brochuredata.csv'), BrochureDataMapping ),
-#    ArchiveMigrationTask( SpacetelescopeCSVDataSource( '/Users/luis/Workspaces/pttu/spacetelescope.org/migration/csvfiles/merchandisedata.csv'), MerchandiseDataMapping ),
-#    ArchiveMigrationTask( SpacetelescopeCSVDataSource( '/Users/luis/Workspaces/pttu/spacetelescope.org/migration/csvfiles/newsletterdata.csv'), NewsletterDataMapping ),
-#    ArchiveMigrationTask( SpacetelescopeCSVDataSource( '/Users/luis/Workspaces/pttu/spacetelescope.org/migration/csvfiles/postcarddata.csv'), PostCardDataMapping ),
-#    ArchiveMigrationTask( SpacetelescopeCSVDataSource( '/Users/luis/Workspaces/pttu/spacetelescope.org/migration/csvfiles/posterdata.csv'), PosterDataMapping ),
-#    ArchiveMigrationTask( SpacetelescopeCSVDataSource( '/Users/luis/Workspaces/pttu/spacetelescope.org/migration/csvfiles/presskitdata.csv'), PressKitDataMapping ),
-#    ArchiveMigrationTask( SpacetelescopeCSVDataSource( '/Users/luis/Workspaces/pttu/spacetelescope.org/migration/csvfiles/stickerdata.csv'), StickerDataMapping ),
+    ArchiveMigrationTask( SpacetelescopeCSVDataSource( '/Users/luis/Workspaces/pttu/spacetelescope.org/migration/csvfiles/slideshowdata.csv'), SlideShowDataMapping ),
+    ArchiveMigrationTask( SpacetelescopeCSVDataSource( '/Users/luis/Workspaces/pttu/spacetelescope.org/migration/csvfiles/bookdata.csv'), BookDataMapping ),
+    ArchiveMigrationTask( SpacetelescopeCSVDataSource( '/Users/luis/Workspaces/pttu/spacetelescope.org/migration/csvfiles/cdromdata.csv'), CDROMDataMapping ),
+    ArchiveMigrationTask( SpacetelescopeCSVDataSource( '/Users/luis/Workspaces/pttu/spacetelescope.org/migration/csvfiles/brochuredata.csv'), BrochureDataMapping ),
+    ArchiveMigrationTask( SpacetelescopeCSVDataSource( '/Users/luis/Workspaces/pttu/spacetelescope.org/migration/csvfiles/merchandisedata.csv'), MerchandiseDataMapping ),
+    ArchiveMigrationTask( SpacetelescopeCSVDataSource( '/Users/luis/Workspaces/pttu/spacetelescope.org/migration/csvfiles/newsletterdata.csv'), NewsletterDataMapping ),
+    ArchiveMigrationTask( SpacetelescopeCSVDataSource( '/Users/luis/Workspaces/pttu/spacetelescope.org/migration/csvfiles/postcarddata.csv'), PostCardDataMapping ),
+    ArchiveMigrationTask( SpacetelescopeCSVDataSource( '/Users/luis/Workspaces/pttu/spacetelescope.org/migration/csvfiles/posterdata.csv'), PosterDataMapping ),
+    ArchiveMigrationTask( SpacetelescopeCSVDataSource( '/Users/luis/Workspaces/pttu/spacetelescope.org/migration/csvfiles/presskitdata.csv'), PressKitDataMapping ),
+    ArchiveMigrationTask( SpacetelescopeCSVDataSource( '/Users/luis/Workspaces/pttu/spacetelescope.org/migration/csvfiles/stickerdata.csv'), StickerDataMapping ),
     
     # Org
-    #ArchiveMigrationTask( SpacetelescopeCSVDataSource( '/Users/luis/Workspaces/pttu/spacetelescope.org/migration/csvfiles/updatedata.csv'), AnnouncementDataMapping ),
-    #ArchiveMigrationTask( SpacetelescopeCSVDataSource( '/Users/luis/Workspaces/pttu/spacetelescope.org/migration/csvfiles/conferenceposterdata.csv'), ConferencePosterDataMapping ),
-    #ArchiveMigrationTask( SpacetelescopeCSVDataSource( '/Users/luis/Workspaces/pttu/spacetelescope.org/migration/csvfiles/logodata.csv'), LogoDataMapping ),
-    #ArchiveMigrationTask( SpacetelescopeCSVDataSource( '/Users/luis/Workspaces/pttu/spacetelescope.org/migration/csvfiles/techdocsdata.csv'), TechnicalDocumentDataMapping ),
+    ArchiveMigrationTask( SpacetelescopeCSVDataSource( '/Users/luis/Workspaces/pttu/spacetelescope.org/migration/csvfiles/updatedata.csv'), AnnouncementDataMapping ),
+    ArchiveMigrationTask( SpacetelescopeCSVDataSource( '/Users/luis/Workspaces/pttu/spacetelescope.org/migration/csvfiles/conferenceposterdata.csv'), ConferencePosterDataMapping ),
+    ArchiveMigrationTask( SpacetelescopeCSVDataSource( '/Users/luis/Workspaces/pttu/spacetelescope.org/migration/csvfiles/logodata.csv'), LogoDataMapping ),
+    ArchiveMigrationTask( SpacetelescopeCSVDataSource( '/Users/luis/Workspaces/pttu/spacetelescope.org/migration/csvfiles/techdocsdata.csv'), TechnicalDocumentDataMapping ),
     
-    # projects
-    #ArchiveMigrationTask( SpacetelescopeCSVDataSource( '/Users/luis/Workspaces/pttu/spacetelescope.org/migration/csvfiles/exhibitiondata.csv'), ExhibitionDataMapping ),
-    #ArchiveMigrationTask( SpacetelescopeCSVDataSource( '/Users/luis/Workspaces/pttu/spacetelescope.org/migration/csvfiles/fitsimagedata.csv'), FITSImageDataMapping ),
+    #projects
+    ArchiveMigrationTask( SpacetelescopeCSVDataSource( '/Users/luis/Workspaces/pttu/spacetelescope.org/migration/csvfiles/exhibitiondata.csv'), ExhibitionDataMapping ),
+    ArchiveMigrationTask( SpacetelescopeCSVDataSource( '/Users/luis/Workspaces/pttu/spacetelescope.org/migration/csvfiles/fitsimagedata.csv'), FITSImageDataMapping ),
     
 ]
 
@@ -243,7 +243,7 @@ archivetasks = [
 # find . | grep -E '\.(html|htm)$' | grep -v /html/ | grep -v -E '^\./(about/history/sm4blog/|bin/|bugs/|goodies/slideshows/flash/|goodies/mergingGalaxiesSite/|error_401.html$|pressroom/error_401.html$|error_404.html$|nvff/|projects/fits_liberator/bugs/|projects/python-xmp-toolkit/|q/|search/|xmm/|internal/|sitemap.html$|index.html$|internal_old/|testphp/|mn/|googlea95441ee32fbe5c8.html$|googlead94a0599adf8109.html$|index_test.html$|maptest/|tests/|unavailable.html$|test/|google34e371fb40a60c65.html$|images/search2.html$|integral/|netscape.html$|pressroom/embargo/index.html$|projects/web/article2.html$|projects/anniversary/index2.html$|goodies/interactive_hubble/index_old.html$|projects/fits_liberator/v23files/releasenotes.html$|images/zoom/Template.htm$|projects/av_lab/Summary of Interviews_files/header.htm$|projects/av_lab/Summary of Interviews.htm$|projects/credibility/Summary of Interviews_files/header.htm$|projects/credibility/Summary%20of%20Interviews.htm$|iyalogos.htm$|pressroom/presskits/index.html$)'
 #
 pagestasks = [
-	#PageInitializationTask(),
+	PageInitializationTask(),
 	PageMigrationTask( SpacetelescopePageDocument( 'about/further_information/presskits/index.html' ) ),
 	PageMigrationTask( SpacetelescopePageDocument( 'about/further_information/index.html' ) ),
 	PageMigrationTask( SpacetelescopePageDocument( 'about/further_information/links.html' ) ),
@@ -378,7 +378,7 @@ pagestasks = [
 	PageMigrationTask( SpacetelescopePageDocument( 'kidsandteachers/exercises.html' ) ),
 	PageMigrationTask( SpacetelescopePageDocument( 'kidsandteachers/index.html' ) ),
 	PageMigrationTask( SpacetelescopePageDocument( 'kidsandteachers/submit_drawings.html' ) ),
-	PageMigrationTask( SpacetelescopePageDocument( 'pressroom/crabfacts.html' ) ),
+#	PageMigrationTask( SpacetelescopePageDocument( 'pressroom/crabfacts.html' ) ),
 	PageMigrationTask( SpacetelescopePageDocument( 'pressroom/interview_possibilities.html' ) ),
 	PageMigrationTask( SpacetelescopePageDocument( 'pressroom/broadcast_videos.html' ) ),
 	PageMigrationTask( SpacetelescopePageDocument( 'pressroom/image_formats.html' ) ),
@@ -387,7 +387,7 @@ pagestasks = [
 	PageMigrationTask( SpacetelescopePageDocument( 'pressroom/video_formats.html' ) ),
 	PageMigrationTask( SpacetelescopePageDocument( 'pressroom/mailinglist.html' ) ),
 	PageMigrationTask( SpacetelescopePageDocument( 'pressroom/presscoverage.html' ) ),
-	PageMigrationTask( SpacetelescopePageDocument( 'projects/DVD/index.html' ) ),
+	#PageMigrationTask( SpacetelescopePageDocument( 'projects/DVD/index.html' ) ),
 	PageMigrationTask( SpacetelescopePageDocument( 'projects/IAU_WG/index.html' ) ),
 	PageMigrationTask( SpacetelescopePageDocument( 'projects/anniversary/about_bob.html' ) ),
 	PageMigrationTask( SpacetelescopePageDocument( 'projects/anniversary/about_lars.html' ) ),
@@ -411,7 +411,7 @@ pagestasks = [
 	PageMigrationTask( SpacetelescopePageDocument( 'projects/av_lab/index.html' ) ),
 	PageMigrationTask( SpacetelescopePageDocument( 'projects/credibility/Summary of Interviews.htm' ) ),
 	PageMigrationTask( SpacetelescopePageDocument( 'projects/credibility/credibility.html' ) ),
-	PageMigrationTask( SpacetelescopePageDocument( 'projects/credibility/credibility_interviews.html' ) ),
+	#PageMigrationTask( SpacetelescopePageDocument( 'projects/credibility/credibility_interviews.html' ) ),
 	PageMigrationTask( SpacetelescopePageDocument( 'projects/denmark/index.html' ) ),
 	PageMigrationTask( SpacetelescopePageDocument( 'projects/fits_liberator/archives.html' ) ),
 	PageMigrationTask( SpacetelescopePageDocument( 'projects/fits_liberator/blackwhitehelp.html' ) ),
@@ -471,13 +471,13 @@ pagestasks = [
 	PageMigrationTask( SpacetelescopePageDocument( 'projects/cap2005.html' ) ),
 	PageMigrationTask( SpacetelescopePageDocument( 'projects/vo_images/improc.html' ) ),
 	PageMigrationTask( SpacetelescopePageDocument( 'projects/vo_images/index.html' ) ),
-	PageMigrationTask( SpacetelescopePageDocument( 'projects/web/article.html' ) ),
+	#PageMigrationTask( SpacetelescopePageDocument( 'projects/web/article.html' ) ),
 	PageMigrationTask( SpacetelescopePageDocument( 'projects/web/download.html' ) ),
 	PageMigrationTask( SpacetelescopePageDocument( 'projects/web/index.html' ) ),
 	PageMigrationTask( SpacetelescopePageDocument( 'projects/index.html' ) ),
 	PageMigrationTask( SpacetelescopePageDocument( 'projects/kiosk.html' ) ),
 	PageMigrationTask( SpacetelescopePageDocument( 'projects/iauga2006.html' ) ),
-	PageMigrationTask( SpacetelescopePageDocument( 'projects/seminars/index.html' ) ),
+	#PageMigrationTask( SpacetelescopePageDocument( 'projects/seminars/index.html' ) ),
 	PageMigrationTask( SpacetelescopePageDocument( 'projects/socialnetworking/index.html' ) ),
 	PageMigrationTask( SpacetelescopePageDocument( 'projects/iau_pressoffice/index.html' ) ),
 	PageMigrationTask( SpacetelescopePageDocument( 'projects/20anniversary/index.html' ) ),
@@ -487,7 +487,7 @@ pagestasks = [
 	PageMigrationTask( SpacetelescopePageDocument( 'science/composition_of_universe.html' ) ),
 	PageMigrationTask( SpacetelescopePageDocument( 'science/age_size.html' ) ),
 	PageMigrationTask( SpacetelescopePageDocument( 'science/black_holes.html' ) ),
-	PageMigrationTask( SpacetelescopePageDocument( 'science/gravitational_lensing.html' ) ),
+	#PageMigrationTask( SpacetelescopePageDocument( 'science/gravitational_lensing.html' ) ),
 	PageMigrationTask( SpacetelescopePageDocument( 'science/deep_fields.html' ) ),
 	PageMigrationTask( SpacetelescopePageDocument( 'science/europe_hubble.html' ) ),
 	PageMigrationTask( SpacetelescopePageDocument( 'science/formation_of_stars.html' ) ),

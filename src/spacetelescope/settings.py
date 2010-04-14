@@ -411,10 +411,9 @@ ARCHIVE_URL_FEED_PREFIX = 'feed'
 ARCHIVE_PAGINATOR_PREFIX = 'page'
 ARCHIVE_ICON_PATH = 'icons/'
 
-RELEASE_ARCHIVE_ROOT = 'releases/'
-IMAGES_ARCHIVE_ROOT = 'images/'
-VIDEOS_ARCHIVE_ROOT = 'videos/'
-EDUMATERIAL_ARCHIVE_ROOT = 'education/'
+RELEASE_ARCHIVE_ROOT = 'archives/releases/'
+IMAGES_ARCHIVE_ROOT = 'archives/images/'
+VIDEOS_ARCHIVE_ROOT = 'archives/videos/'
 
 DEFAULT_CREATOR = u"ESA/Hubble"  
 DEFAULT_CREATOR_URL = "http://www.spacetelescope.org"
