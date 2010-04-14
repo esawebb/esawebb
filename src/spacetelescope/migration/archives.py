@@ -23,6 +23,13 @@ from spacetelescope.archives.org.models import *
 
 import csv
 
+def calc_priority( p ):
+	"""
+	Take an integer between 0 and 5 and returns a number
+	between 10 and 90
+	"""
+	return (5-int(p))*16+10
+
 COPY_INSTEAD_OF_MOVE = True
 #for all resources except THUMBS, only touch new ones instead of copy
 DEBUG_ONLY_TOUCH = True
@@ -378,7 +385,7 @@ class EducationalMaterialsDataMapping( SpacetelescopeDataMapping ):
 		return self.dataentry['Weight']
 		
 	def priority(self):
-		return self.dataentry['priority']
+		return calc_priority(self.dataentry['priority'])
 		
 	def credit(self):
 		return self.dataentry['credit']
@@ -441,7 +448,7 @@ class KidsDrawingsDataMapping( SpacetelescopeDataMapping ):
 		return unicode( soup )
 		
 	def priority(self):
-		return self.dataentry['priority']
+		return calc_priority(self.dataentry['priority'])
 		
 	def credit(self):
 		return unicode(self.dataentry['credit'].decode('iso-8859-1'))
@@ -518,7 +525,7 @@ class CalendarsDataMapping( SpacetelescopeDataMapping ):
 				year=self.year(),
 				month=self.month(),
 				description=self.description(),
-				priority=self.priority(),
+				#priority=self.priority(),
 				credit=self.credit(),
 			)
 		self.obj.save()
@@ -591,7 +598,7 @@ class SlideShowDataMapping( SpacetelescopeDataMapping ):
 		return unicode( soup )
 		
 	def priority(self):
-		return self.dataentry['priority']
+		return calc_priority(self.dataentry['priority'])
 		
 	def credit(self):
 		return unicode(self.dataentry['Credit'])
@@ -631,7 +638,7 @@ class ProductDataMapping (SpacetelescopeDataMapping):
 				credit=self.credit(),
 				sale=self.sale(),
 				price=self.price(),
-				delivery=self.delivery(),
+				#delivery=self.delivery(),
 			)
 
 		if self.has_pages:
@@ -672,7 +679,7 @@ class ProductDataMapping (SpacetelescopeDataMapping):
 		return self._dataentry('Weight')
 		
 	def priority(self):
-		return self._dataentry('priority')
+		return calc_priority(self._dataentry('priority'))
 		
 	def credit(self):
 		return self._dataentry('credit').decode('iso-8859-1').encode('utf8') 
@@ -920,7 +927,7 @@ class ConferencePosterDataMapping(SpacetelescopeDataMapping):
 		return self.dataentry['dpi']
 		
 	def priority(self):
-		return self.dataentry['priority']
+		return calc_priority(self.dataentry['priority'])
 		
 	def credit(self):
 		return self.dataentry['credit'].decode('iso-8859-1').encode('utf8') 
@@ -967,7 +974,7 @@ class LogoDataMapping(SpacetelescopeDataMapping):
 
 		
 	def priority(self):
-		return self.dataentry['priority']
+		return calc_priority(self.dataentry['priority'])
 		
 	def credit(self):
 		return self.dataentry['credit'].decode('iso-8859-1').encode('utf8') 
@@ -1023,7 +1030,7 @@ class ExhibitionDataMapping(SpacetelescopeDataMapping):
 		return unicode( soup )
 
 	def priority(self):
-		return self.dataentry['priority']
+		return calc_priority(self.dataentry['priority'])
 		
 		
 	def credit(self):
@@ -1073,7 +1080,7 @@ class FITSImageDataMapping(SpacetelescopeDataMapping):
 
 		
 	def priority(self):
-		return self.dataentry['priority']
+		return calc_priority(self.dataentry['priority'])
 		
 	def credit(self):
 		return self.dataentry['credit'].decode('iso-8859-1').encode('utf8') 
@@ -1123,7 +1130,7 @@ class OnlineArtAuthorDataMapping(SpacetelescopeDataMapping):
 		return unicode( soup )
 	
 	def priority(self):
-		return self.dataentry['priority']
+		return calc_priority(self.dataentry['priority'])
 	
 	def city(self):
 		return self.dataentry['City'].decode('iso-8859-1').encode('utf8') 
@@ -1179,7 +1186,7 @@ class OnlineArtDataMapping(SpacetelescopeDataMapping):
 		return unicode( soup )
 	
 	def priority(self):
-		return self.dataentry['priority']
+		return calc_priority(self.dataentry['priority'])
 	
 	def city(self):
 		return self.dataentry['City'].decode('iso-8859-1').encode('utf8') 
