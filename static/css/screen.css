@@ -310,9 +310,22 @@ h1, h2{
 	min-height:200px;
 	clear:both;
 	color:#515151;
+	
 }
 
+#content_area {
 
+}
+
+/* Two Column layout */
+#maincolumn {
+	float:left;
+	width:460px;
+}
+
+#rightcolumn {
+	float:left;
+}
 
 
 /* frontpage headlines */
