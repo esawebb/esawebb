@@ -27,7 +27,7 @@ def main_page( request ):
 	#file_path = im.resource_original.path
 	#avm = avm_from_file(str(file_path))
 		
-	return render_to_response('base.html', {}, context_instance=RequestContext(request) )
+	return render_to_response('frontpage.html', {}, context_instance=RequestContext(request) )
 
 
 #def page_not_found( request, template_name='404_site.html' ):

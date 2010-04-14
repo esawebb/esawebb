@@ -1,60 +1,7 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
-<head>
-<link href="http://www.spacetelescope.org/rss/feed.xml" rel="alternate" type="application/rss+xml" title="Hubble Space Telescope News">
+{% extends "base.html" %}
 
-<title>{% block site_title %}spacetelescope.org{% endblock %}</title>
-<link rel="SHORTCUT ICON" href="{{MEDIA_URL}}favicon.ico" />
-<link rel="ICON" href="{{MEDIA_URL}}favicon.ico" />
-<link href="{{MEDIA_URL}}css/reset.css" rel="stylesheet" type="text/css" media="screen" />
-<link href="{{MEDIA_URL}}css/base_grid.css" rel="stylesheet" type="text/css" media="screen" />
-<link href="{{MEDIA_URL}}css/screen.css" rel="stylesheet" type="text/css" media="screen" />
-<link href="{{MEDIA_URL}}css/printstyle.css" rel="stylesheet" type="text/css" media="print" />
-<meta name="ROBOTS" content="INDEX,FOLLOW" />
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
-<meta name="Keywords" content="Hubble, Hubble Space Telescope, HST, JWST, James Webb Space Telescope, images, information centre, news, video, European Space Agency, ESA, ACS, WFPC2, WFPC, FOS, FOC, GHRS, NICMOS, STIS, FGS, goodies, wallpaper, calendar, posters">
-{% block extra_header %}{% endblock %}
-{% load menus %}{% init_menu 'Top Menu' as top_menu %}{% init_menu 'Main Menu' as main_menu %}{% init_menu 'Footer Menu' as footer_menu %}
-</head>
-<div id="header" class="container_16">
-
-	<div class='grid_12 '>
-		<a href="#todo" id='hubblelogo'></a>
-	</div>
-	<div class='trmenu'>
-		<a href='#todo'>Contact</a>
-		<a href='#todo'>Subscribe</a>
-		<a href='#todo'>Sitemap</a>
-	</div>
-</div>
-               
-<div class='clear'></div> 
-
-<div id="content" class="container_16">
-	<div id='topcontent' class='featured'>
-		<div id='mainmenu' class='grid_16'>
-		{% spaceless %}{% render_menu top_menu horizontal %}{% endspaceless %}
-		</div>
-		<div class='grid_12'>
-			<div id='breadcrumb'>
-{% block breadcrumb %}<a href="/">Home</a> {% breadcrumb main_menu top_menu footer_menu %}{% endblock %}
-			</div>
-		</div>
-		<div id='googlesearch' class='grid_4'>
-			<!-- Google CSE Search Box Begins  -->
-						<form action="/search/" id="cse-search-box">
-						  <input type="hidden" name="cx" value="016374242383990648147:_pzdc_64anc" />
-						  <input type="hidden" name="cof" value="FORID:11" />
-						  <input type="hidden" name="ie" value="UTF-8" />
-						  <input type="text" id="searchbox" name="q" />
-						</form>
-						<!-- Google CSE Search Box Ends -->
-			
-		</div>
-		
-		<div class='clear'></div>
-	
-		<div class='gutter'>
+{% block feature %}
+<div class='gutter'>
 			<div class='whitegutter bodygradient'>
 			</div>
 		</div>
@@ -81,78 +28,16 @@
 			<a href="#todo"><img src='{{MEDIA_URL}}img/placeholders/potw.png' /></a>
 			<h1><a href="#todo">Picture Of The Week</a></h1>
 			<p>heic0917: Born in beauty: proplyds in the Orion Nebula
-			<br/>
-			<a href="#todo">View All</a></p>
+			<br/><a href="#todo">View All</a></p>
 			
 			<div id="usage">
 			SpaceTelescope imagery is free for anyone to use. <a href="#todo">Read our complete image usage policy.</a>
 			</div>	
 		</div>
-
-
-		
-	</div>
-	
-	<div id='maincontent' class='container_16'>
-	{% block content_area %}
-{% block content %}
 {% endblock %}
-{% endblock %}
-		<div class='grid_6 fp_news'>
-			<h1>
-				<a href="#todo">Announcements</a>
-				<a href="#todo"><img src="{{MEDIA_URL}}img/rssicon.png" /></a>
-			</h1>
-			<img src='{{MEDIA_URL}}img/placeholders/news.png' />
-			<img src='{{MEDIA_URL}}img/placeholders/news2.png' />
-			<img src='{{MEDIA_URL}}img/placeholders/news.png' />
-			<img src='{{MEDIA_URL}}img/placeholders/news.png' />
-			<img src='{{MEDIA_URL}}img/placeholders/news2.png' />
-			
-		</div>
-		<div class='grid_6 fp_news'>
-			<h1>
-				<a href="#todo">Hubblecast</a>
-				<a href="#todo"><img src="{{MEDIA_URL}}img/rssicon.png" /></a>
-				[icon]
-			</h1>
-		</div>
-		<div class='grid_4'>
-			<h1>POTD</h1>
-		</div>
-		
 	
-	</div>
-</div>
+{% block bodystyle %}{%endblock%}
 
-<div class='clear'></div>
+{%block mainblock %}
 
-
-<div id="footer" class="container_16">
-<div id="ftcol1" class="grid_3 ">
-	<p><b>Image Use Policy</b></p>
-	<p>Space Telescope imagery is free for anyone to use</p>
-</div>
-
-<div id="ftcol2" class="grid_3 ">
-	test2
-</div>
-
-<div id="ftcol3" class="grid_3 ">
-	test3
-</div>
-
-<div id="ftcol4" class="grid_3 ">
-	test4
-</div>
-
-<div id="ftcol5" class="grid_4">
-	test5
-</div>
-
-</div>
-
-     
-</body>
-<script type="text/javascript" src="http://www.google.com/coop/cse/brand?form=cse-search-box&lang=en"></script>
-</html>
+{%endblock%}

@@ -102,7 +102,7 @@ a:hover {
 
 #breadcrumb {
     padding-top:2px;
-	padding-bottom:28px; /* spacing! */
+	padding-bottom:14px; /* spacing! */
 }
 
 /* google custom search */
@@ -118,6 +118,7 @@ a:hover {
 #potw_box h1 {
 	margin-top:10px;
 	font-size:14px;
+	margin-bottom:0px;
 }
 
 
@@ -192,7 +193,7 @@ a:hover {
 	/*todo: overflow, right-align to logo! */
 	margin-top:108px;
 	margin-left:10px;
-	width:230px;
+	width:350px;
 	display:inline;
 	float: left;
 	position: relative;
@@ -225,18 +226,53 @@ a:hover {
 
 #leftmenu {
 	padding-top:3px;
+	margin-left:10px;
+	padding-right:10px;
+	margin:0px;
+	border-right:1px solid #E1E1E1;
 }
-#leftmenu a {
+#leftmenu a{
 	font-size: 12px;
 	color: #515151;
-	line-height:15px;
-
+	display:block;
+	margin: 0px 0px 7px 0px;
+}
+#leftmenu h1 a{
+	font-size:15px;
 }
 
-#leftmenu ul ul {
-	margin-left:10px;
+#leftmenu .selected {
+	font-weight:bold;
 }
 
+#leftmenu hr {
+	
+}
+
+#leftmenu .level_1 {
+
+	font-size:15px;
+	font-weight:bold;
+}
+
+#leftmenu .level_2 {
+	margin-left:15px;
+}
+
+#leftmenu .level_3 {
+	margin-left:30px;	
+}
+#leftmenu .level_4 {
+	margin-left:45px;
+	
+}
+#leftmenu .level_5 {
+	margin-left:60px;	
+}
+#leftmenu .level_6 {
+	margin-left:60px;
+	
+}
 
 /***********/
 /* CONTENT */

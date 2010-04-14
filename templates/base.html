@@ -18,8 +18,8 @@
 </head>
 <div id="header" class="container_16">
 
-	<div class='grid_12 '>
-		<a href="#todo" id='hubblelogo'></a>
+	<div class='grid_10 '>
+		<a href="/" id='hubblelogo'></a>
 	</div>
 	<div class='trmenu'>
 		{% spaceless %}{% render_menu top_right_menu horizontal %}{% endspaceless %}
@@ -44,7 +44,7 @@
 						  <input type="hidden" name="cx" value="016374242383990648147:_pzdc_64anc" />
 						  <input type="hidden" name="cof" value="FORID:11" />
 						  <input type="hidden" name="ie" value="UTF-8" />
-						  <input type="text" id="searchbox" name="q" />
+						  <input type="text" id="searchbox" name="q" style='width:216px'/>
 						</form>
 						<!-- Google CSE Search Box Ends -->
 			
@@ -52,24 +52,25 @@
 		
 		<div class='clear'></div>
 	
-		
+		{% block feature %}{%endblock%}
 
 		
 	</div>
 	
-	<div  id='mainblock' class='container_16 bodygradient'>
+	<div  id='mainblock' class='container_16 {%block bodystyle%}bodygradient{%endblock%}'>
 
-	
-		<div id='leftmenu' class='grid_4'>
-		{% spaceless %}{% render_menu main_menu default %}{% endspaceless %}
+	{%block mainblock %}
+		<div class='grid_4 nomargr'>
+		<div id='leftmenu'>
+		{% spaceless %}{% render_menu main_menu level1 %}{% endspaceless %}
+		</div>
 		</div>
 		<div id='content_area' class='grid_12 ' >
 		{% block content_area %}
-	{% block content %}
-	{% endblock %}
 	{% endblock %}
 		</div>
 	
+	{%endblock%}
 		
 	
 	</div>
