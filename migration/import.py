@@ -158,18 +158,18 @@ link_replacements = {
 #
 
 def choose_tasks():
-	return  pagestasks # + archivetasks
+	return  archivetasks + pagestasks
 
 #
 # Define migration tasks
 #
 archivetasks = [
 	# INIT - reset all redirects!!
-	#ArchiveInitializationTask( Redirect ),
+	ArchiveInitializationTask( Redirect ),
 	
 	
 	ArchiveInitializationTask( Release ),
-	#ArchiveInitializationTask( Image ),
+	ArchiveInitializationTask( Image ),
     
     # Goodies
     ArchiveInitializationTask( EducationalMaterial ),

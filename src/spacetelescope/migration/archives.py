@@ -226,7 +226,7 @@ class ImagesDataMapping( SpacetelescopeDataMapping ):
 	format_mapping = {'thumbs':'thumb'}
 
 	OLD_FMT_ROOT = "/Volumes/webdocs/spacetelescope/docs/images/"
-	NEW_FMT_ROOT = "/hubbleroot/static/images/"
+	NEW_FMT_ROOT = "/hubbleroot/static/archives/images/"
 	
 	def run(self):
 		self._create_object()
@@ -255,7 +255,7 @@ class NewsDataMapping( SpacetelescopeDataMapping ):
 	#format_mapping = {'thumbs':'thumb'}
 
 	#OLD_FMT_ROOT = "/Volumes/webdocs/spacetelescope/docs/news/"
-	#NEW_FMT_ROOT = "/hubbleroot/static/education/"
+	#NEW_FMT_ROOT = "/hubbleroot/static/archives/education/"
 
 	
 	def _create_redirect(self):
@@ -325,7 +325,7 @@ class EducationalMaterialsDataMapping( SpacetelescopeDataMapping ):
 					  }
 
 	OLD_FMT_ROOT = "/Volumes/webdocs/spacetelescope/docs/kidsandteachers/education/"
-	NEW_FMT_ROOT = "/hubbleroot/static/education/"
+	NEW_FMT_ROOT = "/hubbleroot/static/archives/education/"
 	
 	def _create_redirect(self):
 		new_url = self.obj.get_absolute_url()
@@ -404,7 +404,7 @@ class KidsDrawingsDataMapping( SpacetelescopeDataMapping ):
 					  }
 
 	OLD_FMT_ROOT = "/Volumes/webdocs/spacetelescope/docs/kidsandteachers/drawings/"
-	NEW_FMT_ROOT = "/hubbleroot/static/drawings/"
+	NEW_FMT_ROOT = "/hubbleroot/static/archives/drawings/"
 	
 	def _create_redirect(self):
 		new_url = self.obj.get_absolute_url()
@@ -470,7 +470,7 @@ class CalendarsDataMapping( SpacetelescopeDataMapping ):
 					  }
 
 	OLD_FMT_ROOT = "/Volumes/webdocs/spacetelescope/docs/goodies/calendar/"
-	NEW_FMT_ROOT = "/hubbleroot/static/calendars/"
+	NEW_FMT_ROOT = "/hubbleroot/static/archives/calendars/"
 	
 	MONTHS = {'January':'01',
 			  'February':'02',
@@ -554,7 +554,7 @@ class SlideShowDataMapping( SpacetelescopeDataMapping ):
 					  }
 
 	OLD_FMT_ROOT = "/Volumes/webdocs/spacetelescope/docs/goodies/slideshows/"
-	NEW_FMT_ROOT = "/hubbleroot/static/slideshows/"
+	NEW_FMT_ROOT = "/hubbleroot/static/archives/slideshows/"
 	
 	
 	
@@ -699,7 +699,7 @@ class CDROMDataMapping(ProductDataMapping):
 					  }
 	
 	OLD_FMT_ROOT = "/Volumes/webdocs/spacetelescope/docs/goodies/cdroms/"
-	NEW_FMT_ROOT = "/hubbleroot/static/cdroms/"
+	NEW_FMT_ROOT = "/hubbleroot/static/archives/cdroms/"
 	
 class BookDataMapping(ProductDataMapping):
 	model = Book
@@ -714,7 +714,7 @@ class BookDataMapping(ProductDataMapping):
 	
 	has_pages=True
 	OLD_FMT_ROOT = "/Volumes/webdocs/spacetelescope/docs/about/further_information/books/"
-	NEW_FMT_ROOT = "/hubbleroot/static/books/"
+	NEW_FMT_ROOT = "/hubbleroot/static/archives/books/"
 	
 class BrochureDataMapping(ProductDataMapping):
 	model = Brochure
@@ -730,7 +730,7 @@ class BrochureDataMapping(ProductDataMapping):
 	
 	has_pages=True
 	OLD_FMT_ROOT = "/Volumes/webdocs/spacetelescope/docs/about/further_information/brochures/"
-	NEW_FMT_ROOT = "/hubbleroot/static/brochures/"
+	NEW_FMT_ROOT = "/hubbleroot/static/archives/brochures/"
 	
 class MerchandiseDataMapping(ProductDataMapping):
 	model = Merchandise
@@ -743,7 +743,7 @@ class MerchandiseDataMapping(ProductDataMapping):
 					  }
 
 	OLD_FMT_ROOT = "/Volumes/webdocs/spacetelescope/docs/goodies/merchandise/"
-	NEW_FMT_ROOT = "/hubbleroot/static/merchandise/"
+	NEW_FMT_ROOT = "/hubbleroot/static/archives/merchandise/"
 	
 class NewsletterDataMapping(ProductDataMapping):
 	model = Newsletter
@@ -757,7 +757,7 @@ class NewsletterDataMapping(ProductDataMapping):
 					  }
 	has_pages=True
 	OLD_FMT_ROOT = "/Volumes/webdocs/spacetelescope/docs/about/further_information/newsletters/"
-	NEW_FMT_ROOT = "/hubbleroot/static/newsletters/"
+	NEW_FMT_ROOT = "/hubbleroot/static/archives/newsletters/"
 
 class PostCardDataMapping(ProductDataMapping):
 	model = PostCard
@@ -769,7 +769,7 @@ class PostCardDataMapping(ProductDataMapping):
 					  'large':'large',
 					  }
 	OLD_FMT_ROOT = "/Volumes/webdocs/spacetelescope/docs/goodies/postcards/"
-	NEW_FMT_ROOT = "/hubbleroot/static/postcards/"
+	NEW_FMT_ROOT = "/hubbleroot/static/archives/postcards/"
 
 class PosterDataMapping(ProductDataMapping):
 	model = Poster
@@ -781,7 +781,7 @@ class PosterDataMapping(ProductDataMapping):
 					  'large':'large',
 					  }
 	OLD_FMT_ROOT = "/Volumes/webdocs/spacetelescope/docs/goodies/posters/"
-	NEW_FMT_ROOT = "/hubbleroot/static/posters/"
+	NEW_FMT_ROOT = "/hubbleroot/static/archives/posters/"
 
 class StickerDataMapping(ProductDataMapping):
 	model = Sticker
@@ -793,7 +793,7 @@ class StickerDataMapping(ProductDataMapping):
 					  'large':'large',
 					  }
 	OLD_FMT_ROOT = "/Volumes/webdocs/spacetelescope/docs/goodies/stickers/"
-	NEW_FMT_ROOT = "/hubbleroot/static/stickers/"
+	NEW_FMT_ROOT = "/hubbleroot/static/archives/stickers/"
 
 
 class PressKitDataMapping(ProductDataMapping):
@@ -808,7 +808,7 @@ class PressKitDataMapping(ProductDataMapping):
 					  }
 	has_pages=True
 	OLD_FMT_ROOT = "/Volumes/webdocs/spacetelescope/docs/about/further_information/presskits/"
-	NEW_FMT_ROOT = "/hubbleroot/static/presskits/"
+	NEW_FMT_ROOT = "/hubbleroot/static/archives/presskits/"
 	
 	
 	
@@ -827,7 +827,7 @@ class AnnouncementDataMapping (ProductDataMapping):
 					  'newsmini':'newsmini',
 					  }
 	OLD_FMT_ROOT = "/Volumes/webdocs/spacetelescope/docs/updates/"
-	NEW_FMT_ROOT = "/hubbleroot/static/announcements/"
+	NEW_FMT_ROOT = "/hubbleroot/static/archives/announcements/"
 	
 	
 	
@@ -882,7 +882,7 @@ class ConferencePosterDataMapping(SpacetelescopeDataMapping):
 					  }
 	
 	OLD_FMT_ROOT = "/Volumes/webdocs/spacetelescope/docs/about_us/conference_posters/"
-	NEW_FMT_ROOT = "/hubbleroot/static/conference_posters/"
+	NEW_FMT_ROOT = "/hubbleroot/static/archives/conference_posters/"
 
 	def _create_object(self):
 		
@@ -939,7 +939,7 @@ class LogoDataMapping(SpacetelescopeDataMapping):
 					  }
 
 	OLD_FMT_ROOT = "/Volumes/webdocs/spacetelescope/docs/about_us/logos/"
-	NEW_FMT_ROOT = "/hubbleroot/static/logos/"
+	NEW_FMT_ROOT = "/hubbleroot/static/archives/logos/"
 
 	def _create_object(self):
 		
@@ -984,7 +984,7 @@ class TechnicalDocumentDataMapping(ProductDataMapping):
 					  }
 	has_pages=True
 	OLD_FMT_ROOT = "/Volumes/webdocs/spacetelescope/docs/about/further_information/techdocs/"
-	NEW_FMT_ROOT = "/hubbleroot/static/techdocs/"
+	NEW_FMT_ROOT = "/hubbleroot/static/archives/techdocs/"
 	
 
 
@@ -999,7 +999,7 @@ class ExhibitionDataMapping(SpacetelescopeDataMapping):
 					  }
 
 	OLD_FMT_ROOT = "/Volumes/webdocs/spacetelescope/docs/projects/exhibitions/"
-	NEW_FMT_ROOT = "/hubbleroot/static/exhibitions/"
+	NEW_FMT_ROOT = "/hubbleroot/static/archives/exhibitions/"
 
 	def _create_object(self):
 		
@@ -1040,7 +1040,7 @@ class FITSImageDataMapping(SpacetelescopeDataMapping):
 					  }
 
 	OLD_FMT_ROOT = "/Volumes/webdocs/spacetelescope/docs/projects/fits_liberator/fitsimages/"
-	NEW_FMT_ROOT = "/hubbleroot/static/fitsimages/"
+	NEW_FMT_ROOT = "/hubbleroot/static/archives/fitsimages/"
 
 	def _create_object(self):
 		
@@ -1092,7 +1092,7 @@ class OnlineArtAuthorDataMapping(SpacetelescopeDataMapping):
 
 
 	OLD_FMT_ROOT = "/Volumes/webdocs/spacetelescope/docs/goodies/art/"
-	NEW_FMT_ROOT = "/hubbleroot/static/artists/"
+	NEW_FMT_ROOT = "/hubbleroot/static/archives/artists/"
 
 	def _create_object(self):
 		
@@ -1152,7 +1152,7 @@ class OnlineArtDataMapping(SpacetelescopeDataMapping):
 					  }
 
 	OLD_FMT_ROOT = "/Volumes/webdocs/spacetelescope/docs/goodies/art"
-	NEW_FMT_ROOT = "/hubbleroot/static/art/"
+	NEW_FMT_ROOT = "/hubbleroot/static/archives/art/"
 
 	def _create_object(self):
 		

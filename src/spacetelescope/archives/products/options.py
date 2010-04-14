@@ -63,7 +63,7 @@ class BookOptions (StandardOptions):
 		)
 	
 	class Queries(object):
-		default = AllPublicQuery( browsers=( 'normal', 'viewall' ), verbose_name="CDROM Archive: View All" )
+		default = AllPublicQuery( browsers=( 'normal', 'viewall' ), verbose_name="Books Archive: View All" )
 		
 	
 class BrochureOptions (StandardOptions):

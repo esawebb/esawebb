@@ -63,38 +63,38 @@ urlpatterns += basepatterns + patterns( '',
     ( r'^kidsandteachers/drawings/', include('spacetelescope.archives.educational.urls.drawings'), { 'model': KidsDrawing, 'options': KidsDrawingOptions } ),
 
     # Goodies
-    ( r'^goodies/calendars/', include('spacetelescope.archives.goodies.urls.calendars'), { 'model': Calendar, 'options': CalendarOptions } ),
-    ( r'^goodies/art/', include('spacetelescope.archives.goodies.urls.art'), { 'model': OnlineArt, 'options': OnlineArtOptions } ),
-    ( r'^goodies/artists/', include('spacetelescope.archives.goodies.urls.artists'), { 'model': OnlineArtAuthor, 'options': OnlineArtAuthorOptions } ),
+    ( r'^extras/calendars/', include('spacetelescope.archives.goodies.urls.calendars'), { 'model': Calendar, 'options': CalendarOptions } ),
+    ( r'^extras/art/', include('spacetelescope.archives.goodies.urls.art'), { 'model': OnlineArt, 'options': OnlineArtOptions } ),
+    ( r'^extras/artists/', include('spacetelescope.archives.goodies.urls.artists'), { 'model': OnlineArtAuthor, 'options': OnlineArtAuthorOptions } ),
     
     # TODO: assess if we can handle print layouts with Release Archive, but just different options
     #( r'^goodies/printlayouts/', include('spacetelescope.archives.goodies.urls.printlayouts'), { 'model': Release, 'options': PrintLayoutOptions } ),
     
-    ( r'^goodies/slideshows/', include('spacetelescope.archives.goodies.urls.slideshows'), { 'model': SlideShow, 'options': SlideShowOptions } ),
+    ( r'^extras/presentations/', include('spacetelescope.archives.goodies.urls.slideshows'), { 'model': SlideShow, 'options': SlideShowOptions } ),
 
 
     #TODO: map to ST?
     # PRODUCTS
-    ( r'^products/cdroms/', include('spacetelescope.archives.products.urls.cdroms'), { 'model': CDROM, 'options': CDROMOptions } ),
-    ( r'^products/books/', include('spacetelescope.archives.products.urls.books'), { 'model': Book, 'options': BookOptions } ),
-    ( r'^products/brochures/', include('spacetelescope.archives.products.urls.brochures'), { 'model': Brochure, 'options': BrochureOptions } ),
-    ( r'^products/merchandise/', include('spacetelescope.archives.products.urls.merchandise'), { 'model': Merchandise, 'options': MerchandiseOptions } ),
-    ( r'^products/newsletters/', include('spacetelescope.archives.products.urls.newsletters'), { 'model': Newsletter, 'options': NewsletterOptions } ),
-    ( r'^products/postcards/', include('spacetelescope.archives.products.urls.postcards'), { 'model': PostCard, 'options': PostCardOptions } ),
-    ( r'^products/posters/', include('spacetelescope.archives.products.urls.posters'), { 'model': Poster, 'options': PosterOptions } ),
-    ( r'^products/presskits/', include('spacetelescope.archives.products.urls.presskits'), { 'model': PressKit, 'options': PressKitOptions } ),
-    ( r'^products/stickers/', include('spacetelescope.archives.products.urls.stickers'), { 'model': Sticker, 'options': StickerOptions } ),
+    ( r'^extras/dvds/', include('spacetelescope.archives.products.urls.cdroms'), { 'model': CDROM, 'options': CDROMOptions } ),
+    ( r'^about/further_information/books/', include('spacetelescope.archives.products.urls.books'), { 'model': Book, 'options': BookOptions } ),
+    ( r'^about/further_information/brochures/', include('spacetelescope.archives.products.urls.brochures'), { 'model': Brochure, 'options': BrochureOptions } ),
+    ( r'^extras/merchandise/', include('spacetelescope.archives.products.urls.merchandise'), { 'model': Merchandise, 'options': MerchandiseOptions } ),
+    ( r'^about/further_information/newsletters/', include('spacetelescope.archives.products.urls.newsletters'), { 'model': Newsletter, 'options': NewsletterOptions } ),
+    ( r'^extras/postcards/', include('spacetelescope.archives.products.urls.postcards'), { 'model': PostCard, 'options': PostCardOptions } ),
+    ( r'^extras/posters/', include('spacetelescope.archives.products.urls.posters'), { 'model': Poster, 'options': PosterOptions } ),
+    ( r'^press/kits/', include('spacetelescope.archives.products.urls.presskits'), { 'model': PressKit, 'options': PressKitOptions } ),
+    ( r'^extras/stickers/', include('spacetelescope.archives.products.urls.stickers'), { 'model': Sticker, 'options': StickerOptions } ),
     
     
     # ORG
     #TODO: is "announcements" gonna be the new prefix?
     ( r'^announcements/', include('spacetelescope.archives.org.urls.announcements'), { 'model': Announcement, 'options': AnnouncementOptions } ),
-    ( r'^about_us/techdocs/', include('spacetelescope.archives.org.urls.techdocs'), { 'model': TechnicalDocument, 'options': TechnicalDocumentOptions } ),
-    ( r'^about_us/logos/', include('spacetelescope.archives.org.urls.logos'), { 'model': Logo, 'options': LogoOptions } ),
-    ( r'^about_us/conference_posters/', include('spacetelescope.archives.org.urls.conference_posters'), { 'model': ConferencePoster, 'options': ConferencePosterOptions } ),
+    ( r'^about/further_information/techdocs/', include('spacetelescope.archives.org.urls.techdocs'), { 'model': TechnicalDocument, 'options': TechnicalDocumentOptions } ),
+    ( r'^extras/logos/', include('spacetelescope.archives.org.urls.logos'), { 'model': Logo, 'options': LogoOptions } ),
+    ( r'^extras/conferenceposters/', include('spacetelescope.archives.org.urls.conference_posters'), { 'model': ConferencePoster, 'options': ConferencePosterOptions } ),
     
     # Projects
-    ( r'^projects/exhibitions/', include('spacetelescope.archives.projects.urls.exhibitions'), { 'model': Exhibition, 'options': ExhibitionOptions } ),
+    ( r'^extras/exhibitions/', include('spacetelescope.archives.projects.urls.exhibitions'), { 'model': Exhibition, 'options': ExhibitionOptions } ),
     ( r'^projects/fits_liberator/fitsimages/', include('spacetelescope.archives.projects.urls.fitsimages'), { 'model': FITSImage, 'options': FITSImageOptions } ),
     
     # User authentication
@@ -115,5 +115,5 @@ urlpatterns += basepatterns + patterns('',
 # Static files/media serving during development
 if settings.SERVE_STATIC_MEDIA:
     urlpatterns += patterns( '',
-        ( r'^' + settings.STATIC_MEDIA_PREFIX + r'/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.MEDIA_ROOT } ),
+        ( r'^' + settings.STATIC_MEDIA_PREFIX + r'/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.MEDIA_ROOT, 'show_indexes': True } ),
 				)
