@@ -358,3 +358,28 @@ h1, h2{
 	line-height:1.5;
 
 }
+
+/* social networks */
+#socialnetworks {
+	display:block;
+	width:180px;
+	height:82px;
+	margin-top:10px;
+	margin-left:1px;
+	background: url('../images/socialnetworks.png') no-repeat;
+}
+
+#socialnetworks  a {
+	display:block;
+	width:80px;
+	float:left;
+	height:22px;
+}
+
+#socialnetworks #yt {
+	float:right;
+}
+#socialnetworks #it {
+	float:right;
+	height:40px;
+}
