@@ -20,13 +20,12 @@ class CalendarAdmin( DjangoplicityModelAdmin, RenameAdmin, ArchiveAdmin ):
 	list_display = ( 'id', 'year', 'month','priority','last_modified', 'published',view_link('calendars') )
 	list_filter = ( 'year', 'month', 'published', 'last_modified',  )
 	list_editable = ( 'published', )
-	search_fields = ( 'id', 'old_ids', 'title', 'description', 'credit' )
+	search_fields = ( 'id', 'title', 'description', 'credit' )
 	date_hierarchy = 'last_modified'
 	fieldsets = (
 					( None, {'fields': ( 'id', ) } ),
 					( 'Publishing', {'fields': ( 'published', 'priority', ), } ),
 					( 'Archive', {'fields': ( 'year', 'month', 'description', 'credit', ), } ),
-					( 'Compatibility', {'fields': ('old_ids', ), }),
 				)
 	ordering = ('id', )
 	richtext_fields = ('description',)
@@ -40,13 +39,12 @@ class OnlineArtAdmin( DjangoplicityModelAdmin, RenameAdmin, ArchiveAdmin ):
 	list_display = ( 'id', 'title', 'published','priority','last_modified', view_link('art') )
 	list_filter = ( 'title', 'published', 'last_modified', )
 	list_editable = ( 'title', 'published', )
-	search_fields = ( 'id', 'old_ids', 'title', 'description', 'artist', 'credit' )
+	search_fields = ( 'id', 'title', 'description', 'artist', 'credit' )
 	date_hierarchy = 'last_modified'
 	fieldsets = (
 					( None, {'fields': ( 'id', ) } ),
 					( 'Publishing', {'fields': ( 'published', 'priority', ), } ),
 					( 'Archive', {'fields': ( 'title', 'description', 'credit', 'artist'), } ),
-					( 'Compatibility', {'fields': ('old_ids', ), }),
 				)
 	ordering = ('id', )
 	#raw_id_fields = ('artist', )
@@ -73,13 +71,12 @@ class OnlineArtAuthorAdmin( DjangoplicityModelAdmin, RenameAdmin, ArchiveAdmin )
 #	list_display = ( 'id', 'title', 'published','priority','last_modified', view_link('printlayouts') )
 #	list_filter = ( 'title', 'published', 'last_modified', )
 #	list_editable = ( 'title', 'published', )
-#	search_fields = ( 'id', 'old_ids', 'title', 'description', 'credit' )
+#	search_fields = ( 'id', 'title', 'description', 'credit' )
 #	date_hierarchy = 'last_modified'
 #	fieldsets = (
 #					( None, {'fields': ( 'id', ) } ),
 #					( 'Publishing', {'fields': ( 'published', 'priority', ), } ),
 #					( 'Archive', {'fields': ( 'title', 'description', 'credit', ), } ),
-#					( 'Compatibility', {'fields': ('old_ids', ), }),
 #				)
 #	ordering = ('id', )
 #	richtext_fields = ('description',)
@@ -91,14 +88,13 @@ class SlideShowAdmin( DjangoplicityModelAdmin, RenameAdmin, ArchiveAdmin ):
 	list_display = ( 'id', 'title', 'published','priority','last_modified', 'resolution','x_size','y_size', view_link('slideshows') )
 	list_filter = ( 'title', 'published', 'last_modified', 'resolution','x_size','y_size')
 	list_editable = ( 'title', 'published', 'resolution','x_size','y_size' )
-	search_fields = ( 'id', 'old_ids', 'title', 'description', 'credit' )
+	search_fields = ( 'id', 'title', 'description', 'credit' )
 	date_hierarchy = 'last_modified'
 	fieldsets = (
 					( None, {'fields': ( 'id', ) } ),
 					( 'Publishing', {'fields': ( 'published', 'priority', ), } ),
 					( 'Archive', {'fields': ( 'title', 'description', 'credit', ), } ),
 					( 'Screen', {'fields': ( 'resolution', 'x_size', 'y_size'), } ),
-					( 'Compatibility', {'fields': ('old_ids', ), }),
 				)
 	ordering = ('id', )
 	richtext_fields = ('description',)

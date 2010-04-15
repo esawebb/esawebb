@@ -10,14 +10,15 @@ from djangoplicity.migration.apps.pages import PageInitializationTask, \
 	PageMigrationTask, HTMLPageDocument
 from djangoplicity.pages.models import Section
 from djangoplicity.releases.models import Release
-from spacetelescope.archives.educational.models import *
+from spacetelescope.archives.models import *
 from spacetelescope.archives.goodies.models import *
-from spacetelescope.archives.products.models import *
+#from spacetelescope.archives.products.models import *
 from spacetelescope.migration.archives import *
 from spacetelescope.migration.pages import SpacetelescopePageDocument, \
 	SpacetelescopePageLinksCleanupTask, SpacetelescopePageFilesCopyTask
 import logging
 import re
+from product.models import Product
 
 #
 # Define logger to use
@@ -34,29 +35,29 @@ conf = {
 				'site' : Site.objects.get(id=settings.SITE_ID), 
 				'section' : Section.objects.get_or_create( name='Default', append_title='spacetelescope.org', template='pages/page_onecolumn.html' )[0],
 				'sections' : { 
-								'home' : Section.objects.get_or_create( name='Home', append_title='spacetelescope.org', template='pages/page_onecolumn.html' )[0],
-								'news' : Section.objects.get_or_create( name='News', append_title='News | spacetelescope.org', template='pages/page_onecolumn.html' )[0],
-								'images' : Section.objects.get_or_create( name='Images', append_title='Images | spacetelescope.org', template='pages/page_onecolumn.html' )[0],
-								'videos' : Section.objects.get_or_create( name='Videos', append_title='Videos | spacetelescope.org', template='pages/page_onecolumn.html' )[0],
-								'shop' : Section.objects.get_or_create( name='Shop', append_title='Hubble Shop | spacetelescope.org', template='pages/page_onecolumn.html' )[0],
-								'extras' : Section.objects.get_or_create( name='Hubble Extras', append_title='Hubble Extras | spacetelescope.org', template='pages/page_onecolumn.html' )[0],
-								'about' : Section.objects.get_or_create( name='About Hubble', append_title='About Hubble | spacetelescope.org', template='pages/page_onecolumn.html' )[0],
-								'kids' : Section.objects.get_or_create( name='Kids & Teachers', append_title='Kids & Teachers | spacetelescope.org', template='pages/page_onecolumn.html' )[0],
-								'press' : Section.objects.get_or_create( name='Press', append_title='Press | spacetelescope.org', template='pages/page_onecolumn.html' )[0],
-								'projects' : Section.objects.get_or_create( name='Projects', append_title='Projects | spacetelescope.org', template='pages/page_onecolumn.html' )[0],
+								#'home' : Section.objects.get_or_create( name='Home', append_title='spacetelescope.org', template='pages/page_onecolumn.html' )[0],
+								#'news' : Section.objects.get_or_create( name='News', append_title='News | spacetelescope.org', template='pages/page_onecolumn.html' )[0],
+								#'images' : Section.objects.get_or_create( name='Images', append_title='Images | spacetelescope.org', template='pages/page_onecolumn.html' )[0],
+								#'videos' : Section.objects.get_or_create( name='Videos', append_title='Videos | spacetelescope.org', template='pages/page_onecolumn.html' )[0],
+								#'shop' : Section.objects.get_or_create( name='Shop', append_title='Hubble Shop | spacetelescope.org', template='pages/page_onecolumn.html' )[0],
+								#'extras' : Section.objects.get_or_create( name='Hubble Extras', append_title='Hubble Extras | spacetelescope.org', template='pages/page_onecolumn.html' )[0],
+								#'about' : Section.objects.get_or_create( name='About Hubble', append_title='About Hubble | spacetelescope.org', template='pages/page_onecolumn.html' )[0],
+								#'kids' : Section.objects.get_or_create( name='Kids & Teachers', append_title='Kids & Teachers | spacetelescope.org', template='pages/page_onecolumn.html' )[0],
+								#'press' : Section.objects.get_or_create( name='Press', append_title='Press | spacetelescope.org', template='pages/page_onecolumn.html' )[0],
+								#'projects' : Section.objects.get_or_create( name='Projects', append_title='Projects | spacetelescope.org', template='pages/page_onecolumn.html' )[0],
 							 },
 				'section_mapping' : {
-								'news' : 'news',
-								'home' : 'home',
-								'images' : 'images',
-								'videos' : 'videos',
-								'goodies' : 'extras',
-								'hubble shop' : 'shop',
-								'science' : 'about',
-								'about hubble' : 'about',
-								'kids &amp; teachers' : 'kids',
-								'press' : 'press',
-								'projects' : 'projects',
+								'news' : 'default',
+								'home' : 'default',
+								'images' : 'default',
+								'videos' : 'default',
+								'goodies' : 'default',
+								'hubble shop' : 'default',
+								'science' : 'default',
+								'about hubble' : 'default',
+								'kids &amp; teachers' : 'default',
+								'press' : 'default',
+								'projects' : 'default',
 								'jobs' : 'default',
 							},
 			  },
@@ -139,16 +140,25 @@ link_replacements = {
 	'/projects/anniversary/' : '/projects/anniversary/',
 	#'/bin/mailform/majordomo@eso.org/hubblenews' : '/bin/mailform/majordomo@eso.org/hubblenews',
 	#'/about/history/sm4blog/' : '',
-	#'/hubbleshop/webshop/webshop.php?show=sales&section=books' : '',
-	#'/hubbleshop/webshop/webshop.php?show=sales&section=brochures' : '',
-	#'/hubbleshop/webshop/webshop.php?show=sales&section=cdroms' : '',
-	#'/hubbleshop/webshop/webshop.php?show=sales&section=merchandise' : '',
-	#'/hubbleshop/webshop/webshop.php?show=sales&section=newsletters' : '',
-	#'/hubbleshop/webshop/webshop.php?show=sales&section=postcards' : '',
-	#'/hubbleshop/webshop/webshop.php?show=sales&section=stickers' : '',
-	#'/hubbleshop/webshop/webshop.php?show=sales&section=techdocs' : '',
+	'/hubbleshop/webshop/webshop.php?show=sales&section=books' : '/shop/category/book/',
+	'/hubbleshop/webshop/webshop.php?show=sales&section=brochures' : '/shop/category/brochure/',
+	'/hubbleshop/webshop/webshop.php?show=sales&section=cdroms' : '/shop/category/cdrom/',
+	'/hubbleshop/webshop/webshop.php?show=sales&section=merchandise' : '/shop/category/merchandise/',
+	'/hubbleshop/webshop/webshop.php?show=sales&section=newsletters' : '/shop/category/newsletter/',
+	'/hubbleshop/webshop/webshop.php?show=sales&section=postcards' : '/shop/category/postcard/',
+	'/hubbleshop/webshop/webshop.php?show=sales&section=stickers' : '/shop/category/sticker/',
+	'/hubbleshop/webshop/webshop.php?show=sales&section=techdocs' : '/shop/category/technicaldocument/',
 #	'/projects/seminars/presentations/roth_art.pdf' : '/projects/seminars/presentations/roth_art.pdf',
-#	'/q/spacemailform.php' : '',	
+#	'/q/spacemailform.php' : '',
+	'about_us/heic/group.html' : 'http://www.eso.org/public/outreach/department/index.html',
+	'about_us/heic/students.html' : 'http://www.eso.org/public/outreach/department/students.html',
+	'about_us/contact.html' : '/contact/',
+	'about_us/copyright.html' : '/copyright/',
+	'about_us/hubblenews.html' : 'http://list.hq.eso.org/cgi-bin/mailman/listinfo/hubblenews',
+	'goodies/slideshows/index.html' : '/extras/slideshows/',
+	'goodies/tutorial/index1.html' : '/extras/tutorial/',
+	'goodies/slideshows.html' : '/extras/slideshows/',
+	'hubbleshop/index.html' : '/shop/',	
 }
 
 # Additional Redirects
@@ -158,84 +168,84 @@ link_replacements = {
 #
 
 def choose_tasks():
-	return  archivetasks + pagestasks
+	return archivetasks + pagestasks
 
 #
 # Define migration tasks
 #
 archivetasks = [
 	# INIT - reset all redirects!!
-	ArchiveInitializationTask( Redirect ),
+#	ArchiveInitializationTask( Redirect ),
 	
 	
-	ArchiveInitializationTask( Release ),
-	ArchiveInitializationTask( Image ),
+	#ArchiveInitializationTask( Release ),
+	#ArchiveInitializationTask( Image ),
     
     # Goodies
-    ArchiveInitializationTask( EducationalMaterial ),
-    ArchiveInitializationTask( KidsDrawing ),
-    ArchiveInitializationTask( Calendar ),
-    ArchiveInitializationTask( OnlineArt ),
-    ArchiveInitializationTask( OnlineArtAuthor ),
-	#Print Layout
-    ArchiveInitializationTask( SlideShow ),
+#    ArchiveInitializationTask( EducationalMaterial ),
+    #ArchiveInitializationTask( KidsDrawing ),
+    #ArchiveInitializationTask( Calendar ),
+    #ArchiveInitializationTask( OnlineArt ),
+    #ArchiveInitializationTask( OnlineArtAuthor ),
+	# Print Layout
+    #ArchiveInitializationTask( SlideShow ),
     
     #Products
-    ArchiveInitializationTask( Book ),
-    ArchiveInitializationTask( CDROM ),
-    ArchiveInitializationTask( Brochure ),
-    ArchiveInitializationTask( Merchandise ),
-    ArchiveInitializationTask( Newsletter ),
-    ArchiveInitializationTask( PostCard ),
-    ArchiveInitializationTask( Poster ),
-    ArchiveInitializationTask( PressKit ),
-    ArchiveInitializationTask( Sticker ),
-
-    #ORG
-    ArchiveInitializationTask ( Announcement ),
-    ArchiveInitializationTask ( ConferencePoster ),
-    ArchiveInitializationTask ( Logo ),
-    ArchiveInitializationTask ( TechnicalDocument ),  
- 
-    #Projects
-    ArchiveInitializationTask ( Exhibition ),
-    ArchiveInitializationTask ( FITSImage ),
+#    ArchiveInitializationTask( Product ),
+#    ArchiveInitializationTask( Book ),
+#    ArchiveInitializationTask( CDROM ),
+#    ArchiveInitializationTask( Brochure ),
+#    ArchiveInitializationTask( Merchandise ),
+#    ArchiveInitializationTask( Newsletter ),
+#    ArchiveInitializationTask( PostCard ),
+#    ArchiveInitializationTask( Poster ),
+#    ArchiveInitializationTask( PressKit ),
+#    ArchiveInitializationTask( Sticker ),
+#
+#    #ORG
+#    ArchiveInitializationTask ( Announcement ),
+#    ArchiveInitializationTask ( ConferencePoster ),
+#    ArchiveInitializationTask ( Logo ),
+#    ArchiveInitializationTask ( TechnicalDocument ),  
+# 
+#    #Projects
+#    ArchiveInitializationTask ( Exhibition ),
+#    ArchiveInitializationTask ( FITSImage ),
     
     # MIG
     ArchiveMigrationTask( SpacetelescopeCSVDataSource( '/Volumes/webdocs/spacetelescope/docs/csvfiles/newsdata.csv'), NewsDataMapping ),
 	ArchiveMigrationTask( SpacetelescopeCSVDataSource( '/Volumes/webdocs/spacetelescope/docs/csvfiles/imagedata.csv'), ImagesDataMapping ),
 	
 	# Goodies
-	ArchiveMigrationTask( SpacetelescopeCSVDataSource( '/Users/luis/Workspaces/pttu/spacetelescope.org/migration/csvfiles/edumatdata.csv'), EducationalMaterialsDataMapping ),
-	ArchiveMigrationTask( SpacetelescopeCSVDataSource( '/Users/luis/Workspaces/pttu/spacetelescope.org/migration/csvfiles/kidsdrawingdata.csv'), KidsDrawingsDataMapping ),
-	ArchiveMigrationTask( SpacetelescopeCSVDataSource( '/Users/luis/Workspaces/pttu/spacetelescope.org/migration/csvfiles/calendardata.csv'), CalendarsDataMapping ),
-	ArchiveMigrationTask( SpacetelescopeCSVDataSource( '/Users/luis/Workspaces/pttu/spacetelescope.org/migration/csvfiles/artdata_artists.csv'), OnlineArtAuthorDataMapping ),
-	ArchiveMigrationTask( SpacetelescopeCSVDataSource( '/Users/luis/Workspaces/pttu/spacetelescope.org/migration/csvfiles/artdata_pictures.csv'), OnlineArtDataMapping ),
+	ArchiveMigrationTask( SpacetelescopeCSVDataSource( '/Volumes/webdocs/spacetelescope/docs/csvfiles/edumatdata.csv'), EducationalMaterialsDataMapping ),
+	ArchiveMigrationTask( SpacetelescopeCSVDataSource( '/Volumes/webdocs/spacetelescope/docs/csvfiles/kidsdrawingdata.csv'), KidsDrawingsDataMapping ),
+	ArchiveMigrationTask( SpacetelescopeCSVDataSource( '/Volumes/webdocs/spacetelescope/docs/csvfiles/calendardata.csv'), CalendarsDataMapping ),
+	ArchiveMigrationTask( SpacetelescopeCSVDataSource( '/Volumes/webdocs/spacetelescope/docs/csvfiles/artdata_artists.csv'), OnlineArtAuthorDataMapping ),
+	ArchiveMigrationTask( SpacetelescopeCSVDataSource( '/Volumes/webdocs/spacetelescope/docs/csvfiles/artdata_pictures.csv'), OnlineArtDataMapping ),
 	
-    #Print Layout
+# Print Layout
 
     # Products
-    ArchiveMigrationTask( SpacetelescopeCSVDataSource( '/Users/luis/Workspaces/pttu/spacetelescope.org/migration/csvfiles/slideshowdata.csv'), SlideShowDataMapping ),
-    ArchiveMigrationTask( SpacetelescopeCSVDataSource( '/Users/luis/Workspaces/pttu/spacetelescope.org/migration/csvfiles/bookdata.csv'), BookDataMapping ),
-    ArchiveMigrationTask( SpacetelescopeCSVDataSource( '/Users/luis/Workspaces/pttu/spacetelescope.org/migration/csvfiles/cdromdata.csv'), CDROMDataMapping ),
-    ArchiveMigrationTask( SpacetelescopeCSVDataSource( '/Users/luis/Workspaces/pttu/spacetelescope.org/migration/csvfiles/brochuredata.csv'), BrochureDataMapping ),
-    ArchiveMigrationTask( SpacetelescopeCSVDataSource( '/Users/luis/Workspaces/pttu/spacetelescope.org/migration/csvfiles/merchandisedata.csv'), MerchandiseDataMapping ),
-    ArchiveMigrationTask( SpacetelescopeCSVDataSource( '/Users/luis/Workspaces/pttu/spacetelescope.org/migration/csvfiles/newsletterdata.csv'), NewsletterDataMapping ),
-    ArchiveMigrationTask( SpacetelescopeCSVDataSource( '/Users/luis/Workspaces/pttu/spacetelescope.org/migration/csvfiles/postcarddata.csv'), PostCardDataMapping ),
-    ArchiveMigrationTask( SpacetelescopeCSVDataSource( '/Users/luis/Workspaces/pttu/spacetelescope.org/migration/csvfiles/posterdata.csv'), PosterDataMapping ),
-    ArchiveMigrationTask( SpacetelescopeCSVDataSource( '/Users/luis/Workspaces/pttu/spacetelescope.org/migration/csvfiles/presskitdata.csv'), PressKitDataMapping ),
-    ArchiveMigrationTask( SpacetelescopeCSVDataSource( '/Users/luis/Workspaces/pttu/spacetelescope.org/migration/csvfiles/stickerdata.csv'), StickerDataMapping ),
+    ArchiveMigrationTask( SpacetelescopeCSVDataSource( '/Volumes/webdocs/spacetelescope/docs/csvfiles/slideshowdata.csv'), SlideShowDataMapping ),
+    ArchiveMigrationTask( SpacetelescopeCSVDataSource( '/Volumes/webdocs/spacetelescope/docs/csvfiles/bookdata.csv'), BookDataMapping ),
+    ArchiveMigrationTask( SpacetelescopeCSVDataSource( '/Volumes/webdocs/spacetelescope/docs/csvfiles/cdromdata.csv'), CDROMDataMapping ),
+    ArchiveMigrationTask( SpacetelescopeCSVDataSource( '/Volumes/webdocs/spacetelescope/docs/csvfiles/brochuredata.csv'), BrochureDataMapping ),
+    ArchiveMigrationTask( SpacetelescopeCSVDataSource( '/Volumes/webdocs/spacetelescope/docs/csvfiles/merchandisedata.csv'), MerchandiseDataMapping ),
+    ArchiveMigrationTask( SpacetelescopeCSVDataSource( '/Volumes/webdocs/spacetelescope/docs/csvfiles/newsletterdata.csv'), NewsletterDataMapping ),
+    ArchiveMigrationTask( SpacetelescopeCSVDataSource( '/Volumes/webdocs/spacetelescope/docs/csvfiles/postcarddata.csv'), PostCardDataMapping ),
+    ArchiveMigrationTask( SpacetelescopeCSVDataSource( '/Volumes/webdocs/spacetelescope/docs/csvfiles/posterdata.csv'), PosterDataMapping ),
+    ArchiveMigrationTask( SpacetelescopeCSVDataSource( '/Volumes/webdocs/spacetelescope/docs/csvfiles/presskitdata.csv'), PressKitDataMapping ),
+    ArchiveMigrationTask( SpacetelescopeCSVDataSource( '/Volumes/webdocs/spacetelescope/docs/csvfiles/stickerdata.csv'), StickerDataMapping ),
     
     # Org
-    ArchiveMigrationTask( SpacetelescopeCSVDataSource( '/Users/luis/Workspaces/pttu/spacetelescope.org/migration/csvfiles/updatedata.csv'), AnnouncementDataMapping ),
-    ArchiveMigrationTask( SpacetelescopeCSVDataSource( '/Users/luis/Workspaces/pttu/spacetelescope.org/migration/csvfiles/conferenceposterdata.csv'), ConferencePosterDataMapping ),
-    ArchiveMigrationTask( SpacetelescopeCSVDataSource( '/Users/luis/Workspaces/pttu/spacetelescope.org/migration/csvfiles/logodata.csv'), LogoDataMapping ),
-    ArchiveMigrationTask( SpacetelescopeCSVDataSource( '/Users/luis/Workspaces/pttu/spacetelescope.org/migration/csvfiles/techdocsdata.csv'), TechnicalDocumentDataMapping ),
+    ArchiveMigrationTask( SpacetelescopeCSVDataSource( '/Volumes/webdocs/spacetelescope/docs/csvfiles/updatedata.csv'), AnnouncementDataMapping ),
+    ArchiveMigrationTask( SpacetelescopeCSVDataSource( '/Volumes/webdocs/spacetelescope/docs/csvfiles/conferenceposterdata.csv'), ConferencePosterDataMapping ),
+    ArchiveMigrationTask( SpacetelescopeCSVDataSource( '/Volumes/webdocs/spacetelescope/docs/csvfiles/logodata.csv'), LogoDataMapping ),
+    ArchiveMigrationTask( SpacetelescopeCSVDataSource( '/Volumes/webdocs/spacetelescope/docs/csvfiles/techdocsdata.csv'), TechnicalDocumentDataMapping ),
     
-    #projects
-    ArchiveMigrationTask( SpacetelescopeCSVDataSource( '/Users/luis/Workspaces/pttu/spacetelescope.org/migration/csvfiles/exhibitiondata.csv'), ExhibitionDataMapping ),
-    ArchiveMigrationTask( SpacetelescopeCSVDataSource( '/Users/luis/Workspaces/pttu/spacetelescope.org/migration/csvfiles/fitsimagedata.csv'), FITSImageDataMapping ),
-    
+    # projects
+    ArchiveMigrationTask( SpacetelescopeCSVDataSource( '/Volumes/webdocs/spacetelescope/docs/csvfiles/exhibitiondata.csv'), ExhibitionDataMapping ),
+    ArchiveMigrationTask( SpacetelescopeCSVDataSource( '/Volumes/webdocs/spacetelescope/docs/csvfiles/fitsimagedata.csv'), FITSImageDataMapping ),
 ]
 
 #
@@ -243,7 +253,7 @@ archivetasks = [
 # find . | grep -E '\.(html|htm)$' | grep -v /html/ | grep -v -E '^\./(about/history/sm4blog/|bin/|bugs/|goodies/slideshows/flash/|goodies/mergingGalaxiesSite/|error_401.html$|pressroom/error_401.html$|error_404.html$|nvff/|projects/fits_liberator/bugs/|projects/python-xmp-toolkit/|q/|search/|xmm/|internal/|sitemap.html$|index.html$|internal_old/|testphp/|mn/|googlea95441ee32fbe5c8.html$|googlead94a0599adf8109.html$|index_test.html$|maptest/|tests/|unavailable.html$|test/|google34e371fb40a60c65.html$|images/search2.html$|integral/|netscape.html$|pressroom/embargo/index.html$|projects/web/article2.html$|projects/anniversary/index2.html$|goodies/interactive_hubble/index_old.html$|projects/fits_liberator/v23files/releasenotes.html$|images/zoom/Template.htm$|projects/av_lab/Summary of Interviews_files/header.htm$|projects/av_lab/Summary of Interviews.htm$|projects/credibility/Summary of Interviews_files/header.htm$|projects/credibility/Summary%20of%20Interviews.htm$|iyalogos.htm$|pressroom/presskits/index.html$)'
 #
 pagestasks = [
-	PageInitializationTask(),
+	#PageInitializationTask(),
 	PageMigrationTask( SpacetelescopePageDocument( 'about/further_information/presskits/index.html' ) ),
 	PageMigrationTask( SpacetelescopePageDocument( 'about/further_information/index.html' ) ),
 	PageMigrationTask( SpacetelescopePageDocument( 'about/further_information/links.html' ) ),
@@ -339,38 +349,38 @@ pagestasks = [
 	PageMigrationTask( SpacetelescopePageDocument( 'about_us/evaluation/press_clippings.html' ) ),
 	PageMigrationTask( SpacetelescopePageDocument( 'about_us/evaluation/web_stats.html' ) ),
 	PageMigrationTask( SpacetelescopePageDocument( 'about_us/heic/european.html' ) ),
-	PageMigrationTask( SpacetelescopePageDocument( 'about_us/heic/group.html' ) ),
-	PageMigrationTask( SpacetelescopePageDocument( 'about_us/heic/index.html' ) ),
-	PageMigrationTask( SpacetelescopePageDocument( 'about_us/heic/mission.html' ) ),
-	PageMigrationTask( SpacetelescopePageDocument( 'about_us/heic/products.html' ) ),
-	PageMigrationTask( SpacetelescopePageDocument( 'about_us/heic/scientist_guidelines.html' ) ),
-	PageMigrationTask( SpacetelescopePageDocument( 'about_us/heic/students.html' ) ),
+	#PageMigrationTask( SpacetelescopePageDocument( 'about_us/heic/group.html', new_url="/about_us/" ) ),
+	PageMigrationTask( SpacetelescopePageDocument( 'about_us/heic/index.html', new_url="/about_us/" ) ),
+	PageMigrationTask( SpacetelescopePageDocument( 'about_us/heic/mission.html', new_url="/about_us/mission/" ) ),
+	PageMigrationTask( SpacetelescopePageDocument( 'about_us/heic/products.html', new_url="/about_us/products/" ) ),
+	PageMigrationTask( SpacetelescopePageDocument( 'about_us/heic/scientist_guidelines.html', new_url="/about_us/" ) ),
+	#PageMigrationTask( SpacetelescopePageDocument( 'about_us/heic/students.html' ) ),
 	PageMigrationTask( SpacetelescopePageDocument( 'about_us/heic/world.html' ) ),
-	PageMigrationTask( SpacetelescopePageDocument( 'about_us/contact.html' ) ),
-	PageMigrationTask( SpacetelescopePageDocument( 'about_us/copyright.html' ) ),
-	PageMigrationTask( SpacetelescopePageDocument( 'about_us/hubblenews.html' ) ),
-	PageMigrationTask( SpacetelescopePageDocument( 'about_us/index.html' ) ),
-	PageMigrationTask( SpacetelescopePageDocument( 'goodies/art/submit_art.html' ) ),
-	PageMigrationTask( SpacetelescopePageDocument( 'goodies/image_experience/index.html' ) ),
-	PageMigrationTask( SpacetelescopePageDocument( 'goodies/interactive_hubble/index.html' ) ),
-	PageMigrationTask( SpacetelescopePageDocument( 'goodies/slideshows/index.html' ) ),
-	PageMigrationTask( SpacetelescopePageDocument( 'goodies/index.html' ) ),
-	PageMigrationTask( SpacetelescopePageDocument( 'goodies/orbit.html' ) ),
-	PageMigrationTask( SpacetelescopePageDocument( 'goodies/tutorial/index.html' ) ),
-	PageMigrationTask( SpacetelescopePageDocument( 'goodies/tutorial/index1.html' ) ),
-	PageMigrationTask( SpacetelescopePageDocument( 'goodies/slideshows.html' ) ),
-	PageMigrationTask( SpacetelescopePageDocument( 'goodies/ecards/index.html' ) ),
-	PageMigrationTask( SpacetelescopePageDocument( 'goodies/ecards/xmas2006/index.html' ) ),
-	PageMigrationTask( SpacetelescopePageDocument( 'hubbleshop/cvc_info.html' ) ),
-	PageMigrationTask( SpacetelescopePageDocument( 'hubbleshop/freeorders.html' ) ),
-	PageMigrationTask( SpacetelescopePageDocument( 'hubbleshop/index.html' ) ),
-	PageMigrationTask( SpacetelescopePageDocument( 'hubbleshop/maintenance.html' ) ),
-	PageMigrationTask( SpacetelescopePageDocument( 'hubbleshop/payment.html' ) ),
-	PageMigrationTask( SpacetelescopePageDocument( 'hubbleshop/purchasing_steps.html' ) ),
-	PageMigrationTask( SpacetelescopePageDocument( 'hubbleshop/secure_payments.htm' ) ),
-	PageMigrationTask( SpacetelescopePageDocument( 'hubbleshop/shipping.html' ) ),
-	PageMigrationTask( SpacetelescopePageDocument( 'hubbleshop/terms_conditions.html' ) ),
-	PageMigrationTask( SpacetelescopePageDocument( 'hubbleshop/bulk_orders.html' ) ),
+	#PageMigrationTask( SpacetelescopePageDocument( 'about_us/contact.html' ) ),
+	#PageMigrationTask( SpacetelescopePageDocument( 'about_us/copyright.html' ) ),
+	#PageMigrationTask( SpacetelescopePageDocument( 'about_us/hubblenews.html' ) ),
+	PageMigrationTask( SpacetelescopePageDocument( 'about_us/index.html', new_url="/about_us/" ) ),
+	PageMigrationTask( SpacetelescopePageDocument( 'goodies/art/submit_art.html', new_url="/extras/art/submit_art/" ) ),
+	PageMigrationTask( SpacetelescopePageDocument( 'goodies/image_experience/index.html', new_url="/extras/image_experience/" ) ),
+	PageMigrationTask( SpacetelescopePageDocument( 'goodies/interactive_hubble/index.html', new_url="/extras/interactive_hubble/" ) ),
+	#PageMigrationTask( SpacetelescopePageDocument( 'goodies/slideshows/index.html', new_url="/extras/slideshows/" ) ),
+	PageMigrationTask( SpacetelescopePageDocument( 'goodies/index.html', new_url="/extras/" ) ),
+	PageMigrationTask( SpacetelescopePageDocument( 'goodies/orbit.html', new_url="/extras/orbit/" ) ),
+	PageMigrationTask( SpacetelescopePageDocument( 'goodies/tutorial/index.html', new_url="/extras/tutorial/" ) ),
+	#PageMigrationTask( SpacetelescopePageDocument( 'goodies/tutorial/index1.html', new_url="/extras/" ) ),
+	#PageMigrationTask( SpacetelescopePageDocument( 'goodies/slideshows.html', new_url="/extras/" ) ),
+	PageMigrationTask( SpacetelescopePageDocument( 'goodies/ecards/index.html', new_url="/extras/ecards/" ) ),
+	PageMigrationTask( SpacetelescopePageDocument( 'goodies/ecards/xmas2006/index.html', new_url="/extras/xmas2006/" ) ),
+	PageMigrationTask( SpacetelescopePageDocument( 'hubbleshop/cvc_info.html', new_url="/shop/cvc_info/" ) ),
+	PageMigrationTask( SpacetelescopePageDocument( 'hubbleshop/freeorders.html', new_url="/shop/freeorders/" ) ),
+	#PageMigrationTask( SpacetelescopePageDocument( 'hubbleshop/index.html', new_url="/shop/" ) ),
+	PageMigrationTask( SpacetelescopePageDocument( 'hubbleshop/maintenance.html', new_url="/shop/maintenance/" ) ),
+	PageMigrationTask( SpacetelescopePageDocument( 'hubbleshop/payment.html', new_url="/shop/payment/" ) ),
+	PageMigrationTask( SpacetelescopePageDocument( 'hubbleshop/purchasing_steps.html', new_url="/shop/purchasing_steps/" ) ),
+	PageMigrationTask( SpacetelescopePageDocument( 'hubbleshop/secure_payments.htm', new_url="/shop/secure_payments/" ) ),
+	PageMigrationTask( SpacetelescopePageDocument( 'hubbleshop/shipping.html', new_url="/shop/shipping/" ) ),
+	PageMigrationTask( SpacetelescopePageDocument( 'hubbleshop/terms_conditions.html', new_url="/shop/terms_conditions/" ) ),
+	PageMigrationTask( SpacetelescopePageDocument( 'hubbleshop/bulk_orders.html', new_url="/shop/bulk_orders/" ) ),
 	PageMigrationTask( SpacetelescopePageDocument( 'contact.html' ) ),
 	PageMigrationTask( SpacetelescopePageDocument( 'copyright.html' ) ),
 	PageMigrationTask( SpacetelescopePageDocument( 'images/index.html' ) ),
@@ -378,16 +388,16 @@ pagestasks = [
 	PageMigrationTask( SpacetelescopePageDocument( 'kidsandteachers/exercises.html' ) ),
 	PageMigrationTask( SpacetelescopePageDocument( 'kidsandteachers/index.html' ) ),
 	PageMigrationTask( SpacetelescopePageDocument( 'kidsandteachers/submit_drawings.html' ) ),
-#	PageMigrationTask( SpacetelescopePageDocument( 'pressroom/crabfacts.html' ) ),
-	PageMigrationTask( SpacetelescopePageDocument( 'pressroom/interview_possibilities.html' ) ),
-	PageMigrationTask( SpacetelescopePageDocument( 'pressroom/broadcast_videos.html' ) ),
-	PageMigrationTask( SpacetelescopePageDocument( 'pressroom/image_formats.html' ) ),
-	PageMigrationTask( SpacetelescopePageDocument( 'pressroom/index.html' ) ),
-	PageMigrationTask( SpacetelescopePageDocument( 'pressroom/template.html' ) ),
-	PageMigrationTask( SpacetelescopePageDocument( 'pressroom/video_formats.html' ) ),
-	PageMigrationTask( SpacetelescopePageDocument( 'pressroom/mailinglist.html' ) ),
-	PageMigrationTask( SpacetelescopePageDocument( 'pressroom/presscoverage.html' ) ),
-	#PageMigrationTask( SpacetelescopePageDocument( 'projects/DVD/index.html' ) ),
+	PageMigrationTask( SpacetelescopePageDocument( 'pressroom/crabfacts.html', new_url="/press/crabfacts/" ) ),
+	PageMigrationTask( SpacetelescopePageDocument( 'pressroom/interview_possibilities.html', new_url="/press/interview_possibilities/" ) ),
+	PageMigrationTask( SpacetelescopePageDocument( 'pressroom/broadcast_videos.html', new_url="/press/broadcast_videos/" ) ),
+	PageMigrationTask( SpacetelescopePageDocument( 'pressroom/image_formats.html', new_url="/press/image_formats/" ) ),
+	PageMigrationTask( SpacetelescopePageDocument( 'pressroom/index.html', new_url="/press/" ) ),
+	#PageMigrationTask( SpacetelescopePageDocument( 'pressroom/template.html' ) ),
+	PageMigrationTask( SpacetelescopePageDocument( 'pressroom/video_formats.html', new_url="/press/video_formats/" ) ),
+	PageMigrationTask( SpacetelescopePageDocument( 'pressroom/mailinglist.html', new_url="/press/mailinglist/" ) ),
+	PageMigrationTask( SpacetelescopePageDocument( 'pressroom/presscoverage.html', new_url="/press/presscoverage/" ) ),
+	PageMigrationTask( SpacetelescopePageDocument( 'projects/DVD/index.html' ) ),
 	PageMigrationTask( SpacetelescopePageDocument( 'projects/IAU_WG/index.html' ) ),
 	PageMigrationTask( SpacetelescopePageDocument( 'projects/anniversary/about_bob.html' ) ),
 	PageMigrationTask( SpacetelescopePageDocument( 'projects/anniversary/about_lars.html' ) ),
@@ -411,7 +421,7 @@ pagestasks = [
 	PageMigrationTask( SpacetelescopePageDocument( 'projects/av_lab/index.html' ) ),
 	PageMigrationTask( SpacetelescopePageDocument( 'projects/credibility/Summary of Interviews.htm' ) ),
 	PageMigrationTask( SpacetelescopePageDocument( 'projects/credibility/credibility.html' ) ),
-	#PageMigrationTask( SpacetelescopePageDocument( 'projects/credibility/credibility_interviews.html' ) ),
+	PageMigrationTask( SpacetelescopePageDocument( 'projects/credibility/credibility_interviews.html' ) ),
 	PageMigrationTask( SpacetelescopePageDocument( 'projects/denmark/index.html' ) ),
 	PageMigrationTask( SpacetelescopePageDocument( 'projects/fits_liberator/archives.html' ) ),
 	PageMigrationTask( SpacetelescopePageDocument( 'projects/fits_liberator/blackwhitehelp.html' ) ),
@@ -471,13 +481,13 @@ pagestasks = [
 	PageMigrationTask( SpacetelescopePageDocument( 'projects/cap2005.html' ) ),
 	PageMigrationTask( SpacetelescopePageDocument( 'projects/vo_images/improc.html' ) ),
 	PageMigrationTask( SpacetelescopePageDocument( 'projects/vo_images/index.html' ) ),
-	#PageMigrationTask( SpacetelescopePageDocument( 'projects/web/article.html' ) ),
+	PageMigrationTask( SpacetelescopePageDocument( 'projects/web/article.html' ) ),
 	PageMigrationTask( SpacetelescopePageDocument( 'projects/web/download.html' ) ),
 	PageMigrationTask( SpacetelescopePageDocument( 'projects/web/index.html' ) ),
 	PageMigrationTask( SpacetelescopePageDocument( 'projects/index.html' ) ),
 	PageMigrationTask( SpacetelescopePageDocument( 'projects/kiosk.html' ) ),
 	PageMigrationTask( SpacetelescopePageDocument( 'projects/iauga2006.html' ) ),
-	#PageMigrationTask( SpacetelescopePageDocument( 'projects/seminars/index.html' ) ),
+	PageMigrationTask( SpacetelescopePageDocument( 'projects/seminars/index.html' ) ),
 	PageMigrationTask( SpacetelescopePageDocument( 'projects/socialnetworking/index.html' ) ),
 	PageMigrationTask( SpacetelescopePageDocument( 'projects/iau_pressoffice/index.html' ) ),
 	PageMigrationTask( SpacetelescopePageDocument( 'projects/20anniversary/index.html' ) ),
@@ -487,7 +497,7 @@ pagestasks = [
 	PageMigrationTask( SpacetelescopePageDocument( 'science/composition_of_universe.html' ) ),
 	PageMigrationTask( SpacetelescopePageDocument( 'science/age_size.html' ) ),
 	PageMigrationTask( SpacetelescopePageDocument( 'science/black_holes.html' ) ),
-	#PageMigrationTask( SpacetelescopePageDocument( 'science/gravitational_lensing.html' ) ),
+	PageMigrationTask( SpacetelescopePageDocument( 'science/gravitational_lensing.html' ) ),
 	PageMigrationTask( SpacetelescopePageDocument( 'science/deep_fields.html' ) ),
 	PageMigrationTask( SpacetelescopePageDocument( 'science/europe_hubble.html' ) ),
 	PageMigrationTask( SpacetelescopePageDocument( 'science/formation_of_stars.html' ) ),

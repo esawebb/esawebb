@@ -20,13 +20,12 @@ class ExhibitionAdmin (DjangoplicityModelAdmin, RenameAdmin, ArchiveAdmin ):
 	list_display = ( 'id', 'title', 'published','priority','last_modified', view_link('announcements') )
 	list_filter = ( 'title', 'published', 'last_modified',  )
 	list_editable = ( 'title', 'published', )
-	search_fields = ( 'id', 'old_ids', 'title', 'description', 'credit' )
+	search_fields = ( 'id', 'title', 'description', 'credit' )
 	date_hierarchy = 'last_modified'
 	fieldsets = (
 					( None, {'fields': ( 'id', ) } ),
 					( 'Publishing', {'fields': ( 'published', 'priority', ), } ),
 					( 'Archive', {'fields': ( 'title', 'description', 'credit',), } ),
-					( 'Compatibility', {'fields': ('old_ids', ), }),
 				)	
 	
 	ordering = ('id', )
@@ -37,13 +36,12 @@ class FITSImageAdmin( DjangoplicityModelAdmin, RenameAdmin, ArchiveAdmin ):
 	list_display = ( 'id', 'title', 'published','priority','last_modified', view_link('announcements') )
 	list_filter = ( 'title', 'published', 'last_modified',  )
 	list_editable = ( 'title', 'published', )
-	search_fields = ( 'id', 'old_ids', 'title', 'description', 'credit' )
+	search_fields = ( 'id', 'title', 'description', 'credit' )
 	date_hierarchy = 'last_modified'
 	fieldsets = (
 					( None, {'fields': ( 'id', ) } ),
 					( 'Publishing', {'fields': ( 'published', 'priority', ), } ),
 					( 'Archive', {'fields': ( 'title', 'description', 'credit', 'country','city' ), } ),
-					( 'Compatibility', {'fields': ('old_ids', ), }),
 				)	
 	
 	ordering = ('id', )

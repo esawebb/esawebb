@@ -28,11 +28,8 @@ import djangoplicity.metadata.admin
 import djangoplicity.contrib.redirects.admin
 import djangoplicity.authtkt.admin
 
-import spacetelescope.archives.educational.admin
+import spacetelescope.archives.admin
 import spacetelescope.archives.goodies.admin
-import spacetelescope.archives.org.admin
-import spacetelescope.archives.products.admin
-
 
 
 # Register each applications admin interfaces with
@@ -50,10 +47,8 @@ autoregister( admin_site, djangoplicity.releases.admin )
 autoregister( admin_site, djangoplicity.metadata.admin )
 
 
-autoregister( admin_site, spacetelescope.archives.educational.admin )
+autoregister( admin_site, spacetelescope.archives.admin )
 autoregister( admin_site, spacetelescope.archives.goodies.admin )
-autoregister( admin_site, spacetelescope.archives.org.admin )
-autoregister( admin_site, spacetelescope.archives.products.admin )
 
 
 #autoregister ( adminlogs_site, djangoplicity.contrib.redirects.admin )

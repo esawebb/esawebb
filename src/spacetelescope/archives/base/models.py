@@ -42,18 +42,12 @@ class StandardArchiveInfo ( models.Model ):
     description = archives.DescriptionField( )
     """ """
     
-    priority = archives.PriorityField( default = 0)
+    priority = archives.PriorityField( default = 0 )
     """ """
     
     credit = metadatafields.AVMCreditField( )
     """ """
 
-    old_ids = models.CharField(verbose_name=_("Old Ids"), 
-                               max_length=50,blank=True, 
-                               help_text=_(u'For backwards compatibility: Historic ids of this archive item.') )
-    """ """
-   
-    
     class Meta:
         abstract = True
         ordering = ['-priority','last_modified']

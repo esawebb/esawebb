@@ -1401,7 +1401,7 @@
             "tree_id": 1, 
             "on_click": 0, 
             "lft": 158, 
-            "link": "/shop/category/brochures/", 
+            "link": "/shop/category/brochure/", 
             "published": 1, 
             "level": 3
         }
@@ -1418,7 +1418,7 @@
             "tree_id": 1, 
             "on_click": 0, 
             "lft": 160, 
-            "link": "/shop/category/books/", 
+            "link": "/shop/category/book/", 
             "published": 1, 
             "level": 3
         }
@@ -1435,7 +1435,7 @@
             "tree_id": 1, 
             "on_click": 0, 
             "lft": 162, 
-            "link": "/shop/category/education/", 
+            "link": "/shop/category/educationalmaterial/", 
             "published": 1, 
             "level": 3
         }
@@ -1452,7 +1452,7 @@
             "tree_id": 1, 
             "on_click": 0, 
             "lft": 164, 
-            "link": "/shop/category/dvds/", 
+            "link": "/shop/category/cdrom/", 
             "published": 1, 
             "level": 3
         }
@@ -1469,7 +1469,7 @@
             "tree_id": 1, 
             "on_click": 0, 
             "lft": 166, 
-            "link": "/shop/category/posters/", 
+            "link": "/shop/category/poster/", 
             "published": 1, 
             "level": 3
         }
@@ -1486,7 +1486,7 @@
             "tree_id": 1, 
             "on_click": 0, 
             "lft": 168, 
-            "link": "/shop/category/techdocs/", 
+            "link": "/shop/category/technicaldocument/", 
             "published": 1, 
             "level": 3
         }
@@ -1503,7 +1503,7 @@
             "tree_id": 1, 
             "on_click": 0, 
             "lft": 170, 
-            "link": "/shop/category/newsletters/", 
+            "link": "/shop/category/newsletter/", 
             "published": 1, 
             "level": 3
         }
@@ -1537,7 +1537,7 @@
             "tree_id": 1, 
             "on_click": 0, 
             "lft": 174, 
-            "link": "/shop/category/stickers/", 
+            "link": "/shop/category/sticker/", 
             "published": 1, 
             "level": 3
         }
@@ -1554,7 +1554,7 @@
             "tree_id": 1, 
             "on_click": 0, 
             "lft": 176, 
-            "link": "/shop/category/postcards/", 
+            "link": "/shop/category/postcard/", 
             "published": 1, 
             "level": 3
         }
@@ -3745,9 +3745,9 @@
             "title": "Our Group", 
             "menu": null, 
             "tree_id": 2, 
-            "on_click": 0, 
+            "on_click": 1, 
             "lft": 25, 
-            "link": "/about_us/group/", 
+            "link": "http://www.eso.org/public/outreach/department/index.html", 
             "published": 1, 
             "level": 2
         }

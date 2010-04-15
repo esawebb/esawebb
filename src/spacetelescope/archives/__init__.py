@@ -12,7 +12,7 @@ class archive_settings:
     MERCHANDISE_ROOT = 'archives/merchandise'
     SLIDESHOW_ROOT = 'archives/slideshows'
     ANNOUNCEMENT_ROOT = 'archives/updates'
-    NEWSLETTER_ROOT = 'archives/news'
+    NEWSLETTER_ROOT = 'archives/newsletters'
     FITS_IMAGE_ROOT = 'archives/fitsimages'
     KIDS_DRAWING_ROOT = 'archives/drawings'
     EDUMATERIAL_ROOT = 'archives/education'

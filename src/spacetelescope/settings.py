@@ -273,10 +273,8 @@ INSTALLED_APPS = (
 	'djangodblog',
 	'django_extensions',
 	'django_assets',
-	'spacetelescope.archives.educational',
+	'spacetelescope.archives',
 	'spacetelescope.archives.goodies',
-	'spacetelescope.archives.products',
-	'spacetelescope.archives.org',
 	'spacetelescope.archives.projects',	
 	# Satchmo
 	#'registration',
@@ -496,7 +494,9 @@ AUTHENTICATION_BACKENDS += ( 'satchmo_store.accounts.email-auth.EmailBackend', )
 SATCHMO_SETTINGS = {
                     'SHOP_BASE' : '/shop',
                     'MULTISHOP' : False,
-                    #'CUSTOM_PRODUCT_MODULES' : ['spacetelescope.archives.products',],
+                    'CUSTOM_PRODUCT_MODULES' : [
+											'spacetelescope.archives',
+											],
                     #'SHOP_URLS' : patterns('satchmo_store.shop.views',)
                     }
 
@@ -524,6 +524,46 @@ logging.basicConfig(level=logging.DEBUG,
 logging.getLogger( 'keyedcache' ).setLevel( logging.INFO )
 logging.getLogger( 'l10n' ).setLevel( logging.INFO )
 logging.info( "Satchmo Started" )
+
+LIVESETTINGS_OPTIONS = {   
+	1: { 
+		'DB' : False, 
+		'SETTINGS' : { 
+		    u'LANGUAGE': {   
+				u'CURRENCY': u'\u20ac',
+				u'SHOW_TRANSLATIONS': u'False'
+			},
+            u'PAYMENT': {
+				u'COUNTRY_MATCH': u'False',
+                u'MINIMUM_ORDER': u'3.00',
+                u'ORDER_EMAIL_EXTRA': u'disitribution@spacetelescope.org',
+                u'ORDER_EMAIL_OWNER': u'True',
+                u'SSL': u'True'
+            },
+            u'PAYMENT_DUMMY': {
+				u'CREDITCHOICES': u'["Visa", "Mastercard", "Discover", "American Express"]'
+			},
+            u'PRODUCT': {   
+				u'IMAGE_DIR': u'satchmoimages',
+				u'MEASUREMENT_SYSTEM': u'["metric"]',
+				# Note the string below is too long to store in the database since PRODUCT_TYPES is not a LongSetting
+				# Therefore it must be configured here!
+				u'PRODUCT_TYPES': u'["product::ConfigurableProduct", "product::ProductVariation", "spacetelescope.archives::Book", "spacetelescope.archives::Brochure", "spacetelescope.archives::EducationalMaterial", "spacetelescope.archives::CDROM", "spacetelescope.archives::Poster", "spacetelescope.archives::TechnicalDocument", "spacetelescope.archives::Newsletter", "spacetelescope.archives::Merchandise", "spacetelescope.archives::Sticker", "spacetelescope.archives::PostCard"]',
+				u'TRACK_INVENTORY': u'False'
+			},
+            u'SHIPPING': {   
+				u'PER_DAYS': u'1 - 3 business days',
+				u'PER_SERVICE': u'Deutsche Post/DHL'
+			},
+            u'TAX' : { 
+				u'PRODUCTS_TAXABLE_BY_DEFAULT' :u'False', 
+			},
+            u'SHOP': {
+				u'REQUIRED_BILLING_DATA': u'["email", "first_name", "last_name", "phone", "street1", "city", "postal_code", "country"]'
+			}
+		}
+	}
+}
 
 # ======================================================================
 # SITE SPECIFIC SECTIONS 

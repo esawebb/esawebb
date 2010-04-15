@@ -1,0 +1,36 @@
+{% extends "base_twocolumn.html" %}
+{% load i18n %}
+{% load satchmo_util %}
+{% load pages %}
+{% load djangoplicity_satchmo %}
+{% load djangoplicity_utils %}
+{% load satchmo_price %}
+{% load satchmo_currency satchmo_category %}
+{% load satchmo_util satchmo_discounts %}
+
+{% block site_title %} {{ shop_name }} | {{ block.super }} {% endblock %}
+
+{% block content %}
+<h1>{{ shop_name }}</h1>
+{% if shop.store_description %}<p>{{ shop.store_description }}</p>{% endif %}
+
+{% if all_products_list %}
+    <h3>{% trans "Featured Products" %}</h3>
+    
+<table class="archive_normal" width="100%">
+{% for list in all_products_list|split_list:"3" %}
+<tr>{% for product in list %}{% archiveitem product as item %}
+<td class="imagerow" width="33"><a href="{{ product.get_absolute_url }}"><img src="{{ item.resource_thumb.url }}" width="122" alt="{{item.title}}" /></a></td>{% endarchiveitem %}{% endfor %}
+</tr>
+<tr>{% for product in list %}{% archiveitem product as item %}
+<td class="titlerow"><span class="price" align="right">Price:&nbsp;{{ product|discount_price:sale|currency }}</span></td>{% endarchiveitem %}{% endfor %}
+</tr>
+<tr>{% for product in list %}{% archiveitem product as item %}
+<td class="titlerow">{{item.title}}</td>{% endarchiveitem %}{% endfor %}
+</tr>
+{% endfor %}
+</table>
+{% endif %}
+{% endblock %}
+
+{% block rightcolumn %}{% embed_page spacetelescope.shop_right_column %}{% endblock %}

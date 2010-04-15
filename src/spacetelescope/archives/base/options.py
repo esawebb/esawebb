@@ -28,16 +28,12 @@ from djangoplicity.metadata.archives.info import *
 from models import *
 
 
-def release_date( obj ):
-	print 
-	if obj.release_date:
-		if obj.release_date.time() == time(0,0):
-			return datetime_format( obj.release_date, arg='DATE' )
-		else:
-			return datetime_format( obj.release_date, arg='DATETIME' )
+def shop_link( obj ):
+	if hasattr( obj, 'product' ) and obj.sale and obj.product:
+		return obj.product.get_absolute_url()
 	else:
-		return None
-
+		return ''
+shop_link.short_description = _("Buy in Hubble Shop")
 #TODO: feeds for models
 		
 class StandardOptions (ArchiveOptions):
@@ -52,6 +48,11 @@ class StandardOptions (ArchiveOptions):
 	search_fields = ( 
 		'id', 'title', 'description', 'credit',
 	)
+	
+	downloads = ( 
+		( _(u'Images'), {'resources' : ( 'original', 'large', 'screen', 'medium',  ), 'icons' : { 'original' : 'phot', 'large' : 'phot', 'medium' : 'phot', 'screen' : 'phot' } } ),
+		( _(u'Files'), {'resources' : ( 'pdf', 'pdfsm', 'zip' ), 'icons' : { 'pdf' : 'doc',  'pdfsm' : 'doc', 'zip' : 'zip' } } ),
+		)
 		
 	class Browsers(object):
 		normal = NormalBrowser( index_template='archives/index_normal.html', paginate_by=16 )

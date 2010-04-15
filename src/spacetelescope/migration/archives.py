@@ -8,20 +8,23 @@
 #   Luis Clara Gomes <lcgomes@eso.org>
 #
 import os, shutil
-from BeautifulSoup import BeautifulSoup
+from BeautifulSoup import BeautifulSoup, BeautifulStoneSoup
 from datetime import datetime
 from django.contrib.redirects.models import Redirect
 from djangoplicity.migration import MigrationError
 from djangoplicity.migration.apps.archives import CSVDataSource, DataMapping
 from djangoplicity.releases.models import Release, ReleaseType
 from djangoplicity.releases.models import Image
-from spacetelescope.archives.educational.models import *
+from spacetelescope.archives.models import *
 from spacetelescope.archives.goodies.models import *
-from spacetelescope.archives.products.models import *
+#from spacetelescope.archives.products.models import *
 from spacetelescope.archives.projects.models import *
-from spacetelescope.archives.org.models import *
+from django.utils.html import strip_tags
 
 import csv
+import re
+
+numberregex = re.compile( "(\d+(\.\d+)?)")
 
 def calc_priority( p ):
 	"""
@@ -29,6 +32,19 @@ def calc_priority( p ):
 	between 10 and 90
 	"""
 	return (5-int(p))*16+10
+
+
+def strip_and_convert( s ):
+	"""
+	Convert a string with HTML and entities in into
+	Unicode string.
+	"""
+	s = BeautifulSoup( s )
+	s = "".join([unicode(x) for x in s.contents])
+	s = strip_tags(s)
+	s = BeautifulStoneSoup( s,  convertEntities=BeautifulStoneSoup.HTML_ENTITIES)
+	s = "".join([unicode(x) for x in s.contents])
+	return s.strip() 
 
 COPY_INSTEAD_OF_MOVE = True
 #for all resources except THUMBS, only touch new ones instead of copy
@@ -153,7 +169,106 @@ class SpacetelescopeDataMapping( DataMapping ):
 			    
 			    
 				
+class ProductDataMapping (SpacetelescopeDataMapping):
+	#base data mapping for all products (shop)
+	model = None  
+	has_pages=False
+	format_mapping = {'thumbs':'thumb'}
+	extra_fields = []
+    
+	def _create_redirect(self):
+		new_url = self.obj.get_absolute_url()
+		for url in self.old_urls():
+			r,created = Redirect.objects.get_or_create( site = self.conf['pages']['site'], old_path=url )
+			if created:
+				r.new_path = new_url
+			r.save()
 
+	def _create_object(self):
+		# id, releasetype, title
+		
+		self.obj = self.model( 
+				id=self.id(),
+				title=self.title(), 
+				description=self.description(),
+				width=self.width(),
+				height=self.height(),
+				weight=self.weight(),
+				priority=self.priority(),
+				credit=self.credit(),
+				sale=self.sale(),
+				price=self.price(),
+				#delivery=self.delivery(),
+			)
+
+		if self.has_pages:
+			self.obj.pages = self.pages()
+			
+		if self.extra_fields:
+			for f in self.extra_fields:
+				setattr( self.obj, f, getattr( self, f )() ) 
+
+		self.obj.save()
+		
+	def _dataentry(self,key):
+		# attempt lowercase retrieve and then title. otherwise fail
+		try:
+			return self.dataentry[key]
+		except KeyError:
+			try:
+				return self.dataentry[key.lower()]
+			except KeyError:
+				return self.dataentry[key.title()]
+	
+	def id(self):
+		return self._dataentry('id')
+	
+	def title(self):
+		return strip_and_convert( self._dataentry('Title') ) #.decode('iso-8859-1').encode('utf8') 
+			
+	def description(self):
+		soup = BeautifulSoup( self._dataentry('Description') )#.decode('iso-8859-1').encode('utf8') )
+		return unicode( soup )
+	
+	def pages(self):
+		if self.has_pages:
+			
+			return self._dataentry('Pages')
+		
+		else:
+			return None
+	def width(self):
+		m = numberregex.search( self._dataentry('Width') )
+		if m:
+			return m.group(1)
+		else:
+			return ''
+	
+	def height(self):
+		m = numberregex.search( self._dataentry('Height') )
+		if m:
+			return m.group(1)
+		else:
+			return ''
+	
+	def weight(self):
+		return self._dataentry('Weight')
+		
+	def priority(self):
+		return calc_priority(self._dataentry('priority'))
+		
+	def credit(self):
+		soup = BeautifulSoup( self._dataentry('credit') ) #.decode('iso-8859-1').encode('utf8')
+		return unicode( soup ) 
+		
+	def sale(self):
+		return self._dataentry('Sale').lower() in ['yes',]
+		
+	def price(self):
+		p = self._dataentry('Price')
+		return p if p else 0
+	
+	
 #
 # TOOD: Remove HTML tags from title
 # TOOD: Format links
@@ -319,8 +434,9 @@ class NewsDataMapping( SpacetelescopeDataMapping ):
 		
 		
 
-class EducationalMaterialsDataMapping( SpacetelescopeDataMapping ):
-	BASE = "/kidsandteachers/educational"
+class EducationalMaterialsDataMapping( ProductDataMapping ):
+	model = EducationalMaterial
+	BASE = "/kidsandteachers/education"
 	
 	format_mapping = {'thumbs':'thumb',
 					  'original':'original',
@@ -331,73 +447,9 @@ class EducationalMaterialsDataMapping( SpacetelescopeDataMapping ):
 					  'lowres_pdf':'pdfsm',
 					  }
 
+	has_pages=True
 	OLD_FMT_ROOT = "/Volumes/webdocs/spacetelescope/docs/kidsandteachers/education/"
 	NEW_FMT_ROOT = "/hubbleroot/static/archives/education/"
-	
-	def _create_redirect(self):
-		new_url = self.obj.get_absolute_url()
-		for url in self.old_urls():
-			r,created = Redirect.objects.get_or_create( site = self.conf['pages']['site'], old_path=url )
-			if created:
-				r.new_path = new_url
-			r.save()
-
-	
-	def _create_object(self):
-		# id, releasetype, title
-		self.obj = EducationalMaterial( 
-				id=self.id(),
-				title=self.title(), 
-				description=self.description(),
-				pages=self.pages(),
-				width=self.width(),
-				height=self.height(),
-				weight=self.weight(),
-				priority=self.priority(),
-				credit=self.credit(),
-				sale=self.sale(),
-				price=self.price(),
-				delivery=self.delivery(),
-			)
-		self.obj.save()
-		
-	
-	def id(self):
-		return self.dataentry['id']
-
-	def title(self):
-		return self.dataentry['Title']
-			
-	def description(self):
-		soup = BeautifulSoup( self.dataentry['Description'] )
-		return unicode( soup )
-
-	def pages(self):
-		return self.dataentry['Pages']
-		
-	def width(self):
-		return self.dataentry['Width']
-		
-	def height(self):
-		return self.dataentry['Height']
-
-	def weight(self):
-		return self.dataentry['Weight']
-		
-	def priority(self):
-		return calc_priority(self.dataentry['priority'])
-		
-	def credit(self):
-		return self.dataentry['credit']
-		
-	def sale(self):
-		return self.dataentry['Sale']
-		
-	def price(self):
-		return self.dataentry['Price']
-		
-	def delivery(self):
-		return self.dataentry['Delivery'] if self.dataentry['Delivery'] is not None else ''
 		
 
 class KidsDrawingsDataMapping( SpacetelescopeDataMapping ):
@@ -608,95 +660,12 @@ class SlideShowDataMapping( SpacetelescopeDataMapping ):
 	
 	def y_size (self):
 		return self.dataentry['ysize']
-	
-	
-class ProductDataMapping (SpacetelescopeDataMapping):
-	#base data mapping for all products (shop)
-	model = None  
-	has_pages=False
-	format_mapping = {'thumbs':'thumb'}
-    
-	def _create_redirect(self):
-		new_url = self.obj.get_absolute_url()
-		for url in self.old_urls():
-			r,created = Redirect.objects.get_or_create( site = self.conf['pages']['site'], old_path=url )
-			if created:
-				r.new_path = new_url
-			r.save()
 
-	def _create_object(self):
-		# id, releasetype, title
-		
-		self.obj = self.model( 
-				id=self.id(),
-				title=self.title(), 
-				description=self.description(),
-				width=self.width(),
-				height=self.height(),
-				weight=self.weight(),
-				priority=self.priority(),
-				credit=self.credit(),
-				sale=self.sale(),
-				price=self.price(),
-				#delivery=self.delivery(),
-			)
-
-		if self.has_pages:
-			self.obj.pages = self.pages()
-		self.obj.save()
-		
-	def _dataentry(self,key):
-		# attempt lowercase retrieve and then title. otherwise fail
-		try:
-			return self.dataentry[key.lower()]
-		except KeyError:
-			return self.dataentry[key.title()]
-	
-	def id(self):
-		return self._dataentry('id')
-	
-	def title(self):
-		return self._dataentry('Title').decode('iso-8859-1').encode('utf8') 
-			
-	def description(self):
-		soup = BeautifulSoup( self._dataentry('Description').decode('iso-8859-1').encode('utf8') )
-		return unicode( soup )
-	
-	def pages(self):
-		if self.has_pages:
-			
-			return self._dataentry('Pages')
-		
-		else:
-			return None
-	def width(self):
-		return self._dataentry('Width')
-		
-	def height(self):
-		return self._dataentry('Height')
-	
-	def weight(self):
-		return self._dataentry('Weight')
-		
-	def priority(self):
-		return calc_priority(self._dataentry('priority'))
-		
-	def credit(self):
-		return self._dataentry('credit').decode('iso-8859-1').encode('utf8') 
-		
-	def sale(self):
-		return self._dataentry('Sale')
-		
-	def price(self):
-		return self._dataentry('Price')
-		
-	def delivery(self):
-		return self._dataentry('Delivery') if self._dataentry('Delivery') is not None else ''
 
 
 class CDROMDataMapping(ProductDataMapping):
 	model = CDROM
-	BASE = "/products/cdroms"
+	BASE = "/extras/dvds"
 	
 	format_mapping = {'thumbs':'thumb',
 					  'original':'original',
@@ -710,7 +679,7 @@ class CDROMDataMapping(ProductDataMapping):
 	
 class BookDataMapping(ProductDataMapping):
 	model = Book
-	BASE = "/products/books"
+	BASE = "/about/further_information/books"
 	format_mapping = {'thumbs':'thumb',
 				  'original':'original',
 				  'medium':'medium',
@@ -725,7 +694,7 @@ class BookDataMapping(ProductDataMapping):
 	
 class BrochureDataMapping(ProductDataMapping):
 	model = Brochure
-	BASE = "/products/brochures"
+	BASE = "/about/further_information/brochures"
 	format_mapping = {'thumbs':'thumb',
 					  'original':'original',
 					  'screen':'screen',
@@ -741,7 +710,7 @@ class BrochureDataMapping(ProductDataMapping):
 	
 class MerchandiseDataMapping(ProductDataMapping):
 	model = Merchandise
-	BASE = "/products/merchandise"
+	BASE = "/extras/merchandise"
 	format_mapping = {'thumbs':'thumb',
 					  'original':'original',
 					  'screen':'screen',
@@ -752,9 +721,9 @@ class MerchandiseDataMapping(ProductDataMapping):
 	OLD_FMT_ROOT = "/Volumes/webdocs/spacetelescope/docs/goodies/merchandise/"
 	NEW_FMT_ROOT = "/hubbleroot/static/archives/merchandise/"
 	
-class NewsletterDataMapping(ProductDataMapping):
+class NewsletterDataMapping( ProductDataMapping ):
 	model = Newsletter
-	BASE = "/products/newsletters"
+	BASE = "/about/further_information/newsletters/newsletters"
 	format_mapping = {'thumbs':'thumb',
 					  'original':'original',
 					  'screen':'screen',
@@ -768,7 +737,7 @@ class NewsletterDataMapping(ProductDataMapping):
 
 class PostCardDataMapping(ProductDataMapping):
 	model = PostCard
-	BASE = "/products/postcards"
+	BASE = "/extras/postcards"
 	format_mapping = {'thumbs':'thumb',
 					  'original':'original',
 					  'screen':'screen',
@@ -780,7 +749,7 @@ class PostCardDataMapping(ProductDataMapping):
 
 class PosterDataMapping(ProductDataMapping):
 	model = Poster
-	BASE = "/products/posters"
+	BASE = "/extras/posters"
 	format_mapping = {'thumbs':'thumb',
 					  'original':'original',
 					  'screen':'screen',
@@ -789,10 +758,21 @@ class PosterDataMapping(ProductDataMapping):
 					  }
 	OLD_FMT_ROOT = "/Volumes/webdocs/spacetelescope/docs/goodies/posters/"
 	NEW_FMT_ROOT = "/hubbleroot/static/archives/posters/"
+	
+	extra_fields = ['x_size','y_size','resolution']
+	
+	def x_size(self):
+		return self._dataentry('X resolution')
+	
+	def y_size(self):
+		return self._dataentry('Y resolution')
+	
+	def resolution(self):
+		return self._dataentry('dpi')
 
 class StickerDataMapping(ProductDataMapping):
 	model = Sticker
-	BASE = "/products/stickers"
+	BASE = "/extras/stickers"
 	format_mapping = {'thumbs':'thumb',
 					  'original':'original',
 					  'screen':'screen',
@@ -981,7 +961,7 @@ class LogoDataMapping(SpacetelescopeDataMapping):
 
 class TechnicalDocumentDataMapping(ProductDataMapping):
 	model = TechnicalDocument
-	BASE = "/about_us/techdocs"
+	BASE = "/about/further_information/techdocs"
 	format_mapping = {'thumbs':'thumb',
 					  'original':'original',
 					  'screen':'screen',

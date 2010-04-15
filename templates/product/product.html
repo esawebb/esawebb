@@ -1,0 +1,79 @@
+{% extends "base_twocolumn.html" %}
+{% comment %}
+-------------------------------------------------------------------
+This is the base product detail page.
+To modify the templates of specific types of products, such as
+ProductVariations or CustomProducts, look for product/detail_xxx.html
+-------------------------------------------------------------------
+{% endcomment %}
+{% load i18n %}
+{% load thumbnail %}
+{% load satchmo_price %}
+{% load satchmo_currency satchmo_category %}
+{% load satchmo_util satchmo_discounts %}
+{% load app_plugins %}
+{% load djangoplicity_satchmo %}
+{% load satchmo_cart %}
+{% load normalize_decimal %}
+{% load menus %}
+
+{% block extra_header %}
+{% if product.meta %}
+    <meta name="description" content="{{product.meta}}">
+{% endif %}
+{% endblock %}
+
+{% block breadcrumb %} {{ block.super}}
+{% for name, url in product.category.all.0.get_url_name %}{% breadcrumb_append name url %}{% endfor %}
+{% breadcrumb_append product.name product.get_absolute_url %} {% endblock %}
+
+{% block site_title %} {{product.name}} | {{ shop_name }}{% endblock %}
+
+{% block content %}
+{% block productdetail %}
+{% archiveitem product as object %}
+<h1>{{ shop_name }}: {{ object.title }}</h1>
+{% if object.resource_medium %}
+<div class="archive_image">
+<div class="image_container">{% if object.resource_screen %}<a href="{{object.resource_screen.url}}" rel="shadowbox" title="{{object}}" />
+<img src="{{object.resource_medium.url}}" width="320" border="0" alt="{{object}}" />
+<br/><p>Click to Enlarge</p></a>
+{% else %}
+<img src="{{object.resource_medium.url}}" width="320" border="0" alt="{{object}}" />
+{% endif %}
+</div>
+</div>
+{% endif %}
+<p>{{ object.description|safe }}</p>
+<p><strong>Credit:</strong><div class="credit"><p>{{ object.credit|safe|default:"ESA/Hubble" }}</p></div></p>
+<div class="checkoutdiv"><div align="left" style="line-height: 15px;">
+<strong>Note:</strong> The digital resources (images, videos, PDFs, etc.) for this product can be downloaded in the <a href="{{ object.get_absolute_url }}">archive</a>
+</div></div>
+{% endarchiveitem %}
+{% endblock %}
+{% endblock %}
+
+{% block rightcolumn %}
+<div class="rightbox pricediv">
+<h1 style="">{% trans "Price" %}{% if default_view_tax %} {% trans '(incl. tax)' %}{% endif %}: {% if sale %}<strike id="fullprice" style="display: block;">{{ product|discount_price:""|currency }}</strike>{% endif %}
+<span id="price">{{ product|discount_price:sale|currency }}</span>
+</h1>
+{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+<form id="options" action="{% url satchmo_smart_add %}" method="post">
+{% trans "Quantity" %} <input type="text" size="5" name="quantity" id="quantity" value="1" class="priced" />
+<input type="hidden" name="productname" id="productname" value="{{product.slug}}" />
+<input type="submit" name="addcart" value="{% trans "Add to cart" %}" />
+{% plugin_point "product_add_buttons" %}
+{% plugin_point "product_form" %}
+</form>
+{% archiveitem product as object %}
+<br /><a href="{{ object.get_absolute_url }}">View in Archive</a>
+{% endarchiveitem %}
+</div>
+{% include "product/cart_box.html" %}
+{% endblock %}
+
+{% block productfooter %}
+{% if sale %}{% include "product/product_discount_eligible.html" %}{% endif %}
+{% plugin_point "product_footer" %}
+{% endblock %}
