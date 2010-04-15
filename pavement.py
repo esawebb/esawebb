@@ -113,6 +113,8 @@ options(
                              '../projects/spacetelescope.org/apps/django_threaded_multihost-1.3_2-py2.5.egg',
                              '../projects/spacetelescope.org/apps/reportlab-2.4.tar.gz',
                              '../projects/spacetelescope.org/apps/satchmo-v0.9.zip',
+                             '../projects/spacetelescope.org/apps/ssl-1.15-patched.tar.gz',
+                             
                              ], # packages to install
         paver_command_line='', # command to run after installation
         unzip_setuptools = True,

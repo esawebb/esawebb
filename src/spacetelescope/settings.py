@@ -491,13 +491,16 @@ TEMPLATE_CONTEXT_PROCESSORS += ( 'satchmo_store.shop.context_processors.settings
 
 AUTHENTICATION_BACKENDS += ( 'satchmo_store.accounts.email-auth.EmailBackend', )
 
+from django.conf.urls.defaults import patterns, include
 SATCHMO_SETTINGS = {
                     'SHOP_BASE' : '/shop',
                     'MULTISHOP' : False,
                     'CUSTOM_PRODUCT_MODULES' : [
 											'spacetelescope.archives',
 											],
-                    #'SHOP_URLS' : patterns('satchmo_store.shop.views',)
+                    #'SHOP_URLS' : patterns('',
+					#					(r'^category/$', include('satchmo_store.shop.views.home')),
+					#			)
                     }
 
 

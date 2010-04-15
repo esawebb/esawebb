@@ -68,7 +68,7 @@ urlpatterns += basepatterns + patterns( '',
     # TODO: assess if we can handle print layouts with Release Archive, but just different options
     #( r'^goodies/printlayouts/', include('spacetelescope.archives.goodies.urls.printlayouts'), { 'model': Release, 'options': PrintLayoutOptions } ),
     
-    ( r'^extras/presentations/', include('spacetelescope.archives.goodies.urls.slideshows'), { 'model': SlideShow, 'options': SlideShowOptions } ),
+    ( r'^extras/slideshows/', include('spacetelescope.archives.goodies.urls.slideshows'), { 'model': SlideShow, 'options': SlideShowOptions } ),
 
 
     #TODO: map to ST?

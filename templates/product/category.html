@@ -24,7 +24,7 @@
 
 <div id="product_category">
 {% if category.description %}<p class="product_category_description">{{ category.description }}</p>{% endif %}
-<div style="float: right;">
+<div style="widhth: 100%; clear: both;">
 <table class="archive_normal" width="100%">
 {% for list in products|split_list:"4" %}
 <tr>{% for product in list %}{% archiveitem product as item %}
