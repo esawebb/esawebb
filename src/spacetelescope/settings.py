@@ -484,7 +484,7 @@ LOCAL_DEV = True
 
 MIDDLEWARE_CLASSES += ( 
 					"threaded_multihost.middleware.ThreadLocalMiddleware",
-					"satchmo_store.shop.SSLMiddleware.SSLRedirect", 
+					#"satchmo_store.shop.SSLMiddleware.SSLRedirect", 
 					)
 
 TEMPLATE_CONTEXT_PROCESSORS += ( 'satchmo_store.shop.context_processors.settings', )
