@@ -374,6 +374,22 @@ h1, h2, h3{
 
 }
 
+/* archive search */
+.archive_list_heading {
+	clear:both
+}
+.archive_list_title {
+	float:left;
+}
+.archive_list_search {
+	margin-top:-2px;
+	float:right;
+}
+
+#id_archivesearch {
+	width:176px;
+}
+
 /* admin column */
 .admin_table td, .info_table td {
 	padding: 2px !important;
@@ -396,8 +412,10 @@ h1, h2, h3{
 
 #rightcolumn .esohr, hr {
 	clear:both;
-	color:#E1E1E1;
-	margin-bottom:15px;
+	width:200px;
+	height:20px;
+	background:  url('../images/fp-news-bg.png') no-repeat;
+	border:none;
 }
 
 

@@ -6,7 +6,20 @@
 {# block breadcrumb %}{{ block.super}}{% endblock #}
 
 {% block content %}
+<div class='archive_list_heading'>
+<div class='archive_list_title'>
 <h1>{% if archive_title %}{{ archive_title }}{% else %}{{ archive|capfirst }} Archive{% endif %}</h1>
+</div>
+<div class='archive_list_search'>{% if searchable %}
+
+<form action="{{ search_url }}" method="GET">
+<input id="id_archivesearch" type="text" value="{%if search_specific %}Search {{search_specific|capfirst}}...{%else%}{{search_str|default:"Search..."}}{%endif%}" name="search" class="archivesearch" onblur="searchbox_blur(this,'{%if search_specific %}Search {{search_specific|capfirst}}...{%else%}{{search_str|default:"Search..."}}{%endif%}');" onfocus="searchbox_focus(this,'{%if search_specific %}Search {{search_specific|capfirst}}...{%else%}{{search_str|default:"Search..."}}{%endif%}');" />
+<input class="archivesearch_submit" type="submit" value="Go" />
+</form>
+</div>
+<div class='clear'></div>
+</div>
+{% endif %}
 {% include index_template %}
 {% endblock %}
 {% include 'archives/extra_footer.html' %}
