@@ -35,6 +35,9 @@ def shop_link( obj ):
 		return ''
 shop_link.short_description = _("Buy in Hubble Shop")
 #TODO: feeds for models
+
+image_downloads = ( _(u'Images'), {'resources' : ( 'original', 'large', 'screen',  ), 'icons' : { 'original' : 'phot', 'large' : 'phot', 'medium' : 'phot', 'screen' : 'phot' } } )
+file_downloads = ( _(u'Files'), {'resources' : ( 'pdf', 'pdfsm', 'zip' ), 'icons' : { 'pdf' : 'doc',  'pdfsm' : 'doc', 'zip' : 'zip' } } )
 		
 class StandardOptions (ArchiveOptions):
 	"""
@@ -50,9 +53,9 @@ class StandardOptions (ArchiveOptions):
 	)
 	
 	downloads = ( 
-		( _(u'Images'), {'resources' : ( 'original', 'large', 'screen', 'medium',  ), 'icons' : { 'original' : 'phot', 'large' : 'phot', 'medium' : 'phot', 'screen' : 'phot' } } ),
-		( _(u'Files'), {'resources' : ( 'pdf', 'pdfsm', 'zip' ), 'icons' : { 'pdf' : 'doc',  'pdfsm' : 'doc', 'zip' : 'zip' } } ),
-		)
+		image_downloads,
+		file_downloads,
+	)
 		
 	class Browsers(object):
 		normal = NormalBrowser( index_template='archives/index_normal.html', paginate_by=16 )

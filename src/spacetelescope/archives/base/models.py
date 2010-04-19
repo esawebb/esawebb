@@ -119,20 +119,4 @@ class ScreenInfo ( models.Model ):
     class Meta:
         abstract = True
 
-class ShopInfo ( models.Model ):
-    """ 
-    Abstract class containing shop-related information across all archives
-    """
-        
-    sale = models.BooleanField (blank =True , help_text=_(u'Is item on sale?') )
-    
-    price = models.CharField ( blank = True, max_length=10, help_text=_(u'Price (Eur)'))
-    
-    delivery = models.CharField ( blank = True, max_length=10, help_text=_(u'Delivery costs (Eur)'))
-
-    class Meta:
-        abstract = True
-    
-
-
 

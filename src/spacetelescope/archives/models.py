@@ -351,7 +351,7 @@ class Poster( archives.ArchiveModel, StandardArchiveInfo, PhysicalInfo, ScreenIn
 post_save.connect( Poster.post_save_handler, sender = Poster )
 post_delete.connect( Poster.post_delete_handler, sender = Poster )
 
-class PressKit (archives.ArchiveModel, StandardArchiveInfo, PhysicalInfo, ShopInfo, PrintInfo):
+class PressKit (archives.ArchiveModel, StandardArchiveInfo, PhysicalInfo, PrintInfo):
 	
 	class Archive:
 		original = archives.ImageResourceManager( type=types.OriginalImageType )
@@ -411,24 +411,22 @@ post_delete.connect( Sticker.post_delete_handler, sender = Sticker )
 
 
 
-class Announcement (archives.ArchiveModel,StandardArchiveInfo,):
+class Announcement( archives.ArchiveModel, models.Model ):	
+	id = archives.IdField( )
+	""" """
 
-	links = models.TextField( blank=True, help_text=_(u'Associated Links') )
+	title = archives.TitleField( )
+	""" """
+
+	description = archives.DescriptionField( )
 	""" """
 	
-	contacts = models.TextField( blank=True, help_text=_(u'Associated Contacts') )
-	""" """
-
-	subject_category = metadatafields.AVMSubjectCategoryField()
+	contacts = models.TextField( blank=True, help_text=_(u'Contacts') )
 	""" """
 	
-	subject_name = metadatafields.AVMSubjectNameField()
+	links = models.TextField( blank=True, help_text=_(u'Links') )
 	""" """
 	
-	facility = metadatafields.FacilityManyToManyField()
-
-
-
 	class Archive:
 		original = archives.ImageResourceManager( type=types.OriginalImageType )
 		large = archives.ImageResourceManager( derived='original', verbose_name=_('Large JPEG'), type=types.JpegType )
@@ -445,11 +443,18 @@ class Announcement (archives.ArchiveModel,StandardArchiveInfo,):
 			embargo_date = True
 			last_modified = True
 			created = True
-			published = True  
+			published = True
+			
+	class Meta:
+		ordering = ['-release_date','-id']
+		#get_latest_by = "release_date"
 
 	@permalink
 	def get_absolute_url(self):
-		return ('announcements_detail', [str(self.id)])  
+		return ('announcements_detail', [str(self.id)])
+	
+	def __unicode__(self):
+		return "%s: %s" % (self.id, self.title)  
 
 
 class ConferencePoster(archives.ArchiveModel, StandardArchiveInfo, PhysicalInfo,ScreenInfo):

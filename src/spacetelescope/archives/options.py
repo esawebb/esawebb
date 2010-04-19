@@ -102,34 +102,36 @@ class PressKitOptions (StandardOptions):
 		default = AllPublicQuery( browsers=( 'normal', 'viewall' ), verbose_name="Press Kit Archive: View All" )
 	
 	
-class AnnouncementOptions (StandardOptions):
+class AnnouncementOptions( ArchiveOptions ):
 	urlname_prefix = 'announcements'
+	
+	admin = (
+		( _(u'Admin'), { 'links' : ( admin_edit_for_site('admin_site'),  ), 'fields' : ( published, 'release_date', 'last_modified', 'created' ), }  ),
+	)
 
 	info = ( 
-		( _(u'About the Announcement'), { 'fields' : ( id, subject_name, subject_category, facility )  } ),
+		( _(u'About the Announcement'), { 'fields' : ( 'id',)  } ),
 	)
 	
-	#TODO: add search fields?
+	search_fields = ( 'id', 'title', 'description', 'contacts', 'links', )
 	
-	downloads = ( 
-		( _(u'Images'), {'resources' : ( 'original', 'large', 'medium', 'screen'  ), 'icons' : { 'original' : 'phot', 'large' : 'phot', 'medium' : 'phot', 'screen' : 'phot'  } } ),
-		)
+	downloads = ( image_downloads, file_downloads )
 	
-
 	class Queries( object ):
 		default = AllPublicQuery( browsers = ( 'normal', 'viewall' ), verbose_name = "Announcements" )
-		embargo = EmbargoQuery( browsers = ( 'normal', 'viewall' ), verbose_name = "Embargoed Updates" )
-		staging = StagingQuery( browsers = ( 'normal', 'viewall' ), verbose_name = "Updates (Staging)" )
+		embargo = EmbargoQuery( browsers = ( 'normal', 'viewall' ), verbose_name = "Embargoed Announcements" )
+		staging = StagingQuery( browsers = ( 'normal', 'viewall' ), verbose_name = "Announcements (Staging)" )
 		year = YearQuery( browsers = ( 'normal', 'viewall' ), verbose_name = "Announcements %d" )
 		
 	class Browsers( object ):
-		normal = ListBrowser( index_template = 'archives/index_list.html' )
-		viewall = ListBrowser( verbose_name = _( u'View All' ), paginate_by = 100, index_template = 'archives/index_list.html' )
+		normal = ListBrowser( index_template = 'archives/announcement/index_list.html' )
+		viewall = ListBrowser( verbose_name = _( u'View All' ), paginate_by = 100, index_template = 'archives/announcement/index_list.html' )
 		
 	class ResourceProtection ( object ):
-		#unpublished = ( UnpublishedQuery, security.UNPUBLISHED_PERMS )
-		#staging = ( StagingQuery, security.STAGING_PERMS )
+		unpublished = ( UnpublishedQuery, security.UNPUBLISHED_PERMS )
+		staging = ( StagingQuery, security.STAGING_PERMS )
 		embargo = ( EmbargoQuery, security.EMBARGO )	
+
 
 class ConferencePosterOptions (StandardOptions):
 	urlname_prefix = 'conference_posters'

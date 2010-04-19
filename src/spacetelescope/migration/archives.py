@@ -103,9 +103,11 @@ class SpacetelescopeDataMapping( DataMapping ):
 		"""
 		new_url = self.obj.get_absolute_url()
 		for url in self.old_urls():
-			r = Redirect( site = self.conf['pages']['site'], old_path=url, new_path=new_url )
+			r,created = Redirect.objects.get_or_create( site = self.conf['pages']['site'], old_path=url )
+			if created:
+				r.new_path = new_url
 			r.save()
-			
+
 	def _create_object(self):
 		"""
 		Creating the archive item object and store it in self.obj.
@@ -162,10 +164,97 @@ class SpacetelescopeDataMapping( DataMapping ):
 				shutil.copy(old_filepath,new_filepath)
 			else:
 				pass
-			    #os.rename( p, new_filepath )
-			    
-			    
-			    
+				#os.rename( p, new_filepath )
+	
+	def _dataentry(self,key):
+		# attempt lowercase retrieve and then title. otherwise fail
+		try:
+			return self.dataentry[key]
+		except KeyError:
+			try:
+				return self.dataentry[key.lower()]
+			except KeyError:
+				return self.dataentry[key.title()]
+	
+	def release_date( self ):
+		return self._parse_date( self.dataentry['release date/local time Munich (CET or CEST)'] )
+	
+	def embargo_date( self ):
+		return self._parse_date( self.dataentry['Stage date/local time Munich (CET or CEST)'] )
+		
+	def contacts(self):
+		soup = BeautifulSoup( self._dataentry('contacts') )
+		return unicode( soup )
+	
+	def links (self):
+		soup = BeautifulSoup( self.dataentry['links'] )
+		links = unicode( soup )
+		
+		p = re.compile("(<br>|<br \/>)") #my @lines = split( /)/, $str);
+		
+		tmp = p.split( links )
+		lines = []
+		for i in range( 0, len( tmp ) ):
+			if i % 2 == 0:
+				lines.append( tmp[i] )
+		
+		linkp = re.compile("(.+):\s+(http|https|ftp):\/\/(.+)\s*")
+		
+		output = ""
+		for line in lines:
+			m = linkp.match( line )
+			if m:
+				output += '<a href="%s://%s">%s</a><br />' % ( m.group( 2 ), m.group( 3 ), m.group( 1 ) );
+			
+		return output;
+	
+	def id(self):
+		return self._dataentry('id')
+	
+	def title(self):
+		return strip_and_convert( self._dataentry('Title') ) #.decode('iso-8859-1').encode('utf8') 
+			
+	def description(self):
+		soup = BeautifulSoup( self._dataentry('Description') )#.decode('iso-8859-1').encode('utf8') )
+		return unicode( soup )
+	
+	def text(self):
+		soup = BeautifulSoup( self._dataentry('text') )#.decode('iso-8859-1').encode('utf8') )
+		return unicode( soup )
+
+	
+	def width(self):
+		m = numberregex.search( self._dataentry('Width') )
+		if m:
+			return m.group(1)
+		else:
+			return ''
+	
+	def height(self):
+		m = numberregex.search( self._dataentry('Height') )
+		if m:
+			return m.group(1)
+		else:
+			return ''
+	
+	def weight(self):
+		return self._dataentry('Weight')
+		
+	def priority(self):
+		return calc_priority(self._dataentry('priority'))
+		
+	def credit(self):
+		soup = BeautifulSoup( self._dataentry('credit') )
+		return unicode( soup ) 
+		
+	def sale(self):
+		return self._dataentry('Sale').lower() in ['yes',]
+		
+	def price(self):
+		p = self._dataentry('Price')
+		return p if p else 0
+			
+				
 				
 class ProductDataMapping (SpacetelescopeDataMapping):
 	#base data mapping for all products (shop)
@@ -173,15 +262,7 @@ class ProductDataMapping (SpacetelescopeDataMapping):
 	has_pages=False
 	format_mapping = {'thumbs':'thumb'}
 	extra_fields = []
-    
-	def _create_redirect(self):
-		new_url = self.obj.get_absolute_url()
-		for url in self.old_urls():
-			r,created = Redirect.objects.get_or_create( site = self.conf['pages']['site'], old_path=url )
-			if created:
-				r.new_path = new_url
-			r.save()
-
+	
 	def _create_object(self):
 		# id, releasetype, title
 		
@@ -208,64 +289,14 @@ class ProductDataMapping (SpacetelescopeDataMapping):
 
 		self.obj.save()
 		
-	def _dataentry(self,key):
-		# attempt lowercase retrieve and then title. otherwise fail
-		try:
-			return self.dataentry[key]
-		except KeyError:
-			try:
-				return self.dataentry[key.lower()]
-			except KeyError:
-				return self.dataentry[key.title()]
-	
-	def id(self):
-		return self._dataentry('id')
-	
-	def title(self):
-		return strip_and_convert( self._dataentry('Title') ) #.decode('iso-8859-1').encode('utf8') 
-			
-	def description(self):
-		soup = BeautifulSoup( self._dataentry('Description') )#.decode('iso-8859-1').encode('utf8') )
-		return unicode( soup )
 	
 	def pages(self):
 		if self.has_pages:
-			
 			return self._dataentry('Pages')
-		
 		else:
 			return None
-	def width(self):
-		m = numberregex.search( self._dataentry('Width') )
-		if m:
-			return m.group(1)
-		else:
-			return ''
 	
-	def height(self):
-		m = numberregex.search( self._dataentry('Height') )
-		if m:
-			return m.group(1)
-		else:
-			return ''
-	
-	def weight(self):
-		return self._dataentry('Weight')
-		
-	def priority(self):
-		return calc_priority(self._dataentry('priority'))
-		
-	def credit(self):
-		soup = BeautifulSoup( self._dataentry('credit') ) #.decode('iso-8859-1').encode('utf8')
-		return unicode( soup ) 
-		
-	def sale(self):
-		return self._dataentry('Sale').lower() in ['yes',]
-		
-	def price(self):
-		p = self._dataentry('Price')
-		return p if p else 0
-	
+
 	
 #
 # TOOD: Remove HTML tags from title
@@ -800,9 +831,9 @@ class PressKitDataMapping(ProductDataMapping):
 
 # ORG
 #TODO copy image resources
-class AnnouncementDataMapping (ProductDataMapping):
+class AnnouncementDataMapping( ProductDataMapping ):
 
-	BASE = "/updates"
+	BASE = "/announcements"
 	
 	format_mapping = {'thumbs':'thumb',
 					  'original':'original',
@@ -811,50 +842,37 @@ class AnnouncementDataMapping (ProductDataMapping):
 					  'large':'large',
 					  'newsmini':'newsmini',
 					  }
+	
 	OLD_FMT_ROOT = "/Volumes/webdocs/spacetelescope/docs/updates/"
 	NEW_FMT_ROOT = "/hubbleroot/static/archives/announcements/"
-	
-	
-	
-	def _create_redirect(self):
-		new_url = self.obj.get_absolute_url()
-		for url in self.old_urls():
-			r,created = Redirect.objects.get_or_create( site = self.conf['pages']['site'], old_path=url )
-			if created:
-				r.new_path = new_url
-			r.save()
-	
-	
-	#def copy_image_resource (self):
-		
 	
 	def _create_object(self):
 		self.obj = Announcement( 
 				id=self.id(),
 				title = self.title(),
-				description=self.description(),
+				release_date = self.release_date(),
+				embargo_date = self.embargo_date(),
+				description=self.text(),
 				contacts=self.contacts(),
-				links = self.links (),
+				links = self.links(),
 			)
 		self.obj.save()
 		
-		
 	def id(self):
-		return self.dataentry['id']
+		id = super(AnnouncementDataMapping,self).id()
+		id = id.replace('update','ann')
+		return id
 	
-	def title(self):
-		return self.dataentry['Title'].decode('iso-8859-1').encode('utf8') 
-			
-	def description(self):
-		soup = BeautifulSoup( self.dataentry['text'] )
-		return unicode( soup )
+	def _find_old_resource(self, fmt ):
+		old_path = os.path.join( self.OLD_FMT_ROOT, fmt )
+		#look for files named with self.obj.id in old_path 
 		
-	def contacts(self):
-		return BeautifulSoup(self.dataentry['contacts'].decode('iso-8859-1').encode('utf8'))
-	
-	def links (self):
-		soup = BeautifulSoup( self.dataentry['links'] )
-		return unicode( soup )
+		p = old_path
+		for ext in self.VALID_EXTS:
+			old_path = os.path.join(p, super(AnnouncementDataMapping,self).id() + ext)
+			if os.path.exists(old_path):
+				return old_path
+
 	
 class ConferencePosterDataMapping(SpacetelescopeDataMapping):
 	BASE = "/about_us/conference_posters"

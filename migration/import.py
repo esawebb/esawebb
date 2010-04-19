@@ -166,7 +166,15 @@ link_replacements = {
 #
 
 def choose_tasks():
-	return archivetasks + pagestasks
+	#return archivetasks + pagestasks
+	return testtask
+
+testtask = [
+		ArchiveInitializationTask( Redirect ),
+		ArchiveInitializationTask( Announcement ), 
+		ArchiveMigrationTask( SpacetelescopeCSVDataSource( '/Volumes/webdocs/spacetelescope/docs/csvfiles/updatedata.csv' ), AnnouncementDataMapping ), 
+]
+
 
 #
 # Define migration tasks

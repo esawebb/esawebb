@@ -578,7 +578,7 @@ LIVESETTINGS_OPTIONS = {
 }
 
 REGEX_REDIRECTS = (
-	#( re.compile( '/hubbleshop/webshop/webshop\.php\?show=sales&section=(books|cdroms)' ), '/shop/category/\g<1>/' ), 
+#	( re.compile( '/hubbleshop/webshop/webshop\.php\?show=sales&section=(books|cdroms)' ), '/shop/category/\g<1>/' ), 
 )
 
 # ======================================================================

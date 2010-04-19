@@ -61,7 +61,36 @@ def _getDefaultShopAdmin(prefix,with_pages=False, extra_fields=()):
 		return DefaultShopAdmin
 	
 
+#
+#
+#
+def StandardAdminFactory( prefix, remove=['release_date', 'embargo_date','links','contacts'] ):
+	filter_fields = lambda field_list: filter( lambda x: x not in remove, field_list )
+	
+	class StandardArchiveAdmin( DjangoplicityModelAdmin, RenameAdmin, ArchiveAdmin ):
+		thumbnail_resource = 'thumb' 
+		list_display = filter_fields( ( 'id', 'list_link_thumbnail', 'title', 'published', 'priority', 'release_date', 'embargo_date', 'last_modified', view_link( prefix ), ) )
+		list_filter = filter_fields( ( 'published', 'last_modified', 'release_date', 'embargo_date', ) )
+		list_editable = filter_fields( ( 'title', ) )
+		search_fields = filter_fields( ( 'id', 'title', 'description', 'credit' ) )
+		date_hierarchy = 'last_modified'
+		ordering = filter_fields( ( '-release_date', '-last_modified', ) )
+		richtext_fields = filter_fields( ( 'description', 'credit', 'contacts', 'links' ) )
+		actions = ['action_toggle_published', ]
+		fieldsets = ( 
+						( None, {'fields': ( 'id', ) } ),
+						( 'Publishing', {'fields': filter_fields( ( 'published', 'priority', 'release_date', 'embargo_date' ) ), } ),
+						( 'Archive', {'fields': filter_fields( ( 'title', 'description', 'credit', 'links', 'contacts' ) ), } ),
+					)
+	return StandardArchiveAdmin
+	
 
+#
+#
+#
+class AnnouncementAdmin( StandardAdminFactory( 'announcements', remove = [ 'priority','credit' ] ) ):
+	date_hierarchy = 'release_date'
+	
 
 class KidsDrawingAdmin( DjangoplicityModelAdmin, RenameAdmin, ArchiveAdmin ):
 	list_display = ( 'id', 'title', 'published','priority','last_modified', view_link('drawings') )
@@ -83,22 +112,7 @@ class KidsDrawingAdmin( DjangoplicityModelAdmin, RenameAdmin, ArchiveAdmin ):
 	#	css = { 'all' : (settings.MEDIA_URL + settings.SUBJECT_CATEGORY_CSS,) } # Extra widget for subject category field
 
 
-class AnnouncementAdmin (DjangoplicityModelAdmin, RenameAdmin, ArchiveAdmin ):
-	list_display = ( 'id', 'title', 'published','priority','last_modified', view_link('announcements') )
-	list_filter = ( 'title', 'published', 'last_modified',  )
-	list_editable = ( 'title', 'published', )
-	search_fields = ( 'id', 'title', 'description', 'credit' )
-	date_hierarchy = 'last_modified'
-	fieldsets = (
-					( None, {'fields': ( 'id', ) } ),
-					( 'Publishing', {'fields': ( 'published', 'priority', ), } ),
-					( 'Archive', {'fields': ( 'title', 'description', 'credit', 'links','contacts'), } ),
-					( 'Metadata', {'fields': ( 'subject_category', 'subject_name', 'facility', ), } ),
-				)	
 	
-	ordering = ('id', )
-	richtext_fields = ('description',)
-	links = ()
 
 class LogoAdmin( DjangoplicityModelAdmin, RenameAdmin, ArchiveAdmin ):
 	list_display = ( 'id', 'title', 'published','priority','last_modified', 'resolution','x_size','y_size', view_link('logos') )
@@ -272,7 +286,7 @@ def register_with_admin( admin_site ):
 #	admin_site.register( Logo, LogoAdmin )
 #	admin_site.register( ConferencePoster, ConferencePosterAdmin )
 	admin_site.register( TechnicalDocument, _getDefaultShopAdmin( 'techdocs', with_pages = True ) )
-#	admin_site.register( Announcement, AnnouncementAdmin )
+	admin_site.register( Announcement, AnnouncementAdmin )
 
 	admin_site.register( Calendar, CalendarAdmin )
 	admin_site.register( OnlineArt, OnlineArtAdmin )
