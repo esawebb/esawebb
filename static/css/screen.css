@@ -20,20 +20,23 @@ a:hover {
 	text-decoration:underline;
 }
 
+ul, ol {
+	margin-left: 20px;
+	margin-bottom:15px;
+}
+
+ul ul, ol ol {
+	margin-bottom: 0px;
+}
+
 ul li {
 	list-style-type: disc;
-	list-style-position: inside;
-
+	list-style-position: outside;
 }
-	
-ul ul li {
-	list-style-type: circle;
-	text-indent:20px;
 
-}
-ul ul ul li {
-	list-style-type: disc;
-	text-indent:40px;
+ol li {
+	list-style-type: decimal;
+	list-style-position: outside;
 }
 
 /* external link decoration */
@@ -309,7 +312,7 @@ ul ul ul li {
 		background: white url('../images/body-gradient.png') repeat-x;
 }
 
-p {
+p, p strong {
 	font-size:12px;
 	line-height:15px;
 	margin-bottom:15px;
@@ -346,6 +349,15 @@ h1, h2, h3{
 
 #singlecolumn {
 }
+
+#singlecolumn table, #singlecolumn tbody, #singlecolumn tr, #singlecolumn td {
+	border-color: #e1e1e1;
+	border-spacing: 2px 2px;
+	border-collapse: separate;
+	border-width: 1px;
+	line-height: 15px;
+}
+
 
 /************/
 /* ARCHIVES */
@@ -547,8 +559,8 @@ table.shoppingcart td {
 
 #footer {
 	padding-top:27px;
-	height:280px;
 	background: url('../images/footer-gradient.png') repeat-x;
+	background-color: #08243b;
 	color:white;
 	font-size:12px;
 
@@ -584,19 +596,58 @@ table.shoppingcart td {
 	height:40px;
 }
 
-
-ul li {
-	list-style-type: disc;
-	list-style-position: inside;
-
+#ftcolorg {
+	text-align: center;
+	padding-top: 50px;
+	height: 150px;	
 }
-	
-ul ul li {
-	list-style-type: circle;
-	text-indent:20px;
 
+#organisations {
+	width: 611px;
+	height: 93px;
+	background: url("../images/organisations8.png") no-repeat;
 }
-ul ul ul li {
-	list-style-type: disc;
-	text-indent:40px;
+
+#organisations a {
+	display:block;
+	position:relative;
+	float: left;
+}
+
+#organisations #org_eso {
+	left: 35px; top: 5px; width: 40px; height: 52px;
+}
+
+#organisations #org_iya {
+	left: 91px; top: 5px; width: 31px; height: 54px;
+}
+
+#organisations #org_stecf {
+	left: 144px; top: 11px; width: 97px; height: 44px;
+}
+
+#organisations #org_esa1 {
+	left: 166px; top: 15px; width: 134px; height: 34px;
+}
+
+#organisations #org_esa2 {
+	left: 177px; top: 15px; width: 95px; height: 34px;
+}
+
+.admin_bar {
+	width: 100%;
+	background-color: #e1e1e1;
+	float:left;
+	margin-bottom: 5px;
+}
+
+.admin_bar #djnote {
+	float:left;
+	font-weight: bold;
+	margin: 2px;
+}
+
+.admin_bar #djlinks {
+	float:right;
+	margin: 2px;
 }

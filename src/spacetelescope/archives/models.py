@@ -6,6 +6,7 @@
 #   Luis Clara Gomes <lcgomes@eso.org>
 #
 
+from datetime import date
 from django.conf import settings
 from django.contrib.contenttypes import generic
 from django.contrib.contenttypes.models import ContentType
@@ -530,3 +531,232 @@ class TechnicalDocument (archives.ArchiveModel, StandardArchiveInfo, PhysicalInf
 	
 post_save.connect( TechnicalDocument.post_save_handler, sender = TechnicalDocument )
 post_delete.connect( TechnicalDocument.post_delete_handler, sender = TechnicalDocument )
+
+
+
+
+"""
+Archive for the Goodies section of ST
+"""
+
+MONTHS_CHOICES = (
+                  (1,'January'),
+                  (2,'February'),
+                  (3,'March'),
+                  (4,'April'),
+                  (5,'May'),
+                  (6,'June'),
+                  (7,'July'),
+                  (8,'August'),
+                  (9,'September'),
+                  (10,'October'),
+                  (11,'November'),
+                  (12,'December'),
+                  )
+    
+
+        
+class Calendar(archives.ArchiveModel, StandardArchiveInfo):
+    
+    """
+    Calendars have the specificities of year and month attributes
+    """
+    year = models.CharField ( max_length = 4, blank=False, null=False )
+    month = archives.ChoiceField (choices = MONTHS_CHOICES, blank=False )
+    
+    # remove inherited field
+    title = None
+    
+    class Archive:
+        original = archives.ImageResourceManager( type=types.OriginalImageType )
+        large = archives.ImageResourceManager( derived='original', verbose_name=_('Large JPEG'), type=types.JpegType )
+        medium = archives.ImageResourceManager( derived='original', type=types.MediumJpegType )
+        thumb = archives.ImageResourceManager( derived='original', type=types.ThumbnailJpegType )
+        
+        pdf = archives.ResourceManager( type=types.PDFType, verbose_name=_('A3 PDF'))
+        pdfsm = archives.ResourceManager( type=types.PDFType, verbose_name=_('A4 PDF') )   
+        #pdf = archives.ResourceManager( type=types.PDFType, verbose_name=_('A3 PDF (Whole Year)'))
+        
+        
+        class Meta:
+            root = archive_settings.CALENDAR_ROOT
+            release_date = True
+            embargo_date = True
+            last_modified = True
+            created = True
+            published = True  
+            ordering = ['-year','month']
+            
+    @permalink
+    def get_absolute_url(self):
+        return ('calendars_detail', [str(self.id)])
+       
+    def __unicode__(self):
+        return 'Calendar %s %s' % (date(year=1901,month=self.month,day=1).strftime('%b'),self.year)     
+
+
+class OnlineArtAuthor (archives.ArchiveModel, ExtendedContact):
+    id = archives.IdField( )
+    
+    description = archives.DescriptionField( )
+
+    credit = metadatafields.AVMCreditField( )
+    """ """
+    
+    priority = archives.PriorityField( default = 0)
+    """ """
+    
+    credit = metadatafields.AVMCreditField( )
+
+    links = models.TextField()
+
+    class Meta:
+        verbose_name = 'Author'
+        verbose_name_plural = 'Authors'
+
+    class Archive:
+        original = archives.ImageResourceManager( type=types.OriginalImageType )
+        screen = archives.ImageResourceManager( derived='original', type=types.ScreensizeJpegType )
+        
+        thumb = archives.ImageResourceManager( derived='original', type=types.ThumbnailJpegType )
+        
+               
+        class Meta:
+            root = archive_settings.ONLINE_ART_AUTHOR_ROOT
+            release_date = True
+            embargo_date = True
+            last_modified = True
+            created = True
+            published = True
+            
+    def __unicode__(self): 
+        return self.name
+
+    @permalink
+    def get_absolute_url(self):
+        return ('artists_detail', [str(self.id)])
+    
+class OnlineArt (archives.ArchiveModel, StandardArchiveInfo, ):
+    
+    artist = models.ForeignKey (OnlineArtAuthor)
+    
+    class Archive:
+        original = archives.ImageResourceManager( type=types.OriginalImageType )
+        large = archives.ImageResourceManager( derived='original', verbose_name=_('Large JPEG'), type=types.JpegType )
+        medium = archives.ImageResourceManager( derived='original', type=types.MediumJpegType )
+        screen = archives.ImageResourceManager( derived='original', type=types.ScreensizeJpegType )
+        
+        thumb = archives.ImageResourceManager( derived='original', type=types.ThumbnailJpegType )
+        newsmini = archives.ImageResourceManager( derived='original', type=types.NewsMiniJpegType )
+        
+               
+        class Meta:
+            root = archive_settings.ONLINE_ART_ROOT
+            release_date = True
+            embargo_date = True
+            last_modified = True
+            created = True
+            published = True 
+            
+    class Meta:
+        verbose_name = 'Online Art Piece'
+        verbose_name_plural = 'Online Art Pieces' 
+
+    @permalink
+    def get_absolute_url(self):
+        return ('art_detail', [str(self.id)])
+    
+
+#TODO Print Layout? Resources
+# Release Resource
+#class PrintLayout (archives.ArchiveModel, StandardArchiveInfo, ):
+#    
+#    class Archive:
+#        original = archives.ImageResourceManager( type=types.OriginalImageType )
+#        large = archives.ImageResourceManager( derived='original', verbose_name=_('Large JPEG'), type=types.JpegType )
+#        medium = archives.ImageResourceManager( derived='original', type=types.MediumJpegType )
+#        screen = archives.ImageResourceManager( derived='original', type=types.ScreensizeJpegType )
+#        
+#        thumb = archives.ImageResourceManager( derived='original', type=types.ThumbnailJpegType )
+#        newsmini = archives.ImageResourceManager( derived='original', type=types.NewsMiniJpegType )
+#               
+#        class Meta:
+#            root = archive_settings.PRINT_LAYOUT_ROOT
+#            release_date = True
+#            embargo_date = True
+#            last_modified = True
+#            created = True
+#            published = True  
+#            
+#    @permalink
+#    def get_absolute_url(self):
+#        return ('printlayouts_detail', [str(self.id)])
+
+class SlideShow (archives.ArchiveModel, StandardArchiveInfo,ScreenInfo):
+    
+    class Archive:
+        thumb = archives.ImageResourceManager( derived='original', type=types.ThumbnailJpegType )
+        
+        flash = archives.ResourceManager( type=types.FlvType)
+                    
+        class Meta:
+            root = archive_settings.SLIDESHOW_ROOT
+            release_date = True
+            embargo_date = True
+            last_modified = True
+            created = True
+            published = True  
+   
+    @permalink
+    def get_absolute_url(self):
+        return ('slideshows_detail', [str(self.id)])
+       
+       
+class Exhibition (archives.ArchiveModel, StandardArchiveInfo, ):
+    
+    class Archive:
+        original = archives.ImageResourceManager( type=types.OriginalImageType )
+        large = archives.ImageResourceManager( derived='original', verbose_name=_('Large JPEG'), type=types.JpegType )
+        medium = archives.ImageResourceManager( derived='original', type=types.MediumJpegType )
+        screen = archives.ImageResourceManager( derived='original', type=types.ScreensizeJpegType )
+        
+        thumb = archives.ImageResourceManager( derived='original', type=types.ThumbnailJpegType )
+                   
+        class Meta:
+            root = archive_settings.EXHIBITION_ROOT
+            release_date = True
+            embargo_date = True
+            last_modified = True
+            created = True
+            published = True  
+            
+    @permalink
+    def get_absolute_url(self):
+        return ('exhibitions_detail', [str(self.id)])   
+
+class FITSImage (archives.ArchiveModel, StandardArchiveInfo, ):
+
+    #TODO convert to metadata model
+    country = models.CharField (max_length = 50)
+    city = models.CharField (max_length = 50)
+    
+    class Archive:
+        original = archives.ImageResourceManager( type=types.OriginalImageType )
+        large = archives.ImageResourceManager( derived='original', verbose_name=_('Large JPEG'), type=types.JpegType )
+        medium = archives.ImageResourceManager( derived='original', type=types.MediumJpegType )
+        screen = archives.ImageResourceManager( derived='original', type=types.ScreensizeJpegType )
+        
+        thumb = archives.ImageResourceManager( derived='original', type=types.ThumbnailJpegType )
+        
+               
+        class Meta:
+            root = archive_settings.FITS_IMAGE_ROOT
+            release_date = True
+            embargo_date = True
+            last_modified = True
+            created = True
+            published = True  
+        
+    @permalink
+    def get_absolute_url(self):
+        return ('fitsimages_detail', [str(self.id)])   

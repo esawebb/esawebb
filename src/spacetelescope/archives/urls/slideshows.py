@@ -1,4 +1,4 @@
-# Djangoplicity
+# Spacetelescope
 # Copyright 2007-2008 ESA/Hubble
 #
 # Authors:
@@ -7,7 +7,6 @@
 #
 
 from djangoplicity.archives import urlpatterns_for_options
-from spacetelescope.archives.projects.options import *
+from spacetelescope.archives.options import *
 
-
-urlpatterns = urlpatterns_for_options( ExhibitionOptions )
+urlpatterns = urlpatterns_for_options( SlideShowOptions )

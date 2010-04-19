@@ -33,7 +33,7 @@
         "pk": 4, 
         "model": "menus.menuitem", 
         "fields": {
-            "rght": 440, 
+            "rght": 442, 
             "is_primary": 1, 
             "parent": null, 
             "title": "MainMenuRoot", 
@@ -68,7 +68,7 @@
         "model": "menus.menuitem", 
         "fields": {
             "rght": 47, 
-            "is_primary": 0, 
+            "is_primary": 1, 
             "parent": 4, 
             "title": "News", 
             "menu": null, 
@@ -85,7 +85,7 @@
         "model": "menus.menuitem", 
         "fields": {
             "rght": 30, 
-            "is_primary": 1, 
+            "is_primary": 0, 
             "parent": 6, 
             "title": "Press Releases", 
             "menu": null, 
@@ -789,7 +789,7 @@
             "tree_id": 1, 
             "on_click": 0, 
             "lft": 87, 
-            "link": "/press/imageformats/", 
+            "link": "/press/image_formats/", 
             "published": 1, 
             "level": 2
         }
@@ -1282,7 +1282,7 @@
             "tree_id": 1, 
             "on_click": 0, 
             "lft": 145, 
-            "link": "/press/videoformats/", 
+            "link": "/press/video_formats/", 
             "published": 1, 
             "level": 2
         }
@@ -3373,7 +3373,7 @@
             "tree_id": 1, 
             "on_click": 0, 
             "lft": 391, 
-            "link": "/press/interviews/", 
+            "link": "/press/interview_possibilities/", 
             "published": 1, 
             "level": 2
         }
@@ -3407,7 +3407,7 @@
             "tree_id": 1, 
             "on_click": 0, 
             "lft": 395, 
-            "link": "/press/videoformats/", 
+            "link": "/press/video_formats/", 
             "published": 1, 
             "level": 2
         }
@@ -3424,7 +3424,7 @@
             "tree_id": 1, 
             "on_click": 0, 
             "lft": 397, 
-            "link": "/press/imageformats/", 
+            "link": "/press/image_formats/", 
             "published": 1, 
             "level": 2
         }
@@ -3441,7 +3441,7 @@
             "tree_id": 1, 
             "on_click": 0, 
             "lft": 399, 
-            "link": "/press/coverage/", 
+            "link": "/press/presscoverage/", 
             "published": 1, 
             "level": 2
         }
@@ -3484,7 +3484,7 @@
         "pk": 14, 
         "model": "menus.menuitem", 
         "fields": {
-            "rght": 433, 
+            "rght": 435, 
             "is_primary": 1, 
             "parent": 4, 
             "title": "Projects", 
@@ -3543,7 +3543,7 @@
             "tree_id": 1, 
             "on_click": 1, 
             "lft": 413, 
-            "link": "http:/www.eyesontheskies.org", 
+            "link": "http://www.eyesontheskies.org", 
             "published": 1, 
             "level": 2
         }
@@ -3697,6 +3697,23 @@
             "on_click": 0, 
             "lft": 431, 
             "link": "/projects/denmark/", 
+            "published": 1, 
+            "level": 2
+        }
+    }, 
+    {
+        "pk": 246, 
+        "model": "menus.menuitem", 
+        "fields": {
+            "rght": 434, 
+            "is_primary": 1, 
+            "parent": 14, 
+            "title": "20th anniversary", 
+            "menu": null, 
+            "tree_id": 1, 
+            "on_click": 0, 
+            "lft": 433, 
+            "link": "/projects/20anniversary/", 
             "published": 1, 
             "level": 2
         }

@@ -11,8 +11,6 @@ from djangoplicity.migration.apps.pages import PageInitializationTask, \
 from djangoplicity.pages.models import Section
 from djangoplicity.releases.models import Release
 from spacetelescope.archives.models import *
-from spacetelescope.archives.goodies.models import *
-#from spacetelescope.archives.products.models import *
 from spacetelescope.migration.archives import *
 from spacetelescope.migration.pages import SpacetelescopePageDocument, \
 	SpacetelescopePageLinksCleanupTask, SpacetelescopePageFilesCopyTask
@@ -136,7 +134,7 @@ link_replacements = {
 	'/images' : '/images/',
 	'/about_us' : '/about_us/',
 	'/goodies/slideshows/hubble_images_1.swf' : '/static/archives/slideshows/flash/hubble_images_1.swf',
-	'/pressroom' : '/pressroom/',
+	'/pressroom' : '/press/',
 	'/projects/anniversary/' : '/projects/anniversary/',
 	#'/bin/mailform/majordomo@eso.org/hubblenews' : '/bin/mailform/majordomo@eso.org/hubblenews',
 	#'/about/history/sm4blog/' : '',
@@ -212,20 +210,13 @@ archivetasks = [
 #    ArchiveInitializationTask ( Exhibition ),
 #    ArchiveInitializationTask ( FITSImage ),
     
-    # MIG
     ArchiveMigrationTask( SpacetelescopeCSVDataSource( '/Volumes/webdocs/spacetelescope/docs/csvfiles/newsdata.csv'), NewsDataMapping ),
 	ArchiveMigrationTask( SpacetelescopeCSVDataSource( '/Volumes/webdocs/spacetelescope/docs/csvfiles/imagedata.csv'), ImagesDataMapping ),
-	
-	# Goodies
 	ArchiveMigrationTask( SpacetelescopeCSVDataSource( '/Volumes/webdocs/spacetelescope/docs/csvfiles/edumatdata.csv'), EducationalMaterialsDataMapping ),
 	ArchiveMigrationTask( SpacetelescopeCSVDataSource( '/Volumes/webdocs/spacetelescope/docs/csvfiles/kidsdrawingdata.csv'), KidsDrawingsDataMapping ),
 	ArchiveMigrationTask( SpacetelescopeCSVDataSource( '/Volumes/webdocs/spacetelescope/docs/csvfiles/calendardata.csv'), CalendarsDataMapping ),
 	ArchiveMigrationTask( SpacetelescopeCSVDataSource( '/Volumes/webdocs/spacetelescope/docs/csvfiles/artdata_artists.csv'), OnlineArtAuthorDataMapping ),
 	ArchiveMigrationTask( SpacetelescopeCSVDataSource( '/Volumes/webdocs/spacetelescope/docs/csvfiles/artdata_pictures.csv'), OnlineArtDataMapping ),
-	
-# Print Layout
-
-    # Products
     ArchiveMigrationTask( SpacetelescopeCSVDataSource( '/Volumes/webdocs/spacetelescope/docs/csvfiles/slideshowdata.csv'), SlideShowDataMapping ),
     ArchiveMigrationTask( SpacetelescopeCSVDataSource( '/Volumes/webdocs/spacetelescope/docs/csvfiles/bookdata.csv'), BookDataMapping ),
     ArchiveMigrationTask( SpacetelescopeCSVDataSource( '/Volumes/webdocs/spacetelescope/docs/csvfiles/cdromdata.csv'), CDROMDataMapping ),
@@ -236,14 +227,10 @@ archivetasks = [
     ArchiveMigrationTask( SpacetelescopeCSVDataSource( '/Volumes/webdocs/spacetelescope/docs/csvfiles/posterdata.csv'), PosterDataMapping ),
     ArchiveMigrationTask( SpacetelescopeCSVDataSource( '/Volumes/webdocs/spacetelescope/docs/csvfiles/presskitdata.csv'), PressKitDataMapping ),
     ArchiveMigrationTask( SpacetelescopeCSVDataSource( '/Volumes/webdocs/spacetelescope/docs/csvfiles/stickerdata.csv'), StickerDataMapping ),
-    
-    # Org
     ArchiveMigrationTask( SpacetelescopeCSVDataSource( '/Volumes/webdocs/spacetelescope/docs/csvfiles/updatedata.csv'), AnnouncementDataMapping ),
     ArchiveMigrationTask( SpacetelescopeCSVDataSource( '/Volumes/webdocs/spacetelescope/docs/csvfiles/conferenceposterdata.csv'), ConferencePosterDataMapping ),
     ArchiveMigrationTask( SpacetelescopeCSVDataSource( '/Volumes/webdocs/spacetelescope/docs/csvfiles/logodata.csv'), LogoDataMapping ),
     ArchiveMigrationTask( SpacetelescopeCSVDataSource( '/Volumes/webdocs/spacetelescope/docs/csvfiles/techdocsdata.csv'), TechnicalDocumentDataMapping ),
-    
-    # projects
     ArchiveMigrationTask( SpacetelescopeCSVDataSource( '/Volumes/webdocs/spacetelescope/docs/csvfiles/exhibitiondata.csv'), ExhibitionDataMapping ),
     ArchiveMigrationTask( SpacetelescopeCSVDataSource( '/Volumes/webdocs/spacetelescope/docs/csvfiles/fitsimagedata.csv'), FITSImageDataMapping ),
 ]
@@ -353,7 +340,7 @@ pagestasks = [
 	PageMigrationTask( SpacetelescopePageDocument( 'about_us/heic/index.html', new_url="/about_us/" ) ),
 	PageMigrationTask( SpacetelescopePageDocument( 'about_us/heic/mission.html', new_url="/about_us/mission/" ) ),
 	PageMigrationTask( SpacetelescopePageDocument( 'about_us/heic/products.html', new_url="/about_us/products/" ) ),
-	PageMigrationTask( SpacetelescopePageDocument( 'about_us/heic/scientist_guidelines.html', new_url="/about_us/" ) ),
+	PageMigrationTask( SpacetelescopePageDocument( 'about_us/heic/scientist_guidelines.html', new_url="/about_us/scientist_guidelines/" ) ),
 	#PageMigrationTask( SpacetelescopePageDocument( 'about_us/heic/students.html' ) ),
 	PageMigrationTask( SpacetelescopePageDocument( 'about_us/heic/world.html' ) ),
 	#PageMigrationTask( SpacetelescopePageDocument( 'about_us/contact.html' ) ),
@@ -420,8 +407,8 @@ pagestasks = [
 	PageMigrationTask( SpacetelescopePageDocument( 'projects/anniversary/soundtrack.html' ) ),
 	PageMigrationTask( SpacetelescopePageDocument( 'projects/av_lab/index.html' ) ),
 	PageMigrationTask( SpacetelescopePageDocument( 'projects/credibility/Summary of Interviews.htm' ) ),
-	PageMigrationTask( SpacetelescopePageDocument( 'projects/credibility/credibility.html' ) ),
-	PageMigrationTask( SpacetelescopePageDocument( 'projects/credibility/credibility_interviews.html' ) ),
+	PageMigrationTask( SpacetelescopePageDocument( 'projects/credibility/credibility.html', new_url='/projects/credibility/' ) ),
+	PageMigrationTask( SpacetelescopePageDocument( 'projects/credibility/credibility_interviews.html', new_url='projects/credibility/interviews/' ) ),
 	PageMigrationTask( SpacetelescopePageDocument( 'projects/denmark/index.html' ) ),
 	PageMigrationTask( SpacetelescopePageDocument( 'projects/fits_liberator/archives.html' ) ),
 	PageMigrationTask( SpacetelescopePageDocument( 'projects/fits_liberator/blackwhitehelp.html' ) ),

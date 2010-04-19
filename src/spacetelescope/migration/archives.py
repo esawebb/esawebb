@@ -16,9 +16,7 @@ from djangoplicity.migration.apps.archives import CSVDataSource, DataMapping
 from djangoplicity.releases.models import Release, ReleaseType
 from djangoplicity.releases.models import Image
 from spacetelescope.archives.models import *
-from spacetelescope.archives.goodies.models import *
 #from spacetelescope.archives.products.models import *
-from spacetelescope.archives.projects.models import *
 from django.utils.html import strip_tags
 
 import csv

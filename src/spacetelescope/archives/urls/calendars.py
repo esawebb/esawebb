@@ -7,7 +7,6 @@
 #
 
 from djangoplicity.archives import urlpatterns_for_options
-from spacetelescope.archives.goodies.options import *
+from spacetelescope.archives.options import *
 
-
-urlpatterns = urlpatterns_for_options( SlideShowOptions )
+urlpatterns = urlpatterns_for_options( CalendarOptions )

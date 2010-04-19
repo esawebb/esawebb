@@ -273,9 +273,7 @@ INSTALLED_APPS = (
 	'djangodblog',
 	'django_extensions',
 	'django_assets',
-	'spacetelescope.archives',
-	'spacetelescope.archives.goodies',
-	'spacetelescope.archives.projects',	
+	'spacetelescope.archives',	
 	# Satchmo
 	#'registration',
 	'sorl.thumbnail',
@@ -290,7 +288,7 @@ INSTALLED_APPS = (
     'tax',
     'tax.modules.no',
     'app_plugins',
-    'shipping.modules.tiered'
+    'shipping.modules.tieredweight'
 )
 
 
@@ -541,7 +539,8 @@ LIVESETTINGS_OPTIONS = {
                 u'MINIMUM_ORDER': u'3.00',
                 u'ORDER_EMAIL_EXTRA': u'disitribution@spacetelescope.org',
                 u'ORDER_EMAIL_OWNER': u'True',
-                u'SSL': u'True'
+                u'SSL': u'True',
+                u'MODULES': u'["PAYMENT_DUMMY"]'
             },
             u'PAYMENT_DUMMY': {
 				u'CREDITCHOICES': u'["Visa", "Mastercard", "Discover", "American Express"]'
@@ -552,17 +551,24 @@ LIVESETTINGS_OPTIONS = {
 				# Note the string below is too long to store in the database since PRODUCT_TYPES is not a LongSetting
 				# Therefore it must be configured here!
 				u'PRODUCT_TYPES': u'["product::ConfigurableProduct", "product::ProductVariation", "spacetelescope.archives::Book", "spacetelescope.archives::Brochure", "spacetelescope.archives::EducationalMaterial", "spacetelescope.archives::CDROM", "spacetelescope.archives::Poster", "spacetelescope.archives::TechnicalDocument", "spacetelescope.archives::Newsletter", "spacetelescope.archives::Merchandise", "spacetelescope.archives::Sticker", "spacetelescope.archives::PostCard"]',
-				u'TRACK_INVENTORY': u'False'
+				u'TRACK_INVENTORY': u'False',
+				u'NUM_PAGINATED': u'10',
+				u'NUM_DISPLAY': u'20',
 			},
             u'SHIPPING': {   
-				u'PER_DAYS': u'1 - 3 business days',
-				u'PER_SERVICE': u'Deutsche Post/DHL'
+				#u'PER_DAYS': u'1 - 3 business days',
+				#u'PER_SERVICE': u'Deutsche Post/DHL',
+				u'HIDING': u'DESCRIPTION',
+				u'MODULES': u'["shipping.modules.tieredweight"]',
 			},
-            u'TAX' : { 
-				u'PRODUCTS_TAXABLE_BY_DEFAULT' :u'False', 
+            u'TAX' : {
+				u'PRODUCTS_TAXABLE_BY_DEFAULT' :u'False',
+				u'TAX_SHIPPING' : u'False', 
 			},
             u'SHOP': {
-				u'REQUIRED_BILLING_DATA': u'["email", "first_name", "last_name", "phone", "street1", "city", "postal_code", "country"]'
+				u'REQUIRED_BILLING_DATA': u'["email", "first_name", "last_name", "phone", "street1", "city", "postal_code", "country"]',
+				u'ENFORCE_STATE': u'False',
+				u'LOGO_URI': u'http://www.spacetelescope.org/about_us/logos/transparent/esa_hubble_colour_wb_gen.png',
 			}
 		}
 	}
