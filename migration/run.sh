@@ -7,4 +7,5 @@ python src/spacetelescope/manage.py loaddata shop
 python src/spacetelescope/manage.py loaddata shipping
 python src/spacetelescope/manage.py loaddata pages
 python src/spacetelescope/manage.py loaddata release_types
+python src/spacetelescope/manage.py appsregister
 python migration/import.py

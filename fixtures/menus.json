@@ -33,7 +33,7 @@
         "pk": 4, 
         "model": "menus.menuitem", 
         "fields": {
-            "rght": 442, 
+            "rght": 524, 
             "is_primary": 1, 
             "parent": null, 
             "title": "MainMenuRoot", 
@@ -883,7 +883,7 @@
         "pk": 175, 
         "model": "menus.menuitem", 
         "fields": {
-            "rght": 138, 
+            "rght": 140, 
             "is_primary": 0, 
             "parent": 8, 
             "title": "Categories", 
@@ -1220,17 +1220,34 @@
         }
     }, 
     {
+        "pk": 186, 
+        "model": "menus.menuitem", 
+        "fields": {
+            "rght": 139, 
+            "is_primary": 1, 
+            "parent": 175, 
+            "title": "Stars", 
+            "menu": null, 
+            "tree_id": 1, 
+            "on_click": 0, 
+            "lft": 138, 
+            "link": "/videos/archive/category/stars/", 
+            "published": 1, 
+            "level": 3
+        }
+    }, 
+    {
         "pk": 179, 
         "model": "menus.menuitem", 
         "fields": {
-            "rght": 140, 
+            "rght": 142, 
             "is_primary": 1, 
             "parent": 8, 
             "title": "View All", 
             "menu": null, 
             "tree_id": 1, 
             "on_click": 0, 
-            "lft": 139, 
+            "lft": 141, 
             "link": "/videos/viewall/", 
             "published": 1, 
             "level": 2
@@ -1240,14 +1257,14 @@
         "pk": 178, 
         "model": "menus.menuitem", 
         "fields": {
-            "rght": 142, 
+            "rght": 144, 
             "is_primary": 1, 
             "parent": 8, 
             "title": "Video News Releases", 
             "menu": null, 
             "tree_id": 1, 
             "on_click": 0, 
-            "lft": 141, 
+            "lft": 143, 
             "link": "/videos/archive/news/", 
             "published": 1, 
             "level": 2
@@ -1257,14 +1274,14 @@
         "pk": 177, 
         "model": "menus.menuitem", 
         "fields": {
-            "rght": 144, 
+            "rght": 146, 
             "is_primary": 1, 
             "parent": 8, 
             "title": "Top 100", 
             "menu": null, 
             "tree_id": 1, 
             "on_click": 0, 
-            "lft": 143, 
+            "lft": 145, 
             "link": "/videos/archive/top100/", 
             "published": 1, 
             "level": 2
@@ -1274,14 +1291,14 @@
         "pk": 180, 
         "model": "menus.menuitem", 
         "fields": {
-            "rght": 146, 
+            "rght": 148, 
             "is_primary": 0, 
             "parent": 8, 
             "title": "Video Formats", 
             "menu": null, 
             "tree_id": 1, 
             "on_click": 0, 
-            "lft": 145, 
+            "lft": 147, 
             "link": "/press/video_formats/", 
             "published": 1, 
             "level": 2
@@ -1291,14 +1308,14 @@
         "pk": 181, 
         "model": "menus.menuitem", 
         "fields": {
-            "rght": 150, 
+            "rght": 152, 
             "is_primary": 1, 
             "parent": 8, 
             "title": "User's Videos", 
             "menu": null, 
             "tree_id": 1, 
             "on_click": 0, 
-            "lft": 147, 
+            "lft": 149, 
             "link": "/videos/users_videos/", 
             "published": 1, 
             "level": 2
@@ -1308,14 +1325,14 @@
         "pk": 182, 
         "model": "menus.menuitem", 
         "fields": {
-            "rght": 149, 
+            "rght": 151, 
             "is_primary": 1, 
             "parent": 181, 
             "title": "Submit videos", 
             "menu": null, 
             "tree_id": 1, 
             "on_click": 0, 
-            "lft": 148, 
+            "lft": 150, 
             "link": "/videos/submit_videos/", 
             "published": 1, 
             "level": 3
@@ -1325,32 +1342,15 @@
         "pk": 183, 
         "model": "menus.menuitem", 
         "fields": {
-            "rght": 152, 
+            "rght": 154, 
             "is_primary": 1, 
             "parent": 8, 
             "title": "Advanced Search", 
             "menu": null, 
             "tree_id": 1, 
             "on_click": 0, 
-            "lft": 151, 
-            "link": "/videos/search/", 
-            "published": 1, 
-            "level": 2
-        }
-    }, 
-    {
-        "pk": 186, 
-        "model": "menus.menuitem", 
-        "fields": {
-            "rght": 154, 
-            "is_primary": 1, 
-            "parent": 8, 
-            "title": "Stars", 
-            "menu": null, 
-            "tree_id": 1, 
-            "on_click": 0, 
             "lft": 153, 
-            "link": "/videos/archive/category/stars/", 
+            "link": "/videos/search/", 
             "published": 1, 
             "level": 2
         }
@@ -1673,7 +1673,7 @@
             "tree_id": 1, 
             "on_click": 0, 
             "lft": 190, 
-            "link": "/hubbleshop/bulk_orders/", 
+            "link": "/shop/bulk_orders/", 
             "published": 1, 
             "level": 3
         }
@@ -3484,7 +3484,7 @@
         "pk": 14, 
         "model": "menus.menuitem", 
         "fields": {
-            "rght": 435, 
+            "rght": 517, 
             "is_primary": 1, 
             "parent": 4, 
             "title": "Projects", 
@@ -3501,7 +3501,7 @@
         "pk": 229, 
         "model": "menus.menuitem", 
         "fields": {
-            "rght": 410, 
+            "rght": 438, 
             "is_primary": 1, 
             "parent": 14, 
             "title": "FITS Liberator", 
@@ -3515,34 +3515,612 @@
         }
     }, 
     {
+        "pk": 247, 
+        "model": "menus.menuitem", 
+        "fields": {
+            "rght": 411, 
+            "is_primary": 1, 
+            "parent": 229, 
+            "title": "News", 
+            "menu": null, 
+            "tree_id": 1, 
+            "on_click": 0, 
+            "lft": 410, 
+            "link": "/projects/fits_liberator/news/", 
+            "published": 1, 
+            "level": 3
+        }
+    }, 
+    {
+        "pk": 248, 
+        "model": "menus.menuitem", 
+        "fields": {
+            "rght": 413, 
+            "is_primary": 1, 
+            "parent": 229, 
+            "title": "Download", 
+            "menu": null, 
+            "tree_id": 1, 
+            "on_click": 0, 
+            "lft": 412, 
+            "link": "/projects/fits_liberator/download_v23/", 
+            "published": 1, 
+            "level": 3
+        }
+    }, 
+    {
+        "pk": 249, 
+        "model": "menus.menuitem", 
+        "fields": {
+            "rght": 415, 
+            "is_primary": 1, 
+            "parent": 229, 
+            "title": "User Guide (PDF)", 
+            "menu": null, 
+            "tree_id": 1, 
+            "on_click": 0, 
+            "lft": 414, 
+            "link": "/projects/fits_liberator/userguide_v23/", 
+            "published": 1, 
+            "level": 3
+        }
+    }, 
+    {
+        "pk": 251, 
+        "model": "menus.menuitem", 
+        "fields": {
+            "rght": 417, 
+            "is_primary": 0, 
+            "parent": 229, 
+            "title": "How the Hubble images are made", 
+            "menu": null, 
+            "tree_id": 1, 
+            "on_click": 0, 
+            "lft": 416, 
+            "link": "/extras/tutorial/", 
+            "published": 1, 
+            "level": 3
+        }
+    }, 
+    {
+        "pk": 252, 
+        "model": "menus.menuitem", 
+        "fields": {
+            "rght": 419, 
+            "is_primary": 0, 
+            "parent": 229, 
+            "title": "Image processing introduction ", 
+            "menu": null, 
+            "tree_id": 1, 
+            "on_click": 0, 
+            "lft": 418, 
+            "link": "/projects/fits_liberator/improc/", 
+            "published": 1, 
+            "level": 3
+        }
+    }, 
+    {
+        "pk": 253, 
+        "model": "menus.menuitem", 
+        "fields": {
+            "rght": 421, 
+            "is_primary": 1, 
+            "parent": 229, 
+            "title": "FITS for education", 
+            "menu": null, 
+            "tree_id": 1, 
+            "on_click": 0, 
+            "lft": 420, 
+            "link": "/projects/fits_liberator/fitsforeducation/", 
+            "published": 1, 
+            "level": 3
+        }
+    }, 
+    {
+        "pk": 254, 
+        "model": "menus.menuitem", 
+        "fields": {
+            "rght": 423, 
+            "is_primary": 0, 
+            "parent": 229, 
+            "title": "Example data sets and links to archives", 
+            "menu": null, 
+            "tree_id": 1, 
+            "on_click": 0, 
+            "lft": 422, 
+            "link": "/projects/fits_liberator/datasets_archives/", 
+            "published": 1, 
+            "level": 3
+        }
+    }, 
+    {
+        "pk": 255, 
+        "model": "menus.menuitem", 
+        "fields": {
+            "rght": 425, 
+            "is_primary": 1, 
+            "parent": 229, 
+            "title": "Submit your images", 
+            "menu": null, 
+            "tree_id": 1, 
+            "on_click": 0, 
+            "lft": 424, 
+            "link": "/projects/fits_liberator/submit_images/", 
+            "published": 1, 
+            "level": 3
+        }
+    }, 
+    {
+        "pk": 256, 
+        "model": "menus.menuitem", 
+        "fields": {
+            "rght": 427, 
+            "is_primary": 1, 
+            "parent": 229, 
+            "title": "User's Gallery", 
+            "menu": null, 
+            "tree_id": 1, 
+            "on_click": 0, 
+            "lft": 426, 
+            "link": "/projects/fits_liberator/fitsimages/", 
+            "published": 1, 
+            "level": 3
+        }
+    }, 
+    {
+        "pk": 257, 
+        "model": "menus.menuitem", 
+        "fields": {
+            "rght": 429, 
+            "is_primary": 1, 
+            "parent": 229, 
+            "title": "Subscribe to FITS Liberator news", 
+            "menu": null, 
+            "tree_id": 1, 
+            "on_click": 0, 
+            "lft": 428, 
+            "link": "/projects/fits_liberator/fitsmailinglist/", 
+            "published": 1, 
+            "level": 3
+        }
+    }, 
+    {
+        "pk": 258, 
+        "model": "menus.menuitem", 
+        "fields": {
+            "rght": 431, 
+            "is_primary": 1, 
+            "parent": 229, 
+            "title": "Known issues and FAQ", 
+            "menu": null, 
+            "tree_id": 1, 
+            "on_click": 0, 
+            "lft": 430, 
+            "link": "/projects/fits_liberator/knownissues_faq/", 
+            "published": 1, 
+            "level": 3
+        }
+    }, 
+    {
+        "pk": 259, 
+        "model": "menus.menuitem", 
+        "fields": {
+            "rght": 433, 
+            "is_primary": 1, 
+            "parent": 229, 
+            "title": "Bug form", 
+            "menu": null, 
+            "tree_id": 1, 
+            "on_click": 0, 
+            "lft": 432, 
+            "link": "/projects/fits_liberator/bugform/", 
+            "published": 1, 
+            "level": 3
+        }
+    }, 
+    {
+        "pk": 260, 
+        "model": "menus.menuitem", 
+        "fields": {
+            "rght": 435, 
+            "is_primary": 1, 
+            "parent": 229, 
+            "title": "Download past versions", 
+            "menu": null, 
+            "tree_id": 1, 
+            "on_click": 0, 
+            "lft": 434, 
+            "link": "/projects/fits_liberator/downloads_page/", 
+            "published": 1, 
+            "level": 3
+        }
+    }, 
+    {
+        "pk": 261, 
+        "model": "menus.menuitem", 
+        "fields": {
+            "rght": 437, 
+            "is_primary": 1, 
+            "parent": 229, 
+            "title": "Documents", 
+            "menu": null, 
+            "tree_id": 1, 
+            "on_click": 0, 
+            "lft": 436, 
+            "link": "/projects/fits_liberator/documents/", 
+            "published": 1, 
+            "level": 3
+        }
+    }, 
+    {
         "pk": 230, 
         "model": "menus.menuitem", 
         "fields": {
-            "rght": 412, 
+            "rght": 480, 
             "is_primary": 1, 
             "parent": 14, 
             "title": "15th Anniversary ", 
             "menu": null, 
             "tree_id": 1, 
             "on_click": 0, 
-            "lft": 411, 
+            "lft": 439, 
             "link": "/projects/anniversary/", 
             "published": 1, 
             "level": 2
         }
     }, 
     {
+        "pk": 262, 
+        "model": "menus.menuitem", 
+        "fields": {
+            "rght": 441, 
+            "is_primary": 0, 
+            "parent": 230, 
+            "title": "News Release", 
+            "menu": null, 
+            "tree_id": 1, 
+            "on_click": 0, 
+            "lft": 440, 
+            "link": "/news/?search=15th", 
+            "published": 1, 
+            "level": 3
+        }
+    }, 
+    {
+        "pk": 263, 
+        "model": "menus.menuitem", 
+        "fields": {
+            "rght": 443, 
+            "is_primary": 1, 
+            "parent": 230, 
+            "title": "Movie DVD", 
+            "menu": null, 
+            "tree_id": 1, 
+            "on_click": 0, 
+            "lft": 442, 
+            "link": "/projects/anniversary/movie_dvd/", 
+            "published": 1, 
+            "level": 3
+        }
+    }, 
+    {
+        "pk": 264, 
+        "model": "menus.menuitem", 
+        "fields": {
+            "rght": 445, 
+            "is_primary": 0, 
+            "parent": 230, 
+            "title": "Movie Script", 
+            "menu": null, 
+            "tree_id": 1, 
+            "on_click": 0, 
+            "lft": 444, 
+            "link": "/about/further_information/techdocs/hubble_15_script/", 
+            "published": 1, 
+            "level": 3
+        }
+    }, 
+    {
+        "pk": 265, 
+        "model": "menus.menuitem", 
+        "fields": {
+            "rght": 447, 
+            "is_primary": 0, 
+            "parent": 230, 
+            "title": "Trailer", 
+            "menu": null, 
+            "tree_id": 1, 
+            "on_click": 0, 
+            "lft": 446, 
+            "link": "/videos/heic0505a/", 
+            "published": 1, 
+            "level": 3
+        }
+    }, 
+    {
+        "pk": 266, 
+        "model": "menus.menuitem", 
+        "fields": {
+            "rght": 449, 
+            "is_primary": 0, 
+            "parent": 230, 
+            "title": "DVD covers", 
+            "menu": null, 
+            "tree_id": 1, 
+            "on_click": 0, 
+            "lft": 448, 
+            "link": "/extras/dvds/?search=15+years", 
+            "published": 1, 
+            "level": 3
+        }
+    }, 
+    {
+        "pk": 267, 
+        "model": "menus.menuitem", 
+        "fields": {
+            "rght": 451, 
+            "is_primary": 1, 
+            "parent": 230, 
+            "title": "Partners", 
+            "menu": null, 
+            "tree_id": 1, 
+            "on_click": 0, 
+            "lft": 450, 
+            "link": "/projects/anniversary/partners/", 
+            "published": 1, 
+            "level": 3
+        }
+    }, 
+    {
+        "pk": 268, 
+        "model": "menus.menuitem", 
+        "fields": {
+            "rght": 453, 
+            "is_primary": 1, 
+            "parent": 230, 
+            "title": "Hubble Day Events", 
+            "menu": null, 
+            "tree_id": 1, 
+            "on_click": 0, 
+            "lft": 452, 
+            "link": "/projects/anniversary/events/", 
+            "published": 1, 
+            "level": 3
+        }
+    }, 
+    {
+        "pk": 269, 
+        "model": "menus.menuitem", 
+        "fields": {
+            "rght": 455, 
+            "is_primary": 1, 
+            "parent": 230, 
+            "title": "Planetarium shows", 
+            "menu": null, 
+            "tree_id": 1, 
+            "on_click": 0, 
+            "lft": 454, 
+            "link": "/projects/anniversary/planetaria/", 
+            "published": 1, 
+            "level": 3
+        }
+    }, 
+    {
+        "pk": 270, 
+        "model": "menus.menuitem", 
+        "fields": {
+            "rght": 457, 
+            "is_primary": 1, 
+            "parent": 230, 
+            "title": "Educational Material", 
+            "menu": null, 
+            "tree_id": 1, 
+            "on_click": 0, 
+            "lft": 456, 
+            "link": "/projects/anniversary/educational_material/", 
+            "published": 1, 
+            "level": 3
+        }
+    }, 
+    {
+        "pk": 271, 
+        "model": "menus.menuitem", 
+        "fields": {
+            "rght": 459, 
+            "is_primary": 1, 
+            "parent": 230, 
+            "title": "Soundtrack ", 
+            "menu": null, 
+            "tree_id": 1, 
+            "on_click": 0, 
+            "lft": 458, 
+            "link": "/projects/anniversary/soundtrack/", 
+            "published": 1, 
+            "level": 3
+        }
+    }, 
+    {
+        "pk": 272, 
+        "model": "menus.menuitem", 
+        "fields": {
+            "rght": 461, 
+            "is_primary": 1, 
+            "parent": 230, 
+            "title": "Hubble Anniversary Book", 
+            "menu": null, 
+            "tree_id": 1, 
+            "on_click": 0, 
+            "lft": 460, 
+            "link": "/projects/anniversary/book/", 
+            "published": 1, 
+            "level": 3
+        }
+    }, 
+    {
+        "pk": 273, 
+        "model": "menus.menuitem", 
+        "fields": {
+            "rght": 463, 
+            "is_primary": 1, 
+            "parent": 230, 
+            "title": "Outlets/resellers", 
+            "menu": null, 
+            "tree_id": 1, 
+            "on_click": 0, 
+            "lft": 462, 
+            "link": "/projects/anniversary/outlets/", 
+            "published": 1, 
+            "level": 3
+        }
+    }, 
+    {
+        "pk": 274, 
+        "model": "menus.menuitem", 
+        "fields": {
+            "rght": 465, 
+            "is_primary": 1, 
+            "parent": 230, 
+            "title": "Press meetings", 
+            "menu": null, 
+            "tree_id": 1, 
+            "on_click": 0, 
+            "lft": 464, 
+            "link": "/projects/anniversary/press_meetings/", 
+            "published": 1, 
+            "level": 3
+        }
+    }, 
+    {
+        "pk": 275, 
+        "model": "menus.menuitem", 
+        "fields": {
+            "rght": 467, 
+            "is_primary": 1, 
+            "parent": 230, 
+            "title": "About Bob Fosbury", 
+            "menu": null, 
+            "tree_id": 1, 
+            "on_click": 0, 
+            "lft": 466, 
+            "link": "http://www.spacetelescope.org/projects/anniversary/about_bob/", 
+            "published": 1, 
+            "level": 3
+        }
+    }, 
+    {
+        "pk": 276, 
+        "model": "menus.menuitem", 
+        "fields": {
+            "rght": 469, 
+            "is_primary": 1, 
+            "parent": 230, 
+            "title": "About Lars Lindberg Christensen", 
+            "menu": null, 
+            "tree_id": 1, 
+            "on_click": 0, 
+            "lft": 468, 
+            "link": "/projects/anniversary/about_lars/", 
+            "published": 1, 
+            "level": 3
+        }
+    }, 
+    {
+        "pk": 277, 
+        "model": "menus.menuitem", 
+        "fields": {
+            "rght": 471, 
+            "is_primary": 1, 
+            "parent": 230, 
+            "title": "About Martin Kornmesser", 
+            "menu": null, 
+            "tree_id": 1, 
+            "on_click": 0, 
+            "lft": 470, 
+            "link": "/projects/anniversary/about_martin/", 
+            "published": 1, 
+            "level": 3
+        }
+    }, 
+    {
+        "pk": 278, 
+        "model": "menus.menuitem", 
+        "fields": {
+            "rght": 473, 
+            "is_primary": 0, 
+            "parent": 230, 
+            "title": "Poster", 
+            "menu": null, 
+            "tree_id": 1, 
+            "on_click": 0, 
+            "lft": 472, 
+            "link": "/extras/posters/hst15/", 
+            "published": 1, 
+            "level": 3
+        }
+    }, 
+    {
+        "pk": 285, 
+        "model": "menus.menuitem", 
+        "fields": {
+            "rght": 475, 
+            "is_primary": 1, 
+            "parent": 230, 
+            "title": "Planetarium Show Package", 
+            "menu": null, 
+            "tree_id": 1, 
+            "on_click": 0, 
+            "lft": 474, 
+            "link": "/projects/anniversary/planetarium_show/", 
+            "published": 1, 
+            "level": 3
+        }
+    }, 
+    {
+        "pk": 286, 
+        "model": "menus.menuitem", 
+        "fields": {
+            "rght": 477, 
+            "is_primary": 1, 
+            "parent": 230, 
+            "title": "Credits", 
+            "menu": null, 
+            "tree_id": 1, 
+            "on_click": 0, 
+            "lft": 476, 
+            "link": "/projects/anniversary/credits/", 
+            "published": 1, 
+            "level": 3
+        }
+    }, 
+    {
+        "pk": 287, 
+        "model": "menus.menuitem", 
+        "fields": {
+            "rght": 479, 
+            "is_primary": 1, 
+            "parent": 230, 
+            "title": "Project overview (PDF)", 
+            "menu": null, 
+            "tree_id": 1, 
+            "on_click": 0, 
+            "lft": 478, 
+            "link": "/static/projects/anniversary/hst15_esa.pdf", 
+            "published": 1, 
+            "level": 3
+        }
+    }, 
+    {
         "pk": 231, 
         "model": "menus.menuitem", 
         "fields": {
-            "rght": 414, 
+            "rght": 482, 
             "is_primary": 1, 
             "parent": 14, 
             "title": "Eyes on the Skies", 
             "menu": null, 
             "tree_id": 1, 
             "on_click": 1, 
-            "lft": 413, 
+            "lft": 481, 
             "link": "http://www.eyesontheskies.org", 
             "published": 1, 
             "level": 2
@@ -3552,14 +4130,14 @@
         "pk": 232, 
         "model": "menus.menuitem", 
         "fields": {
-            "rght": 416, 
+            "rght": 484, 
             "is_primary": 1, 
             "parent": 14, 
             "title": "Astronomy Communication Seminars", 
             "menu": null, 
             "tree_id": 1, 
             "on_click": 0, 
-            "lft": 415, 
+            "lft": 483, 
             "link": "/projects/seminars/", 
             "published": 1, 
             "level": 2
@@ -3569,14 +4147,14 @@
         "pk": 233, 
         "model": "menus.menuitem", 
         "fields": {
-            "rght": 418, 
+            "rght": 486, 
             "is_primary": 1, 
             "parent": 14, 
             "title": "Credibility of Science Communication", 
             "menu": null, 
             "tree_id": 1, 
             "on_click": 0, 
-            "lft": 417, 
+            "lft": 485, 
             "link": "/projects/credibility/", 
             "published": 1, 
             "level": 2
@@ -3586,14 +4164,14 @@
         "pk": 234, 
         "model": "menus.menuitem", 
         "fields": {
-            "rght": 420, 
+            "rght": 488, 
             "is_primary": 1, 
             "parent": 14, 
             "title": "Simplicity Web System", 
             "menu": null, 
             "tree_id": 1, 
             "on_click": 0, 
-            "lft": 419, 
+            "lft": 487, 
             "link": "/projects/web/", 
             "published": 1, 
             "level": 2
@@ -3603,48 +4181,150 @@
         "pk": 235, 
         "model": "menus.menuitem", 
         "fields": {
-            "rght": 422, 
+            "rght": 496, 
             "is_primary": 1, 
             "parent": 14, 
             "title": "Conferences", 
             "menu": null, 
             "tree_id": 1, 
             "on_click": 0, 
-            "lft": 421, 
+            "lft": 489, 
             "link": "", 
             "published": 1, 
             "level": 2
+        }
+    }, 
+    {
+        "pk": 279, 
+        "model": "menus.menuitem", 
+        "fields": {
+            "rght": 491, 
+            "is_primary": 1, 
+            "parent": 235, 
+            "title": "CAP communication conference 2007", 
+            "menu": null, 
+            "tree_id": 1, 
+            "on_click": 0, 
+            "lft": 490, 
+            "link": "http://www.communicatingastronomy.org/cap2007/", 
+            "published": 1, 
+            "level": 3
+        }
+    }, 
+    {
+        "pk": 280, 
+        "model": "menus.menuitem", 
+        "fields": {
+            "rght": 493, 
+            "is_primary": 1, 
+            "parent": 235, 
+            "title": "CAP communication conference 2005", 
+            "menu": null, 
+            "tree_id": 1, 
+            "on_click": 0, 
+            "lft": 492, 
+            "link": "http://www.communicatingastronomy.org/cap2005/", 
+            "published": 1, 
+            "level": 3
+        }
+    }, 
+    {
+        "pk": 281, 
+        "model": "menus.menuitem", 
+        "fields": {
+            "rght": 495, 
+            "is_primary": 1, 
+            "parent": 235, 
+            "title": "ESO-IYA2009 Meeting", 
+            "menu": null, 
+            "tree_id": 1, 
+            "on_click": 0, 
+            "lft": 494, 
+            "link": "http://www.communicatingastronomy.org/iya_eso/", 
+            "published": 1, 
+            "level": 3
         }
     }, 
     {
         "pk": 236, 
         "model": "menus.menuitem", 
         "fields": {
-            "rght": 424, 
+            "rght": 504, 
             "is_primary": 1, 
             "parent": 14, 
             "title": "IAU Projects", 
             "menu": null, 
             "tree_id": 1, 
             "on_click": 0, 
-            "lft": 423, 
+            "lft": 497, 
             "link": "", 
             "published": 1, 
             "level": 2
         }
     }, 
     {
+        "pk": 282, 
+        "model": "menus.menuitem", 
+        "fields": {
+            "rght": 499, 
+            "is_primary": 1, 
+            "parent": 236, 
+            "title": "IAU Commission 55", 
+            "menu": null, 
+            "tree_id": 1, 
+            "on_click": 0, 
+            "lft": 498, 
+            "link": "http://www.communicatingastronomy.org/iya_eso/", 
+            "published": 1, 
+            "level": 3
+        }
+    }, 
+    {
+        "pk": 283, 
+        "model": "menus.menuitem", 
+        "fields": {
+            "rght": 501, 
+            "is_primary": 1, 
+            "parent": 236, 
+            "title": "Press Office", 
+            "menu": null, 
+            "tree_id": 1, 
+            "on_click": 0, 
+            "lft": 500, 
+            "link": "/projects/iau_pressoffice/", 
+            "published": 1, 
+            "level": 3
+        }
+    }, 
+    {
+        "pk": 284, 
+        "model": "menus.menuitem", 
+        "fields": {
+            "rght": 503, 
+            "is_primary": 1, 
+            "parent": 236, 
+            "title": "CAP Journal", 
+            "menu": null, 
+            "tree_id": 1, 
+            "on_click": 0, 
+            "lft": 502, 
+            "link": "http://www.communicatingastronomy.org/journal/index.html", 
+            "published": 1, 
+            "level": 3
+        }
+    }, 
+    {
         "pk": 237, 
         "model": "menus.menuitem", 
         "fields": {
-            "rght": 426, 
+            "rght": 506, 
             "is_primary": 1, 
             "parent": 14, 
             "title": "International Year of Astronomy 2009", 
             "menu": null, 
             "tree_id": 1, 
             "on_click": 1, 
-            "lft": 425, 
+            "lft": 505, 
             "link": "http://www.astronomy2009.org", 
             "published": 1, 
             "level": 2
@@ -3654,14 +4334,14 @@
         "pk": 238, 
         "model": "menus.menuitem", 
         "fields": {
-            "rght": 428, 
+            "rght": 508, 
             "is_primary": 1, 
             "parent": 14, 
             "title": "Science Communication Guide", 
             "menu": null, 
             "tree_id": 1, 
             "on_click": 1, 
-            "lft": 427, 
+            "lft": 507, 
             "link": "http://www.eso.org/~lchriste/scicomm", 
             "published": 1, 
             "level": 2
@@ -3671,14 +4351,14 @@
         "pk": 239, 
         "model": "menus.menuitem", 
         "fields": {
-            "rght": 430, 
+            "rght": 510, 
             "is_primary": 1, 
             "parent": 14, 
             "title": "VAMP", 
             "menu": null, 
             "tree_id": 1, 
             "on_click": 1, 
-            "lft": 429, 
+            "lft": 509, 
             "link": "http://virtualastronomy.org/", 
             "published": 1, 
             "level": 2
@@ -3688,14 +4368,14 @@
         "pk": 240, 
         "model": "menus.menuitem", 
         "fields": {
-            "rght": 432, 
+            "rght": 512, 
             "is_primary": 1, 
             "parent": 14, 
             "title": "A Danish Communication Strategy", 
             "menu": null, 
             "tree_id": 1, 
             "on_click": 0, 
-            "lft": 431, 
+            "lft": 511, 
             "link": "/projects/denmark/", 
             "published": 1, 
             "level": 2
@@ -3705,15 +4385,32 @@
         "pk": 246, 
         "model": "menus.menuitem", 
         "fields": {
-            "rght": 434, 
+            "rght": 514, 
             "is_primary": 1, 
             "parent": 14, 
             "title": "20th anniversary", 
             "menu": null, 
             "tree_id": 1, 
             "on_click": 0, 
-            "lft": 433, 
+            "lft": 513, 
             "link": "/projects/20anniversary/", 
+            "published": 1, 
+            "level": 2
+        }
+    }, 
+    {
+        "pk": 250, 
+        "model": "menus.menuitem", 
+        "fields": {
+            "rght": 516, 
+            "is_primary": 1, 
+            "parent": 14, 
+            "title": "Step-by-step guide to making your own images", 
+            "menu": null, 
+            "tree_id": 1, 
+            "on_click": 0, 
+            "lft": 515, 
+            "link": "/projects/fits_liberator/stepbystep/", 
             "published": 1, 
             "level": 2
         }
@@ -4036,7 +4733,7 @@
             "tree_id": 3, 
             "on_click": 0, 
             "lft": 26, 
-            "link": "/subscribe/", 
+            "link": "http://list.hq.eso.org/cgi-bin/mailman/listinfo/hubblenews", 
             "published": 1, 
             "level": 1
         }
