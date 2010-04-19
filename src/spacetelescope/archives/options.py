@@ -117,7 +117,7 @@ class AnnouncementOptions (StandardOptions):
 	
 
 	class Queries( object ):
-		default = AllPublicQuery( browsers = ( 'normal', 'viewall' ), verbose_name = "Updates" )
+		default = AllPublicQuery( browsers = ( 'normal', 'viewall' ), verbose_name = "Announcements" )
 		embargo = EmbargoQuery( browsers = ( 'normal', 'viewall' ), verbose_name = "Embargoed Updates" )
 		staging = StagingQuery( browsers = ( 'normal', 'viewall' ), verbose_name = "Updates (Staging)" )
 		year = YearQuery( browsers = ( 'normal', 'viewall' ), verbose_name = "Announcements %d" )
