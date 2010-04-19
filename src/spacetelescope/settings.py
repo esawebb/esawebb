@@ -241,6 +241,9 @@ MIDDLEWARE_CLASSES += (
 	# Module for URL redirection. 
 	'django.contrib.redirects.middleware.RedirectFallbackMiddleware', # Response
 	
+	# Module for URL redirection based on regular expressions
+	'djangoplicity.utils.middleware.RegexRedirectMiddleware', # Response
+	
 	# Djangoplicity static pages
 	'djangoplicity.pages.middleware.PageFallbackMiddleware', # Response
 )
@@ -573,6 +576,10 @@ LIVESETTINGS_OPTIONS = {
 		}
 	}
 }
+
+REGEX_REDIRECTS = (
+	#( re.compile( '/hubbleshop/webshop/webshop\.php\?show=sales&section=(books|cdroms)' ), '/shop/category/\g<1>/' ), 
+)
 
 # ======================================================================
 # SITE SPECIFIC SECTIONS 
