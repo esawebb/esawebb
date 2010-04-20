@@ -12,7 +12,7 @@
 {% if item.main_image %}{% if item.main_image.resource_wallpaperthumbs %}
 <div class="pr_list_image"><a href="{{ item.get_absolute_url }}"><img src="{{ item.main_image.resource_wallpaperthumbs.url }}" width="122" height="92" /></a></div>
 {% endif %}{% endif %}
-<div class="pr_list_text"><strong>{{ item.release_date|date }}</strong>: <a class="teasertext" href="{{ item.get_absolute_url }}">{{ item.description|striptags|truncatewords:50 }}</a>
+<div class="pr_list_text"><strong>{{ item.release_date|date }}</strong>: <a class="teasertext" href="{{ item.get_absolute_url }}">{{ item.description|striptags|truncatewords:50|safe }}</a>
 <br /><div class="read_more_link" align="right"><a href="{{ item.get_absolute_url }}" >Read more</a></div>
 </div>
 </div>
