@@ -55,3 +55,17 @@ function searchbox_blur( box, text ) {
 		box.className = box.className.split('_ready',1)[0];
 	}
 }
+
+/* reverse order */
+(function($) {
+$.fn.reverseOrder = function() {
+    return this.each(function() {
+        $(this).prependTo( $(this).parent() );
+    });
+};
+})(jQuery);
+
+
+$('#ordereverse').click(function(){
+            $('.bestof .entry').reverseOrder();
+        });    

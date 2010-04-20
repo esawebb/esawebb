@@ -1,0 +1,47 @@
+{% extends "base_onecolumn.html" %}
+
+{% block site_title %}{% if archive_title %}{{archive_title}}{% else %}{{ archive|capfirst }} Archive{%endif%} | {{block.super}}{% endblock %}
+
+{% load menus %}
+{# block breadcrumb %}{{ block.super}}{% endblock #}
+
+{% block content %}
+<div class='archive_list_heading'>
+<div class='archive_list_title'>
+<h1>{% if archive_title %}{{ archive_title }}{% else %}{{ archive|capfirst }} Archive{% endif %}</h1>
+</div>
+<div class='archive_list_search'>{% if searchable %}
+
+<form action="{{ search_url }}" method="GET">
+<input id="id_archivesearch" type="text" value="{%if search_specific %}Search {{search_specific|capfirst}}...{%else%}{{search_str|default:"Search..."}}{%endif%}" name="search" class="archivesearch" onblur="searchbox_blur(this,'{%if search_specific %}Search {{search_specific|capfirst}}...{%else%}{{search_str|default:"Search..."}}{%endif%}');" onfocus="searchbox_focus(this,'{%if search_specific %}Search {{search_specific|capfirst}}...{%else%}{{search_str|default:"Search..."}}{%endif%}');" />
+<input class="archivesearch_submit" type="submit" value="Go" />
+</form>
+</div>
+<div class='clear'></div>
+</div>
+{% endif %}
+{% load djangoplicity_utils %}
+{% if not object_list %}
+	<div align="center">No entries were found.</div>
+{% else %}
+{% include "archives/search_results.html" %}
+<div class='bestof'>
+
+{% for item in object_list reversed %}
+	<a class='entry' href="{{ item.get_absolute_url }}">
+		<div class='image'>
+			<img src="http://www.spacetelescope.org/images/medium/{{ item.id }}.jpg"  alt="{{item.title}}" />
+		</div>
+		<div class='descr'>
+			<div class='number'>{{forloop.revcounter}}</div>
+			<div class='title'>{{item.title}}</div>
+			<div class='credit'>Credit: {{item.credit|default:'ESA/Hubble'}}</div>
+		</div>
+	<div class='clear'></div>
+	</a>
+
+{%endfor%}
+</div>
+{% endif %}
+{% endblock %}
+{% include 'archives/extra_footer.html' %}
