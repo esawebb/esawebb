@@ -260,6 +260,7 @@ class ProductDataMapping (SpacetelescopeDataMapping):
 	#base data mapping for all products (shop)
 	model = None  
 	has_pages=False
+	has_price=True
 	format_mapping = {'thumbs':'thumb'}
 	extra_fields = []
 	
@@ -272,13 +273,15 @@ class ProductDataMapping (SpacetelescopeDataMapping):
 				description=self.description(),
 				width=self.width(),
 				height=self.height(),
-				weight=self.weight(),
 				priority=self.priority(),
 				credit=self.credit(),
-				sale=self.sale(),
-				price=self.price(),
 				#delivery=self.delivery(),
 			)
+
+		if self.has_price:
+			self.obj.price = self.price()
+			self.obj.sale = self.sale()
+			self.obj.weight = self.weight()
 
 		if self.has_pages:
 			self.obj.pages = self.pages()
@@ -752,7 +755,7 @@ class MerchandiseDataMapping(ProductDataMapping):
 	
 class NewsletterDataMapping( ProductDataMapping ):
 	model = Newsletter
-	BASE = "/about/further_information/newsletters/newsletters"
+	BASE = "/about/further_information/newsletters"
 	format_mapping = {'thumbs':'thumb',
 					  'original':'original',
 					  'screen':'screen',
@@ -814,6 +817,7 @@ class StickerDataMapping(ProductDataMapping):
 
 class PressKitDataMapping(ProductDataMapping):
 	model = PressKit
+	has_price = False
 	BASE = "/products/presskits"
 	format_mapping = {'thumbs':'thumb',
 					  'original':'original',
@@ -857,6 +861,12 @@ class AnnouncementDataMapping( ProductDataMapping ):
 				links = self.links(),
 			)
 		self.obj.save()
+		
+	def old_urls(self):
+		"""
+		Return a list of old URLs where this archive item was accessible.
+		"""
+		return ["%s/html/%s.html" % (self.BASE, super(AnnouncementDataMapping,self).id() ),]
 		
 	def id(self):
 		id = super(AnnouncementDataMapping,self).id()
@@ -1083,7 +1093,7 @@ class FITSImageDataMapping(SpacetelescopeDataMapping):
 	
 
 class OnlineArtAuthorDataMapping(SpacetelescopeDataMapping):
-	BASE = "/goodies/art/"
+	BASE = "/goodies/art"
 	
 	format_mapping = {'thumbs':'thumb',
 					  'original':'original',

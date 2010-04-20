@@ -3,7 +3,7 @@ from django.contrib.redirects.models import Redirect
 from django.contrib.sites.models import Site
 from djangoplicity.logger import define_logger
 from djangoplicity.media.models import Image
-from djangoplicity.migration import run_migration
+from djangoplicity.migration import run_migration, RedirectTask
 from djangoplicity.migration.apps.archives import ArchiveInitializationTask, \
 	ArchiveMigrationTask, DataMapping
 from djangoplicity.migration.apps.pages import PageInitializationTask, \
@@ -70,6 +70,7 @@ redirectpatterns = [
 	( re.compile( "^/images/(news|screen|thumbs|medium|web)/([a-z0-9-_]+)\.(jpg|tif)$" ), "/static/archives/images/\g<1>/\g<2>.\g<3>" ),
 	( re.compile( "^/about_us/logos/(news|screen|thumbs|medium|web)/([a-z0-9-_]+)\.(jpg|tif)$" ), "/static/archives/images/\g<1>/\g<2>.\g<3>" ),
 	( re.compile( "^/updates/(news|screen|thumbs|medium|web)/([a-z0-9-_]+)\.(jpg|tif)$" ), "/static/archives/annoucements/\g<1>/\g<2>.\g<3>" ),
+	( re.compile( "^/about/further_information/techdocs/(pdf)/([a-z0-9-_]+)\.(pdf|jpg|tif)$" ), "/static/archives/techdocs/\g<1>/\g<2>.\g<3>" ),
 	( re.compile( "^/goodies/posters/(news|screen|thumbs|medium|web)/([a-z0-9-_]+)\.(jpg|tif)$" ), "/static/archives/posters/\g<1>/\g<2>.\g<3>" ),	
 ]
 
@@ -101,7 +102,6 @@ link_replacements = {
 	'/about/about/history/servicing_mission_3b.html' : '/about/history/servicing_mission_3b/',
 	'//contact.html' : '/contact/',
 	'/about/videos/index.html' : '/videos/',
-	'/hubbleshop/secure_payments.htm' : '/shop/secure_payments/',
 	'/projects/fits_liberator/v23files/releasenotes.html' : '/static/projects/fits_liberator/v23files/releasenotes.html',
 	'/images/archive/topic/cosmo//' : '/images/archive/category/cosmology/',
 	'/images/archive/topic/galax//' : '/images/archive/category/galaxies/',
@@ -137,7 +137,7 @@ link_replacements = {
 	'/pressroom' : '/press/',
 	'/projects/anniversary/' : '/projects/anniversary/',
 	#'/bin/mailform/majordomo@eso.org/hubblenews' : '/bin/mailform/majordomo@eso.org/hubblenews',
-	#'/about/history/sm4blog/' : '',
+	'/about/history/sm4blog/' : '/static/sm4blog/',
 	'/hubbleshop/webshop/webshop.php?show=sales&section=books' : '/shop/category/book/',
 	'/hubbleshop/webshop/webshop.php?show=sales&section=brochures' : '/shop/category/brochure/',
 	'/hubbleshop/webshop/webshop.php?show=sales&section=cdroms' : '/shop/category/cdrom/',
@@ -148,15 +148,76 @@ link_replacements = {
 	'/hubbleshop/webshop/webshop.php?show=sales&section=techdocs' : '/shop/category/technicaldocument/',
 #	'/projects/seminars/presentations/roth_art.pdf' : '/projects/seminars/presentations/roth_art.pdf',
 #	'/q/spacemailform.php' : '',
-	'about_us/heic/group.html' : 'http://www.eso.org/public/outreach/department/index.html',
-	'about_us/heic/students.html' : 'http://www.eso.org/public/outreach/department/students.html',
-	'about_us/contact.html' : '/contact/',
-	'about_us/copyright.html' : '/copyright/',
-	'about_us/hubblenews.html' : 'http://list.hq.eso.org/cgi-bin/mailman/listinfo/hubblenews',
-	'goodies/slideshows/index.html' : '/extras/slideshows/',
-	'goodies/tutorial/index1.html' : '/extras/tutorial/',
-	'goodies/slideshows.html' : '/extras/slideshows/',
-	'hubbleshop/index.html' : '/shop/',
+	'/about_us/heic/group.html' : 'http://www.eso.org/public/outreach/department/index.html',
+	'/about_us/heic/students.html' : 'http://www.eso.org/public/outreach/department/students.html',
+	'/about_us/contact.html' : '/contact/',
+	'/about_us/copyright.html' : '/copyright/',
+	'/about_us/hubblenews.html' : 'http://list.hq.eso.org/cgi-bin/mailman/listinfo/hubblenews',
+	'/goodies/slideshows/index.html' : '/extras/slideshows/',
+	'/goodies/tutorial/index1.html' : '/extras/tutorial/',
+	'/goodies/slideshows.html' : '/extras/slideshows/',
+	'/q/spacemailform.php' : '/static/q/spacemailform.php',
+	#'/projects/web/article.html' : '',
+	'/projects/fits_liberator/bugs' : 'http://www.djangoplicity.org/bugs/',
+	'/projects/fits_liberator/userguide.html' : '/static/projects/fits_liberator/userguide_v23.pdf',
+	'/hubbleshop/index.html' : '/shop/',
+	'/extras/interactive_hubble/index.swf' : '/static/extras/interactive_hubble/index.swf',
+	'/extras/tutorial/index.swf' : '/static/extras/tutorial/index.swf',
+	'/about/history/servicing_mission_3b/sm3b_a_little_boost.html' : '/about/history/sm3b_a_little_boost.html',
+	'/about/history/servicing_mission_3b/sm3b_a_new_coat.html' : '/about/history/sm3b_a_new_coat.html',
+	'/about/history/servicing_mission_3b/sm3b_astronauts.html' : '/about/history/sm3b_astronauts.html',
+	'/about/history/servicing_mission_3b/sm3b_new_solar_panels.html' : '/about/history/sm3b_new_solar_panels.html',
+	'/about/history/servicing_mission_3b/sm3b_nicmos_returns.html' : '/about/history/sm3b_nicmos_returns.html',
+	'/about/history/servicing_mission_3b/sm3b_replacement_of_pcu.htm' : '/about/history/sm3b_replacement_of_pcu.htm',
+	'/about/history/img/99pp1511.jpg' : '/static/about/img/99pp1511.jpg',
+	'/about/history/img/Working_on_Solar_Array.jpg' : '/static/about/img/Working_on_Solar_Array.jpg',
+	'/about/history/img/img0038.jpg' : '/static/about/img/img0038.jpg',
+	'/about/history/img/s103e5162.jpg' : '/static/about/img/s103e5162.jpg',
+	'/about/history/img/s103e5320.jpg' : '/static/about/img/s103e5320.jpg',
+	'/about/history/img/s82e5175.jpg' : '/static/about/img/s82e5175.jpg',
+	'/about/history/img/s82e5718.jpg' : '/static/about/img/s82e5718.jpg',
+	'/about/history/img/slide11.jpg' : '/static/about/img/slide11.jpg',
+	'/about/history/img/sm3b_hst1.jpg' : '/static/about/img/sm3b_hst1.jpg',
+	'/about/history/img/sm3bgrapple.jpg' : '/static/about/img/sm3bgrapple.jpg',
+	'/about/history/img/sts103_701_009.jpg' : '/static/about/img/sts103_701_009.jpg',
+	'/about/history/img/sts103_713_048_200.jpg' : '/static/about/img/sts103_713_048_200.jpg',
+	'/about/history/img/sts103_726_081.jpg' : '/static/about/img/sts103_726_081.jpg',
+	'/about/history/img/sts103s005.jpg' : '/static/about/img/sts103s005.jpg',
+	'/about/general/old_solar_panels.html' : 'about/general/solar_panels.html',
+	'/about/history/general/instruments/acs.html' : '/about/general/instruments/acs.html',
+	'/extras/ecards/xmas2006/xmas2006.swf' : '/static/extras/ecards/xmas2006/xmas2006.swf',
+	'/videos/hubblecast.html' : '/videos/category/hubblecast/',
+}
+
+extra_redirects = {
+	'/about_us/heic/students.html' : 'http://www.eso.org/public/outreach/department/students.html',
+	'/about_us/hubblenews.html' : 'http://list.hq.eso.org/cgi-bin/mailman/listinfo/hubblenews',
+	'/about/further_information/litterature.html' : '/about/further_information/literature/',
+	'/projects/iauga2006.html' : '/about/further_information/techdocs/iau_po_report/',
+	'/goodies/image_experience/index.html' : '/extras/',
+	'/goodies/ecards/index.html' : '/extras/ecards/xmas2006/',
+	'/projects/anniversary/poster.html' : '/extras/posters/hst15/',
+	'/goodies/tutorial/index1.html' : '/extras/tutorial/',
+	'/about/further_information/presskits/index.html' : '/press/kits/',
+	'/pressroom/broadcast_videos.html' : '/press/video_formats/',
+	'/projects/DVD/index.html' : '/projects/anniversary/',
+	'/projects/anniversary/events2.html' : '/projects/anniversary/events/',
+	'/projects/fits_liberator/indexol.html' : '/projects/fits_liberator/',
+	'/projects/fits_liberator/userguide.html' : '/projects/fits_liberator/downloads_page/',
+	'/projects/fits_liberator/userguide_v1.html' : '/projects/fits_liberator/downloads_page/',
+	'/projects/fits_liberator/readme21.html' : '/projects/fits_liberator/downloads_page/',
+	'/projects/fits_liberator/readme.html' : '/projects/fits_liberator/downloads_page/',
+	'/projects/fits_liberator/download_v21.html' : '/projects/fits_liberator/downloads_page/',
+	'/projects/fits_liberator/download_v20.html' : '/projects/fits_liberator/downloads_page/',
+	'/projects/fits_liberator/download_v2.html' : '/projects/fits_liberator/downloads_page/',
+	'/projects/fits_liberator/download_v1.html' : '/projects/fits_liberator/downloads_page/',
+	'/projects/fits_liberator/knownissues.html' : '/projects/fits_liberator/knownissues_faq/',
+	'/projects/fits_liberator/userimages.html' : '/projects/fits_liberator/submit_images/',
+	'/projects/IAU_WG/index.html' : 'http://www.communicatingastronomy.org/',
+	'/projects/cap2005.html' : 'http://www.communicatingastronomy.org/cap2005/',
+	'/projects/vo_images/index.html' : 'http://www.virtualastronomy.org',
+	'/projects/vo_images/improc.html' : 'http://www.virtualastronomy.org',
+	'/projects/fits_liberator/archives.html' : 'projects/fits_liberator/datasets_archives/',
 }
 
 # Additional Redirects
@@ -166,8 +227,8 @@ link_replacements = {
 #
 
 def choose_tasks():
-	#return archivetasks + pagestasks
-	return testtask
+	return archivetasks + pagestasks
+	#return pagestasks
 
 testtask = [
 		ArchiveInitializationTask( Redirect ),
@@ -248,9 +309,10 @@ archivetasks = [
 # find . | grep -E '\.(html|htm)$' | grep -v /html/ | grep -v -E '^\./(about/history/sm4blog/|bin/|bugs/|goodies/slideshows/flash/|goodies/mergingGalaxiesSite/|error_401.html$|pressroom/error_401.html$|error_404.html$|nvff/|projects/fits_liberator/bugs/|projects/python-xmp-toolkit/|q/|search/|xmm/|internal/|sitemap.html$|index.html$|internal_old/|testphp/|mn/|googlea95441ee32fbe5c8.html$|googlead94a0599adf8109.html$|index_test.html$|maptest/|tests/|unavailable.html$|test/|google34e371fb40a60c65.html$|images/search2.html$|integral/|netscape.html$|pressroom/embargo/index.html$|projects/web/article2.html$|projects/anniversary/index2.html$|goodies/interactive_hubble/index_old.html$|projects/fits_liberator/v23files/releasenotes.html$|images/zoom/Template.htm$|projects/av_lab/Summary of Interviews_files/header.htm$|projects/av_lab/Summary of Interviews.htm$|projects/credibility/Summary of Interviews_files/header.htm$|projects/credibility/Summary%20of%20Interviews.htm$|iyalogos.htm$|pressroom/presskits/index.html$)'
 #
 pagestasks = [
+	RedirectTask( link_replacements ),
 	#PageInitializationTask(),
 	#PageMigrationTask( SpacetelescopePageDocument( 'about/further_information/presskits/index.html' ) ),
-	PageMigrationTask( SpacetelescopePageDocument( 'about/further_information/index.html' ) ),
+	#PageMigrationTask( SpacetelescopePageDocument( 'about/further_information/index.html' ) ),
 	PageMigrationTask( SpacetelescopePageDocument( 'about/further_information/links.html' ) ),
 	PageMigrationTask( SpacetelescopePageDocument( 'about/further_information/literature.html' ) ),
 	#PageMigrationTask( SpacetelescopePageDocument( 'about/further_information/litterature.html' ) ),
@@ -335,7 +397,7 @@ pagestasks = [
 	PageMigrationTask( SpacetelescopePageDocument( 'about/history/crew.html' ) ),
 	PageMigrationTask( SpacetelescopePageDocument( 'about/history/sm4_timeline.html' ) ),
 	PageMigrationTask( SpacetelescopePageDocument( 'about/history/sm4_tv.html' ) ),
-#	PageMigrationTask( SpacetelescopePageDocument( 'about/history/timeline_test.html' ) ),
+	#PageMigrationTask( SpacetelescopePageDocument( 'about/history/timeline_test.html' ) ),
 	PageMigrationTask( SpacetelescopePageDocument( 'about/glossary.html' ) ),
 	PageMigrationTask( SpacetelescopePageDocument( 'about/faq.html' ) ),
 	PageMigrationTask( SpacetelescopePageDocument( 'about/index.html' ) ),
@@ -365,7 +427,7 @@ pagestasks = [
 	#PageMigrationTask( SpacetelescopePageDocument( 'goodies/tutorial/index1.html', new_url="/extras/" ) ),
 	#PageMigrationTask( SpacetelescopePageDocument( 'goodies/slideshows.html', new_url="/extras/" ) ),
 	#PageMigrationTask( SpacetelescopePageDocument( 'goodies/ecards/index.html', new_url="/extras/ecards/" ) ),
-	#PageMigrationTask( SpacetelescopePageDocument( 'goodies/ecards/xmas2006/index.html', new_url="/extras/xmas2006/" ) ),
+	PageMigrationTask( SpacetelescopePageDocument( 'goodies/ecards/xmas2006/index.html', new_url="/extras/ecards/xmas2006/" ) ),
 	PageMigrationTask( SpacetelescopePageDocument( 'hubbleshop/cvc_info.html', new_url="/shop/cvc_info/" ) ),
 	PageMigrationTask( SpacetelescopePageDocument( 'hubbleshop/freeorders.html', new_url="/shop/freeorders/" ) ),
 	#PageMigrationTask( SpacetelescopePageDocument( 'hubbleshop/index.html', new_url="/shop/" ) ),
@@ -503,7 +565,8 @@ pagestasks = [
 	PageMigrationTask( SpacetelescopePageDocument( 'science/protoplanetary_extrasolar.html' ) ),
 	PageMigrationTask( SpacetelescopePageDocument( 'jobs/index.html' ) ),
 	SpacetelescopePageFilesCopyTask( bases=['www.spacetelescope.org','spacetelescope.org'], patterns=filesredirectpatterns ),
-	SpacetelescopePageLinksCleanupTask( bases=['www.spacetelescope.org','spacetelescope.org'], patterns=redirectpatterns, link_replacements=link_replacements ),
+	SpacetelescopePageLinksCleanupTask( bases=['www.spacetelescope.org','spacetelescope.org'], patterns=redirectpatterns ),
+	RedirectTask( extra_redirects ),
 ]
 
 tasks = choose_tasks()
