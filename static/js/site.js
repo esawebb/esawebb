@@ -36,7 +36,7 @@ $(document).ready( function(){
 		handleLgImages: "resize",
 		players : ["img","html","flv","qt","wmp"],
     };
-    Shadowbox.init(options);	
+    Shadowbox.init(options);
 
 
 }); 
