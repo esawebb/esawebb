@@ -390,15 +390,11 @@ h1, h2, h3{
 	position:relative;
 }
 
-#singlecolumn {
-}
 
-#singlecolumn table, #singlecolumn tbody, #singlecolumn tr, #singlecolumn td {
+.page_content table, .page_content tbody, .page_content tr, .page_content td {
 	border-color: #e1e1e1;
-	border-spacing: 2px 2px;
-	border-collapse: separate;
-	border-width: 1px;
 	line-height: 15px;
+	border:1px solid #e1e1e1;
 }
 
 
@@ -429,6 +425,7 @@ h1, h2, h3{
 	color: #BBB;
 
 }
+
 
 /* archive search */
 .archive_list_heading {
