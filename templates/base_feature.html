@@ -1,13 +1,24 @@
 {% extends "base.html" %}
 
 {% block feature %}
-<div class='gutter'>
-			<div class='whitegutter bodygradient'>
-			</div>
+
+		<div class='grid_12'>
+		<p></p>
 		</div>
-				
-		<div class='grid_12 nomarg featuredmedia'>
-			
+		
+		<div id='potw_box' class='grid_4'>
+			<a href="#todo"><img src='{{MEDIA_URL}}images/placeholders/potw.png' /></a>
+			<h1><a href="#todo">Picture Of The Week</a></h1>
+			<p>heic0917: Born in beauty: proplyds in the Orion Nebula
+			<br/><a href="#todo">View All</a></p>
+		</div>				
+		
+		<div class='clear'>
+		</div>
+
+
+		<div id="whitebox" class=''>
+			<div class='grid_12 featuredmedia'>
 			<div class="description">
 				<p><a href="#todo">29 January 2010</a></p>
 				<h1><a href="#todo">Vampires and collisions rejuvenate stars</h1>
@@ -17,23 +28,13 @@
 
 			<img src='{{MEDIA_URL}}images/featureshadow.png' class="shadow"/>
 
-		</div>
-		
-		<div class='gutter'>
-			<div class='whitegutter bodygradient'>
+		</div>		
+			<div id='usage' class='grid_4'>
+			SpaceTelescope imagery is free for anyone to use. <a href="/copyright/">Read our complete image/video usage policy.</a>
 			</div>
 		</div>
 		
-		<div id='potw_box' class='grid_4'>
-			<a href="#todo"><img src='{{MEDIA_URL}}images/placeholders/potw.png' /></a>
-			<h1><a href="#todo">Picture Of The Week</a></h1>
-			<p>heic0917: Born in beauty: proplyds in the Orion Nebula
-			<br/><a href="#todo">View All</a></p>
-			
-			<div id="usage">
-			SpaceTelescope imagery is free for anyone to use. <a href="/copyright/">Read our complete image/video usage policy.</a>
-			</div>	
-		</div>
+
 {% endblock %}
 	
 {% block bodystyle %}{%endblock%}
@@ -41,3 +42,4 @@
 {%block mainblock %}
 
 {%endblock%}
+
