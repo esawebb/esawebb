@@ -40,7 +40,7 @@ ol li {
 }
 
 /* external link decoration */
-.extlink {
+#content_area .extlink {
     background-image: url(../images/extlink.png);
     background-repeat: no-repeat;
     background-position: left 3px;
@@ -316,7 +316,6 @@ html>body #mainmenu #mmselected {
     background-image: url(../images/extlink-gray.png);
     background-repeat: no-repeat;
     background-position: right 3px;
-    margin-left:0px;	
 }
 
 #leftmenu .level_1 {
