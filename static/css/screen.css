@@ -312,6 +312,13 @@ html>body #mainmenu #mmselected {
 	
 }
 
+#leftmenu .extlink{
+    background-image: url(../images/extlink-gray.png);
+    background-repeat: no-repeat;
+    background-position: right 3px;
+    margin-left:0px;	
+}
+
 #leftmenu .level_1 {
 
 	font-size:15px;
@@ -336,6 +343,9 @@ html>body #mainmenu #mmselected {
 	margin-left:60px;
 	
 }
+
+
+
 
 /***********/
 /* CONTENT */

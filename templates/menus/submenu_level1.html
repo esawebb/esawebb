@@ -1,14 +1,14 @@
 {% load menus %}
 {% for entry in submenu %}
-
 {%ifequal entry.level 1 %}
 
 {%if entry.selected%}
-<a class="level_1" href="{{ entry.link }}">{{ entry.title }}</a>
+
+<a class="level_1 " href="{{ entry.link }}" {% if entry.on_click %}target="_blank"{%endif%} >{{ entry.title }}</a>
 {% render_submenu entry.children level1 %}
 {%endif%}
 {%else%}
-<a class="level_{{entry.level}} {% if entry.leaf_selected %} selected {%endif%}" href="{{ entry.link }}">{{ entry.title }}</a>
+<a class="level_{{entry.level}} {% if entry.leaf_selected %} selected {%endif%}" href="{{ entry.link }}" {% if entry.on_click %}target="_blank"{%endif%}">{{ entry.title }}</a>
 
 {% render_submenu entry.children level1 %}
 {%endifequal%}

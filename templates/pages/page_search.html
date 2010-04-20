@@ -1,10 +1,11 @@
 {% extends "pages/page_onecolumn.html" %}
 
 {% block site_title %} {{page.title}} {{page.section.append_title}} {% endblock %}
-{% block breadcrumb %}{{ block.super}} {{ site_vars.bc_sep }} {{page.title}}{% endblock %}
-
+{% load menus %}
+{% block breadcrumb %}{{ block.super}}{% breadcrumb_append page.title page.get_absolute_url %}{% endblock %}
 {% block content %}
 {{ page.content }}
+
 <!-- Google Search Result Snippet Begins -->
 <div align="center">
 	<div id="cse-search-results"></div>
@@ -19,3 +20,5 @@
 	<!-- Google Search Result Snippet Ends -->
 </div>
 {% endblock %}
+
+
