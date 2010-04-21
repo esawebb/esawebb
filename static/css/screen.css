@@ -292,6 +292,8 @@ html>body #mainmenu #mmselected {
 	margin-left:10px;
 	padding-right:10px;
 	margin:0px;
+	padding-right:10px;
+	margin-right:-10px;
 	border-right:1px solid #E1E1E1;
 }
 #leftmenu a{
@@ -461,6 +463,11 @@ h1, h2, h3{
 	width:220px;
 	line-height:1.5;
 }
+.leftbord {
+	margin-left:-10px;
+	padding-left:10px;
+	border-left:1px solid #E1E1E1;
+}
 
 #rightcolumn .esohr, hr {
 	clear:both;
@@ -522,9 +529,34 @@ h1, h2, h3{
 	line-height:1;
 	margin-bottom:10px;
 }
+
+/* releases */
+.pr_typeid,.date {
+	font-size:12px;
+	font-weight:normal;	
+	margin-bottom:9px;
+}
+
+.date {
+	color:#1596c1;
+}
+
+.pr_title {
+	font-size:30px;
+	margin-bottom:4px;
+	line-height:1;
+}
+
+.pr_news_feature_link {
+	margin-bottom:15px;
+}
+
+.text_intro {
+	font-weight:bold;
+}
+
 /* paginator */
 
-/* PAGINATOR */
 .paginator {
 	text-align: center;
 	width: 700px;
