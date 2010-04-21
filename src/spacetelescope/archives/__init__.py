@@ -20,7 +20,8 @@ class archive_settings:
     ONLINE_ART_AUTHOR_ROOT = 'archives/artists'
     POSTCARD_ROOT = 'archives/postcards'
     EXHIBITION_ROOT = 'archives/exhibitions'
-    USER_VIDEO_ROOT = 'archives/user_videos'
+    USER_VIDEO_ROOT = 'archives/uservideos'
+    PRESENTATION_ROOT = 'archives/presentations'
     PRINT_LAYOUT_ROOT = 'archives/printlayouts'
     
     

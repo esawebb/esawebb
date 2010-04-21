@@ -72,9 +72,11 @@ urlpatterns += patterns( '',
     ( r'^extras/dvds/', include('spacetelescope.archives.urls.cdroms'), { 'model': CDROM, 'options': CDROMOptions } ),
 	( r'^extras/slideshows/', include('spacetelescope.archives.urls.slideshows'), { 'model': SlideShow, 'options': SlideShowOptions } ),
 	#( r'^extras/printlayouts/', include('spacetelescope.archives.urls.printlayouts'), { 'model': Release, 'options': PrintLayoutOptions } ),
+	( r'^extras/presentations/', include('spacetelescope.archives.urls.presentations'), { 'model': Presentation, 'options': PresentationOptions } ),
 	( r'^kidsandteachers/education/', include('spacetelescope.archives.urls.education'), { 'model': EducationalMaterial, 'options': EducationalMaterialOptions } ),
 	( r'^kidsandteachers/drawings/', include('spacetelescope.archives.urls.drawings'), { 'model': KidsDrawing, 'options': KidsDrawingOptions } ),
 	( r'^press/kits/', include('spacetelescope.archives.urls.presskits'), { 'model': PressKit, 'options': PressKitOptions } ),
+	( r'^videos/uservideos/', include('spacetelescope.archives.urls.uservideos'), { 'model': UserVideo, 'options': UserVideoOptions } ),
     ( r'^projects/fits_liberator/fitsimages/', include('spacetelescope.archives.urls.fitsimages'), { 'model': FITSImage, 'options': FITSImageOptions } ),
     
 

@@ -58,11 +58,20 @@ def pixel_size(obj):
 		return None
 pixel_size.short_description = _('Pixel Size')
 
+
+def resolution(obj):
+	""" Display helper - output the dimensions of an image. """
+	if obj.resolution:
+		return '%s dpi' % obj.resolution 
+	else:
+		return None
+resolution.short_description = _('Resolution')
+
 BookOptions = product_options( "books", "Book", "Books", True )
 BrochureOptions = product_options( "brochures", "Brochure", "Brochures", True )
 EducationalMaterialOptions = product_options( "education", "Material", "Educational Material", True )
 CDROMOptions = product_options( "cdroms", "DVD/CD", "DVDs/CDs", False )
-PosterOptions = product_options( "posters", "Poster", "Posters", False, extra_fields=(pixel_size,'resolution') )
+PosterOptions = product_options( "posters", "Poster", "Posters", False, extra_fields=(pixel_size,resolution) )
 TechnicalDocumentOptions = product_options( "techdocs", "Document", "Technical Documents", True )
 NewsletterOptions = product_options( "newsletters", "Newsletter", "Newsletter & Journals", True )
 MerchandiseOptions = product_options( "merchandise", "Merchandise", "Merchandise", False )
@@ -74,28 +83,28 @@ class KidsDrawingOptions ( StandardOptions ):
 	urlname_prefix = 'drawings'
 
 	info = ( 
-		( _(u'Author'), { 'fields' : ( 'author_name', 'author_age', 'author_city' ), } ),
-		( _(u'About the Drawing'), { 'fields' : ( 'id', release_date,  ), } ),
+		( _(u'Author'), { 'fields' : ( 'name', 'age', 'city', 'country' ), } ),
+		( _(u'About the Drawing'), { 'fields' : ( 'id', ), } ),
 	)
 	
 	downloads = ( 
-		( _(u'Images'), {'resources' : ( 'original', 'large', 'medium', 'screen'  ), 'icons' : { 'original' : 'phot', 'large' : 'phot', 'medium' : 'phot', 'screen' : 'phot'  } } ),
+		( _(u'Images'), {'resources' : ( 'original', 'large', 'screen'  ), 'icons' : { 'original' : 'phot', 'large' : 'phot', 'medium' : 'phot', 'screen' : 'phot'  } } ),
 		)
 	
 	class Queries(object):
-		default = AllPublicQuery( browsers=( 'normal', 'viewall' ), verbose_name="Drawings: View All" )
+		default = AllPublicQuery( browsers=( 'normal', 'viewall' ), verbose_name="Drawings" )
 				
 	
 class PressKitOptions (StandardOptions):
 	urlname_prefix = 'presskits'
 
 	info = ( 
-		( _(u'About the Press Kit'), { 'fields' : ( 'id', release_date,  ), } ),
+		( _(u'About the Press Kit'), { 'fields' : ( 'id', paper_size, 'pages'  ), } ),
 	)
 	
 	downloads = ( 
-		( _(u'Images'), {'resources' : ( 'original', 'large', 'medium', 'screen'  ), 'icons' : { 'original' : 'phot', 'large' : 'phot', 'medium' : 'phot', 'screen' : 'phot'  } } ),
-		( _(u'File Formats'), {'resources' : ( 'pdf', ), 'icons' : { 'pdf' : 'pdf',  } } ),
+		( _(u'Images'), {'resources' : ( 'original', 'large', 'screen'  ), 'icons' : { 'original' : 'phot', 'large' : 'phot', 'medium' : 'phot', 'screen' : 'phot'  } } ),
+		( _(u'File Formats'), {'resources' : ( 'pdf', ), 'icons' : { 'pdf' : 'doc',  } } ),
 		)
 	
 	class Queries(object):
@@ -137,11 +146,11 @@ class ConferencePosterOptions (StandardOptions):
 	urlname_prefix = 'conference_posters'
 
 	info = ( 
-		( _(u'About the Poster'), { 'fields' : ( 'id', release_date,  ), } ),
+		( _( u'About the Poster' ), { 'fields' : ( 'id', paper_size, pixel_size, resolution ), } ), 
 	)
 	
 	downloads = ( 
-		( _(u'Images'), {'resources' : ( 'original', 'large', 'medium', 'screen' ), 'icons' : { 'original' : 'phot', 'large' : 'phot', 'medium' : 'phot', 'screen': 'phot' } } ),
+		( _(u'Images'), {'resources' : ( 'original', 'large', 'screen' ), 'icons' : { 'original' : 'phot', 'large' : 'phot', 'medium' : 'phot', 'screen': 'phot' } } ),
 		)
 
 	class Queries(object):
@@ -156,7 +165,7 @@ class LogoOptions (StandardOptions):
 	)
 	
 	downloads = ( 
-		( _(u'Images'), {'resources' : ( 'original', 'large', 'medium', 'screen' ), 'icons' : { 'original' : 'phot', 'large' : 'phot', 'medium' : 'phot', 'screen': 'phot' } } ),
+		( _(u'Images'), {'resources' : ( 'original', 'large', 'screen' ), 'icons' : { 'original' : 'phot', 'large' : 'phot', 'medium' : 'phot', 'screen': 'phot' } } ),
 		( _(u'File Formats'), {'resources' : ( 'eps', 'illustrator', 'transparent', ), 'icons' : { 'eps' : 'phot', 'illustrator' : 'phot', 'transparent' : 'phot',  } } )
 	)
 
@@ -256,12 +265,12 @@ class CalendarOptions (StandardOptions):
 	urlname_prefix = 'calendars'
 
 	info = ( 
-		( _(u'About the Calendar'), { 'fields' : ( 'id', release_date,  ), } ),
+		( _(u'About the Calendar'), { 'fields' : ( 'id', 'year', 'month',  ), } ),
 	)
 	
 	downloads = ( 
 		( _(u'Images'), {'resources' : ( 'original', 'large', 'medium',  ), 'icons' : { 'original' : 'phot', 'large' : 'phot', 'medium' : 'phot',  } } ),
-		( _(u'File Formats'), {'resources' : ( 'pdf', 'pdfsm' ), 'icons' : { 'pdf' : 'pdf',  'pdfsm' : 'pdf' } } ),
+		( _(u'File Formats'), {'resources' : ( 'pdf', 'pdfsm' ), 'icons' : { 'pdf' : 'doc',  'pdfsm' : 'doc' } } ),
 		)
 	
 	class Queries(object):
@@ -323,7 +332,7 @@ class SlideShowOptions (StandardOptions):
 	urlname_prefix = 'slideshows'
 
 	info = ( 
-		( _(u'About the Slideshow'), { 'fields' : ( 'id', release_date, 'x_size','y_size','resolution' ), } ),
+		( _(u'About the Slideshow'), { 'fields' : ( 'id', 'x_size','y_size', ), } ),
 	)
 	
 	downloads = ( 
@@ -357,13 +366,47 @@ class FITSImageOptions ( StandardOptions ):
 
 	#TODO add author entries to info?
 	info = ( 
-		( _(u'About the FITS Image'), { 'fields' : ( 'id', release_date,  ), } ),
+		( _(u'About the FITS Image'), { 'fields' : ( 'id', 'name', 'city', 'country', ), } ),
 	)
 	
 	downloads = ( 
-		( _(u'Images'), {'resources' : ( 'original', 'large', 'medium', 'screen'  ), 'icons' : { 'original' : 'phot', 'large' : 'phot', 'medium' : 'phot', 'screen' : 'phot'  } } ),
+		( _(u'Images'), {'resources' : ( 'original', 'large', 'screen'  ), 'icons' : { 'original' : 'phot', 'large' : 'phot', 'medium' : 'phot', 'screen' : 'phot'  } } ),
 		)
 	
 	class Queries(object):
-		default = AllPublicQuery( browsers=( 'normal', 'viewall' ), verbose_name="FITS Images: View All" )
+		default = AllPublicQuery( browsers=( 'normal', 'viewall' ), verbose_name="FITS Liberator Images" )
+		
+		
+class UserVideoOptions ( StandardOptions ):
+	   
+	urlname_prefix = 'uservideos'
+
+	#TODO add author entries to info?
+	info = ( 
+		( _(u'About the Video'), { 'fields' : ( 'id', 'name', 'city', 'country', 'email', 'link' ), } ),
+	)
+	
+	downloads = ( 
+		( _(u'Images'), {'resources' : ( 'original', 'large', 'screen'  ), 'icons' : { 'original' : 'phot', 'large' : 'phot', 'medium' : 'phot', 'screen' : 'phot'  } } ),
+		)
+	
+	class Queries(object):
+		default = AllPublicQuery( browsers=( 'normal', 'viewall' ), verbose_name="User Videos" )
+
+
+class PresentationOptions ( StandardOptions ):
+	   
+	urlname_prefix = 'presentations'
+
+	#TODO add author entries to info?
+	info = ( 
+		( _(u'About the Presentation'), { 'fields' : ( 'id', ), } ),
+	)
+	
+	downloads = ( 
+		( _(u'Images'), {'resources' : ( 'original', 'large', 'screen'  ), 'icons' : { 'original' : 'phot', 'large' : 'phot', 'medium' : 'phot', 'screen' : 'phot'  } } ),
+		)
+	
+	class Queries(object):
+		default = AllPublicQuery( browsers=( 'normal', 'viewall' ), verbose_name="Presentations" )
 	

@@ -227,13 +227,13 @@ extra_redirects = {
 #
 
 def choose_tasks():
-	return archivetasks + pagestasks
-	#return pagestasks
+	#return archivetasks + pagestasks
+	return testtask
 
 testtask = [
 		ArchiveInitializationTask( Redirect ),
-		ArchiveInitializationTask( Announcement ), 
-		ArchiveMigrationTask( SpacetelescopeCSVDataSource( '/Volumes/webdocs/spacetelescope/docs/csvfiles/updatedata.csv' ), AnnouncementDataMapping ), 
+		#ArchiveInitializationTask( PressKit ), 
+		ArchiveMigrationTask( SpacetelescopeCSVDataSource( '/Volumes/webdocs/spacetelescope/docs/csvfiles/presentationdata.csv'), PresentationDataMapping ),
 ]
 
 
@@ -302,6 +302,7 @@ archivetasks = [
     ArchiveMigrationTask( SpacetelescopeCSVDataSource( '/Volumes/webdocs/spacetelescope/docs/csvfiles/techdocsdata.csv'), TechnicalDocumentDataMapping ),
     ArchiveMigrationTask( SpacetelescopeCSVDataSource( '/Volumes/webdocs/spacetelescope/docs/csvfiles/exhibitiondata.csv'), ExhibitionDataMapping ),
     ArchiveMigrationTask( SpacetelescopeCSVDataSource( '/Volumes/webdocs/spacetelescope/docs/csvfiles/fitsimagedata.csv'), FITSImageDataMapping ),
+    ArchiveMigrationTask( SpacetelescopeCSVDataSource( '/Volumes/webdocs/spacetelescope/docs/csvfiles/uservideosdata.csv'), UserVideoDataMapping ),
 ]
 
 #

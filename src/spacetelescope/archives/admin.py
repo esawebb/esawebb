@@ -102,7 +102,7 @@ class KidsDrawingAdmin( DjangoplicityModelAdmin, RenameAdmin, ArchiveAdmin ):
 					( None, {'fields': ( 'id',) } ),
 					( 'Publishing', {'fields': ( 'published', 'priority', ), } ),
 					( 'Archive', {'fields': ( 'title', 'description', 'credit', ), } ),
-					( 'Author', {'fields': ( 'author_name', 'author_city', 'author_age' ), } ),
+					( 'Author', {'fields': ( 'name', 'city', 'age' ), } ),
 				)
 	ordering = ('id', )
 	richtext_fields = ('description',)
@@ -115,16 +115,15 @@ class KidsDrawingAdmin( DjangoplicityModelAdmin, RenameAdmin, ArchiveAdmin ):
 	
 
 class LogoAdmin( DjangoplicityModelAdmin, RenameAdmin, ArchiveAdmin ):
-	list_display = ( 'id', 'title', 'published','priority','last_modified', 'resolution','x_size','y_size', view_link('logos') )
-	list_filter = ( 'title', 'published', 'last_modified', 'resolution','x_size','y_size')
-	list_editable = ( 'title', 'published', 'resolution','x_size','y_size' )
+	list_display = ( 'id', 'title', 'published','priority','last_modified', view_link('logos') )
+	list_filter = ( 'title', 'published', 'last_modified', )
+	list_editable = ( 'title', 'published', 'resolution',)
 	search_fields = ( 'id', 'title', 'description', 'credit' )
 	date_hierarchy = 'last_modified'
 	fieldsets = (
 					( None, {'fields': ( 'id', ) } ),
 					( 'Publishing', {'fields': ( 'published', 'priority', ), } ),
 					( 'Archive', {'fields': ( 'title', 'description', 'credit', ), } ),
-					( 'Screen', {'fields': ( 'resolution', 'x_size', 'y_size'), } ),
 				)
 	ordering = ('id', )
 	richtext_fields = ('description',)
@@ -192,7 +191,7 @@ class OnlineArtAuthorAdmin( DjangoplicityModelAdmin, RenameAdmin, ArchiveAdmin )
 	fieldsets = (
 					( None, {'fields': ( 'id', ) } ),
 					( 'Publishing', {'fields': ( 'published', 'priority', ), } ),
-					( 'Archive', {'fields': ( 'name', 'description', 'credit', 'city', 'country', 'links'), } ),
+					( 'Archive', {'fields': ( 'name', 'description', 'credit', 'city', 'country', 'link'), } ),
 				)
 	ordering = ('name', )
 	richtext_fields = ('description',)
