@@ -99,7 +99,7 @@ ol li {
 }
 
 /*******************/
-/* Feature Section */
+/* AFTER-HEADER SECTION */
 /*******************/
 /* contains main menu, breadcrumb, featured media, search, POTW etc */
 
@@ -201,11 +201,12 @@ html>body .featuredmedia {margin-top:-220px;} /* other browsers, see above */
 	color:white;
 	font-size:12px;
 	background:black; /*ie6 only, see gradient bg below */
-		
+	height:120px;
+	width:700px;
 }
 
 html>body .featuredmedia .description {	
-	background: url('../images/feature-gradient.png');
+	background: url('../images/feature-gradient.png'); /* ie6 hack */
 }
 
 .featuredmedia .description * {
@@ -216,6 +217,57 @@ html>body .featuredmedia .description {
 }
 
 
+/* feature rotator */
+
+div.rotator { 
+    /* required settings */
+    background:black; 
+    overflow:hidden; 
+
+} 
+ 
+div.rotator div.items { 
+
+} 
+ 
+div.rotator div.items .feature_item { 
+	display:none;
+    float:left; 
+}
+
+
+
+
+.fbut {
+	padding:10px;
+	padding-top:12px;
+	display:block;
+	position:absolute;
+	background:black;
+	background-opacity:0.4;
+	width:80px;
+	height:20px;
+	z-index:200;
+	color:white;
+	font-size:20px;
+	top:100px	
+}
+.fbut span{
+	cursor:pointer;
+	display:block;		
+}
+.fbut_left {
+
+}
+.fbut_right {
+	right:0px;
+	text-align:right;
+	
+}
+
+.init_hide {
+	opacity:0;
+}
 
 /* main menu */
 
@@ -761,3 +813,7 @@ html>body #socialnetworks {background: url('../images/socialnetworks.png') no-re
 	float:right;
 	margin: 2px;
 }
+
+
+
+ 

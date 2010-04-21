@@ -69,3 +69,36 @@ $.fn.reverseOrder = function() {
 $('#ordereverse').click(function(){
             $('.bestof .entry').reverseOrder();
         });    
+        
+        
+/* feature rotator */
+
+$(".rotator").hover(
+          function () {
+              $(".fbut").fadeIn();
+              
+          }, 
+          function () {
+             $(".fbut").fadeOut();
+          }
+        )
+        
+$('.feature-fade').removeClass("init_hide")
+
+$('.rotator .items' ).
+            cycle({ 
+                fx:    'fade', 
+                timeout: 4000,
+                speed:  1000,
+                pause:  1,
+                next:   '.fbut_right', 
+                prev:   '.fbut_left',
+                pager: '#feat-nav'
+            });;
+
+$('.fbut').fadeOut(0);
+$('.fbut').removeClass('init_hide')
+
+
+
+
