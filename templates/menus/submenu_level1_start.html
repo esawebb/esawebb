@@ -4,11 +4,11 @@
 {% if entry.children %}
 {%ifequal entry.level 1 %}
 {%if entry.selected%}
-<a class="level_1" href="{{ entry.link }}">{{ entry.title }}</a>
+<div><a class="level_1" href="{{ entry.link }}">{{ entry.title }}</a></div>
 {% render_submenu entry.children level1 %}
 {%endif%}
 {%else%}
-<a class="level_{{entry.level}} {% if entry.leaf_selected %} selected {%endif%}" href="{{ entry.link }}">{{ entry.title }}</a>
+<div><a class="level_{{entry.level}} {% if entry.leaf_selected %} selected {%endif%}" href="{{ entry.link }}">{{ entry.title }}</a></div
 {% render_submenu entry.children level1 %}
 {%endifequal%}
 {%endif%}

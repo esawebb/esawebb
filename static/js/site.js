@@ -28,18 +28,6 @@ $(document).ready(function () {
     $(this).extlink();
 });
 
-/*shadowbox */
-
-$(document).ready( function(){
-	var options = {
-		assetURL: MEDIA_URL + "djangoplicity/shadowbox3/",
-		handleLgImages: "resize",
-		players : ["img","html","flv","qt","wmp"],
-    };
-    Shadowbox.init(options);
-
-
-}); 
 
 /* onFocus/onBlur events for search fields */
 function searchbox_focus( box, text ) {
@@ -56,20 +44,7 @@ function searchbox_blur( box, text ) {
 	}
 }
 
-/* reverse order */
-(function($) {
-$.fn.reverseOrder = function() {
-    return this.each(function() {
-        $(this).prependTo( $(this).parent() );
-    });
-};
-})(jQuery);
 
-
-$('#ordereverse').click(function(){
-            $('.bestof .entry').reverseOrder();
-        });    
-        
         
 /* feature rotator */
 
@@ -97,8 +72,13 @@ $('.rotator .items' ).
             });;
 
 $('.fbut').fadeOut(0);
-$('.fbut').removeClass('init_hide')
+$('.fbut').removeClass('init_hide');
 
 
+/*shadowbox */
+
+
+
+Shadowbox.init(options);
 
 
