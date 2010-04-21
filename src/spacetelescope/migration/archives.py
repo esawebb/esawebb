@@ -13,7 +13,7 @@ from datetime import datetime
 from django.contrib.redirects.models import Redirect
 from djangoplicity.migration import MigrationError
 from djangoplicity.migration.apps.archives import CSVDataSource, DataMapping
-from djangoplicity.releases.models import Release, ReleaseType
+from djangoplicity.releases.models import Release, ReleaseType, ReleaseImage, ReleaseVideo
 from djangoplicity.releases.models import Image
 from spacetelescope.archives.models import *
 #from spacetelescope.archives.products.models import *
@@ -182,12 +182,26 @@ class SpacetelescopeDataMapping( DataMapping ):
 		soup = BeautifulSoup( self._dataentry( fieldname ) )
 		return unicode( soup )
 	
+	def get_boolean( self, fieldname ):
+		dat = self._dataentry( fieldname )
+		if dat.lower() == "yes":
+			return True
+		if dat.lower() == "no":
+			return False
+		return None
+	
 	def get_number_field( self, fieldname ):
 		m = numberregex.search( self._dataentry( fieldname ) )
 		if m:
 			return m.group(1)
 		else:
 			return None
+	
+	def lead(self):
+		return strip_and_convert( self.get_text_field('lead') )
+	
+	def headline(self):
+		return strip_and_convert( self.get_text_field('headline') )
 	
 	def release_date( self ):
 		return self._parse_date( self.dataentry['release date/local time Munich (CET or CEST)'] )
@@ -360,20 +374,20 @@ class ProductDataMapping (SpacetelescopeDataMapping):
 
 class NewsDataMapping( SpacetelescopeDataMapping ):
 	BASE = "/news"
-	#format_mapping = {'thumbs':'thumb'}
+	format_mapping = {
+					'pdf':'pdf',
+					'doc':'doc',
+					'text':'text',
+					'science_paper':'science_papers', 
+					}
+	
+	OLD_FMT_ROOT = "/Volumes/webdocs/spacetelescope/docs/news/"
+	NEW_FMT_ROOT = "/hubbleroot/static/archives/news/"
 	
 	# handle layouts
 	#TODO handle print layouts
 	def _move_resources(self,copy=COPY_INSTEAD_OF_MOVE):
-		super(SpaceTelescopeDataMapping,self)._move_resources(copy)
-		
-		
-	
-	def _create_redirect(self):
-		new_url = self.obj.get_absolute_url()
-		for url in self.old_urls():
-			r = Redirect( site = self.conf['pages']['site'], old_path=url, new_path=new_url )
-			r.save()
+		pass
 	
 	def _create_object(self):
 		# id, releasetype, title
@@ -381,46 +395,67 @@ class NewsDataMapping( SpacetelescopeDataMapping ):
 				id=self.id(),
 				release_type=self.release_type(),
 				title=self.title(), 
-				headline=self.headline(),
-				description=self.description(),
+				headline=self.lead(),
+				description=self.text(),
 				notes=self.notes(),
-				links=self.links(),
+				links=self.links_contacts(),
 				release_date=self.release_date(),
 				embargo_date=self.embargo_date(),
 			)
 		self.obj.save()
-	
-	def id(self):
-		return self.dataentry['id']
+		
+#	def id(self):
+#		return self.dataentry['id']
 
 	def release_type(self):
-		return ReleaseType.objects.get_or_create( name=self.dataentry['release_type'] )[0]
+		type = self.dataentry['release_type']
+		mapping = {'News':'Science Release', 'Photo':'Photo Release'}
+		type = mapping[type]
+		return ReleaseType.objects.get_or_create( name=type )[0]
 	
-	def title(self):
-		return self.dataentry['title']
+#	def title(self):
+#		return self.dataentry['title']
 	
-	def headline(self):
-		soup = BeautifulSoup( self.dataentry['lead'] )
-		return unicode( soup )
+	def links_contacts(self):
+		contacts = self.contacts()
+		links = self.links()
 		
-	def description(self):
-		soup = BeautifulSoup( self.dataentry['text'] )
-		return unicode( soup )
+		if contacts:  
+			return "%s<div class='contactdata'><h3>Contacts</h3>%s</div>" % ( links, contacts )
+		else:
+			return links
 		
 	def notes(self):
-		soup = BeautifulSoup( self.dataentry['notes'] )
-		return unicode( soup )
+		return self.get_text_field('notes')
 		
-	def links(self):
-		soup = BeautifulSoup( self.dataentry['links'] )
-		return unicode( soup )
-	
-	def release_date( self ):
-		return self._parse_date( self.dataentry['release date/local time Munich (CET or CEST)'] )
-	
-	def embargo_date( self ):
-		return self._parse_date( self.dataentry['Stage date/local time Munich (CET or CEST)'] )
+
+class NewsMainImageDataMapping( SpacetelescopeDataMapping ):
+	def _create_object(self):
+		# id, releasetype, title
 		
+		rel = Release.objects.get( id = self.id() )
+		
+		try:
+			im = Image.objects.get( id = self.main_image() )
+		
+			print rel.id
+			print im.id
+			ri = ReleaseImage.objects.get( release = rel, archive_item = im )
+			ri.main_visual=True
+			ri.save()
+		except Image.DoesNotExist:
+			pass
+		except:
+			pass
+		
+	def _create_redirect(self):
+		pass
+	
+	def _move_resources(self):
+		pass
+	
+	def main_image(self):
+		return self.get_text_field('main_image')
 
 # Lots
 class ImagesDataMapping( SpacetelescopeDataMapping ):
@@ -431,89 +466,108 @@ class ImagesDataMapping( SpacetelescopeDataMapping ):
 	OLD_FMT_ROOT = "/Volumes/webdocs/spacetelescope/docs/images/"
 	NEW_FMT_ROOT = "/hubbleroot/static/archives/images/"
 	
-	def run(self):
-		self._create_object()
-		self._create_redirect()
-		
 	def _create_object(self):
-		# id, releasetype, title
 		self.obj = Image( 
-				id=self.id(),
-				priority=0,
-				title=self.title(), 
-			)
-		self.obj.save()
-	
-	def id(self):
-		return self.dataentry['id']
-
-	def title(self):
-		soup = BeautifulSoup( self.dataentry['Title'] )
-		return unicode( soup )		
-
-# TODO: extract thumb from main image
-class NewsDataMapping( SpacetelescopeDataMapping ):
-	BASE = "/news"
-	
-	#format_mapping = {'thumbs':'thumb'}
-
-	#OLD_FMT_ROOT = "/Volumes/webdocs/spacetelescope/docs/news/"
-	#NEW_FMT_ROOT = "/hubbleroot/static/archives/education/"
-
-	
-	def _create_redirect(self):
-		new_url = self.obj.get_absolute_url()
-		for url in self.old_urls():
-			r = Redirect( site = self.conf['pages']['site'], old_path=url, new_path=new_url )
-			r.save()
-	
-	def _create_object(self):
-		# id, releasetype, title
-		self.obj = Release( 
-				id=self.id(),
-				release_type=self.release_type(),
-				title=self.title(), 
+				id = self.id(),
+				# alternative id/OPO id, Release number:
+				# Release type: Do we need it for OPO releases? 
+				priority=self.priority(),
+				title=self.title(),
 				headline=self.headline(),
 				description=self.description(),
-				notes=self.notes(),
-				links=self.links(),
-				release_date=self.release_date(),
-				embargo_date=self.embargo_date(),
+				credit=self.credit(),
+				# subject name
+				# object type
+				# facility
+				# instrument
+				wallpapers = self.wallpaper(),
+				zoomify = self.zoomable(),
+				width = self.org_width(),
+				height = self.org_height(),
+				# OPO caption link
+				# OPO Press link
+				# Simbad
+				# subject_category
+				type = self.type(),
+				spatial_reference_dimension = self.spatial_reference_dimension(),
+				spatial_coordinate_frame = self.spatial_coordinate_frame(),
+				spatial_equinox = self.spatial_equinox(),
+				spatial_reference_value = self.spatial_reference_value(),
+				spatial_reference_pixel = self.spatial_reference_pixel(),
+				spatial_scale = self.spatial_scale(),
+				spatial_rotation = self.spatial_rotation(),
+				spatial_coordsystem_projection = self.spatial_coordsystem_projection(),
+				spatial_quality = self.spatial_quality(),
+				spatial_notes = self.spatial_notes(),
 			)
 		self.obj.save()
+		
+		heicrels = self.heic_release_numbers()
+		if heicrels: 
+			for relno in heicrels:
+				rel = Release.objects.get( id = relno  )
+				ri = ReleaseImage( release = rel, archive_item = self.obj , order = self.chrono() )
+				ri.save()
 	
-	def id(self):
-		return self.dataentry['id']
+	def chrono( self ):
+		return self.get_number_field('Chrono, subnumber')
+	
+	def release_number(self):
+		rels = self.get_text_field('Release number')
+		return rels.split( "," )
+	
+	def heic_release_numbers(self):
+		rels = self.release_number()
+		return filter( lambda x: x.startswith("heic"), rels )
+	
+	def type(self):
+		return self.get_text_field('Type')
+	
+	def wallpaper(self):
+		return self.get_boolean('Wallpaper')
+	
+	def zoomable(self):
+		return self.get_boolean('Zoomable')
+	
+	def org_width(self):
+		return self.get_number_field('original pixel width')
+	
+	def org_height(self):
+		return self.get_number_field('original pixel height')
+	
+	def type(self):
+		return self.get_text_field('Type')
+	
+	def spatial_reference_dimension( self ):
+		return self.get_text_field('Spatial.ReferenceDimension')
+	
+	def spatial_coordinate_frame(self):
+		return self.get_text_field('Spatial.CoordinateFrame')
+	
+	def spatial_equinox(self):
+		return self.get_text_field('Spatial.Equinox')
 
-	def release_type(self):
-		return ReleaseType.objects.get_or_create( name=self.dataentry['release_type'] )[0]
+	def spatial_reference_value(self):
+		return self.get_text_field('Spatial.ReferenceValue')
 	
-	def title(self):
-		return self.dataentry['title']
+	def spatial_reference_pixel(self):
+		return self.get_text_field('Spatial.ReferencePixel')
 	
-	def headline(self):
-		soup = BeautifulSoup( self.dataentry['lead'] )
-		return unicode( soup )
-		
-	def description(self):
-		soup = BeautifulSoup( self.dataentry['text'] )
-		return unicode( soup )
-		
-	def notes(self):
-		soup = BeautifulSoup( self.dataentry['notes'] )
-		return unicode( soup )
-		
-	def links(self):
-		soup = BeautifulSoup( self.dataentry['links'] )
-		return unicode( soup )
+	def spatial_scale(self):
+		return self.get_text_field('Spatial.Scale')
 	
-	def release_date( self ):
-		return self._parse_date( self.dataentry['release date/local time Munich (CET or CEST)'] )
+	def spatial_rotation(self):
+		return self.get_text_field('Spatial.Rotation')
 	
-	def embargo_date( self ):
-		return self._parse_date( self.dataentry['Stage date/local time Munich (CET or CEST)'] )
-		
-		
+	def spatial_coordsystem_projection(self):
+		return self.get_text_field('Spatial.CoordsystemProjection')
+	
+	def spatial_quality(self):
+		return self.get_text_field('Spatial.Quality')
+	
+	def spatial_notes(self):
+		return self.get_text_field('Spatial.Notes')
+	
 
 class EducationalMaterialsDataMapping( ProductDataMapping ):
 	model = EducationalMaterial
