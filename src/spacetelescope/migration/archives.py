@@ -18,6 +18,7 @@ from djangoplicity.releases.models import Image
 from spacetelescope.archives.models import *
 #from spacetelescope.archives.products.models import *
 from django.utils.html import strip_tags
+from djangoplicity.utils.videothumbnails import format_duration
 
 import csv
 import re
@@ -175,6 +176,18 @@ class SpacetelescopeDataMapping( DataMapping ):
 				return self.dataentry[key.lower()]
 			except KeyError:
 				return self.dataentry[key.title()]
+			
+			
+	def get_text_field( self, fieldname ):
+		soup = BeautifulSoup( self._dataentry( fieldname ) )
+		return unicode( soup )
+	
+	def get_number_field( self, fieldname ):
+		m = numberregex.search( self._dataentry( fieldname ) )
+		if m:
+			return m.group(1)
+		else:
+			return None
 	
 	def release_date( self ):
 		return self._parse_date( self.dataentry['release date/local time Munich (CET or CEST)'] )
@@ -183,8 +196,7 @@ class SpacetelescopeDataMapping( DataMapping ):
 		return self._parse_date( self.dataentry['Stage date/local time Munich (CET or CEST)'] )
 		
 	def contacts(self):
-		soup = BeautifulSoup( self._dataentry('contacts') )
-		return unicode( soup )
+		return self.get_text_field('contacts')
 	
 	def links (self):
 		soup = BeautifulSoup( self.dataentry['links'] )
@@ -212,16 +224,13 @@ class SpacetelescopeDataMapping( DataMapping ):
 		return self._dataentry('id')
 	
 	def title(self):
-		return strip_and_convert( self._dataentry('Title') ) #.decode('iso-8859-1').encode('utf8') 
+		return strip_and_convert( self._dataentry('Title') ) 
 			
 	def description(self):
-		soup = BeautifulSoup( self._dataentry('Description') )#.decode('iso-8859-1').encode('utf8') )
-		return unicode( soup )
+		return self.get_text_field('Description')
 	
 	def text(self):
-		soup = BeautifulSoup( self._dataentry('text') )#.decode('iso-8859-1').encode('utf8') )
-		return unicode( soup )
-
+		return self.get_text_field('text')
 	
 	def width(self):
 		m = numberregex.search( self._dataentry('Width') )
@@ -236,6 +245,21 @@ class SpacetelescopeDataMapping( DataMapping ):
 			return m.group(1)
 		else:
 			return ''
+		
+	def x_size(self):
+		return self._dataentry('X resolution')
+	
+	def y_size(self):
+		return self._dataentry('Y resolution')
+	
+	def xsize(self):
+		return self._dataentry('xsize')
+	
+	def ysize(self):
+		return self._dataentry('ysize')
+	
+	def resolution(self):
+		return self._dataentry('dpi')
 	
 	def weight(self):
 		return self._dataentry('Weight')
@@ -244,8 +268,7 @@ class SpacetelescopeDataMapping( DataMapping ):
 		return calc_priority(self._dataentry('priority'))
 		
 	def credit(self):
-		soup = BeautifulSoup( self._dataentry('credit') )
-		return unicode( soup ) 
+		return self.get_text_field('credit')
 		
 	def sale(self):
 		return self._dataentry('Sale').lower() in ['yes',]
@@ -253,6 +276,32 @@ class SpacetelescopeDataMapping( DataMapping ):
 	def price(self):
 		p = self._dataentry('Price')
 		return p if p else 0
+	
+	def name(self):
+		return self.get_text_field( 'Name' ) 
+
+	def city(self):
+		return self.get_text_field( 'City' )
+	
+	def town(self):
+		return self.get_text_field( 'Town' )
+
+	def country(self):
+		return self.get_text_field( 'Country' )
+	
+	def email(self):
+		return self.get_text_field('e-mail') 
+		
+	def link(self):
+		return self.get_text_field('link')
+	
+	def duration(self):
+		secs = int(self.get_number_field('duration'))
+		
+		print secs
+		if secs:
+			return format_duration(secs)
+		return None 
 			
 				
 				
@@ -514,43 +563,20 @@ class KidsDrawingsDataMapping( SpacetelescopeDataMapping ):
 				description=self.description(),
 				priority=self.priority(),
 				credit=self.credit(),
-				author_name = self.author_name(),
-				author_age = self.author_age(),
-				author_city = self.author_city(),
+				name = self.name(),
+				age = self.age(),
+				city = self.town(),
+				country = self.country(),
 			)
 		self.obj.save()
 		
-	
-	def id(self):
-		return self.dataentry['id']
-
-	def title(self):
-		return self.dataentry['Title']
-			
-	def description(self):
-		soup = BeautifulSoup( self.dataentry['Description'] )
-		return unicode( soup )
-		
-	def priority(self):
-		return calc_priority(self.dataentry['priority'])
-		
-	def credit(self):
-		return unicode(self.dataentry['credit'].decode('iso-8859-1'))
-		
-	def author_name(self):
-		return unicode(self.dataentry['Name'].decode('iso-8859-1'))
-		
-	def author_age(self):
-		return self.dataentry['Age']
-
-	def author_city(self):
-		return unicode(self.dataentry['Town'].decode('iso-8859-1'))
-
+	def age(self):
+		return self.get_number_field( 'Age' )
 
 
 #TODO copy pdf resources ALL to each month/year
 class CalendarsDataMapping( SpacetelescopeDataMapping ):
-	BASE = "/goodies/calendars"
+	BASE = "/goodies/calendar"
 	
 	format_mapping = {'thumbs':'thumb',
 					  'original':'original',
@@ -589,26 +615,17 @@ class CalendarsDataMapping( SpacetelescopeDataMapping ):
 			print old_path
 			if os.path.exists(old_path):
 				return old_path	
-	
-		
-		
-	
-	def _create_redirect(self):
-		new_url = self.obj.get_absolute_url()
-		for url in self.old_urls():
-			r,created = Redirect.objects.get_or_create( site = self.conf['pages']['site'], old_path=url )
-			if created:
-				r.new_path = new_url
-			r.save()
+
 
 	
 	def _create_object(self):
 		# id, releasetype, title
 		self.obj = Calendar( 
 				id=self.id(),
+				title=self.title(),
 				year=self.year(),
 				month=self.month(),
-				description=self.description(),
+				description=self.caption(),
 				#priority=self.priority(),
 				credit=self.credit(),
 			)
@@ -625,15 +642,13 @@ class CalendarsDataMapping( SpacetelescopeDataMapping ):
 		return int(self.MONTHS[self.dataentry['month']])
 	
 	
-	def description(self):
-		soup = BeautifulSoup( self.dataentry['caption'].decode('iso-8859-1').encode('utf8') )
+	def caption(self):
+		soup = BeautifulSoup( self.dataentry['caption'] )
 		return unicode( soup )
 		
 	def priority(self):
 		return 0 # there is no prio in csv
-		
-	def credit(self):
-		return self.dataentry['credit'].decode('iso-8859-1').encode('utf8')
+
 		
 class SlideShowDataMapping( SpacetelescopeDataMapping ):
 	BASE = "/goodies/slideshows"
@@ -647,17 +662,6 @@ class SlideShowDataMapping( SpacetelescopeDataMapping ):
 	OLD_FMT_ROOT = "/Volumes/webdocs/spacetelescope/docs/goodies/slideshows/"
 	NEW_FMT_ROOT = "/hubbleroot/static/archives/slideshows/"
 	
-	
-	
-	def _create_redirect(self):
-		new_url = self.obj.get_absolute_url()
-		for url in self.old_urls():
-			r,created = Redirect.objects.get_or_create( site = self.conf['pages']['site'], old_path=url )
-			if created:
-				r.new_path = new_url
-			r.save()
-
-	
 	def _create_object(self):
 		# id, releasetype, title
 		self.obj = SlideShow( 
@@ -666,38 +670,15 @@ class SlideShowDataMapping( SpacetelescopeDataMapping ):
 				description=self.description(),
 				priority=self.priority(),
 				credit=self.credit(),
-				x_size = self.x_size(),
-				y_size = self.y_size(),
+				x_size = self.xsize(),
+				y_size = self.ysize(),
 			)
 		self.obj.save()
-		
-	def id(self):
-		return self.dataentry['id']
-	
-	def title(self):
-		return self.dataentry['Title']
-			
-	def description(self):
-		soup = BeautifulSoup( self.dataentry['Description'] )
-		return unicode( soup )
-		
-	def priority(self):
-		return calc_priority(self.dataentry['priority'])
-		
-	def credit(self):
-		return unicode(self.dataentry['Credit'])
-	
-	def x_size (self):
-		return self.dataentry['xsize']
-	
-	def y_size (self):
-		return self.dataentry['ysize']
-
 
 
 class CDROMDataMapping(ProductDataMapping):
 	model = CDROM
-	BASE = "/extras/dvds"
+	BASE = "/goodies/cdroms"
 	
 	format_mapping = {'thumbs':'thumb',
 					  'original':'original',
@@ -742,7 +723,7 @@ class BrochureDataMapping(ProductDataMapping):
 	
 class MerchandiseDataMapping(ProductDataMapping):
 	model = Merchandise
-	BASE = "/extras/merchandise"
+	BASE = "/goodies/merchandise"
 	format_mapping = {'thumbs':'thumb',
 					  'original':'original',
 					  'screen':'screen',
@@ -769,7 +750,7 @@ class NewsletterDataMapping( ProductDataMapping ):
 
 class PostCardDataMapping(ProductDataMapping):
 	model = PostCard
-	BASE = "/extras/postcards"
+	BASE = "/goodies/postcards"
 	format_mapping = {'thumbs':'thumb',
 					  'original':'original',
 					  'screen':'screen',
@@ -781,7 +762,7 @@ class PostCardDataMapping(ProductDataMapping):
 
 class PosterDataMapping(ProductDataMapping):
 	model = Poster
-	BASE = "/extras/posters"
+	BASE = "/goodies/posters"
 	format_mapping = {'thumbs':'thumb',
 					  'original':'original',
 					  'screen':'screen',
@@ -792,15 +773,7 @@ class PosterDataMapping(ProductDataMapping):
 	NEW_FMT_ROOT = "/hubbleroot/static/archives/posters/"
 	
 	extra_fields = ['x_size','y_size','resolution']
-	
-	def x_size(self):
-		return self._dataentry('X resolution')
-	
-	def y_size(self):
-		return self._dataentry('Y resolution')
-	
-	def resolution(self):
-		return self._dataentry('dpi')
+
 
 class StickerDataMapping(ProductDataMapping):
 	model = Sticker
@@ -818,7 +791,7 @@ class StickerDataMapping(ProductDataMapping):
 class PressKitDataMapping(ProductDataMapping):
 	model = PressKit
 	has_price = False
-	BASE = "/products/presskits"
+	BASE = "/about/further_information/presskits"
 	format_mapping = {'thumbs':'thumb',
 					  'original':'original',
 					  'screen':'screen',
@@ -837,7 +810,7 @@ class PressKitDataMapping(ProductDataMapping):
 #TODO copy image resources
 class AnnouncementDataMapping( ProductDataMapping ):
 
-	BASE = "/announcements"
+	BASE = "/updates"
 	
 	format_mapping = {'thumbs':'thumb',
 					  'original':'original',
@@ -908,36 +881,12 @@ class ConferencePosterDataMapping(SpacetelescopeDataMapping):
 				resolution=self.resolution(),
 				priority=self.priority(),
 				credit=self.credit(),
-				x_size = 0,
-				y_size = 0,
+				x_size = self.x_size(),
+				y_size = self.y_size(),
 				)
 		self.obj.save()	
-
-	def id(self):
-		return self.dataentry['id']
+		
 	
-	def title(self):
-		return self.dataentry['Title'].decode('iso-8859-1').encode('utf8') 
-			
-	def description(self):
-		soup = BeautifulSoup( self.dataentry['Description'] )
-		return unicode( soup )
-
-	def width(self):
-		return self.dataentry['width']
-		
-	def height(self):
-		return self.dataentry['height']
-	
-	def resolution(self):
-		return self.dataentry['dpi']
-		
-	def priority(self):
-		return calc_priority(self.dataentry['priority'])
-		
-	def credit(self):
-		return self.dataentry['credit'].decode('iso-8859-1').encode('utf8') 
-
 class LogoDataMapping(SpacetelescopeDataMapping):
 	BASE = "/about_us/logos"
 	
@@ -962,28 +911,9 @@ class LogoDataMapping(SpacetelescopeDataMapping):
 				description=self.description(),
 				priority=self.priority(),
 				credit=self.credit(),
-				x_size =0,
-				y_size =0,
-				resolution = 0,
 				)
 		self.obj.save()	
 
-	def id(self):
-		return self.dataentry['id']
-	
-	def title(self):
-		return self.dataentry['Title'].decode('iso-8859-1').encode('utf8') 
-			
-	def description(self):
-		soup = BeautifulSoup( self.dataentry['Description'] )
-		return unicode( soup )
-
-		
-	def priority(self):
-		return calc_priority(self.dataentry['priority'])
-		
-	def credit(self):
-		return self.dataentry['credit'].decode('iso-8859-1').encode('utf8') 
 
 class TechnicalDocumentDataMapping(ProductDataMapping):
 	model = TechnicalDocument
@@ -1002,7 +932,7 @@ class TechnicalDocumentDataMapping(ProductDataMapping):
 
 
 class ExhibitionDataMapping(SpacetelescopeDataMapping):
-	BASE = "/projects/exhibitions/"
+	BASE = "/projects/exhibitions"
 	
 	format_mapping = {'thumbs':'thumb',
 					  'original':'original',
@@ -1024,26 +954,10 @@ class ExhibitionDataMapping(SpacetelescopeDataMapping):
 				credit=self.credit(),
 				)
 		self.obj.save()	
-
-	def id(self):
-		return self.dataentry['id']
+		
 	
-	def title(self):
-		return self.dataentry['Title'].decode('iso-8859-1').encode('utf8') 
-			
-	def description(self):
-		soup = BeautifulSoup( self.dataentry['Description'] )
-		return unicode( soup )
-
-	def priority(self):
-		return calc_priority(self.dataentry['priority'])
-		
-		
-	def credit(self):
-		return self.dataentry['credit'].decode('iso-8859-1').encode('utf8') 
-
 class FITSImageDataMapping(SpacetelescopeDataMapping):
-	BASE = "/projects/fits_liberator/fitsimages/"
+	BASE = "/projects/fits_liberator/fitsimages"
 	
 	format_mapping = {'thumbs':'thumb',
 					  'original':'original',
@@ -1059,7 +973,8 @@ class FITSImageDataMapping(SpacetelescopeDataMapping):
 		
 		self.obj = FITSImage( 
 				id=self.id(),
-				title=self.title(), 
+				title=self.title(),
+				name=self.name(), 
 				description=self.description(),
 				priority=self.priority(),
 				credit=self.credit(),
@@ -1067,30 +982,40 @@ class FITSImageDataMapping(SpacetelescopeDataMapping):
 				country = self.country(),
 				)
 		self.obj.save()	
-
-	def id(self):
-		return self.dataentry['id']
+		
+		
+class UserVideoDataMapping(SpacetelescopeDataMapping):
+	BASE = "/videos/users_videos"
 	
-	def title(self):
-		return self.dataentry['Title'].decode('iso-8859-1').encode('utf8') 
+	format_mapping = {'thumbs':'thumb',
+					  'broadcast':'broadcast',
+					  'h264':'h264',
+					  'large':'large',
+					  '180px' : '180px',
+					  '320px' : '320px',
+					  'broadcast' : 'broadcast',
+					  }
+
+	OLD_FMT_ROOT = "/Volumes/webdocs/spacetelescope/docs/videos/user_videos/"
+	NEW_FMT_ROOT = "/hubbleroot/static/archives/uservideos/"
+
+	def _create_object(self):
+		
+		self.obj = UserVideo( 
+				id=self.id(),
+				title=self.title(),
+				description=self.description(),
+				priority=self.priority(),
+				credit=self.credit(),
+				city = self.city(),
+				country = self.country(),
+				email = self.email(),
+				link = self.link(),
+				duration = self.duration(),
+				)
+		self.obj.save()	
+
 			
-	def description(self):
-		soup = BeautifulSoup( self.dataentry['Description'] )
-		return unicode( soup )
-
-	def city(self):
-		return self.dataentry['City'].decode('iso-8859-1').encode('utf8') 
-
-	def country(self):
-		return self.dataentry['Country'].decode('iso-8859-1').encode('utf8') 
-
-		
-	def priority(self):
-		return calc_priority(self.dataentry['priority'])
-		
-	def credit(self):
-		return self.dataentry['credit'].decode('iso-8859-1').encode('utf8') 
-	
 
 class OnlineArtAuthorDataMapping(SpacetelescopeDataMapping):
 	BASE = "/goodies/art"
@@ -1116,46 +1041,14 @@ class OnlineArtAuthorDataMapping(SpacetelescopeDataMapping):
 				city = self.city(),
 				country = self.country(),
 				email = self.email(),
-				links = self.links(),
+				link = self.link(),
 				priority = self.priority()
 				)
 		self.obj.save()	
-		
-		
 
-	def id(self):
-		return self.dataentry['id']
-	
-
-	
-	def name(self):
-		return self.dataentry['Name'].decode('iso-8859-1').encode('utf8') 
-			
-	def description(self):
-		soup = BeautifulSoup( self.dataentry['Description'] )
-		return unicode( soup )
-	
-	def priority(self):
-		return calc_priority(self.dataentry['priority'])
-	
-	def city(self):
-		return self.dataentry['City'].decode('iso-8859-1').encode('utf8') 
-
-	def country(self):
-		return self.dataentry['Country'].decode('iso-8859-1').encode('utf8') 
-
-	def email(self):
-		return self.dataentry['e-mail'].decode('iso-8859-1').encode('utf8') 
-		
-	def credit(self):
-		return self.dataentry['credit'].decode('iso-8859-1').encode('utf8') 
-	
-	def links(self):
-		soup = BeautifulSoup( self.dataentry['link'] )
-		return unicode( soup )
 	
 class OnlineArtDataMapping(SpacetelescopeDataMapping):
-	BASE = "/goodies/art/"
+	#BASE = "/goodies/art"
 	
 	format_mapping = {'thumbs':'thumb',
 					  'original':'original',
@@ -1167,45 +1060,45 @@ class OnlineArtDataMapping(SpacetelescopeDataMapping):
 	OLD_FMT_ROOT = "/Volumes/webdocs/spacetelescope/docs/goodies/art"
 	NEW_FMT_ROOT = "/hubbleroot/static/archives/art/"
 
-	def _create_object(self):
+	def _create_object( self ):
 		
 		self.obj = OnlineArt( 
-				id=self.id(),
-				title=self.title(), 
-				description=self.description(),
+				id = self.id(),
+				title = self.title(),
+				description = self.description(),
 				priority = self.priority(),
-				artist = OnlineArtAuthor.objects.get(id=self.artist())
-				)
+				artist = OnlineArtAuthor.objects.get( id = self.artist() )
+								)
 		self.obj.save()	
 
+
 	def artist (self):
-		return self.dataentry['artist_id']
+		return self.get_text_field('artist_id')
 	
-	def id(self):
-		return self.dataentry['id']
-	
-	def title(self):
-		return self.dataentry['Title'].decode('iso-8859-1').encode('utf8') 
-			
-	def description(self):
-		soup = BeautifulSoup( self.dataentry['Description'] )
-		return unicode( soup )
-	
-	def priority(self):
-		return calc_priority(self.dataentry['priority'])
-	
-	def city(self):
-		return self.dataentry['City'].decode('iso-8859-1').encode('utf8') 
 
-	def country(self):
-		return self.dataentry['Country'].decode('iso-8859-1').encode('utf8') 
+class PresentationDataMapping(SpacetelescopeDataMapping):
+	BASE = "/goodies/presentations"
+	
+	format_mapping = {'thumbs':'thumb',
+					  'original':'original',
+					  'screen':'screen',
+					  'medium':'medium',
+					  'large':'large',
+					  'ppt':'ppt',
+					  'pps':'pps',
+					  'pdf':'pdf',
+					  }
 
-	def email(self):
-		return self.dataentry['e-mail'].decode('iso-8859-1').encode('utf8') 
+	OLD_FMT_ROOT = "/Volumes/webdocs/spacetelescope/docs/goodies/presentations"
+	NEW_FMT_ROOT = "/hubbleroot/static/archives/presentations/"
+
+	def _create_object(self):
 		
-	def credit(self):
-		return self.dataentry['credit'].decode('iso-8859-1').encode('utf8') 
-	
-	def links(self):
-		soup = BeautifulSoup( self.dataentry['link'] )
-		return unicode( soup )
+		self.obj = Presentation( 
+				id=self.id(),
+				title=self.title(),
+				description=self.description(),
+				priority=self.priority(),
+				credit=self.credit(),
+				)
+		self.obj.save()	
