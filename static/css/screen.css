@@ -889,5 +889,6 @@ html>body #socialnetworks {background: url('../images/socialnetworks.png') no-re
 	font-size: 11px;
 }
 
-
- 
+.titlerow {
+	margin-bottom: 10px;
+}

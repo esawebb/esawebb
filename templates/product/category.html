@@ -31,9 +31,9 @@
 <td class="imagerow" width="25"><a href="{{ product.get_absolute_url }}"><img src="{{ item.resource_thumb.url }}" width="122" alt="{{item.title}}" /></a></td>{% endarchiveitem %}{% endfor %}
 </tr>
 <tr>{% for product in list %}{% archiveitem product as item %}
-<td class="titlerow"><span class="price" align="right">Price:&nbsp;{{ product|discount_price:sale|currency }}</span></td>{% endarchiveitem %}{% endfor %}
+<td class="pricerow"><span class="price" align="right">Price:&nbsp;{{ product|discount_price:sale|currency }}</span></td>{% endarchiveitem %}{% endfor %}
 </tr>
-<tr>{% for product in list %}{% archiveitem product as item %}
+<tr class="titlerow">{% for product in list %}{% archiveitem product as item %}
 <td class="titlerow">{{item.title}}</td>{% endarchiveitem %}{% endfor %}
 </tr>
 {% endfor %}

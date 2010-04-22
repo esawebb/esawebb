@@ -635,7 +635,7 @@ class ImagesDataMapping( SpacetelescopeDataMapping ):
 		nonheic = self.nonheic_release_numbers()
 		
 		if nonheic:
-			return "%s (release id)" % (self.alternate_id(), ", ".join(nonheic) )
+			return "%s (release id)" % (", ".join(nonheic) )
 		elif self.alternate_id():
 			return "%s (alternative id)" % self.alternate_id()
 		else:
