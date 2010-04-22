@@ -949,3 +949,14 @@ a.teasertext:hover {
 	float: left;
 	margin-right: 10px;
 }
+
+.hidden {
+display:none;
+}
+
+.inline_image {
+	backgroun-color: red;
+	float: left;
+	margin-right: 10px;
+	margin-bottom: 10px;
+}

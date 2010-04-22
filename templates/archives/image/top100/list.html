@@ -30,7 +30,7 @@
 {% for item in object_list reversed %}
 	<a class='entry' href="{{ item.get_absolute_url }}">
 		<div class='image'>
-			<img src="http://www.spacetelescope.org/images/medium/{{ item.id }}.jpg"  alt="{{item.title}}" />
+			<img src="{{ item.resource_medium.url }}"  alt="{{item.title}}" />
 		</div>
 		<div class='descr'>
 			<div class='number'>{{forloop.revcounter}}</div>
