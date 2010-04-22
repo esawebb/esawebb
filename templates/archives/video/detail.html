@@ -1,0 +1,54 @@
+{% extends "base_twocolumn.html" %}
+
+{% block site_title %}{{object.title}} | {{block.super}}{% endblock %}
+
+{% load menus %}
+{% block breadcrumb %}{{ block.super}}{% breadcrumb_append object.title object.get_absolute_url %}{% endblock %}
+
+{% block twocol_feature %}
+<style>
+.c75l {
+min-width: 640px;
+}
+
+.subcolumns{
+min-width: 860px;
+}
+</style>
+<h1 style="min-width:640px;">{{ object.title }}</h1>
+{% include 'archives/embargo_notice.html' %}
+{% if object.resource_medium_flash %}
+<div style="width:100%;padding-top:10px;padding-bottom:10px;"><div align="center" id="flashplayer"></div></div>
+<script type="text/javascript" src="{{MEDIA_URL}}djangoplicity/shadowbox3/libraries/mediaplayer-licensed/swfobject.js"></script>
+<script type="text/javascript">
+  var so = new SWFObject('{{MEDIA_URL}}djangoplicity/shadowbox3/libraries/mediaplayer-licensed/player-licensed.swf','mpl',640,360+24,'9');
+  so.addParam('allowfullscreen','true');
+  so.addParam('flashvars','file={{object.resource_medium_flash.url}}&autostart=false&image={{object.resource_videoframe.url}}&backcolor=0x000000&frontcolor=0xCCCCCC&lightcolor=0x005ba0&plugins=gapro-1&gapro.accountid={{ GA_ID }}');
+  so.write('flashplayer');
+</script>   
+
+{% else %}
+{% if object.resource_videoframe %}
+<div class="archive_image">
+<div class="image_container"><img src="{{object.resource_videoframe.url}}" width="640" border="0" alt="{{object}}" /></div>
+</div>
+{% endif %}
+{% endif %}
+{% endblock %}
+
+{% block content %}
+{% if object.headline %}<p>{{ object.headline }}</p>{% endif %}
+<p>{{ object.description|safe }}</p>
+<p><strong>Credit:</strong><div class="credit"><p>{{ object.credit|safe|default:"ESO" }}</p></div></p>
+{% include 'archives/extra_footer.html' %}
+{% endblock %}
+
+
+{% block rightcolumn %}
+{% include admin_template %}
+{% include info_template %}
+<hr />
+{% include "images/embedded_list.html" %}
+{% include "videos/embedded_list.html" %}
+{% include resources_template %}
+{% endblock %}
