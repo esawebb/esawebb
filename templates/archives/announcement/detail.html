@@ -5,12 +5,15 @@
 {% load menus %}
 {% block breadcrumb %}{{ block.super}}{% breadcrumb_append object.title object.get_absolute_url %}{% endblock %}
 
-{% block content %}
+{% block twocol_feature %}
 {% load djangoplicity_datetime %}
 <h3 class="pr_typeid">{{object.id}} - Announcement</h3>
 <h1 class="pr_title">{{object.title}}</h1>
 <p class="date">{{object.release_date|datetime:"DATE_LONG"}}</p>
 {% include 'archives/embargo_notice.html' %}
+{% endblock %}
+
+{% block content %}
 {% if object.resource_medium %}
 <div class="archive_image">
 <div class="image_container">{% if object.resource_screen %}<a href="{{object.resource_screen.url}}" rel="shadowbox" title="{{object}}" />

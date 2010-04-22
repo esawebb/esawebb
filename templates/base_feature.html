@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-
+{% load djangoplicity_datetime %}
 {% block feature %}
 
 		<div class='grid_12'>
@@ -7,10 +7,10 @@
 		</div>
 		
 		<div id='potw_box' class='grid_4'>
-			<a href="#todo"><img src='{{MEDIA_URL}}images/placeholders/potw.png' /></a>
-			<h1><a href="#todo">Picture Of The Week</a></h1>
-			<p>heic0917: Born in beauty: proplyds in the Orion Nebula
-			<br/><a href="#todo">View All</a></p>
+			<a href="{{potw.visual.get_absolute_url}}"><img src='{{potw.visual.resource_potwmedium.url}}' width="220" height="140" /></a>
+			<h1>Picture Of The Week</h1>
+			<p><a href="{{potw.visual.get_absolute_url}}">{{potw.id}}: {{potw.visual.title}}</a>
+			<br/><a class="viewall" href="{% url potw_defaultquery %}">View All</a></p>
 		</div>				
 		
 		<div class='clear'>
@@ -27,41 +27,16 @@
 			<div class="fbut fbut_left init_hide"><span>&#9664; Prev</span></div>
 			<div class="fbut fbut_right init_hide"><span>Next &#9654;</span></div>
 		    <div class="items"> 
-		     
+		     	{% for object in releases %}
 		        <div class='feature_item'>
 		        	<div class="description">
-						<p><a href="#todo">29 January 2010</a></p>
-						<h1><a href="#todo">Vamsdfpires and collisions rejuvenate stars</h1>
-						<p>Using the NASA/ESA Hubble Space Telescope, astronomers have uncovered two distinct kinds of "rejuvenated" stars in the globular cluster Messier 30. A new study shows that both stellar collisions and a...</a></p>
+						<p><a href="{{object.get_absolute_url}}">{{object.release_date|datetime:"DATE_LONG"}}</a></p>
+						<h1><a href="{{object.get_absolute_url}}">{{object.title}}</h1>
+						<p>{{object.headline|truncatewords:35}}</a></p>
 					</div>
-					<img src='{{MEDIA_URL}}images/placeholders/feature1.png' />			
+					<img src="{{object.main_image.resource_newsfeature.url}}" width="700" height="280" />			
 		        </div>
-		        <div class='feature_item'>
-		        	<div class="description">
-						<p><a href="#todo">29 January 2010</a></p>
-						<h1><a href="#todo">Vampir collisions rejuvenate stars</h1>
-						<p>Using the NASA/ESA Hubble Space Telescope, astronomers have uncovered two distinct kinds of "rejuvenated" stars in the globular cluster Messier 30. A new study shows that both stellar collisions and a...</a></p>
-					</div>
-					<img src='{{MEDIA_URL}}images/placeholders/feature2.png' />			
-		        </div>
-		        <div class='feature_item'>
-		        	<div class="description">
-						<p><a href="#todo">29 January 2010</a></p>
-						<h1><a href="#todo">Vampires and s rejuvenate stars</h1>
-						<p>Using the NASA/ESA Hubble Space Telescope, astronomers have uncovered two distinct kinds of "rejuvenated" stars in the globular cluster Messier 30. A new study shows that both stellar collisions and a...</a></p>
-					</div>
-					<img src='{{MEDIA_URL}}images/placeholders/feature3.png' />			
-		        </div>
-		        <div class='feature_item'>
-		        	<div class="description">
-						<p><a href="#todo">29 January 2010</a></p>
-						<h1><a href="#todo">Vampirejuvenate stars</h1>
-						<p>Using the NASA/ESA Hubble Space Telescope, astronomers have uncovered two distinct kinds of "rejuvenated" stars in the globular cluster Messier 30. A new study shows that both stellar collisions and a...</a></p>
-					</div>
-					<img src='{{MEDIA_URL}}images/placeholders/feature4.png' />			
-		        </div>
-		         
-
+		        {% endfor %}
 		    </div> 
 
 		</div> 

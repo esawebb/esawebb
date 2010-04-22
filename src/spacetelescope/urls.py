@@ -42,6 +42,8 @@ urlpatterns += patterns( '',
 	( r'^admin/', include(admin_site.urls), { 'SSL': True } ),
 	( r'^admin/import/', include('djangoplicity.archives.importer.urls'), { 'SSL': True } ),
 	
+	
+	( r'^/shop/checkout/$', 'spacetelescope.views.shop_closed' ),
 	 
     # Server alive check (used for load balancers - called every 5 secs )
     ( r'^alive-check.dat$', 'djangoplicity.views.alive_check', { 'SSLAllow' : True } ),

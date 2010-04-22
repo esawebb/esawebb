@@ -441,7 +441,12 @@ class Announcement( archives.ArchiveModel, models.Model ):
 			last_modified = True
 			created = True
 			published = True
-			
+
+	@staticmethod
+	def get_latest_announcement( len=1 ):
+		qs = Announcement.objects.filter( release_date__lte=datetime.now(), published=True ).order_by( '-release_date' )[:len]
+		return qs
+	
 	class Meta:
 		ordering = ['-release_date','-id']
 		#get_latest_by = "release_date"

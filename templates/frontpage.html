@@ -1,45 +1,30 @@
 {% extends "base_feature.html" %}
-
+{% load djangoplicity_datetime %}
 {%block mainblock%}
 		<div class='grid_6 fp_news'>
 			<h1>
-				<a href="#todo">Announcements</a>
+				<a href="{% url announcements_defaultquery %}">Announcements</a>
 				<a href="#todo"><img src="{{MEDIA_URL}}images/rssicon.png" /></a>
 			</h1>
 			
+			{% for object in announcements %}
 			<div class='entry'>
-				<img src='{{MEDIA_URL}}images/placeholders/news2.png' />
-				<div class='info'>
-					<div class='title'>Vampires and Collisions rejuvenate stars</div>
-					<div class='date'>23-Dec-2009</div>
+				{% if object.resource_newsmini %}<a href="{{object.get_absolute_url}}"><img src='{{ object.resource_newsmini.url }}' /></a>
+				<div class='info withimg'>
+				{% else %}
+				<div class='info extra'>
+				{% endif %}
+					<div class='title'><a href="{{object.get_absolute_url}}">{{ object.title }}</a></div>
+					<div class='date'>{{ object.release_date|datetime:"DATE_LONG"}}</div>
 				</div>
+				
 			</div>
-			<div class='entry'>
-				<img src='{{MEDIA_URL}}images/placeholders/news2.png' />
-				<div class='info'>
-					<div class='title'>Vampires and Collisions rejuvenate stars</div>
-					<div class='date'>23-Dec-2009</div>
-				</div>
-			</div>
-			<div class='entry'>
-				<img src='{{MEDIA_URL}}images/placeholders/news2.png' />
-				<div class='info'>
-					<div class='title'>Vampires and Collisions rejuvenate stars</div>
-					<div class='date'>23-Dec-2009</div>
-				</div>
-			</div>
-			<div class='entry'>
-				<img src='{{MEDIA_URL}}images/placeholders/news2.png' />
-				<div class='info'>
-					<div class='title'>Vampires and Collisions rejuvenate stars</div>
-					<div class='date'>23-Dec-2009</div>
-				</div>
-			</div>
+			{% endfor %}
 
 		</div>
 		<div class='grid_6 fp_news'>
 			<h1>
-				<a href="#todo">Hubblecast</a>
+				<a href="{% url videos_query_category "hubblecast" %}">Hubblecast</a>
 				<a href="#todo"><img src="{{MEDIA_URL}}images/rssicon.png" /></a>
 			</h1>
 			<div class='entry'>

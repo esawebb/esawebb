@@ -144,7 +144,6 @@ ol li {
 
 /* potw */
 #potw_box {
-	
 	height:220px;
 }
 #potw_box p {
@@ -152,10 +151,21 @@ ol li {
 	line-height:1.5;
 
 }
+
 #potw_box h1 {
 	margin-top:10px;
 	font-size:14px;
+	line-height: 15px;
 	margin-bottom:0px;
+	color:#ffffff;
+}
+
+#potw_box a.viewall {
+	color:#ffffff;
+}
+
+#potw_box a {
+	color:#1596c1;
 }
 
 
@@ -251,7 +261,7 @@ div.rotator div.items .feature_item {
 	z-index:200;
 	color:white;
 	font-size:20px;
-	top:100px	
+	top:60px	
 }
 .fbut span{
 	cursor:pointer;
@@ -705,17 +715,36 @@ h2, h3{
 
 .fp_news .entry img  {
 	float:left;
+	width: 60px;
 }
 .fp_news .entry .info {
 	float:left;
-	margin-left:10px;
+}
 
+.fp_news .entry .withimg {
+	width: 260px;
+	margin-left:10px;
+}
+
+.fp_news .entry .extra {
+	width: 330px;
+	margin-left:0px;
+}
+
+.fp_news .entry a {
+	color: #515151;
+}
+
+.fp_news .entry a:hover {
+	color: #818181;
+	text-decoration: none;
 }
 
 .fp_news .entry {
 	display:block;
 	clear:both;
 	line-height:1.5;
+	
 }
 
 .price {
@@ -790,6 +819,7 @@ table.shoppingcart td {
 }
 .potd_box h1 {
 	margin-bottom:10px;
+	font-size: 15px;
 }
 
 .potd_box .title {
