@@ -6,14 +6,16 @@
 {% for item in object_list %}
 <div class="pr_box">
 
-<div class="pr_idtype">{{ item.id }}</div>
+<div class="pr_idtype">{{ item.id }} - Announcement</div>
 <h2 class="pr_headline"><a href="{{ item.get_absolute_url }}">{{item.title}}</a></h2>
 <div class="pr_lead">
-{% if item.main_image %}{% if item.main_image.resource_wallpaperthumbs %}
-<div class="pr_list_image"><a href="{{ item.get_absolute_url }}"><img src="{{ item.main_image.resource_wallpaperthumbs.url }}" width="122" height="92" /></a></div>
-{% endif %}{% endif %}
+{% if item.resource_thumb %}
+<div class="pr_list_image"><a href="{{ item.get_absolute_url }}"><img src="{{ item.resource_thumb.url }}" width="122" /></a></div>
+{% endif %}
 <div class="pr_list_text"><strong>{{ item.release_date|date }}</strong>: <a class="teasertext" href="{{ item.get_absolute_url }}">{{ item.description|striptags|truncatewords:50|safe }}</a>
-<br /><div class="read_more_link" align="right"><a href="{{ item.get_absolute_url }}" >Read more</a></div>
+<br />
+<div class="read_more_link" align="right"><a href="{{ item.get_absolute_url }}" >Read more</a></div>
+<div class="clear"></div>
 </div>
 </div>
 

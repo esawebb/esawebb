@@ -944,3 +944,8 @@ a.teasertext:hover {
 	font-size: 20px;
 	text-align:center;
 }
+
+.pr_list_image {
+	float: left;
+	margin-right: 10px;
+}

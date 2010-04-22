@@ -122,9 +122,13 @@ class AnnouncementOptions( ArchiveOptions ):
 		( _(u'About the Announcement'), { 'fields' : ( 'id',)  } ),
 	)
 	
+	downloads = ( 
+		( _(u'Images'), {'resources' : ( 'original', 'large', 'screen'  ), 'icons' : { 'original' : 'phot', 'large' : 'phot', 'medium' : 'phot', 'screen' : 'phot'  } } ),
+	)
+	
 	search_fields = ( 'id', 'title', 'description', 'contacts', 'links', )
 	
-	downloads = ( image_downloads, file_downloads )
+	#downloads = ( image_downloads, file_downloads )
 	
 	class Queries( object ):
 		default = AllPublicQuery( browsers = ( 'normal', 'viewall' ), verbose_name = "Announcements" )

@@ -428,10 +428,11 @@ class Announcement( archives.ArchiveModel, models.Model ):
 		large = archives.ImageResourceManager( derived='original', verbose_name=_('Large JPEG'), type=types.JpegType )
 		medium = archives.ImageResourceManager( derived='original', type=types.MediumJpegType )
 		screen = archives.ImageResourceManager( derived='original', type=types.ScreensizeJpegType )
-		
+		wallpaperthumbs = archives.ImageResourceManager( derived='original', type=types.WallpaperThumbnailType )
+		newsfeature = archives.ImageResourceManager( derived='news', type=types.JpegType )
+		news = archives.ImageResourceManager( derived='original', type=types.NewsJpegType )
+		newsmini = archives.ImageResourceManager( derived='news', type=types.NewsMiniJpegType )
 		thumb = archives.ImageResourceManager( derived='original', type=types.ThumbnailJpegType )
-		newsmini = archives.ImageResourceManager( derived='original', type=types.NewsMiniJpegType )
-		
 			   
 		class Meta:
 			root = archive_settings.ANNOUNCEMENT_ROOT

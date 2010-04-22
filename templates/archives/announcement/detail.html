@@ -1,5 +1,13 @@
+{% extends "base_twocolumn.html" %}
+
+{% block site_title %}{{object.title}} | {{block.super}}{% endblock %}
+
+{% load menus %}
+{% block breadcrumb %}{{ block.super}}{% breadcrumb_append object.title object.get_absolute_url %}{% endblock %}
+
+{% block content %}
 {% load djangoplicity_datetime %}
-<h3 class="pr_typeid">{{object.id}}</h3>
+<h3 class="pr_typeid">{{object.id}} - Announcement</h3>
 <h1 class="pr_title">{{object.title}}</h1>
 <p class="date">{{object.release_date|datetime:"DATE_LONG"}}</p>
 {% include 'archives/embargo_notice.html' %}
@@ -17,3 +25,14 @@
 <p>{{ object.description|safe }}</p>
 {% include 'archives/credit.html' %}
 {% include 'archives/extra_footer.html' %}
+{% endblock %}
+
+
+{% block rightcolumn %}
+{% include admin_template %}
+{% include info_template %}
+<hr />
+{% include "images/embedded_list.html" %}
+{% include "videos/embedded_list.html" %}
+{% include resources_template %}
+{% endblock %}
