@@ -36,6 +36,8 @@ def main_page( request ):
 				'releases': Release.get_latest_release( 5 ),
 				'potw' : PictureOfTheWeek.get_latest(),
 				'announcements' : Announcement.get_latest_announcement(5),
+				'potd' : Image.objects.get(id="heic0506b"),
+				#'potd' : Image.object.get(id="heic0813c"), 
 				#'announcements': Announcement.get_latest_release( settings.FRONTPAGE_PRESSRELEASES_LEN ),
 			}, context_instance=RequestContext(request) )
 
