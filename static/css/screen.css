@@ -892,3 +892,7 @@ html>body #socialnetworks {background: url('../images/socialnetworks.png') no-re
 .titlerow {
 	margin-bottom: 10px;
 }
+
+.imagerow {
+	vertical-align: bottom;
+}
