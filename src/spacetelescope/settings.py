@@ -427,6 +427,11 @@ DEFAULT_PUBLISHER_ID = u"vamp://esahubble"
 
 ARCHIVE_IMPORT_ROOT = config.get('media','ARCHIVE_IMPORT_ROOT') if config.has_option('media','ARCHIVE_IMPORT_ROOT')  else '/Volumes/webdocs/importi'
 
+VIDEO_CONTENT_SERVERS = (
+	( '', 'Default' ),
+	( 'http://videos.spacetelescope.org/videos/', 'videos.spacetelescope.org' )
+)
+
 ############
 # REPORTS  #
 ############

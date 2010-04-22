@@ -14,7 +14,7 @@ from django.contrib.redirects.models import Redirect
 from djangoplicity.migration import MigrationError
 from djangoplicity.migration.apps.archives import CSVDataSource, DataMapping
 from djangoplicity.releases.models import Release, ReleaseType, ReleaseImage, ReleaseVideo
-from djangoplicity.releases.models import Image
+from djangoplicity.releases.models import Image, Video
 from spacetelescope.archives.models import *
 #from spacetelescope.archives.products.models import *
 from django.utils.html import strip_tags
@@ -177,7 +177,29 @@ class SpacetelescopeDataMapping( DataMapping ):
 			except KeyError:
 				return self.dataentry[key.title()]
 			
+	
+	def subject_category( self, type ):
+		mapping = self.conf['archives']['%s_category_mapping' % type]
+		
+		cats = []
+		for t in self.topic():
+			 try:
+			 	c = mapping[t].subject_category
+			 	cats.append(c)
+			 except KeyError:
+			 	print '%s_category_mapping' % type
+			 	print "Couldn't get topic %s.." % t
+		
+		return cats
 			
+	def heic_release_numbers(self):
+		rels = self.release_number()
+		return filter( lambda x: x.startswith("heic"), rels )
+	
+	def topic(self):
+		topics = self.get_text_field('topic')
+		return map( lambda x: x.strip(), topics.split( "," ) )
+	
 	def get_text_field( self, fieldname ):
 		soup = BeautifulSoup( self._dataentry( fieldname ) )
 		return unicode( soup )
@@ -310,11 +332,12 @@ class SpacetelescopeDataMapping( DataMapping ):
 		return self.get_text_field('link')
 	
 	def duration(self):
-		secs = int(self.get_number_field('duration'))
+		txt = self.get_number_field('duration')
+		if txt:
+			secs = int(txt)
 		
-		print secs
-		if secs:
-			return format_duration(secs)
+			if secs:
+				return format_duration(secs)
 		return None 
 			
 				
@@ -457,11 +480,62 @@ class NewsMainImageDataMapping( SpacetelescopeDataMapping ):
 	def main_image(self):
 		return self.get_text_field('main_image')
 
-# Lots
+
+class VideosDataMapping( SpacetelescopeDataMapping ):
+	BASE = "/videos"
+	
+	format_mapping = {'thumbs':'thumbs'}
+
+	OLD_FMT_ROOT = "/Volumes/webdocs/spacetelescope/docs/videos/"
+	NEW_FMT_ROOT = "/hubbleroot/static/archives/videos/"
+	
+	def _create_object(self):
+		self.obj = Video( 
+				id = self.id(),
+				# TOPIC 
+				priority=self.priority(),
+				title=self.title(),
+				headline=self.rss_desc(),
+				description=self.description(),
+				credit=self.credit(),
+				file_duration = self.duration(),
+				content_server = self.file_url()
+			)
+		self.obj.save()
+		
+		heicrels = self.heic_release_numbers()
+		if heicrels: 
+			for relno in heicrels:
+				rel = Release.objects.get( id = relno  )
+				ri = ReleaseVideo( release = rel, archive_item = self.obj )
+				ri.save()
+				
+		cats = self.subject_category('videos')
+		
+		for c in cats:
+			self.obj.subject_category.add( c )
+			
+		self.obj.save()
+				
+	def release_number(self):
+		rels = self.get_text_field('release_number')
+		return rels.split( "," )
+	
+	def file_url(self):
+		return self.get_text_field('fileurl')
+	
+	def rss_desc(self):
+		return strip_and_convert( self.dataentry['rss desc'] )
+	
+	
+
+
+	
+
 class ImagesDataMapping( SpacetelescopeDataMapping ):
 	BASE = "/images"
 	
-	format_mapping = {'thumbs':'thumb'}
+	format_mapping = {'thumbs':'thumbs'}
 
 	OLD_FMT_ROOT = "/Volumes/webdocs/spacetelescope/docs/images/"
 	NEW_FMT_ROOT = "/hubbleroot/static/archives/images/"
@@ -469,8 +543,6 @@ class ImagesDataMapping( SpacetelescopeDataMapping ):
 	def _create_object(self):
 		self.obj = Image( 
 				id = self.id(),
-				# alternative id/OPO id, Release number:
-				# Release type: Do we need it for OPO releases? 
 				priority=self.priority(),
 				title=self.title(),
 				headline=self.headline(),
@@ -508,6 +580,17 @@ class ImagesDataMapping( SpacetelescopeDataMapping ):
 				rel = Release.objects.get( id = relno  )
 				ri = ReleaseImage( release = rel, archive_item = self.obj , order = self.chrono() )
 				ri.save()
+				
+		cats = self.subject_category('images')
+		
+		for c in cats:
+			self.obj.subject_category.add( c )
+			
+		self.obj.save()
+		
+	def topic(self):
+		topics = self.get_text_field("Object Type")
+		return map( lambda x: x.strip(), topics.split( "," ) )
 	
 	def chrono( self ):
 		return self.get_number_field('Chrono, subnumber')
@@ -515,10 +598,6 @@ class ImagesDataMapping( SpacetelescopeDataMapping ):
 	def release_number(self):
 		rels = self.get_text_field('Release number')
 		return rels.split( "," )
-	
-	def heic_release_numbers(self):
-		rels = self.release_number()
-		return filter( lambda x: x.startswith("heic"), rels )
 	
 	def type(self):
 		return self.get_text_field('Type')
@@ -600,15 +679,6 @@ class KidsDrawingsDataMapping( SpacetelescopeDataMapping ):
 	OLD_FMT_ROOT = "/Volumes/webdocs/spacetelescope/docs/kidsandteachers/drawings/"
 	NEW_FMT_ROOT = "/hubbleroot/static/archives/drawings/"
 	
-	def _create_redirect(self):
-		new_url = self.obj.get_absolute_url()
-		for url in self.old_urls():
-			r,created = Redirect.objects.get_or_create( site = self.conf['pages']['site'], old_path=url )
-			if created:
-				r.new_path = new_url
-			r.save()
-
-	
 	def _create_object(self):
 		# id, releasetype, title
 		self.obj = KidsDrawing( 
@@ -622,7 +692,6 @@ class KidsDrawingsDataMapping( SpacetelescopeDataMapping ):
 				city = self.town(),
 				country = self.country(),
 			)
-		self.obj.save()
 		
 	def age(self):
 		return self.get_number_field( 'Age' )

@@ -10,6 +10,7 @@ from djangoplicity.migration.apps.pages import PageInitializationTask, \
 	PageMigrationTask, HTMLPageDocument
 from djangoplicity.pages.models import Section
 from djangoplicity.releases.models import Release
+from djangoplicity.metadata.models import *
 from spacetelescope.archives.models import *
 from spacetelescope.migration.archives import *
 from spacetelescope.migration.pages import SpacetelescopePageDocument, \
@@ -59,6 +60,55 @@ conf = {
 								'jobs' : 'default',
 							},
 			  },
+	'archives' : {
+				'videos_category_mapping' : {
+							'Hubble Images':Category.objects.get(url='hubble',type=2),
+							'3D Animations':Category.objects.get(url='3d',type=2),
+							'Solar System':Category.objects.get(url='solarsystem',type=2),
+							'Stars':Category.objects.get(url='stars',type=2),
+							'Star Clusters':Category.objects.get(url='clusters',type=2),
+							'Nebulae':Category.objects.get(url='nebulae',type=2),
+							'Galaxies':Category.objects.get(url='galaxies',type=2),
+							'Quasars':Category.objects.get(url='quasars',type=2),
+							'Cosmology':Category.objects.get(url='cosmology',type=2),
+							'Extrasolar Planets':Category.objects.get(url='extrasolar',type=2),
+							'JWST':Category.objects.get(url='jwst',type=2),
+							'Spacecraft':Category.objects.get(url='spacecraft',type=2),
+							'Miscellaneous':Category.objects.get(url='misc',type=2),
+							'Dome':Category.objects.get(url='dome',type=2),
+							'Hubble DVD':Category.objects.get(url='dvd',type=2),
+							'HD':Category.objects.get(url='hd',type=2),
+							'VNR':Category.objects.get(url='vnr',type=2),
+							'Stereoscopic':Category.objects.get(url='stereoscopic',type=2),
+							'Hubblecast':Category.objects.get(url='hubblecast',type=2),
+							'Eyes on the Skies DVD':Category.objects.get(url='eyesontheskies',type=2),
+				},
+				'images_category_mapping' : {
+					'Solar System'	: Category.objects.get(url='solarsystem',type=1),
+					'Star' 			:Category.objects.get(url='star',type=1),
+					'Stars' 			:Category.objects.get(url='star',type=1),
+					'Star Cluster' 	:Category.objects.get(url='starcluster',type=1),
+					'Star Clusters' 	:Category.objects.get(url='starcluster',type=1),
+					'Nebulae'	 	:Category.objects.get(url='nebulae',type=1),
+					'Nebula'	 	:Category.objects.get(url='nebulae',type=1),
+					'Galaxy' 		:Category.objects.get(url='galax',type=1),
+					'Galaxies' 		:Category.objects.get(url='galax',type=1),
+					'Quasar' 	:Category.objects.get(url='quasar',type=1),
+					'Quasar/AGN/Black Hole' 	:Category.objects.get(url='quasar',type=1),
+					'Cosmology'		:Category.objects.get(url='cosmo',type=1),
+					'JWST'			:Category.objects.get(url='jwst',type=1),
+					'Miscelaneous'	:Category.objects.get(url='misc',type=1),
+					'Miscellaneous'	:Category.objects.get(url='misc',type=1),
+					#'Extrasolar Planets'	:Category.objects.get(url='extrasolar',type=1),
+					'Illustration'	:Category.objects.get(url='illustration',type=1),
+					'Illustrations'	:Category.objects.get(url='illustration',type=1),
+					'Spacecraft'	:Category.objects.get(url='spacecraft',type=1),
+					'Mission'		:Category.objects.get(url='mission',type=1),
+					'Servicing Missions'		:Category.objects.get(url='mission',type=1),
+					
+					
+				},
+	},
 	'logger' : 'migration_logger', 
 }
 
@@ -227,15 +277,17 @@ extra_redirects = {
 #
 
 def choose_tasks():
-	#return archivetasks + pagestasks
-	return testtask
+	return archivetasks + pagestasks
+	#return testtask
 
 testtask = [
-		ArchiveInitializationTask( Redirect ),
-		#ArchiveInitializationTask( Image ), 
+		#ArchiveInitializationTask( Redirect ),
+		ArchiveInitializationTask( Image ),
+		#ArchiveInitializationTask( Video ),
 		#ArchiveMigrationTask( SpacetelescopeCSVDataSource( '/Volumes/webdocs/spacetelescope/docs/csvfiles/newsdata.csv'), NewsDataMapping ),
-    	#ArchiveMigrationTask( SpacetelescopeCSVDataSource( '/Volumes/webdocs/spacetelescope/docs/csvfiles/imagedata.csv'), ImagesDataMapping ),
-    	ArchiveMigrationTask( SpacetelescopeCSVDataSource( '/Volumes/webdocs/spacetelescope/docs/csvfiles/newsdata.csv'), NewsMainImageDataMapping ),
+		#ArchiveMigrationTask( SpacetelescopeCSVDataSource( '/Volumes/webdocs/spacetelescope/docs/csvfiles/videodata.csv'), VideosDataMapping ),
+    	ArchiveMigrationTask( SpacetelescopeCSVDataSource( '/Volumes/webdocs/spacetelescope/docs/csvfiles/imagedata.csv'), ImagesDataMapping ),
+    	#ArchiveMigrationTask( SpacetelescopeCSVDataSource( '/Volumes/webdocs/spacetelescope/docs/csvfiles/newsdata.csv'), NewsMainImageDataMapping ),
 ]
 
 
@@ -283,6 +335,7 @@ archivetasks = [
     
     ArchiveMigrationTask( SpacetelescopeCSVDataSource( '/Volumes/webdocs/spacetelescope/docs/csvfiles/newsdata.csv'), NewsDataMapping ),
     ArchiveMigrationTask( SpacetelescopeCSVDataSource( '/Volumes/webdocs/spacetelescope/docs/csvfiles/imagedata.csv'), ImagesDataMapping ),
+    ArchiveMigrationTask( SpacetelescopeCSVDataSource( '/Volumes/webdocs/spacetelescope/docs/csvfiles/videodata.csv'), VideosDataMapping ),
     ArchiveMigrationTask( SpacetelescopeCSVDataSource( '/Volumes/webdocs/spacetelescope/docs/csvfiles/newsdata.csv'), NewsMainImageDataMapping ),
 	ArchiveMigrationTask( SpacetelescopeCSVDataSource( '/Volumes/webdocs/spacetelescope/docs/csvfiles/edumatdata.csv'), EducationalMaterialsDataMapping ),
 	ArchiveMigrationTask( SpacetelescopeCSVDataSource( '/Volumes/webdocs/spacetelescope/docs/csvfiles/kidsdrawingdata.csv'), KidsDrawingsDataMapping ),
@@ -305,7 +358,7 @@ archivetasks = [
     ArchiveMigrationTask( SpacetelescopeCSVDataSource( '/Volumes/webdocs/spacetelescope/docs/csvfiles/techdocsdata.csv'), TechnicalDocumentDataMapping ),
     ArchiveMigrationTask( SpacetelescopeCSVDataSource( '/Volumes/webdocs/spacetelescope/docs/csvfiles/exhibitiondata.csv'), ExhibitionDataMapping ),
     ArchiveMigrationTask( SpacetelescopeCSVDataSource( '/Volumes/webdocs/spacetelescope/docs/csvfiles/fitsimagedata.csv'), FITSImageDataMapping ),
-    ArchiveMigrationTask( SpacetelescopeCSVDataSource( '/Volumes/webdocs/spacetelescope/docs/csvfiles/uservideosdata.csv'), UserVideoDataMapping ),
+    ArchiveMigrationTask( SpacetelescopeCSVDataSource( '/Volumes/webdocs/spacetelescope/docs/csvfiles/usersvideosdata.csv'), UserVideoDataMapping ),
 ]
 
 #

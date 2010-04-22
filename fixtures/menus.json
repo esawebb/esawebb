@@ -517,7 +517,7 @@
             "tree_id": 1, 
             "on_click": 0, 
             "lft": 54, 
-            "link": "/images/archive/category/stars/", 
+            "link": "/images/archive/category/star/", 
             "published": 1, 
             "level": 3
         }
@@ -534,7 +534,7 @@
             "tree_id": 1, 
             "on_click": 0, 
             "lft": 56, 
-            "link": "/images/archive/category/starclusters/", 
+            "link": "/images/archive/category/starcluster/", 
             "published": 1, 
             "level": 3
         }
@@ -568,7 +568,7 @@
             "tree_id": 1, 
             "on_click": 0, 
             "lft": 60, 
-            "link": "/images/archive/category/galaxies/", 
+            "link": "/images/archive/category/galax/", 
             "published": 1, 
             "level": 3
         }
@@ -585,7 +585,7 @@
             "tree_id": 1, 
             "on_click": 0, 
             "lft": 62, 
-            "link": "/images/archive/category/blackholes/", 
+            "link": "/images/archive/category/quasar/", 
             "published": 1, 
             "level": 3
         }
@@ -602,7 +602,7 @@
             "tree_id": 1, 
             "on_click": 0, 
             "lft": 64, 
-            "link": "/images/archive/category/cosmology/", 
+            "link": "/images/archive/category/cosmo/", 
             "published": 1, 
             "level": 3
         }
@@ -653,7 +653,7 @@
             "tree_id": 1, 
             "on_click": 0, 
             "lft": 70, 
-            "link": "/images/archive/category/illustrations/", 
+            "link": "/images/archive/category/illustration/", 
             "published": 1, 
             "level": 3
         }
@@ -942,7 +942,7 @@
             "tree_id": 1, 
             "on_click": 0, 
             "lft": 104, 
-            "link": "/videos/archive/category/extrasolarplanets/", 
+            "link": "/videos/archive/category/extrasolar/", 
             "published": 1, 
             "level": 3
         }
@@ -959,7 +959,7 @@
             "tree_id": 1, 
             "on_click": 0, 
             "lft": 106, 
-            "link": "/videos/archive/category/starclusters/", 
+            "link": "/videos/archive/category/clusters/", 
             "published": 1, 
             "level": 3
         }
@@ -1010,7 +1010,7 @@
             "tree_id": 1, 
             "on_click": 0, 
             "lft": 112, 
-            "link": "/videos/archive/category/blackholes/", 
+            "link": "/videos/archive/category/quasars/", 
             "published": 1, 
             "level": 3
         }
@@ -1061,7 +1061,7 @@
             "tree_id": 1, 
             "on_click": 0, 
             "lft": 118, 
-            "link": "/videos/archive/category/hubbledvd/", 
+            "link": "/videos/archive/category/dvd/", 
             "published": 1, 
             "level": 3
         }
@@ -1112,7 +1112,7 @@
             "tree_id": 1, 
             "on_click": 0, 
             "lft": 124, 
-            "link": "/videos/archive/category/3danimations/", 
+            "link": "/videos/archive/category/3d/", 
             "published": 1, 
             "level": 3
         }
@@ -1129,7 +1129,7 @@
             "tree_id": 1, 
             "on_click": 0, 
             "lft": 126, 
-            "link": "/videos/archive/category/hubbleimages/", 
+            "link": "/videos/archive/category/hubble/", 
             "published": 1, 
             "level": 3
         }
