@@ -772,7 +772,7 @@ class UserVideo (archives.ArchiveModel, StandardArchiveInfo, ):
 		mov_medium = archives.ResourceManager( type=types.MovType, verbose_name=_(u"Medium QT") )
 		mpg_small = archives.ResourceManager( type=types.MpegType, verbose_name=_(u"Small MPEG") )
 		mpg_medium = archives.ResourceManager( type=types.MpegType, verbose_name=_(u"Medium MPEG") )
-		h264 = archives.ResourceManager( type=types.H264Type, verbose_name=_(u"Large H.264 MPEG-4") )
+		h264 = archives.ResourceManager( type=types.H264Type, verbose_name=_(u"Large MPEG") )
 		broadcast = archives.ResourceManager( type=types.ZipType, verbose_name=_(u"Broadcast") )
 		
 			   

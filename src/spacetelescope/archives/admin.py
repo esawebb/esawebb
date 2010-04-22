@@ -154,7 +154,7 @@ class CalendarAdmin( DjangoplicityModelAdmin, RenameAdmin, ArchiveAdmin ):
 	search_fields = ( 'id', 'title', 'description', 'credit' )
 	date_hierarchy = 'last_modified'
 	fieldsets = (
-					( None, {'fields': ( 'id', ) } ),
+					( None, {'fields': ( 'id', 'title' ) } ),
 					( 'Publishing', {'fields': ( 'published', 'priority', ), } ),
 					( 'Archive', {'fields': ( 'year', 'month', 'description', 'credit', ), } ),
 				)
