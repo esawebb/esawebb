@@ -49,6 +49,17 @@ def shop_closed( request ):
 		
 	return render_to_response('shop_closed.html', {}, context_instance=RequestContext(request) )
 
+
+def rssfeedhack( request, rssfile=None ):
+	if not rssfile:
+		raise Http404
+	
+	
+	
+	return render_to_response("rss/%s" % rssfile, {}, context_instance=RequestContext(request) )
+	
+
+
 #def page_not_found( request, template_name='404_site.html' ):
 #	"""
 #	Default 404 handler.

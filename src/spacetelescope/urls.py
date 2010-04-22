@@ -43,8 +43,6 @@ urlpatterns += patterns( '',
 	( r'^admin/import/', include('djangoplicity.archives.importer.urls'), { 'SSL': True } ),
 	
 	
-	( r'^/shop/checkout/$', 'spacetelescope.views.shop_closed' ),
-	 
     # Server alive check (used for load balancers - called every 5 secs )
     ( r'^alive-check.dat$', 'djangoplicity.views.alive_check', { 'SSLAllow' : True } ),
     ( r'^sitemap/', 'djangoplicity.menus.views.sitemap' ),
@@ -52,7 +50,7 @@ urlpatterns += patterns( '',
     # Media Archive
     ( r'^images/potw/', include('djangoplicity.media.urls_potw'), { 'model': PictureOfTheWeek, 'options': PictureOfTheWeekOptions } ),
 	( r'^images/', include('djangoplicity.media.urls_images'), { 'model': Image, 'options': ImageOptions } ),
-    #( r'^news/feed/(?P<url>.*)/?$', 'django.contrib.syndication.views.feed', { 'feed_dict': ReleaseOptions.feeds } ),
+    ( r'^news/feed/(?P<url>.*)/?$', 'django.contrib.syndication.views.feed', { 'feed_dict': ReleaseOptions.get_feeds() } ),
     ( r'^news/', include('djangoplicity.releases.urls'), { 'model': Release, 'options': ReleaseOptions } ),
     ( r'^videos/uservideos/', include('spacetelescope.archives.urls.uservideos'), { 'model': UserVideo, 'options': UserVideoOptions } ),
     ( r'^videos/', include('djangoplicity.media.urls_videos'), { 'model': Video, 'options': VideoOptions } ),
@@ -82,6 +80,11 @@ urlpatterns += patterns( '',
 	( r'^press/kits/', include('spacetelescope.archives.urls.presskits'), { 'model': PressKit, 'options': PressKitOptions } ),
 	
     ( r'^projects/fits_liberator/fitsimages/', include('spacetelescope.archives.urls.fitsimages'), { 'model': FITSImage, 'options': FITSImageOptions } ),
+    
+    ( r'^rss/feed.xml$', 'spacetelescope.views.rssfeedhack', { 'rssfile': 'feed.xml' } ),
+    ( r'^rss/vodcast.xml$', 'spacetelescope.views.rssfeedhack', { 'rssfile': 'vodcast.xml' } ),
+    ( r'^rss/vodcastfullhd.xml$', 'spacetelescope.views.rssfeedhack', { 'rssfile': 'vodcastfullhd.xml' } ),
+    ( r'^rss/vodcasthd.xml$', 'spacetelescope.views.rssfeedhack', { 'rssfile': 'vodcasthd.xml' } ),
     
 
     # User authentication

@@ -504,9 +504,9 @@ SATCHMO_SETTINGS = {
                     'CUSTOM_PRODUCT_MODULES' : [
 											'spacetelescope.archives',
 											],
-                    #'SHOP_URLS' : patterns('',
-					#					(r'^category/$', include('satchmo_store.shop.views.home')),
-					#			)
+                    'SHOP_URLS' : patterns('',
+										( r'^checkout/', 'spacetelescope.views.shop_closed' ),
+								)
                     }
 
 
