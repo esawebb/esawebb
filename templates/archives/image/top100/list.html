@@ -35,7 +35,7 @@
 		<div class='descr'>
 			<div class='number'>{{forloop.revcounter}}</div>
 			<div class='title'>{{item.title}}</div>
-			<div class='credit'>Credit: {{item.credit|default:'ESA/Hubble'}}</div>
+			<div class='credit'><strong>Credit:</strong> {{item.credit|safe|default:'ESA/Hubble'}}</div>
 		</div>
 	<div class='clear'></div>
 	</a>

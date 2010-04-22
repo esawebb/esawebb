@@ -685,8 +685,8 @@ class SlideShow (archives.ArchiveModel, StandardArchiveInfo,ScreenInfo):
 	
 	class Archive:
 		thumb = archives.ImageResourceManager( derived='original', type=types.ThumbnailJpegType )
-		
-		flash = archives.ResourceManager( type=types.FlvType)
+		flash = archives.ResourceManager( type=types.SwfType )
+		#flash_dir = archives.ResourceManager( type=types.DirHtmlType, verbose_name= )
 					
 		class Meta:
 			root = archive_settings.SLIDESHOW_ROOT
@@ -796,8 +796,8 @@ class Presentation( archives.ArchiveModel, StandardArchiveInfo ):
 		thumb = archives.ImageResourceManager( derived='original', type=types.ThumbnailJpegType )
 		
 		pdf = archives.ResourceManager( type=types.PDFType, verbose_name=_('PDF Presentation') )
-		ppt = archives.ResourceManager( type=types.PPTType )
-		pps = archives.ResourceManager( type=types.PPSType )
+		ppt = archives.ResourceManager( type=types.PowerpointPresentationType )
+		pps = archives.ResourceManager( type=types.PowerpointSlideshowType )
 		   
 		class Meta:
 			root = archive_settings.PRESENTATION_ROOT

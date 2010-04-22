@@ -748,6 +748,7 @@ class KidsDrawingsDataMapping( SpacetelescopeDataMapping ):
 				city = self.town(),
 				country = self.country(),
 			)
+		self.obj.save()
 		
 	def age(self):
 		return self.get_number_field( 'Age' )

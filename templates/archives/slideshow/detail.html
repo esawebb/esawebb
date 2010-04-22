@@ -1,0 +1,34 @@
+{% extends "base_twocolumn.html" %}
+
+{% block site_title %}{{object.title}} | {{block.super}}{% endblock %}
+
+{% load menus %}
+{% block breadcrumb %}{{ block.super}}{% breadcrumb_append object.title object.get_absolute_url %}{% endblock %}
+
+{% block content %}
+<h1>{{ object.title }}</h1>
+{% include 'archives/embargo_notice.html' %}
+
+{% if object.resource_flash %}
+<div align="center"><div id="flashplayer"></div></div>
+<script type="text/javascript" src="{{MEDIA_URL}}djangoplicity/shadowbox3/libraries/mediaplayer-licensed/swfobject.js"></script>
+<script type="text/javascript">
+  var so = new SWFObject('{{object.resource_flash.url}}','mpl',350,250,'9');
+  so.write('flashplayer');
+</script>   
+{% endif %}
+
+<p>{{ object.description|safe }}</p>
+{% include 'archives/credit.html' %}
+{% include 'archives/extra_footer.html' %}
+{% endblock %}
+
+
+{% block rightcolumn %}
+{% include admin_template %}
+{% include info_template %}
+<hr />
+{% include "images/embedded_list.html" %}
+{% include "videos/embedded_list.html" %}
+{% include resources_template %}
+{% endblock %}

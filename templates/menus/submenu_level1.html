@@ -9,7 +9,7 @@
 {% render_submenu entry.children level1 %}
 {%endif%}
 {%else%}
-<div><a class="level_{{entry.level}} {% if entry.leaf_selected %} selected {%endif%}" href="{{ entry.link }}" {% if entry.on_click %}target="_blank"{%endif%}>{{ entry.title }}</a> </div>
+<div><a class="level_{{entry.level}} {% if entry.leaf_selected %} selected {% else %}{% if entry.selected %} path_selected {%endif%}{%endif%}" href="{{ entry.link }}" {% if entry.on_click %}target="_blank"{%endif%}>{{ entry.title }}</a> </div>
 
 {% render_submenu entry.children level1 %}
 {%endifequal%}

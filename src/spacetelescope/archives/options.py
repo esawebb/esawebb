@@ -325,7 +325,7 @@ class OnlineArtAuthorOptions ( StandardOptions ):
 #	
 #	class Queries(object):
 #		default = AllPublicQuery( browsers=( 'normal', 'viewall' ), verbose_name="Print Layouts: View All" )
-#	
+	
 
 
 class SlideShowOptions (StandardOptions):
