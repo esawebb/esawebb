@@ -15,8 +15,8 @@ from django.contrib import admin
 from spacetelescope.admin import admin_site, adminlogs_site, adminshop_site
 
 
-from djangoplicity.media.models import Image, Video
-from djangoplicity.media.options import ImageOptions, VideoOptions
+from djangoplicity.media.models import Image, Video, PictureOfTheWeek
+from djangoplicity.media.options import ImageOptions, VideoOptions, PictureOfTheWeekOptions
 from django.views.generic.simple import redirect_to
 
 from djangoplicity.releases.models import Release
@@ -48,6 +48,7 @@ urlpatterns += patterns( '',
     ( r'^sitemap/', 'djangoplicity.menus.views.sitemap' ),
 
     # Media Archive
+    ( r'^images/potw/', include('djangoplicity.media.urls_potw'), { 'model': PictureOfTheWeek, 'options': PictureOfTheWeekOptions } ),
 	( r'^images/', include('djangoplicity.media.urls_images'), { 'model': Image, 'options': ImageOptions } ),
     #( r'^news/feed/(?P<url>.*)/?$', 'django.contrib.syndication.views.feed', { 'feed_dict': ReleaseOptions.feeds } ),
     ( r'^news/', include('djangoplicity.releases.urls'), { 'model': Release, 'options': ReleaseOptions } ),

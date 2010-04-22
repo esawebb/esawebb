@@ -927,7 +927,7 @@ a.teasertext {
 }
 
 a.teasertext:hover {
-	color:#818181;
+	color:#777777;
 	text-decoration: none; 
 }
 
@@ -958,5 +958,8 @@ display:none;
 	backgroun-color: red;
 	float: left;
 	margin-right: 10px;
-	margin-bottom: 10px;
+}
+
+.inline_image a { 
+	color: 
 }
