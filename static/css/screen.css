@@ -938,3 +938,9 @@ a.teasertext:hover {
 	padding: 5px;
 	line-height: 15px;
 }
+
+.embargo_notice {
+	color: red;
+	font-size: 20px;
+	text-align:center;
+}

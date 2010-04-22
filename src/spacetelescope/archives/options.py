@@ -387,7 +387,15 @@ class UserVideoOptions ( StandardOptions ):
 	)
 	
 	downloads = ( 
-		( _(u'Images'), {'resources' : ( 'original', 'large', 'screen'  ), 'icons' : { 'original' : 'phot', 'large' : 'phot', 'medium' : 'phot', 'screen' : 'phot'  } } ),
+				( _(u'Videos'), {'resources' : ( 'mov_small', 'mov_medium', 'mpg_small', 'mpg_medium', 'h264', 'broadcast',  ), 
+						 'icons' : { 
+									'mov_small' : 'movie', 
+									'mov_medium' : 'movie', 
+									'mpg_small' : 'movie', 
+									'mpg_medium' : 'movie', 
+									'h264' : 'movie', 
+									'broadcast' : 'movie', 
+									} } ),
 		)
 	
 	class Queries(object):

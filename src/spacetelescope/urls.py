@@ -51,6 +51,7 @@ urlpatterns += patterns( '',
 	( r'^images/', include('djangoplicity.media.urls_images'), { 'model': Image, 'options': ImageOptions } ),
     #( r'^news/feed/(?P<url>.*)/?$', 'django.contrib.syndication.views.feed', { 'feed_dict': ReleaseOptions.feeds } ),
     ( r'^news/', include('djangoplicity.releases.urls'), { 'model': Release, 'options': ReleaseOptions } ),
+    ( r'^videos/uservideos/', include('spacetelescope.archives.urls.uservideos'), { 'model': UserVideo, 'options': UserVideoOptions } ),
     ( r'^videos/', include('djangoplicity.media.urls_videos'), { 'model': Video, 'options': VideoOptions } ),
 
 	# Other archives
@@ -76,7 +77,7 @@ urlpatterns += patterns( '',
 	( r'^kidsandteachers/education/', include('spacetelescope.archives.urls.education'), { 'model': EducationalMaterial, 'options': EducationalMaterialOptions } ),
 	( r'^kidsandteachers/drawings/', include('spacetelescope.archives.urls.drawings'), { 'model': KidsDrawing, 'options': KidsDrawingOptions } ),
 	( r'^press/kits/', include('spacetelescope.archives.urls.presskits'), { 'model': PressKit, 'options': PressKitOptions } ),
-	( r'^videos/uservideos/', include('spacetelescope.archives.urls.uservideos'), { 'model': UserVideo, 'options': UserVideoOptions } ),
+	
     ( r'^projects/fits_liberator/fitsimages/', include('spacetelescope.archives.urls.fitsimages'), { 'model': FITSImage, 'options': FITSImageOptions } ),
     
 

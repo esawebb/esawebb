@@ -765,9 +765,15 @@ class UserVideo (archives.ArchiveModel, StandardArchiveInfo, ):
 	
 	class Archive:
 		original = archives.ImageResourceManager( type=types.OriginalImageType )
-		medium = archives.ImageResourceManager( derived='original', type=types.MediumJpegType )
-		thumb = archives.ImageResourceManager( derived='original', type=types.ThumbnailJpegType )
+		thumb = archives.ImageResourceManager( type=types.ThumbnailJpegType )
+		videoframe = archives.ImageResourceManager( type=types.JpegType )
+		
+		mov_small = archives.ResourceManager( type=types.MovType, verbose_name=_(u"Small QT") )
+		mov_medium = archives.ResourceManager( type=types.MovType, verbose_name=_(u"Medium QT") )
+		mpg_small = archives.ResourceManager( type=types.MpegType, verbose_name=_(u"Small MPEG") )
+		mpg_medium = archives.ResourceManager( type=types.MpegType, verbose_name=_(u"Medium MPEG") )
 		h264 = archives.ResourceManager( type=types.H264Type, verbose_name=_(u"Large H.264 MPEG-4") )
+		broadcast = archives.ResourceManager( type=types.ZipType, verbose_name=_(u"Broadcast") )
 		
 			   
 		class Meta:
