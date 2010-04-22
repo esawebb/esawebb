@@ -760,8 +760,12 @@ h2, h3{
 }
 
 .pricediv {
-	margin-top: 30px;
+	margin-top: 40px;
 	text-align: center;
+}
+
+.pricediv h1 {
+	font-size: 18px;
 }
 
 .checkoutdiv {
