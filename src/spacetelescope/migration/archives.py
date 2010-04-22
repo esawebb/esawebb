@@ -196,6 +196,10 @@ class SpacetelescopeDataMapping( DataMapping ):
 		rels = self.release_number()
 		return filter( lambda x: x.startswith("heic"), rels )
 	
+	def nonheic_release_numbers(self):
+		rels = self.release_number()
+		return filter( lambda x: not x.startswith("heic"), rels )
+	
 	def topic(self):
 		topics = self.get_text_field('topic')
 		return map( lambda x: x.strip(), topics.split( "," ) )
@@ -548,6 +552,7 @@ class ImagesDataMapping( SpacetelescopeDataMapping ):
 				headline=self.headline(),
 				description=self.description(),
 				credit=self.credit(),
+				old_ids=self.old_ids(),
 				# subject name
 				# object type
 				# facility
@@ -556,8 +561,8 @@ class ImagesDataMapping( SpacetelescopeDataMapping ):
 				zoomify = self.zoomable(),
 				width = self.org_width(),
 				height = self.org_height(),
-				# OPO caption link
-				# OPO Press link
+				long_caption_link = self.caption_link(),
+				press_release_link = self.opo_link(),
 				# Simbad
 				# subject_category
 				type = self.type(),
@@ -586,8 +591,59 @@ class ImagesDataMapping( SpacetelescopeDataMapping ):
 		for c in cats:
 			self.obj.subject_category.add( c )
 			
+		names = self.subject_names()
+		for n in names:
+			self.obj.subject_name.add(n)
+			
 		self.obj.save()
+	
+	def opo_link(self):
+		return self.get_text_field('OPO Press Link')
+	
+	def caption_link(self):
+		return self.get_text_field('OPO Caption link')
+	
+	def subject_names(self):
+		names = self.get_text_field('Subject.Name')
+		simbad_compliant = True if self.get_boolean('Simbad') is None or self.get_boolean('Simbad') else False
 		
+		ret = []
+		if names:
+			names = map( lambda x: x.strip(), names.split(",") )
+			is_first=True
+			for n in names:
+				if is_first:
+					subjectname = self.get_create_subject_name( n, simbad=simbad_compliant )
+					is_first = False
+				else:
+					subjectname = self.get_create_subject_name( n )
+				ret.append( subjectname )
+				
+		return ret
+
+		
+	def get_create_subject_name(self, name, simbad=False ):
+		name,created = SubjectName.objects.get_or_create( name=strip_and_convert(name) )
+		
+		if created:
+			name.simbad_compliant = simbad
+			name.save()
+			
+		return name
+		
+	def old_ids(self):
+		nonheic = self.nonheic_release_numbers()
+		
+		if nonheic:
+			return "%s (release id)" % (self.alternate_id(), ", ".join(nonheic) )
+		elif self.alternate_id():
+			return "%s (alternative id)" % self.alternate_id()
+		else:
+			return ""
+	
+	def alternate_id(self):
+		return self.get_text_field("alternative id/OPO id")
+	
 	def topic(self):
 		topics = self.get_text_field("Object Type")
 		return map( lambda x: x.strip(), topics.split( "," ) )

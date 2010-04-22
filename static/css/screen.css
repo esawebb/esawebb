@@ -23,6 +23,7 @@ a:hover {
 ul, ol {
 	margin-left: 20px;
 	margin-bottom:15px;
+	line-height:15px;
 }
 
 ul ul, ol ol {
@@ -361,6 +362,7 @@ html>body #mainmenu #mmselected {
 
 #leftmenu .selected {
 	font-weight:bold;
+	color:#1596c1;
 }
 
 #leftmenu hr {
@@ -449,6 +451,8 @@ h1, h2, h3{
 	border-color: #e1e1e1;
 	line-height: 15px;
 	border:1px solid #e1e1e1;
+	vertical-align: top;
+	margin-bottom: 15px; 
 }
 
 
@@ -881,6 +885,9 @@ html>body #socialnetworks {background: url('../images/socialnetworks.png') no-re
 	margin: 2px;
 }
 
+.credit p {
+	font-size: 11px;
+}
 
 
  
