@@ -583,7 +583,7 @@ LIVESETTINGS_OPTIONS = {
 }
 
 
-
+import re
 REGEX_REDIRECTS = (
 #	( re.compile( '/hubbleshop/webshop/webshop\.php\?show=sales&section=(books|cdroms)' ), '/shop/category/\g<1>/' ),
 	( re.compile( '/about/history/sm4blog/(.+)' ), '/static/sm4blog/\g<1>' ),
