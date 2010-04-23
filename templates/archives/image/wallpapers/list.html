@@ -1,0 +1,43 @@
+{% extends "base_onecolumn.html" %}
+
+{% block site_title %}{% if archive_title %}{{archive_title}}{% else %}{{ archive|capfirst }} Archive{%endif%} | {{block.super}}{% endblock %}
+
+{% load menus %}
+{# block breadcrumb %}{{ block.super}}{% endblock #}
+
+{% block content %}
+<div class='archive_list_heading'>
+<div class='archive_list_title'>
+<h1>{% if archive_title %}{{ archive_title }}{% else %}{{ archive|capfirst }} Archive{% endif %}</h1>
+</div>
+<div class='archive_list_search'>{% if searchable %}
+
+<form action="{{ search_url }}" method="GET">
+<input id="id_archivesearch" type="text" value="{%if search_specific %}Search {{search_specific|capfirst}}...{%else%}{{search_str|default:"Search..."}}{%endif%}" name="search" class="archivesearch" onblur="searchbox_blur(this,'{%if search_specific %}Search {{search_specific|capfirst}}...{%else%}{{search_str|default:"Search..."}}{%endif%}');" onfocus="searchbox_focus(this,'{%if search_specific %}Search {{search_specific|capfirst}}...{%else%}{{search_str|default:"Search..."}}{%endif%}');" />
+<input class="archivesearch_submit" type="submit" value="Go" />
+</form>
+</div>
+<div class='clear'></div>
+</div>
+{% endif %}
+{% load djangoplicity_utils %}
+{% if not object_list %}
+	<div align="center">No entries were found.</div>
+{% else %}
+{% include "archives/search_results.html" %}
+<table class="archive_normal" width="100%">
+{% for list in object_list|split_list:"4" %}
+
+<tr>{% for item in list %}
+<td class="imagerow grid_3 {%if forloop.first%} alpha{%endif%}{%if forloop.last%} omega{%endif%}" ><a href="{{ item.get_absolute_url }}"><img src="{{ item.resource_wallpaperthumbs.url }}" width="122" alt="{{item.title}}" /></a></td>{% endfor %}
+</tr>
+<tr>{% for item in list %}
+<td class="titlerow grid_3 {%if forloop.first%} alpha{%endif%}{%if forloop.last%} omega{%endif%}">{{item.title}}</td>{% endfor %}
+</tr>
+{% endfor %}
+</table>
+{% paginator paginator page_obj paginator_url paginator_prefix paginator_params %}
+{% statusbar paginator page_obj browsers searchable search_url search_str  %}
+{% endif %}
+{% endblock %}
+{% include 'archives/extra_footer.html' %}

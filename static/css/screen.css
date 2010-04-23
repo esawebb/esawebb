@@ -997,3 +997,11 @@ display:none;
 .inline_image a { 
 	color: 
 }
+
+#maincolumn {
+	line-height: 15px;
+}
+
+.left, .middle {
+	margin-bottom: 5px;
+}
