@@ -587,9 +587,15 @@ import re
 REGEX_REDIRECTS = (
 #	( re.compile( '/hubbleshop/webshop/webshop\.php\?show=sales&section=(books|cdroms)' ), '/shop/category/\g<1>/' ),
 	( re.compile( '/about/history/sm4blog/(.+)' ), '/static/sm4blog/\g<1>' ),
-	( re.compile( '/news/(doc|pdf|science_paper)/(.+)' ), '/static/archives/news/g<1>' ),
-	( re.compile( '/images/html/([a-z-_]+)\.html' ), '/images/g<1>/' ),
+	( re.compile( '/news/(doc|pdf|science_paper)/(.+)' ), '/static/archives/news/\g<1>/\g<2>' ),
+	( re.compile( '/images/html/([a-z-_]+)\.html' ), '/images/\g<1>/' ),
 	( re.compile( '/videos/(vodcast|hd1080p_screen|hd1080p_broadcast|hd720p_screen|hd720p_broadcast|h264|broadcast)/(.+)' ), '/static/archives/videos/\g<1>/\g<2>' ),
+	( re.compile( '/images/html/zoomable/([a-z-_]+).html' ), '/images/\g<1>/zoomable/' ),
+	( re.compile( '/videos/html/mov/(320px|180px)/([a-z-_]+).html' ), '/videos/\g<2>/' ),
+	( re.compile( '/bin/videos.pl\?(searchtype=news&)?string=([a-z-_]+)' ), '/videos/?search=\g<2>' ),
+	( re.compile( '/bin/images.pl\?(searchtype=news&)?string=([a-z-_]+)' ), '/images/?search=\g<2>' ),
+	
+	
 )
 
 # ======================================================================
