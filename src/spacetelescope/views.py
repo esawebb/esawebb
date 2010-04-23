@@ -7,7 +7,7 @@
 #   Lars Holm Nielsen <lnielsen@eso.org>
 #   Luis Clara Gomes <lcgomes@eso.org>
 #
-from djangoplicity.cache.decorators import cached_page
+from django.views.decorators.cache import cache_page
 from django.conf import settings
 from django.core.urlresolvers import reverse
 from django.shortcuts import render_to_response
@@ -23,7 +23,7 @@ from spacetelescope.archives.models import Announcement
 #from djangoplicity.media.models import Image
 #from libavm.utils import avm_from_file
 
-
+@cache_page(60*5)
 def main_page( request ):
 	""" Main Page view """
 	
