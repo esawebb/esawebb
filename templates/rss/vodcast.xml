@@ -3,7 +3,7 @@
     <channel> 
 	<title>Hubblecast</title> 
         <itunes:author>ESA/Hubble</itunes:author> 
-        <link>http://www.spacetelescope.org/videos/hubblecast.html</link> 
+        <link>http://www.spacetelescope.org/videos/hubblecast/</link> 
         <description>The latest news about astronomy, space, and the NASA/ESA Hubble Space Telescope</description> 
         <itunes:subtitle>Vodcasts about the NASA/ESA Hubble Space Telescope</itunes:subtitle> 
         <itunes:summary>The latest news about astronomy, space, and the NASA/ESA Hubble Space Telescope</itunes:summary> 
@@ -19,11 +19,25 @@
 		</itunes:category>
 		<image>
 		  <title>Hubblecast</title>
-		  <url>http://www.spacetelescope.org/design/hcsquarelogo144.jpg</url> 
+		  <url>http://www.spacetelescope.org/static/design/hcsquarelogo144.jpg</url> 
 		  <width>144</width> 
 		  <height>144</height>
 		</image>
-		<itunes:image>http://www.spacetelescope.org/design/hubblecast_03.png</itunes:image>
+		<itunes:image>http://www.spacetelescope.org/static/design/hubblecast_03.png</itunes:image>
+	<item>
+		<title>Hubblecast 36: Gifts from the sky: honouring 20 years of Hubble</title> 
+          <itunes:author>ESA/Hubble</itunes:author> 
+	  		<description>Gifts from the sky: honouring 20 years of Hubble</description> 
+            <link>http://videos.spacetelescope.org/videos/vodcast/heic1007a.m4v</link>
+          <itunes:subtitle>Gifts from the sky: honouring 20 years of Hubble</itunes:subtitle> 
+          <itunes:summary>Gifts from the sky: honouring 20 years of Hubble</itunes:summary> 
+          <enclosure url="http://videos.spacetelescope.org/videos/vodcast/heic1007a.m4v" type="video/mov" /> 
+          <guid>http://www.spacetelescope.org/videos/heic1007a/</guid> 
+          <pubDate>Thu, 23 Apr 2010 10:00:00 +0200</pubDate> 
+          <itunes:explicit>no</itunes:explicit> 
+          <itunes:duration>749 sec</itunes:duration> 
+          <itunes:keywords>HD, High Definition, Hubblecast, Dr. J, anniversary, 20 years</itunes:keywords>  
+        </item>
 	<item>
 		<title>Hubblecast 35: The stuff of legend</title> 
           <itunes:author>ESA/Hubble</itunes:author> 

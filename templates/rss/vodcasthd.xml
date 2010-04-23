@@ -18,7 +18,7 @@
 <itunes:explicit>no</itunes:explicit>
 <itunes:keywords>astronomy, space, science, Hubble, telescope, astronaut, cosmos, Hubblecast, NASA, HD, High-Definition, high definition</itunes:keywords>
  
-<itunes:image>http://www.spacetelescope.org/design/hubblecast_hd_03.png</itunes:image> 
+<itunes:image>http://www.spacetelescope.org/static/design/hubblecast_hd_03.png</itunes:image> 
         
 <category>Science</category> 
 <itunes:category text="Science &amp; Medicine">
@@ -27,11 +27,24 @@
 
 <image>
 <title>Hubblecast</title>
-<url>http://www.spacetelescope.org/design/hubblecasthd_logo.jpg</url> 
+<url>http://www.spacetelescope.org/static/design/hubblecasthd_logo.jpg</url> 
 <width>144</width> 
 <height>144</height>
 </image>
-
+<item>
+		<title>Hubblecast 36: Gifts from the sky: honouring 20 years of Hubble</title> 
+          <itunes:author>ESA/Hubble</itunes:author> 
+	  		<description>Gifts from the sky: honouring 20 years of Hubble</description> 
+            <link>http://videos.spacetelescope.org/videos/vodcast/heic1007a.m4v</link>
+          <itunes:subtitle>Gifts from the sky: honouring 20 years of Hubble</itunes:subtitle> 
+          <itunes:summary>Gifts from the sky: honouring 20 years of Hubble</itunes:summary> 
+          <enclosure url="http://videos.spacetelescope.org/videos/hd720p_screen/heic1007a.m4v" type="video/mov" /> 
+          <guid>http://www.spacetelescope.org/videos/heic1007a/</guid> 
+          <pubDate>Thu, 23 Apr 2010 10:00:00 +0200</pubDate> 
+          <itunes:explicit>no</itunes:explicit> 
+          <itunes:duration>749 sec</itunes:duration> 
+          <itunes:keywords>HD, High Definition, Hubblecast, Dr. J, anniversary, 20 years</itunes:keywords>  
+        </item>
 	<item>
 <title>Hubblecast 35: The stuff of legend</title> 
 <itunes:author>ESA/Hubble</itunes:author> 
