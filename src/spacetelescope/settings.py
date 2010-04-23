@@ -589,7 +589,7 @@ REGEX_REDIRECTS = (
 	( re.compile( '/about/history/sm4blog/(.+)' ), '/static/sm4blog/\g<1>' ),
 	( re.compile( '/news/(doc|pdf|science_paper)/(.+)' ), '/static/archives/news/g<1>' ),
 	( re.compile( '/images/html/([a-z-_]+)\.html' ), '/images/g<1>/' ),
-	( re.compile( '/videos/(vodcast|hd1080p_screen|hd1080p_broadcast|hd720p_screen|hd720p_broadcast|h264|broadcast)/(.+)' ), '/static/archives/videos/g<1>/g<2>' ),
+	( re.compile( '/videos/(vodcast|hd1080p_screen|hd1080p_broadcast|hd720p_screen|hd720p_broadcast|h264|broadcast)/(.+)' ), '/static/archives/videos/\g<1>/\g<2>' ),
 )
 
 # ======================================================================
