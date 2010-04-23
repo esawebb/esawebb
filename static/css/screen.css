@@ -721,6 +721,10 @@ h2, h3{
 	float:left;
 }
 
+.fp_news .entry .date {
+	margin-bottom: 1px;
+}
+
 .fp_news .entry .withimg {
 	width: 260px;
 	margin-left:10px;
@@ -744,7 +748,7 @@ h2, h3{
 	display:block;
 	clear:both;
 	line-height:1.5;
-	margin-bottom: 5px;	
+	margin-top: 10px;	
 }
 
 .price {
