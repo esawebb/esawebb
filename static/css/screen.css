@@ -744,7 +744,7 @@ h2, h3{
 	display:block;
 	clear:both;
 	line-height:1.5;
-	
+	margin-bottom: 5px;	
 }
 
 .price {
