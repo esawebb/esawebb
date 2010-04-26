@@ -587,13 +587,37 @@ import re
 REGEX_REDIRECTS = (
 #	( re.compile( '/hubbleshop/webshop/webshop\.php\?show=sales&section=(books|cdroms)' ), '/shop/category/\g<1>/' ),
 	( re.compile( '/about/history/sm4blog/(.+)' ), '/static/sm4blog/\g<1>' ),
-	( re.compile( '/news/(doc|pdf|science_paper)/(.+)' ), '/static/archives/releases/\g<1>/\g<2>' ),
+	( re.compile( '/news/(doc|pdf|text)/(.+)' ), '/static/archives/releases/\g<1>/\g<2>' ),
+	( re.compile( '/news/(science_paper)/(.+)' ), '/static/archives/releases/science_papers/\g<1>' ),
 	( re.compile( '/images/html/([a-z0-9-_]+)\.html' ), '/images/\g<1>/' ),
 	( re.compile( '/videos/(vodcast|hd1080p_screen|hd1080p_broadcast|hd720p_screen|hd720p_broadcast|h264|broadcast)/(.+)' ), '/static/archives/videos/\g<1>/\g<2>' ),
 	( re.compile( '/images/html/zoomable/([a-z0-9-_]+).html' ), '/images/\g<1>/zoomable/' ),
 	( re.compile( '/videos/html/mov/(320px|180px)/([a-z0-9-_]+).html' ), '/videos/\g<2>/' ),
 	( re.compile( '/bin/videos.pl\?(searchtype=news&)?string=([a-z0-9-_]+)' ), '/videos/?search=\g<2>' ),
 	( re.compile( '/bin/images.pl\?(searchtype=news&)?string=([a-z0-9-_]+)' ), '/images/?search=\g<2>' ),
+	( re.compile( '/about/further_information/(brochures|books|newsletters)/(pdf|pdfsm)/(.+)' ), '/static/archives/\g<1>/\g<2>/\g<3>' ),
+	( re.compile( '/bin/calendar.pl' ), '/extras/calendars/' ),
+	( re.compile( '/bin/calendar.pl\?string=(\d+)' ), '/extras/calendars/archive/year/\g<1>/' ),
+	( re.compile( '/bin/images.pl\?embargo=0&viewtype=standard&searchtype=freesearch&lang=en&string=(.+)' ), '/images/?search=\g<1>' ),
+	( re.compile( '/bin/images.pl\?searchtype=freesearch&string=(.+)' ), '/images/?search=\g<1>' ),
+	( re.compile( '/bin/images.pl\?searchtype=top100' ), '/images/archive/top100/' ),
+	( re.compile( '/bin/images.pl\?searchtype=wallpaper' ), '/images/archive/wallpapers/' ),
+	( re.compile( '/bin/news.pl\?string=([a-z0-9-_]+)' ), '/news/\g<1>/' ),
+	( re.compile( '/goodies/printlayouts/html/([a-z0-9-_]+).html' ), '/news/\g<1>/' ),
+	( re.compile( '/images/archive/freesearch/([^/]+)/viewall/\d+' ), '/images/?search=\g<1>' ),
+	( re.compile( '/images/archive/topic/([^/]+)/(|standard)/(\d+)?' ), '/images/archive/category/\g<1>/' ),
+	( re.compile( '/images/archive/wallpaper/(.+)' ), '/images/archive/wallpapers/' ),
+	( re.compile( '/kidsandteachers/education/lowres_pdf/([a-z0-9-_]+)\.pdf' ), '/static/archives/education/pdfsm/\g<1>.pdf' ),
+	( re.compile( '/projects/python-xmp-toolkit/(.*)' ), '/static/projects/python-xmp-toolkit/\g<1>' ),
+	( re.compile( '/videos/archive/topic/([^/]+)/(|standard|viewall)/(\d+)?' ), '/videos/archive/category/\g<1>/' ),
+	( re.compile( '/videos/html/mpeg/320px/([a-z0-9-_]+).html' ), '/videos/\g<1>/' ),
+	( re.compile( '/videos/scripts/(.+)' ), '/static/archives/videos/script/\g<1>' ),
+	
+	
+	
+	
+	
+	
 	
 	
 )
