@@ -18,7 +18,7 @@ from django.template import Context, RequestContext, loader
 from django.views import defaults as default_views
 from djangoplicity.releases.models import Release
 from djangoplicity.media.models import Image, Video, PictureOfTheWeek
-from djangoplicity.media.options import ImageOptions
+from djangoplicity.media.options import ImageOptions, VideoOptions
 from spacetelescope.archives.models import Announcement 
 
 #from djangoplicity.media.models import Image
@@ -34,12 +34,14 @@ def main_page( request ):
 	from datetime import datetime
 	now = datetime.now()
 	potd = ImageOptions.Queries.default.queryset( Image, ImageOptions, request )[0][now.day]
+	votd = VideoOptions.Queries.default.queryset( Video, VideoOptions, request )[0][now.day]
 		
 	return render_to_response('frontpage.html', {
 				'releases': Release.get_latest_release( 5 ),
 				'potw' : PictureOfTheWeek.get_latest(),
 				'announcements' : Announcement.get_latest_announcement(5),
 				'potd' : potd,
+				'votd' : votd,
 				#'announcements': Announcement.get_latest_release( settings.FRONTPAGE_PRESSRELEASES_LEN ),
 			}, context_instance=RequestContext(request) )
 

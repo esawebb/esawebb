@@ -71,8 +71,13 @@
 			<div class='leftbord2 '>
 				<div class='potd_box'>
 				<h1>Picture of the Day</h1>
-				<img src='{{potd.resource_thumbs.url}}'></img>
+				<img src='{{potd.resource_wallpaperthumbs.url}}'></img>
 				<div class='title'><a href="{{potd.get_absolute_url}}">{{potd.title}}</a></div>
+				</div>
+				<div class='potd_box'>
+				<h1>Video of the Day</h1>
+				<img src='{{votd.resource_thumb.url}}'></img>
+				<div class='title'><a href="{{votd.get_absolute_url}}">{{votd.title}}</a></div>
 				</div>
 			</div>
 		</div>
