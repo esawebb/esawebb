@@ -27,13 +27,13 @@
 {% include "archives/search_results.html" %}
 <div class='bestof'>
 
-{% for item in object_list reversed %}
+{% for item in object_list %}
 	<a class='entry' href="{{ item.get_absolute_url }}">
 		<div class='image'>
 			<img src="{{ item.resource_medium.url }}"  alt="{{item.title}}" />
 		</div>
 		<div class='descr'>
-			<div class='number'>{{forloop.revcounter}}</div>
+			<div class='number'>{{forloop.counter}}</div>
 			<div class='title'>{{item.title}}</div>
 			<div class='credit'><strong>Credit:</strong> {{item.credit|safe|default:'ESA/Hubble'}}</div>
 		</div>
