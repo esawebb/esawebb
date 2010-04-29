@@ -287,6 +287,7 @@ INSTALLED_APPS = (
 	'product',
 	'shipping',
 	'payment',
+	'djangoplicity.coposweb',
     'l10n',
     'tax',
     'tax.modules.no',
@@ -504,9 +505,12 @@ SATCHMO_SETTINGS = {
                     'CUSTOM_PRODUCT_MODULES' : [
 											'spacetelescope.archives',
 											],
-                    'SHOP_URLS' : patterns('',
-										( r'^checkout/', 'spacetelescope.views.shop_closed' ),
-								)
+					'CUSTOM_PAYMENT_MODULES' : [
+											'djangoplicity.coposweb',
+											],
+#                    'SHOP_URLS' : patterns('',
+#										( r'^checkout/', 'spacetelescope.views.shop_closed' ),
+#								)
                     }
 
 
@@ -525,14 +529,14 @@ L10N_SETTINGS = {
   'allow_translations': False,
 }
 
-#import logging
-#logging.basicConfig(level=logging.DEBUG,
-#                    format='%(asctime)s %(name)-12s %(levelname)-8s %(message)s',
-#                    datefmt='%a, %d %b %Y %H:%M:%S')
-#
-#logging.getLogger( 'keyedcache' ).setLevel( logging.INFO )
-#logging.getLogger( 'l10n' ).setLevel( logging.INFO )
-#logging.info( "Satchmo Started" )
+import logging
+logging.basicConfig(level=logging.DEBUG,
+                    format='%(asctime)s %(name)-12s %(levelname)-8s %(message)s',
+                    datefmt='%a, %d %b %Y %H:%M:%S')
+
+logging.getLogger( 'keyedcache' ).setLevel( logging.INFO )
+logging.getLogger( 'l10n' ).setLevel( logging.INFO )
+logging.info( "Satchmo Started" )
 
 LIVESETTINGS_OPTIONS = {   
 	1: { 
@@ -548,7 +552,7 @@ LIVESETTINGS_OPTIONS = {
                 u'ORDER_EMAIL_EXTRA': u'disitribution@spacetelescope.org',
                 u'ORDER_EMAIL_OWNER': u'True',
                 u'SSL': u'True',
-                u'MODULES': u'["PAYMENT_DUMMY"]'
+                u'MODULES': u'["PAYMENT_COPOSWEB"]'
             },
             u'PAYMENT_DUMMY': {
 				u'CREDITCHOICES': u'["Visa", "Mastercard", "Discover", "American Express"]'
@@ -577,10 +581,20 @@ LIVESETTINGS_OPTIONS = {
 				u'REQUIRED_BILLING_DATA': u'["email", "first_name", "last_name", "phone", "street1", "city", "postal_code", "country"]',
 				u'ENFORCE_STATE': u'False',
 				u'LOGO_URI': u'http://www.spacetelescope.org/about_us/logos/transparent/esa_hubble_colour_wb_gen.png',
-			}
+			},
+            u'PAYMENT_COPOSWEB': {
+				u'USER_TEST': u'testeso',
+				u'PASSWORD_TEST': u'Kw6&gHKi',
+				u'LIVE_CONFIG_FILE' : config.get("shop","COPOSWEB_CONFIG_INI", "/etc/coposweb.ini"),
+				u'CAPTURE': u'True',
+				u'LIVE': u'True' if config.getboolean("shop","LIVE" ) else u'False',
+				u'EXTRA_LOGGING': u'True',				
+			},
 		}
 	}
 }
+
+ORDER_PREFIX = config.get( "shop", "ORDER_PREFIX", "hb" ) 
 
 
 import re
@@ -612,14 +626,6 @@ REGEX_REDIRECTS = (
 	( re.compile( '/videos/archive/topic/([^/]+)/(|standard|viewall)/(\d+)?' ), '/videos/archive/category/\g<1>/' ),
 	( re.compile( '/videos/html/mpeg/320px/([a-z0-9-_]+).html' ), '/videos/\g<1>/' ),
 	( re.compile( '/videos/scripts/(.+)' ), '/static/archives/videos/script/\g<1>' ),
-	
-	
-	
-	
-	
-	
-	
-	
 )
 
 # ======================================================================

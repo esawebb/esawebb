@@ -1013,3 +1013,16 @@ display:none;
 .contactdata {
 	margin-top: 10px;
 }
+
+.error {
+	color: red; 
+}
+
+.small {
+	font-size: 10px;
+	display: block;
+}
+
+.orderbox {
+	margin-bottom: 15px;
+}

@@ -1,0 +1,72 @@
+{% extends "shop/base.html" %}
+{% load i18n %}
+
+{% block content %}
+<h1>{% trans "Checkout" %}</h1>
+<h2>Step 2 of 3: Enter credit card information</h2>
+
+<p>{% trans "Please complete the following information in order to submit your order." %} Note, your credit card will not be charged before you have 
+reviewed the complete order in step 3.</p>
+
+{% if form.errors %}
+<div align="center" class="error">
+    <h2>{% blocktrans count form.errors|length as count %}Please correct the error{% plural %}Please correct the errors{% endblocktrans %}</h2>    
+</div>
+{% endif %}
+
+<table>
+<form method="post" action=".">
+    {% block payment_table %}
+    <tr><td><h2>{% trans "Payment Information" %}</h2></td></tr>
+    
+	{% if form.errors %}
+	{% if form.non_field_errors %}
+    <tr><td colspan="2"><strong>Errors:</strong><br />
+    <p>{{ form.non_field_errors }}</p>
+    </td></tr>{% endif %}
+    {% endif %}
+    
+    <tr><td><label for="id_credit_type">{% trans "Type of credit card" %}</label></td> <td>{{ form.credit_type }}</td></tr>
+    {% if form.credit_type.errors %}<tr><td></td><td class="error">*** {{ form.credit_type.errors|join:", " }}</td></tr>{% endif %}
+
+    <tr><td><label for="id_credit_number">{% trans "Credit card number" %}</label></td><td> {{ form.credit_number }}</td></tr>
+    {% if form.credit_number.errors %}<tr><td></td><td class="error">*** {{ form.credit_number.errors|join:", " }}</td></tr>{% endif %}
+
+    <tr><td><label for="id_month_expires">{% trans "Expiration date" %}</label><label for="id_year_expires"></label></td><td> {{ form.month_expires }} {{form.year_expires}}</td></tr>
+    {% if form.year_expires.errors %}<tr><td></td><td class="error">*** {{ form.year_expires.errors|join:", " }}</td></tr>{% endif %}
+
+    <tr><td><label for="id_ccv">{% trans "CCV" %}</label></span></td><td> {{ form.ccv}}<span class="small">What is <a href="/shop/cvc_info/">CCV</a>?</td></tr>
+    {% if form.ccv.errors %}<tr><td></td><td class="error">*** {{ form.ccv.errors|join:", " }}</td></tr>{% endif %}
+
+	{% endblock %}
+
+    {% if cart.is_shippable %}
+
+        {% if form.shipping_hidden %}
+        {{ form.shipping }}
+        {% else %}
+        <tr><td><h2><br /><br />{% trans "Shipping Information" %}</h2></td></tr>
+        </table>
+        {% block shipping_table %}
+        <div id="shipping">
+        {% if form.shipping_description or form.shipping.field.choices|length_is:1 %}
+        <p><label for="id_shipping">{% trans "The following shipping method will be used" %}:</label></p>
+        {% else %}
+        <label for="id_shipping">{% trans "Please choose your preferred shipping method" %}</label>
+        {% endif %}
+        {{ form.shipping }}
+        {% if form.shipping_description %}<p><strong>{{ form.shipping_description }}</strong></p>{% endif %}
+        {% if form.shipping.errors %}*** {{ form.shipping.errors|join:", " }}{% endif %}
+        </div>
+        {% endblock %}
+        {% endif %}
+    {% else %}
+        <tr><td colspan="2"><p>{% trans "There are no items in this order to ship." %}</p></td></tr>
+    
+    {% endif %}
+    </table>
+
+    <div align="center"><input type="submit" value="{% trans "Continue to order review" %}"/></div>
+</form>
+
+{% endblock %}
