@@ -1,0 +1,25 @@
+{% load djangoplicity_satchmo %}{% load i18n %}{% with order.contact.first_name as first_name %}{% with order.contact.last_name as last_name %}{% blocktrans %}Dear {{ first_name }} {{ last_name }},{% endblocktrans %}{% endwith %}{% endwith %}
+
+{% blocktrans %}Thank you for ordering with {{ shop_name }}.{% endblocktrans %}
+
+{% with order.shipping_method as shippingmethod %}{% blocktrans %}Your order {{ order|order_variable:"ORDER_ID" }} has shipped today via {{ shippingmethod }}.{% endblocktrans %}{% endwith %}
+
+{% trans "Shipping Address" %}
+----------------
+{{ order.ship_addressee }}
+{{ order.full_ship_street }}
+{{ order.ship_postal_code }} {{ order.ship_city }}
+{% if order.ship_state %}{{ order.ship_state }}
+{% endif %}{{ order.ship_country }}
+
+{% blocktrans %}This completes your order.{% endblocktrans %}
+
+Yours sincerely,
+ESA/Hubble
+
+---
+Hubble European Space Agency Information Centre
+c/o Space Telescope-European Coordinating Facility (ST-ECF)
+Karl-Schwarzschild-Strasse 2
+D-85748 Garching bei Munchen
+Germany
