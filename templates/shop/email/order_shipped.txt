@@ -2,7 +2,7 @@
 
 {% blocktrans %}Thank you for ordering with {{ shop_name }}.{% endblocktrans %}
 
-{% with order.shipping_method as shippingmethod %}{% blocktrans %}Your order {{ order|order_variable:"ORDER_ID" }} has shipped today via {{ shippingmethod }}.{% endblocktrans %}{% endwith %}
+{% with order.shipping_method as shippingmethod %}Your order {{ order|order_variable:"ORDER_ID" }} has shipped today via {{ shippingmethod }}.{% endwith %}
 
 {% trans "Shipping Address" %}
 ----------------
