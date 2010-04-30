@@ -549,7 +549,7 @@ LIVESETTINGS_OPTIONS = {
             u'PAYMENT': {
 				u'COUNTRY_MATCH': u'False',
                 u'MINIMUM_ORDER': u'3.00',
-                u'ORDER_EMAIL_EXTRA': u'disitribution@spacetelescope.org',
+                u'ORDER_EMAIL_EXTRA': u'distribution@spacetelescope.org',
                 u'ORDER_EMAIL_OWNER': u'True',
                 u'SSL': u'True',
                 u'MODULES': u'["PAYMENT_COPOSWEB"]'
