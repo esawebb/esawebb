@@ -30,7 +30,6 @@
 <h3>{% trans "Shipping Address" %}</h3>
 <p>
 {{ order.contact.shipping_address.addressee }}<br/>
-{{ order.ship_to }}<br/>
 {{ order.full_ship_street|linebreaksbr }}<br/>
 {{ order.ship_postal_code }} {{ order.ship_city }}<br/>
 {% if order.ship_state %}{{ order.ship_state }}<br/>{% endif %}
