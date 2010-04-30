@@ -9,8 +9,13 @@
 
 {% block error_processing %}
 {% if errors %}
-    <h3>{% block errorheader %}{% trans "The following error was returned while trying to process your card.  Please correct and resubmit" %}{% endblock %}</h3>
-    {{ errors }}
+<div class="pr_box">
+    <h3 class="error">{% block errorheader %}An error was returned while trying to process your card{% endblock %}</h3>
+    <p><span class="error">Reason: {{ errors }}</span>
+    </p>
+    <p>Please go back to <a href="../">Step 2 of 3: Enter credit card information</a> and 
+    correct the error given below.</p>
+</div>
 {% else %}
     <p>Please validate the following information, then submit press "Place order". Your credit card will be charged immediately after you 
     have placed the order.</p>
