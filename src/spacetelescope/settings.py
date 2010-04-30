@@ -529,14 +529,14 @@ L10N_SETTINGS = {
   'allow_translations': False,
 }
 
-import logging
-logging.basicConfig(level=logging.DEBUG,
-                    format='%(asctime)s %(name)-12s %(levelname)-8s %(message)s',
-                    datefmt='%a, %d %b %Y %H:%M:%S')
-
-logging.getLogger( 'keyedcache' ).setLevel( logging.INFO )
-logging.getLogger( 'l10n' ).setLevel( logging.INFO )
-logging.info( "Satchmo Started" )
+#import logging
+#logging.basicConfig(level=logging.DEBUG,
+#                    format='%(asctime)s %(name)-12s %(levelname)-8s %(message)s',
+#                    datefmt='%a, %d %b %Y %H:%M:%S')
+#
+#logging.getLogger( 'keyedcache' ).setLevel( logging.INFO )
+#logging.getLogger( 'l10n' ).setLevel( logging.INFO )
+#logging.info( "Satchmo Started" )
 
 LIVESETTINGS_OPTIONS = {   
 	1: { 
