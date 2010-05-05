@@ -15,6 +15,7 @@
 #
 
 from djangoconfutils.ini_locator import locate_ini_config
+import re
 
 config = locate_ini_config( 'spacetelescope', 'settings' )
 
@@ -108,7 +109,7 @@ SITE_ID = 1
 USE_I18N = False
 
 # Default date and time formats (con be overridden by locale)
-DATE_FORMAT = 'M j, Y'
+DATE_FORMAT = 'j M Y'
 DATE_LONG_FORMAT = 'j F Y'
 DATETIME_FORMAT = 'M j, Y, H:i T'
 DATETIME_LONG_FORMAT = 'M j, Y y, H:i T'
@@ -170,8 +171,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
 	'djangoplicity.utils.context_processors.site_environment',
 	'djangoplicity.utils.context_processors.project_environment',
 	'djangoplicity.utils.context_processors.google_analytics_id',
-	'djangoplicity.utils.context_processors.djangoplicity_environment'
-	#'eso.context_processors.test_environment',
+	'djangoplicity.utils.context_processors.djangoplicity_environment',
 )
 
 ROOT_URLCONF = 'spacetelescope.urls'
@@ -220,7 +220,14 @@ if DEBUG_TOOLBAR:
 	# Add debug toolbar to request
 	MIDDLEWARE_CLASSES += (
 		'debug_toolbar.middleware.DebugToolbarMiddleware',
-	)	
+	)
+	
+ENABLE_REDIRECT_MIDDLEWARE = config.getboolean('environment','ENABLE_REDIRECT_MIDDLEWARE') if config.has_option('environment','ENABLE_REDIRECT_MIDDLEWARE') else False
+
+
+REDIRECT_MIDDLEWARE_URI = config.get('environment','REDIRECT_MIDDLEWARE_URI') if config.has_option('environment','REDIRECT_MIDDLEWARE_URI') else ''	
+
+		
 
 MIDDLEWARE_CLASSES += (
 	# Enables session support
@@ -237,7 +244,16 @@ MIDDLEWARE_CLASSES += (
     
     # Logging of exceptions in database.
     'djangodblog.DBLogMiddleware', # Exception
-		
+	
+)
+
+
+if ENABLE_REDIRECT_MIDDLEWARE:
+	MIDDLEWARE_CLASSES += (
+		'djangoplicity.contrib.redirects.middleware.SinkRedirectMiddleware',
+		)
+
+MIDDLEWARE_CLASSES += (
 	# Module for URL redirection. 
 	'django.contrib.redirects.middleware.RedirectFallbackMiddleware', # Response
 	
@@ -427,6 +443,11 @@ DEFAULT_PUBLISHER = u"ESA/Hubble"
 DEFAULT_PUBLISHER_ID = u"vamp://esahubble"
 
 ARCHIVE_IMPORT_ROOT = config.get('media','ARCHIVE_IMPORT_ROOT') if config.has_option('media','ARCHIVE_IMPORT_ROOT')  else '/Volumes/webdocs/importi'
+ARCHIVE_WORKFLOWS = {
+	'media.video.rename' : ('eso.workflows.media','video_rename'), 
+}
+
+VIDEO_RENAME_NOTIFY = ['mkornmes@eso.org',]
 
 VIDEO_CONTENT_SERVERS = (
 	( '', 'Default' ),
@@ -474,6 +495,40 @@ JQUERY_UI_CSS = "djangoplicity/css/ui-lightness/jquery-ui-1.7.2.custom.css"
 DJANGOPLICITY_ADMIN_CSS = "djangoplicity/css/admin.css"
 DJANGOPLICITY_ADMIN_JS = "djangoplicity/js/admin.js"
 SUBJECT_CATEGORY_CSS = "djangoplicity/css/widgets.css"
+
+REGEX_REDIRECTS = (
+#	( re.compile( '/hubbleshop/webshop/webshop\.php\?show=sales&section=(books|cdroms)' ), '/shop/category/\g<1>/' ),
+	( re.compile( '/about/history/sm4blog/(.+)' ), '/static/sm4blog/\g<1>' ),
+	( re.compile( '/news/(doc|pdf|text)/(.+)' ), '/static/archives/releases/\g<1>/\g<2>' ),
+	( re.compile( '/news/(science_paper)/(.+)' ), '/static/archives/releases/science_papers/\g<1>' ),
+	( re.compile( '/images/html/([a-z0-9-_]+)\.html' ), '/images/\g<1>/' ),
+	( re.compile( '/videos/(vodcast|hd1080p_screen|hd1080p_broadcast|hd720p_screen|hd720p_broadcast|h264|broadcast)/(.+)' ), '/static/archives/videos/\g<1>/\g<2>' ),
+	( re.compile( '/images/html/zoomable/([a-z0-9-_]+).html' ), '/images/\g<1>/zoomable/' ),
+	( re.compile( '/videos/html/mov/(320px|180px)/([a-z0-9-_]+).html' ), '/videos/\g<2>/' ),
+	( re.compile( '/bin/videos.pl\?(searchtype=news&)?string=([a-z0-9-_]+)' ), '/videos/?search=\g<2>' ),
+	( re.compile( '/bin/images.pl\?(searchtype=news&)?string=([a-z0-9-_]+)' ), '/images/?search=\g<2>' ),
+	( re.compile( '/about/further_information/(brochures|books|newsletters)/(pdf|pdfsm)/(.+)' ), '/static/archives/\g<1>/\g<2>/\g<3>' ),
+	( re.compile( '/bin/calendar.pl' ), '/extras/calendars/' ),
+	( re.compile( '/bin/calendar.pl\?string=(\d+)' ), '/extras/calendars/archive/year/\g<1>/' ),
+	( re.compile( '/bin/images.pl\?embargo=0&viewtype=standard&searchtype=freesearch&lang=en&string=(.+)' ), '/images/?search=\g<1>' ),
+	( re.compile( '/bin/images.pl\?searchtype=freesearch&string=(.+)' ), '/images/?search=\g<1>' ),
+	( re.compile( '/bin/images.pl\?searchtype=top100' ), '/images/archive/top100/' ),
+	( re.compile( '/bin/images.pl\?searchtype=wallpaper' ), '/images/archive/wallpapers/' ),
+	( re.compile( '/bin/news.pl\?string=([a-z0-9-_]+)' ), '/news/\g<1>/' ),
+	( re.compile( '/goodies/printlayouts/html/([a-z0-9-_]+).html' ), '/news/\g<1>/' ),
+	( re.compile( '/images/archive/freesearch/([^/]+)/viewall/\d+' ), '/images/?search=\g<1>' ),
+	( re.compile( '/images/archive/topic/([^/]+)/(|standard)/(\d+)?' ), '/images/archive/category/\g<1>/' ),
+	( re.compile( '/images/archive/wallpaper/(.+)' ), '/images/archive/wallpapers/' ),
+	( re.compile( '/kidsandteachers/education/lowres_pdf/([a-z0-9-_]+)\.pdf' ), '/static/archives/education/pdfsm/\g<1>.pdf' ),
+	( re.compile( '/projects/python-xmp-toolkit/(.*)' ), '/static/projects/python-xmp-toolkit/\g<1>' ),
+	( re.compile( '/videos/archive/topic/([^/]+)/(|standard|viewall)/(\d+)?' ), '/videos/archive/category/\g<1>/' ),
+	( re.compile( '/videos/html/mpeg/320px/([a-z0-9-_]+).html' ), '/videos/\g<1>/' ),
+	( re.compile( '/videos/scripts/(.+)' ), '/static/archives/videos/script/\g<1>' ),
+)
+
+# ======================================================================
+# SITE SPECIFIC SECTIONS 
+# ======================================================================
 
 ###########
 # SATCHMO #
@@ -594,40 +649,4 @@ LIVESETTINGS_OPTIONS = {
 	}
 }
 
-ORDER_PREFIX = config.get( "shop", "ORDER_PREFIX", "hb" ) 
-
-
-import re
-REGEX_REDIRECTS = (
-#	( re.compile( '/hubbleshop/webshop/webshop\.php\?show=sales&section=(books|cdroms)' ), '/shop/category/\g<1>/' ),
-	( re.compile( '/about/history/sm4blog/(.+)' ), '/static/sm4blog/\g<1>' ),
-	( re.compile( '/news/(doc|pdf|text)/(.+)' ), '/static/archives/releases/\g<1>/\g<2>' ),
-	( re.compile( '/news/(science_paper)/(.+)' ), '/static/archives/releases/science_papers/\g<1>' ),
-	( re.compile( '/images/html/([a-z0-9-_]+)\.html' ), '/images/\g<1>/' ),
-	( re.compile( '/videos/(vodcast|hd1080p_screen|hd1080p_broadcast|hd720p_screen|hd720p_broadcast|h264|broadcast)/(.+)' ), '/static/archives/videos/\g<1>/\g<2>' ),
-	( re.compile( '/images/html/zoomable/([a-z0-9-_]+).html' ), '/images/\g<1>/zoomable/' ),
-	( re.compile( '/videos/html/mov/(320px|180px)/([a-z0-9-_]+).html' ), '/videos/\g<2>/' ),
-	( re.compile( '/bin/videos.pl\?(searchtype=news&)?string=([a-z0-9-_]+)' ), '/videos/?search=\g<2>' ),
-	( re.compile( '/bin/images.pl\?(searchtype=news&)?string=([a-z0-9-_]+)' ), '/images/?search=\g<2>' ),
-	( re.compile( '/about/further_information/(brochures|books|newsletters)/(pdf|pdfsm)/(.+)' ), '/static/archives/\g<1>/\g<2>/\g<3>' ),
-	( re.compile( '/bin/calendar.pl' ), '/extras/calendars/' ),
-	( re.compile( '/bin/calendar.pl\?string=(\d+)' ), '/extras/calendars/archive/year/\g<1>/' ),
-	( re.compile( '/bin/images.pl\?embargo=0&viewtype=standard&searchtype=freesearch&lang=en&string=(.+)' ), '/images/?search=\g<1>' ),
-	( re.compile( '/bin/images.pl\?searchtype=freesearch&string=(.+)' ), '/images/?search=\g<1>' ),
-	( re.compile( '/bin/images.pl\?searchtype=top100' ), '/images/archive/top100/' ),
-	( re.compile( '/bin/images.pl\?searchtype=wallpaper' ), '/images/archive/wallpapers/' ),
-	( re.compile( '/bin/news.pl\?string=([a-z0-9-_]+)' ), '/news/\g<1>/' ),
-	( re.compile( '/goodies/printlayouts/html/([a-z0-9-_]+).html' ), '/news/\g<1>/' ),
-	( re.compile( '/images/archive/freesearch/([^/]+)/viewall/\d+' ), '/images/?search=\g<1>' ),
-	( re.compile( '/images/archive/topic/([^/]+)/(|standard)/(\d+)?' ), '/images/archive/category/\g<1>/' ),
-	( re.compile( '/images/archive/wallpaper/(.+)' ), '/images/archive/wallpapers/' ),
-	( re.compile( '/kidsandteachers/education/lowres_pdf/([a-z0-9-_]+)\.pdf' ), '/static/archives/education/pdfsm/\g<1>.pdf' ),
-	( re.compile( '/projects/python-xmp-toolkit/(.*)' ), '/static/projects/python-xmp-toolkit/\g<1>' ),
-	( re.compile( '/videos/archive/topic/([^/]+)/(|standard|viewall)/(\d+)?' ), '/videos/archive/category/\g<1>/' ),
-	( re.compile( '/videos/html/mpeg/320px/([a-z0-9-_]+).html' ), '/videos/\g<1>/' ),
-	( re.compile( '/videos/scripts/(.+)' ), '/static/archives/videos/script/\g<1>' ),
-)
-
-# ======================================================================
-# SITE SPECIFIC SECTIONS 
-# ======================================================================
+ORDER_PREFIX = config.get( "shop", "ORDER_PREFIX", "hb" )

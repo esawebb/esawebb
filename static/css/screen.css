@@ -981,6 +981,7 @@ a.teasertext:hover {
 	color: red;
 	font-size: 20px;
 	text-align:center;
+	margin-bottom: 10px;
 }
 
 .pr_list_image {
@@ -989,7 +990,7 @@ a.teasertext:hover {
 }
 
 .hidden {
-display:none;
+	display:none;
 }
 
 .inline_image {
