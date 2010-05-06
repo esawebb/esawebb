@@ -112,11 +112,7 @@
 <div class='clear'></div>
 </div>
 <script type="text/javascript">var MEDIA_URL = "{{MEDIA_URL}}"</script>
-<script type="text/javascript" src="{{MEDIA_URL}}djangoplicity/js/jquery-1.4.2.min.js"></script>
-<script type="text/javascript" src="{{MEDIA_URL}}djangoplicity/js/jquery.cycle.js"></script>
-<script type="text/javascript" src="{{MEDIA_URL}}djangoplicity/js/jquery.jclock-1.2.0.js"></script>
-<script type="text/javascript" src="{{MEDIA_URL}}djangoplicity/shadowbox3/shadowbox.js"></script>
-<script type="text/javascript" src="{{MEDIA_URL}}js/site.js"></script>
+{% load assets %}{% assets filter="jsmin", output="js/packed.js", "djangoplicity/js/jquery-1.4.2.min.js", "djangoplicity/js/jquery.cycle.min.js", "djangoplicity/js/jquery.jclock-1.2.0.js", "djangoplicity/shadowbox3/shadowbox.js", "djangoplicity/js/shadowbox_conf.js", "js/site.js" %}<script type="text/javascript" src="{{ ASSET_URL }}"></script>{% endassets %}
 <script type="text/javascript" src="http://www.google.com/coop/cse/brand?form=cse-search-box&lang=en"></script>
 {% block extra_scripts %}{% endblock %}
 <script type="text/javascript">

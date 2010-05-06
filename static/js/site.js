@@ -73,12 +73,3 @@ $('.rotator .items' ).
 
 $('.fbut').fadeOut(0);
 $('.fbut').removeClass('init_hide');
-
-
-/*shadowbox */
-
-
-
-Shadowbox.init(options);
-
-
