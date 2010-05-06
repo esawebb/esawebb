@@ -39,7 +39,7 @@ min-width: 860px;
 {% block content %}
 {% if object.headline %}<p>{{ object.headline }}</p>{% endif %}
 <p>{{ object.description|safe }}</p>
-<p><strong>Credit:</strong><div class="credit"><p>{{ object.credit|safe|default:"ESO" }}</p></div></p>
+<p><strong>Credit:</strong><div class="credit"><p>{{ object.credit|safe|default:"ESA/Hubble" }}</p></div></p>
 {% include 'archives/extra_footer.html' %}
 {% endblock %}
 
