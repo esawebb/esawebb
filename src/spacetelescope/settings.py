@@ -454,6 +454,10 @@ VIDEO_CONTENT_SERVERS = (
 	( 'http://videos.spacetelescope.org/videos/', 'videos.spacetelescope.org' )
 )
 
+
+# FEEDS SETTINGS MODULE
+FEED_SETTINGS_MODULE = 'spacetelescope.feed_settings'
+
 ############
 # REPORTS  #
 ############
