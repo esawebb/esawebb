@@ -487,14 +487,17 @@ UPDATE_JOBS_RUN_EVERY = 300
 ##############
 # JavaScript #
 ##############
-TINYMCE_JS = "djangoplicity/js/tiny_mce_v32/tiny_mce.js"
-TINYMCE_JQUERY_JS = "djangoplicity/js/tiny_mce_v32/jquery.tinymce.js"
-JQUERY_JS = "djangoplicity/js/jquery-1.3.2.min.js"
+TINYMCE_JS = "djangoplicity/js/tiny_mce_v33/tiny_mce.js"
+TINYMCE_JQUERY_JS = "djangoplicity/js/tiny_mce_v33/jquery.tinymce.js"
+JQUERY_JS = "djangoplicity/js/jquery-1.4.2.min.js"
 JQUERY_UI_JS = "djangoplicity/js/jquery-ui-1.7.2.custom.min.js"
 JQUERY_UI_CSS = "djangoplicity/css/ui-lightness/jquery-ui-1.7.2.custom.css"
 DJANGOPLICITY_ADMIN_CSS = "djangoplicity/css/admin.css"
 DJANGOPLICITY_ADMIN_JS = "djangoplicity/js/admin.js"
 SUBJECT_CATEGORY_CSS = "djangoplicity/css/widgets.css"
+SHADOWBOX_JS = "djangoplicity/shadowbox3/shadowbox.js"
+SHADOWBOX_CSS = "djangoplicity/shadowbox3/shadowbox.css"
+SWFOBJECT_JS = "djangoplicity/js/swfobject.js"
 
 REGEX_REDIRECTS = (
 #	( re.compile( '/hubbleshop/webshop/webshop\.php\?show=sales&section=(books|cdroms)' ), '/shop/category/\g<1>/' ),
