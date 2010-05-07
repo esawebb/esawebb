@@ -1027,3 +1027,11 @@ a.teasertext:hover {
 .orderbox {
 	margin-bottom: 15px;
 }
+
+.disclaimer {
+	background-color: #ff9999;
+	padding: 5px;
+	border: 1px solid #ff0000;
+	margin-bottom: 10px;
+	color: #000000;
+}

@@ -11,6 +11,7 @@
 {% load djangoplicity_datetime %}
 {% load release_links %}
 {% include 'archives/embargo_notice.html' %}
+{% if object.disclaimer %}<div class="disclaimer">{{ object.disclaimer|safe }}</div>{% endif %}
 <h3 class="pr_typeid">{{object.id}} - {{object.release_type}}</h3>
 {% if translations %}
 <div align="left"><div align="left" style="margin-top: 10px; width: 590px;">
