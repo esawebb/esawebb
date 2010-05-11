@@ -27,6 +27,7 @@ import djangoplicity.releases.admin
 import djangoplicity.metadata.admin
 import djangoplicity.contrib.redirects.admin
 import djangoplicity.authtkt.admin
+import djangoplicity.google.admin
 
 import spacetelescope.archives.admin
 
@@ -54,6 +55,7 @@ autoregister( adminlogs_site, djangoplicity.search.admin )
 autoregister( adminlogs_site, djangodblog.admin )
 autoregister( adminlogs_site, djangoplicity.cron.admin )
 autoregister( adminlogs_site, djangoplicity.authtkt.admin )
+autoregister( adminlogs_site, djangoplicity.google.admin )
 
 
 

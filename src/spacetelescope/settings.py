@@ -286,6 +286,7 @@ INSTALLED_APPS = (
 	'djangoplicity.metadata',
 	'djangoplicity',
 	'djangoplicity.authtkt',
+	'djangoplicity.google',
 	'spacetelescope',
 	'celery',
 	'mptt',

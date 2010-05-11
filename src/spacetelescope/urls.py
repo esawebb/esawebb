@@ -93,6 +93,9 @@ urlpatterns += patterns( '',
     ( r'^login/$', 'djangoplicity.authtkt.views.login', { 'template_name': 'login.html', 'SSL' : True } ),
  	( r'^logout/$', 'djangoplicity.authtkt.views.logout', { 'template_name': 'logout.html', 'SSL' : True } ),
  	
+ 	# Google Webmaster Toolkit verification
+ 	( r'^', include( 'djangoplicity.google.urls' ) ), 
+
  	# Main view
  	( r'^$', 'spacetelescope.views.main_page' ),
  )
