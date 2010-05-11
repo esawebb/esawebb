@@ -60,7 +60,7 @@ class VideoPodcastFeedSettings ():
     
     
 class ReleaseFeedSettings ():
-    title = 'Hubble Space Telescope News'
+    title = 'Hubble News'
     link = '/news/'
     description = "The latest news about astronomy and the NASA/ESA Hubble Space Telescope"
     
