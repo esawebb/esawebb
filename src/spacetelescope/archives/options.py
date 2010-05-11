@@ -145,6 +145,14 @@ class AnnouncementOptions( ArchiveOptions ):
 		staging = ( StagingQuery, security.STAGING_PERMS )
 		embargo = ( EmbargoQuery, security.EMBARGO )	
 
+	@staticmethod
+	def feeds ():
+		from feeds import AnnouncementFeed
+		feed_dict = {
+			'':	        AnnouncementFeed,
+		}
+		return feed_dict
+	
 
 class ConferencePosterOptions (StandardOptions):
 	urlname_prefix = 'conference_posters'

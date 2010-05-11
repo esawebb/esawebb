@@ -82,6 +82,7 @@ urlpatterns += patterns( '',
 	
     ( r'^projects/fits_liberator/fitsimages/', include('spacetelescope.archives.urls.fitsimages'), { 'model': FITSImage, 'options': FITSImageOptions } ),
     
+    
     ( r'^rss/feed.xml$', 'spacetelescope.views.rssfeedhack', { 'rssfile': 'feed.xml' } ),
     ( r'^rss/vodcast.xml$', 'spacetelescope.views.rssfeedhack', { 'rssfile': 'vodcast.xml' } ),
     ( r'^rss/vodcastfullhd.xml$', 'spacetelescope.views.rssfeedhack', { 'rssfile': 'vodcastfullhd.xml' } ),
@@ -95,6 +96,14 @@ urlpatterns += patterns( '',
  	# Main view
  	( r'^$', 'spacetelescope.views.main_page' ),
  )
+
+## legacy rss feed urls
+#urlpatterns += patterns('django.views.generic.simple',
+#    ( r'^rss/feed.xml$', 'redirect_to', { 'url': '/news/feed/' } ),
+#    ( r'^rss/vodcast.xml$', 'redirect_to', { 'url': '/videos/feed/category/hubblecast/sd/' } ),
+#    ( r'^rss/vodcasthd.xml$', 'redirect_to', { 'url': '/videos/feed/category/hubblecast/hd/' } ),
+#    ( r'^rss/vodcastfullhd.xml$', 'redirect_to', { 'url': '/videos/feed/category/hubblecast/fullhd/' } ),
+#)
 
 urlpatterns += basepatterns + patterns('',
 	# Satchmo Shop URLs

@@ -1,3 +1,10 @@
+# Djangoplicity
+# Copyright 2007-2008 ESA/Hubble
+#
+# Authors:
+#   Lars Holm Nielsen <lnielsen@eso.org>
+#   Luis Clara Gomes <lcgomes@eso.org>
+#
 from django.utils.translation import ugettext_lazy as _
 from livesettings import *
 
