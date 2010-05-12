@@ -1,10 +1,10 @@
 <copyright>(c) 2007 ESA/Hubble</copyright>
 
-<itunes:new-feed-url>http://www.spacetelescope.org/videos/feed/category/hubblecast/{% if format %}{{format}}/{% endif %}</itunes:new-feed-url>
+<itunes:new-feed-url>{% if not format %}http://feeds.feedburner.com/hubblecast/{% else %}{% ifequal format "hd" %}http://feeds.feedburner.com/hubblecast/{% else %}http://feeds.feedburner.com/hubblecast_{{format}}/{% endifequal %}{% endif %}</itunes:new-feed-url>
 
 <itunes:author>ESA/Hubble</itunes:author> 
 <itunes:subtitle>Vodcasts in High Definition about the NASA/ESA Hubble Space Telescope</itunes:subtitle> 
-<itunes:summary>The latest news about astronomy, space, and the NASA/ESA Hubble Space Telescope presented in High Definition format (720/25p)</itunes:summary>
+<itunes:summary>The latest news about astronomy, space, and the NASA/ESA Hubble Space Telescope presented in High Definition.</itunes:summary>
 
 <itunes:owner> 
 	<itunes:name>ESA/Hubble</itunes:name> 
@@ -37,5 +37,5 @@
 <amp:networkWebsite>http://www.nasa.gov/multimedia/podcasting/</amp:networkWebsite>
 <amp:background>http://www.spacetelescope.org/static/archives/images/screen/heic0822a.jpg</amp:background>
 
-<atom:link href="http://www.spacetelescope.org/videos/feed/category/hubblecast/{% if format %}{{format}}/{% endif %}" rel="self" type="application/rss+xml" />
+<atom:link href="{% if not format %}http://feeds.feedburner.com/hubblecast/{% else %}{% ifequal format "hd" %}http://feeds.feedburner.com/hubblecast/{% else %}http://feeds.feedburner.com/hubblecast_{{format}}/{% endifequal %}{% endif %}" rel="self" type="application/rss+xml" />
 <atom:link rel="hub" href="http://pubsubhubbub.appspot.com/" />
