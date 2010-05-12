@@ -3,8 +3,8 @@
 <itunes:new-feed-url>{% if not format %}http://feeds.feedburner.com/hubblecast/{% else %}{% ifequal format "hd" %}http://feeds.feedburner.com/hubblecast/{% else %}http://feeds.feedburner.com/hubblecast_{{format}}/{% endifequal %}{% endif %}</itunes:new-feed-url>
 
 <itunes:author>ESA/Hubble</itunes:author> 
-<itunes:subtitle>Vodcasts in High Definition about the NASA/ESA Hubble Space Telescope</itunes:subtitle> 
-<itunes:summary>The latest news about astronomy, space, and the NASA/ESA Hubble Space Telescope presented in High Definition.</itunes:summary>
+<itunes:subtitle>Vodcasts{% ifnotequal format "sd" %} in High Definition{% endifnotequal %} about the NASA/ESA Hubble Space Telescope</itunes:subtitle> 
+<itunes:summary>The latest news about astronomy, space, and the NASA/ESA Hubble Space Telescope{% ifnotequal format "sd" %} presented in High Definition{% endifnotequal %}.</itunes:summary>
 
 <itunes:owner> 
 	<itunes:name>ESA/Hubble</itunes:name> 
@@ -12,7 +12,7 @@
 </itunes:owner>
 
 <itunes:explicit>no</itunes:explicit>
-<itunes:keywords>astronomy, space, science, Hubble, telescope, astronaut, cosmos, Hubblecast, NASA, HD, High-Definition, high definition</itunes:keywords>
+<itunes:keywords>astronomy, space, science, Hubble, telescope, astronaut, cosmos, Hubblecast, NASA{% ifnotequal format "sd" %}, HD, High-Definition, high definition{% endifnotequal %}</itunes:keywords>
  
 <itunes:image href="http://www.spacetelescope.org/static/design/hubblecast_{{format|default:'hd'}}_03.png" /> 
         
