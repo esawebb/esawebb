@@ -87,6 +87,7 @@ urlpatterns += patterns( '',
     ( r'^rss/vodcast.xml$', 'spacetelescope.views.rssfeedhack', { 'rssfile': 'vodcast.xml' } ),
     ( r'^rss/vodcastfullhd.xml$', 'spacetelescope.views.rssfeedhack', { 'rssfile': 'vodcastfullhd.xml' } ),
     ( r'^rss/vodcasthd.xml$', 'spacetelescope.views.rssfeedhack', { 'rssfile': 'vodcasthd.xml' } ),
+    ( r'^rss/hubblecasthd_amp.xml$', 'spacetelescope.views.rssfeedhack', { 'rssfile': 'hubblecasthd_amp.xml' } ),
     
 
     # User authentication
