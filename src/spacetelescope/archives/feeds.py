@@ -27,4 +27,7 @@ class AnnouncementFeed ( DjangoplicityArchiveFeed ):
         default_query = AnnouncementOptions.Queries.default
         category_query = None
         items_to_display = 10
+        
+    def item_enclosure_mime_type( self, item ):
+        return 'image/jpeg'
     
