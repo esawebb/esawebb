@@ -8,7 +8,7 @@
 		
 		<div id='potw_box' class='grid_4'>
 			<a href="{{potw.visual.get_absolute_url}}"><img src='{{potw.visual.resource_potwmedium.url}}' width="220" height="140" /></a>
-			<h1>Picture Of The Week</h1>
+			<h1>Picture Of The Week<a href="images/potw/feed/" class='rssicon'><img src='{{MEDIA_URL}}images/rssicon.png' /></a> </h1>
 			<p><a href="{{potw.visual.get_absolute_url}}">{{potw.id}}: {{potw.visual.title}}</a>
 			<br/><a class="viewall" href="{% url potw_defaultquery %}">View All</a></p>
 		</div>				

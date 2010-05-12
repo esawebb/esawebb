@@ -698,7 +698,14 @@ h2, h3{
 	width: 33%;
 }
 
+/* rss */
+.rssicon {
+	float:right
+}
 
+.fp_news .rssicon {
+	clear:both	
+}
 
 /* frontpage headlines */
 .fp_news {
