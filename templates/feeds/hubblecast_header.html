@@ -1,5 +1,7 @@
 <copyright>(c) 2007 ESA/Hubble</copyright>
 
+<itunes:new-feed-url>http://www.spacetelescope.org/videos/feed/category/hubblecast/{% if format %}{{format}}/{% endif %}</itunes:new-feed-url>
+
 <itunes:author>ESA/Hubble</itunes:author> 
 <itunes:subtitle>Vodcasts in High Definition about the NASA/ESA Hubble Space Telescope</itunes:subtitle> 
 <itunes:summary>The latest news about astronomy, space, and the NASA/ESA Hubble Space Telescope presented in High Definition format (720/25p)</itunes:summary>
@@ -32,4 +34,5 @@
 <amp:banner>http://www.spacetelescope.org/static/design/amp_hubblecast_banner.jpg</amp:banner>
 <amp:networkHalfBanner>http://www.spacetelescope.org/static/design/amp_hubblecast_halfbanner.jpg</amp:networkHalfBanner>
 
-<atom10:link xmlns:atom10="http://www.w3.org/2005/Atom" rel="hub" href="http://pubsubhubbub.appspot.com/" />
+<atom:link href="http://www.spacetelescope.org/videos/feed/hubblecast/{% if format %}{{format}}/{% endif %}" rel="self" type="application/rss+xml" />
+<atom:link rel="hub" href="http://pubsubhubbub.appspot.com/" />

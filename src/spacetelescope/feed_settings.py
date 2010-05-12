@@ -18,7 +18,7 @@ class VideoPodcastFeedSettings ():
                                 'hd' : 'resource_hd720p_screen',
                                 'sd' : 'resource_vodcast',
                                 'fullhd': 'resource_hd1080p_screen'}
-    override_guids = { 'heic1007a': u'http://www.spacetelescope.org/videos/heic1007a/',
+    override_guids = {
                     'hubblecast35a': u'http://www.spacetelescope.org/videos/vodcast/hubblecast35a.m4v',
                     'heic1006a': u'http://www.spacetelescope.org/videos/vodcast/heic1006a.m4v',
                     'heic1003a': u'http://www.spacetelescope.org/videos/vodcast/heic1003a.m4v',
@@ -97,8 +97,10 @@ class ReleaseFeedSettings ():
 class HubblecastFeedSettings ():
     title = 'Hubblecast %s'
     link = '/videos/hubblecast/'
-    description =  'The latest news about astronomy, space, and the NASA/ESA Hubble Space Telescope'
+    description =  'The latest news about astronomy, space, and the NASA/ESA Hubble Space Telescope in High Definition (720p/24)'
+    
     header_template = 'feeds/hubblecast_header.html'
+    
 
 
 
