@@ -4,7 +4,7 @@
 		<div class='grid_6 fp_news'>
 			<h1>
 				<a href="{% url announcements_defaultquery %}">Announcements</a>
-				<a href="announcements/feed/" class=''><img src='{{MEDIA_URL}}images/rssicon.png' /></a> 
+				<a href="http://feeds.feedburner.com/hubble_announcements/" class=''><img src='{{MEDIA_URL}}images/rssicon.png' /></a> 
 			</h1>
 			
 			{% for object in announcements %}
@@ -26,7 +26,7 @@
 		<div class='grid_6 fp_news'>
 			<h1>
 				<a href="{% url videos_query_category "hubblecast" %}">Hubblecast</a>
-				<a href="/rss/vodcasthd.xml" class=''><img src='{{MEDIA_URL}}images/rssicon.png' /></a> 
+				<a href="http://feeds.feedburner.com/hubblecast/" class=''><img src='{{MEDIA_URL}}images/rssicon.png' /></a> 
 				
 			</h1>
 			<div class='entry'>
