@@ -15,7 +15,7 @@ class FeedRedirectSettings ():
                  
                  }
     
-    whitelist_agents = ['FeedBurner']
+    whitelist = ['FeedBurner','Mozilla']
 
 
 class VideoPodcastFeedSettings ():
