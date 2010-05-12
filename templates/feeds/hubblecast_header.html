@@ -23,7 +23,7 @@
 </itunes:category>
 
 <image>
-	<title>Hubblecast {{format|upper|default:'HD'}}</title>
+	<title>Hubblecast {% ifequal format "hd"%}HD{% endifequal %}{% ifequal format "sd"%}SD{% endifequal %}{% ifequal format "fullhd"%}Full HD{% endifequal %}</title>
 	<link>http://www.spacetelescope.org/videos/hubblecast/</link>
 	<url>http://www.spacetelescope.org/static/design/hubblecast_{{format|default:'hd'}}_03.png</url> 
 </image>
