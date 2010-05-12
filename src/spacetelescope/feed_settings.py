@@ -97,10 +97,8 @@ class ReleaseFeedSettings ():
 class HubblecastFeedSettings ():
     title = 'Hubblecast %s'
     link = '/videos/hubblecast/'
-    description =  'The latest news about astronomy, space, and the NASA/ESA Hubble Space Telescope in High Definition (720p/24)'
-    
+    description =  'The latest news about astronomy, space, and the NASA/ESA Hubble Space Telescope'
     header_template = 'feeds/hubblecast_header.html'
-    
 
 
 
