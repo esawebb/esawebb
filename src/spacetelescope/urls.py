@@ -83,11 +83,16 @@ urlpatterns += patterns( '',
     ( r'^projects/fits_liberator/fitsimages/', include('spacetelescope.archives.urls.fitsimages'), { 'model': FITSImage, 'options': FITSImageOptions } ),
     
     
-    ( r'^rss/feed.xml$', 'spacetelescope.views.rssfeedhack', { 'rssfile': 'feed.xml' } ),
-    ( r'^rss/vodcast.xml$', 'spacetelescope.views.rssfeedhack', { 'rssfile': 'vodcast.xml' } ),
-    ( r'^rss/vodcastfullhd.xml$', 'spacetelescope.views.rssfeedhack', { 'rssfile': 'vodcastfullhd.xml' } ),
-    ( r'^rss/vodcasthd.xml$', 'spacetelescope.views.rssfeedhack', { 'rssfile': 'vodcasthd.xml' } ),
-    ( r'^rss/hubblecasthd_amp.xml$', 'spacetelescope.views.rssfeedhack', { 'rssfile': 'hubblecasthd_amp.xml' } ),
+#    ( r'^rss/feed.xml$', 'spacetelescope.views.rssfeedhack', { 'rssfile': 'feed.xml' } ),
+#    ( r'^rss/vodcast.xml$', 'spacetelescope.views.rssfeedhack', { 'rssfile': 'vodcast.xml' } ),
+#    ( r'^rss/vodcastfullhd.xml$', 'spacetelescope.views.rssfeedhack', { 'rssfile': 'vodcastfullhd.xml' } ),
+#    ( r'^rss/vodcasthd.xml$', 'spacetelescope.views.rssfeedhack', { 'rssfile': 'vodcasthd.xml' } ),
+#    ( r'^rss/hubblecasthd_amp.xml$', 'spacetelescope.views.rssfeedhack', { 'rssfile': 'hubblecasthd_amp.xml' } ),
+    ( r'^rss/feed.xml$', 'redirect_to', { 'url': 'http://feeds.feedburner.com/hubble_news/' } ),
+    ( r'^rss/vodcast.xml$', 'redirect_to', { 'url': 'http://feeds.feedburner.com/hubblecast_sd/' } ),
+    ( r'^rss/vodcasthd.xml$', 'redirect_to', { 'url': 'http://feeds.feedburner.com/hubblecast/' } ),
+    ( r'^rss/vodcastfullhd.xml$', 'redirect_to', { 'url': 'http://feeds.feedburner.com/hubblecast_fullhd/' } ),
+    ( r'^rss/hubblecasthd_amp.xml$', 'redirect_to', { 'url': 'http://feeds.feedburner.com/hubblecast/' } ),
     
 
     # User authentication
@@ -101,13 +106,6 @@ urlpatterns += patterns( '',
  	( r'^$', 'spacetelescope.views.main_page' ),
  )
 
-## legacy rss feed urls
-#urlpatterns += patterns('django.views.generic.simple',
-#    ( r'^rss/feed.xml$', 'redirect_to', { 'url': '/news/feed/' } ),
-#    ( r'^rss/vodcast.xml$', 'redirect_to', { 'url': '/videos/feed/category/hubblecast/sd/' } ),
-#    ( r'^rss/vodcasthd.xml$', 'redirect_to', { 'url': '/videos/feed/category/hubblecast/hd/' } ),
-#    ( r'^rss/vodcastfullhd.xml$', 'redirect_to', { 'url': '/videos/feed/category/hubblecast/fullhd/' } ),
-#)
 
 urlpatterns += basepatterns + patterns('',
 	# Satchmo Shop URLs
