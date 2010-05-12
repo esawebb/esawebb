@@ -18,7 +18,9 @@ class VideoPodcastFeedSettings ():
                                 'hd' : 'resource_hd720p_screen',
                                 'sd' : 'resource_vodcast',
                                 'fullhd': 'resource_hd1080p_screen'}
-    override_guids = {
+    
+    override_guids_format = { 
+                    'sd': { 'heic1007a': u'http://www.spacetelescope.org/videos/heic1007a/',
                     'hubblecast35a': u'http://www.spacetelescope.org/videos/vodcast/hubblecast35a.m4v',
                     'heic1006a': u'http://www.spacetelescope.org/videos/vodcast/heic1006a.m4v',
                     'heic1003a': u'http://www.spacetelescope.org/videos/vodcast/heic1003a.m4v',
@@ -54,7 +56,87 @@ class VideoPodcastFeedSettings ():
                     'heic0707a': u'http://www.spacetelescope.org/videos/vodcast/heic0707a.m4v',
                     'heic0706a': u'http://www.spacetelescope.org/videos/vodcast/heic0706a.m4v',
                     'heic0705a': u'http://www.spacetelescope.org/videos/vodcast/heic0705a.m4v'
+                    },
+                    
+                    'hd':{ 'heic1007a': u'http://www.spacetelescope.org/videos/heic1007a/',
+                    'hubblecast35a': u'http://www.spacetelescope.org/videos/hd720p_screen/hubblecast35a.m4v',
+                    'heic1006a': u'http://www.spacetelescope.org/videos/hd720p_screen/heic1006a.m4v',
+                    'heic1003a': u'http://www.spacetelescope.org/videos/hd720p_screen/heic1003a.m4v',
+                    'heic0917a': u'http://www.spacetelescope.org/videos/hd720p_screen/heic0917a.m4v',
+                    'heic0912a': u'http://www.spacetelescope.org/videos/hd720p_screen/heic0912a.m4v',
+                    'heic0910a': u'http://www.spacetelescope.org/videos/hd720p_screen/heic0910a.m4v',
+                    'hubblecast29a': u'http://www.spacetelescope.org/videos/hd720p_screen/hubblecast29a.m4v',
+                    'heic0907a': u'http://www.spacetelescope.org/videos/hd720p_screen/heic0907a.m4v',
+                    'hubblecast27a': u'http://www.spacetelescope.org/videos/hd720p_screen/hubblecast27a.m4v',
+                    'heic0901c': u'http://www.spacetelescope.org/videos/hd720p_screen/heic0901c.m4v',
+                    'hubblecast25a': u'http://www.spacetelescope.org/videos/hd720p_screen/hubblecast25a.m4v',
+                    'hubblecast24a': u'http://www.spacetelescope.org/videos/hd720p_screen/hubblecast24a.m4v',
+                    'hubblecast23a': u'http://www.spacetelescope.org/videos/hd720p_screen/hubblecast23a.m4v',
+                    'heic0821a': u'http://www.spacetelescope.org/videos/hd720p_screen/heic0821a.m4v',
+                    'hubblecast21a': u'http://www.spacetelescope.org/videos/hd720p_screen/hubblecast21a.m4v',
+                    'hubblecast20a': u'http://www.spacetelescope.org/videos/hd720p_screen/hubblecast20a.m4v',
+                    'hubblecast19a': u'http://www.spacetelescope.org/videos/hd720p_screen/hubblecast19a.m4v',
+                    'heic0817a': u'http://www.spacetelescope.org/videos/hd720p_screen/heic0817a.m4v',
+                    'hubblecast17a': u'http://www.spacetelescope.org/videos/hd720p_screen/hubblecast17a.m4v',
+                    'heic0810a': u'http://www.spacetelescope.org/videos/hd720p_screen/heic0810a.m4v',
+                    'heic0809a': u'http://www.spacetelescope.org/videos/hd720p_screen/heic0809a.m4v',
+                    'heic0807a': u'http://www.spacetelescope.org/videos/hd720p_screen/heic0807a.m4v',
+                    'heic0804a': u'http://www.spacetelescope.org/videos/hd720p_screen/heic0804a.m4v',
+                    'heic0720a': u'http://www.spacetelescope.org/videos/hd720p_screen/heic0720a.m4v',
+                    'heic0719a': u'http://www.spacetelescope.org/videos/hd720p_screen/heic0719a.m4v',
+                    'hubblecast10a': u'http://www.spacetelescope.org/videos/hd720p_screen/hubblecast10a.m4v',
+                    'heic0715a': u'http://www.spacetelescope.org/videos/hd720p_screen/heic0715a.m4v',
+                    'heic0714a': u'http://www.spacetelescope.org/videos/hd720p_screen/heic0714a.m4v',
+                    'heic0712a': u'http://www.spacetelescope.org/videos/hd720p_screen/heic0712a.m4v',
+                    'hubblecast06a': u'http://www.spacetelescope.org/videos/hd720p_screen/hubblecast06a.m4v',
+                    'heic0709a': u'http://www.spacetelescope.org/videos/hd720p_screen/heic0709a.m4v',
+                    'heic0708a': u'http://www.spacetelescope.org/videos/hd720p_screen/heic0708a.m4v',
+                    'heic0707a': u'http://www.spacetelescope.org/videos/hd720p_screen/heic0707a.m4v',
+                    'heic0706a': u'http://www.spacetelescope.org/videos/hd720p_screen/heic0706a.m4v',
+                    'heic0705a': u'http://www.spacetelescope.org/videos/hd720p_screen/heic0705a.m4v'
+                    },
+                    'fullhd': { 'heic1007a': u'http://www.spacetelescope.org/videos/heic1007a/',
+                    'hubblecast35a': u'http://www.spacetelescope.org/videos/hd1080p_screen/hubblecast35a.mp4',
+                    'heic1006a': u'http://www.spacetelescope.org/videos/hd1080p_screen/heic1006a.mp4',
+                    'heic1003a': u'http://www.spacetelescope.org/videos/hd1080p_screen/heic1003a.mp4',
+                    'heic0917a': u'http://www.spacetelescope.org/videos/hd1080p_screen/heic0917a.mp4',
+                    'heic0912a': u'http://www.spacetelescope.org/videos/hd1080p_screen/heic0912a.mp4',
+                    'heic0910a': u'http://www.spacetelescope.org/videos/hd1080p_screen/heic0910a.mp4',
+                    'hubblecast29a': u'http://www.spacetelescope.org/videos/hd1080p_screen/hubblecast29a.mp4',
+                    'heic0907a': u'http://www.spacetelescope.org/videos/hd1080p_screen/heic0907a.mp4',
+                    'hubblecast27a': u'http://www.spacetelescope.org/videos/hd1080p_screen/hubblecast27a.mp4',
+                    'heic0901c': u'http://www.spacetelescope.org/videos/hd1080p_screen/heic0901c.mp4',
+                    'hubblecast25a': u'http://www.spacetelescope.org/videos/hd1080p_screen/hubblecast25a.mp4',
+                    'hubblecast24a': u'http://www.spacetelescope.org/videos/hd1080p_screen/hubblecast24a.mp4',
+                    'hubblecast23a': u'http://www.spacetelescope.org/videos/hd1080p_screen/hubblecast23a.mp4',
+                    'heic0821a': u'http://www.spacetelescope.org/videos/hd1080p_screen/heic0821a.mp4',
+                    'hubblecast21a': u'http://www.spacetelescope.org/videos/hd1080p_screen/hubblecast21a.mp4',
+                    'hubblecast20a': u'http://www.spacetelescope.org/videos/hd1080p_screen/hubblecast20a.mp4',
+                    'hubblecast19a': u'http://www.spacetelescope.org/videos/hd1080p_screen/hubblecast19a.mp4',
+                    'heic0817a': u'http://www.spacetelescope.org/videos/hd1080p_screen/heic0817a.mp4',
+                    'hubblecast17a': u'http://www.spacetelescope.org/videos/hd1080p_screen/hubblecast17a.mp4',
+                    'heic0810a': u'http://www.spacetelescope.org/videos/hd1080p_screen/heic0810a.mp4',
+                    'heic0809a': u'http://www.spacetelescope.org/videos/hd1080p_screen/heic0809a.mp4',
+                    'heic0807a': u'http://www.spacetelescope.org/videos/hd1080p_screen/heic0807a.mp4',
+                    'heic0804a': u'http://www.spacetelescope.org/videos/hd1080p_screen/heic0804a.mp4',
+                    'heic0720a': u'http://www.spacetelescope.org/videos/hd1080p_screen/heic0720a.mp4',
+                    'heic0719a': u'http://www.spacetelescope.org/videos/hd1080p_screen/heic0719a.mp4',
+                    'hubblecast10a': u'http://www.spacetelescope.org/videos/hd1080p_screen/hubblecast10a.mp4',
+                    'heic0715a': u'http://www.spacetelescope.org/videos/hd1080p_screen/heic0715a.mp4',
+                    'heic0714a': u'http://www.spacetelescope.org/videos/hd1080p_screen/heic0714a.mp4',
+                    'heic0712a': u'http://www.spacetelescope.org/videos/hd1080p_screen/heic0712a.mp4',
+                    'hubblecast06a': u'http://www.spacetelescope.org/videos/hd1080p_screen/hubblecast06a.mp4',
+                    'heic0709a': u'http://www.spacetelescope.org/videos/hd1080p_screen/heic0709a.mp4',
+                    'heic0708a': u'http://www.spacetelescope.org/videos/hd1080p_screen/heic0708a.mp4',
+                    'heic0707a': u'http://www.spacetelescope.org/videos/hd1080p_screen/heic0707a.mp4',
+                    'heic0706a': u'http://www.spacetelescope.org/videos/hd1080p_screen/heic0706a.mp4',
+                    'heic0705a': u'http://www.spacetelescope.org/videos/hd1080p_screen/heic0705a.mp4'
                     }
+                    }
+    
+    
+    
+    override_guids = override_guids_format[''] = override_guids_format['hd']
     
     
     
@@ -98,9 +180,7 @@ class HubblecastFeedSettings ():
     title = 'Hubblecast %s'
     link = '/videos/hubblecast/'
     description =  'The Hubblecast HD is a series of video podcasts featuring the latest news about astronomy, space, and the NASA/ESA Hubble Space Telescope (in High Definition: 720p/24). It is presented by Dr. J, a professional astronomer at the European Organization for Astronomical Research in the Southern Hemisphere (ESO), and it is produced by the European Space Agency/Hubble team in Germany.'
-    
     header_template = 'feeds/hubblecast_header.html'
-    
 
 
 
