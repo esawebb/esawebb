@@ -88,11 +88,11 @@ urlpatterns += patterns( '',
 #    ( r'^rss/vodcastfullhd.xml$', 'spacetelescope.views.rssfeedhack', { 'rssfile': 'vodcastfullhd.xml' } ),
 #    ( r'^rss/vodcasthd.xml$', 'spacetelescope.views.rssfeedhack', { 'rssfile': 'vodcasthd.xml' } ),
 #    ( r'^rss/hubblecasthd_amp.xml$', 'spacetelescope.views.rssfeedhack', { 'rssfile': 'hubblecasthd_amp.xml' } ),
-    ( r'^rss/feed.xml$', 'redirect_to', { 'url': 'http://feeds.feedburner.com/hubble_news/' } ),
-    ( r'^rss/vodcast.xml$', 'redirect_to', { 'url': 'http://feeds.feedburner.com/hubblecast_sd/' } ),
-    ( r'^rss/vodcasthd.xml$', 'redirect_to', { 'url': 'http://feeds.feedburner.com/hubblecast/' } ),
-    ( r'^rss/vodcastfullhd.xml$', 'redirect_to', { 'url': 'http://feeds.feedburner.com/hubblecast_fullhd/' } ),
-    ( r'^rss/hubblecasthd_amp.xml$', 'redirect_to', { 'url': 'http://feeds.feedburner.com/hubblecast/' } ),
+    ( r'^rss/feed.xml$', redirect_to, { 'url': 'http://feeds.feedburner.com/hubble_news/' } ),
+    ( r'^rss/vodcast.xml$', redirect_to, { 'url': 'http://feeds.feedburner.com/hubblecast_sd/' } ),
+    ( r'^rss/vodcasthd.xml$', redirect_to, { 'url': 'http://feeds.feedburner.com/hubblecast/' } ),
+    ( r'^rss/vodcastfullhd.xml$', redirect_to, { 'url': 'http://feeds.feedburner.com/hubblecast_fullhd/' } ),
+    ( r'^rss/hubblecasthd_amp.xml$', redirect_to, { 'url': 'http://feeds.feedburner.com/hubblecast/' } ),
     
 
     # User authentication
