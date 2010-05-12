@@ -508,6 +508,13 @@ table.archive_normal .breaker  {
 	background:white;
 	padding:10px;
 }
+table.archive_normal .littlebreaker  {
+	background:white;
+	padding:5px;
+}
+table.archive_normal .botpad {
+	padding-bottom:5px;	
+}
 
 table.archive_normal td.imagerow {
 	padding-top:10px;

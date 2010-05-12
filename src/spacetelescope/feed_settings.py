@@ -10,6 +10,14 @@
 
 # Feed settings for website project
 
+class FeedRedirectSettings ():
+    redirects = { '/images/potw/feed/':'http://feeds.feedburner.com/hubble_potw/',
+                 
+                 }
+    
+    whitelist_agents = ['FeedBurner']
+
+
 class VideoPodcastFeedSettings ():
     title = 'Spacetelescope.org Video Feed'
     link = '/videos/'
