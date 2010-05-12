@@ -488,6 +488,36 @@ h2, h3{
 /************/
 /* ARCHIVES */
 /************/
+table.archive_normal {
+
+	border-collapse:separate;
+	border-spacing:10px 0px;
+}
+
+table.archive_normal td  {
+	text-align: center;
+	background: #EEE;
+
+}
+
+table.archive_normal td {
+	vertical-align:middle;
+}
+
+table.archive_normal .breaker  {
+	background:white;
+	padding:10px;
+}
+
+table.archive_normal td.imagerow {
+	padding-top:10px;
+	
+}
+
+table.archive_normal td.titlerow {
+	padding:10px;
+	
+}
 
 .archive_image {
 	text-align: center;
