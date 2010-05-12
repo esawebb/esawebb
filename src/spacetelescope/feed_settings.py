@@ -21,7 +21,6 @@ class VideoPodcastFeedSettings ():
     
     override_guids_format = { 
                     'sd': {
-                        'heic1007a': u'http://www.spacetelescope.org/videos/heic1007a/',
                         'hubblecast35a': u'http://www.spacetelescope.org/videos/vodcast/hubblecast35a.m4v',
                         'heic1006a': u'http://www.spacetelescope.org/videos/vodcast/heic1006a.m4v',
                         'heic1003a': u'http://www.spacetelescope.org/videos/vodcast/heic1003a.m4v',
@@ -60,7 +59,6 @@ class VideoPodcastFeedSettings ():
                     },
                     
                     'hd':{ 
-                        'heic1007a': u'http://www.spacetelescope.org/videos/heic1007a/',
                         'hubblecast35a': u'http://www.spacetelescope.org/videos/hd720p_screen/hubblecast35a.m4v',
                         'heic1006a': u'http://www.spacetelescope.org/videos/hd720p_screen/heic1006a.m4v',
                         'heic1003a': u'http://www.spacetelescope.org/videos/hd720p_screen/heic1003a.m4v',
@@ -98,7 +96,6 @@ class VideoPodcastFeedSettings ():
                         'heic0705a': u'http://www.spacetelescope.org/videos/hd720p_screen/heic0705a.m4v'
                     },
                     'fullhd': { 
-                        'heic1007a': u'http://www.spacetelescope.org/videos/heic1007a/',
                         'hubblecast35a': u'http://www.spacetelescope.org/videos/hd1080p_screen/hubblecast35a.mp4',
                         'heic1006a': u'http://www.spacetelescope.org/videos/hd1080p_screen/heic1006a.mp4',
                         'heic1003a': u'http://www.spacetelescope.org/videos/hd1080p_screen/heic1003a.mp4',
@@ -148,7 +145,6 @@ class ReleaseFeedSettings ():
     description = "The latest news about astronomy and the NASA/ESA Hubble Space Telescope"
     
     override_guids = {
-        'heic1007': u'http://www.spacetelescope.org/news/heic1007/',
         'heic1006': u'http://www.spacetelescope.org/news/html/heic1006.html',
         'heic1005': u'http://www.spacetelescope.org/news/html/heic1005.html',
         'heic1004': u'http://www.spacetelescope.org/news/html/heic1004.html',
