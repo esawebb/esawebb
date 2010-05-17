@@ -71,7 +71,7 @@ def StandardAdminFactory( prefix, remove=['release_date', 'embargo_date','links'
 		thumbnail_resource = 'thumb' 
 		list_display = filter_fields( ( 'id', 'list_link_thumbnail', 'title', 'published', 'priority', 'release_date', 'embargo_date', 'last_modified', view_link( prefix ), ) )
 		list_filter = filter_fields( ( 'published', 'last_modified', 'release_date', 'embargo_date', ) )
-		list_editable = filter_fields( ( 'title', ) )
+		list_editable = filter_fields( ( 'title', 'priority') )
 		search_fields = filter_fields( ( 'id', 'title', 'description', 'credit' ) )
 		date_hierarchy = 'last_modified'
 		ordering = filter_fields( ( '-release_date', '-last_modified', ) )
@@ -95,7 +95,7 @@ class AnnouncementAdmin( StandardAdminFactory( 'announcements', remove = [ 'prio
 class KidsDrawingAdmin( DjangoplicityModelAdmin, RenameAdmin, ArchiveAdmin ):
 	list_display = ( 'id', 'title', 'published','priority','last_modified', view_link('drawings') )
 	list_filter = ( 'title', 'published', 'last_modified',  )
-	list_editable = ( 'title', 'published', )
+	list_editable = ( 'title', 'published', 'priority' )
 	search_fields = ( 'id', 'title', 'description', 'credit' )
 	date_hierarchy = 'last_modified'
 	fieldsets = (
@@ -106,6 +106,7 @@ class KidsDrawingAdmin( DjangoplicityModelAdmin, RenameAdmin, ArchiveAdmin ):
 				)
 	ordering = ('id', )
 	richtext_fields = ('description',)
+	actions = ['action_toggle_published',]
 	links = ()
 	
 	#class Media:
@@ -118,7 +119,7 @@ class LogoAdmin( DjangoplicityModelAdmin, RenameAdmin, ArchiveAdmin ):
 	list_display = ( 'id', 'title', 'published','priority','last_modified', view_link('logos') )
 	list_filter = ( 'title', 'published', 'last_modified', )
 	list_editable = ( 'title', 'published', 'resolution',)
-	search_fields = ( 'id', 'title', 'description', 'credit' )
+	search_fields = ( 'id', 'title', 'description', 'credit','priority' )
 	date_hierarchy = 'last_modified'
 	fieldsets = (
 					( None, {'fields': ( 'id', ) } ),
@@ -127,13 +128,14 @@ class LogoAdmin( DjangoplicityModelAdmin, RenameAdmin, ArchiveAdmin ):
 				)
 	ordering = ('id', )
 	richtext_fields = ('description',)
+	actions = ['action_toggle_published',]
 
 	links = ()
 
 class ConferencePosterAdmin( DjangoplicityModelAdmin, RenameAdmin, ArchiveAdmin ):
 	list_display = ( 'id', 'title', 'published','priority','last_modified',  'resolution','x_size','y_size', view_link('conference_posters') )
 	list_filter = ( 'title', 'published', 'last_modified',  'resolution','x_size','y_size')
-	list_editable = ( 'title', 'published',  'resolution','x_size','y_size')
+	list_editable = ( 'title', 'published',  'resolution','x_size','y_size','priority')
 	search_fields = ( 'id', 'title', 'description', 'credit' )
 	date_hierarchy = 'last_modified'
 	fieldsets = (
@@ -144,13 +146,14 @@ class ConferencePosterAdmin( DjangoplicityModelAdmin, RenameAdmin, ArchiveAdmin 
 				)
 	ordering = ('id', )
 	richtext_fields = ('description',)
+	actions = ['action_toggle_published',]
 	links = ()
 	
 	
 class CalendarAdmin( DjangoplicityModelAdmin, RenameAdmin, ArchiveAdmin ):
 	list_display = ( 'id', 'year', 'month','priority','last_modified', 'published',view_link('calendars') )
 	list_filter = ( 'year', 'month', 'published', 'last_modified',  )
-	list_editable = ( 'published', )
+	list_editable = ( 'published', 'priority')
 	search_fields = ( 'id', 'title', 'description', 'credit' )
 	date_hierarchy = 'last_modified'
 	fieldsets = (
@@ -160,6 +163,7 @@ class CalendarAdmin( DjangoplicityModelAdmin, RenameAdmin, ArchiveAdmin ):
 				)
 	ordering = ('id', )
 	richtext_fields = ('description',)
+	actions = ['action_toggle_published',]
 	links = ()
 	
 
@@ -169,7 +173,7 @@ def artist (obj):
 class OnlineArtAdmin( DjangoplicityModelAdmin, RenameAdmin, ArchiveAdmin ):
 	list_display = ( 'id', 'title', 'published','priority','last_modified', view_link('art') )
 	list_filter = ( 'title', 'published', 'last_modified', )
-	list_editable = ( 'title', 'published', )
+	list_editable = ( 'title', 'published', 'priority' )
 	search_fields = ( 'id', 'title', 'description', 'artist', 'credit' )
 	date_hierarchy = 'last_modified'
 	fieldsets = (
@@ -180,14 +184,17 @@ class OnlineArtAdmin( DjangoplicityModelAdmin, RenameAdmin, ArchiveAdmin ):
 	ordering = ('id', )
 	#raw_id_fields = ('artist', )
 	richtext_fields = ('description',)
+	actions = ['action_toggle_published',]
 
 	links = ()
 	
 class OnlineArtAuthorAdmin( DjangoplicityModelAdmin, RenameAdmin, ArchiveAdmin ):
 	list_display = ( 'id', 'name', 'city', 'country', 'email', 'published','priority','last_modified', view_link('artists') ) 
 	list_filter = ( 'city', 'country',)
+	list_editable = ( 'name', 'priority' )
 	search_fields = ( 'name', 'city', 'country', 'email',)
 	date_hierarchy = 'last_modified'
+	search_fields = ( 'id', 'name', 'priority' )
 	fieldsets = (
 					( None, {'fields': ( 'id', ) } ),
 					( 'Publishing', {'fields': ( 'published', 'priority', ), } ),
@@ -195,6 +202,7 @@ class OnlineArtAuthorAdmin( DjangoplicityModelAdmin, RenameAdmin, ArchiveAdmin )
 				)
 	ordering = ('name', )
 	richtext_fields = ('description',)
+	actions = ['action_toggle_published',]
 	links = ()
 
 #TODO printlayouts remain?
@@ -216,9 +224,10 @@ class OnlineArtAuthorAdmin( DjangoplicityModelAdmin, RenameAdmin, ArchiveAdmin )
 
 
 class SlideShowAdmin( DjangoplicityModelAdmin, RenameAdmin, ArchiveAdmin ):
+	thumbnail_resource = 'thumb' 
 	list_display = ( 'id', 'title', 'published','priority','last_modified', 'resolution','x_size','y_size', view_link('slideshows') )
 	list_filter = ( 'title', 'published', 'last_modified', 'resolution','x_size','y_size')
-	list_editable = ( 'title', 'published', 'resolution','x_size','y_size' )
+	list_editable = ( 'title', 'published', 'resolution','x_size','y_size' ,'priority')
 	search_fields = ( 'id', 'title', 'description', 'credit' )
 	date_hierarchy = 'last_modified'
 	fieldsets = (
@@ -229,14 +238,16 @@ class SlideShowAdmin( DjangoplicityModelAdmin, RenameAdmin, ArchiveAdmin ):
 				)
 	ordering = ('id', )
 	richtext_fields = ('description',)
+	actions = ['action_toggle_published',]
 
 	links = ()
+	
 
 
 class ExhibitionAdmin (DjangoplicityModelAdmin, RenameAdmin, ArchiveAdmin ):
 	list_display = ( 'id', 'title', 'published','priority','last_modified', view_link('announcements') )
 	list_filter = ( 'title', 'published', 'last_modified',  )
-	list_editable = ( 'title', 'published', )
+	list_editable = ( 'title', 'published','priority' )
 	search_fields = ( 'id', 'title', 'description', 'credit' )
 	date_hierarchy = 'last_modified'
 	fieldsets = (
@@ -247,12 +258,13 @@ class ExhibitionAdmin (DjangoplicityModelAdmin, RenameAdmin, ArchiveAdmin ):
 	
 	ordering = ('id', )
 	richtext_fields = ('description',)
+	actions = ['action_toggle_published',]
 	links = ()
 
 class FITSImageAdmin( DjangoplicityModelAdmin, RenameAdmin, ArchiveAdmin ):
 	list_display = ( 'id', 'title', 'published','priority','last_modified', view_link('announcements') )
 	list_filter = ( 'title', 'published', 'last_modified',  )
-	list_editable = ( 'title', 'published', )
+	list_editable = ( 'title', 'published','priority' )
 	search_fields = ( 'id', 'title', 'description', 'credit' )
 	date_hierarchy = 'last_modified'
 	fieldsets = (
@@ -263,6 +275,7 @@ class FITSImageAdmin( DjangoplicityModelAdmin, RenameAdmin, ArchiveAdmin ):
 	
 	ordering = ('id', )
 	richtext_fields = ('description',)
+	actions = ['action_toggle_published',]
 	links = ()
 
 

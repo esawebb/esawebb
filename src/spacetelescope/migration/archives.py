@@ -45,7 +45,7 @@ def strip_and_convert( s ):
 	s = "".join([unicode(x) for x in s.contents])
 	return s.strip() 
 
-COPY_INSTEAD_OF_MOVE = True
+COPY_INSTEAD_OF_MOVE = False
 #for all resources except THUMBS, only touch new ones instead of copy
 DEBUG_ONLY_TOUCH = True
 

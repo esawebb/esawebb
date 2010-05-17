@@ -21,17 +21,18 @@
 			<div class='grid_12 featuredmedia'>
 			
 
- 
+ 		
 		<div class="rotator" id='feature_rotator'>   
-			
 			<div class="fbut fbut_left init_hide"><span>&#9664; Prev</span></div>
 			<div class="fbut fbut_right init_hide"><span>Next &#9654;</span></div>
+			
 		    <div class="items"> 
 		     	{% for object in releases %}
 		        <div class='feature_item'>
+		        	
 		        	<div class="description">
 						<p><a href="{{object.get_absolute_url}}">{{object.release_date|datetime:"DATE_LONG"}}</a></p>
-						<h1><a href="{{object.get_absolute_url}}">{{object.title}}</h1>
+						<h1><a href="{{object.get_absolute_url}}"><div class='title'>{{object.title}}</div></h1>
 						<p>{{object.headline|truncatewords:35}}</a></p>
 					</div>
 					<img src="{{object.main_image.resource_newsfeature.url}}" width="700" height="280" />			

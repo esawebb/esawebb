@@ -205,6 +205,21 @@ ol li {
 
 html>body .featuredmedia {margin-top:-220px;} /* other browsers, see above */
 
+.featuredmedia .number {
+	display:block;
+	position:absolute;
+	color:black;
+	font-size:16px;	
+	right:0px;
+	top:250px;
+	
+	background:none;
+	width:130px;
+}
+.featuredmedia .title {
+	font-size:20px;	
+}
+
 .featuredmedia .description {
 	margin: 170px 0px 0px 0px;
 	padding: 0px 10px 10px 20px;
