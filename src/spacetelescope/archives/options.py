@@ -425,6 +425,8 @@ class PresentationOptions ( StandardOptions ):
 	
 	downloads = ( 
 		( _(u'Images'), {'resources' : ( 'original', 'large', 'screen'  ), 'icons' : { 'original' : 'phot', 'large' : 'phot', 'medium' : 'phot', 'screen' : 'phot'  } } ),
+		( _(u'File Formats'), {'resources' : ( 'ppt', 'pps', 'pdf'  ), 'icons' : { 'ppt' : 'doc', 'pps' : 'doc', 'pdf' : 'doc',  } } ),
+		
 		)
 	
 	class Queries(object):
