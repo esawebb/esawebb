@@ -131,10 +131,10 @@ class AnnouncementOptions( ArchiveOptions ):
 	#downloads = ( image_downloads, file_downloads )
 	
 	class Queries( object ):
-		default = AllPublicQuery( browsers = ( 'normal', 'viewall' ), verbose_name = "Announcements" )
+		default = AllPublicQuery( browsers = ( 'normal', 'viewall' ), verbose_name = "Announcements", feed_name="default" )
 		embargo = EmbargoQuery( browsers = ( 'normal', 'viewall' ), verbose_name = "Embargoed Announcements" )
 		staging = StagingQuery( browsers = ( 'normal', 'viewall' ), verbose_name = "Announcements (Staging)" )
-		year = YearQuery( browsers = ( 'normal', 'viewall' ), verbose_name = "Announcements %d" )
+		year = YearQuery( browsers = ( 'normal', 'viewall' ), verbose_name = "Announcements %d", feed_name="default" )
 		
 	class Browsers( object ):
 		normal = ListBrowser( index_template = 'archives/announcement/index_list.html' )
