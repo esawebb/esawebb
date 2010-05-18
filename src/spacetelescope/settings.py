@@ -466,8 +466,8 @@ ARCHIVE_CROSSLINKS = {
 ARCHIVE_CROSSLINKS = {
 			'releases': (('eso.org','http://www.eso.org/public/news/'),
 						 ('iau.org', 'http://www.iau.org/public_press/news/'),
-						 ('astronomy2009.org', 'http://www.iau.org/public_press/news/'),
-						  ('portaltotheuniverse.org', 'http://portaltotheuniverse.org/news/'),
+						 ('astronomy2009.org', 'http://www.astronomy2009.org/news/pressreleases/'),
+						 ('portaltotheuniverse.org', 'http://portaltotheuniverse.org/news/'),
 						),
 			'images': (('eso.org','http://www.eso.org/public/images/'),
 						 ('iau.org', 'http://www.iau.org/public_press/images/'),

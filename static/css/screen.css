@@ -578,13 +578,22 @@ table.archive_normal td.titlerow {
 	float:right;
 }
 
-.seealso{
-	float:right;
-	margin-top:-15px;
+.seealso {
+	float:left;
+	margin-top:-10px;
 	margin-bottom:15px;
-	width:300px;
 	display:block;
-	text-align:right;
+	text-align:left;
+	font-size: 10px;
+}
+
+.seealso a {
+	color: #515151;
+	text-decoration: underline; 
+}
+
+.seealso a:hover {
+	color: #aaaaaa; 
 }
 
 #id_archivesearch {
