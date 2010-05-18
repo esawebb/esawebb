@@ -16,8 +16,7 @@ class AnnouncementFeed ( DjangoplicityArchiveFeed ):
 	link = '/announcements/'
 	description = ''
 
-	#title_template = feedsconf.get('ReleaseFeedSettings','title_template','feeds/release_title.html')
-	#description_template = feedsconf.get('ReleaseFeedSettings','description_template','feeds/release_description.html')
+	description_template = 'feeds/release_description.html'
 	
 	class Meta(DjangoplicityArchiveFeed.Meta):
 		model = Announcement
