@@ -10,13 +10,6 @@
 
 # Feed settings for website project
 
-class FeedRedirectSettings():
-	redirects = { 
-				'/images/potw/feed/' : 'http://feeds.feedburner.com/hubble_potw/',
-	}
-	
-	whitelist = ['FeedBurner',]
-
 class PictureOfTheWeekFeedSettings():
 	external_feed_url = 'http://feeds.feedburner.com/hubble_potw/'
 
@@ -191,6 +184,19 @@ class HubblecastFeedSettings():
 	header_template = 'feeds/hubblecast_header.html'
 	external_feed_url = 'http://feeds.feedburner.com/hubblecast/'
 
+
+class FeedRedirectSettings():
+	redirects = { 
+				'/images/potw/feed/' : PictureOfTheWeekFeedSettings.external_feed_url,
+				'/videos/feed/category/hubblecast/hd/' : HubblecastFeedSettings.external_feed_url,
+				'/videos/feed/category/hubblecast/sd/' : 'http://feeds.feedburner.com/hubblecast_sd/',
+				'/videos/feed/category/hubblecast/fullhd/' : 'http://feeds.feedburner.com/hubblecast_fullhd/',
+				'/videos/feed/category/hubblecast/' : HubblecastFeedSettings.external_feed_url,
+				'/news/feed/' : ReleaseFeedSettings.external_feed_url,
+				'/announcements/feed/' : 'http://feeds.feedburner.com/hubble_announcements/',
+	}
+	
+	whitelist = ['FeedBurner',]
 
 CATEGORY_SPECIFIC_SETTINGS = {
 	'hubblecast': 'HubblecastFeedSettings',
