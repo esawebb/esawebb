@@ -20,6 +20,12 @@
 <div class='clear'></div>
 </div>
 {% endif %}
+{% if crosslinks %}
+<div class="seealso">Also see {{crosslinks_subject|capfirst}} on
+{%for site,url,sep in crosslinks%}{%if not forloop.first %}{%if forloop.revcounter0 %}, {%else%} and {%endif%}{%endif%}<a href="{{url}}" target="_blank">{{site}}</a>{%endfor%}.	
+</div>
+<div class='clear'></div>
+{%endif%}
 {% load djangoplicity_utils %}
 {% if not object_list %}
 	<div align="center">No entries were found.</div>

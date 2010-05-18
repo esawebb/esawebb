@@ -455,6 +455,63 @@ VIDEO_CONTENT_SERVERS = (
 	( 'http://videos.spacetelescope.org/videos/', 'videos.spacetelescope.org' )
 )
 
+"""
+format:
+ARCHIVE_CROSSLINKS = {
+	'archive urlname_prefix': (('display name 1','url1'),
+							('display name 2','url2'),...),
+							
+							}
+"""
+ARCHIVE_CROSSLINKS = {
+			'releases': (('eso.org','http://www.eso.org/public/news/'),
+						 ('iau.org', 'http://www.iau.org/public_press/news/'),
+						 ('astronomy2009.org', 'http://www.iau.org/public_press/news/'),
+						  ('portaltotheuniverse.org', 'http://portaltotheuniverse.org/news/'),
+						),
+			'images': (('eso.org','http://www.eso.org/public/images/'),
+						 ('iau.org', 'http://www.iau.org/public_press/images/'),
+						 ('astronomy2009.org', 'http://www.astronomy2009.org/resources/multimedia/images/'),
+						),
+			'videos': (('eso.org','http://www.eso.org/public/news/'),
+					   ('astronomy2009.org', 'http://www.astronomy2009.org/resources/multimedia/videos/'),
+					   ),
+			'potw': (('eso.org','http://www.eso.org/public/images/potw/'),
+						),
+			'posters': (('eso.org','http://www.eso.org/public/outreach/products/posters/index_sale.html'),
+						('astronomy2009.org','http://www.astronomy2009.org/resources/posters/'),
+						),
+			'books': (('eso.org','http://www.eso.org/public/outreach/products/books/'),
+					  ('astronomy2009.org','http://www.astronomy2009.org/resources/books/'),
+					  ('iau.org','http://www.iau.org/science/publications/iau/'),
+						),
+			'brochures': (('eso.org','http://www.eso.org/public/outreach/products/brochures/'),
+						  ('astronomy2009.org','http://www.astronomy2009.org/resources/brochures/'),
+						),
+			'calendars': (('eso.org','http://www.eso.org/public/outreach/products/calendars/'),
+						),
+			'education': (('eso.org','http://www.eso.org/public/outreach/eduoff/materials.html'),
+						  ('astronomy2009.org','http://www.astronomy2009.org/resources/educational/'),
+						),
+			'newsletters':(('eso.org','http://www.eso.org/sci/enews/archive.html'),
+						),
+			'postcards': (('eso.org','http://www.eso.org/public/outreach/products/postcards/'),
+						),
+			'logos': (('eso.org','http://www.eso.org/public/outreach/products/logos/eso/index.html'),
+						('astronomy2009.org','http://www.astronomy2009.org/resources/branding/'),
+						('iau.org','http://www.iau.org/public_press/images/archive/category/logos/'),
+						),	
+			'conferenceposters': (
+						('astronomy2009.org','http://www.astronomy2009.org/resources/posters/'),
+						),	
+			'presentations': (
+						('eso.org','http://www.eso.org/public/outreach/products/presentations/'),
+						('astronomy2009.org','http://www.astronomy2009.org/resources/presentations/'),
+						),						
+			
+						
+					  }
+
 
 # FEEDS SETTINGS MODULE
 FEED_SETTINGS_MODULE = 'spacetelescope.feed_settings'

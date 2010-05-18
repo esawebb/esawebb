@@ -578,6 +578,15 @@ table.archive_normal td.titlerow {
 	float:right;
 }
 
+.seealso{
+	float:right;
+	margin-top:-15px;
+	margin-bottom:15px;
+	width:300px;
+	display:block;
+	text-align:right;
+}
+
 #id_archivesearch {
 	width:176px;
 }
@@ -630,6 +639,7 @@ table.archive_normal td.titlerow {
 .archive_download {
 	clear:both
 }
+
 
 
 /* best of and top 100 */
