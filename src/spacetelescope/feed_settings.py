@@ -18,7 +18,7 @@ class FeedRedirectSettings():
 	whitelist = ['FeedBurner',]
 
 class PictureOfTheWeekFeedSettings():
-	feed_url = 'http://feeds.feedburner.com/hubble_potw/'
+	external_feed_url = 'http://feeds.feedburner.com/hubble_potw/'
 
 class VideoPodcastFeedSettings():
 	title = 'Spacetelescope.org Video Feed'
@@ -153,7 +153,7 @@ class ReleaseFeedSettings():
 	title = 'Hubble News'
 	link = '/news/'
 	description = "The latest news about astronomy and the NASA/ESA Hubble Space Telescope"
-	feed_url = 'http://feeds.feedburner.com/hubble_news/'
+	external_feed_url = 'http://feeds.feedburner.com/hubble_news/'
 	
 	override_guids = {
 			'heic1006': u'http://www.spacetelescope.org/news/html/heic1006.html',
@@ -189,6 +189,7 @@ class HubblecastFeedSettings():
 	link = '/videos/hubblecast/'
 	description = 'The Hubblecast HD is a series of video podcasts featuring the latest news about astronomy, space, and the NASA/ESA Hubble Space Telescope (in High Definition: 720p/24). It is presented by Dr. J, a professional astronomer at the European Organization for Astronomical Research in the Southern Hemisphere (ESO), and it is produced by the European Space Agency/Hubble team in Germany.'
 	header_template = 'feeds/hubblecast_header.html'
+	external_feed_url = 'http://feeds.feedburner.com/hubblecast/'
 
 
 CATEGORY_SPECIFIC_SETTINGS = {

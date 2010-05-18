@@ -28,7 +28,7 @@ class AnnouncementFeed ( DjangoplicityArchiveFeed ):
 		category_query = None
 		items_to_display = 10
 		archive_query = "default"
-		feed_url = "http://feeds.feedburner.com/hubble_announcements/"
+		external_feed_url = "http://feeds.feedburner.com/hubble_announcements/"
 			
 		
 	def item_enclosure_mime_type( self, item ):
