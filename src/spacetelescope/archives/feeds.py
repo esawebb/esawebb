@@ -12,9 +12,9 @@ from models import *
 from options import *
 
 class AnnouncementFeed ( DjangoplicityArchiveFeed ):
-	title = 'Hubble Space Telescope Announcements'
+	title = 'Hubble Announcements'
 	link = '/announcements/'
-	description = 'Spacetelescope.org Announcements'
+	description = ''
 
 	#title_template = feedsconf.get('ReleaseFeedSettings','title_template','feeds/release_title.html')
 	#description_template = feedsconf.get('ReleaseFeedSettings','description_template','feeds/release_description.html')
