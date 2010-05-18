@@ -10,7 +10,7 @@
 {% block content %}
 <div class='archive_list_heading'>
 <div class='archive_list_title'>
-<h1>{% if archive_title %}{{ archive_title }}{% else %}{{ archive|capfirst }} Archive{% endif %}</h1>
+<h1>{% if archive_title %}{{ archive_title }}{% else %}{{ archive|capfirst }} Archive{% endif %}{% if listview_feed_url %} <a href="{{ listview_feed_url }}"><img src="{{MEDIA_URL}}images/rssicon.png" /></a>{% endif %}</h1>
 </div>
 <div class='archive_list_search'>{% if searchable %}
 

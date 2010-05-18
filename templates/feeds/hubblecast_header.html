@@ -1,9 +1,8 @@
-<copyright>(c) 2007 ESA/Hubble</copyright>
+<copyright>ESA/Hubble</copyright>
 
 <itunes:new-feed-url>{% if not format %}http://feeds.feedburner.com/hubblecast/{% else %}{% ifequal format "hd" %}http://feeds.feedburner.com/hubblecast/{% else %}http://feeds.feedburner.com/hubblecast_{{format}}/{% endifequal %}{% endif %}</itunes:new-feed-url>
 
 <itunes:author>ESA/Hubble</itunes:author> 
-<itunes:subtitle>Vodcasts{% ifnotequal format "sd" %} in High Definition{% endifnotequal %} about the NASA/ESA Hubble Space Telescope</itunes:subtitle> 
 <itunes:summary>The latest news about astronomy, space, and the NASA/ESA Hubble Space Telescope{% ifnotequal format "sd" %} presented in High Definition{% endifnotequal %}.</itunes:summary>
 
 <itunes:owner> 
