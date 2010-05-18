@@ -19,7 +19,7 @@ class AnnouncementFeed ( DjangoplicityArchiveFeed ):
 	#title_template = feedsconf.get('ReleaseFeedSettings','title_template','feeds/release_title.html')
 	#description_template = feedsconf.get('ReleaseFeedSettings','description_template','feeds/release_description.html')
 	
-	class Meta():
+	class Meta(DjangoplicityArchiveFeed.Meta):
 		model = Announcement
 		options = AnnouncementOptions
 		latest_fieldname = Announcement.Archive.Meta.release_date_fieldname
