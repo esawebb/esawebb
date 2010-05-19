@@ -472,7 +472,7 @@ ARCHIVE_CROSSLINKS = {
 						 ('iau.org', 'http://www.iau.org/public_press/images/'),
 						 ('astronomy2009.org', 'http://www.astronomy2009.org/resources/multimedia/images/'),
 						),
-			'videos': (('eso.org','http://www.eso.org/public/news/'),
+			'videos': (('eso.org','http://www.eso.org/public/videos/'),
 					   ('astronomy2009.org', 'http://www.astronomy2009.org/resources/multimedia/videos/'),
 					   ),
 			'potw': (('eso.org','http://www.eso.org/public/images/potw/'),
