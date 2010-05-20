@@ -232,7 +232,7 @@ html>body .featuredmedia {margin-top:-220px;} /* other browsers, see above */
 }
 
 html>body .featuredmedia .description {	
-	background: url('../images/feature-gradient.png'); /* ie6 hack */
+	background: url('../images/feature-gradient-75.png'); /* ie6 hack */
 }
 
 .featuredmedia .description * {
