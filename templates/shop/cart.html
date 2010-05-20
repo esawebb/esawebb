@@ -1,5 +1,6 @@
 {% extends "shop/base.html" %}
 {% load i18n %}
+{% load thumbnail %}
 {% load satchmo_cart %}
 {% load satchmo_currency %}
 {% load satchmo_util %}
@@ -39,9 +40,9 @@
     	{% archiveitem cartitem.product as object %}
         <tr>
         	<td align="center">
-        	{% if object.resource_thumb %}<img src="{{ object.resource_thumb.url}}" width="122px" />{%endif%}
+        	{% if object.resource_thumb %}<img src="{{ object.resource_thumb.url}}" width="122px" />{% else %}{% thumbnail cartitem.product.main_image.picture 122x122 as image %}<img src="{{ image }}" width="122px" />{%endif%}
             </td>
-            <td align="center">
+            <td align="center" width="10">
                 <form class="qtyform" id="form-{{ cartitem.id }}" action="{% url satchmo_cart_set_qty %}" method="post">
                     <input type="hidden" name="cartitem" value="{{ cartitem.id }}" />
 					<input type="text" name="quantity" id="id_quantity" size="4" value="{{ cartitem.quantity|normalize_decimal }}" />
@@ -52,7 +53,7 @@
                 <input type="submit" value="{% trans 'Remove' %}" />
             </form>
             </td>
-            <td><p><a href="{{cartitem.product.get_absolute_url}}">{{ object.title }}</a></p><p>{{object.description|striptags|truncatewords:50}}</p></td>
+            <td><p><a href="{{cartitem.product.get_absolute_url}}">{% if object %}{{ object.title }}{% else %}{{cartitem.product.name}}{%endif%}</a></p><p>{%if object %}{{object.description|striptags|truncatewords:50}}{%else%}{{cartitem.product.description|striptags|truncatewords:50}}{% endif %}</p></td>
 			{% if sale %}<td align="center">{{ cartitem.product.unit_price|currency }}</td>{% endif %}
 			<td align="center">{{ cartitem.product|discount_price:sale|currency }}</td>
             <td align="center">{{ cartitem|discount_line_total:sale|currency }}</td>

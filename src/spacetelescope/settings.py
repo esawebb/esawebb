@@ -309,7 +309,7 @@ INSTALLED_APPS = (
     'tax',
     'tax.modules.no',
     'app_plugins',
-    'shipping.modules.tieredweight'
+    'shipping.modules.tieredweight',
 )
 
 
@@ -689,7 +689,7 @@ LIVESETTINGS_OPTIONS = {
             u'SHIPPING': {   
 				#u'PER_DAYS': u'1 - 3 business days',
 				#u'PER_SERVICE': u'Deutsche Post/DHL',
-				u'HIDING': u'DESCRIPTION',
+				u'HIDING': u'NO',
 				u'MODULES': u'["shipping.modules.tieredweight"]',
 			},
             u'TAX' : {

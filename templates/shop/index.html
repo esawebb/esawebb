@@ -2,6 +2,7 @@
 {% load i18n %}
 {% load satchmo_util %}
 {% load pages %}
+{% load thumbnail %}
 {% load djangoplicity_satchmo %}
 {% load djangoplicity_utils %}
 {% load satchmo_price %}
@@ -21,13 +22,13 @@
 <table class="archive_normal" width="100%">
 {% for list in all_products_list|split_list:"3" %}
 <tr>{% for product in list %}{% archiveitem product as item %}
-<td class="imagerow" width="33"><a href="{{ product.get_absolute_url }}"><img src="{{ item.resource_thumb.url }}" width="122" alt="{{item.title}}" /></a></td>{% endarchiveitem %}{% endfor %}
+<td class="imagerow" width="33">{% if item.resource_thumb %}<a href="{{ product.get_absolute_url }}"><img src="{{ item.resource_thumb.url }}" width="122" alt="{{item.title}}" /></a>{% else %}{% thumbnail product.main_image.picture 122x122 as image %}<a href="{{ product.get_absolute_url }}"><img src="{{image}}" width="122" alt="{{product.name}}" /></a>{% endif %}</td>{% endarchiveitem %}{% endfor %}
+</tr>
+<tr>{% for product in list %}
+<td class="titlerow"><span class="price" align="right">Price:&nbsp;{{ product|discount_price:sale|currency }}</span></td>{% endfor %}
 </tr>
 <tr>{% for product in list %}{% archiveitem product as item %}
-<td class="titlerow"><span class="price" align="right">Price:&nbsp;{{ product|discount_price:sale|currency }}</span></td>{% endarchiveitem %}{% endfor %}
-</tr>
-<tr>{% for product in list %}{% archiveitem product as item %}
-<td class="titlerow">{{item.title}}</td>{% endarchiveitem %}{% endfor %}
+<td class="titlerow">{% if item %}{{item.title}}{% else %}{{product.name}}{% endif %}</td>{% endarchiveitem %}{% endfor %}
 </tr>
 <tr><td colspan='4' class='breaker'></td></tr>
 {% endfor %}

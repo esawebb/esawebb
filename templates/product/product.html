@@ -32,7 +32,7 @@ ProductVariations or CustomProducts, look for product/detail_xxx.html
 {% block content %}
 {% block productdetail %}
 {% archiveitem product as object %}
-<h1>{{ shop_name }}: {{ object.title }}</h1>
+<h1>{{ shop_name }}: {% if object %}{{ object.title }}{%else%}{{ product.name }}{% endif %}</h1>
 {% if object.resource_medium %}
 <div class="archive_image">
 <div class="image_container">{% if object.resource_screen %}<a href="{{object.resource_screen.url}}" rel="shadowbox" title="{{object}}" />
@@ -43,12 +43,23 @@ ProductVariations or CustomProducts, look for product/detail_xxx.html
 {% endif %}
 </div>
 </div>
+{% else %}
+<div class="archive_image">
+<div class="image_container">{% thumbnail product.main_image.picture 320x320 as image %}
+<img src="{{image}}" width="320" border="0" alt="{{product.name}}" />
+</div>
+</div>
 {% endif %}
+
+{% if object%}
 <p>{{ object.description|safe }}</p>
 <p><strong>Credit:</strong><div class="credit"><p>{{ object.credit|safe|default:"ESA/Hubble" }}</p></div></p>
 <div class="checkoutdiv"><div align="left" style="line-height: 15px;">
 <strong>Note:</strong> The digital resources (images, videos, PDFs, etc.) for this product can be downloaded in the <a href="{{ object.get_absolute_url }}">archive</a>
 </div></div>
+{%else%}
+<p>{{ product.description|safe }}</p>
+{%endif%}
 {% endarchiveitem %}
 {% endblock %}
 {% endblock %}
@@ -67,7 +78,7 @@ ProductVariations or CustomProducts, look for product/detail_xxx.html
 {% plugin_point "product_form" %}
 </form>
 {% archiveitem product as object %}
-<br /><a href="{{ object.get_absolute_url }}">View in Archive</a>
+{% if object %}<br /><a href="{{ object.get_absolute_url }}">View in Archive</a>{% endif %}
 {% endarchiveitem %}
 </div>
 {% include "product/cart_box.html" %}

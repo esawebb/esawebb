@@ -28,13 +28,13 @@
 <table class="archive_normal" width="100%">
 {% for list in products|split_list:"4" %}
 <tr>{% for product in list %}{% archiveitem product as item %}
-<td class="imagerow" width="25"><a href="{{ product.get_absolute_url }}"><img src="{{ item.resource_thumb.url }}" width="122" alt="{{item.title}}" /></a></td>{% endarchiveitem %}{% endfor %}
+<td class="imagerow" width="25">{% if item.resource_thumb %}<a href="{{ product.get_absolute_url }}"><img src="{{ item.resource_thumb.url }}" width="122" alt="{{item.title}}" /></a>{% else %}{% thumbnail product.main_image.picture 122x122 as image %}<a href="{{ product.get_absolute_url }}"><img src="{{image}}" width="122" alt="{{product.name}}" /></a>{% endif %}</td>{% endarchiveitem %}{% endfor %}
 </tr>
 <tr>{% for product in list %}{% archiveitem product as item %}
 <td class="pricerow"><span class="price" align="right">Price:&nbsp;{{ product|discount_price:sale|currency }}</span></td>{% endarchiveitem %}{% endfor %}
 </tr>
 <tr class="titlerow">{% for product in list %}{% archiveitem product as item %}
-<td class="titlerow">{{item.title}}</td>{% endarchiveitem %}{% endfor %}
+<td class="titlerow">{% if item %}{{item.title}}{% else %}{{product.name}}{% endif %}</td>{% endarchiveitem %}{% endfor %}
 </tr>
 <tr><td colspan='4' class='breaker'></td></tr>
 {% endfor %}
