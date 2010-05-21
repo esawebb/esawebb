@@ -291,6 +291,31 @@ div.rotator div.items .feature_item {
 	
 }
 
+.fbut_selector {
+	display:block;
+	position:absolute;
+	z-index:200;
+	top:-18px;
+	right:-4px;
+	font-size: 11px;
+}
+
+
+.fbut_selector a {
+	display:block;
+	width:20px;
+	height:20px;
+	float:left;
+	padding:2px;
+	text-align:center;
+
+}
+
+.fbut_selector .activeSlide {
+	font-weight:bold;
+}
+
+
 .init_hide {
 	opacity:0;
 }
