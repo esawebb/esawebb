@@ -808,12 +808,21 @@ table.archive_normal td.titlerow {
 
 }
 
+.fpviewall {
+	font-size:11px;
+	text-align:center;
+}
+
 .fp_news h1  {
 	display:block;
 	font-size:18px;
 	text-transform: uppercase;
-	padding-bottom:20px;
 	background: url('../images/fp-news-bg.png') no-repeat 0px 26px;
+}
+
+.fp_news .entry {
+	display:block;
+	height:50px;	
 }
 
 .fp_news .entry img  {
