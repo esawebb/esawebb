@@ -291,7 +291,7 @@ div.rotator div.items .feature_item {
 	
 }
 
-.fbut_selector {
+.fbut_selector, #feat-nav-viewall {
 	display:block;
 	position:absolute;
 	z-index:200;
@@ -300,21 +300,32 @@ div.rotator div.items .feature_item {
 	font-size: 11px;
 }
 
+.fbut_selector {
+	right:60px;
+}
 
 .fbut_selector a {
 	display:block;
 	width:20px;
 	height:20px;
+}
+.fbut_selector a,#feat-nav-viewall a {
 	float:left;
 	padding:2px;
 	text-align:center;
 
 }
+#feat-nav-viewall .rssicon {
+	margin-top:-4px;
+}
+
+
 
 .fbut_selector .activeSlide {
 	font-weight:bold;
+	text-decoration:underline !important;
+	
 }
-
 
 .init_hide {
 	opacity:0;
