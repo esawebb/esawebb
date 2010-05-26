@@ -35,11 +35,13 @@ def main_page( request ):
 	now = datetime.now()
 	potd = ImageOptions.Queries.default.queryset( Image, ImageOptions, request )[0][now.day]
 	votd = VideoOptions.Queries.default.queryset( Video, VideoOptions, request )[0][now.day]
+	hubblecasts = VideoOptions.Queries.category.queryset( Video,VideoOptions, request, stringparam='hubblecast' )[0].order_by('-release_date', )[:5]
 		
 	return render_to_response('frontpage.html', {
 				'releases': Release.get_latest_release( 5 ),
 				'potw' : PictureOfTheWeek.get_latest(),
 				'announcements' : Announcement.get_latest_announcement(5),
+				'hubblecasts' : hubblecasts,  
 				'potd' : potd,
 				'votd' : votd,
 				#'announcements': Announcement.get_latest_release( settings.FRONTPAGE_PRESSRELEASES_LEN ),
