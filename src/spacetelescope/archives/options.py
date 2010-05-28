@@ -302,8 +302,8 @@ class OnlineArtOptions ( StandardOptions ):
 		)
 	
 	class Queries(object):
-		#default = AllPublicQuery( browsers=( 'normal', 'viewall' ), verbose_name="Art: View All" )
-		default = ArtistQuery ( browsers=( 'normal', 'viewall' ),  verbose_name="%s" )
+		default = AllPublicQuery( browsers=( 'normal', 'viewall' ), verbose_name="Space Art" )
+		#default = ArtistQuery ( browsers=( 'normal', 'viewall' ),  verbose_name="%s" )
 		
 
 class OnlineArtAuthorOptions ( StandardOptions ):
