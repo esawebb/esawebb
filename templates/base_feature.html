@@ -43,7 +43,7 @@
 						<h1><a href="{{object.get_absolute_url}}"><div class='title'>{{object.title}}</div></h1>
 						<p>{{object.headline|truncatewords:35}}</a></p>
 					</div>
-					<img src="{{object.main_image.resource_newsfeature.url}}" width="700" height="280" />			
+					<a href="{{object.get_absolute_url}}"><img src="{{object.main_image.resource_newsfeature.url}}" width="700" height="280" /></a>			
 		        </div>
 		        {% endfor %}
 		    </div> 

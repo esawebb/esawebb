@@ -50,12 +50,12 @@
 			<div class='leftbord2 '>
 				<div class='potd_box'>
 				<h1>Archive Picture of the Day</h1>
-				<img src='{{potd.resource_wallpaperthumbs.url}}'></img>
+				<a href="{{potd.get_absolute_url}}"><img src='{{potd.resource_wallpaperthumbs.url}}' /></a>
 				<div class='title'><a href="{{potd.get_absolute_url}}">{{potd.title}}</a></div>
 				</div>
 				<div class='potd_box'>
 				<h1>Archive Video of the Day</h1>
-				<img src='{{votd.resource_thumb.url}}'></img>
+				<a href="{{votd.get_absolute_url}}"><img src='{{votd.resource_thumb.url}}' /></a>
 				<div class='title'><a href="{{votd.get_absolute_url}}">{{votd.title}}</a></div>
 				</div>
 			</div>
