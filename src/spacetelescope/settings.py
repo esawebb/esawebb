@@ -281,6 +281,7 @@ INSTALLED_APPS = (
 	'djangoplicity.media',
 	'djangoplicity.jobs',
 	'django.contrib.redirects',
+	'djangoplicity.announcements',
 	'djangoplicity.releases',
 	'djangoplicity.search',
 	'djangoplicity.metadata',

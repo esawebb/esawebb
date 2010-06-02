@@ -196,7 +196,7 @@ class FeedRedirectSettings():
 				'/announcements/feed/' : 'http://feeds.feedburner.com/hubble_announcements/',
 	}
 	
-	whitelist = ['FeedBurner',]
+	whitelist = ['FeedBurner','Mozilla']
 
 CATEGORY_SPECIFIC_SETTINGS = {
 	'hubblecast': 'HubblecastFeedSettings',

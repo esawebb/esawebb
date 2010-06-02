@@ -88,8 +88,8 @@ def StandardAdminFactory( prefix, remove=['release_date', 'embargo_date','links'
 #
 #
 #
-class AnnouncementAdmin( StandardAdminFactory( 'announcements', remove = [ 'priority','credit' ] ) ):
-	date_hierarchy = 'release_date'
+#class AnnouncementAdmin( StandardAdminFactory( 'announcements', remove = [ 'priority','credit' ] ) ):
+#	date_hierarchy = 'release_date'
 	
 
 class KidsDrawingAdmin( DjangoplicityModelAdmin, RenameAdmin, ArchiveAdmin ):
@@ -298,7 +298,7 @@ def register_with_admin( admin_site ):
 #	admin_site.register( Logo, LogoAdmin )
 #	admin_site.register( ConferencePoster, ConferencePosterAdmin )
 	admin_site.register( TechnicalDocument, _getDefaultShopAdmin( 'techdocs', with_pages = True ) )
-	admin_site.register( Announcement, AnnouncementAdmin )
+	#admin_site.register( Announcement, AnnouncementAdmin )
 
 	admin_site.register( Calendar, CalendarAdmin )
 	admin_site.register( OnlineArt, OnlineArtAdmin )

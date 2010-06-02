@@ -14,7 +14,8 @@ from django.utils.translation import ugettext as _
 from django.contrib import admin
 from spacetelescope.admin import admin_site, adminlogs_site, adminshop_site
 
-
+from djangoplicity.announcements.models import Announcement
+from djangoplicity.announcements.options import AnnouncementOptions
 from djangoplicity.media.models import Image, Video, PictureOfTheWeek
 from djangoplicity.media.options import ImageOptions, VideoOptions, PictureOfTheWeekOptions
 from django.views.generic.simple import redirect_to
@@ -57,7 +58,7 @@ urlpatterns += patterns( '',
     ( r'^videos/', include('djangoplicity.media.urls_videos'), { 'model': Video, 'options': VideoOptions } ),
 
 	# Other archives
-    ( r'^announcements/', include('spacetelescope.archives.urls.announcements'), { 'model': Announcement, 'options': AnnouncementOptions } ),
+    ( r'^announcements/', include('djangoplicity.announcements.urls'), { 'model': Announcement, 'options': AnnouncementOptions } ),
     ( r'^about/further_information/books/', include('spacetelescope.archives.urls.books'), { 'model': Book, 'options': BookOptions } ),
     ( r'^about/further_information/brochures/', include('spacetelescope.archives.urls.brochures'), { 'model': Brochure, 'options': BrochureOptions } ),
     ( r'^about/further_information/newsletters/', include('spacetelescope.archives.urls.newsletters'), { 'model': Newsletter, 'options': NewsletterOptions } ),

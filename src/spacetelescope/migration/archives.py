@@ -11,7 +11,8 @@ import os, shutil
 from BeautifulSoup import BeautifulSoup, BeautifulStoneSoup
 from datetime import datetime
 from django.contrib.redirects.models import Redirect
-from djangoplicity.migration import MigrationError
+from djangoplicity.announcements.models import Announcement, AnnouncementImage
+from djangoplicity.migration import MigrationError, MigrationTask
 from djangoplicity.migration.apps.archives import CSVDataSource, DataMapping
 from djangoplicity.releases.models import Release, ReleaseType, ReleaseImage, ReleaseVideo
 from djangoplicity.releases.models import Image, Video
@@ -22,6 +23,7 @@ from djangoplicity.utils.videothumbnails import format_duration
 
 import csv
 import re
+import glob
 
 numberregex = re.compile( "(\d+(\.\d+)?)")
 
@@ -1282,3 +1284,71 @@ class PresentationDataMapping(SpacetelescopeDataMapping):
 				credit=self.credit(),
 				)
 		self.obj.save()	
+		
+		
+class AnnouncementResourcesToImagesTask (MigrationTask):
+	
+	OLD_ROOT = "/Volumes/webdocs/hubble/docs/static/archives/announcements"
+	FORMATS_TO_MOVE = [('original','original'),('newsmini','newsmini'),('screen','screen'),('thumb','thumbs'),('large','large'),('medium','medium')]
+	NEW_ROOT = "/Volumes/webdocs/hubble/docs/static/archives/images"
+	
+	
+	#finished on 0712
+	
+	def run(self):
+		# reset
+		for annimg in AnnouncementImage.objects.all():
+			print "deleting %s" % annimg
+			annimg.archive_item.delete()
+
+		# go
+		announcements = Announcement.objects.all()
+		
+		for announcement in announcements:
+			img = self._create_object(announcement)
+			self._add_image(announcement,img)
+			self._move_resources(announcement, img)
+
+			
+	def _create_object(self,ann):
+		try:
+			image = Image.objects.get(id=ann.id)
+			#print "image with id %s already exists" % ann.id
+			#print image.id
+			return image
+		    
+		except Image.DoesNotExist:
+			pass
+			
+		image = Image( 
+				id = ann.id,
+				title=ann.title,
+				description=ann.description,
+				priority = 0,
+			)
+		image.save()
+		return image
+	
+	def _add_image(self,ann,img):
+		try:
+			AnnouncementImage.objects.get(announcement=ann,archive_item=img)
+		except AnnouncementImage.DoesNotExist:
+			animg = AnnouncementImage(announcement=ann,
+								  main_visual = True,
+								  archive_item = img)
+			animg.save()
+		return
+	
+	def _move_resources(self,ann,img):
+		for format,new_format in self.FORMATS_TO_MOVE:
+			old_path = os.path.join (self.OLD_ROOT,format)
+			new_path = os.path.join (self.NEW_ROOT,new_format)
+			for f in glob.glob (os.path.join (old_path, '%s.*'% ann.id)):
+				dir,filename = os.path.split(f)
+				p = os.path.join(new_path,filename)
+				print "Copying %s to %s" % (f,p )
+				if os.path.isfile(p):
+					print "%s already exists, skipping" % p
+				else:
+					shutil.copy(f,p)
+		return ann	

@@ -17,6 +17,7 @@ import django.contrib.auth.admin
 import django.contrib.redirects.admin
 import django.contrib.sites.admin
 import djangodblog.admin
+import djangoplicity.announcements.admin
 import djangoplicity.contrib.statistics.admin
 import djangoplicity.cron.admin
 import djangoplicity.menus.admin
@@ -38,6 +39,7 @@ admin_site = authtkt_decorator( AdminSite( name="admin_site" ) )
 adminlogs_site = authtkt_decorator( AdminSite( name="adminlogs_site" ) )
 adminshop_site = authtkt_decorator( AdminSite( name="adminshop_site" ) )
 
+autoregister( admin_site, djangoplicity.announcements.admin )
 autoregister( admin_site, django.contrib.auth.admin )
 autoregister( admin_site, django.contrib.sites.admin )
 autoregister( admin_site, djangoplicity.menus.admin )

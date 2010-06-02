@@ -407,56 +407,56 @@ post_delete.connect( Sticker.post_delete_handler, sender = Sticker )
 
 
 
-class Announcement( archives.ArchiveModel, models.Model ):	
-	id = archives.IdField( )
-	""" """
-
-	title = archives.TitleField( )
-	""" """
-
-	description = archives.DescriptionField( )
-	""" """
-	
-	contacts = models.TextField( blank=True, help_text=_(u'Contacts') )
-	""" """
-	
-	links = models.TextField( blank=True, help_text=_(u'Links') )
-	""" """
-	
-	class Archive:
-		original = archives.ImageResourceManager( type=types.OriginalImageType )
-		large = archives.ImageResourceManager( derived='original', verbose_name=_('Large JPEG'), type=types.JpegType )
-		medium = archives.ImageResourceManager( derived='original', type=types.MediumJpegType )
-		screen = archives.ImageResourceManager( derived='original', type=types.ScreensizeJpegType )
-		wallpaperthumbs = archives.ImageResourceManager( derived='original', type=types.WallpaperThumbnailType )
-		newsfeature = archives.ImageResourceManager( derived='news', type=types.JpegType )
-		news = archives.ImageResourceManager( derived='original', type=types.NewsJpegType )
-		newsmini = archives.ImageResourceManager( derived='news', type=types.NewsMiniJpegType )
-		thumb = archives.ImageResourceManager( derived='original', type=types.ThumbnailJpegType )
-			   
-		class Meta:
-			root = archive_settings.ANNOUNCEMENT_ROOT
-			release_date = True
-			embargo_date = True
-			last_modified = True
-			created = True
-			published = True
-
-	@staticmethod
-	def get_latest_announcement( len=1 ):
-		qs = Announcement.objects.filter( release_date__lte=datetime.now(), published=True ).order_by( '-release_date' )[:len]
-		return qs
-	
-	class Meta:
-		ordering = ['-release_date','-id']
-		#get_latest_by = "release_date"
-
-	@permalink
-	def get_absolute_url(self):
-		return ('announcements_detail', [str(self.id)])
-	
-	def __unicode__(self):
-		return "%s: %s" % (self.id, self.title)  
+#class Announcement( archives.ArchiveModel, models.Model ):	
+#	id = archives.IdField( )
+#	""" """
+#
+#	title = archives.TitleField( )
+#	""" """
+#
+#	description = archives.DescriptionField( )
+#	""" """
+#	
+#	contacts = models.TextField( blank=True, help_text=_(u'Contacts') )
+#	""" """
+#	
+#	links = models.TextField( blank=True, help_text=_(u'Links') )
+#	""" """
+#	
+#	class Archive:
+#		original = archives.ImageResourceManager( type=types.OriginalImageType )
+#		large = archives.ImageResourceManager( derived='original', verbose_name=_('Large JPEG'), type=types.JpegType )
+#		medium = archives.ImageResourceManager( derived='original', type=types.MediumJpegType )
+#		screen = archives.ImageResourceManager( derived='original', type=types.ScreensizeJpegType )
+#		wallpaperthumbs = archives.ImageResourceManager( derived='original', type=types.WallpaperThumbnailType )
+#		newsfeature = archives.ImageResourceManager( derived='news', type=types.JpegType )
+#		news = archives.ImageResourceManager( derived='original', type=types.NewsJpegType )
+#		newsmini = archives.ImageResourceManager( derived='news', type=types.NewsMiniJpegType )
+#		thumb = archives.ImageResourceManager( derived='original', type=types.ThumbnailJpegType )
+#			   
+#		class Meta:
+#			root = archive_settings.ANNOUNCEMENT_ROOT
+#			release_date = True
+#			embargo_date = True
+#			last_modified = True
+#			created = True
+#			published = True
+#
+#	@staticmethod
+#	def get_latest_announcement( len=1 ):
+#		qs = Announcement.objects.filter( release_date__lte=datetime.now(), published=True ).order_by( '-release_date' )[:len]
+#		return qs
+#	
+#	class Meta:
+#		ordering = ['-release_date','-id']
+#		#get_latest_by = "release_date"
+#
+#	@permalink
+#	def get_absolute_url(self):
+#		return ('announcements_detail', [str(self.id)])
+#	
+#	def __unicode__(self):
+#		return "%s: %s" % (self.id, self.title)  
 
 
 class ConferencePoster(archives.ArchiveModel, StandardArchiveInfo, PhysicalInfo,ScreenInfo):

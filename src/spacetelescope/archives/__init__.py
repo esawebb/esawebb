@@ -11,7 +11,7 @@ class archive_settings:
     TECHDOC_ROOT = 'archives/techdocs'
     MERCHANDISE_ROOT = 'archives/merchandise'
     SLIDESHOW_ROOT = 'archives/slideshows'
-    ANNOUNCEMENT_ROOT = 'archives/announcements'
+    #ANNOUNCEMENT_ROOT = 'archives/announcements'
     NEWSLETTER_ROOT = 'archives/newsletters'
     FITS_IMAGE_ROOT = 'archives/fitsimages'
     KIDS_DRAWING_ROOT = 'archives/drawings'

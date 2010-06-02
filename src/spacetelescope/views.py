@@ -19,7 +19,7 @@ from django.views import defaults as default_views
 from djangoplicity.releases.models import Release
 from djangoplicity.media.models import Image, Video, PictureOfTheWeek
 from djangoplicity.media.options import ImageOptions, VideoOptions
-from spacetelescope.archives.models import Announcement 
+from djangoplicity.announcements.models import Announcement 
 
 #from djangoplicity.media.models import Image
 #from libavm.utils import avm_from_file
