@@ -9,7 +9,7 @@
 			
 			{% for object in announcements %}
 			<div class='entry'>
-				{% if object.resource_newsmini %}<a href="{{object.get_absolute_url}}"><img src='{{ object.resource_newsmini.url }}' /></a>
+				{% if object.main_image.resource_newsmini %}<a href="{{object.get_absolute_url}}"><img src='{{ object.main_image.resource_newsmini.url }}' /></a>
 				<div class='info withimg'>
 				{% else %}
 				<div class='info extra'>
