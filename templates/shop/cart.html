@@ -20,7 +20,7 @@
     <h4>{% trans "You have no items in your shopping cart!" %}</h4>
 {% else %}
 	<div class="checkoutdiv">
-    <form action="{% url satchmo_checkout-step1 %}" method="get">
+    <form action="{% url satchmo_checkout-step1 %}" method="get">{% csrf_token %}
     <input type="submit" value="{% trans 'Checkout' %}" />
 	</form>
 	</div>
@@ -48,7 +48,7 @@
 					<input type="text" name="quantity" id="id_quantity" size="4" value="{{ cartitem.quantity|normalize_decimal }}" />
                     <input type="submit" id="id_update_submit" value="{% trans 'Update' %}" />
                 </form>
-                <form action="{% url satchmo_cart_remove %}" method="post">
+                <form action="{% url satchmo_cart_remove %}" method="post">{% csrf_token %}
                 <input type="hidden" name="cartitem" value="{{ cartitem.id }}" />
                 <input type="submit" value="{% trans 'Remove' %}" />
             </form>
@@ -70,7 +70,7 @@
 	{% endif %}
 	
 	<div class="checkoutdiv">
-    <form action="{% url satchmo_checkout-step1 %}" method="get">
+    <form action="{% url satchmo_checkout-step1 %}" method="get">{% csrf_token %}
     <input type="submit" value="{% trans 'Checkout' %}" />
 	</form>
 	</div>

@@ -623,12 +623,13 @@ from django.conf.urls.defaults import patterns, include
 SATCHMO_SETTINGS = {
                     'SHOP_BASE' : '/shop',
                     'MULTISHOP' : False,
+                    'SSL' : True,
                     'CUSTOM_PRODUCT_MODULES' : [
 											'spacetelescope.archives',
 											],
-					'CUSTOM_PAYMENT_MODULES' : [
-											'djangoplicity.coposweb',
-											],
+					#'CUSTOM_PAYMENT_MODULES' : [
+					#						'djangoplicity.coposweb',
+					#						],
 #                    'SHOP_URLS' : patterns('',
 #										( r'^checkout/', 'spacetelescope.views.shop_closed' ),
 #								)
@@ -646,8 +647,8 @@ L10N_SETTINGS = {
      'EURO' : {'symbol': u'€', 'positive' : u"€ %(val)0.2f", 'negative': u"€ (%(val)0.2f)", 'decimal' : ','},
   },
   'default_currency' : 'EURO',
-  'show_translations': False,
-  'allow_translations': False,
+  'show_admin_translations': False,
+  'allow_translation_choice': False,
 }
 
 #import logging
@@ -661,7 +662,7 @@ L10N_SETTINGS = {
 
 LIVESETTINGS_OPTIONS = {   
 	1: { 
-		'DB' : False, 
+		'DB' : True, 
 		'SETTINGS' : { 
 		    u'LANGUAGE': {   
 				u'CURRENCY': u'\u20ac',
@@ -671,8 +672,7 @@ LIVESETTINGS_OPTIONS = {
 				u'COUNTRY_MATCH': u'False',
                 u'MINIMUM_ORDER': u'3.00',
                 #u'ORDER_EMAIL_EXTRA': u'distribution@spacetelescope.org',
-                u'ORDER_EMAIL_OWNER': u'True',
-                u'SSL': u'True',
+                u'ORDER_EMAIL_OWNER': u'True',                
                 u'MODULES': u'["PAYMENT_COPOSWEB"]'
             },
             u'PAYMENT_DUMMY': {
@@ -683,7 +683,7 @@ LIVESETTINGS_OPTIONS = {
 				u'MEASUREMENT_SYSTEM': u'["metric"]',
 				# Note the string below is too long to store in the database since PRODUCT_TYPES is not a LongSetting
 				# Therefore it must be configured here!
-				u'PRODUCT_TYPES': u'["product::ConfigurableProduct", "product::ProductVariation", "spacetelescope.archives::Book", "spacetelescope.archives::Brochure", "spacetelescope.archives::EducationalMaterial", "spacetelescope.archives::CDROM", "spacetelescope.archives::Poster", "spacetelescope.archives::TechnicalDocument", "spacetelescope.archives::Newsletter", "spacetelescope.archives::Merchandise", "spacetelescope.archives::Sticker", "spacetelescope.archives::PostCard"]',
+				u'PRODUCT_TYPES': u'["spacetelescope.archives::Book", "spacetelescope.archives::Brochure", "spacetelescope.archives::EducationalMaterial", "spacetelescope.archives::CDROM", "spacetelescope.archives::Poster", "spacetelescope.archives::TechnicalDocument", "spacetelescope.archives::Newsletter", "spacetelescope.archives::Merchandise", "spacetelescope.archives::Sticker", "spacetelescope.archives::PostCard"]',
 				u'TRACK_INVENTORY': u'False',
 				u'NUM_PAGINATED': u'10',
 				u'NUM_DISPLAY': u'20',

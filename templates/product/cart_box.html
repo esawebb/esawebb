@@ -25,10 +25,10 @@
 </table>
 <table width="100%" style="margin-top: 10px; line-height: 15px; text-align: center;">
 <tr>
-<td><form action="{% url satchmo_cart %}" method="get">
+<td><form action="{% url satchmo_cart %}" method="get">{% csrf_token %}
     <input type="submit" value="{% trans 'View Cart' %}" />
 	</form></td>
-<td><form action="{% url satchmo_checkout-step1 %}" method="get">
+<td><form action="{% url satchmo_checkout-step1 %}" method="get">{% csrf_token %}
     <input type="submit" value="{% trans 'Checkout' %}" />
 	</form></td>
 </tr>

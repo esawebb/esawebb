@@ -612,6 +612,7 @@ table.archive_normal td.titlerow {
 .archive_list_search {
 	margin-top:-2px;
 	float:right;
+	margin-bottom: 8px;
 }
 
 .seealso {

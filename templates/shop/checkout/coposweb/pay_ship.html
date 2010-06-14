@@ -15,7 +15,7 @@ reviewed the complete order in step 3.</p>
 {% endif %}
 
 <table>
-<form method="post" action=".">
+<form method="post" action=".">{% csrf_token %}
     {% block payment_table %}
     <tr><td><h2>{% trans "Payment Information" %}</h2></td></tr>
     

@@ -40,7 +40,7 @@
 </div>
 {% block payment_form %}
 
-<div align="center" class="pr_box"><form method="post" action=".">
+<div align="center" class="pr_box"><form method="post" action=".">{% csrf_token %}
 <p>By clicking on the "Place order"-button I hereby confirm that I accept the <a href="/shop/terms_conditions/">Terms &amp; Conditions</a>.</p>
 <input type="hidden" name="Process" value="True">
 <input type="submit" value="{% trans "Place order" %}"/>

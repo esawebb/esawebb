@@ -12,7 +12,7 @@
 </div>
 <div class='archive_list_search'>{% if searchable %}
 
-<form action="{{ search_url }}" method="GET">
+<form action="{{ search_url }}" method="GET">{% csrf_token %}
 <input id="id_archivesearch" type="text" value="{%if search_specific %}Search {{search_specific|capfirst}}...{%else%}{{search_str|default:"Search..."}}{%endif%}" name="search" class="archivesearch" onblur="searchbox_blur(this,'{%if search_specific %}Search {{search_specific|capfirst}}...{%else%}{{search_str|default:"Search..."}}{%endif%}');" onfocus="searchbox_focus(this,'{%if search_specific %}Search {{search_specific|capfirst}}...{%else%}{{search_str|default:"Search..."}}{%endif%}');" />
 <input class="archivesearch_submit" type="submit" value="Go" />
 </form>
