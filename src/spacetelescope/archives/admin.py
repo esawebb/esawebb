@@ -118,7 +118,7 @@ class KidsDrawingAdmin( DjangoplicityModelAdmin, RenameAdmin, ArchiveAdmin ):
 class LogoAdmin( DjangoplicityModelAdmin, RenameAdmin, ArchiveAdmin ):
 	list_display = ( 'id', 'title', 'published','priority','last_modified', view_link('logos') )
 	list_filter = ( 'title', 'published', 'last_modified', )
-	list_editable = ( 'title', 'published', 'resolution',)
+	list_editable = ( 'title', 'published',)
 	search_fields = ( 'id', 'title', 'description', 'credit','priority' )
 	date_hierarchy = 'last_modified'
 	fieldsets = (
@@ -295,8 +295,8 @@ def register_with_admin( admin_site ):
 	admin_site.register( Sticker, _getDefaultShopAdmin( 'stickers', with_pages = False ) )
 	
 	
-#	admin_site.register( Logo, LogoAdmin )
-#	admin_site.register( ConferencePoster, ConferencePosterAdmin )
+	admin_site.register( Logo, LogoAdmin )
+	admin_site.register( ConferencePoster, ConferencePosterAdmin )
 	admin_site.register( TechnicalDocument, _getDefaultShopAdmin( 'techdocs', with_pages = True ) )
 	#admin_site.register( Announcement, AnnouncementAdmin )
 
