@@ -1297,9 +1297,9 @@ class AnnouncementResourcesToImagesTask (MigrationTask):
 	
 	def run(self):
 		# reset
-		for annimg in AnnouncementImage.objects.all():
-			print "deleting %s" % annimg
-			annimg.archive_item.delete()
+		#for annimg in AnnouncementImage.objects.all():
+		#	print "deleting %s" % annimg
+		#	annimg.archive_item.delete()
 
 		# go
 		announcements = Announcement.objects.all()
@@ -1307,7 +1307,8 @@ class AnnouncementResourcesToImagesTask (MigrationTask):
 		for announcement in announcements:
 			img = self._create_object(announcement)
 			self._add_image(announcement,img)
-			self._move_resources(announcement, img)
+			print "added %s" % img.id
+			#self._move_resources(announcement, img)
 
 			
 	def _create_object(self,ann):

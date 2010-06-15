@@ -50,6 +50,8 @@ class EducationalMaterial (archives.ArchiveModel, StandardArchiveInfo, PrintInfo
 			last_modified = True
 			created = True
 			published = True 
+			rename_pk = ('archives_educationalmaterial','id')
+			
 
 	@permalink
 	def get_absolute_url(self):
@@ -92,6 +94,7 @@ class KidsDrawing (archives.ArchiveModel,StandardArchiveInfo, ):
 			last_modified = True
 			created = True
 			published = True  
+			rename_pk = ('archives_kidsdrawing','id')
 			
 
 	class Meta:
@@ -133,6 +136,7 @@ class CDROM(archives.ArchiveModel, StandardArchiveInfo, PhysicalInfo, ShopModel)
 			last_modified = True
 			created = True
 			published = True
+			rename_pk = ('archives_cdrom','id')
 			
 	class Meta:
 		verbose_name = _("DVD/CD")
@@ -167,7 +171,8 @@ class Book( archives.ArchiveModel, StandardArchiveInfo, PhysicalInfo, PrintInfo,
 			embargo_date = True
 			last_modified = True
 			created = True
-			published = True	  
+			published = True
+			rename_pk = ('archives_book','id')	  
 
 	@permalink
 	def get_absolute_url(self):
@@ -204,7 +209,8 @@ class Brochure(archives.ArchiveModel, StandardArchiveInfo, PhysicalInfo, PrintIn
 			embargo_date = True
 			last_modified = True
 			created = True 
-			published = True	  
+			published = True
+			rename_pk = ('archives_brochure','id')	  
 
 	@permalink
 	def get_absolute_url(self):
@@ -234,6 +240,7 @@ class Merchandise ( archives.ArchiveModel, StandardArchiveInfo, PhysicalInfo, Sh
 			last_modified = True
 			created = True
 			published = True  
+			rename_pk = ('archives_merchandise','id')
 
 	@permalink
 	def get_absolute_url(self):
@@ -274,6 +281,7 @@ class Newsletter ( archives.ArchiveModel, StandardArchiveInfo, PhysicalInfo, Pri
 			last_modified = True
 			created = True
 			published = True  
+			rename_pk = ('archives_newsletter','id')
 
 	@permalink
 	def get_absolute_url(self):
@@ -304,6 +312,7 @@ class PostCard (archives.ArchiveModel, StandardArchiveInfo, PhysicalInfo, ShopMo
 			last_modified = True
 			created = True
 			published = True  
+			rename_pk = ('archives_postcard','id')
 
 	@permalink
 	def get_absolute_url(self):
@@ -335,7 +344,8 @@ class Poster( archives.ArchiveModel, StandardArchiveInfo, PhysicalInfo, ScreenIn
 			embargo_date = True
 			last_modified = True
 			created = True
-			published = True	
+			published = True
+			rename_pk = ('archives_poster','id')	
 
 	@permalink
 	def get_absolute_url(self):
@@ -366,6 +376,7 @@ class PressKit (archives.ArchiveModel, StandardArchiveInfo, PhysicalInfo, PrintI
 			last_modified = True
 			created = True
 			published = True  
+			rename_pk = ('archives_presskit','id')
 
 	@permalink
 	def get_absolute_url(self):
@@ -390,6 +401,7 @@ class Sticker ( archives.ArchiveModel, StandardArchiveInfo, PhysicalInfo, ShopMo
 			last_modified = True
 			created = True
 			published = True  
+			rename_pk = ('archives_sticker','id')
 
 	@permalink
 	def get_absolute_url(self):
@@ -475,6 +487,7 @@ class ConferencePoster(archives.ArchiveModel, StandardArchiveInfo, PhysicalInfo,
 			last_modified = True
 			created = True
 			published = True  
+			rename_pk = ('archives_conferenceposter','id')
 	
 	@permalink
 	def get_absolute_url(self):
@@ -499,6 +512,7 @@ class Logo( archives.ArchiveModel, StandardArchiveInfo ):
 			last_modified = True
 			created = True
 			published = True  
+			rename_pk = ('archives_logo','id')
 			
 			
 	@permalink
@@ -527,6 +541,7 @@ class TechnicalDocument (archives.ArchiveModel, StandardArchiveInfo, PhysicalInf
 			last_modified = True
 			created = True
 			published = True  
+			rename_pk = ('archives_technicaldocument','id')
 
 	@permalink
 	def get_absolute_url(self):
@@ -589,6 +604,7 @@ class Calendar(archives.ArchiveModel, StandardArchiveInfo):
 			created = True
 			published = True  
 			ordering = ['-year','month']
+			rename_pk = ('archives_calendar','id')
 			
 	@permalink
 	def get_absolute_url(self):
@@ -623,6 +639,10 @@ class OnlineArtAuthor (archives.ArchiveModel, StandardArchiveInfo ):
 			last_modified = True
 			created = True
 			published = True
+			rename_pk = ('archives_onlineartauthor','id')
+			rename_fks = (
+							('archives_online_art','artist_id'),
+						)
 			
 	def __unicode__(self): 
 		return self.name
@@ -652,7 +672,7 @@ class OnlineArt (archives.ArchiveModel, StandardArchiveInfo, ):
 			last_modified = True
 			created = True
 			published = True 
-			
+			rename_pk = ('archives_onlineart','id')
 	class Meta:
 		verbose_name = 'Space Art'
 		verbose_name_plural = 'Space Art' 
@@ -701,6 +721,7 @@ class SlideShow (archives.ArchiveModel, StandardArchiveInfo,ScreenInfo):
 			last_modified = True
 			created = True
 			published = True  
+			rename_pk = ('archives_slideshow','id')
    
 	@permalink
 	def get_absolute_url(self):
@@ -723,7 +744,8 @@ class Exhibition (archives.ArchiveModel, StandardArchiveInfo, ):
 			embargo_date = True
 			last_modified = True
 			created = True
-			published = True  
+			published = True
+			rename_pk = ('archives_exhibition','id')  
 			
 	@permalink
 	def get_absolute_url(self):
@@ -751,7 +773,8 @@ class FITSImage (archives.ArchiveModel, StandardArchiveInfo, ):
 			embargo_date = True
 			last_modified = True
 			created = True
-			published = True  
+			published = True 
+			rename_pk = ('archives_fitsimage','id') 
 		
 	@permalink
 	def get_absolute_url(self):
@@ -788,7 +811,8 @@ class UserVideo (archives.ArchiveModel, StandardArchiveInfo, ):
 			embargo_date = True
 			last_modified = True
 			created = True
-			published = True  
+			published = True 
+			rename_pk = ('archives_uservideo','id') 
 		
 	@permalink
 	def get_absolute_url(self):
@@ -818,6 +842,7 @@ class Presentation( archives.ArchiveModel, StandardArchiveInfo ):
 			last_modified = True
 			created = True
 			published = True  
+			rename_pk = ('archives_presentation','id')
 
 	@permalink
 	def get_absolute_url(self):

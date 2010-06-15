@@ -277,8 +277,13 @@ extra_redirects = {
 #
 
 def choose_tasks():
-	return archivetasks + pagestasks
+	#return archivetasks + pagestasks
 	#return testtask
+	return [AnnouncementResourcesToImagesTask () ]
+
+
+
+
 
 testtask = [
 		ArchiveInitializationTask( Redirect ),
