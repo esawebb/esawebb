@@ -136,7 +136,7 @@ options(
 					 ],
         
         # Directories to create
-        symlinks = [ ('../../virtualenv/lib/python2.5/site-packages/Django-1.1.1-py2.5.egg/django/contrib/admin/media', 'docs/static/', 'media' ), ],
+        symlinks = [ ('../../virtualenv/lib/python2.5/site-packages/Django-1.2.1-py2.5.egg/django/contrib/admin/media', 'docs/static/', 'media' ), ],
 		
         deploy_layout = [
                         'docs',
