@@ -624,12 +624,6 @@ SATCHMO_SETTINGS = {
                     'SHOP_BASE' : '/shop',
                     'MULTISHOP' : False,
                     'SSL' : True,
-                    'CUSTOM_PRODUCT_MODULES' : [
-											'spacetelescope.archives',
-											],
-					#'CUSTOM_PAYMENT_MODULES' : [
-					#						'djangoplicity.coposweb',
-					#						],
 #                    'SHOP_URLS' : patterns('',
 #										( r'^checkout/', 'spacetelescope.views.shop_closed' ),
 #								)
@@ -683,7 +677,6 @@ LIVESETTINGS_OPTIONS = {
 				u'MEASUREMENT_SYSTEM': u'["metric"]',
 				# Note the string below is too long to store in the database since PRODUCT_TYPES is not a LongSetting
 				# Therefore it must be configured here!
-				u'PRODUCT_TYPES': u'["spacetelescope.archives::Book", "spacetelescope.archives::Brochure", "spacetelescope.archives::EducationalMaterial", "spacetelescope.archives::CDROM", "spacetelescope.archives::Poster", "spacetelescope.archives::TechnicalDocument", "spacetelescope.archives::Newsletter", "spacetelescope.archives::Merchandise", "spacetelescope.archives::Sticker", "spacetelescope.archives::PostCard"]',
 				u'TRACK_INVENTORY': u'False',
 				u'NUM_PAGINATED': u'10',
 				u'NUM_DISPLAY': u'20',
