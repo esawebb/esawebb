@@ -67,6 +67,20 @@ def resolution(obj):
 		return None
 resolution.short_description = _('Resolution')
 
+def author_name( obj ):
+	return obj.artist.name
+author_name.short_description = _( 'Name' )
+
+def author_location( obj ):
+	return obj.artist.city + ', ' + obj.artist.country
+author_location.short_description = _( 'Location' )
+
+def author_link( obj ):
+	return obj.artist.link
+author_link.short_description = _( 'Website' )
+
+
+
 BookOptions = product_options( "books", "Book", "Books", True )
 BrochureOptions = product_options( "brochures", "Brochure", "Brochures", True )
 EducationalMaterialOptions = product_options( "education", "Material", "Educational Material", True )
@@ -295,6 +309,8 @@ class OnlineArtOptions ( StandardOptions ):
 
 	info = ( 
 		( _(u'About the Piece'), { 'fields' : ( 'id', release_date,  ), } ),
+		( _(u'Author'), { 'fields' : (author_name, author_location, author_link), } ),
+		
 	)
 	
 	downloads = ( 
