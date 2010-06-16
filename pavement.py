@@ -142,6 +142,7 @@ options(
                         'docs',
                         'docs/static',
                         'docs/static/djangoplicity',
+                        'docs/static/archives',
                         'docs/static/archives/images/',
                         'docs/static/archives/images/original',
 						'docs/static/archives/images/large',
