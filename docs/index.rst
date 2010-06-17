@@ -12,6 +12,10 @@ Technical Documentation
 
 .. toctree::
    :maxdepth: 3
+   
+   
+Important for redeployment:
+logs/orderid.txt must be copied to new deployment, as well as virtualenv/etc/coposweb.ini
 
 
 installation requires boost.
