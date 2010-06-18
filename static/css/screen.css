@@ -589,6 +589,12 @@ table.archive_normal td.titlerow {
 	font-size: 11px;
 }
 
+.image_container a {
+	color: #bbb;
+	margin-top: 3px;
+	margin-bottom: 5px;
+}
+
 .image_container a:hover {
 	color: #bbb
 }
@@ -598,9 +604,7 @@ table.archive_normal td.titlerow {
 	margin:  0px;
 	text-align:center;
 	color: #BBB;
-
 }
-
 
 /* archive search */
 .archive_list_heading {
