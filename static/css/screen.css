@@ -589,6 +589,10 @@ table.archive_normal td.titlerow {
 	font-size: 11px;
 }
 
+.image_container > div {
+	margin-top: 10px;
+}
+
 .image_container a {
 	color: #bbb;
 	margin-top: 3px;
