@@ -180,7 +180,7 @@ class ReleaseFeedSettings():
 class HubblecastFeedSettings():
 	title = 'Hubblecast %s'
 	link = '/videos/hubblecast/'
-	description = 'The Hubblecast HD is a series of video podcasts featuring the latest news about astronomy, space, and the NASA/ESA Hubble Space Telescope (in High Definition: 720p/24). It is presented by Dr. J, a professional astronomer at the European Organization for Astronomical Research in the Southern Hemisphere (ESO), and it is produced by the European Space Agency/Hubble team in Germany.'
+	description = 'The latest news about astronomy, space and the NASA/ESA Hubble Space Telescope presented in High Definition is only for devices that play High Definition video (not iPhone or iPod). To watch the Hubblecast on your iPod and/or iPhone, please download the Standard Definition version also available on iTunes.'
 	header_template = 'feeds/hubblecast_header.html'
 	external_feed_url = 'http://feeds.feedburner.com/hubblecast/'
 
