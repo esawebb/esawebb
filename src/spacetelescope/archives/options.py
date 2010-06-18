@@ -76,7 +76,7 @@ def author_location( obj ):
 author_location.short_description = _( 'Location' )
 
 def author_link( obj ):
-	return obj.artist.link
+	return mark_safe("<a href='%s' target='_blank'>%s</a>" % (obj.artist.link,obj.artist.link))
 author_link.short_description = _( 'Website' )
 
 
@@ -340,6 +340,10 @@ class OnlineArtAuthorOptions ( StandardOptions ):
 		
 ## Print
 #class PrintLayoutOptions ( StandardOptions ):
+#	
+#	id = models.SlugField( primary_key=True, help_text=_(u'Id of Print Layout') )
+#	""" """
+#
 #	   
 #	urlname_prefix = 'printlayouts'
 #
@@ -353,7 +357,7 @@ class OnlineArtAuthorOptions ( StandardOptions ):
 #	
 #	class Queries(object):
 #		default = AllPublicQuery( browsers=( 'normal', 'viewall' ), verbose_name="Print Layouts: View All" )
-	
+#	
 
 
 class SlideShowOptions (StandardOptions):

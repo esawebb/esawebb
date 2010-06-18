@@ -690,7 +690,9 @@ class OnlineArt ( archives.ArchiveModel, StandardArchiveInfo, ):
 
 #TODO Print Layout? Resources
 # Release Resource
-#class PrintLayout (archives.ArchiveModel, StandardArchiveInfo, ):
+#class PrintLayout (archives.ArchiveModel, ):
+#	
+#	
 #	
 #	class Archive:
 #		original = archives.ImageResourceManager( type=types.OriginalImageType )
@@ -708,6 +710,7 @@ class OnlineArt ( archives.ArchiveModel, StandardArchiveInfo, ):
 #			last_modified = True
 #			created = True
 #			published = True  
+#			rename_pk = ('archives_printlayout','id')
 #			
 #	@permalink
 #	def get_absolute_url(self):
