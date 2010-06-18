@@ -12,6 +12,10 @@
 
 class PictureOfTheWeekFeedSettings():
 	external_feed_url = 'http://feeds.feedburner.com/hubble_potw/'
+	
+class AnnouncementFeedSettings():
+    external_feed_url = "http://feeds.feedburner.com/hubble_announcements/"
+
 
 class VideoPodcastFeedSettings():
 	title = 'Spacetelescope.org Video Feed'
