@@ -433,6 +433,13 @@ RELEASE_ARCHIVE_ROOT = 'archives/releases/'
 IMAGES_ARCHIVE_ROOT = 'archives/images/'
 VIDEOS_ARCHIVE_ROOT = 'archives/videos/'
 
+VIDEO_CONTENT_SERVERS = (
+	( '', 'Default' ),
+	( 'http://videos.spacetelescope.org/videos/', 'videos.spacetelescope.org' )
+)
+
+
+
 DEFAULT_CREATOR = u"ESA/Hubble"  
 DEFAULT_CREATOR_URL = "http://www.spacetelescope.org"
 DEFAULT_CONTACT_ADDRESS = u"Karl-Schwarzschild-Strasse 2" 
