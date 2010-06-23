@@ -5,12 +5,7 @@
 <div class="image_container">{% if object.resource_screen %}<a href="{{object.resource_screen.url}}" rel="shadowbox" title="{{object}}" />
 <img src="{{object.resource_medium.url}}" width="320" border="0" alt="{{object}}" />
 <br/>Click to Enlarge</a>
-{% if object.print_layout %}
-<div>
-<strong>Print Layout Available!</strong><br />
-<a href="{{object.resource_pl_screen.url}}" rel="shadowbox" title="{{object}}" /><img src="{{object.resource_pl_thumbs.url}}" /></a>
-</div>
-{% endif %}{% else %}
+{% else %}
 <img src="{{object.resource_medium.url}}" width="320" border="0" alt="{{object}}" />
 {% endif %}
 </div>

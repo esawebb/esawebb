@@ -694,6 +694,9 @@ table.archive_normal td.titlerow {
 	clear:both
 }
 
+.archive_download_thumbnail{
+margin-bottom:20px;
+}
 
 
 /* best of and top 100 */
