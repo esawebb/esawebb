@@ -145,6 +145,7 @@ ol li {
 /* potw */
 #potw_box {
 	height:220px;
+	
 }
 #potw_box p {
 	font-size:11px;
@@ -249,6 +250,7 @@ div.rotator {
     /* required settings */
     background:black; 
     overflow:hidden; 
+    border: 1px solid white;
 
 } 
  
@@ -271,7 +273,7 @@ div.rotator div.items .feature_item {
 	position:absolute;
 	background:black;
 	background-opacity:0.4;
-	width:70px;
+	width:45px;
 	height:20px;
 	z-index:200;
 	color:white;
@@ -286,7 +288,7 @@ div.rotator div.items .feature_item {
 
 }
 .fbut_right {
-	right:0px;
+	right:1px;
 	text-align:right;
 	
 }
@@ -670,12 +672,21 @@ table.archive_normal td.titlerow {
 
 }
 
+.leftbord2{
+	margin-left:-10px;
+	padding-left:10px;
+	border-left: 1px solid #E1E1E1;
+}
+
+.xtrapad {
+	padding-bottom:20px;
+}
 
 #rightcolumn .esohr, hr {
 	clear:both;
 	width:200px;
 	height:20px;
-	background:  url('../images/fp-news-bg.png') no-repeat;
+	background:  url('../images/fp-news-bg-sm.png') no-repeat;
 	border:none;
 }
 
@@ -833,14 +844,16 @@ margin-bottom:20px;
 
 .fpviewall {
 	font-size:11px;
-	text-align:center;
+	text-align:left;
+	left:0px;
 }
 
 .fp_news h1  {
 	display:block;
 	font-size:18px;
 	text-transform: uppercase;
-	background: url('../images/fp-news-bg.png') no-repeat 0px 26px;
+	padding-bottom:6px;
+	background: url('../images/fp-news-bg.png') no-repeat 0px 32px;
 }
 
 .fp_news .entry {
@@ -924,6 +937,22 @@ table.shoppingcart td {
 	padding: 2px;
 }
 
+/* social icons */
+
+.social_icons {
+	padding-top:47px;
+	display:block;
+	padding-bottom:27px;
+}
+
+.social_icons .sp {
+	display:block;
+}
+
+.social_icons .follow {
+	padding-top:14px;
+	text-align:right;
+}
 
 /* frontpage icons */
 .fpicon_area{
@@ -956,9 +985,14 @@ table.shoppingcart td {
 
 
 /* POTD box */
+
+.pxwb{
+	border: 1px solid white;	
+}
+
 .potd_box {
 	text-align:center;
-
+	
 	margin-bottom:30px;
 }
 .potd_box h1 {
@@ -995,7 +1029,7 @@ table.shoppingcart td {
 }
 
 /* social networks */
-#socialnetworks {
+/*#socialnetworks {
 	display:block;
 	width:180px;
 	height:82px;
@@ -1004,7 +1038,7 @@ table.shoppingcart td {
 	background: url('../images/socialnetworks_nt.jpg') no-repeat;
 }
 
-html>body #socialnetworks {background: url('../images/socialnetworks.png') no-repeat;} /* other browsers, see above */
+html>body #socialnetworks {background: url('../images/socialnetworks.png') no-repeat;}
 
 
 #socialnetworks  a {
@@ -1021,6 +1055,7 @@ html>body #socialnetworks {background: url('../images/socialnetworks.png') no-re
 	float:right;
 	height:40px;
 }
+*/
 
 #ftcolorg {
 	text-align: center;

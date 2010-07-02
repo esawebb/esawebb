@@ -7,7 +7,7 @@
 		</div>
 		
 		<div id='potw_box' class='grid_4'>
-			<a href="{{potw.visual.get_absolute_url}}"><img src='{{potw.visual.resource_potwmedium.url}}' width="220" height="140" /></a>
+			<a href="{{potw.visual.get_absolute_url}}" ><img src='{{potw.visual.resource_potwmedium.url}}' class='pxwb' width="220" height="140" /></a>
 			<h1>Picture Of The Week<a href="http://feeds.feedburner.com/hubble_potw/" class='rssicon'><img src='{{MEDIA_URL}}images/rssicon.png' /></a> </h1>
 			<p><a href="{{potw.visual.get_absolute_url}}">{{potw.id}}: {{potw.visual.title}}</a>
 			<br/><a class="viewall" href="{% url potw_defaultquery %}">View All</a></p>
@@ -31,8 +31,8 @@
 			</div>
 			
 			
-			<div class="fbut fbut_left init_hide"><span>&#9664; Prev</span></div>
-			<div class="fbut fbut_right init_hide"><span>Next &#9654;</span></div>
+			<div class="fbut fbut_left init_hide"><span>Prev</span></div>
+			<div class="fbut fbut_right init_hide"><span>Next</span></div>
 			
 		    <div class="items"> 
 		     	{% for object in releases %}

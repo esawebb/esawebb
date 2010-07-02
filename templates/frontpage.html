@@ -47,7 +47,7 @@
 						
 		</div>
 		<div class='grid_4 '>
-			<div class='leftbord2 '>
+			<div class='leftbord2 xtrapad'>
 				<div class='potd_box'>
 				<h1>Archive Picture of the Day</h1>
 				<a href="{{potd.get_absolute_url}}"><img src='{{potd.resource_wallpaperthumbs.url}}' /></a>
@@ -68,6 +68,51 @@
 		</div>
 		<div class='grid_6 fp_news fpviewall'>
 		<a href="{% url videos_query_category "hubblecast" %}">View all Hubblecast episodes</a>
+		</div>
+		
+		<div class='clear'></div>
+		
+
+				
+		<div class='social_icons'>
+			<div class='grid_2 sp follow small'>
+			Follow Spacetelescope on
+			</div>
+			
+			<div class='grid_2'>
+				<a href="http://www.facebook.com/HubbleESA" target='_blank' id='fb'>
+					<img src='{{MEDIA_URL}}images/social/bw/fb.png'></img>
+				</a>
+			</div>
+			<div class='grid_2 yo'>
+				<a href="http://www.youtube.com/user/HubbleESA" target='_blank' id='tw'>
+					<img src='{{MEDIA_URL}}images/social/bw/youtube.png'></img>
+				</a>
+			</div>
+			<div class='grid_2 yo'>
+				<a href="http://twitter.com/hubble_space" target='_blank' id='yt'>
+					<img src='{{MEDIA_URL}}images/social/bw/twitter.png'></img>
+				</a>
+			</div>
+			<div class='grid_2 yo'>
+				<a href="itpc://www.spacetelescope.org/rss/vodcast.xml" target='_blank' id='it'>
+					<img src='{{MEDIA_URL}}images/social/bw/itunes.png'></img>
+				</a>
+			</div>
+			<div class='grid_2 yo'>
+				<a href="http://www.dailymotion.com/spacetelescope_org" target='_blank' id='dm'>
+					<img src='{{MEDIA_URL}}images/social/bw/dailymotion.png'></img>
+				</a>
+			</div>
+			<div class='grid_2 yo'>
+				<a href="http://www.flickr.com/photos/hubble_esa" id='fl'>
+					<img src='{{MEDIA_URL}}images/social/bw/flickr.png'></img>
+				</a>
+			</div>
+
+			<div class='grid_2 sp'>
+			&nbsp;
+			</div>
 		</div>
 		
 		<div class='fpicon_area'>
