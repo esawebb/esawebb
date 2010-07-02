@@ -16,6 +16,7 @@
 {% block extra_header %}{% endblock %}
 {% load menus %}{% init_menu 'Main Menu' as main_menu %}{%init_menu 'Top Right Menu' as top_right_menu %}{% init_menu 'Footer Menu' as footer_menu %}
 </head>
+<body>
 <div id="header" class="container_16">
 
 	<div class='grid_10 '>
@@ -88,12 +89,13 @@
 {% spaceless %}{% render_menu footer_menu footer %}{% endspaceless %}
 
 <div id="ftcol5" class="grid_4">
+<iframe id ='fb_like_main' src="http://www.facebook.com/plugins/like.php?href=http%3A%2F%2Fwww.facebook.com%2FhubbleESA&amp;layout=standard&amp;show_faces=false&amp;width=220&amp;action=like&amp;font=arial&amp;colorscheme=dark&amp;height=40" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:220px; height:40px;" allowTransparency="true"></iframe>
+
 <!-- AddThis Button BEGIN -->
 <a class="addthis_button"
 href="http://www.addthis.com/bookmark.php?v%0&amp;username=epod 
 "><img src="http://s7.addthis.com/static/btn/sm-share-en.gif"  
 width="83" height="16" alt="Bookmark and Share" style="border:0"/></a>
-
 <script type="text/javascript"
 src="http://s7.addthis.com/js/250/addthis_widget.js#username 
 =epod"></script>
@@ -127,5 +129,8 @@ try {
 var pageTracker = _gat._getTracker("UA-2368492-6");
 pageTracker._trackPageview();
 } catch(err) {}</script>     
+
+
+
 </body>
 </html>
