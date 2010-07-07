@@ -26,6 +26,7 @@ PRJBASE = config.get('DEFAULT','PRJBASE')
 PRJNAME = 'spacetelescope.org'
 DJANGOPLICITY_ROOT = config.get('djangoplicity', 'ROOT' )
 LOG_DIR = config.get('djangoplicity','LOG_DIR') if config.has_option('djangoplicity', 'LOG_DIR') else "/tmp"
+TMP_DIR = config.get('djangoplicity','TMP_DIR') if config.has_option('djangoplicity', 'TMP_DIR') else "/tmp"
 
 if config.has_option('environment', 'ENABLE_SSL'):
 	ENABLE_SSL = config.getboolean('environment','ENABLE_SSL')
@@ -428,7 +429,8 @@ ARCHIVE_URL_DETAIL_PREFIX = ''
 ARCHIVE_URL_FEED_PREFIX = 'feed'
 ARCHIVE_PAGINATOR_PREFIX = 'page'
 ARCHIVE_ICON_PATH = 'icons/'
-ARCHIVE_AUTO_RESOURCE_DELETION = True
+ARCHIVE_AUTO_RESOURCE_DELETION = config.get('media', 'ARCHIVE_AUTO_RESOURCE_DELETION') if config.has_option('media', 'ARCHIVE_AUTO_RESOURCE_DELETION') else False
+
 
 RELEASE_ARCHIVE_ROOT = 'archives/releases/'
 IMAGES_ARCHIVE_ROOT = 'archives/images/'
