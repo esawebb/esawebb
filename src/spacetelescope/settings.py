@@ -101,13 +101,22 @@ TIME_ZONE = 'Europe/Berlin'
 
 # Language code for this installation. All choices can be found here:
 # http://www.w3.org/TR/REC-html40/struct/dirlang.html#langcodes
-LANGUAGE_CODE = 'en-us'
+gettext_noop = lambda s: s
+
+LANGUAGES = (
+	( 'en', gettext_noop( 'English' ) ),
+)
+
+LANGUAGE_CODE = 'en'
 
 SITE_ID = 1
 
 # If you set this to False, Django will make some optimizations so as not
 # to load the internationalization machinery.
 USE_I18N = False
+USE_L10N = False
+
+LOCALE_PATHS = ( DJANGOPLICITY_ROOT + "/locale", PRJBASE + "/locale", )
 
 # Default date and time formats (con be overridden by locale)
 DATE_FORMAT = 'j M Y'
@@ -237,7 +246,15 @@ MIDDLEWARE_CLASSES += (
     # Adds the user attribute, representing the currently-logged-in user, to every incoming 
     # HttpRequest object. 
     'django.contrib.auth.middleware.AuthenticationMiddleware', # Request
-    
+)    
+
+if USE_I18N:
+	MIDDLEWARE_CLASSES += (
+    	# Sets local for request based on URL prefix.
+	    'djangoplicity.translation.middleware.LocaleMiddleware', # Request/Response
+    )
+
+MIDDLEWARE_CLASSES += (    
     # - Forbids access to user agents in the DISALLOWED_USER_AGENTS setting
     # - Performs URL rewriting based on the APPEND_SLASH and PREPEND_WWW settings.
     # - Handles ETags based on the USE_ETAGS setting.
@@ -248,11 +265,6 @@ MIDDLEWARE_CLASSES += (
 	
 )
 
-
-if ENABLE_REDIRECT_MIDDLEWARE:
-	MIDDLEWARE_CLASSES += (
-		'djangoplicity.contrib.redirects.middleware.SinkRedirectMiddleware',
-		)
 
 MIDDLEWARE_CLASSES += (
 	# Module for URL redirection. 
@@ -265,7 +277,20 @@ MIDDLEWARE_CLASSES += (
 	'djangoplicity.pages.middleware.PageFallbackMiddleware', # Response
 )
 
-INSTALLED_APPS = (
+if ENABLE_REDIRECT_MIDDLEWARE:
+	MIDDLEWARE_CLASSES += (
+		'djangoplicity.contrib.redirects.middleware.SinkRedirectMiddleware',
+		)
+		
+INSTALLED_APPS = ()
+
+if USE_I18N:
+	INSTALLED_APPS += (
+		'djangoplicity.translation',
+		'rosetta',
+	)
+
+INSTALLED_APPS += (
 	'django.contrib.sites',
 	'satchmo_store.shop',
     'django.contrib.auth',
@@ -429,18 +454,13 @@ ARCHIVE_URL_DETAIL_PREFIX = ''
 ARCHIVE_URL_FEED_PREFIX = 'feed'
 ARCHIVE_PAGINATOR_PREFIX = 'page'
 ARCHIVE_ICON_PATH = 'icons/'
-ARCHIVE_AUTO_RESOURCE_DELETION = config.get('media', 'ARCHIVE_AUTO_RESOURCE_DELETION') if config.has_option('media', 'ARCHIVE_AUTO_RESOURCE_DELETION') else False
 
+ARCHIVE_AUTO_RESOURCE_DELETION = config.get('media', 'ARCHIVE_AUTO_RESOURCE_DELETION') if config.has_option('media', 'ARCHIVE_AUTO_RESOURCE_DELETION') else False
 
 RELEASE_ARCHIVE_ROOT = 'archives/releases/'
 IMAGES_ARCHIVE_ROOT = 'archives/images/'
 VIDEOS_ARCHIVE_ROOT = 'archives/videos/'
-
-VIDEO_CONTENT_SERVERS = (
-	( '', 'Default' ),
-	( 'http://videos.spacetelescope.org/videos/', 'videos.spacetelescope.org' )
-)
-
+ANNOUNCEMENTS_ARCHIVE_ROOT = 'archives/announcements/'
 
 
 DEFAULT_CREATOR = u"ESA/Hubble"  
@@ -523,8 +543,9 @@ ARCHIVE_CROSSLINKS = {
 						
 					  }
 
-
-# FEEDS SETTINGS MODULE
+#########
+# FEEDS #
+#########
 FEED_SETTINGS_MODULE = 'spacetelescope.feed_settings'
 
 ############
