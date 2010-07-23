@@ -14,12 +14,13 @@ class PictureOfTheWeekFeedSettings():
 	external_feed_url = 'http://feeds.feedburner.com/hubble_potw/'
 	
 class AnnouncementFeedSettings():
-    external_feed_url = "http://feeds.feedburner.com/hubble_announcements/"
-
+	title = 'Hubble Announcements'
+	link = 'http://www.spacetelescope.org/announcements/'
+	external_feed_url = "http://feeds.feedburner.com/hubble_announcements/"
 
 class VideoPodcastFeedSettings():
 	title = 'Spacetelescope.org Video Feed'
-	link = '/videos/'
+	link = 'http://www.spacetelescope.org/videos/'
 	description = 'The Latest Videos from Spacetelescope.org'
 	enclosure_resources = {	
 			''   : 'resource_hd720p_screen',
@@ -148,7 +149,7 @@ class VideoPodcastFeedSettings():
 
 class ReleaseFeedSettings():
 	title = 'Hubble News'
-	link = '/news/'
+	link = 'http://www.spacetelescope.org/news/'
 	description = "The latest news about astronomy and the NASA/ESA Hubble Space Telescope"
 	external_feed_url = 'http://feeds.feedburner.com/hubble_news/'
 	
@@ -183,7 +184,7 @@ class ReleaseFeedSettings():
 
 class HubblecastFeedSettings():
 	title = 'Hubblecast %s'
-	link = '/videos/hubblecast/'
+	link = 'http://www.spacetelescope.org/videos/hubblecast/'
 	description = 'The latest news about astronomy, space and the NASA/ESA Hubble Space Telescope presented in High Definition is only for devices that play High Definition video (not iPhone or iPod). To watch the Hubblecast on your iPod and/or iPhone, please download the Standard Definition version also available on iTunes.'
 	header_template = 'feeds/hubblecast_header.html'
 	external_feed_url = 'http://feeds.feedburner.com/hubblecast/'
