@@ -69,7 +69,7 @@ options(
 							 '../projects/djangoplicity/apps/python-memcached-1.45.tar.gz',
                              '../projects/djangoplicity/apps/pycrypto-2.1.0.tar.gz',
 							 '../projects/djangoplicity/apps/paramiko-1.7.4.tar.gz',
-							 '../projects/djangoplicity/apps/fabric-0.9.0.tar.gz',
+							 '../projects/djangoplicity/apps/Fabric-0.9.1.tar.gz',
                              '../projects/djangoplicity/apps/BeautifulSoup.tar.gz',
                              #'../projects/djangoplicity/apps/threadpool-1.2.5.zip',
                              '../projects/djangoplicity/apps/Django-1.2.1.tar.gz',
@@ -94,7 +94,8 @@ options(
                              '../projects/djangoplicity/apps/celery-0.8.0-patched.tar.gz',
                              '../projects/djangoplicity/apps/python-xmp-toolkit-1.0-rc1.tar.gz',
                              '../projects/djangoplicity/apps/python-avm-library-1.0a1.tar.gz',
-                             
+                             '../projects/djangoplicity/apps/django-rosetta-0.5.5.tar.gz',
+                                                          
                              # Migration related packages.
                              '../projects/spacetelescope.org/apps/BareNecessities-0.2.4.tar.gz', 
                              '../projects/spacetelescope.org/apps/DreamweaverTemplate-0.1.1.tar.gz',
@@ -125,8 +126,8 @@ options(
         virtualenv_dir = 'virtualenv',
         
         svn_projects_dir = 'projects',
-        svn_projects = [ ('svn://svnsrv/p30/trunk/spacetelescope.org', 'spacetelescope.org'),
-                         ('svn://svnsrv/p30/trunk/djangoplicity', 'djangoplicity' ),
+        svn_projects = [ ('http://svnhq30.hq.eso.org/p30/trunk/spacetelescope.org', 'spacetelescope.org'),
+                         ('http://svnhq30.hq.eso.org/p30/trunk/djangoplicity', 'djangoplicity' ),
                        ],
             
         rsync_dirs = [ ("projects/spacetelescope.org/static/","docs/static/" ),
@@ -135,8 +136,7 @@ options(
 					 ],
         
         # Directories to create
-        symlinks = [ ('../../virtualenv/lib/python2.5/site-packages/Django-1.2.1-py2.5.egg/django/contrib/admin/media', 'docs/static/', 'media' ), ],
-		
+        symlinks = [ ('../../virtualenv/lib/python2.5/site-packages/Django-1.2.1-py2.5.egg/django/contrib/admin/media', 'docs/static/', 'media' ),],
         deploy_layout = [
                         'docs',
                         'docs/static',
