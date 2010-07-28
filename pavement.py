@@ -61,7 +61,7 @@ options(
         packages_to_install=['../projects/djangoplicity/apps/Paver-1.0.1.tar.gz',
 							 '../projects/djangoplicity/apps/virtualenv-1.4.4.tar.gz',
 							 '../projects/djangoplicity/apps/docutils-0.6.tar.gz',
-							 '../projects/djangoplicity/apps/Jinja2-2.21.1.tar.gz',
+							 '../projects/djangoplicity/apps/Jinja2-2.5.tar.gz',
 							 '../projects/djangoplicity/apps/Pygments-1.2.2.tar.gz',
 							 '../projects/djangoplicity/apps/Sphinx-0.6.4.tar.gz',
 							 '../projects/djangoplicity/apps/MySQL-python-1.2.2-patched.tar.gz',
