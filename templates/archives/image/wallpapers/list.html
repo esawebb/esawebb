@@ -21,9 +21,7 @@
 </div>
 {% endif %}
 {% if crosslinks %}
-<div class="seealso">Also see our {{crosslinks_subject|lower}} on
-{%for site,url,sep in crosslinks%}{%if not forloop.first %}{%if forloop.revcounter0 %}, {%else%} &amp; {%endif%}{%endif%}<a href="{{url}}">{{site}}</a>{%endfor%}.	
-</div>
+<div class="seealso">{{crosslinks_string|safe}}</div>
 <div class='clear'></div>
 {%endif%}
 {% load djangoplicity_utils %}

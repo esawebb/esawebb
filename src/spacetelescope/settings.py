@@ -494,54 +494,56 @@ ARCHIVE_CROSSLINKS = {
 							
 							}
 """
-ARCHIVE_CROSSLINKS = {
-			'announcements': (('eso.org','http://www.eso.org/public/announcements/'),),
-			'releases': (('eso.org','http://www.eso.org/public/news/'),
-						 ('iau.org', 'http://www.iau.org/public_press/news/'),
-						 ('astronomy2009.org', 'http://www.astronomy2009.org/news/pressreleases/'),
-						),
-			'images': (('eso.org','http://www.eso.org/public/images/'),
-						 ('iau.org', 'http://www.iau.org/public_press/images/'),
-						 ('astronomy2009.org', 'http://www.astronomy2009.org/resources/multimedia/images/'),
-						),
-			'videos': (('eso.org','http://www.eso.org/public/videos/'),
-					   ('astronomy2009.org', 'http://www.astronomy2009.org/resources/multimedia/videos/'),
-					   ),
-			'potw': (('eso.org','http://www.eso.org/public/images/potw/'),
-						),
-			'posters': (('eso.org','http://www.eso.org/public/outreach/products/posters/index_sale.html'),
-						('astronomy2009.org','http://www.astronomy2009.org/resources/posters/'),
-						),
-			'books': (('eso.org','http://www.eso.org/public/outreach/products/books/'),
-					  ('astronomy2009.org','http://www.astronomy2009.org/resources/books/'),
-					  ('iau.org','http://www.iau.org/science/publications/iau/'),
-						),
-			'brochures': (('eso.org','http://www.eso.org/public/outreach/products/brochures/'),
-						  ('astronomy2009.org','http://www.astronomy2009.org/resources/brochures/'),
-						),
-			'calendars': (('eso.org','http://www.eso.org/public/outreach/products/calendars/'),
-						),
-			'education': (('eso.org','http://www.eso.org/public/outreach/eduoff/materials.html'),
-						  ('astronomy2009.org','http://www.astronomy2009.org/resources/educational/'),
-						),
-			'newsletters':(('eso.org','http://www.eso.org/sci/enews/archive.html'),
-						),
-			'postcards': (('eso.org','http://www.eso.org/public/outreach/products/postcards/'),
-						),
-			'logos': (('eso.org','http://www.eso.org/public/outreach/products/logos/eso/index.html'),
-						('astronomy2009.org','http://www.astronomy2009.org/resources/branding/'),
-						('iau.org','http://www.iau.org/public_press/images/archive/category/logos/'),
-						),	
-			'conferenceposters': (
-						('astronomy2009.org','http://www.astronomy2009.org/resources/posters/'),
-						),	
-			'presentations': (
-						('eso.org','http://www.eso.org/public/outreach/products/presentations/'),
-						('astronomy2009.org','http://www.astronomy2009.org/resources/presentations/'),
-						),						
-			
-						
-					  }
+import djangoplicity.crosslinks
+ARCHIVE_CROSSLINKS = djangoplicity.crosslinks.crosslinks_for_domain('spacetelescope.org')
+#ARCHIVE_CROSSLINKS = {
+#			'announcements': (('eso.org','http://www.eso.org/public/announcements/'),),
+#			'releases': (('eso.org','http://www.eso.org/public/news/'),
+#						 ('iau.org', 'http://www.iau.org/public_press/news/'),
+#						 ('astronomy2009.org', 'http://www.astronomy2009.org/news/pressreleases/'),
+#						),
+#			'images': (('eso.org','http://www.eso.org/public/images/'),
+#						 ('iau.org', 'http://www.iau.org/public_press/images/'),
+#						 ('astronomy2009.org', 'http://www.astronomy2009.org/resources/multimedia/images/'),
+#						),
+#			'videos': (('eso.org','http://www.eso.org/public/videos/'),
+#					   ('astronomy2009.org', 'http://www.astronomy2009.org/resources/multimedia/videos/'),
+#					   ),
+#			'potw': (('eso.org','http://www.eso.org/public/images/potw/'),
+#						),
+#			'posters': (('eso.org','http://www.eso.org/public/outreach/products/posters/index_sale.html'),
+#						('astronomy2009.org','http://www.astronomy2009.org/resources/posters/'),
+#						),
+#			'books': (('eso.org','http://www.eso.org/public/outreach/products/books/'),
+#					  ('astronomy2009.org','http://www.astronomy2009.org/resources/books/'),
+#					  ('iau.org','http://www.iau.org/science/publications/iau/'),
+#						),
+#			'brochures': (('eso.org','http://www.eso.org/public/outreach/products/brochures/'),
+#						  ('astronomy2009.org','http://www.astronomy2009.org/resources/brochures/'),
+#						),
+#			'calendars': (('eso.org','http://www.eso.org/public/outreach/products/calendars/'),
+#						),
+#			'education': (('eso.org','http://www.eso.org/public/outreach/eduoff/materials.html'),
+#						  ('astronomy2009.org','http://www.astronomy2009.org/resources/educational/'),
+#						),
+#			'newsletters':(('eso.org','http://www.eso.org/sci/enews/archive.html'),
+#						),
+#			'postcards': (('eso.org','http://www.eso.org/public/outreach/products/postcards/'),
+#						),
+#			'logos': (('eso.org','http://www.eso.org/public/outreach/products/logos/eso/index.html'),
+#						('astronomy2009.org','http://www.astronomy2009.org/resources/branding/'),
+#						('iau.org','http://www.iau.org/public_press/images/archive/category/logos/'),
+#						),	
+#			'conferenceposters': (
+#						('astronomy2009.org','http://www.astronomy2009.org/resources/posters/'),
+#						),	
+#			'presentations': (
+#						('eso.org','http://www.eso.org/public/outreach/products/presentations/'),
+#						('astronomy2009.org','http://www.astronomy2009.org/resources/presentations/'),
+#						),						
+#			
+#						
+#					  }
 
 #########
 # FEEDS #
@@ -659,6 +661,7 @@ SATCHMO_SETTINGS = {
 #										( r'^checkout/', 'spacetelescope.views.shop_closed' ),
 #								)
                     }
+
 
 
 SITE_NAME = "Hubbleshop"

@@ -4,14 +4,13 @@
 # Copyright 2008 ESA/Hubble & International Astronomical Union
 #
 # Authors:
-#   Lars Holm Nielsen <lnielsen@eso.org>
-#   Luis Clara Gomes <lcgomes@eso.org>
+#Lars Holm Nielsen <lnielsen@eso.org>
+#Luis Clara Gomes <lcgomes@eso.org>
 #
 from PIL import Image as PILImage
-from datetime import datetime, time
-from django import forms
 from django.conf.urls.defaults import *
 from django.core.urlresolvers import NoReverseMatch, reverse
+from django.core.exceptions import FieldError,ImproperlyConfigured
 from django.forms.util import flatatt
 from django.http import Http404
 from django.utils.safestring import mark_safe
@@ -29,7 +28,6 @@ from djangoplicity.templatetags.djangoplicity_datetime import \
 from models import *
 from spacetelescope.archives.base import *
 import os
-
 
 def product_options( prefix, about_name, view_name, with_pages, extra_fields=() ):
 	if with_pages:
@@ -93,7 +91,7 @@ StickerOptions = product_options( "stickers", "Sticker", "Stickers", False )
 PostCardOptions = product_options( "postcards", "Postcard", "Postcards", False )
 
 class KidsDrawingOptions ( StandardOptions ):
-	   
+	
 	urlname_prefix = 'drawings'
 
 	info = ( 
@@ -163,7 +161,7 @@ class PressKitOptions (StandardOptions):
 #	def feeds ():
 #		from feeds import AnnouncementFeed
 #		feed_dict = {
-#			'':	        AnnouncementFeed,
+#			'':	  AnnouncementFeed,
 #		}
 #		return feed_dict
 	
@@ -209,7 +207,7 @@ class CalendarYearQuery( YearQuery ):
 		
 		now = datetime.now()
 		
-		# Convert to year   
+		# Convert to year
 		try:
 			year = int( stringparam )
 			
@@ -304,7 +302,7 @@ class CalendarOptions (StandardOptions):
 		year = CalendarYearQuery( browsers = ( 'normal', 'viewall' ), verbose_name = "Calendar: %d")
 		
 class OnlineArtOptions ( StandardOptions ):
-	   
+	
 	urlname_prefix = 'art'
 
 	info = ( 
@@ -323,7 +321,7 @@ class OnlineArtOptions ( StandardOptions ):
 		
 
 class OnlineArtAuthorOptions ( StandardOptions ):
-	   
+	
 	urlname_prefix = 'artists'
 
 	info = ( 
@@ -344,7 +342,7 @@ class OnlineArtAuthorOptions ( StandardOptions ):
 #	id = models.SlugField( primary_key=True, help_text=_(u'Id of Print Layout') )
 #	""" """
 #
-#	   
+#	
 #	urlname_prefix = 'printlayouts'
 #
 #	info = ( 
@@ -376,7 +374,7 @@ class SlideShowOptions (StandardOptions):
 
 
 class ExhibitionOptions ( StandardOptions ):
-	   
+	
 	urlname_prefix = 'exhibitions'
 
 	info = ( 
@@ -393,7 +391,7 @@ class ExhibitionOptions ( StandardOptions ):
 
 	
 class FITSImageOptions ( StandardOptions ):
-	   
+	
 	urlname_prefix = 'fitsimages'
 
 	#TODO add author entries to info?
@@ -410,7 +408,7 @@ class FITSImageOptions ( StandardOptions ):
 		
 		
 class UserVideoOptions ( StandardOptions ):
-	   
+	
 	urlname_prefix = 'uservideos'
 
 	#TODO add author entries to info?
@@ -435,7 +433,7 @@ class UserVideoOptions ( StandardOptions ):
 
 
 class PresentationOptions ( StandardOptions ):
-	   
+	
 	urlname_prefix = 'presentations'
 
 	#TODO add author entries to info?
