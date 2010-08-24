@@ -309,8 +309,9 @@ INSTALLED_APPS += (
 	'django.contrib.redirects',
 	'djangoplicity.announcements',
 	'djangoplicity.releases',
+	'djangoplicity.products',  
 	'djangoplicity.search',
-	'djangoplicity.metadata',
+	'djangoplicity.metadata',  
 	'djangoplicity',
 	'djangoplicity.authtkt',
 	'djangoplicity.google',
@@ -320,7 +321,6 @@ INSTALLED_APPS += (
 	'djangodblog',
 	'django_extensions',
 	'django_assets',
-	'spacetelescope.archives',	
 	# Satchmo
 	#'registration',
 	'sorl.thumbnail',

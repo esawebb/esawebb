@@ -23,8 +23,8 @@ from django.views.generic.simple import redirect_to
 from djangoplicity.releases.models import Release
 from djangoplicity.releases.options import ReleaseOptions
 
-from spacetelescope.archives.models import *
-from spacetelescope.archives.options import *
+from djangoplicity.products.models import *
+from djangoplicity.products.options import *
 
 from satchmo_store.urls import basepatterns
 
@@ -54,34 +54,34 @@ urlpatterns += patterns( '',
 	( r'^images/', include('djangoplicity.media.urls_images'), { 'model': Image, 'options': ImageOptions } ),
     #( r'^news/feed/(?P<url>.*)/?$', 'django.contrib.syndication.views.feed', { 'feed_dict': ReleaseOptions.get_feeds() } ),
     ( r'^news/', include('djangoplicity.releases.urls'), { 'model': Release, 'options': ReleaseOptions } ),
-    ( r'^videos/uservideos/', include('spacetelescope.archives.urls.uservideos'), { 'model': UserVideo, 'options': UserVideoOptions } ),
+    ( r'^videos/uservideos/', include('djangoplicity.products.urls.uservideos'), { 'model': UserVideo, 'options': UserVideoOptions } ),
     ( r'^videos/', include('djangoplicity.media.urls_videos'), { 'model': Video, 'options': VideoOptions } ),
 
 	# Other archives
     ( r'^announcements/', include('djangoplicity.announcements.urls'), { 'model': Announcement, 'options': AnnouncementOptions } ),
-    ( r'^about/further_information/books/', include('spacetelescope.archives.urls.books'), { 'model': Book, 'options': BookOptions } ),
-    ( r'^about/further_information/brochures/', include('spacetelescope.archives.urls.brochures'), { 'model': Brochure, 'options': BrochureOptions } ),
-    ( r'^about/further_information/newsletters/', include('spacetelescope.archives.urls.newsletters'), { 'model': Newsletter, 'options': NewsletterOptions } ),
-    ( r'^about/further_information/techdocs/', include('spacetelescope.archives.urls.techdocs'), { 'model': TechnicalDocument, 'options': TechnicalDocumentOptions } ),
-	( r'^extras/calendars/', include('spacetelescope.archives.urls.calendars'), { 'model': Calendar, 'options': CalendarOptions } ),
-	( r'^extras/art/', include('spacetelescope.archives.urls.art'), { 'model': OnlineArt, 'options': OnlineArtOptions } ),
-	( r'^extras/artists/', include('spacetelescope.archives.urls.artists'), { 'model': OnlineArtAuthor, 'options': OnlineArtAuthorOptions } ),
-    ( r'^extras/logos/', include('spacetelescope.archives.urls.logos'), { 'model': Logo, 'options': LogoOptions } ),
-    ( r'^extras/conferenceposters/', include('spacetelescope.archives.urls.conference_posters'), { 'model': ConferencePoster, 'options': ConferencePosterOptions } ),
-    ( r'^extras/exhibitions/', include('spacetelescope.archives.urls.exhibitions'), { 'model': Exhibition, 'options': ExhibitionOptions } ),
-    ( r'^extras/stickers/', include('spacetelescope.archives.urls.stickers'), { 'model': Sticker, 'options': StickerOptions } ),
-    ( r'^extras/postcards/', include('spacetelescope.archives.urls.postcards'), { 'model': PostCard, 'options': PostCardOptions } ),
-    ( r'^extras/posters/', include('spacetelescope.archives.urls.posters'), { 'model': Poster, 'options': PosterOptions } ),
-    ( r'^extras/merchandise/', include('spacetelescope.archives.urls.merchandise'), { 'model': Merchandise, 'options': MerchandiseOptions } ),
-    ( r'^extras/dvds/', include('spacetelescope.archives.urls.cdroms'), { 'model': CDROM, 'options': CDROMOptions } ),
-	( r'^extras/slideshows/', include('spacetelescope.archives.urls.slideshows'), { 'model': SlideShow, 'options': SlideShowOptions } ),
-	#( r'^extras/printlayouts/', include('spacetelescope.archives.urls.printlayouts'), { 'model': Release, 'options': PrintLayoutOptions } ),
-	( r'^extras/presentations/', include('spacetelescope.archives.urls.presentations'), { 'model': Presentation, 'options': PresentationOptions } ),
-	( r'^kidsandteachers/education/', include('spacetelescope.archives.urls.education'), { 'model': EducationalMaterial, 'options': EducationalMaterialOptions } ),
-	( r'^kidsandteachers/drawings/', include('spacetelescope.archives.urls.drawings'), { 'model': KidsDrawing, 'options': KidsDrawingOptions } ),
-	( r'^press/kits/', include('spacetelescope.archives.urls.presskits'), { 'model': PressKit, 'options': PressKitOptions } ),
+    ( r'^about/further_information/books/', include('djangoplicity.products.urls.books'), { 'model': Book, 'options': BookOptions } ),
+    ( r'^about/further_information/brochures/', include('djangoplicity.products.urls.brochures'), { 'model': Brochure, 'options': BrochureOptions } ),
+    ( r'^about/further_information/newsletters/', include('djangoplicity.products.urls.newsletters'), { 'model': Newsletter, 'options': NewsletterOptions } ),
+    ( r'^about/further_information/techdocs/', include('djangoplicity.products.urls.techdocs'), { 'model': TechnicalDocument, 'options': TechnicalDocumentOptions } ),
+	( r'^extras/calendars/', include('djangoplicity.products.urls.calendars'), { 'model': Calendar, 'options': CalendarOptions } ),
+	( r'^extras/art/', include('djangoplicity.products.urls.art'), { 'model': OnlineArt, 'options': OnlineArtOptions } ),
+	( r'^extras/artists/', include('djangoplicity.products.urls.artists'), { 'model': OnlineArtAuthor, 'options': OnlineArtAuthorOptions } ),
+    ( r'^extras/logos/', include('djangoplicity.products.urls.logos'), { 'model': Logo, 'options': LogoOptions } ),
+    ( r'^extras/conferenceposters/', include('djangoplicity.products.urls.conference_posters'), { 'model': ConferencePoster, 'options': ConferencePosterOptions } ),
+    ( r'^extras/exhibitions/', include('djangoplicity.products.urls.exhibitions'), { 'model': Exhibition, 'options': ExhibitionOptions } ),
+    ( r'^extras/stickers/', include('djangoplicity.products.urls.stickers'), { 'model': Sticker, 'options': StickerOptions } ),
+    ( r'^extras/postcards/', include('djangoplicity.products.urls.postcards'), { 'model': PostCard, 'options': PostCardOptions } ),
+    ( r'^extras/posters/', include('djangoplicity.products.urls.posters'), { 'model': Poster, 'options': PosterOptions } ),
+    ( r'^extras/merchandise/', include('djangoplicity.products.urls.merchandise'), { 'model': Merchandise, 'options': MerchandiseOptions } ),
+    ( r'^extras/dvds/', include('djangoplicity.products.urls.cdroms'), { 'model': CDROM, 'options': CDROMOptions } ),
+	( r'^extras/slideshows/', include('djangoplicity.products.urls.slideshows'), { 'model': SlideShow, 'options': SlideShowOptions } ),
+	#( r'^extras/printlayouts/', include('djangoplicity.products.urls.printlayouts'), { 'model': Release, 'options': PrintLayoutOptions } ),
+	( r'^extras/presentations/', include('djangoplicity.products.urls.presentations'), { 'model': Presentation, 'options': PresentationOptions } ),
+	( r'^kidsandteachers/education/', include('djangoplicity.products.urls.education'), { 'model': EducationalMaterial, 'options': EducationalMaterialOptions } ),
+	( r'^kidsandteachers/drawings/', include('djangoplicity.products.urls.drawings'), { 'model': KidsDrawing, 'options': KidsDrawingOptions } ),
+	( r'^press/kits/', include('djangoplicity.products.urls.presskits'), { 'model': PressKit, 'options': PressKitOptions } ),
 	
-    ( r'^projects/fits_liberator/fitsimages/', include('spacetelescope.archives.urls.fitsimages'), { 'model': FITSImage, 'options': FITSImageOptions } ),
+    ( r'^projects/fits_liberator/fitsimages/', include('djangoplicity.products.urls.fitsimages'), { 'model': FITSImage, 'options': FITSImageOptions } ),
     
     
 #    ( r'^rss/feed.xml$', 'spacetelescope.views.rssfeedhack', { 'rssfile': 'feed.xml' } ),

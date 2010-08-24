@@ -24,13 +24,12 @@ import djangoplicity.menus.admin
 import djangoplicity.pages.admin
 import djangoplicity.search.admin
 import djangoplicity.media.admin
+import djangoplicity.products.admin
 import djangoplicity.releases.admin
 import djangoplicity.metadata.admin
 import djangoplicity.contrib.redirects.admin
 import djangoplicity.authtkt.admin
 import djangoplicity.google.admin
-
-import spacetelescope.archives.admin
 
 
 # Register each applications admin interfaces with
@@ -49,7 +48,7 @@ autoregister( admin_site, djangoplicity.releases.admin )
 autoregister( admin_site, djangoplicity.metadata.admin )
 
 
-autoregister( admin_site, spacetelescope.archives.admin )
+autoregister( admin_site, djangoplicity.products.admin )
 
 
 #autoregister ( adminlogs_site, djangoplicity.contrib.redirects.admin )

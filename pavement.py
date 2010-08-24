@@ -100,20 +100,20 @@ options(
                              '../projects/spacetelescope.org/apps/BareNecessities-0.2.4.tar.gz', 
                              '../projects/spacetelescope.org/apps/DreamweaverTemplate-0.1.1.tar.gz',
                              
-                             # Satchmo packages
-                             '../projects/spacetelescope.org/apps/trml2pdf-1.2.tar.gz',
-                             '../projects/spacetelescope.org/apps/setuptools_hg-0.2.tar.gz',
-                             '../projects/spacetelescope.org/apps/sorl-thumbnail-3.2.5.tar.gz',
-                             '../projects/spacetelescope.org/apps/PyYAML-3.09.zip',
-                             '../projects/spacetelescope.org/apps/django-livesettings-1.4-3.tar.gz',
-                             '../projects/spacetelescope.org/apps/django-registration-0.7.tar.gz',
-                             '../projects/spacetelescope.org/apps/django-signals-ahoy-0.1-1.tar.gz',
-                             '../projects/spacetelescope.org/apps/django-caching-app-plugins-0.1.1.tar.gz',
-                             '../projects/spacetelescope.org/apps/django-keyedcache-1.4-2.tar.gz',
-                             '../projects/spacetelescope.org/apps/django_threaded_multihost-1.3_2-py2.5.egg',
-                             '../projects/spacetelescope.org/apps/reportlab-2.4.tar.gz',
-                             '../projects/spacetelescope.org/apps/satchmo-v0.9.1.zip',
-                             '../projects/spacetelescope.org/apps/ssl-1.15-patched.tar.gz',
+							 # Satchmo packages
+							 '../projects/djangoplicity/apps/trml2pdf-1.2.tar.gz',
+							 '../projects/djangoplicity/apps/setuptools_hg-0.2.tar.gz',
+							 '../projects/djangoplicity/apps/sorl-thumbnail-3.2.5.tar.gz',
+							 '../projects/djangoplicity/apps/PyYAML-3.09.zip',
+							 '../projects/djangoplicity/apps/django-livesettings-1.4-3.tar.gz',
+							 '../projects/djangoplicity/apps/django-registration-0.7.tar.gz',
+							 '../projects/djangoplicity/apps/django-signals-ahoy-0.1-1.tar.gz',
+							 '../projects/djangoplicity/apps/django-caching-app-plugins-0.1.1.tar.gz',
+							 '../projects/djangoplicity/apps/django-keyedcache-1.4-2.tar.gz',
+							 '../projects/djangoplicity/apps/django_threaded_multihost-1.3_2-py2.5.egg',
+							 '../projects/djangoplicity/apps/reportlab-2.4.tar.gz',
+							 '../projects/djangoplicity/apps/satchmo-v0.9.1.zip',
+							 '../projects/djangoplicity/apps/ssl-1.15-patched.tar.gz',
                              
                              ], # packages to install
         paver_command_line='', # command to run after installation
