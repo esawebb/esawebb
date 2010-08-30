@@ -15,6 +15,7 @@ import paver.virtual
 import setuptools
 import paver.svn
 import os
+import sys
 import urllib
 import shutil
 
@@ -22,6 +23,8 @@ import djangoplicity_paver.deploy
 import djangoplicity_paver.svn
 
 paver.setuputils.install_distutils_tasks()
+
+PY_VERSION = "%s.%s" % (sys.version_info.major,sys.version_info.minor)
 
 # Ensure we can use the file as standalone.
 try:
@@ -136,7 +139,7 @@ options(
 					 ],
         
         # Directories to create
-        symlinks = [ ('../../virtualenv/lib/python2.5/site-packages/Django-1.2.1-py2.5.egg/django/contrib/admin/media', 'docs/static/', 'media' ),],
+        symlinks = [ ('../../virtualenv/lib/python%(version)s/site-packages/Django-1.2.1-py%(version)s.egg/django/contrib/admin/media' % { 'version' : PY_VERSION }, 'docs/static/', 'media' ),],
         deploy_layout = [
                         'docs',
                         'docs/static',
