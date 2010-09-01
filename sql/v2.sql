@@ -1,6 +1,6 @@
 BEGIN;
 
-DROP TABLE archives_announcements;
+DROP TABLE archives_announcement;
 ALTER TABLE archives_book RENAME TO products_book;
 ALTER TABLE archives_brochure RENAME TO products_brochure;
 ALTER TABLE archives_calendar RENAME TO products_calendar;
