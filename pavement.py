@@ -24,7 +24,7 @@ import djangoplicity_paver.svn
 
 paver.setuputils.install_distutils_tasks()
 
-PY_VERSION = "%s.%s" % (sys.version_info.major,sys.version_info.minor)
+PY_VERSION = sys.version_info.major + "." + sys.version_info.minor
 
 # Ensure we can use the file as standalone.
 try:
