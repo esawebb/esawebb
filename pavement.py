@@ -75,7 +75,7 @@ options(
 							 '../projects/djangoplicity/apps/Fabric-0.9.1.tar.gz',
                              '../projects/djangoplicity/apps/BeautifulSoup.tar.gz',
                              #'../projects/djangoplicity/apps/threadpool-1.2.5.zip',
-                             '../projects/djangoplicity/apps/Django-1.2.1.tar.gz',
+                             '../projects/djangoplicity/apps/Django-1.2.2.tar.gz',
                              '../projects/djangoplicity/apps/django-extensions-0.4.1.tar.gz',
                              '../projects/djangoplicity/apps/django-confutils-1.0-dev.tar.gz',
                              #'../projects/djangoplicity/apps/django-batchadmin-0.1.tar.gz',
