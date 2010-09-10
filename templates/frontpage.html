@@ -9,7 +9,7 @@
 			
 			{% for object in announcements %}
 			<div class='entry'>
-				{% if object.main_image.resource_newsmini %}<a href="{{object.get_absolute_url}}"><img src='{{ object.main_image.resource_newsmini.url }}' /></a>
+				{% if object.main_visual.resource_newsmini %}<a href="{{object.get_absolute_url}}"><img src='{{ object.main_visual.resource_newsmini.url }}' /></a>
 				<div class='info withimg'>
 				{% else %}
 				<div class='info extra'>
@@ -105,12 +105,9 @@
 				</a>
 			</div>
 			<div class='grid_2 yo'>
-				&nbsp;
-				<!-- 
-				<a href="http://www.flickr.com/photos/hubble_esa" id='fl'>
-					<img src='{{MEDIA_URL}}images/social/bw/flickr.png'></img>
+				<a href="http://www.vimeo.com/hubbleesa" target='_blank' id='fl'>
+					<img src='{{MEDIA_URL}}images/social/bw/vimeo.png'></img>
 				</a>
-				 -->
 			</div>
 
 			<div class='grid_2 sp'>
