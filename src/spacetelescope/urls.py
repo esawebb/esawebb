@@ -26,6 +26,8 @@ from djangoplicity.products.options import *
 from djangoplicity.releases.models import Release
 from djangoplicity.releases.options import ReleaseOptions
 
+from djangoplicity.products.models import *
+from djangoplicity.products.options import *
 
 from satchmo_store.urls import basepatterns
 
@@ -68,7 +70,7 @@ urlpatterns += patterns( '',
 	( r'^extras/art/', include('djangoplicity.products.urls.art'), { 'model': OnlineArt, 'options': OnlineArtOptions } ),
 	( r'^extras/artists/', include('djangoplicity.products.urls.artists'), { 'model': OnlineArtAuthor, 'options': OnlineArtAuthorOptions } ),
     ( r'^extras/logos/', include('djangoplicity.products.urls.logos'), { 'model': Logo, 'options': LogoOptions } ),
-    ( r'^extras/conferenceposters/', include('djangoplicity.products.urls.conference_posters'), { 'model': ConferencePoster, 'options': ConferencePosterOptions } ),
+    #( r'^extras/conferenceposters/', include('djangoplicity.products.urls.conference_posters'), { 'model': Poster, 'options': ConferencePosterOptions } ),
     ( r'^extras/exhibitions/', include('djangoplicity.products.urls.exhibitions'), { 'model': Exhibition, 'options': ExhibitionOptions } ),
     ( r'^extras/stickers/', include('djangoplicity.products.urls.stickers'), { 'model': Sticker, 'options': StickerOptions } ),
     ( r'^extras/postcards/', include('djangoplicity.products.urls.postcards'), { 'model': PostCard, 'options': PostCardOptions } ),
