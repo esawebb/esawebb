@@ -454,6 +454,7 @@ ARCHIVE_URL_DETAIL_PREFIX = ''
 ARCHIVE_URL_FEED_PREFIX = 'feed'
 ARCHIVE_PAGINATOR_PREFIX = 'page'
 ARCHIVE_ICON_PATH = 'icons/'
+ARCHIVE_ROOT = 'archives/'
 
 ARCHIVE_AUTO_RESOURCE_DELETION = config.get('media', 'ARCHIVE_AUTO_RESOURCE_DELETION') if config.has_option('media', 'ARCHIVE_AUTO_RESOURCE_DELETION') else False
 
@@ -486,64 +487,8 @@ VIDEO_CONTENT_SERVERS = (
 	( 'http://videos.spacetelescope.org/videos/', 'videos.spacetelescope.org' )
 )
 
-"""
-format:
-ARCHIVE_CROSSLINKS = {
-	'archive urlname_prefix': (('display name 1','url1'),
-							('display name 2','url2'),...),
-							
-							}
-"""
 import djangoplicity.crosslinks
 ARCHIVE_CROSSLINKS = djangoplicity.crosslinks.crosslinks_for_domain('spacetelescope.org')
-#ARCHIVE_CROSSLINKS = {
-#			'announcements': (('eso.org','http://www.eso.org/public/announcements/'),),
-#			'releases': (('eso.org','http://www.eso.org/public/news/'),
-#						 ('iau.org', 'http://www.iau.org/public_press/news/'),
-#						 ('astronomy2009.org', 'http://www.astronomy2009.org/news/pressreleases/'),
-#						),
-#			'images': (('eso.org','http://www.eso.org/public/images/'),
-#						 ('iau.org', 'http://www.iau.org/public_press/images/'),
-#						 ('astronomy2009.org', 'http://www.astronomy2009.org/resources/multimedia/images/'),
-#						),
-#			'videos': (('eso.org','http://www.eso.org/public/videos/'),
-#					   ('astronomy2009.org', 'http://www.astronomy2009.org/resources/multimedia/videos/'),
-#					   ),
-#			'potw': (('eso.org','http://www.eso.org/public/images/potw/'),
-#						),
-#			'posters': (('eso.org','http://www.eso.org/public/outreach/products/posters/index_sale.html'),
-#						('astronomy2009.org','http://www.astronomy2009.org/resources/posters/'),
-#						),
-#			'books': (('eso.org','http://www.eso.org/public/outreach/products/books/'),
-#					  ('astronomy2009.org','http://www.astronomy2009.org/resources/books/'),
-#					  ('iau.org','http://www.iau.org/science/publications/iau/'),
-#						),
-#			'brochures': (('eso.org','http://www.eso.org/public/outreach/products/brochures/'),
-#						  ('astronomy2009.org','http://www.astronomy2009.org/resources/brochures/'),
-#						),
-#			'calendars': (('eso.org','http://www.eso.org/public/outreach/products/calendars/'),
-#						),
-#			'education': (('eso.org','http://www.eso.org/public/outreach/eduoff/materials.html'),
-#						  ('astronomy2009.org','http://www.astronomy2009.org/resources/educational/'),
-#						),
-#			'newsletters':(('eso.org','http://www.eso.org/sci/enews/archive.html'),
-#						),
-#			'postcards': (('eso.org','http://www.eso.org/public/outreach/products/postcards/'),
-#						),
-#			'logos': (('eso.org','http://www.eso.org/public/outreach/products/logos/eso/index.html'),
-#						('astronomy2009.org','http://www.astronomy2009.org/resources/branding/'),
-#						('iau.org','http://www.iau.org/public_press/images/archive/category/logos/'),
-#						),	
-#			'conferenceposters': (
-#						('astronomy2009.org','http://www.astronomy2009.org/resources/posters/'),
-#						),	
-#			'presentations': (
-#						('eso.org','http://www.eso.org/public/outreach/products/presentations/'),
-#						('astronomy2009.org','http://www.astronomy2009.org/resources/presentations/'),
-#						),						
-#			
-#						
-#					  }
 
 #########
 # FEEDS #
@@ -625,6 +570,34 @@ REGEX_REDIRECTS = (
 	( re.compile( '/videos/scripts/(.+)' ), '/static/archives/videos/script/\g<1>' ),
 )
 
+SITE_DOMAIN = "www.spacetelescope.org"
+
+
+###########
+# LOGGING #
+###########
+import logging
+import logging.handlers
+import os.path
+
+class NullHandler( logging.Handler ):
+    def emit( self, record ):
+        pass
+
+logging.getLogger( 'keyedcache' ).setLevel( logging.WARN )
+logging.getLogger( 'l10n' ).setLevel( logging.WARN )
+logging.getLogger( 'paramiko' ).setLevel( logging.WARN )
+logging.getLogger( 'sslurllib' ).addHandler( NullHandler() )
+
+handler = logging.handlers.RotatingFileHandler( os.path.join( LOG_DIR, "djangoplicity.log" ), maxBytes=50*1024*1024, backupCount=3 )		
+formatter = logging.Formatter( '%(asctime)s %(name)-12s %(levelname)-8s %(message)s', '%a, %d %b %Y %H:%M:%S' )
+handler.setFormatter( formatter)
+
+logger = logging.getLogger()
+logger.addHandler( handler )
+logger.setLevel( logging.DEBUG if DEBUG else logging.INFO )
+logger.info("Djangoplicity started")
+
 # ======================================================================
 # SITE SPECIFIC SECTIONS 
 # ======================================================================
@@ -678,15 +651,6 @@ L10N_SETTINGS = {
   'show_admin_translations': False,
   'allow_translation_choice': False,
 }
-
-#import logging
-#logging.basicConfig(level=logging.DEBUG,
-#                    format='%(asctime)s %(name)-12s %(levelname)-8s %(message)s',
-#                    datefmt='%a, %d %b %Y %H:%M:%S')
-#
-#logging.getLogger( 'keyedcache' ).setLevel( logging.INFO )
-#logging.getLogger( 'l10n' ).setLevel( logging.INFO )
-#logging.info( "Satchmo Started" )
 
 LIVESETTINGS_OPTIONS = {   
 	1: { 

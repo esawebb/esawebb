@@ -20,11 +20,12 @@ from djangoplicity.media.models import Image, Video, PictureOfTheWeek
 from djangoplicity.media.options import ImageOptions, VideoOptions, PictureOfTheWeekOptions
 from django.views.generic.simple import redirect_to
 
+from djangoplicity.products.models import *
+from djangoplicity.products.options import *
+
 from djangoplicity.releases.models import Release
 from djangoplicity.releases.options import ReleaseOptions
 
-from djangoplicity.products.models import *
-from djangoplicity.products.options import *
 
 from satchmo_store.urls import basepatterns
 
