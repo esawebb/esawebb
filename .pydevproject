@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <?eclipse-pydev version="1.0"?>
 
 <pydev_project>
@@ -6,7 +6,7 @@
 <path>/spacetelescope.org/src</path>
 </pydev_pathproperty>
 <pydev_property name="org.python.pydev.PYTHON_PROJECT_VERSION">python 2.5</pydev_property>
-<pydev_property name="org.python.pydev.PYTHON_PROJECT_INTERPRETER">spatecelescope.org python</pydev_property>
+<pydev_property name="org.python.pydev.PYTHON_PROJECT_INTERPRETER">spacetelescope</pydev_property>
 <pydev_variables_property name="org.python.pydev.PROJECT_VARIABLE_SUBSTITUTION">
 <key>DJANGO_MANAGE_LOCATION</key>
 <value>src/spacetelescope/manage.py</value>
@@ -14,8 +14,5 @@
 <value>spacetelescope.settings</value>
 </pydev_variables_property>
 
-<pydev_pathproperty name="org.python.pydev.PROJECT_EXTERNAL_SOURCE_PATH">
-<path>/Users/luis/Workspaces/pttu/djangoplicity/src</path>
-<path>/Users/luis/Workspaces/sites/spacetelescope/virtualenv/lib/python2.5/site-packages</path>
-</pydev_pathproperty>
+
 </pydev_project>
