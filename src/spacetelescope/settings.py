@@ -528,8 +528,8 @@ UPDATE_JOBS_RUN_EVERY = 300
 ##############
 # JavaScript #
 ##############
-TINYMCE_JS = "djangoplicity/js/tiny_mce_v33/tiny_mce.js"
-TINYMCE_JQUERY_JS = "djangoplicity/js/tiny_mce_v33/jquery.tinymce.js"
+TINYMCE_JS = "djangoplicity/js/tiny_mce_v3392/tiny_mce.js"
+TINYMCE_JQUERY_JS = "djangoplicity/js/tiny_mce_v3392/jquery.tinymce.js"
 JQUERY_JS = "djangoplicity/js/jquery-1.4.2.min.js"
 JQUERY_UI_JS = "djangoplicity/js/jquery-ui-1.8.1.custom.min.js"
 JQUERY_UI_CSS = "djangoplicity/css/ui-lightness/jquery-ui-1.8.1.custom.css"
