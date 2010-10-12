@@ -22,13 +22,13 @@ min-width: 860px;
 
 
 
-{% if object.resource_vodcast %}
+{% if object.resource_vodcast or object.resource_h264 %}
 <div style="width:100%;padding-top:10px;padding-bottom:10px;"><div align="center"><div id="flashplayer">Loading player...</div></div></div>
 
 <script type="text/javascript" src="{{MEDIA_URL}}djangoplicity/shadowbox3/libraries/mediaplayer5/jwplayer.js"></script>
 <script type="text/javascript">
 var config = { 	 
-		file: "http://{{DJANGOPLICITY.SITE_DOMAIN}}{{object.resource_vodcast.url}}", 
+		file: "http://{{DJANGOPLICITY.SITE_DOMAIN}}{% if object.resource_vodcast %}{{object.resource_vodcast.url}}{% else %}{{object.resource_h264.url}}{%endif%}", 
 		width: 640, 
 		height: 360,
 		autostart: false,
