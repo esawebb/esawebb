@@ -17,16 +17,41 @@ min-width: 860px;
 </style>
 <h1 style="min-width:640px;">{{ object.title }}</h1>
 {% include 'archives/embargo_notice.html' %}
-{% if object.resource_medium_flash %}
-<div style="width:100%;padding-top:10px;padding-bottom:10px;"><div align="center" id="flashplayer"></div></div>
-<script type="text/javascript" src="{{MEDIA_URL}}djangoplicity/shadowbox3/libraries/mediaplayer-licensed/swfobject.js"></script>
-<script type="text/javascript">
-  var so = new SWFObject('{{MEDIA_URL}}djangoplicity/shadowbox3/libraries/mediaplayer-licensed/player-licensed.swf','mpl',640,360+24,'9');
-  so.addParam('allowfullscreen','true');
-  so.addParam('flashvars','file={{object.resource_medium_flash.url}}&autostart=false&image={{object.resource_videoframe.url}}&backcolor=0x000000&frontcolor=0xCCCCCC&lightcolor=0x005ba0&plugins=gapro-1&gapro.accountid={{ GA_ID }}');
-  so.write('flashplayer');
-</script>   
 
+
+
+
+
+{% if object.resource_vodcast %}
+<div style="width:100%;padding-top:10px;padding-bottom:10px;"><div align="center"><div id="flashplayer">Loading player...</div></div></div>
+
+<script type="text/javascript" src="{{MEDIA_URL}}djangoplicity/shadowbox3/libraries/mediaplayer5/jwplayer.js"></script>
+<script type="text/javascript">
+var config = { 	 
+		file: "http://{{DJANGOPLICITY.SITE_DOMAIN}}{{object.resource_medium_podcast.url}}", 
+		width: 640, 
+		height: 360,
+		autostart: false,
+		image : "http://{{DJANGOPLICITY.SITE_DOMAIN}}{{ object.resource_videoframe.url }}",
+		players : [
+			{ type : "flash", src: "{{MEDIA_URL}}djangoplicity/shadowbox3/libraries/mediaplayer5/player.swf" },
+			{ type : "html5" }
+		    
+		],
+		backcolor : "0x000000",
+		frontcolor: "0xCCCCCC",
+		lightcolor : "0x005ba0"
+};
+
+if( jwplayer.utils.hasFlash() ) {
+	config.plugins = {
+			viral: { onpause: false, oncomplete: true },
+			gapro: { accountid: "{{ GA_ID }}" }
+		};
+}
+
+jwplayer("flashplayer").setup( config );
+</script>
 {% else %}
 {% if object.resource_videoframe %}
 <div class="archive_image">
