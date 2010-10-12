@@ -28,11 +28,11 @@ min-width: 860px;
 <script type="text/javascript" src="{{MEDIA_URL}}djangoplicity/shadowbox3/libraries/mediaplayer5/jwplayer.js"></script>
 <script type="text/javascript">
 var config = { 	 
-		file: "http://{{DJANGOPLICITY.SITE_DOMAIN}}{% if object.resource_vodcast %}{{object.resource_vodcast.url}}{% else %}{{object.resource_h264.url}}{%endif%}", 
+		file: "{% if object.resource_vodcast %}{{object.resource_vodcast.url}}{% else %}{{object.resource_h264.url}}{%endif%}", 
 		width: 640, 
 		height: 360,
 		autostart: false,
-		image : "http://{{DJANGOPLICITY.SITE_DOMAIN}}{{ object.resource_videoframe.url }}",
+		image : "{{ object.resource_videoframe.url }}",
 		players : [
 			{ type : "flash", src: "{{MEDIA_URL}}djangoplicity/shadowbox3/libraries/mediaplayer5/player.swf" },
 			{ type : "html5" }
