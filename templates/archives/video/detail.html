@@ -1,4 +1,4 @@
-{% extends "base_twocolumn.html" %}
+{% extends "base_twocolumn.html" %}{% load media_video %}
 
 {% block site_title %}{{object.title}} | {{block.super}}{% endblock %}
 
@@ -17,50 +17,7 @@ min-width: 860px;
 </style>
 <h1 style="min-width:640px;">{{ object.title }}</h1>
 {% include 'archives/embargo_notice.html' %}
-
-
-
-
-
-{% if object.resource_medium_flash or object.resource_h264 %}
-<div style="width:100%;padding-top:10px;padding-bottom:10px;"><div align="center"><div id="flashplayer">Loading player...</div></div></div>
-
-<script type="text/javascript" src="{{MEDIA_URL}}djangoplicity/shadowbox3/libraries/mediaplayer5/jwplayer.js"></script>
-<script type="text/javascript">
-var config = { 	 
-		file: "{% if object.resource_medium_flash %}{{object.resource_medium_flash.url}}{% else %}{{object.resource_h264.url}}{%endif%}", 
-		width: 640, 
-		height: 360,
-		autostart: false,
-		image : "{{ object.resource_videoframe.url }}",
-		players : [
-			{ type : "flash", src: "{{MEDIA_URL}}djangoplicity/shadowbox3/libraries/mediaplayer5/player.swf" },
-			{ type : "html5" }
-		    
-		],
-		backcolor : "0x000000",
-		frontcolor: "0xCCCCCC",
-		lightcolor : "0x005ba0"
-};
-
-if( jwplayer.utils.hasFlash() ) {
-	config.plugins = {
-			viral: { onpause: false, oncomplete: true },
-			gapro: { accountid: "{{ GA_ID }}" }
-		};
-} else {
-	config.file = "{{object.resource_h264.url}}";
-}
-
-jwplayer("flashplayer").setup( config );
-</script>
-{% else %}
-{% if object.resource_videoframe %}
-<div class="archive_image">
-<div class="image_container"><img src="{{object.resource_videoframe.url}}" width="640" border="0" alt="{{object}}" /></div>
-</div>
-{% endif %}
-{% endif %}
+{% embedvideo object "medium_flash,h264" "hd720p_screen" "h264" %}
 {% endblock %}
 
 {% block content %}
