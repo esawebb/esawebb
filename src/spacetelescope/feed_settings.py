@@ -202,6 +202,10 @@ class FeedRedirectSettings():
 	}
 	
 	whitelist = ['FeedBurner',]#,'Mozilla']
+	whitelist_ips = ['134.171.','127.0.0.1'] # must use ?bypass=1 in request
+
+class Top100FeedSettings():
+	title = 'Hubble Top 100 Images'
 
 CATEGORY_SPECIFIC_SETTINGS = {
 	'hubblecast': 'HubblecastFeedSettings',
