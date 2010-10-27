@@ -73,3 +73,36 @@ $('.rotator .items' ).
 
 $('.fbut').fadeOut(0);
 $('.fbut').removeClass('init_hide');
+
+
+/* Advanced search form submission. removes unset parameters
+ * */
+$(document).ready( function(){
+    function process_adv_search_parms() {
+        var fields = $("#adv_search_data :input").serializeArray();
+        var goodfields = {}
+        jQuery.each(fields, function(i, field){
+        	
+        	
+        	if (field.value != '0' && field.value != null & field.value != '')
+        	{
+        		goodfields[field.name] = field.value
+        		
+        	}
+        });
+    	goodfields['adv'] = ''
+    	//return goodfields
+        return $.param(goodfields)
+      }
+
+      // $(":checkbox, :radio").click(showValues);
+      $("#adv_search_data").submit(function() {
+    	  params = process_adv_search_parms()
+    	  console.log(params)
+    	  window.location = "?" + params
+    	  
+    	  return false
+    	  //return true
+    	});
+      
+});

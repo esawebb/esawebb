@@ -647,6 +647,33 @@ table.archive_normal td.titlerow {
 	width:176px;
 }
 
+
+/* advanced search */
+
+.adv_search table {
+	text-align:left;
+
+}
+
+.adv_search table td {
+	padding-bottom:10px;
+	vertical-align:top;
+		
+}
+
+.adv_search th {
+	width:150px;
+	display:block;	
+}
+
+
+.adv_search ul, .adv_search li  {
+	list-style-type: none;
+	padding: 0;
+	margin: 0;
+
+}
+
 /* admin column */
 .admin_table td, .info_table td {
 	padding: 2px !important;
