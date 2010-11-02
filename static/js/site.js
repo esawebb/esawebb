@@ -80,29 +80,28 @@ $('.fbut').removeClass('init_hide');
 $(document).ready( function(){
     function process_adv_search_parms() {
         var fields = $("#adv_search_data :input").serializeArray();
-        var goodfields = {}
-        jQuery.each(fields, function(i, field){
+        var goodfields = []
+		jQuery.each(fields, function(i, field){
         	
         	
-        	if (field.value != '0' && field.value != null & field.value != '')
+        	if (field.value != '0' && field.value != null && field.value != '')
         	{
-        		goodfields[field.name] = field.value
+        		goodfields.push(field)
         		
         	}
         });
-    	goodfields['adv'] = ''
+    	goodfields.push({name:'adv',value:''})
     	//return goodfields
         return $.param(goodfields)
       }
 
       // $(":checkbox, :radio").click(showValues);
       $("#adv_search_data").submit(function() {
+    	  
     	  params = process_adv_search_parms()
-    	  console.log(params)
     	  window.location = "?" + params
     	  
     	  return false
-    	  //return true
-    	});
+    });
       
 });
