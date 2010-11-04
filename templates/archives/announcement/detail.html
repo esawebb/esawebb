@@ -38,7 +38,7 @@
 		</div>
 		
 		
-		{% if main_visual.resource_medium_flash %}
+	{% if main_visual.resource_medium_flash %}
 			<div class="pr_news_feature_link" style="color: #777777; padding: 0;"><a style="color: #777777; padding: 0;"  href="{{main_visual.resource_medium_flash.url}}" rel="shadowbox;width=640;height=360" title="{{ main_visual.title }}">{% trans "Click to Play" %}</a></div>
 		{% else %}
 			<div class="pr_news_feature_link" style="color: #777777; padding: 0;"><a style="color: #777777; padding: 0;"  href="{{ main_visual.resource_screen.url }}" rel="shadowbox" title="{{ main_visual.title }}">{% trans "Click to Enlarge" %}</a></div>
