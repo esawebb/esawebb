@@ -654,6 +654,9 @@ table.archive_normal td.titlerow {
 	text-align:left;
 
 }
+.adv_search_submit {
+text-align:right;
+}
 
 .adv_search table td {
 	padding-bottom:10px;
