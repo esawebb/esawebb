@@ -657,10 +657,21 @@ table.archive_normal td.titlerow {
 .adv_search_submit {
 text-align:center;
 margin-bottom:0px;
+width:700px;
+}
+
+.adv_search .searchitemsepr {
+	margin-bottom:20px;
+}
+
+.adv_search .searchitemsepr h2 {
+	margin-bottom:0px;
 }
 
 .adv_search .searchitemsepr td {
-	border-bottom:1px solid #AAA;
+	border-top:1px solid #AAA;
+	margin-bottom:0;
+	padding-bottom:20px;
 }
 
 .adv_search table td {
