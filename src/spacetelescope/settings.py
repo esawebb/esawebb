@@ -602,6 +602,12 @@ logger.addHandler( handler )
 logger.setLevel( logging.DEBUG if DEBUG else logging.INFO )
 logger.info("Djangoplicity started")
 
+###################
+# REPORTLAB FONTS #
+###################
+from reportlab import rl_config
+rl_config.TTFSearchPath.append( PRJBASE + "/fonts/" )
+
 # ======================================================================
 # SITE SPECIFIC SECTIONS 
 # ======================================================================
