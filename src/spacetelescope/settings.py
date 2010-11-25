@@ -198,6 +198,9 @@ TEMPLATE_DIRS = (
 # MIDDLEWARE AND APPLICATIONS #
 ###############################
 MIDDLEWARE_CLASSES = (
+	# Middleware hack to do some initialization when django is started. Middleware is removed immediately afterwards.
+	'djangoplicity.startup.StartupMiddleware',
+					
 	# Compresses content for browsers that understand gzip compression (all modern browsers).
 	'django.middleware.gzip.GZipMiddleware', # Response
 
