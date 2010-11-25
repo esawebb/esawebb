@@ -696,7 +696,7 @@ LIVESETTINGS_OPTIONS = {
             u'SHOP': {
 				u'REQUIRED_BILLING_DATA': u'["email", "first_name", "last_name", "phone", "street1", "city", "postal_code", "country"]',
 				u'ENFORCE_STATE': u'False',
-				u'LOGO_URI': u'http://www.spacetelescope.org/about_us/logos/transparent/esa_hubble_colour_wb_gen.png',
+				u'LOGO_URI': u'http://www.spacetelescope.org/static/archives/logos/screen/eso_colour.jpg',
 			},
             u'PAYMENT_COPOSWEB': {
 				u'USER_TEST': u'testeso',

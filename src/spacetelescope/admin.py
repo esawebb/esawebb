@@ -74,7 +74,5 @@ admin_site.register(django.contrib.auth.models.Group,
                         django.contrib.auth.admin.GroupAdmin)
 
 
-# Hack to register Satchmo admin interface
-from django.contrib import admin
-admin.site = adminshop_site
-admin.autodiscover()  
+from djangoplicity.archives.contrib.satchmo.admin import satchmo_admin
+adminshop_site = satchmo_admin( adminshop_site )
