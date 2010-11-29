@@ -50,23 +50,15 @@ $(function() {
 {% endblock %}
 
 {% block extra_sidebar %}
+	{% if ADMINSHOP_SITE %}
 	{% load app_plugins satchmo_util %}
-	{% include "shop/admin/order_sidebar.html" %}
+	{% if request.user.is_superuser %}{% include "shop/admin/order_sidebar.html" %}{% endif %}
 	<div class="module" id="satchmo-helpers">
 		<h2 class="module-title">{% trans "Admin Tools" %}</h2>
 		<div class="module-content">
 			<ul>
-		    	<li>
-					<a href="{% url satchmo_site_settings %}">{% trans "Edit Site Settings" %}</a><br/>
-				</li>
 				<li>
 		    		<a href="{% url satchmo_admin_edit_inventory %}">{% trans 'Edit Inventory' %}</a><br/>
-				</li>
-				<li>
-		    		<a href="{% url satchmo_admin_product_export %}">{% trans 'Export Product Defs' %}</a><br/>
-				</li>
-				<li>
-		    		<a href="{% url satchmo_admin_variation_list %}">{% trans 'Product Variation Manager' %}</a><br/>
 				</li>
 				<li>
 		    		<a href="{% url keyedcache_stats %}">{% trans 'Cache Status' %}</a><br/>
@@ -74,5 +66,6 @@ $(function() {
 				{% plugin_point "admin_tools" %}
 			</ul>
 		</div>
-	</div>	
+	</div>
+	{% endif %}	
 {% endblock %}

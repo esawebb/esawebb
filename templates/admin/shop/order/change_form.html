@@ -4,7 +4,10 @@
 {% block object-tools %}
 {% if change %}{% if not is_popup %}
   <ul class="object-tools">
-    <li><a href="csv/" class="historylink">{% trans "CSV Export" %}</a></li>
+  {% if original.discount_code %}<li><a href="{% url adminshop_site:freeorder_freeorder_changelist %}?q={{original.discount_code}}&accepted__exact=1" class="historylink">{% trans "Check free order" %}</a></li>{% endif %}
+  <li><a href="{% url adminshop_site:contact_contact_change original.contact_id  %}" class="historylink">{% trans "Edit contact" %}</a></li>
+  <li><a href="{% url shop_print_shipping "shippinglabel" original.id  %}" class="historylink">{% trans "Shipping label" %}</a></li>
+  <li><a href="csv/" class="historylink">{% trans "CSV Export" %}</a></li>
   <li><a href="history/" class="historylink">{% trans "History" %}</a></li>
   </ul>
 {% endif %}{% endif %}

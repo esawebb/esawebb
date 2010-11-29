@@ -574,7 +574,7 @@ table.archive_normal td.imagerow {
 	
 }
 
-table.archive_normal td.titlerow {
+table.archive_normal td.titlerow, table.archive_normal td.pricerow {
 	padding:10px;
 	
 }
@@ -1163,7 +1163,7 @@ html>body #socialnetworks {background: url('../images/socialnetworks.png') no-re
 	font-size: 11px;
 }
 
-.titlerow {
+.titlerow, .pricerow {
 	margin-bottom: 10px;
 }
 
@@ -1251,4 +1251,52 @@ a.teasertext:hover {
 	border: 1px solid #ff0000;
 	margin-bottom: 10px;
 	color: #000000;
+}
+
+/* Free order form */
+#freeorderform {	
+	margin: 10px;
+	text-align: left;
+}
+
+#freeorderform table {
+	background-color: #e1e1e1;	
+	margin-left: auto;
+	margin-right: auto;
+}
+
+#freeorderform table td, #freeorderform table th {
+	padding: 10px 10px 10px 10px;;	
+}
+
+#freeorderform th {
+	vertical-align: top;
+}
+
+#freeorderform .submit {
+	padding-top: 10px;
+	text-align: center;
+}
+
+.freelink {
+	width: 100%;
+	float: left;
+	vertical-align: middle;
+		
+}
+
+.freelink > div {
+	float: left;
+	width: 50%;
+	vertical-align: middle;	
+}
+
+.freelinktext {
+	text-color: #e1e1e1;
+	font-size: 10px;
+	text-align: left;
+}
+
+.pr_box td {
+	padding-right: 4px;
 }

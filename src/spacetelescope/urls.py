@@ -43,11 +43,10 @@ urlpatterns += patterns( '',
     ( r'^admin(.*)({{\s?MEDIA_URL\s?}})(?P<path>.*)', 'djangoplicity.views.adm_translate_static_media_path', { 'SSL' : True } ),
     ( r'^admin/shop/shop/order/(?P<order_id>[0-9]+)/csv/', 'djangoplicity.coposweb.views.order_csv_file', { 'SSL': True } ),
 	( r'^admin/shop/', include( 'djangoplicity.archives.contrib.satchmo.urls_shipping' ), { 'SSL': True } ),
-	( r'^admin/shop/', include(adminshop_site.urls), { 'SSL': True } ),
-	( r'^admin/system/', include(adminlogs_site.urls), { 'SSL': True } ),
-	( r'^admin/', include(admin_site.urls), { 'SSL': True } ),
+	( r'^admin/shop/', include(adminshop_site.urls), { 'SSL': True, 'extra_context' : { 'ADMINSHOP_SITE' : True } } ),
+	( r'^admin/system/', include(adminlogs_site.urls), { 'SSL': True, 'extra_context' : { 'ADMINLOGS_SITE' : True }  } ),
+	( r'^admin/', include(admin_site.urls), { 'SSL': True, 'extra_context' : { 'ADMIN_SITE' : True }  } ),
 	( r'^admin/import/', include('djangoplicity.archives.importer.urls'), { 'SSL': True } ),
-	
 	
     # Server alive check (used for load balancers - called every 5 secs )
     ( r'^alive-check.dat$', 'djangoplicity.views.alive_check', { 'SSLAllow' : True } ),
@@ -114,7 +113,9 @@ urlpatterns += patterns( '',
 
 urlpatterns += basepatterns + patterns('',
 	# Satchmo Shop URLs
-	(r'^shop/', include('satchmo_store.shop.urls')),
+	( r'^shop/freeorder/$', include( 'djangoplicity.archives.contrib.satchmo.freeorder.urls' ) ), 
+	( r'^shop/', include( 'satchmo_store.shop.urls' ) ), 
+
 )
 
 #handler404 = 'spacetelescope.views.page_not_found'

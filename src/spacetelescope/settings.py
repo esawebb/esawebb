@@ -102,6 +102,7 @@ TIME_ZONE = 'Europe/Berlin'
 # Language code for this installation. All choices can be found here:
 # http://www.w3.org/TR/REC-html40/struct/dirlang.html#langcodes
 gettext_noop = lambda s: s
+_ = gettext_noop 
 
 LANGUAGES = (
 	( 'en', gettext_noop( 'English' ) ),
@@ -310,6 +311,7 @@ INSTALLED_APPS += (
 	'djangoplicity.media',
 	'djangoplicity.jobs',
 	'django.contrib.redirects',
+	'djangoplicity.archives.contrib.satchmo.freeorder',
 	'djangoplicity.announcements',
 	'djangoplicity.releases',
 	'djangoplicity.products',  
@@ -371,7 +373,7 @@ EMAIL_HOST = config.get('email', 'EMAIL_HOST')
 EMAIL_HOST_PASSWORD = config.get('email', 'EMAIL_HOST_PASSWORD')
 EMAIL_HOST_USER = config.get('email', 'EMAIL_HOST_USER')
 EMAIL_PORT = config.get('email', 'EMAIL_PORT')
-EMAIL_USE_TLS = config.get('email', 'EMAIL_USE_TLS')
+EMAIL_USE_TLS = config.getboolean('email', 'EMAIL_USE_TLS')
 EMAIL_SUBJECT_PREFIX = config.get('email', 'EMAIL_SUBJECT_PREFIX') if config.has_option('email','EMAIL_SUBJECT_PREFIX') else '[Django]'
 
 ##################
@@ -667,7 +669,7 @@ L10N_SETTINGS = {
 
 LIVESETTINGS_OPTIONS = {   
 	1: { 
-		'DB' : True, 
+		'DB' : False, 
 		'SETTINGS' : { 
 		    u'LANGUAGE': {   
 				u'CURRENCY': u'\u20ac',
@@ -695,8 +697,9 @@ LIVESETTINGS_OPTIONS = {
             u'SHIPPING': {   
 				#u'PER_DAYS': u'1 - 3 business days',
 				#u'PER_SERVICE': u'Deutsche Post/DHL',
+				u'SELECT_CHEAPEST': u'False',
 				u'HIDING': u'NO',
-				u'MODULES': u'["shipping.modules.tieredweight"]',
+				u'MODULES': u'["shipping.modules.tieredweight","djangoplicity.archives.contrib.satchmo.esoshipping.officedelivery","djangoplicity.archives.contrib.satchmo.esoshipping.pickup"]',
 			},
             u'TAX' : {
 				u'PRODUCTS_TAXABLE_BY_DEFAULT' :u'False',
@@ -720,3 +723,12 @@ LIVESETTINGS_OPTIONS = {
 }
 
 ORDER_PREFIX = config.get( "shop", "ORDER_PREFIX", "hb" )
+
+SHOP_PICKUP_LOCATIONS = (
+	{ 'id' : 'PUP1', 
+	  'name' : 'ESO HQ',
+	  'desc' : _( "Self-pickup at ESO HQ in Munich, Germany" ), 
+	  'method' : _("Pickup during business hours at ESO Headquaters."),
+	  'delivery' : _("Please allow 1-3 business days for handling the order - you will receive an email once the order is ready for pickup."),
+	},
+)

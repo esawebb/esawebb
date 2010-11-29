@@ -30,7 +30,7 @@ import djangoplicity.metadata.admin
 import djangoplicity.contrib.redirects.admin
 import djangoplicity.authtkt.admin
 import djangoplicity.google.admin
-
+import djangoplicity.archives.contrib.satchmo.freeorder.admin
 
 # Register each applications admin interfaces with
 # an admin site.
@@ -76,3 +76,5 @@ admin_site.register(django.contrib.auth.models.Group,
 
 from djangoplicity.archives.contrib.satchmo.admin import satchmo_admin
 adminshop_site = satchmo_admin( adminshop_site )
+
+autoregister( adminshop_site, djangoplicity.archives.contrib.satchmo.freeorder.admin )
