@@ -95,8 +95,9 @@ options(
                              '../projects/djangoplicity/apps/python-daemon-1.5.1.tar.gz',
                              '../projects/djangoplicity/apps/carrot-0.6.0.tar.gz',
                              '../projects/djangoplicity/apps/celery-0.8.0-patched.tar.gz',
-                             '../projects/djangoplicity/apps/python-xmp-toolkit-1.0-rc1.tar.gz',
-                             '../projects/djangoplicity/apps/python-avm-library-1.0a1.tar.gz',
+                             '../projects/djangoplicity/apps/python-dateutil-1.5.tar.gz',
+                             '../projects/djangoplicity/apps/python-xmp-toolkit-1.0-rc2.tar.gz',
+                             '../projects/djangoplicity/apps/python-avm-library-1.0b1.tar.gz',
                              '../projects/djangoplicity/apps/django-rosetta-0.5.5.tar.gz',
                                                           
                              # Migration related packages.
