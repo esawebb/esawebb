@@ -8,7 +8,7 @@
 #   Luis Clara Gomes <lcgomes@eso.org>
 #
 
-from django.contrib.admin.sites import AdminSite
+from djangoplicity.contrib.admin.sites import AdminSite
 from djangoplicity.authtkt.utils import authtkt_decorator
 from djangoplicity.contrib.admin.discover import autoregister
 

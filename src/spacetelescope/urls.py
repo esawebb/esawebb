@@ -29,8 +29,6 @@ from djangoplicity.releases.options import ReleaseOptions
 from djangoplicity.products.models import *
 from djangoplicity.products.options import *
 
-from satchmo_store.urls import basepatterns
-
 urlpatterns = []
 
 urlpatterns += patterns( '',    
@@ -42,7 +40,7 @@ urlpatterns += patterns( '',
     ( r'^admin/menus/', include( 'djangoplicity.menus.urls' ), { 'SSL' : True } ),
     ( r'^admin(.*)({{\s?MEDIA_URL\s?}})(?P<path>.*)', 'djangoplicity.views.adm_translate_static_media_path', { 'SSL' : True } ),
     ( r'^admin/shop/shop/order/(?P<order_id>[0-9]+)/csv/', 'djangoplicity.coposweb.views.order_csv_file', { 'SSL': True } ),
-	( r'^admin/shop/', include( 'djangoplicity.archives.contrib.satchmo.urls_shipping' ), { 'SSL': True } ),
+	( r'^admin/shop/', include( 'djangoplicity.archives.contrib.satchmo.urls_admin' ), { 'SSL': True } ), 
 	( r'^admin/shop/', include(adminshop_site.urls), { 'SSL': True, 'extra_context' : { 'ADMINSHOP_SITE' : True } } ),
 	( r'^admin/system/', include(adminlogs_site.urls), { 'SSL': True, 'extra_context' : { 'ADMINLOGS_SITE' : True }  } ),
 	( r'^admin/', include(admin_site.urls), { 'SSL': True, 'extra_context' : { 'ADMIN_SITE' : True }  } ),
@@ -98,28 +96,28 @@ urlpatterns += patterns( '',
     ( r'^rss/vodcastfullhd.xml$', redirect_to, { 'url': 'http://feeds.feedburner.com/hubblecast_fullhd/' } ),
     ( r'^rss/hubblecasthd_amp.xml$', redirect_to, { 'url': 'http://feeds.feedburner.com/hubblecast/' } ),
     
-
     # User authentication
     ( r'^login/$', 'djangoplicity.authtkt.views.login', { 'template_name': 'login.html', 'SSL' : True } ),
  	( r'^logout/$', 'djangoplicity.authtkt.views.logout', { 'template_name': 'logout.html', 'SSL' : True } ),
+ 	( r'^password_reset/$', 'django.contrib.auth.views.password_reset', { 'SSL' : True, 'email_template_name' : 'registration/password_reset_email.txt' } ),
+	( r'^password_reset/done/$', 'django.contrib.auth.views.password_reset_done', { 'SSL' : True } ),
+	( r'^reset/(?P<uidb36>[0-9A-Za-z]+)-(?P<token>.+)/$', 'django.contrib.auth.views.password_reset_confirm', { 'SSL' : True } ),
+	( r'^reset/done/$', 'django.contrib.auth.views.password_reset_complete', { 'SSL' : True } ),
+	
+ 	# Shop 
+ 	( r'^shop/freeorder/$', include( 'djangoplicity.archives.contrib.satchmo.freeorder.urls' ) ),
+ 	( r'^shop/', include( 'djangoplicity.archives.contrib.satchmo.urls' ) ),
  	
  	# Google Webmaster Toolkit verification
  	( r'^', include( 'djangoplicity.google.urls' ) ), 
 
  	# Main view
  	( r'^$', 'spacetelescope.views.main_page' ),
+ 	
+ 	
  )
 
-
-urlpatterns += basepatterns + patterns('',
-	# Satchmo Shop URLs
-	( r'^shop/freeorder/$', include( 'djangoplicity.archives.contrib.satchmo.freeorder.urls' ) ), 
-	( r'^shop/', include( 'satchmo_store.shop.urls' ) ), 
-
-)
-
 #handler404 = 'spacetelescope.views.page_not_found'
-
 
 # Static files/media serving during development
 if settings.SERVE_STATIC_MEDIA:
