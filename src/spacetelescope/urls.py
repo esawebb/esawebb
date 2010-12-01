@@ -107,6 +107,7 @@ urlpatterns += patterns( '',
  	# Shop 
  	( r'^shop/terms/', redirect_to, { 'url': '/shop/terms_conditions/' }, 'shop_terms' ),
  	( r'^shop/ccv/', redirect_to, { 'url': '/shop/cvc_info/' }, 'shop_ccv' ),
+ 	( r'^shop/bulkorders/', redirect_to, { 'url': '/shop/bulk_orders/' }, 'shop_bulkorders' ),
  	( r'^shop/freeorder/$', include( 'djangoplicity.archives.contrib.satchmo.freeorder.urls' ) ),
  	( r'^shop/', include( 'djangoplicity.archives.contrib.satchmo.urls' ) ),
  	

@@ -728,8 +728,8 @@ ORDER_PREFIX = config.get( "shop", "ORDER_PREFIX", "hb" )
 SHOP_PICKUP_LOCATIONS = (
 	{ 'id' : 'PUP1', 
 	  'name' : 'ESO HQ',
-	  'desc' : _( "Self-pickup at ESO HQ in Munich, Germany" ), 
-	  'method' : _("Pickup during business hours at ESO Headquaters."),
-	  'delivery' : _("Please allow 1-3 business days for handling the order - you will receive an email once the order is ready for pickup."),
+	  'desc' : _( "Self-pickup/ESO HQ in Munich, Germany" ), 
+	  'method' : _("Pickup (9-17 CET/CEST) at ESO HQ Reception,"),
+	  'delivery' : _("Karl-Schwarzschild-Str. 2, 85748 Garching, GERMANY"),
 	},
 )
