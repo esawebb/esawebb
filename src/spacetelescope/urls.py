@@ -105,6 +105,8 @@ urlpatterns += patterns( '',
 	( r'^reset/done/$', 'django.contrib.auth.views.password_reset_complete', { 'SSL' : True } ),
 	
  	# Shop 
+ 	( r'^shop/terms/', redirect_to, { 'url': '/shop/terms_conditions/' }, 'shop_terms' ),
+ 	( r'^shop/ccv/', redirect_to, { 'url': '/shop/cvc_info/' }, 'shop_ccv' ),
  	( r'^shop/freeorder/$', include( 'djangoplicity.archives.contrib.satchmo.freeorder.urls' ) ),
  	( r'^shop/', include( 'djangoplicity.archives.contrib.satchmo.urls' ) ),
  	
