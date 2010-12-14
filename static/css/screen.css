@@ -647,6 +647,14 @@ table.archive_normal td.titlerow, table.archive_normal td.pricerow {
 	width:176px;
 }
 
+/* featured category */
+.featured_category_box {
+	margin:10px;
+	padding:10px;
+	background-color:#EEE;	
+	border:1px solid #AAA;
+}
+
 
 /* advanced search */
 
@@ -872,6 +880,24 @@ margin-bottom:20px;
 	text-align: right;
 	float: right;
 	width: 33%;
+}
+
+/* featured category */
+
+.leftdivider {
+	width:420px;
+	display:block;
+	float:left;
+}
+
+.rightdivider {
+	display:block;
+	float:right;
+	width:280px;	
+}
+
+.leftdivider .paginator_pages {
+	width:280px;
 }
 
 /* rss */
