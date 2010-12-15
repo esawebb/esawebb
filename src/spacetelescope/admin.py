@@ -31,6 +31,8 @@ import djangoplicity.contrib.redirects.admin
 import djangoplicity.authtkt.admin
 import djangoplicity.google.admin
 import djangoplicity.archives.contrib.satchmo.freeorder.admin
+import djangoplicity.archives.contrib.inventory_control.admin
+import djangoplicity.inventory.admin
 
 # Register each applications admin interfaces with
 # an admin site.
@@ -78,3 +80,5 @@ from djangoplicity.archives.contrib.satchmo.admin import satchmo_admin
 adminshop_site = satchmo_admin( adminshop_site )
 
 autoregister( adminshop_site, djangoplicity.archives.contrib.satchmo.freeorder.admin )
+autoregister( adminshop_site, djangoplicity.archives.contrib.inventory_control.admin )
+autoregister( adminshop_site, djangoplicity.inventory.admin )
