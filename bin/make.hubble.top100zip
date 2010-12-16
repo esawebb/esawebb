@@ -8,5 +8,5 @@
 #   Luis Clara Gomes <lcgomes@eso.org>
 #
 source /home/web/hubble/virtualenv/bin/start_shell.sh
-python projects/djangoplicity/scripts/make.top100zip.py -o /home/web/hubble/docs/static/images/zip/top100/ -f large
-python projects/djangoplicity/scripts/make.top100zip.py -o /home/web/hubble/docs/static/images/zip/top100/ -f original
+python projects/djangoplicity/scripts/make.top100zip.py -o /home/web/hubble/docs/static/images/zip/top100/ -f large -t /home/web/hubble/tmp
+python projects/djangoplicity/scripts/make.top100zip.py -o /home/web/hubble/docs/static/images/zip/top100/ -f original -t /home/web/hubble/tmp
