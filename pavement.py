@@ -75,7 +75,7 @@ options(
 							 '../projects/djangoplicity/apps/Fabric-0.9.1.tar.gz',
                              '../projects/djangoplicity/apps/BeautifulSoup.tar.gz',
                              #'../projects/djangoplicity/apps/threadpool-1.2.5.zip',
-                             '../projects/djangoplicity/apps/Django-1.2.3.tar.gz',
+                             '../projects/djangoplicity/apps/Django-1.2.4.tar.gz',
                              '../projects/djangoplicity/apps/django-extensions-0.4.1.tar.gz',
                              '../projects/djangoplicity/apps/django-confutils-1.0-dev.tar.gz',
                              #'../projects/djangoplicity/apps/django-batchadmin-0.1.tar.gz',
@@ -140,7 +140,7 @@ options(
 					 ],
         
         # Directories to create
-        symlinks = [ ('../../virtualenv/lib/python%(version)s/site-packages/Django-1.2.1-py%(version)s.egg/django/contrib/admin/media' % { 'version' : PY_VERSION }, 'docs/static/', 'media' ),],
+        symlinks = [ ('../../virtualenv/lib/python%(version)s/site-packages/Django-1.2.4-py%(version)s.egg/django/contrib/admin/media' % { 'version' : PY_VERSION }, 'docs/static/', 'media' ),],
         deploy_layout = [
                         'docs',
                         'docs/static',
