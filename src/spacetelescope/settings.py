@@ -475,6 +475,9 @@ VIDEOS_ARCHIVE_ROOT = 'archives/videos/'
 ANNOUNCEMENTS_ARCHIVE_ROOT = 'archives/announcements/'
 
 
+VIDEOS_FEATURED_SUBJECT = 'hubblecast'
+
+
 DEFAULT_CREATOR = u"ESA/Hubble"  
 DEFAULT_CREATOR_URL = "http://www.spacetelescope.org"
 DEFAULT_CONTACT_ADDRESS = u"Karl-Schwarzschild-Strasse 2" 
