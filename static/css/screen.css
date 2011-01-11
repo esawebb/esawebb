@@ -1326,3 +1326,11 @@ a.teasertext:hover {
 .pr_box td {
 	padding-right: 4px;
 }
+
+.bulkpricing h3 {
+	text-align: left;
+}
+
+.bulkpricing td {
+	padding: 2px;
+}
