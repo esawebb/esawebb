@@ -35,7 +35,7 @@ urlpatterns += patterns( '',
 
     # Djangoplicity Adminstration 
     ( r'^admin/cache/', include( 'djangoplicity.cache.urls', namespace="admincache_site", app_name="cache" ), { 'SSL': True } ),
-    ( r'^admin/log/', include( 'djangoplicity.contrib.admin.log.urls', namespace="adminhistory_site", app_name="history" ), { 'SSL': True } ),
+    ( r'^admin/history/', include( 'djangoplicity.adminhistory.urls', namespace="adminhistory_site", app_name="history" ), { 'SSL': True } ),
     ( r'^admin/doc/', include( 'django.contrib.admindocs.urls' ), { 'SSL': True } ),
     ( r'^admin/menus/', include( 'djangoplicity.menus.urls' ), { 'SSL' : True } ),
     ( r'^admin(.*)({{\s?MEDIA_URL\s?}})(?P<path>.*)', 'djangoplicity.views.adm_translate_static_media_path', { 'SSL' : True } ),

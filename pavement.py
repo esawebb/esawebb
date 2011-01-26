@@ -99,6 +99,8 @@ options(
                              '../projects/djangoplicity/apps/python-xmp-toolkit-1.0-rc2.tar.gz',
                              '../projects/djangoplicity/apps/python-avm-library-1.0b1.tar.gz',
                              '../projects/djangoplicity/apps/django-rosetta-0.5.5.tar.gz',
+                             '../projects/djangoplicity/apps/polib-0.5.1.tar.gz',
+                             '../projects/djangoplicity/apps/djangoplicity-adminhistory-0.1.0.tar.gz',
                                                           
                              # Migration related packages.
                              '../projects/spacetelescope.org/apps/BareNecessities-0.2.4.tar.gz', 
