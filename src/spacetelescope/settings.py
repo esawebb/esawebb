@@ -456,6 +456,8 @@ ARCHIVES = (
 	('djangoplicity.releases.models.Release','djangoplicity.releases.options.ReleaseOptions'),		    
 )
 
+ARCHIVE_EMBARGO_LOGIN = ('hst','hotnews')
+
 ARCHIVE_RESOURCE_FIELDS = False
 ARCHIVE_URL_QUERY_PREFIX = 'archive'
 ARCHIVE_URL_DETAIL_PREFIX = ''
@@ -546,6 +548,7 @@ UPDATE_JOBS_RUN_EVERY = 300
 TINYMCE_JS = "djangoplicity/js/tiny_mce_v3392/tiny_mce.js"
 TINYMCE_JQUERY_JS = "djangoplicity/js/tiny_mce_v3392/jquery.tinymce.js"
 JQUERY_JS = "djangoplicity/js/jquery-1.4.2.min.js"
+ZCLIPBOARD_JS = "djangoplicity/js/ZeroClipboard.js"
 JQUERY_UI_JS = "djangoplicity/js/jquery-ui-1.8.1.custom.min.js"
 JQUERY_UI_CSS = "djangoplicity/css/ui-lightness/jquery-ui-1.8.1.custom.css"
 DJANGOPLICITY_ADMIN_CSS = "djangoplicity/css/admin.css"

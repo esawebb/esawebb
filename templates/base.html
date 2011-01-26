@@ -89,6 +89,7 @@
 {% spaceless %}{% render_menu footer_menu footer %}{% endspaceless %}
 
 <div id="ftcol5" class="grid_4">
+{% if not request.is_secure %}
 <iframe id ='fb_like_main' src="http://www.facebook.com/plugins/like.php?href=http%3A%2F%2Fwww.facebook.com%2FhubbleESA&amp;layout=standard&amp;show_faces=false&amp;width=220&amp;action=like&amp;font=arial&amp;colorscheme=dark&amp;height=40" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:220px; height:40px;" allowTransparency="true"></iframe>
 
 <!-- AddThis Button BEGIN -->
@@ -100,6 +101,7 @@ width="83" height="16" alt="Bookmark and Share" style="border:0"/></a>
 src="http://s7.addthis.com/js/250/addthis_widget.js#username 
 =epod"></script>
 <!-- AddThis Button END -->
+{% endif %}
 </div>
 <div id="ftcolorg" class="grid_16">
 <div align="center">
