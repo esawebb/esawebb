@@ -48,7 +48,7 @@ autoregister( admin_site, djangoplicity.pages.admin )
 autoregister( admin_site, djangoplicity.media.admin )
 autoregister( admin_site, djangoplicity.releases.admin )
 autoregister( admin_site, djangoplicity.metadata.admin )
-autoregister( admin_site, djangoplicity.products.admin )
+#autoregister( admin_site, djangoplicity.products.admin )
 
 
 #autoregister ( adminlogs_site, djangoplicity.contrib.redirects.admin )
