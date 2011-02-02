@@ -28,11 +28,11 @@ if sys.version_info[0] == 2 and sys.version_info[1] < 6:
 #
 projects_settings = {
 	'vcs_projects' : [
-			( 'djangoplicity-bootstrap', 'hg+https://bitbucket.org/eso/djangoplicity-bootstrap',),
-			( 'djangoplicity-settings', 'hg+https://bitbucket.org/eso/djangoplicity-settings' ),
-			( 'djangoplicity-adminhistory', 'hg+https://bitbucket.org/eso/djangoplicity-adminhistory' ),
-			( 'djangoplicity', 'hg+https://bitbucket.org/eso/djangoplicity' ),
-			( 'spacetelescope.org', 'hg+https://bitbucket.org/eso/spacetelescope.org' ), 
+			( 'djangoplicity-bootstrap', 'hg+https://eso_readonly:pg11opc@bitbucket.org/eso/djangoplicity-bootstrap',),
+			( 'djangoplicity-settings', 'hg+https://eso_readonly:pg11opc@bitbucket.org/eso/djangoplicity-settings' ),
+			( 'djangoplicity-adminhistory', 'hg+https://eso_readonly:pg11opc@bitbucket.org/eso/djangoplicity-adminhistory' ),
+			( 'djangoplicity', 'hg+https://eso_readonly:pg11opc@bitbucket.org/eso/djangoplicity' ),
+			( 'spacetelescope.org', 'hg+https://eso_readonly:pg11opc@bitbucket.org/eso/spacetelescope.org' ), 
 		],
 	'directories' : settings['directories'] + [
 			'docs',
