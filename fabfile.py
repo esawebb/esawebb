@@ -46,6 +46,7 @@ local_apply_sql = djangoplicity.fabric.apply_sql( sqlfile='sql/deploy.sql', proj
 # Integration deployment tasks
 integration_clear_installation = djangoplicity.fabric.clear_installation( servers=[DEVSERVER,], prefix=PREFIXI )
 integration_relocate_virtualenv = djangoplicity.fabric.relocate_virtualenv( servers=[DEVSERVER,], prefix=PREFIXI, relocateto=PREFIX )
+integration_bootstrap = djangoplicity.fabric.bootstrap( servers=[DEVSERVER,], prefix=PREFIXI, mode='integration_settings' )
 integration_setup = djangoplicity.fabric.setup( servers=[DEVSERVER,], prefix=PREFIXI, mode='integration' )
 integration_fix_perms = djangoplicity.fabric.fix_perms( servers=[DEVSERVER], prefix=PREFIX )
 integration = djangoplicity.fabric.deploy( servers=[DEVSERVER,], prefix=PREFIXI, prjdir=PRJDIR )

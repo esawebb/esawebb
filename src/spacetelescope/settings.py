@@ -14,25 +14,20 @@
 # from the settings.ini file.
 #
 
-from djangoconfutils.ini_locator import locate_ini_config
 import re
 
-config = locate_ini_config( 'spacetelescope', 'settings' )
+from djangoplicity.settings import import_settings		
+local_settings = import_settings('spacetelescope')
 
 #############################
 # ENVIRONMENT CONFIGURATION #
 #############################
-PRJBASE = config.get('DEFAULT','PRJBASE')
+PRJBASE = local_settings.PRJBASE
 PRJNAME = 'spacetelescope.org'
-DJANGOPLICITY_ROOT = config.get('djangoplicity', 'ROOT' )
-LOG_DIR = config.get('djangoplicity','LOG_DIR') if config.has_option('djangoplicity', 'LOG_DIR') else "/tmp"
-TMP_DIR = config.get('djangoplicity','TMP_DIR') if config.has_option('djangoplicity', 'TMP_DIR') else "/tmp"
-
-if config.has_option('environment', 'ENABLE_SSL'):
-	ENABLE_SSL = config.getboolean('environment','ENABLE_SSL')
-else:
-	ENABLE_SSL = False
-	
+DJANGOPLICITY_ROOT = local_settings.DJANGOPLICITY_ROOT
+LOG_DIR = local_settings.LOG_DIR
+TMP_DIR = local_settings.TMP_DIR
+ENABLE_SSL = local_settings.ENABLE_SSL
 GA_ID = "UA-2368492-6"
 
 ###################
@@ -40,22 +35,19 @@ GA_ID = "UA-2368492-6"
 ###################
 INTERNAL_IPS = ('127.0.0.1',)
 
-SITE_ENVIRONMENT = config.get('environment','SITE_ENVIRONMENT') if config.has_option('environment','SITE_ENVIRONMENT') else 'local'
-DEBUG = config.getboolean('environment','DEBUG')
-DEBUG_SQL = config.getboolean('environment','DEBUG_SQL') if config.has_option('environment','DEBUG_SQL') else False
-DEBUG_PROFILER = config.getboolean('environment','DEBUG_PROFILER') if config.has_option('environment','DEBUG_PROFILER') else False
-DEBUG_TOOLBAR = config.getboolean('environment','DEBUG_TOOLBAR') if config.has_option('environment','DEBUG_TOOLBAR') else False
-TEMPLATE_DEBUG = config.getboolean('environment','TEMPLATE_DEBUG')
-SEND_BROKEN_LINK_EMAILS = config.getboolean('environment','SEND_BROKEN_LINK_EMAILS')
+SITE_ENVIRONMENT = local_settings.SITE_ENVIRONMENT
+DEBUG = local_settings.DEBUG
+DEBUG_SQL = local_settings.DEBUG_SQL
+DEBUG_PROFILER = local_settings.DEBUG_PROFILER
+DEBUG_TOOLBAR = local_settings.DEBUG_TOOLBAR
+TEMPLATE_DEBUG = local_settings.TEMPLATE_DEBUG
+SEND_BROKEN_LINK_EMAILS = local_settings.SEND_BROKEN_LINK_EMAILS
 
-ADMINS = tuple(config.items('admins'))
+ADMINS = local_settings.ADMINS
 MANAGERS = ADMINS
 
-SERVE_STATIC_MEDIA = config.getboolean('environment', 'SERVE_STATIC_MEDIA')
+SERVE_STATIC_MEDIA = local_settings.SERVE_STATIC_MEDIA
 
-if SERVE_STATIC_MEDIA:
-	STATIC_MEDIA_PREFIX = config.get('environment', 'STATIC_MEDIA_PREFIX')
-	
 DEBUG_TOOLBAR_PANELS = (
     'debug_toolbar.panels.version.VersionDebugPanel',
     'debug_toolbar.panels.timer.TimerDebugPanel',
@@ -72,17 +64,7 @@ DEBUG_TOOLBAR_PANELS = (
 ##################
 # DATABASE SETUP #
 ##################
-DATABASE_ENGINE 	= config.get('database', 'DATABASE_ENGINE')
-DATABASE_NAME 		= config.get('database', 'DATABASE_NAME')
-DATABASE_USER 		= config.get('database', 'DATABASE_USER')
-DATABASE_PASSWORD 	= config.get('database', 'DATABASE_PASSWORD')
-DATABASE_HOST 		= config.get('database', 'DATABASE_HOST')
-DATABASE_PORT 		= config.get('database', 'DATABASE_PORT')
-DATABASE_OPTIONS	= {
-	# Uncomment following line when creating tables to ensure
-	# InnoDB tables are created.
-	#"init_command": "SET storage_engine=INNODB",
-}
+DATABASES = local_settings.DATABASES
 
 FIXTURE_DIRS = (
 	PRJBASE + '/fixtures',
@@ -134,33 +116,34 @@ WIDGET_FORMAT = "j/m/Y"
 ###############
 # Absolute path to the directory that holds media.
 # Example: "/home/media/media.lawrence.com/"
-MEDIA_ROOT = config.get('media', 'MEDIA_ROOT')
+MEDIA_ROOT = local_settings.MEDIA_ROOT
 
 # URL that handles the media served from MEDIA_ROOT. Make sure to use a
 # trailing slash if there is a path component (optional in other cases).
 # Examples: "http://media.lawrence.com", "http://example.com/media/"
-MEDIA_URL = config.get('media', 'MEDIA_URL')
-
+MEDIA_URL = local_settings.MEDIA_URL
 
 # URL prefix for admin media -- CSS, JavaScript and images. Make sure to use a
 # trailing slash.
 # Examples: "http://foo.com/media/", "/media/".
-ADMIN_MEDIA_PREFIX = config.get('media', 'ADMIN_MEDIA_PREFIX')
+ADMIN_MEDIA_PREFIX = local_settings.ADMIN_MEDIA_PREFIX
+DJANGOPLICITY_MEDIA_URL = local_settings.DJANGOPLICITY_MEDIA_URL
+DJANGOPLICITY_MEDIA_ROOT = local_settings.DJANGOPLICITY_MEDIA_ROOT
 
 # Make this unique, and don't share it with anybody.
-SECRET_KEY = config.get('secrets', 'SECRET_KEY')
-CSRF_MIDDLEWARE_SECRET = config.get('secrets', 'CSRF_MIDDLEWARE_SECRET')
+SECRET_KEY = local_settings.SECRET_KEY
+CSRF_MIDDLEWARE_SECRET = local_settings.CSRF_MIDDLEWARE_SECRET
 
 ##########
 # CACHE  #
 ##########
 CACHE_MIDDLEWARE_SECONDS = 600
-CACHE_BACKEND = config.get('cache', 'CACHE_BACKEND')
-CACHE_MIDDLEWARE_KEY_PREFIX = config.get('cache', 'CACHE_MIDDLEWARE_KEY_PREFIX')
-CACHE_KEY_PREFIX = config.get('cache', 'CACHE_KEY_PREFIX') if config.has_option('cache', 'CACHE_KEY_PREFIX') else ''
+CACHE_BACKEND = local_settings.CACHE_BACKEND
+CACHE_MIDDLEWARE_KEY_PREFIX = local_settings.CACHE_MIDDLEWARE_KEY_PREFIX
+CACHE_KEY_PREFIX = local_settings.CACHE_KEY_PREFIX
 CACHE_PREFIX = CACHE_KEY_PREFIX 
 CACHE_MIDDLEWARE_ANONYMOUS_ONLY = True
-CACHE_TEMPLATES = config.getboolean('cache', 'CACHE_TEMPLATES')
+CACHE_TEMPLATES = local_settings.CACHE_TEMPLATES
 CACHE_TIMEOUT = 60*5
 
 USE_ETAGS = True
@@ -236,12 +219,9 @@ if DEBUG_TOOLBAR:
 		'debug_toolbar.middleware.DebugToolbarMiddleware',
 	)
 	
-ENABLE_REDIRECT_MIDDLEWARE = config.getboolean('environment','ENABLE_REDIRECT_MIDDLEWARE') if config.has_option('environment','ENABLE_REDIRECT_MIDDLEWARE') else False
-
-
-REDIRECT_MIDDLEWARE_URI = config.get('environment','REDIRECT_MIDDLEWARE_URI') if config.has_option('environment','REDIRECT_MIDDLEWARE_URI') else ''	
-
-		
+ENABLE_REDIRECT_MIDDLEWARE = local_settings.ENABLE_REDIRECT_MIDDLEWARE
+REDIRECT_MIDDLEWARE_URI = local_settings.REDIRECT_MIDDLEWARE_URI	
+	
 
 MIDDLEWARE_CLASSES += (
 	# Enables session support
@@ -356,28 +336,28 @@ if DEBUG_TOOLBAR:
 ############
 # SESSIONS #
 ############
-SESSION_ENGINE=config.get('sessions', 'SESSION_ENGINE') if config.has_option('sessions', 'SESSION_ENGINE') else 'django.contrib.sessions.backends.db'
-SESSION_COOKIE_AGE=config.getint('sessions', 'SESSION_COOKIE_AGE') if config.has_option('sessions', 'SESSION_COOKIE_AGE') else 86400
-SESSION_COOKIE_DOMAIN=config.get('sessions', 'SESSION_COOKIE_DOMAIN') if config.has_option('sessions', 'SESSION_COOKIE_DOMAIN') else None
+SESSION_ENGINE=local_settings.SESSION_ENGINE
+SESSION_COOKIE_AGE=local_settings.SESSION_COOKIE_AGE
+SESSION_COOKIE_DOMAIN=local_settings.SESSION_COOKIE_DOMAIN
 
 ################
 # FILE UPLOADS #
 ################
-FILE_UPLOAD_TEMP_DIR = config.get('djangoplicity','TMP_DIR') if config.has_option('djangoplicity', 'TMP_DIR') else None
+FILE_UPLOAD_TEMP_DIR = local_settings.FILE_UPLOAD_TEMP_DIR
 FILE_UPLOAD_PERMISSIONS = 0666
 #FILE_UPLOAD_MAX_MEMORY_SIZE = 2621440 <-- default 
 
 #########
 # EMAIL #
 #########
-SERVER_EMAIL = config.get('email', 'SERVER_EMAIL')
-DEFAULT_FROM_EMAIL = config.get('email', 'DEFAULT_FROM_EMAIL')
-EMAIL_HOST = config.get('email', 'EMAIL_HOST')
-EMAIL_HOST_PASSWORD = config.get('email', 'EMAIL_HOST_PASSWORD')
-EMAIL_HOST_USER = config.get('email', 'EMAIL_HOST_USER')
-EMAIL_PORT = config.get('email', 'EMAIL_PORT')
-EMAIL_USE_TLS = config.getboolean('email', 'EMAIL_USE_TLS')
-EMAIL_SUBJECT_PREFIX = config.get('email', 'EMAIL_SUBJECT_PREFIX') if config.has_option('email','EMAIL_SUBJECT_PREFIX') else '[Django]'
+SERVER_EMAIL = local_settings.SERVER_EMAIL
+DEFAULT_FROM_EMAIL = local_settings.DEFAULT_FROM_EMAIL
+EMAIL_HOST = local_settings.EMAIL_HOST
+EMAIL_HOST_PASSWORD = local_settings.EMAIL_HOST_PASSWORD
+EMAIL_HOST_USER = local_settings.EMAIL_HOST_USER
+EMAIL_PORT = local_settings.EMAIL_PORT
+EMAIL_USE_TLS = local_settings.EMAIL_USE_TLS
+EMAIL_SUBJECT_PREFIX = local_settings.EMAIL_SUBJECT_PREFIX
 
 ##################
 # AUTHENTICATION #
@@ -403,11 +383,8 @@ AUTH_TKT_HTACCESS = '.esoacc'
 #########
 # GEOIP #
 #########
-if config.has_option('gis', 'GEOIP_PATH'):
-	GEOIP_PATH = config.get('gis', 'GEOIP_PATH')
-
-if config.has_option('gis', 'GEOIP_LIBRARY_PATH'):
-	GEOIP_LIBRARY_PATH = config.get('gis', 'GEOIP_LIBRARY_PATH')
+GEOIP_PATH =local_settings.GEOIP_PATH
+GEOIP_LIBRARY_PATH = local_settings.GEOIP_LIBRARY_PATH
 
 #########
 # PAGES #
@@ -434,8 +411,8 @@ BATCHADMIN_JQUERY_JS = "js/jquery-1.2.6.min.js"
 #################
 # DJANGO ASSETS #
 #################
-#ASSETS_DEBUG
-#ASSETS_UPDATER
+ASSETS_DEBUG = local_settings.ASSETS_DEBUG
+ASSETS_UPDATER="timestamp"
 #ASSETS_AUTO_CREATE
 #ASSETS_EXPIRE = 'filename'
 
@@ -470,7 +447,7 @@ ARCHIVE_ROOT = 'archives/'
 ENABLE_ADVANCED_SEARCH = True
 ADV_SEARCH_START_YEAR = 1998
 
-ARCHIVE_AUTO_RESOURCE_DELETION = config.get('media', 'ARCHIVE_AUTO_RESOURCE_DELETION') if config.has_option('media', 'ARCHIVE_AUTO_RESOURCE_DELETION') else False
+ARCHIVE_AUTO_RESOURCE_DELETION = local_settings.ARCHIVE_AUTO_RESOURCE_DELETION
 
 RELEASE_ARCHIVE_ROOT = 'archives/releases/'
 IMAGES_ARCHIVE_ROOT = 'archives/images/'
@@ -492,7 +469,7 @@ DEFAULT_RIGHTS = ""
 DEFAULT_PUBLISHER = u"ESA/Hubble"
 DEFAULT_PUBLISHER_ID = u"vamp://esahubble"
 
-ARCHIVE_IMPORT_ROOT = config.get('media','ARCHIVE_IMPORT_ROOT') if config.has_option('media','ARCHIVE_IMPORT_ROOT')  else '/Volumes/webdocs/importi'
+ARCHIVE_IMPORT_ROOT = local_settings.ARCHIVE_IMPORT_ROOT
 ARCHIVE_WORKFLOWS = {
 	'media.video.rename' : ('eso.workflows.media','video_rename'), 
 }
@@ -521,21 +498,20 @@ REPORT_REGISTER_FORMATTERS = True
 ########	
 # AMQP #
 ########
-AMQP_SERVER = config.get('amqp', 'AMQP_SERVER') if config.has_option('amqp', 'AMQP_SERVER') else None
-AMQP_PORT = config.get('amqp', 'AMQP_PORT') if config.has_option('amqp', 'AMQP_PORT') else None
-AMQP_USER = config.get('amqp', 'AMQP_USER') if config.has_option('amqp', 'AMQP_USER') else None
-AMQP_PASSWORD = config.get('amqp', 'AMQP_PASSWORD') if config.has_option('amqp', 'AMQP_PASSWORD') else None
-AMQP_VHOST = config.get('amqp', 'AMQP_VHOST') if config.has_option('amqp', 'AMQP_VHOST') else None
+AMQP_SERVER = local_settings.AMQP_SERVER
+AMQP_PORT = local_settings.AMQP_PORT
+AMQP_USER = local_settings.AMQP_USER
+AMQP_PASSWORD = local_settings.AMQP_PASSWORD
+AMQP_VHOST = local_settings.AMQP_VHOST
 
 
-CELERY_BACKEND = config.get('celery','CELERY_BACKEND') if config.has_option('celery','CELERY_BACKEND') else None
-CELERY_CACHE_BACKEND =  config.get('celery','CELERY_CACHE_BACKEND') if config.has_option('celery','CELERY_CACHE_BACKEND') else None
-CELERY_AMQP_EXCHANGE = config.get("celery",'CELERY_AMQP_EXCHANGE') if config.has_option('celery','CELERY_AMQP_EXCHANGE') else None
-CELERY_AMQP_PUBLISHER_ROUTING_KEY = config.get("celery",'CELERY_AMQP_EXCHANGE') if config.has_option('celery','CELERY_AMQP_PUBLISHER_ROUTING_KEY') else None
-CELERY_AMQP_CONSUMER_QUEUE = config.get('celery',"CELERY_AMQP_CONSUMER_QUEUE") if config.has_option('celery','CELERY_AMQP_CONSUMER_QUEUE') else None
-CELERY_AMQP_CONSUMER_ROUTING_KEY = config.get("celery",'CELERY_AMQP_EXCHANGE') if config.has_option('celery','CELERY_AMQP_CONSUMER_ROUTING_KEY') else None
-CELERY_AMQP_EXCHANGE_TYPE = config.get('celery','CELERY_AMQP_EXCHANGE_TYPE') if config.has_option('celery','CELERY_AMQP_EXCHANGE_TYPE') else None
-
+CELERY_BACKEND = local_settings.CELERY_BACKEND
+CELERY_CACHE_BACKEND = local_settings.CELERY_CACHE_BACKEND
+CELERY_AMQP_EXCHANGE = local_settings.CELERY_AMQP_EXCHANGE
+CELERY_AMQP_PUBLISHER_ROUTING_KEY = local_settings.CELERY_AMQP_EXCHANGE
+CELERY_AMQP_CONSUMER_QUEUE = local_settings.CELERY_AMQP_CONSUMER_QUEUE
+CELERY_AMQP_CONSUMER_ROUTING_KEY = local_settings.CELERY_AMQP_EXCHANGE
+CELERY_AMQP_EXCHANGE_TYPE = local_settings.CELERY_AMQP_EXCHANGE_TYPE
 
 ########
 # JOBS #
@@ -632,7 +608,7 @@ rl_config.TTFSearchPath.append( PRJBASE + "/fonts/" )
 SHOP_CONF = {
 	'DEFAULT_NAVISION_JOB' : '280E',
 	'DEFAULT_NAVISION_JSP' : 6265,
-	'ORDER_FILE_PREFX' : 'hb',
+	'ORDER_FILE_PREFX' : "hb",
 }
 
 
@@ -723,16 +699,16 @@ LIVESETTINGS_OPTIONS = {
             u'PAYMENT_COPOSWEB': {
 				u'USER_TEST': u'testeso',
 				u'PASSWORD_TEST': u'Kw6&gHKi',
-				u'LIVE_CONFIG_FILE' : config.get("shop","COPOSWEB_CONFIG_INI", "/etc/coposweb.ini"),
+				u'LIVE_CONFIG_FILE' : local_settings.COPOSWEB_CONFIG_INI,
 				u'CAPTURE': u'True',
-				u'LIVE': u'True' if config.getboolean("shop","LIVE" ) else u'False',
-				u'EXTRA_LOGGING': u'True',				
+				u'LIVE': u'True' if local_settings.LIVE else u'False',
+				u'EXTRA_LOGGING': u'True',
 			},
 		}
 	}
 }
 
-ORDER_PREFIX = config.get( "shop", "ORDER_PREFIX", "hb" )
+ORDER_PREFIX = local_settings.ORDER_PREFIX
 
 SHOP_PICKUP_LOCATIONS = (
 	{ 'id' : 'PUP1', 

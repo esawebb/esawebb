@@ -125,5 +125,6 @@ urlpatterns += patterns( '',
 # Static files/media serving during development
 if settings.SERVE_STATIC_MEDIA:
     urlpatterns += patterns( '',
-        ( r'^' + settings.STATIC_MEDIA_PREFIX + r'/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.MEDIA_ROOT, 'show_indexes': True } ),
-				)
+		( r'^' + settings.DJANGOPLICITY_MEDIA_URL[1:] + r'(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.DJANGOPLICITY_MEDIA_ROOT, 'show_indexes': True } ),
+		( r'^' + settings.MEDIA_URL[1:] + r'(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.MEDIA_ROOT, 'show_indexes': True } ),
+	)

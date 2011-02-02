@@ -9,8 +9,10 @@
 recursive-include templates *
 recursive-include static *
 recursive-include fixtures *
-recursive-include docs *
 recursive-include bin *
+recursive-include scripts *
+recursive-include migration *
 recursive-include conf *
 include *.py
-prune docs/build
+include sql *.sql
+include fonts *.ttf
