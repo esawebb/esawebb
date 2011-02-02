@@ -29,7 +29,7 @@ django-sslmiddleware==dev
 recaptcha-client==1.0.3
 cssutils==0.9.6b2
 amqplib==0.6.1
-#anyjson==0.2.1
+anyjson==0.3
 lockfile==0.8
 multiprocessing==2.6.1.1
 django-unittest-depth==0.6
