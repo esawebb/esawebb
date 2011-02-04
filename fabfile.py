@@ -41,9 +41,9 @@ MERGE_FILES = [
 
 PERMISSIONS = [
 		{'path' : '%(prefix)s/virtualenv/bin/*', 'user' : None, 'group' : None, 'perms' : 'a+x' },
-		{'path' : '%(prefix)s/docs/static/css/', 'user' : None, 'group' : 'w3hst', 'perms' : 'og+ws' },
-		{'path' : '%(prefix)s/docs/static/js/', 'user' : None, 'group' : 'w3hst', 'perms' : 'og+ws' },
-		{'path' : '%(prefix)s/logs/', 'user' : None, 'group' : 'w3hst', 'perms' : 'og+ws' },
+		{'path' : '%(prefix)s/docs/static/css/', 'user' : None, 'group' : 'w3hst', 'perms' : 'g+ws' },
+		{'path' : '%(prefix)s/docs/static/js/', 'user' : None, 'group' : 'w3hst', 'perms' : 'g+ws' },
+		{'path' : '%(prefix)s/logs/', 'user' : None, 'group' : 'w3hst', 'perms' : 'g+ws' },
 ]
 
 STATIC_FILES = [
@@ -60,7 +60,7 @@ integration_clear_installation = djangoplicity.fabric.clear_installation( server
 integration_bootstrap = djangoplicity.fabric.bootstrap( servers=[DEVSERVER,], prefix=PREFIXI, mode='integration_settings' )
 integration_relocate_virtualenv = djangoplicity.fabric.relocate_virtualenv( servers=[DEVSERVER,], prefix=PREFIXI, relocateto=PREFIX )
 integration_sync = djangoplicity.fabric.sync( servers=[DEVSERVER,], prefix=PREFIXI, sync=STATIC_FILES )
-integration_fix_perms = djangoplicity.fabric.fix_perms( servers=[DEVSERVER], prefix=PREFIXI, dirs=PERMISSIONS )
+integration_fix_perms = djangoplicity.fabric.fix_perms( servers=[SERVER1I], prefix=PREFIX, dirs=PERMISSIONS )
 
 integration_setup = djangoplicity.fabric.setup( servers=[DEVSERVER,], prefix=PREFIXI, mode='integration' )
 

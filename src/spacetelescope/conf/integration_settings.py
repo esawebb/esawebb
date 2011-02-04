@@ -12,6 +12,7 @@ from deployment_settings import *
 
 SITE_ENVIRONMENT = 'integration'
 
+DEBUG = True
 ##################
 # DATABASE SETUP #
 ##################
