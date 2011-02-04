@@ -298,7 +298,6 @@ INSTALLED_APPS += (
 	'djangoplicity.products',  
 	'djangoplicity.search',
 	'djangoplicity.metadata',  
-	'djangoplicity',
 	'djangoplicity.authtkt',
 	'djangoplicity.google',
 	'djangoplicity.inventory',
