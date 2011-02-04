@@ -302,6 +302,7 @@ INSTALLED_APPS += (
 	'djangoplicity.google',
 	'djangoplicity.inventory',
 	'djangoplicity.adminhistory',
+	'djangoplicity.utils',
 	'spacetelescope',
 	'celery',
 	'mptt',
