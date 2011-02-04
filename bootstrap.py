@@ -1271,12 +1271,12 @@ def create_bootstrap_script(extra_text, python_version=''):
 #
 
 """
-Script will be included into project bootstrap script and provides the framework for
-bootstrapping a djangoplicity project environment.
+Script will be included into project bootstrap and deploy script and provides the settings 
+and helper functions for both scripts.
 """
 
-import os
 import sys
+import os
 
 PY_VERSION = "%s.%s" % ( sys.version_info[0], sys.version_info[1] )
 VIRTUALENV_DIRNAME = 'virtualenv'
@@ -1301,6 +1301,225 @@ settings = {
 	'finalize_tasks' : [],
 	'requirements' :  [],
 }
+
+			
+# ==========================================
+# Common tasks
+# ==========================================
+def task_vcs_install( base_dir, home_dir, bin_dir, options ):
+	"""
+	Install checked out VCS projects. Use the --develop option to install them as 
+	editable.
+	"""
+	logger.notify("Installing VCS projects")
+	
+	vcs_base_dir = os.path.join( base_dir, _get_setting( 'vcs_base_dir', 'projects' ) )
+	vcs_projects = _get_setting( 'vcs_projects', [] )
+
+	for vcs_dirname, vcs_url in vcs_projects:
+		try:
+			vcs_dir = os.path.join( vcs_base_dir, vcs_dirname )
+			if os.path.exists( os.path.join( vcs_dir, "setup.py" ) ):
+				if 'call_subprocess' not in globals():
+					from pip import call_subprocess
+				if options.develop:
+					call_subprocess( [os.path.join( bin_dir, "pip" ), "install", "-E", home_dir, "-e", vcs_dir ] ) 
+				else:
+					call_subprocess( [os.path.join( bin_dir, "pip" ), "install", "-E", home_dir,  vcs_dir ] )
+			else:
+				logger.error( "Project located at %s has no setup.py file" % vcs_dir )
+		except Exception, e:
+			logger.error( unicode(e) )
+
+
+def task_install_requirements( base_dir, home_dir, bin_dir ):
+	"""
+	Install all required Python modules 
+	"""
+	reqfiles = _get_setting('requirements')
+	#repository = _get_setting('repository')
+	if not reqfiles:
+		logger.notify( "No requirements to install")
+		return
+	
+	for reqdict in reqfiles:
+		# Two supported formats: 
+		# requirements = [{ 'file':'requirements.txt','repository':'http://...','options':['--no-index']},..]
+		# or 
+		# requirements = [requirements.txt',...]
+		if issubclass( type(reqdict), dict ):
+			reqfile = reqdict['file']
+			repository = reqdict['repository'] if 'repository' in reqdict else None
+			options = reqdict['options'] if 'options' in reqdict else None
+		else:
+			reqfile = reqdict
+			repository = None
+			options = None 
+		
+		reqfile = os.path.join( base_dir, reqdict['file'] )
+		
+		if not os.path.exists( reqfile ):
+			logger.error("Requirements file %s does not exists" % reqfile )
+			continue
+		
+		cmd = [os.path.join( bin_dir, "pip" ), "install"]
+		if repository:
+			logger.notify( "Using repository %s" % repository )
+			cmd += ["--find-links", repository]
+		if options:
+			cmd += options
+		cmd += ["-E", home_dir, "-r", reqfile] 
+		
+		logger.notify( "Installing packages defined in %s" % reqfile )
+		try:
+			if 'call_subprocess' not in globals():
+				from pip import call_subprocess
+			call_subprocess( cmd )
+		except Exception, e:
+			logger.error( unicode(e) )
+
+# ==========================================
+# Helper functions
+# ==========================================
+def _symlink( link_src, link_dest_path ):
+	"""
+	Create a symbolic link from source to destination
+	"""
+	link_dest_dir = os.path.dirname( link_dest_path )
+	link_dest = os.path.basename( link_dest_path )
+	
+	if sys.platform == 'win32':
+		logger.warn("Win32 platform detected - please create link yourself: %s to %s" % ( os.path.abspath( link_dest_path ), os.path.abspath( link_src ) ) )
+		return
+		
+	if not os.path.lexists( link_dest_path ):
+		logger.info( 'Creating symbolic link %s to %s.' % ( os.path.abspath( link_dest_path ), os.path.abspath( link_src ) ) )
+		oldcwd = os.getcwd()
+		os.chdir( link_dest_dir )
+		# TODO: Extend to support win32
+		os.symlink( link_src, link_dest )
+		os.chdir(oldcwd)
+	else:
+		logger.warn( 'Symbolic link, %s, already exists ' % os.path.abspath( link_dest_path ) )
+	
+def _get_setting( attr, default=None ):
+	"""
+	Retrieve a settings value.
+	"""
+	if attr in settings:
+		val = settings[attr]
+		return default if val is None and default is not None else val
+	else:
+		return None
+
+def _activate_virtualenv( bin_dir ):
+	"""
+	Activate the just installed virtual environment
+	"""
+	global logger
+	if logger:
+		logger.notify("Activating virtual environment")
+	activate_this = os.path.join( bin_dir, "activate_this.py" )
+	if os.path.exists( activate_this ):
+		execfile( activate_this, dict( __file__ = activate_this ) )
+	else:
+		if logger:
+			logger.error("Cannot activate virtual environment - bin/activate_this.py is missing.")
+	
+# -*- coding: utf-8 -*-
+#
+# spacetelescope.org
+# Copyright 2010 ESO & ESA/Hubble
+#
+# Authors:
+#   Lars Holm Nielsen <lnielsen@eso.org>
+#   Luis Clara Gomes <lcgomes@eso.org>
+#
+
+import sys
+
+#
+# Make sure the settings can be loaded in other modules
+# 
+if 'settings' not in globals():
+	from djangoplicity.bootstrap.defaults import settings, PY_VERSION 
+	
+#
+# Requirements
+#
+requirements_repo = "http://www.djangoplicity.org/repository/packages/"
+requirements_files = [{'file':'projects/spacetelescope.org/requirements.txt', 'repository':requirements_repo, 'options':['--no-index']}]
+
+#
+# Settings
+#
+projects_settings = {
+	'vcs_projects' : [
+			( 'djangoplicity-bootstrap', 'hg+https://eso_readonly:pg11opc@bitbucket.org/eso/djangoplicity-bootstrap',),
+			( 'djangoplicity-settings', 'hg+https://eso_readonly:pg11opc@bitbucket.org/eso/djangoplicity-settings' ),
+			( 'djangoplicity-adminhistory', 'hg+https://eso_readonly:pg11opc@bitbucket.org/eso/djangoplicity-adminhistory' ),
+			( 'djangoplicity', 'hg+https://eso_readonly:pg11opc@bitbucket.org/eso/djangoplicity' ),
+			( 'spacetelescope.org', 'hg+https://eso_readonly:pg11opc@bitbucket.org/eso/spacetelescope.org' ), 
+		],
+	'directories' : settings['directories'] + [
+			'docs',
+            'docs/static',
+            'docs/static/djangoplicity',
+            'docs/static/archives',
+            'docs/static/archives/images/',
+			'docs/static/archives/videos/',
+			'docs/static/archives/releases/',
+		],
+	'symlinks' : [
+			( '../../virtualenv/lib/python%(version)s/site-packages/django/contrib/admin/media' % { 'version' : PY_VERSION }, 'docs/static/media' ), 
+		],
+	'develop-symlinks' : [
+			( '../../djangoplicity/static', 'projects/spacetelescope.org/static/djangoplicity' ), 
+		],
+	'requirements' : requirements_files,
+	'prompt' : 'spacetelescope.org',
+}
+settings.update( projects_settings )
+
+# -*- coding: utf-8 -*-
+#
+# djangoplicity-apptemplate
+# Copyright (c) 2007-2011, European Southern Observatory (ESO)
+# All rights reserved.
+#
+# Redistribution and use in source and binary forms, with or without
+# modification, are permitted provided that the following conditions are met:
+#
+#    * Redistributions of source code must retain the above copyright
+#      notice, this list of conditions and the following disclaimer.
+#
+#    * Redistributions in binary form must reproduce the above copyright
+#      notice, this list of conditions and the following disclaimer in the
+#      documentation and/or other materials provided with the distribution.
+#
+#    * Neither the name of the European Southern Observatory nor the names 
+#      of its contributors may be used to endorse or promote products derived
+#      from this software without specific prior written permission.
+#
+# THIS SOFTWARE IS PROVIDED BY ESO ``AS IS'' AND ANY EXPRESS OR IMPLIED
+# WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF
+# MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO
+# EVENT SHALL ESO BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
+# EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
+# PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR
+# BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER
+# IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+# ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+# POSSIBILITY OF SUCH DAMAGE
+#
+
+"""
+Script will be included into project bootstrap script and provides the framework for
+bootstrapping a djangoplicity project environment.
+"""
+
+import os
+import sys
 
 # ==========================================
 # Virtualenv bootstrap hooks
@@ -1381,7 +1600,11 @@ def task_hooks( base_dir, home_dir, lib_dir, inc_dir, bin_dir, options, setting_
 	
 	for func in hooks:
 		if callable( func ):
-			func( base_dir, home_dir, lib_dir, inc_dir, bin_dir, options )
+			try:
+				func( base_dir, home_dir, lib_dir, inc_dir, bin_dir, options )
+			except Exception, e:
+				logger.error( unicode(e) )
+				
 
 def task_create_directories( base_dir ):
 	"""
@@ -1390,7 +1613,10 @@ def task_create_directories( base_dir ):
 	logger.notify("Creating directories in deployment root")
 	directories = _get_setting( 'directories', [] )
 	for p in directories:
-		mkdir( os.path.join( base_dir, p ) )
+		try:
+			mkdir( os.path.join( base_dir, p ) )
+		except Exception, e:
+			logger.error( unicode(e) )
 
 def task_create_symlinks( base_dir, setting='symlinks' ):
 	"""
@@ -1404,49 +1630,11 @@ def task_create_symlinks( base_dir, setting='symlinks' ):
 	
 	for link_src, link_dest in symlinks:
 		link_dest = os.path.join( base_dir, link_dest )
-		_symlink( link_src, link_dest )
+		try:
+			_symlink( link_src, link_dest )
+		except Exception, e:
+			logger.error( unicode(e) )
 	os.chdir( base_dir )
-
-def task_install_requirements( base_dir, home_dir, bin_dir ):
-	"""
-	Install all required Python modules 
-	"""
-	reqfiles = _get_setting('requirements')
-	#repository = _get_setting('repository')
-	if not reqfiles:
-		logger.notify( "No requirements to install")
-		return
-	
-	for reqdict in reqfiles:
-		# Two supported formats: 
-		# requirements = [{ 'file':'requirements.txt','repository':'http://...','options':['--no-index']},..]
-		# or 
-		# requirements = [requirements.txt',...]
-		if issubclass( type(reqdict), dict ):
-			reqfile = reqdict['file']
-			repository = reqdict['repository'] if 'repository' in reqdict else None
-			options = reqdict['options'] if 'options' in reqdict else None
-		else:
-			reqfile = reqdict
-			repository = None
-			options = None 
-		
-		reqfile = os.path.join( base_dir, reqdict['file'] )
-		
-		if not os.path.exists( reqfile ):
-			logger.error("Requirements file %s does not exists" % reqfile )
-			continue
-		
-		cmd = [os.path.join( bin_dir, "pip" ), "install"]
-		if repository:
-			logger.notify( "Using repository %s" % repository )
-			cmd += ["--find-links", repository]
-		if options:
-			cmd += options
-		cmd += ["-E", home_dir, "-r", reqfile] 
-		
-		logger.notify( "Installing packages defined in %s" % reqfile )
-		call_subprocess( cmd )
 
 	
 def task_vcs_checkout( base_dir, options ):
@@ -1460,7 +1648,10 @@ def task_vcs_checkout( base_dir, options ):
 	
 	if not os.path.exists( vcs_base_dir ):
 		logger.warn("VCS base directory %s doesn't exists, so it will be created")
-		os.makedirs( vcs_base_dir )
+		try:
+			os.makedirs( vcs_base_dir )
+		except Exception, e:
+			logger.error( unicode(e) )
 	
 	if vcs_projects:
 		# Register all version control modules
@@ -1477,40 +1668,27 @@ def task_vcs_checkout( base_dir, options ):
 				# Link to existing project
 				existing_vcs_dir = os.path.join( options.existing_checkout_dir, vcs_dirname )
 				if os.path.exists( existing_vcs_dir ):
-					_symlink( existing_vcs_dir, os.path.join( vcs_base_dir, vcs_dirname)  )
+					try:
+						_symlink( existing_vcs_dir, os.path.join( vcs_base_dir, vcs_dirname)  )
+					except Exception, e:
+						logger.error( unicode(e) )
 				else:	
 					logger.error( "Existing VCS project doesn't exists at %s" % existing_vcs_dir )
 			else:
 				# Checkout project
-				vc_type, url = vcs_url.split( '+', 1 )
-				backend = vcs.get_backend( vc_type )
-				if backend:
-					logger.info( "Retrieving VCS project from URL %s " % vcs_url )
-					vcs_backend = backend( vcs_url )
-					vcs_backend.obtain( vcs_dir )
-				else:
-					logger.error( "Unexpected version control type (in %s): %s" % ( url, vc_type ) )
+				try:
+					vc_type, url = vcs_url.split( '+', 1 )
+					backend = vcs.get_backend( vc_type )
+					if backend:
+						logger.info( "Retrieving VCS project from URL %s " % vcs_url )
+						vcs_backend = backend( vcs_url )
+						vcs_backend.obtain( vcs_dir )
+					else:
+						logger.error( "Unexpected version control type (in %s): %s" % ( url, vc_type ) )
+				except Exception, e:
+					logger.error( unicode(e) )
 
-	
-def task_vcs_install( base_dir, home_dir, bin_dir, options ):
-	"""
-	Install checked out VCS projects. Use the --develop option to install them as 
-	editable.
-	"""
-	logger.notify("Installing VCS projects")
-	
-	vcs_base_dir = os.path.join( base_dir, _get_setting( 'vcs_base_dir', 'projects' ) )
-	vcs_projects = _get_setting( 'vcs_projects', [] )
 
-	for vcs_dirname, vcs_url in vcs_projects:
-		vcs_dir = os.path.join( vcs_base_dir, vcs_dirname )
-		if os.path.exists( os.path.join( vcs_dir, "setup.py" ) ):
-			if options.develop:
-				call_subprocess( [os.path.join( bin_dir, "pip" ), "install", "-E", home_dir, "-e", vcs_dir ] ) 
-			else:
-				call_subprocess( [os.path.join( bin_dir, "pip" ), "install", "-E", home_dir,  vcs_dir ] )
-		else:
-			logger.error( "Project located at %s has no setup.py file" % vcs_dir )
 
 
 def run_script( script ):
@@ -1521,108 +1699,6 @@ def run_script( script ):
 	def func( base_dir, home_dir, lib_dir, inc_dir, bin_dir, options ):
 		call_subprocess( [ os.path.join( base_dir, script ),  base_dir, home_dir, lib_dir, inc_dir, bin_dir ] )
 	return func
-			
-# ==========================================
-# Helper functions
-# ==========================================
-def _symlink( link_src, link_dest_path ):
-	"""
-	Create a symbolic link from source to destination
-	"""
-	link_dest_dir = os.path.dirname( link_dest_path )
-	link_dest = os.path.basename( link_dest_path )
-	
-	if sys.platform == 'win32':
-		logger.warn("Win32 platform detected - please create link yourself: %s to %s" % ( os.path.abspath( link_dest_path ), os.path.abspath( link_src ) ) )
-		return
-		
-	if not os.path.lexists( link_dest_path ):
-		logger.info( 'Creating symbolic link %s to %s.' % ( os.path.abspath( link_dest_path ), os.path.abspath( link_src ) ) )
-		oldcwd = os.getcwd()
-		os.chdir( link_dest_dir )
-		# TODO: Extend to support win32
-		os.symlink( link_src, link_dest )
-		os.chdir(oldcwd)
-	else:
-		logger.warn( 'Symbolic link, %s, already exists ' % os.path.abspath( link_dest_path ) )
-	
-def _get_setting( attr, default=None ):
-	"""
-	Retrieve a settings value.
-	"""
-	if attr in settings:
-		val = settings[attr]
-		return default if val is None and default is not None else val
-	else:
-		return None
-
-def _activate_virtualenv( bin_dir ):
-	"""
-	Activate the just installed virtual environment
-	"""
-	logger.notify("Activating virtual environment")
-	activate_this = os.path.join( bin_dir, "activate_this.py" )
-	if os.path.exists( activate_this ):
-		execfile( activate_this, dict( __file__ = activate_this ) )
-	else:
-		logger.error("Cannot activate virtual environment - bin/activate_this.py is missing.")
-	
-	# -*- coding: utf-8 -*-
-#
-# spacetelescope.org
-# Copyright 2010 ESO & ESA/Hubble
-#
-# Authors:
-#   Lars Holm Nielsen <lnielsen@eso.org>
-#   Luis Clara Gomes <lcgomes@eso.org>
-#
-
-# Following variables will be available:
-# - PY_VERSION, e.g. "2.7"
-
-import sys
-
-#
-# Requirements
-#
-requirements_repo = "http://www.djangoplicity.org/repository/packages/"
-requirements_files = [{'file':'projects/spacetelescope.org/requirements.txt', 'repository':requirements_repo, 'options':['--no-index']}]
-
-# Extra requirements for Python 2.5
-if sys.version_info[0] == 2 and sys.version_info[1] < 6:
-	requirements_files.append( {'file':'projects/spacetelescope.org/requirements-2.5.txt', 'repository':requirements_repo, 'options':['--no-index']} )
-
-#
-# Settings
-#
-projects_settings = {
-	'vcs_projects' : [
-			( 'djangoplicity-bootstrap', 'hg+https://bitbucket.org/eso/djangoplicity-bootstrap',),
-			( 'djangoplicity-settings', 'hg+https://bitbucket.org/eso/djangoplicity-settings' ),
-			( 'djangoplicity-adminhistory', 'hg+https://bitbucket.org/eso/djangoplicity-adminhistory' ),
-			( 'djangoplicity', 'hg+https://bitbucket.org/eso/djangoplicity' ),
-			( 'spacetelescope.org', 'hg+https://bitbucket.org/eso/spacetelescope.org' ), 
-		],
-	'directories' : settings['directories'] + [
-			'docs',
-            'docs/static',
-            'docs/static/djangoplicity',
-            'docs/static/archives',
-            'docs/static/archives/images/',
-			'docs/static/archives/videos/',
-			'docs/static/archives/releases/',
-		],
-	'symlinks' : [
-			( '../../virtualenv/lib/python%(version)s/site-packages/django/contrib/admin/media' % { 'version' : PY_VERSION }, 'docs/static/media' ), 
-		],
-	'develop-symlinks' : [
-			( '../../djangoplicity/static', 'projects/spacetelescope.org/static/djangoplicity' ), 
-		],
-	'requirements' : requirements_files,
-	'prompt' : 'spacetelescope.org',
-}
-settings.update( projects_settings )  
-
 
 ##file site.py
 SITE_PY = """

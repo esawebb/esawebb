@@ -9,7 +9,7 @@
 #
 from fabric.api import *
 import djangoplicity.fabric
-
+from bootstrap_settings import settings
 
 SERVERNAME = "hubble"
 SERVERNAMEI = "hubblei"
@@ -39,16 +39,32 @@ MERGE_FILES = [
 	# NOT COMPLETE - COPOSWEB FILES AND ORDER FILE NEEDED.
 ]
 
+PERMISSIONS = [
+		{'path' : '%(prefix)s/virtualenv/bin/*', 'user' : None, 'group' : None, 'perms' : 'a+x' },
+		{'path' : '%(prefix)s/docs/static/css/', 'user' : None, 'group' : 'w3hst', 'perms' : 'og+ws' },
+		{'path' : '%(prefix)s/docs/static/js/', 'user' : None, 'group' : 'w3hst', 'perms' : 'og+ws' },
+		{'path' : '%(prefix)s/logs/', 'user' : None, 'group' : 'w3hst', 'perms' : 'og+ws' },
+]
+
+STATIC_FILES = [
+	('%(prefix)s/projects/spacetelescope.org/static/','%(prefix)s/docs/static/'),
+	('%(prefix)s/projects/djangoplicity/static/','%(prefix)s/docs/static/djangoplicity/'),
+]
+
 # Local tasks
 local_backupdb = djangoplicity.fabric.backup_database( project_app=PRJAPP )
 local_apply_sql = djangoplicity.fabric.apply_sql( sqlfile='sql/deploy.sql', project_app=PRJAPP )
 
 # Integration deployment tasks
 integration_clear_installation = djangoplicity.fabric.clear_installation( servers=[DEVSERVER,], prefix=PREFIXI )
-integration_relocate_virtualenv = djangoplicity.fabric.relocate_virtualenv( servers=[DEVSERVER,], prefix=PREFIXI, relocateto=PREFIX )
 integration_bootstrap = djangoplicity.fabric.bootstrap( servers=[DEVSERVER,], prefix=PREFIXI, mode='integration_settings' )
+integration_relocate_virtualenv = djangoplicity.fabric.relocate_virtualenv( servers=[DEVSERVER,], prefix=PREFIXI, relocateto=PREFIX )
+integration_sync = djangoplicity.fabric.sync( servers=[DEVSERVER,], prefix=PREFIXI, sync=STATIC_FILES )
+integration_fix_perms = djangoplicity.fabric.fix_perms( servers=[DEVSERVER], prefix=PREFIXI, dirs=PERMISSIONS )
+
 integration_setup = djangoplicity.fabric.setup( servers=[DEVSERVER,], prefix=PREFIXI, mode='integration' )
-integration_fix_perms = djangoplicity.fabric.fix_perms( servers=[DEVSERVER], prefix=PREFIX )
+
+integration_vcs_update = djangoplicity.fabric.vcs_update( servers=[DEVSERVER,], prefix=PREFIXI )
 integration = djangoplicity.fabric.deploy( servers=[DEVSERVER,], prefix=PREFIXI, prjdir=PRJDIR )
 integration_stop = djangoplicity.fabric.stop( servers=[SERVER1I, SERVER2I], servername=SERVERNAME )
 integration_start = djangoplicity.fabric.start( servers=[SERVER1I, SERVER2I], servername=SERVERNAME )

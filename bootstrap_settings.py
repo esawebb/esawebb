@@ -8,20 +8,19 @@
 #   Luis Clara Gomes <lcgomes@eso.org>
 #
 
-# Following variables will be available:
-# - PY_VERSION, e.g. "2.7"
-
 import sys
 
+#
+# Make sure the settings can be loaded in other modules
+# 
+if 'settings' not in globals():
+	from djangoplicity.bootstrap.defaults import settings, PY_VERSION 
+	
 #
 # Requirements
 #
 requirements_repo = "http://www.djangoplicity.org/repository/packages/"
 requirements_files = [{'file':'projects/spacetelescope.org/requirements.txt', 'repository':requirements_repo, 'options':['--no-index']}]
-
-# Extra requirements for Python 2.5
-if sys.version_info[0] == 2 and sys.version_info[1] < 6:
-	requirements_files.append( {'file':'projects/spacetelescope.org/requirements-2.5.txt', 'repository':requirements_repo, 'options':['--no-index']} )
 
 #
 # Settings
@@ -52,4 +51,4 @@ projects_settings = {
 	'requirements' : requirements_files,
 	'prompt' : 'spacetelescope.org',
 }
-settings.update( projects_settings )  
+settings.update( projects_settings )
