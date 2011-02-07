@@ -11,7 +11,7 @@ from djangoplicity.migration.apps.pages import PageInitializationTask, \
 from djangoplicity.pages.models import Section
 from djangoplicity.releases.models import Release
 from djangoplicity.metadata.models import *
-from spacetelescope.archives.models import *
+#from spacetelescope.archives.models import *
 from spacetelescope.migration.archives import *
 from spacetelescope.migration.pages import SpacetelescopePageDocument, \
 	SpacetelescopePageLinksCleanupTask, SpacetelescopePageFilesCopyTask
@@ -277,16 +277,17 @@ extra_redirects = {
 #
 
 def choose_tasks():
+	return archivetasks
 	#return archivetasks + pagestasks
 	#return testtask
-	return [AnnouncementResourcesToImagesTask () ]
+	#return [AnnouncementResourcesToImagesTask () ]
 
 
 
 
 
 testtask = [
-		ArchiveInitializationTask( Redirect ),
+		#ArchiveInitializationTask( Redirect ),
 		#ArchiveInitializationTask( Image ),
 		#ArchiveInitializationTask( Video ),
 		#ArchiveMigrationTask( SpacetelescopeCSVDataSource( '/Volumes/webdocs/spacetelescope/docs/csvfiles/newsdata.csv'), NewsDataMapping ),
@@ -295,12 +296,11 @@ testtask = [
     	#ArchiveMigrationTask( SpacetelescopeCSVDataSource( '/Volumes/webdocs/spacetelescope/docs/csvfiles/newsdata.csv'), NewsMainImageDataMapping ),
 ]
 
-
 #
 # Define migration tasks
 #
 archivetasks = [
-	ArchiveInitializationTask( Redirect ),
+	#ArchiveInitializationTask( Redirect ),
 	# INIT - reset all redirects!!
 #	ArchiveInitializationTask( Redirect ),
 	
@@ -340,7 +340,7 @@ archivetasks = [
 #    ArchiveInitializationTask ( FITSImage ),
     
 #    ArchiveMigrationTask( SpacetelescopeCSVDataSource( '/Volumes/webdocs/spacetelescope/docs/csvfiles/newsdata.csv'), NewsDataMapping ),
-#    ArchiveMigrationTask( SpacetelescopeCSVDataSource( '/Volumes/webdocs/spacetelescope/docs/csvfiles/imagedata.csv'), ImagesDataMapping ),
+    ArchiveMigrationTask( SpacetelescopeCSVDataSource( '/Users/lnielsen/Desktop/imagedata.csv'), ImagesAVMDataMapping ),
 #    ArchiveMigrationTask( SpacetelescopeCSVDataSource( '/Volumes/webdocs/spacetelescope/docs/csvfiles/videodata.csv'), VideosDataMapping ),
 #    ArchiveMigrationTask( SpacetelescopeCSVDataSource( '/Volumes/webdocs/spacetelescope/docs/csvfiles/newsdata.csv'), NewsMainImageDataMapping ),
 #	ArchiveMigrationTask( SpacetelescopeCSVDataSource( '/Volumes/webdocs/spacetelescope/docs/csvfiles/edumatdata.csv'), EducationalMaterialsDataMapping ),
@@ -365,7 +365,7 @@ archivetasks = [
 #    ArchiveMigrationTask( SpacetelescopeCSVDataSource( '/Volumes/webdocs/spacetelescope/docs/csvfiles/exhibitiondata.csv'), ExhibitionDataMapping ),
 #    ArchiveMigrationTask( SpacetelescopeCSVDataSource( '/Volumes/webdocs/spacetelescope/docs/csvfiles/fitsimagedata.csv'), FITSImageDataMapping ),
 #    ArchiveMigrationTask( SpacetelescopeCSVDataSource( '/Volumes/webdocs/spacetelescope/docs/csvfiles/usersvideosdata.csv'), UserVideoDataMapping ),
-	ArchiveMigrationTask( SpacetelescopeCSVDataSource( '/Volumes/webdocs/spacetelescope/docs/csvfiles/presentationdata.csv'), PresentationDataMapping ),
+#	ArchiveMigrationTask( SpacetelescopeCSVDataSource( '/Volumes/webdocs/spacetelescope/docs/csvfiles/presentationdata.csv'), PresentationDataMapping ),
 ]
 
 #

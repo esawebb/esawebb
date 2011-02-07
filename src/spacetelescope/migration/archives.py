@@ -16,7 +16,7 @@ from djangoplicity.migration import MigrationError, MigrationTask
 from djangoplicity.migration.apps.archives import CSVDataSource, DataMapping
 from djangoplicity.releases.models import Release, ReleaseType, ReleaseImage, ReleaseVideo
 from djangoplicity.releases.models import Image, Video
-from spacetelescope.archives.models import *
+from djangoplicity.products.models import *
 #from spacetelescope.archives.products.models import *
 from django.utils.html import strip_tags
 from djangoplicity.utils.videothumbnails import format_duration
@@ -536,8 +536,6 @@ class VideosDataMapping( SpacetelescopeDataMapping ):
 	
 
 
-	
-
 class ImagesDataMapping( SpacetelescopeDataMapping ):
 	BASE = "/images"
 	
@@ -705,6 +703,59 @@ class ImagesDataMapping( SpacetelescopeDataMapping ):
 	def spatial_notes(self):
 		return self.get_text_field('Spatial.Notes')
 	
+
+
+class ImagesAVMDataMapping( ImagesDataMapping ):
+	def run(self):
+		# Find image.
+		# Determine if something has to be done
+		# Create ImageExposureObjects (align data)
+		id = self._dataentry('id')
+		
+		try:
+			im = Image.objects.get( id=id )
+		except Exception, e:
+			self.logger.error("Could not find image %(id)s - check https://www.spacetelescope.org/admin/history/?s=%(id)s" % { 'id' : id } )
+			return
+			#raise MigrationError( unicode(e) )
+		print im.id
+		
+#		print self._dataentry('Subject.Category')
+#		print self._dataentry('ReferenceURL')
+#		print self._dataentry('Date')
+#		print self._dataentry('Type')
+#		print self._dataentry('Image.ProductQuality')
+#		print self._dataentry('Spectral.ColorAssignment')
+#		print self._dataentry('Spectral.Band')
+#		print self._dataentry('Spectral.Bandpass')
+#		print self._dataentry('Spectral.CentralWavelength')
+#		print self._dataentry('Spectral.Notes')
+#		print self._dataentry('Temporal.StartTime')
+#		print self._dataentry('Temporal.IntegrationTime')
+#		print self._dataentry('DatasetID')
+#		print self._dataentry('Spatial.ReferenceDimension')
+#		print self._dataentry('Spatial.CoordinateFrame')
+#		print self._dataentry('Spatial.Equinox')
+#		print self._dataentry('Spatial.ReferenceValue')
+#		print self._dataentry('Spatial.ReferencePixel')
+#		print self._dataentry('Spatial.Scale')
+#		print self.spatial_rotation()
+#		print self._dataentry('Spatial.Rotation')
+#		print self._dataentry('Spatial.CoordsystemProjection')
+#		print self._dataentry('Spatial.CDMatrix')
+#		print self._dataentry('Spatial.Quality')
+#		print self._dataentry('Spatial.Notes')
+#		print self._dataentry('Publisher')
+#		print self._dataentry('PublisherID')
+#		print self._dataentry('ResourceID')
+#		print self._dataentry('ResourceURL')
+#		print self._dataentry('MetadataVersion')
+#		print self._dataentry('MetadataDate')
+#		print self._dataentry('RelatedResources')
+#		print self._dataentry('ObjectDistance')
+#		print self._dataentry('DistortionCorrection')
+	
+
 
 class EducationalMaterialsDataMapping( ProductDataMapping ):
 	model = EducationalMaterial
