@@ -14,7 +14,7 @@ Pygments==1.4
 Sphinx==1.0.6
 MySQL-python==1.2.3
 python-memcached==1.47
-pycrypto==2.3
+pycrypto==2.0.1
 paramiko==1.7.6
 Fabric==0.9.3
 BeautifulSoup==3.2.0
