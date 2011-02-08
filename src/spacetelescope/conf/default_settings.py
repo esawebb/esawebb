@@ -20,6 +20,9 @@ LOG_DIR = "%s/logs" % ROOT
 TMP_DIR = "%s/tmp" % ROOT
 ENABLE_SSL = False
 
+SHORT_NAME = 'hubble'
+WEBSERVERS = ()
+
 ###################
 # ERROR REPORTING #
 ###################

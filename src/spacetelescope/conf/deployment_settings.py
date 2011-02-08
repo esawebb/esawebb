@@ -20,6 +20,13 @@ LOG_DIR = "%s/logs" % ROOT
 TMP_DIR = "%s/tmp" % ROOT
 ENABLE_SSL = True
 
+WEBSERVERS = (
+	('aweb5', '%s1i' % SHORT_NAME, '134.171.74.147' ),
+	('aweb6', '%s2i' % SHORT_NAME, '134.171.74.148' ),
+	('aweb14', '%s1' % SHORT_NAME, '134.171.75.139' ),
+	('aweb15', '%s2' % SHORT_NAME, '134.171.75.140' ),
+)
+
 ###################
 # ERROR REPORTING #
 ###################

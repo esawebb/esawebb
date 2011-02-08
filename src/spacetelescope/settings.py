@@ -14,14 +14,17 @@
 # from the settings.ini file.
 #
 
+from djangoplicity.settings import import_settings		
+import os
 import re
 
-from djangoplicity.settings import import_settings		
 local_settings = import_settings('spacetelescope')
+LOCAL_SETTINGS_MODULE = local_settings.LOCAL_SETTINGS_MODULE
 
 #############################
 # ENVIRONMENT CONFIGURATION #
 #############################
+ROOT = local_settings.ROOT
 PRJBASE = local_settings.PRJBASE
 PRJNAME = 'spacetelescope.org'
 DJANGOPLICITY_ROOT = local_settings.DJANGOPLICITY_ROOT
@@ -29,6 +32,15 @@ LOG_DIR = local_settings.LOG_DIR
 TMP_DIR = local_settings.TMP_DIR
 ENABLE_SSL = local_settings.ENABLE_SSL
 GA_ID = "UA-2368492-6"
+
+#####################
+# CONFIG GENERATION #
+#####################
+SHORT_NAME = local_settings.SHORT_NAME
+WEBSERVERS = local_settings.WEBSERVERS
+SSL_ASSETS_PREFIX = "www.spacetelescope.org"
+CONFIG_GEN_TEMPLATES_DIR = os.path.join( PRJBASE ,  "conf/templates/" ) 
+CONFIG_GEN_GENERATED_DIR = os.path.join( TMP_DIR ,  "conf/" ) 
 
 ###################
 # ERROR REPORTING #
@@ -325,6 +337,7 @@ INSTALLED_APPS += (
     'tax.modules.no',
     'app_plugins',
     'shipping.modules.tieredweight',
+    'django_config_gen',
 )
 
 
