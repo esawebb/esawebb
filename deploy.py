@@ -208,6 +208,7 @@ settings = {
 	'post_install_tasks' : [],
 	'finalize_tasks' : [],
 	'requirements' :  [],
+	'manage.py' : None,
 }
 
 			
@@ -282,6 +283,77 @@ def task_install_requirements( base_dir, home_dir, bin_dir ):
 		except Exception, e:
 			logger.error( unicode(e) )
 
+
+def task_run_manage(  base_dir, home_dir, lib_dir, inc_dir, bin_dir, options, task=None ):
+	"""
+	Install checked out VCS projects. Use the --develop option to install them as 
+	editable.
+	"""
+	if not task:
+		logger.error("No task defined")
+		return
+	else:
+		logger.notify("Running manage.py %s" % task)
+	
+	manage_py = _get_setting( 'manage.py', None )
+	if not manage_py:
+		logger.error("Setting 'manage.py' empty - please define path to manage.py.")
+		
+	manage_py_path = os.path.join( base_dir, manage_py )
+	if os.path.exists( manage_py_path ):
+		settings_module = _get_setting( 'settings_module', None )
+		local_settings_module = options.local_settings
+		
+		if not settings_module:
+			logger.error( "Settings 'settings_module' not defined" )
+			return
+		
+		if not local_settings_module:
+			local_settings_module = 'default_settings'
+		
+		try:
+			os.environ['DJANGO_SETTINGS_MODULE'] = settings_module   
+			os.environ['DJANGOPLICITY_SETTINGS'] = local_settings_module 
+			call_subprocess( [ os.path.join( bin_dir, "python" ), manage_py_path, task ] ) 
+		except Exception, e:
+			logger.error( unicode(e) )
+	else:
+		logger.error( "Manage.py file %s does not exists" % manage_py_path )
+
+
+def task_move(  base_dir, home_dir, lib_dir, inc_dir, bin_dir, options, src=None, dst=None ):
+	if not src or not dst:
+		logger.errro("No source or destination defined")
+		return
+	
+	src = os.path.join( base_dir, src )
+	dst = os.path.join( base_dir, dst )
+	logger.notify("Moving %s to %s" % (src,dst) )
+	try:
+		import shutil
+		shutil.move( src, dst )
+	except Exception, e:
+		logger.error( unicode(e) )
+	
+	
+def task_append( base_dir, home_dir, lib_dir, inc_dir, bin_dir, options, src=None, dst=None ):
+	if not src or not dst:
+		logger.errro("No source or destination defined")
+		return
+	
+	src = os.path.join( base_dir, src )
+	dst = os.path.join( base_dir, dst )
+	logger.notify( "Appending %s to %s" % ( src, dst ) )
+	try:
+		f = open( src )
+		append_text = f.read()
+		f.close()
+		
+		f = open( dst, 'a' )
+		f.write( append_text )
+		f.close()
+	except Exception, e:
+		logger.error( unicode(e) )
 # ==========================================
 # Helper functions
 # ==========================================
@@ -330,6 +402,24 @@ def _activate_virtualenv( bin_dir ):
 		if logger:
 			logger.error("Cannot activate virtual environment - bin/activate_this.py is missing.")
 	
+
+def run_script( script ):
+	"""
+	Return a function that will run the script. Script must be set as executable and should
+	include the path from the base directory.
+	"""
+	def func( base_dir, home_dir, lib_dir, inc_dir, bin_dir, options ):
+		call_subprocess( [ os.path.join( base_dir, script ),  base_dir, home_dir, lib_dir, inc_dir, bin_dir ] )
+	return func
+
+def run_function( runfunc, **kwargs ):
+	"""
+	Return a function that will run the script. Script must be set as executable and should
+	include the path from the base directory.
+	"""
+	def func( base_dir, home_dir, lib_dir, inc_dir, bin_dir, options ):
+		return runfunc( base_dir, home_dir, lib_dir, inc_dir, bin_dir, options, **kwargs )		
+	return func
 # -*- coding: utf-8 -*-
 #
 # spacetelescope.org
@@ -364,7 +454,7 @@ projects_settings = {
 			( 'djangoplicity-adminhistory', 'hg+https://eso_readonly:pg11opc@bitbucket.org/eso/djangoplicity-adminhistory' ),
 			( 'djangoplicity', 'hg+https://eso_readonly:pg11opc@bitbucket.org/eso/djangoplicity' ),
 			( 'spacetelescope.org', 'hg+https://eso_readonly:pg11opc@bitbucket.org/eso/spacetelescope.org' ), 
-		],
+		],	
 	'directories' : settings['directories'] + [
 			'docs',
             'docs/static',
@@ -382,6 +472,15 @@ projects_settings = {
 		],
 	'requirements' : requirements_files,
 	'prompt' : 'spacetelescope.org',
+	'manage.py' : 'projects/spacetelescope.org/src/spacetelescope/manage.py',
+	'settings_module' : 'spacetelescope.settings',
+	'finalize_tasks' : [ 
+		run_function( task_run_manage, task='config_gen' ), 
+		run_function( task_move, src='tmp/conf/django.wsgi', dst='virtualenv/apache/' ),
+		run_function( task_move, src='tmp/conf/httpd-djangoplicity.conf', dst='virtualenv/apache/'),
+		run_function( task_append, src='tmp/conf/activate-djangoplicity.sh', dst='virtualenv/bin/activate'),
+		run_function( task_append, src='tmp/conf/activate-djangoplicity.csh', dst='virtualenv/bin/activate.csh'), 
+	]
 }
 settings.update( projects_settings )
 
