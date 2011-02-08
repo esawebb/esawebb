@@ -1528,7 +1528,8 @@ import sys
 # Make sure the settings can be loaded in other modules
 # 
 if 'settings' not in globals():
-	from djangoplicity.bootstrap.defaults import settings, PY_VERSION 
+	from djangoplicity.bootstrap.defaults import settings, PY_VERSION, run_function, task_move, task_append, task_run_manage
+	 
 	
 #
 # Requirements
@@ -1557,7 +1558,8 @@ projects_settings = {
 			'docs/static/archives/releases/',
 		],
 	'symlinks' : [
-			( '../../virtualenv/lib/python%(version)s/site-packages/django/contrib/admin/media' % { 'version' : PY_VERSION }, 'docs/static/media' ), 
+			( '../../virtualenv/lib/python%(version)s/site-packages/django/contrib/admin/media' % { 'version' : PY_VERSION }, 'docs/static/media' ),
+			( '../import' % { 'version' : PY_VERSION }, 'import' ), 
 		],
 	'develop-symlinks' : [
 			( '../../djangoplicity/static', 'projects/spacetelescope.org/static/djangoplicity' ), 
