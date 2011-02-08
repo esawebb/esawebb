@@ -20,6 +20,7 @@ import optparse
 ## Main
 
 logger = None
+call_subprocess = None
 
 def main():
 	parser = optparse.OptionParser( usage="%prog [OPTIONS] BASE_DIR" )
@@ -65,10 +66,12 @@ def main():
 		
 	# Logger
 	from virtualenv import Logger
-	from pip import call_subprocess
+	from pip import call_subprocess as pip_call_subprocess
+	global call_subprocess
 	global logger
 	verbosity = options.verbose - options.quiet
 	logger = Logger( [( Logger.level_for_integer( 2 - verbosity ), sys.stdout )] )
+	call_subprocess = pip_call_subprocess
 			
 	class options:
 		develop = False
@@ -225,8 +228,6 @@ def task_vcs_install( base_dir, home_dir, bin_dir, options ):
 		try:
 			vcs_dir = os.path.join( vcs_base_dir, vcs_dirname )
 			if os.path.exists( os.path.join( vcs_dir, "setup.py" ) ):
-				if 'call_subprocess' not in globals():
-					from pip import call_subprocess
 				if options.develop:
 					call_subprocess( [os.path.join( bin_dir, "pip" ), "install", "-E", home_dir, "-e", vcs_dir ] ) 
 				else:
@@ -277,8 +278,6 @@ def task_install_requirements( base_dir, home_dir, bin_dir ):
 		
 		logger.notify( "Installing packages defined in %s" % reqfile )
 		try:
-			if 'call_subprocess' not in globals():
-				from pip import call_subprocess
 			call_subprocess( cmd )
 		except Exception, e:
 			logger.error( unicode(e) )

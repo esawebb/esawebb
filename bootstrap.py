@@ -1320,8 +1320,6 @@ def task_vcs_install( base_dir, home_dir, bin_dir, options ):
 		try:
 			vcs_dir = os.path.join( vcs_base_dir, vcs_dirname )
 			if os.path.exists( os.path.join( vcs_dir, "setup.py" ) ):
-				if 'call_subprocess' not in globals():
-					from pip import call_subprocess
 				if options.develop:
 					call_subprocess( [os.path.join( bin_dir, "pip" ), "install", "-E", home_dir, "-e", vcs_dir ] ) 
 				else:
@@ -1372,8 +1370,6 @@ def task_install_requirements( base_dir, home_dir, bin_dir ):
 		
 		logger.notify( "Installing packages defined in %s" % reqfile )
 		try:
-			if 'call_subprocess' not in globals():
-				from pip import call_subprocess
 			call_subprocess( cmd )
 		except Exception, e:
 			logger.error( unicode(e) )
@@ -1520,15 +1516,21 @@ bootstrapping a djangoplicity project environment.
 
 import os
 import sys
+import time
 
 # ==========================================
 # Virtualenv bootstrap hooks
 # ==========================================
+start_time = None
+
 
 def extend_parser( parser ):
 	"""
 	Add extra options to the parser
 	"""
+	global start_time
+	start_time = time.time()
+	
 	parser.add_option( "--existing-checkout", dest='existing_checkout_dir', metavar="DIR", action='store', default=None, help='Path to already existing checkout of VCS projects. This is mostly used together with the --develop option.' )
 	parser.add_option( "--develop", dest='develop', action='store_true', default=False, help='Install VCS projects in editable mode and create develop only symbolic links.' )
 	parser.add_option( "--keep", dest='keep', action='store_true', default=False, help='Keep this script after bootstrapping.' )
@@ -1585,6 +1587,11 @@ def after_install( options, home_dir ):
 	if not options.keep:
 		logger.notify( "Removing bootstrap script" )
 		os.remove( __file__ )
+	
+	if start_time:
+		end_time = time.time()
+		logger.notify("Bootstrap took %0.0f s" % ( ( end_time - start_time ) )
+	
 	
 # ==========================================
 # Tasks
