@@ -1637,6 +1637,7 @@ def extend_parser( parser ):
 	parser.add_option( "--develop", dest='develop', action='store_true', default=False, help='Install VCS projects in editable mode and create develop only symbolic links.' )
 	parser.add_option( "--keep", dest='keep', action='store_true', default=False, help='Keep this script after bootstrapping.' )
 	parser.add_option( "--local-settings", dest='local_settings', metavar="MODULE", action='store', default=None, help='Local settings module to use - e.g production_settings.' )
+	parser.add_option( "--relocate-to", dest='relocate_to', metavar="DIR", action='store', default=None, help='Relocate virtualenv to DIR' )
 	
 
 def adjust_options( options, args ):
@@ -1660,7 +1661,9 @@ def adjust_options( options, args ):
 	
 	if options.existing_checkout_dir:
 		tmppath = os.path.abspath( os.path.expandvars( os.path.expanduser( options.existing_checkout_dir ) ) )
-		options.existing_checkout_dir = tmppath if os.path.exists( tmppath ) else None 
+		options.existing_checkout_dir = tmppath if os.path.exists( tmppath ) else None
+	if options.relocate_to:
+		options.relocate_to = options.relocate_to if os.path.exists( options.relocate_to ) else None
 		
 def after_install( options, home_dir ):
 	"""
@@ -1688,6 +1691,7 @@ def after_install( options, home_dir ):
 	task_vcs_install( base_dir, home_dir, bin_dir, options )
 	make_environment_relocatable( home_dir )
 	task_hooks( base_dir, home_dir, lib_dir, inc_dir, bin_dir, options, setting_name='finalize_tasks' )
+	fixup_activate_scripts( home_dir, bin_dir, options )
 	if not options.keep:
 		logger.notify( "Removing bootstrap script" )
 		os.remove( __file__ )
@@ -1700,6 +1704,42 @@ def after_install( options, home_dir ):
 # ==========================================
 # Tasks
 # ==========================================
+
+def fixup_activate_scripts( home_dir, bin_dir, options ):
+	if not options.relocate_to:
+		return
+	
+	scripts_fixup = ( "activate", "activate.fish", "activate.csh" )
+
+	for filename in os.listdir( bin_dir ):
+		if filename not in scripts_fixup:
+			continue #ignoring all scripts known not to need fixup.
+		filename = os.path.join( bin_dir, filename )
+		f = open( filename, 'rb' )
+		lines = f.readlines()
+		f.close()
+		if not lines:
+			logger.warn( 'Script %s is an empty file' % filename )
+			continue
+		
+		import re
+		replacement = False		
+		newlines = []
+		p = re.compile( home_dir )
+		for l in lines:
+			m = p.search( l )
+			if m:
+				l = p.sub( join( options.relocate_to, VIRTUALENV_DIRNAME ), l )
+				replacement = True				
+			newlines.append( l )
+		
+		if replacement:
+			logger.notify( 'Making script %s relative' % filename )
+			f = open( filename, 'wb' )
+			f.writelines( newlines )
+			f.close()
+
+
 
 def task_hooks( base_dir, home_dir, lib_dir, inc_dir, bin_dir, options, setting_name=None ):
 	"""
