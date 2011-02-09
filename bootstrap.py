@@ -1290,6 +1290,7 @@ settings = {
 		'docs_maintenance/',
 		'projects',
 		'virtualenv/apache',
+		'virtualenv/etc',
 		'logs',
 		'tmp',
 	],
@@ -1685,6 +1686,7 @@ def after_install( options, home_dir ):
 	task_install_requirements( base_dir, home_dir, bin_dir )
 	task_hooks( base_dir, home_dir, lib_dir, inc_dir, bin_dir, options, setting_name='post_install_tasks' )
 	task_vcs_install( base_dir, home_dir, bin_dir, options )
+	make_environment_relocatable( home_dir )
 	task_hooks( base_dir, home_dir, lib_dir, inc_dir, bin_dir, options, setting_name='finalize_tasks' )
 	if not options.keep:
 		logger.notify( "Removing bootstrap script" )

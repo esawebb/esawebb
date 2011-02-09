@@ -198,6 +198,7 @@ settings = {
 		'docs_maintenance/',
 		'projects',
 		'virtualenv/apache',
+		'virtualenv/etc',
 		'logs',
 		'tmp',
 	],
