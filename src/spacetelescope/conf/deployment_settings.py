@@ -14,18 +14,25 @@ from default_settings import *
 # ENVIRONMENT CONFIGURATION #
 #############################
 ROOT = "/home/web/hubble"
+ROOT_ABS = "/home/web/A/hubblei"
 PRJBASE = "%s/projects/spacetelescope.org" % ROOT
 DJANGOPLICITY_ROOT = "%s/projects/djangoplicity" % ROOT
 LOG_DIR = "%s/logs" % ROOT
 TMP_DIR = "%s/tmp" % ROOT
 ENABLE_SSL = True
 
+#####################
+# CONFIG GENERATION #
+#####################
 WEBSERVERS = (
 	('aweb5', '%s1i' % SHORT_NAME, '134.171.74.147' ),
 	('aweb6', '%s2i' % SHORT_NAME, '134.171.74.148' ),
 	('aweb14', '%s1' % SHORT_NAME, '134.171.75.139' ),
 	('aweb15', '%s2' % SHORT_NAME, '134.171.75.140' ),
 )
+CONFIG_GEN_TEMPLATES_DIR = "%s/conf/templates/" % ROOT 
+CONFIG_GEN_GENERATED_DIR = "%s/conf/" % TMP_DIR
+
 
 ###################
 # ERROR REPORTING #

@@ -32,10 +32,12 @@ PRJAPP = 'spacetelescope'
 DJANGOPLICITYDIR = 'projects/djangoplicity'
 
 MERGE_FILES = [
-	('docs', True),
-	('docs_maintenance', False),
-	('projects/eso_templates',True),
-	('tmp/Trash',True),
+	( 'docs', True ),
+	( 'docs_maintenance', False ),
+	( 'projects/eso_templates', True ),
+	( 'tmp/Trash', True ),
+	( 'virtualenv/etc/coposweb.ini', False ), 
+	( 'logs', False ),
 	# NOT COMPLETE - COPOSWEB FILES AND ORDER FILE NEEDED.
 ]
 

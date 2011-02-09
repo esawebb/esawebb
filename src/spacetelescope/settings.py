@@ -39,8 +39,8 @@ GA_ID = "UA-2368492-6"
 SHORT_NAME = local_settings.SHORT_NAME
 WEBSERVERS = local_settings.WEBSERVERS
 SSL_ASSETS_PREFIX = "www.spacetelescope.org"
-CONFIG_GEN_TEMPLATES_DIR = os.path.join( PRJBASE ,  "conf/templates/" ) 
-CONFIG_GEN_GENERATED_DIR = os.path.join( TMP_DIR ,  "conf/" ) 
+CONFIG_GEN_TEMPLATES_DIR = local_settings.CONFIG_GEN_TEMPLATES_DIR 
+CONFIG_GEN_GENERATED_DIR = local_settings.CONFIG_GEN_GENERATED_DIR
 
 ###################
 # ERROR REPORTING #
