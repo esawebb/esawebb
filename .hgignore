@@ -1,0 +1,13 @@
+
+syntax: regexp
+^src/spacetelescope\.egg-info/dependency_links\.txt$
+syntax: regexp
+^src/spacetelescope\.egg-info/not-zip-safe$
+syntax: regexp
+^src/spacetelescope\.egg-info/PKG-INFO$
+syntax: regexp
+^src/spacetelescope\.egg-info/SOURCES\.txt$
+syntax: regexp
+^src/spacetelescope\.egg-info/top_level\.txt$
+syntax: regexp
+^src/spacetelescope\.egg-info$
