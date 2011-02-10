@@ -7,7 +7,7 @@
 #   Lars Holm Nielsen <lnielsen@eso.org>
 #   Luis Clara Gomes <lcgomes@eso.org>
 #
-
+import copy
 from default_settings import *
 
 #############################
@@ -29,6 +29,7 @@ SERVE_STATIC_MEDIA = False
 ##################
 # DATABASE SETUP #
 ##################
+DATABASES = copy.deepcopy(DATABASES)
 DATABASES['default']['USER'] = "spacetelescope"
 DATABASES['default']['HOST'] = "mysql1i.hq.eso.org"
 DATABASES['default']['PASSWORD'] = "fivjeylvoked"

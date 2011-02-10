@@ -9,12 +9,14 @@
 #
 
 from deployment_settings import *
+from djangoplicity.settings import copy_setting
 
 SITE_ENVIRONMENT = 'production'
 
 ##################
 # DATABASE SETUP #
 ##################
+DATABASES = copy_setting(DATABASES)
 DATABASES['default']['HOST'] = "mysql1.hq.eso.org"
 DATABASES['default']['PASSWORD'] = "letoveumtold"
 

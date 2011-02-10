@@ -7,19 +7,13 @@
 #   Lars Holm Nielsen <lnielsen@eso.org>
 #   Luis Clara Gomes <lcgomes@eso.org>
 #
-
 from deployment_settings import *
-
+from djangoplicity.settings import copy_setting
 
 #####################
 # CONFIG GENERATION #
 #####################
-WEBSERVERS = (
-	('aweb5', '%s1i' % SHORT_NAME, '134.171.74.147' ),
-	('aweb6', '%s2i' % SHORT_NAME, '134.171.74.148' ),
-	('aweb14', '%s1' % SHORT_NAME, '134.171.75.139' ),
-	('aweb15', '%s2' % SHORT_NAME, '134.171.75.140' ),
-)
+
 # Needed since config_gen command is usually running on aweb8, and will thus put
 # config files in the production environment. 
 CONFIG_GEN_TEMPLATES_DIR = "/home/web/A/hubblei/projects/spacetelescope.org/conf/templates/"  
@@ -34,6 +28,7 @@ DEBUG = True
 ##################
 # DATABASE SETUP #
 ##################
+DATABASES = copy_setting(DATABASES)
 DATABASES['default']['HOST'] = "mysql1i.hq.eso.org"
 DATABASES['default']['PASSWORD'] = "fivjeylvoked"
 

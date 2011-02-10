@@ -30,9 +30,8 @@ WEBSERVERS = (
 	('aweb14', '%s1' % SHORT_NAME, '134.171.75.139' ),
 	('aweb15', '%s2' % SHORT_NAME, '134.171.75.140' ),
 )
-CONFIG_GEN_TEMPLATES_DIR = "%s/conf/templates/" % ROOT 
-CONFIG_GEN_GENERATED_DIR = "%s/conf/" % TMP_DIR
-
+CONFIG_GEN_TEMPLATES_DIR = "%s/conf/templates/" % PRJBASE 
+CONFIG_GEN_GENERATED_DIR = "%s/conf/" % PRJBASE
 
 ###################
 # ERROR REPORTING #
