@@ -1684,14 +1684,15 @@ def after_install( options, home_dir ):
 	task_create_directories( base_dir )
 	task_create_symlinks( base_dir )
 	task_vcs_checkout( base_dir, options )
-	task_create_symlinks( base_dir, setting='develop-symlinks' )
+	if options.develop:
+		task_create_symlinks( base_dir, setting='develop-symlinks' )
 	task_hooks( base_dir, home_dir, lib_dir, inc_dir, bin_dir, options, setting_name='pre_install_tasks' ) 
 	task_install_requirements( base_dir, home_dir, bin_dir )
 	task_hooks( base_dir, home_dir, lib_dir, inc_dir, bin_dir, options, setting_name='post_install_tasks' )
 	task_vcs_install( base_dir, home_dir, bin_dir, options )
 	make_environment_relocatable( home_dir )
 	task_hooks( base_dir, home_dir, lib_dir, inc_dir, bin_dir, options, setting_name='finalize_tasks' )
-	fixup_activate_scripts( home_dir, bin_dir, options )
+	fixup_activate_scripts( home_dir, bin_dir, options ) # Fix up last, otherwise tasks depending on activate scripts will not run
 	if not options.keep:
 		logger.notify( "Removing bootstrap script" )
 		os.remove( __file__ )
