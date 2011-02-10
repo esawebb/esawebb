@@ -11,3 +11,7 @@ syntax: regexp
 ^src/spacetelescope\.egg-info/top_level\.txt$
 syntax: regexp
 ^src/spacetelescope\.egg-info$
+syntax: regexp
+^static/djangoplicity$
+syntax: glob
+*.pyc
