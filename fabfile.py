@@ -52,7 +52,6 @@ STATIC_FILES = [
 	('%(prefix)s/projects/djangoplicity/static/','%(prefix)s/docs/static/djangoplicity/'),
 ]
 
-# Local tasks
 local_backupdb = djangoplicity.fabric.backup_database( project_app=PRJAPP )
 local_apply_sql = djangoplicity.fabric.apply_sql( sqlfile='sql/deploy.sql', project_app=PRJAPP )
 local_install_requirements = djangoplicity.fabric.install_requirements( bootstrap_settings=settings, prjapp=PRJAPP )
@@ -62,7 +61,14 @@ integration_clear_installation = djangoplicity.fabric.clear_installation( server
 integration_bootstrap = djangoplicity.fabric.bootstrap( servers=[DEVSERVER,], prefix=PREFIXI, local_settings='integration_settings', py_version="2.5", relocate_to=PREFIX )
 integration_sync = djangoplicity.fabric.sync( servers=[DEVSERVER,], prefix=PREFIXI, sync=STATIC_FILES )
 integration_fix_perms = djangoplicity.fabric.fix_perms( servers=[SERVER1I], prefix=PREFIX, dirs=PERMISSIONS )
-integration_vcs_update = djangoplicity.fabric.vcs_update( servers=[DEVSERVER,], prefix=PREFIXI )
+integration = djangoplicity.fabric.vcs_update( servers=[DEVSERVER,], prefix=PREFIXI )
+integration_stop = djangoplicity.fabric.stop( servers=[SERVER1I, SERVER2I], servername=SERVERNAME )
+integration_start = djangoplicity.fabric.start( servers=[SERVER1I, SERVER2I], servername=SERVERNAME )
+integration_stop_static = djangoplicity.fabric.stop_static( servers=[SERVER1I, SERVER2I], servername=SERVERNAME )
+integration_start_static = djangoplicity.fabric.start_static( servers=[SERVER1I, SERVER2I], servername=SERVERNAME )
+integration_stop_cron = djangoplicity.fabric.stop_cron( servers=[BACKENDDEVSERVER,], prefix=PREFIX, prjdir=PRJDIR, servername=SERVERNAME )
+integration_start_cron = djangoplicity.fabric.start_cron( servers=[BACKENDDEVSERVER,], prefix=PREFIX, prjdir=PRJDIR, servername=SERVERNAME )
+integration_appsregister = djangoplicity.fabric.appsregister( servers=[BACKENDDEVSERVER,], prefix=PREFIX, prjdir=PRJDIR )
 integration_backupdb = djangoplicity.fabric.backup_database( 'integration_settings', project_app=PRJAPP )
 integration_apply_sql = djangoplicity.fabric.apply_sql( sqlfile='sql/deploy.sql', to_settings_module='integration_settings', project_app=PRJAPP )
 integration_bootstrap_online = djangoplicity.fabric.bootstrap_online(
@@ -86,26 +92,20 @@ integration_bootstrap_online = djangoplicity.fabric.bootstrap_online(
 		permissions=PERMISSIONS,
 	)
 
-#integration_setup = djangoplicity.fabric.setup( servers=[DEVSERVER,], prefix=PREFIXI, mode='integration' )
-#integration_relocate_virtualenv = djangoplicity.fabric.relocate_virtualenv( servers=[DEVSERVER,], prefix=PREFIXI, relocateto=PREFIX )
-integration = djangoplicity.fabric.deploy( servers=[DEVSERVER,], prefix=PREFIXI, prjdir=PRJDIR )
-integration_stop = djangoplicity.fabric.stop( servers=[SERVER1I, SERVER2I], servername=SERVERNAME )
-integration_start = djangoplicity.fabric.start( servers=[SERVER1I, SERVER2I], servername=SERVERNAME )
-integration_stop_static = djangoplicity.fabric.stop_static( servers=[SERVER1I, SERVER2I], servername=SERVERNAME )
-integration_start_static = djangoplicity.fabric.start_static( servers=[SERVER1I, SERVER2I], servername=SERVERNAME )
-integration_stop_cron = djangoplicity.fabric.stop_cron( servers=[BACKENDDEVSERVER,], prefix=PREFIX, prjdir=PRJDIR, servername=SERVERNAME )
-integration_start_cron = djangoplicity.fabric.start_cron( servers=[BACKENDDEVSERVER,], prefix=PREFIX, prjdir=PRJDIR, servername=SERVERNAME )
-integration_appsregister = djangoplicity.fabric.appsregister( servers=[BACKENDDEVSERVER,], prefix=PREFIX, prjdir=PRJDIR )
-integration_static_deploy = djangoplicity.fabric.static_deploy( servers=[DEVSERVER,], prefix=PREFIXI, prjdir=PRJDIR, staticdir='static' )
-integration_locale_deploy = djangoplicity.fabric.locale_deploy( servers=[DEVSERVER,], prefix=PREFIXI, dirs = [ PRJDIR, DJANGOPLICITYDIR ] )
-
 
 # Production deployment tasks
 production_clear_installation = djangoplicity.fabric.clear_installation( servers=[DEVSERVER,], prefix=PREFIX )
 production_bootstrap = djangoplicity.fabric.bootstrap( servers=[DEVSERVER,], prefix=PREFIX, local_settings='production_settings', py_version="2.5", relocate_to=PREFIX )
 production_sync = djangoplicity.fabric.sync( servers=[DEVSERVER,], prefix=PREFIX, sync=STATIC_FILES )
 production_fix_perms = djangoplicity.fabric.fix_perms( servers=[SERVER1], prefix=PREFIX, dirs=PERMISSIONS )
-production_vcs_update = djangoplicity.fabric.vcs_update( servers=[DEVSERVER,], prefix=PREFIX )
+production = djangoplicity.fabric.vcs_update( servers=[DEVSERVER,], prefix=PREFIX )
+production_stop = djangoplicity.fabric.stop( servers=[SERVER1, SERVER2], servername=SERVERNAME )
+production_start = djangoplicity.fabric.start( servers=[SERVER1, SERVER2], servername=SERVERNAME )
+production_stop_static = djangoplicity.fabric.stop_static( servers=[SERVER1, SERVER2], servername=SERVERNAME )
+production_start_static = djangoplicity.fabric.start_static( servers=[SERVER1, SERVER2], servername=SERVERNAME )
+production_stop_cron = djangoplicity.fabric.stop_cron( servers=[BACKENDSERVER,], prefix=PREFIX, prjdir=PRJDIR, servername=SERVERNAME )
+production_start_cron = djangoplicity.fabric.start_cron( servers=[BACKENDSERVER,], prefix=PREFIX, prjdir=PRJDIR, servername=SERVERNAME )
+production_appsregister = djangoplicity.fabric.appsregister( servers=[BACKENDSERVER,], prefix=PREFIX, prjdir=PRJDIR )
 production_backupdb = djangoplicity.fabric.backup_database( 'production_settings', project_app=PRJAPP )
 production_apply_sql = djangoplicity.fabric.apply_sql( sqlfile='sql/deploy.sql', to_settings_module='production_settings', project_app=PRJAPP )
 production_bootstrap_online = djangoplicity.fabric.bootstrap_online(
@@ -128,19 +128,6 @@ production_bootstrap_online = djangoplicity.fabric.bootstrap_online(
 		static_files = STATIC_FILES,
 		permissions=PERMISSIONS,
 	)
-
-production_relocate_virtualenv = djangoplicity.fabric.relocate_virtualenv( servers=[DEVSERVER,], prefix=PREFIX, relocateto=PREFIX )
-production_setup = djangoplicity.fabric.setup( servers=[DEVSERVER,], prefix=PREFIX, mode='production' )
-production = djangoplicity.fabric.deploy( servers=[DEVSERVER,], prefix=PREFIX, prjdir=PRJDIR )
-production_stop = djangoplicity.fabric.stop( servers=[SERVER1, SERVER2], servername=SERVERNAME )
-production_start = djangoplicity.fabric.start( servers=[SERVER1, SERVER2], servername=SERVERNAME )
-production_stop_static = djangoplicity.fabric.stop_static( servers=[SERVER1, SERVER2], servername=SERVERNAME )
-production_start_static = djangoplicity.fabric.start_static( servers=[SERVER1, SERVER2], servername=SERVERNAME )
-production_stop_cron = djangoplicity.fabric.stop_cron( servers=[BACKENDSERVER,], prefix=PREFIX, prjdir=PRJDIR, servername=SERVERNAME )
-production_start_cron = djangoplicity.fabric.start_cron( servers=[BACKENDSERVER,], prefix=PREFIX, prjdir=PRJDIR, servername=SERVERNAME )
-production_appsregister = djangoplicity.fabric.appsregister( servers=[BACKENDSERVER,], prefix=PREFIX, prjdir=PRJDIR )
-production_static_deploy = djangoplicity.fabric.static_deploy( servers=[DEVSERVER,], prefix=PREFIX, prjdir=PRJDIR, staticdir='static' )
-production_locale_deploy = djangoplicity.fabric.locale_deploy( servers=[DEVSERVER,], prefix=PREFIX, dirs = [ PRJDIR, DJANGOPLICITYDIR ] )
 
 # Documentation related tasks
 publish_docs = djangoplicity.fabric.publish_docs( domain=DOMAIN )

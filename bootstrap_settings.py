@@ -11,7 +11,7 @@
 import sys
 
 #
-# Make sure the settings can be loaded in other modules
+# Make sure the settings can be loaded in other modules (currently fabfile.py, deploy.py and bootstrap.py)
 # 
 if 'settings' not in globals():
 	from djangoplicity.bootstrap.defaults import settings, PY_VERSION, run_function, task_move, task_append, task_run_manage
