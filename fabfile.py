@@ -10,6 +10,8 @@
 from fabric.api import *
 import djangoplicity.fabric
 from bootstrap_settings import settings
+import getpass
+import os
 
 SERVERNAME = "hubble"
 SERVERNAMEI = "hubblei"
@@ -37,7 +39,6 @@ MERGE_FILES = [
 	( 'tmp/Trash', True ),
 	( 'virtualenv/etc/coposweb.ini', False ), 
 	( 'logs', False ),
-	# NOT COMPLETE - COPOSWEB FILES AND ORDER FILE NEEDED.
 ]
 
 PERMISSIONS = [
@@ -129,15 +130,16 @@ production_bootstrap_online = djangoplicity.fabric.bootstrap_online(
 		permissions=PERMISSIONS,
 	)
 
+
 # Documentation related tasks
 publish_docs = djangoplicity.fabric.publish_docs( domain=DOMAIN )
 make_docs = djangoplicity.fabric.make_docs()
 
 # Locale related tasks
-makemessages_new = djangoplicity.fabric.makemessages_new( dirs = [ DOMAIN, 'djangoplicity'], languages = ['de-at','nl-be','fr-be','de-be','cs','da','fi','fr','de','is','it','nl','no','pt','pl','es','es-cl','sv','de-ch','fr-ch','it-ch','tr','is'] )
+makemessages_new = djangoplicity.fabric.makemessages_new( dirs = [ DOMAIN, 'djangoplicity'], languages = ['de-at','nl-be','fr-be','de-be','cs','da','fi','fr','de','el','is','it','nl','no','pt','pt-br','pl','es','es-cl','sv','de-ch','fr-ch','it-ch','tr','is'] )
 makemessages = djangoplicity.fabric.makemessages( dirs = [ DOMAIN, 'djangoplicity'] )
 compilemessages = djangoplicity.fabric.compilemessages( dirs = [ DOMAIN, 'djangoplicity'] )
-updatemessages = djangoplicity.fabric.updatemessages( file = '/Users/lnielsen/Desktop/ESON\ Djangoplicity\ Translations\ Strings.csv', languages = [('de-at','Austria'), ('nl-be','Belgium-nl'), ('fr-be','Belgium-fr'), ('de-be','Belgium-de'), ('cs','Czech Republic'), ('da','Denmark'), ('fi','Finland'), ('fr','France'), ('de','Germany'), ('is','Iceland'), ('it','Italy'), ('nl','The Netherlands'), ('no','Norway'), ('pt','Portugal'), ('pl','Poland'), ('es','Spain'), ('es-cl','Chile'), ('sv','Sweden'), ('de-ch','Switzerland-de'), ('fr-ch','Switzerland-fr'), ('it-ch','Switzerland-it'), ('tr','Turkey'), ('is','Iceland'), ] )
+updatemessages = djangoplicity.fabric.updatemessages( file = '/Users/%s/Desktop/ESON\ Djangoplicity\ Translations\ Strings.csv' % getpass.getuser(), languages = [('de-at','Austria'), ('nl-be','Belgium-nl'), ('fr-be','Belgium-fr'), ('de-be','Belgium-de'), ('cs','Czech Republic'), ('da','Denmark'), ('fi','Finland'), ('fr','France'), ('de','Germany'), ('el','Greece'), ('is','Iceland'), ('it','Italy'), ('nl','The Netherlands'), ('no','Norway'), ('pt','Portugal'), ('pt-br','Brazil'), ('pl','Poland'), ('es','Spain'), ('es-cl','Chile'), ('sv','Sweden'), ('de-ch','Switzerland-de'), ('fr-ch','Switzerland-fr'), ('it-ch','Switzerland-it'), ('tr','Turkey'), ('is','Iceland'), ] )
 
 # Database related tasks
 copydb_production_to_local = djangoplicity.fabric.copy_database( "production_settings", None, project_app=PRJAPP )

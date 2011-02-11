@@ -23,7 +23,7 @@ CONFIG_GEN_GENERATED_DIR = "/home/web/A/hubblei/tmp/conf/"
 # ERROR REPORTING #
 ###################
 SITE_ENVIRONMENT = 'integration'
-DEBUG = True
+DEBUG = False
 
 ##################
 # DATABASE SETUP #
@@ -35,7 +35,7 @@ DATABASES['default']['PASSWORD'] = "fivjeylvoked"
 ##########
 # CACHE  #
 ##########
-CACHE_BACKEND = "memcached://hubble1i:11211;hubble2i:11211/?timeout=86400"
+CACHE_BACKEND = "memcached://%(short_name)s1i:11211;%(short_name)s2i:11211/?timeout=86400" % { 'short_name' : SHORT_NAME}
 
 #########
 # EMAIL #

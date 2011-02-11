@@ -1,4 +1,3 @@
-#
 # spacetelescope.org
 # Copyright 2010 ESO & ESA/Hubble
 #
@@ -9,6 +8,7 @@
 recursive-include templates *
 recursive-include static *
 recursive-include fixtures *
+recursive-include docs *
 recursive-include bin *
 recursive-include scripts *
 recursive-include migration *
@@ -16,3 +16,4 @@ recursive-include conf *
 include *.py
 include sql *.sql
 include fonts *.ttf
+prune docs/build

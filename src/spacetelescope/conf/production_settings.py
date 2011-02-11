@@ -23,7 +23,7 @@ DATABASES['default']['PASSWORD'] = "letoveumtold"
 ##########
 # CACHE  #
 ##########
-CACHE_BACKEND = "memcached://hubble1:11211;hubble2:11211/?timeout=86400"
+CACHE_BACKEND = "memcached://%(short_name)s1:11211;%(short_name)s2:11211/?timeout=86400" % { 'short_name' : SHORT_NAME}
 
 #########
 # EMAIL #

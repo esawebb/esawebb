@@ -9,12 +9,12 @@
 #
 
 from default_settings import *
+from djangoplicity.settings import copy_setting
 
 #############################
 # ENVIRONMENT CONFIGURATION #
 #############################
 ROOT = "/home/web/hubble"
-ROOT_ABS = "/home/web/A/hubblei"
 PRJBASE = "%s/projects/spacetelescope.org" % ROOT
 DJANGOPLICITY_ROOT = "%s/projects/djangoplicity" % ROOT
 LOG_DIR = "%s/logs" % ROOT
@@ -42,6 +42,7 @@ SERVE_STATIC_MEDIA = False
 ##################
 # DATABASE SETUP #
 ##################
+DATABASES = copy_setting(DATABASES)
 DATABASES['default']['USER'] = "spacetelescope"
 
 ###############

@@ -114,14 +114,14 @@ USE_L10N = False
 LOCALE_PATHS = ( DJANGOPLICITY_ROOT + "/locale", PRJBASE + "/locale", )
 
 # Default date and time formats (con be overridden by locale)
-DATE_FORMAT = 'j M Y'
-DATE_LONG_FORMAT = 'j F Y'
-DATETIME_FORMAT = 'M j, Y, H:i T'
-DATETIME_LONG_FORMAT = 'M j, Y y, H:i T'
-MONTH_DAY_FORMAT = 'F j'
-TIME_FORMAT = 'H:i T'
-YEAR_MONTH_FORMAT = 'F Y'
-WIDGET_FORMAT = "j/m/Y"
+DATE_FORMAT = gettext_noop('j F Y')
+DATE_LONG_FORMAT = gettext_noop('j F Y')
+DATETIME_FORMAT = gettext_noop('M j, Y, H:i T')
+DATETIME_LONG_FORMAT = gettext_noop('M j, Y y, H:i T')
+MONTH_DAY_FORMAT = gettext_noop('F j')
+TIME_FORMAT = gettext_noop('H:i T')
+YEAR_MONTH_FORMAT = gettext_noop('F Y')
+WIDGET_FORMAT = gettext_noop("j/m/Y")
 
 ###############
 # MEDIA SETUP #
@@ -314,7 +314,7 @@ INSTALLED_APPS += (
 	'djangoplicity.google',
 	'djangoplicity.inventory',
 	'djangoplicity.adminhistory',
-	'djangoplicity.utils',
+    'djangoplicity.utils',
 	'spacetelescope',
 	'celery',
 	'mptt',
@@ -447,6 +447,7 @@ ARCHIVES = (
 )
 
 ARCHIVE_EMBARGO_LOGIN = ('hst','hotnews')
+ARCHIVE_EMAIL_SENDER = "ESA/Hubble Information Centre <hubble@eso.org>" 
 
 ARCHIVE_RESOURCE_FIELDS = False
 ARCHIVE_URL_QUERY_PREFIX = 'archive'
@@ -461,12 +462,10 @@ ENABLE_ADVANCED_SEARCH = True
 ADV_SEARCH_START_YEAR = 1998
 
 ARCHIVE_AUTO_RESOURCE_DELETION = local_settings.ARCHIVE_AUTO_RESOURCE_DELETION
-
 RELEASE_ARCHIVE_ROOT = 'archives/releases/'
 IMAGES_ARCHIVE_ROOT = 'archives/images/'
 VIDEOS_ARCHIVE_ROOT = 'archives/videos/'
 ANNOUNCEMENTS_ARCHIVE_ROOT = 'archives/announcements/'
-
 
 VIDEOS_FEATURED_SUBJECT = 'hubblecast'
 
