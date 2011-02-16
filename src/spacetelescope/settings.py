@@ -104,12 +104,14 @@ LANGUAGES = (
 
 LANGUAGE_CODE = 'en'
 
+FORMAT_MODULE_PATH = 'spacetelescope.formats'
+
 SITE_ID = 1
 
 # If you set this to False, Django will make some optimizations so as not
 # to load the internationalization machinery.
 USE_I18N = False
-USE_L10N = False
+USE_L10N = True
 
 LOCALE_PATHS = ( DJANGOPLICITY_ROOT + "/locale", PRJBASE + "/locale", )
 
@@ -483,7 +485,7 @@ DEFAULT_PUBLISHER_ID = u"vamp://esahubble"
 
 ARCHIVE_IMPORT_ROOT = local_settings.ARCHIVE_IMPORT_ROOT
 ARCHIVE_WORKFLOWS = {
-	'media.video.rename' : ('eso.workflows.media','video_rename'), 
+	'media.video.rename' : ('spacetelescope.workflows.media','video_rename'), 
 }
 
 VIDEO_RENAME_NOTIFY = ['mkornmes@eso.org',]
@@ -674,7 +676,7 @@ LIVESETTINGS_OPTIONS = {
 			},
             u'PAYMENT': {
 				u'COUNTRY_MATCH': u'False',
-                u'MINIMUM_ORDER': u'3.00',
+                u'MINIMUM_ORDER': u'2.99',
                 #u'ORDER_EMAIL_EXTRA': u'distribution@spacetelescope.org',
                 u'ORDER_EMAIL_OWNER': u'True',                
                 u'MODULES': u'["PAYMENT_COPOSWEB"]'
@@ -721,7 +723,7 @@ LIVESETTINGS_OPTIONS = {
 }
 
 ORDER_PREFIX = local_settings.ORDER_PREFIX
-
+LIVE = local_settings.LIVE
 SHOP_PICKUP_LOCATIONS = (
 	{ 'id' : 'PUP1', 
 	  'name' : 'ESO HQ',

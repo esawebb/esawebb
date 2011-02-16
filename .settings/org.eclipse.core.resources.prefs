@@ -1,4 +1,4 @@
-#Fri Feb 11 11:11:02 CET 2011
+#Wed Feb 16 15:08:31 CET 2011
 eclipse.preferences.version=1
 encoding//src/spacetelescope/admin.py=utf-8
 encoding//src/spacetelescope/appregister.py=utf-8
@@ -12,6 +12,9 @@ encoding//src/spacetelescope/conf/mandarine_settings.py=utf-8
 encoding//src/spacetelescope/conf/production_settings.py=utf-8
 encoding//src/spacetelescope/cron.py=utf-8
 encoding//src/spacetelescope/feed_settings.py=utf-8
+encoding//src/spacetelescope/formats/__init__.py=utf-8
+encoding//src/spacetelescope/formats/en/__init__.py=utf-8
+encoding//src/spacetelescope/formats/en/formats.py=utf-8
 encoding//src/spacetelescope/manage.py=utf-8
 encoding//src/spacetelescope/migration/__init__.py=utf-8
 encoding//src/spacetelescope/migration/archives.py=utf-8
@@ -19,6 +22,8 @@ encoding//src/spacetelescope/migration/pages.py=utf-8
 encoding//src/spacetelescope/settings.py=utf-8
 encoding//src/spacetelescope/urls.py=utf-8
 encoding//src/spacetelescope/views.py=utf-8
+encoding//src/spacetelescope/workflows/__init__.py=utf-8
+encoding//src/spacetelescope/workflows/media.py=utf-8
 encoding/bootstrap_settings.py=utf-8
 encoding/fabfile.py=utf-8
 encoding/setup.py=utf-8

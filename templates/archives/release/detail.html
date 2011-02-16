@@ -24,7 +24,7 @@
 {% endif %}
 <h1 class="pr_title">{{object.title}}</h1>
 {% if object.subtitle %}<h3>{{object.subtitle}}</h3>{% endif %}
-<p class="date">{{object.release_date|datetime:"DATE_LONG"}}{% if object.release_city %}, {{object.release_city}}{% endif %}</p>
+<p class="date">{{object.release_date|datetime:"DATE"}}{% if object.release_city %}, {{object.release_city}}{% endif %}</p>
 {% if main_image %}{% if main_image.resource_newsfeature %}<div class="pr_news_feature" style="padding:0;">
 <a href="{{ main_image.resource_screen.url }}" rel="shadowbox[newswheel]" title="{{ main_image.title }}"><img src="{{ main_image.resource_newsfeature.url }}" class="pr_news_feature_img" style="padding:0;" /></a>
 {% if images %}{% for im in images %}{% ifnotequal main_image im %}<a href="{{ im.resource_screen.url }}" rel="shadowbox[newswheel]" title="{{ im.title }}" class="hidden">image</a>{% endifnotequal %}{% endfor %}{% endif %}
