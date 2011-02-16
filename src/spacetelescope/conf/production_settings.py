@@ -40,3 +40,4 @@ CELERY_CACHE_BACKEND = "memcached://taskexchange.hq.eso.org:11212/"
 # SHOP #
 ########
 ORDER_PREFIX = "hb"
+LIVE = True
