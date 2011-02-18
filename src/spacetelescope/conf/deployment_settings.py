@@ -31,7 +31,7 @@ WEBSERVERS = (
 	('aweb15', '%s2' % SHORT_NAME, '134.171.75.140' ),
 )
 CONFIG_GEN_TEMPLATES_DIR = "%s/conf/templates/" % PRJBASE 
-CONFIG_GEN_GENERATED_DIR = "%s/conf/" % PRJBASE
+CONFIG_GEN_GENERATED_DIR = "%s/conf/" % TMP_DIR
 
 ###################
 # ERROR REPORTING #
