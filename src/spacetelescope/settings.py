@@ -8,12 +8,6 @@
 #   Luis Clara Gomes <lcgomes@eso.org>
 #
 
-# Django settings for website project
-# ------------------------------------
-# Note most deployment specific settings are imported
-# from the settings.ini file.
-#
-
 from djangoplicity.settings import import_settings		
 import os
 import re
@@ -38,7 +32,7 @@ GA_ID = "UA-2368492-6"
 #####################
 SHORT_NAME = local_settings.SHORT_NAME
 WEBSERVERS = local_settings.WEBSERVERS
-SSL_ASSETS_PREFIX = "www.spacetelescope.org"
+SSL_ASSETS_PREFIX = local_settings.SSL_ASSETS_PREFIX
 CONFIG_GEN_TEMPLATES_DIR = local_settings.CONFIG_GEN_TEMPLATES_DIR 
 CONFIG_GEN_GENERATED_DIR = local_settings.CONFIG_GEN_GENERATED_DIR
 
@@ -416,12 +410,6 @@ PAGE_TEMPLATE_CHOICES = (
 DEFAULT_PAGINATE_BY = 10
 PAGINATOR_ADJ = 5
 BREADCRUMB_SEPARATOR = '&raquo;'
-
-#####################
-# DJANGO BATCHADMIN #
-#####################
-#BATCHADMIN_MEDIA_PREFIX	
-BATCHADMIN_JQUERY_JS = "js/jquery-1.2.6.min.js"
 
 #################
 # DJANGO ASSETS #

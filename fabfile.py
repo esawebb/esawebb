@@ -34,11 +34,11 @@ PRJAPP = 'spacetelescope'
 DJANGOPLICITYDIR = 'projects/djangoplicity'
 
 MERGE_FILES = [
-	( 'docs', True ),
-	( 'docs_maintenance', False ),
-	( 'tmp/Trash', True ),
+	( 'docs/', True ),
+	( 'docs_maintenance/', False ),
+	( 'tmp/Trash/', True ),
 	( 'virtualenv/etc/coposweb.ini', False ), 
-	( 'logs', False ),
+	( 'logs/', False ),
 ]
 
 PERMISSIONS = [
