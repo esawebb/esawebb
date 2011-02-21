@@ -7,5 +7,5 @@
 #   Lars Holm Nielsen <lnielsen@eso.org>
 #   Luis Clara Gomes <lcgomes@eso.org>
 #
-source /home/web/hubble/virtualenv/bin/start_shell.sh
-python projects/spacetelescope.org/src/spacetelescope/manage.py cron 1>/dev/null
+source /home/web/hubble/virtualenv/bin/activate
+python src/spacetelescope/manage.py cron 1>/dev/null

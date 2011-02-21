@@ -7,6 +7,6 @@
 #   Lars Holm Nielsen <lnielsen@eso.org>
 #   Luis Clara Gomes <lcgomes@eso.org>
 #
-source /home/web/hubble/virtualenv/bin/start_shell.sh
-python projects/djangoplicity/scripts/make.top100zip.py -o /home/web/hubble/docs/static/images/zip/top100/ -f large -t /home/web/hubble/tmp
-python projects/djangoplicity/scripts/make.top100zip.py -o /home/web/hubble/docs/static/images/zip/top100/ -f original -t /home/web/hubble/tmp
+source /home/web/hubble/virtualenv/bin/activate
+python ../djangoplicity/scripts/make.top100zip.py -o /home/web/hubble/docs/static/images/zip/top100/ -f large -t /home/web/hubble/tmp
+python ../djangoplicity/scripts/make.top100zip.py -o /home/web/hubble/docs/static/images/zip/top100/ -f original -t /home/web/hubble/tmp
