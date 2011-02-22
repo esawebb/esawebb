@@ -724,7 +724,7 @@ class ImagesAVMDataMapping( ImagesDataMapping ):
 			
 		#print '\n'#, im.id
 		#self.exposures(im,id)    # checks if the number of exposures in the CSV match with the number of ImageExposure objects
-		self.coordinate(im,id)
+		#self.coordinate(im,id)   # checks if the entries in the CSV match with those in the DB
 		
 	def coordinate(self, im, id):
 		# ANALYSE cordinate metadata
