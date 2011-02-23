@@ -17,6 +17,9 @@ from djangoplicity.migration.apps.archives import CSVDataSource, DataMapping
 from djangoplicity.releases.models import Release, ReleaseType, ReleaseImage, ReleaseVideo
 from djangoplicity.releases.models import Image, Video
 from djangoplicity.products.models import *
+from djangoplicity.media.models import ImageExposure
+import djangoplicity.metadata.models as metadata
+from djangoplicity.metadata.consts import *
 #from spacetelescope.archives.products.models import *
 from django.utils.html import strip_tags
 from djangoplicity.utils.videothumbnails import format_duration
@@ -24,6 +27,7 @@ from djangoplicity.utils.videothumbnails import format_duration
 import csv
 import re
 import glob
+import sys    # for exception handling
 
 numberregex = re.compile( "(\d+(\.\d+)?)")
 
@@ -709,8 +713,7 @@ class ImagesAVMDataMapping( ImagesDataMapping ):
 	def run(self):
 		# Find image.
 		# Determine if something has to be done
-		# Create ImageExposureObjects (align data)
-		id = self._dataentry('id')
+		id = self.id()
 		
 		try:
 			im = Image.objects.get( id=id )
@@ -718,21 +721,335 @@ class ImagesAVMDataMapping( ImagesDataMapping ):
 			self.logger.error("Could not find image %(id)s - check https://www.spacetelescope.org/admin/history/?s=%(id)s" % { 'id' : id } )
 			return
 			#raise MigrationError( unicode(e) )
-		print im.id
+			
+		#print '\n'#, im.id
+		#self.exposures(im,id)    # checks if the number of exposures in the CSV match with the number of ImageExposure objects
+		#self.coordinate(im,id)   # checks if the entries in the CSV match with those in the DB
 		
+	def coordinate(self, im, id):
+		# ANALYSE cordinate metadata
+		# ========================================================================
+		# Coordinate Metadata 
+		# ========================================================================
+#		spatial_coordinate_frame = metadatafields.AVMSpatialCoordinateFrameField() CoordinateFrame
+#		spatial_equinox = metadatafields.AVMSpatialEquinoxField() Equinox
+#		spatial_reference_value = metadatafields.AVMSpatialReferenceValueField() ReferenceValue
+#		spatial_reference_dimension = metadatafields.AVMSpatialReferenceDimensionField() ReferenceDimension
+#		spatial_reference_pixel = metadatafields.AVMSpatialReferencePixelField()  ReferencePixel
+#		spatial_scale = metadatafields.AVMSpatialScaleField() Scale
+#		spatial_rotation = metadatafields.AVMSpatialRotationField() Rotation
+#		spatial_coordsystem_projection = metadatafields.AVMSpatialCoordsystemProjectionField() CoordsystemProjection
+#		spatial_quality = metadatafields.AVMSpatialQualityField()
+#		spatial_notes =  metadatafields.AVMSpatialNotesField()
+#		spatial_fits_header =  metadatafields.AVMSpatialNotesField()
+
+#		spatial_coordinate_frame 
+		if self._dataentry('Spatial.CoordinateFrame'):
+			csv = self._dataentry('Spatial.CoordinateFrame').strip().replace(' ','')	
+			db  = im.spatial_coordinate_frame.replace(' ','')
+			if self.CSVDB(csv,db): pass
+			else: print id,': ',db, ' <> CSV: ',  csv
+
+#		spatial_equinox 
+		if self._dataentry('Spatial.Equinox'):
+			csv = self._dataentry('Spatial.Equinox').strip().replace(' ','')	
+			db  = im.spatial_equinox.replace(' ','')
+			if self.CSVDB(csv,db): pass
+			else: print id,' spatial_equinox: ',db, ' <> CSV: ',  csv
+#		spatial_reference_value 
+		if self._dataentry('Spatial.ReferenceValue'):
+			csv = self._dataentry('Spatial.ReferenceValue').strip().replace(' ','')	
+			db  = im.spatial_reference_value.replace(' ','')
+			if self.CSVDB(csv,db): pass
+			else: print id,' spatial_reference_value: ',db, ' <> CSV: ',  csv
+#		spatial_reference_dimension 
+		if self._dataentry('Spatial.ReferenceDimension'):
+			csv = self._dataentry('Spatial.ReferenceDimension').strip().replace(' ','')	
+			db  = im.spatial_reference_dimension.replace(' ','')
+			if self.CSVDB(csv,db): pass
+			else: print id,' spatial_reference_dimension: ',db, ' <> CSV: ',  csv
+#		spatial_reference_pixel 
+		if self._dataentry('Spatial.ReferencePixel'):
+			csv = self._dataentry('Spatial.ReferencePixel').strip().replace(' ','')	
+			db  = im.spatial_reference_pixel.replace(' ','')
+			if self.CSVDB(csv,db): pass
+			else: print id,' spatial_reference_pixel: ',db, ' <> CSV: ',  csv
+#		spatial_scale 
+		if self._dataentry('Spatial.Scale'):
+			csv = self._dataentry('Spatial.Scale').strip().replace(' ','')	
+			db  = im.spatial_scale.replace(' ','')
+			if self.CSVDB(csv,db): pass
+			else: print id,' spatial_scale: ',db, ' <> CSV: ',  csv
+#		spatial_rotation 
+		if self._dataentry('Spatial.Rotation'):
+			csv = self._dataentry('Spatial.Rotation').strip().replace(' ','')	
+			db  = im.spatial_rotation.replace(' ','')
+			if self.CSVDB(csv,db): pass
+			else: print id,' spatial_rotation: ',db, ' <> CSV: ',  csv
+			
+#		spatial_coordsystem_projection 
+		if self._dataentry('Spatial.CoordsystemProjection'):
+			csv = self._dataentry('Spatial.CoordsystemProjection').strip().replace(' ','')	
+			db  = im.spatial_coordsystem_projection.replace(' ','')
+			if self.CSVDB(csv,db): pass
+			else: print id,' spatial_coordsystem_projection: ',db, ' <> CSV: ',  csv
+
+#		spatial_quality 
+		if self._dataentry('Spatial.Quality'):
+			csv = self._dataentry('Spatial.Quality').strip().replace(' ','')	
+			db  = im.spatial_quality.replace(' ','')
+			if self.CSVDB(csv,db): pass
+			else: print id,' spatial_quality: ',db, ' <> CSV: ',  csv
+#		spatial_notes 
+		if self._dataentry('Spatial.Notes'):
+			csv = self._dataentry('Spatial.Notes').strip().replace(' ','')	
+			db  = im.spatial_notes.replace(' ','')
+			if self.CSVDB(csv,db): pass
+			else: print id,' spatial_notes: ',db, ' <> CSV: ',  csv
+
+#		spatial_fits_header CSV?
+
+	def CSVDB(self,a,b):
+		ret = False
+		a = a.strip().replace(' ','')
+		b = b.strip().replace(' ','')
+		if a == b: ret = True
+		else:
+			a = a.split(';')
+			b = b.split(';')
+			if len(a) == len(b): 
+				for i in range(0,len(a),1):
+					ret = True
+					#print i,a[i],b[i]
+					if a[i].find('.') > -1:
+						rp = a[i]
+						fp = rp.find('.')
+						a[i] = rp[:fp] + '.' + rp[fp:].replace('.','')
+							#a, in the CSV it is sometimes like 123.456.789
+							#b, in the DB it is like 123.123456
+					try:
+						if abs(float(a[i]) - float(b[i])) > 0.00001: ret = False
+					except: ret = False	
+			else: ret = False
+		return ret 
+
+	def exposures(self, im, id):
+		# analyses the image exposure related fields in the csv-file
+		# determins the number of exposures from the csv and compares
+		# it to the number of exposures in the image objects
+		
+		# Analyse CSV-file and fill lists
+		DatasetID = ['']
+		IntegrationTimes = [''] 
+		StartTimes = [''] 
+		CentralWavelengths = [''] 
+		Bandpasses = [''] 
+		Bands = [''] 
+		ColorAssignments = [''] 
+		Instruments = ['']
+		Facilities = ['']
+		
+		if self._dataentry('Facility'):
+			Facilities = [self._dataentry('Facility').strip()]
+			# print im.id, Facilities
+			
+		if self._dataentry('Instrument'):
+			Instruments = self._dataentry('Instrument')
+			if Instruments.find(',') > -1:
+				Instruments = [Instrument.strip() for Instrument in self._dataentry('Instrument').split(',')]
+			elif Instruments.find('and') > -1:
+				Instruments = [Instrument.strip() for Instrument in self._dataentry('Instrument').split('and')]
+			elif Instruments.find('&') > -1:
+				Instruments = [Instrument.strip() for Instrument in self._dataentry('Instrument').split('&')]
+			elif Instruments.find(';') > -1:
+				Instruments = [Instrument.strip() for Instrument in self._dataentry('Instrument').split(';')]
+			else: Instruments = [self._dataentry('Instrument').strip()]
+			# print im.id, Instruments
+			
+		# "spectral_color_assignment = metadatafields.AVMSpectralColorAssignmentField() <> _dataentry('Spectral.ColorAssignment')"
+		if self._dataentry('Spectral.ColorAssignment'):
+			ColorAssignments = [ColorAssignment.strip() for ColorAssignment in self._dataentry('Spectral.ColorAssignment').split(';')]
+			# print im.id, ColorAssignments		
+		
+		# "spectral_band = metadatafields.AVMSpectralBandField() <> _dataentry('Spectral.Band')"
+		if self._dataentry('Spectral.Band'):
+			Bands = [Band.strip() for Band in self._dataentry('Spectral.Band').split(';')]
+			# remove all entries that are not in SPECTRAL_BAND_CHOICES
+			for i in range(0,len(Bands),1):
+				if (Bands[i], Bands[i]) not in SPECTRAL_BAND_CHOICES:
+					print i, Bands[i], "not in SPECTRAL_BAND_CHOICES"
+					Bands.pop(i)
+ 			# print im.id,  Bands
+			
+		# "spectral_bandpass = metadatafields.AVMSpectralBandpassField() <> Spectral.Bandpass"
+		if self._dataentry('Spectral.Bandpass'):
+			Bandpasses = [Bandpass.strip() for Bandpass in self._dataentry('Spectral.Bandpass').split(';')]
+			# print im.id, Bandpasses		
+		
+		# "spectral_central_wavelength = metadatafields.AVMSpectralCentralWavelengthField() <> _dataentry('Spectral.CentralWavelength')"
+		if self._dataentry('Spectral.CentralWavelength'):
+			CentralWavelengths = [CentralWavelength.strip() for CentralWavelength in self._dataentry('Spectral.CentralWavelength').split(';')]
+			# print im.id, CentralWavelengths
+		
+		# "temporal_start_time = metadatafields.AVMTemporalStartTimeField() <> _dataentry('Temporal.StartTime')"
+		if self._dataentry('Temporal.StartTime'):
+			StartTimes = [StartTime.strip() for StartTime in self._dataentry('Spectral.StartTime').split(';')]
+			# print im.id, StartTimes
+						
+		# "temporal_integration_time = metadatafields.AVMTemporalIntegrationTimeField() <> _dataentry('Temporal.IntegrationTime')"
+		if self._dataentry('Temporal.IntegrationTime'):
+			IntegrationTimes = [IntegrationTime.strip() for IntegrationTime in self._dataentry('Spectral.IntegrationTime').split(';')]
+			# print im.id, IntegrationTimes
+						
+		# "dataset_id = metadatafields.AVMDatasetIDField() <> _dataentry('DatasetID')"
+		if self._dataentry('DatasetID'):
+			DatasetID = [self._dataentry('DatasetID').strip()]
+			# print im.id, DatasetID
+
+
+		n_exposures = max(len(DatasetID),
+						len(IntegrationTimes), 
+						len(StartTimes), 
+						len(CentralWavelengths), 
+						len(Bandpasses), 
+						len(Bands), 
+						len(ColorAssignments), 
+						len(Instruments),
+						len(Facilities))
+		sum = len(DatasetID[0])+len(IntegrationTimes[0])+len(StartTimes[0])+len(CentralWavelengths[0])+len(Bandpasses[0])+len(Bands[0])+len(ColorAssignments[0]) #+len(Instruments)+len(Facilities)
+		print 'NE:', im.id, sum
+		if sum > 0: 
+			print "DDD", im.id, (DatasetID),(IntegrationTimes), (StartTimes),(CentralWavelengths),(Bandpasses), (Bands), (ColorAssignments)
+		print (len(DatasetID),
+						len(IntegrationTimes), 
+						len(StartTimes), 
+						len(CentralWavelengths), 
+						len(Bandpasses), 
+						len(Bands), 
+						len(ColorAssignments), 
+						len(Instruments),
+						len(Facilities))
+		#print n_exposures
+		
+		#print "Check, how many ImageExposures exist for id", im.id
+		
+		IEs = ImageExposure.objects.filter( image = im.id)
+		diag = ''
+		if len(IEs) == 0: diag = 'create all Exposures'
+		if len(IEs) == n_exposures: diag = 'fill existing Exposures'
+		if len(IEs) > n_exposures: diag = "that's strange"
+		
+		print im.id,'Exposures in DB:', len(IEs),'    Exposures in csv:', n_exposures, '  ', diag
+		return
+	
+		print len(IEs)
+		print "singleIE.image, singleIE.instrument, singleIE.facility, singleIE.spectral_band"
+		for singleIE in IEs:
+			print singleIE.image, singleIE.instrument, singleIE.facility, singleIE.spectral_band
+		
+		
+		for exp in range(0 ,n_exposures, 1):
+			print "Exp", exp
+			IE = ImageExposure(image = im)
+		 	facility = metadatafields.AVMFacilityField()
+		#	instrument = metadatafields.AVMInstrumentField()
+		#	spectral_color_assignment = metadatafields.AVMSpectralColorAssignmentField()
+		#	spectral_band = metadatafields.AVMSpectralBandField()
+		#	spectral_bandpass = metadatafields.AVMSpectralBandpassField()
+		#	spectral_central_wavelength = metadatafields.AVMSpectralCentralWavelengthField()
+		#	temporal_start_time = metadatafields.AVMTemporalStartTimeField()
+		#	temporal_integration_time = metadatafields.AVMTemporalIntegrationTimeField()
+		#	dataset_id = metadatafields.AVMDatasetIDField()
+			# Facilities
+#			if len(Facilities) <= 1:		
+#				IE.facility = metadatafields.AVMFacilityField(Facilities[0])	
+#				#IE.facility = metadata.Facility(Facilities[0])
+#				metadata.Facility(Facilities[0])
+#			elif len(Facilities) == n_exposures:
+#				IE.facility = metadata.Facility(Facilities[exp])
+#			else:
+#				print "len(Facilities): %d, n_exp: %d\n" % (len(Facilities),  n_exposures)
+##			# Instruments
+#			if len(Instruments) <= 1:			
+#				IE.instrument = metadata.Instrument(Instruments[0])
+#			elif len(Instruments) == n_exposures:
+#				IE.instrument = metadata.Instrument(Instruments[exp])
+#			else:
+#				print "len(Instruments): %d, n_exp: %d\n" % (len(Instruments),  n_exposures)
+#			# ColorAssignments
+#			if len(ColorAssignments) <= 1:			
+#				IE.spectral_color_assignment = ColorAssignments[0]
+#			elif len(ColorAssignments) == n_exposures:
+#				IE.spectral_color_assignment = ColorAssignments[exp]
+#			else:
+#				print "len(ColorAssignments): %d, n_exp: %d\n" % (len(ColorAssignments),  n_exposures)
+			# Bands
+			if len(Bands) <= 1:			
+				IE.spectral_band = Bands[0]
+			elif len(Bands) == n_exposures:
+				IE.spectral_band = Bands[exp]
+			else:
+				print "len(Bands): %d, n_exp: %d\n" % (len(Bands),  n_exposures)
+#			# Bandpasses
+#			if len(Bandpasses) <= 1:			
+#				IE.spectral_bandpass = Bandpasses[0]
+#			elif len(Bandpasses) == n_exposures:
+#				IE.spectral_bandpass = Bandpasses[exp]
+#			else:
+#				print "len(Bandpasses): %d, n_exp: %d\n" % (len(Bandpasses),  n_exposures)
+#			# CentralWavelengths
+#			if len(CentralWavelengths) <= 1:			
+#				IE.spectral_central_wavelength = CentralWavelengths[0]
+#			elif len(CentralWavelengths) == n_exposures:
+#				IE.spectral_central_wavelength = CentralWavelengths[exp]
+#			else:
+#				print "len(CentralWavelengths): %d, n_exp: %d\n" % (len(CentralWavelengths),  n_exposures)
+#			# StartTimes
+#			if len(StartTimes) <= 1:			
+#				IE.temporal_start_time = StartTimes[0]
+#			elif len(StartTimes) == n_exposures:
+#				IE.temporal_start_time = StartTimes[exp]
+#			else:
+#				print "len(StartTimes): %d, n_exp: %d\n" % (len(StartTimes),  n_exposures)
+#			# IntegrationTimes
+#			if len(IntegrationTimes) <= 1:			
+#				IE.temporal_integration_time = IntegrationTimes[0]
+#			elif len(IntegrationTimes) == n_exposures:
+#				IE.temporal_integration_time = IntegrationTimes[exp]
+#			else:
+#				print "len(IntegrationTimes): %d, n_exp: %d\n" % (len(IntegrationTimes),  n_exposures)
+#			# DatasetID
+#			if len(DatasetID) <= 1:			
+#				IE.dataset_id = DatasetID[0]
+#			elif len(DatasetID) == n_exposures:
+#				IE.dataset_id = DatasetID[exp]
+#			else:
+#				print "len(DatasetID): %d, n_exp: %d\n" % (len(DatasetID),  n_exposures)
+#	
+			print IE.facility, IE.instrument, IE.spectral_color_assignment, IE.spectral_band, IE.spectral_bandpass, IE.spectral_central_wavelength, IE.temporal_start_time, IE.temporal_integration_time, IE.dataset_id
+			print "Try to save object IE"
+			try:
+				pass 
+				#IE.save()
+			except:
+				print "IE.save() failed"
+				print "Unexpected error:", sys.exc_info()[0]
+    			
+
+#		ImageExposure( image=im, spectral_band=..)
 #		print self._dataentry('Subject.Category')
 #		print self._dataentry('ReferenceURL')
 #		print self._dataentry('Date')
 #		print self._dataentry('Type')
 #		print self._dataentry('Image.ProductQuality')
-#		print self._dataentry('Spectral.ColorAssignment')
-#		print self._dataentry('Spectral.Band')
-#		print self._dataentry('Spectral.Bandpass')
-#		print self._dataentry('Spectral.CentralWavelength')
+#		print self._dataentry('Spectral.ColorAssignment')x
+#		print self._dataentry('Spectral.Band')x
+#		print self._dataentry('Spectral.Bandpass')x
+#		print self._dataentry('Spectral.CentralWavelength')x
 #		print self._dataentry('Spectral.Notes')
-#		print self._dataentry('Temporal.StartTime')
-#		print self._dataentry('Temporal.IntegrationTime')
-#		print self._dataentry('DatasetID')
+#		print self._dataentry('Temporal.StartTime')x
+#		print self._dataentry('Temporal.IntegrationTime')x
+#		print self._dataentry('DatasetID')x
 #		print self._dataentry('Spatial.ReferenceDimension')
 #		print self._dataentry('Spatial.CoordinateFrame')
 #		print self._dataentry('Spatial.Equinox')
