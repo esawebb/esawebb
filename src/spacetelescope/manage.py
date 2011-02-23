@@ -17,4 +17,8 @@ except ImportError:
     sys.exit(1)
 
 if __name__ == "__main__":
+    # Two next lines not needed if http://code.djangoproject.com/ticket/14087 
+    # is included in django
+    from djangoplicity.utils.management import fix_find_management_module
+    fix_find_management_module()
     execute_manager(settings)
