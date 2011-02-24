@@ -107,7 +107,7 @@ SITE_ID = 1
 USE_I18N = False
 USE_L10N = True
 
-LOCALE_PATHS = ( DJANGOPLICITY_ROOT + "/locale", PRJBASE + "/locale", )
+#LOCALE_PATHS = ( DJANGOPLICITY_ROOT + "/locale", PRJBASE + "/locale", )
 
 # Default date and time formats (con be overridden by locale)
 DATE_FORMAT = gettext_noop('j F Y')
