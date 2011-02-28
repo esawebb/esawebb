@@ -1,2 +1,2 @@
-0,5,10,15,20,25,30,35,40,45,50,55 * * * * /home/web/hubble/projects/spacetelescope.org/bin/cron.hubble.main
-0 3 * * * /home/web/hubble/virtualenv/bin/make.hubble.top100zip >/dev/null 2>&1
+0,5,10,15,20,25,30,35,40,45,50,55 * * * * bash -l -c /home/web/hubble/projects/spacetelescope.org/bin/cron.hubble.main
+0 3 * * * bash -l -c /home/web/hubble/virtualenv/bin/make.hubble.top100zip >/dev/null 2>&1

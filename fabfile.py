@@ -41,11 +41,14 @@ MERGE_FILES = [
 	( 'logs/', False ),
 ]
 
+ctx = { 'DOMAIN' : DOMAIN }
 PERMISSIONS = [
 		{'path' : '%(prefix)s/virtualenv/bin/*', 'user' : None, 'group' : None, 'perms' : 'a+x' },
+	    {'path' : '%(prefix)s/projects/'+DOMAIN+'/bin/*', 'user' : None, 'group' : None, 'perms' : 'a+x' },
 		{'path' : '%(prefix)s/docs/static/css/', 'user' : None, 'group' : 'w3hst', 'perms' : 'g+ws' },
 		{'path' : '%(prefix)s/docs/static/js/', 'user' : None, 'group' : 'w3hst', 'perms' : 'g+ws' },
 		{'path' : '%(prefix)s/logs/', 'user' : None, 'group' : 'w3hst', 'perms' : 'g+ws' },
+		{'path' : '%(prefix)s/tmp/', 'user' : None, 'group' : 'w3hst', 'perms' : 'g+ws' },
 ]
 
 STATIC_FILES = [
