@@ -40,7 +40,7 @@ def main_page( request ):
 	return render_to_response('frontpage.html', {
 				'releases': Release.get_latest_release( 5 ),
 				'potw' : PictureOfTheWeek.get_latest(),
-				'announcements' : Announcement.get_latest_announcement(5),
+				'announcements' : Announcement.get_latest_announcement(5, only_featured=True),
 				'hubblecasts' : hubblecasts,  
 				'potd' : potd,
 				'votd' : votd,
