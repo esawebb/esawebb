@@ -300,6 +300,7 @@ INSTALLED_APPS += (
 	'djangoplicity.jobs',
 	'django.contrib.redirects',
 	'djangoplicity.archives.contrib.satchmo.freeorder',
+    'djangoplicity.archives.contrib.security',
 	'djangoplicity.archives.contrib.inventory_control',
 	'djangoplicity.announcements',
 	'djangoplicity.releases',
