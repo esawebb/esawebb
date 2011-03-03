@@ -11,6 +11,8 @@
 from djangoplicity.settings import import_settings		
 import os
 import re
+import logging
+import logging.handlers
 
 local_settings = import_settings('spacetelescope')
 LOCAL_SETTINGS_MODULE = local_settings.LOCAL_SETTINGS_MODULE
@@ -573,27 +575,25 @@ SITE_DOMAIN = "www.spacetelescope.org"
 ###########
 # LOGGING #
 ###########
-import logging
-import logging.handlers
-import os.path
 
 class NullHandler( logging.Handler ):
-    def emit( self, record ):
-        pass
+	def emit( self, record ):
+		pass
 
 logging.getLogger( 'keyedcache' ).setLevel( logging.WARN )
 logging.getLogger( 'l10n' ).setLevel( logging.WARN )
 logging.getLogger( 'paramiko' ).setLevel( logging.WARN )
 logging.getLogger( 'sslurllib' ).addHandler( NullHandler() )
 
-handler = logging.handlers.RotatingFileHandler( os.path.join( LOG_DIR, "djangoplicity.log" ), maxBytes=50*1024*1024, backupCount=3 )		
-formatter = logging.Formatter( '%(asctime)s %(name)-12s %(levelname)-8s %(message)s', '%a, %d %b %Y %H:%M:%S' )
-handler.setFormatter( formatter)
-
 logger = logging.getLogger()
-logger.addHandler( handler )
-logger.setLevel( logging.DEBUG if DEBUG else logging.INFO )
-logger.info("Djangoplicity started")
+if not logger.handlers:
+	handler = logging.handlers.RotatingFileHandler( os.path.join( LOG_DIR, "djangoplicity.log" ), maxBytes=50 * 1024 * 1024, backupCount=3 )
+	formatter = logging.Formatter( '%(asctime)s %(name)-12s %(levelname)-8s %(message)s', '%a, %d %b %Y %H:%M:%S' )
+	handler.setFormatter( formatter )
+
+	logger.addHandler( handler )
+	logger.setLevel( logging.DEBUG if DEBUG else logging.INFO )
+	logger.info( "Djangoplicity started" )
 
 ###################
 # REPORTLAB FONTS #
