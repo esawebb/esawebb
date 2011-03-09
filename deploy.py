@@ -31,6 +31,13 @@ def main():
 		dest = 'verbose',
 		default = 0,
 		help = "Increase verbosity" )
+	
+	parser.add_option( 
+		'-t', '--tag',
+		action = 'store',
+		dest = 'tag',
+		default = None,
+		help = "Deploy specific tag existing on all VCS projects" )
 
 	parser.add_option( 
 		'-q', '--quiet',
@@ -72,6 +79,16 @@ def main():
 	verbosity = options.verbose - options.quiet
 	logger = Logger( [( Logger.level_for_integer( 2 - verbosity ), sys.stdout )] )
 	call_subprocess = pip_call_subprocess
+	
+	#
+	# Modify project settings if specific tag has been specified
+	#
+	if options.tag:
+		if 'vcs_projects' in settings:
+			tmp = [] 
+			for prj,url in settings['vcs_projects']:
+				tmp.append( (prj, "%s@%s" % (url, options.tag) ) )
+			settings['vcs_projects'] = tmp
 			
 	class options:
 		develop = False
@@ -211,6 +228,7 @@ settings = {
 	'requirements' :  [],
 	'manage.py' : None,
 }
+
 
 			
 # ==========================================
@@ -404,13 +422,17 @@ def _activate_virtualenv( bin_dir ):
 			logger.error("Cannot activate virtual environment - bin/activate_this.py is missing.")
 	
 
-def run_script( script ):
+def run_script( script, args=[] ):
 	"""
 	Return a function that will run the script. Script must be set as executable and should
 	include the path from the base directory.
 	"""
 	def func( base_dir, home_dir, lib_dir, inc_dir, bin_dir, options ):
-		call_subprocess( [ os.path.join( base_dir, script ),  base_dir, home_dir, lib_dir, inc_dir, bin_dir ] )
+		ctx = { "base_dir" : base_dir, "home_dir" : home_dir, "lib_dir" : lib_dir, "inc_dir" : inc_dir, "bin_dir" : bin_dir }
+		cmd = [ script % ctx ]
+		for a in args:
+			cmd.append(a % ctx)
+		call_subprocess( cmd )
 	return func
 
 def run_function( runfunc, **kwargs ):
@@ -434,7 +456,7 @@ def run_function( runfunc, **kwargs ):
 import sys
 
 #
-# Make sure the settings can be loaded in other modules
+# Make sure the settings can be loaded in other modules (currently fabfile.py, deploy.py and bootstrap.py)
 # 
 if 'settings' not in globals():
 	from djangoplicity.bootstrap.defaults import settings, PY_VERSION, run_function, task_move, task_append, task_run_manage

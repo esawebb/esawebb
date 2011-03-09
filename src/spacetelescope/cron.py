@@ -8,4 +8,4 @@
 #   Luis Clara Gomes <lcgomes@eso.org>
 #
 
-from djangoplicity.archives.contrib.security import cron
+#from djangoplicity.archives.contrib.security import cron
