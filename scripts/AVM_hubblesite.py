@@ -22,6 +22,7 @@ from djangoplicity.media.models import Image
 
 import re
 import urllib2
+
 import logging, sys
 import socket
 
@@ -120,11 +121,13 @@ if __name__ == '__main__':
         
     dict = {} # {spacetelescope_id:[spacetelescope_thumb, hubblesite_id, hubblesite_thumb, hubblesite_huge, long_caption_link]}for the results
 
-    images = Image.objects.filter(id__startswith='opo')
+    images = Image.objects.all()
     print "spacetelescope id\t hubblesite id\t spacetelescope url\t hubblesite url"
     n_images = str(len(images))
     count = 0
     for image in images:
+        if image.long_caption_link.find('http://hubblesite.org') == -1: continue
+        if image.id[:3] == 'opo': continue
         count = count + 1
         #if count > 30: break
         try:
@@ -136,7 +139,7 @@ if __name__ == '__main__':
             if line.find('release-number') > -1:
                 break
         try:
-            hubble_id = pattern.findall(line)[0].strip()
+            hubble_id = pattern.findall(line)[0].strip()            
         except:
             hubble_id = '?'
         middle = new_id(image.long_caption_link)
@@ -145,14 +148,26 @@ if __name__ == '__main__':
         if middle != '-':
             hubblesite_thumb = hubble_pre + middle + hubble_thumb_post
             hubblesite_huge = hubble_pre + middle + hubble_original_post
+            
+            #Check if hubblesite thumb can be found
+            thumberror = ''
+            try:
+                urllib2.urlopen(hubblesite_thumb) #,data = '', timeout=5
+            except urllib2.URLError, e:
+                hubblesite_thumb = 'ERROR' + str(e.code) + ' ' + hubblesite_thumb               
+                thumberror = 'Thumb not found (' + str(e.code) + ') at ' + hubblesite_thumb
+            
+            
         else:
             hubblesite_thumb = '-'
             hubblesite_huge  = '-'
+        
+
         dict[image.id] = [spacetelescope_thumb, spacetelescope_url, hubble_id, hubblesite_thumb, hubblesite_huge, image.long_caption_link]
         
         print "%s\t%s\t%s\t%s" % (image.id, hubble_id, spacetelescope_url, image.long_caption_link)
-        logger.info(str(count)+' / '+n_images + ' ' + image.id + ' ' + hubble_id + ' ' + middle  + ' ' + image.long_caption_link)
-    store_JSON('/Users/dneumayer/ESO/Mantis/12079/opo.js',dict)
+        logger.info(str(count)+' / '+n_images + ' ' + image.id + ' ' + hubble_id + ' ' + middle  + ' ' + image.long_caption_link + ' ' + thumberror)
+    store_JSON('/Users/dneumayer/ESO/Mantis/12079/heic.js',dict)
            
         
         

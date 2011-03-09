@@ -723,7 +723,7 @@ class ImagesAVMDataMapping( ImagesDataMapping ):
 			#raise MigrationError( unicode(e) )
 			
 		#print '\n'#, im.id
-		#self.exposures(im,id)    # checks if the number of exposures in the CSV match with the number of ImageExposure objects
+		self.exposures(im,id)    # checks if the number of exposures in the CSV match with the number of ImageExposure objects
 		#self.coordinate(im,id)   # checks if the entries in the CSV match with those in the DB
 		
 	def coordinate(self, im, id):
@@ -917,21 +917,22 @@ class ImagesAVMDataMapping( ImagesDataMapping ):
 						len(Instruments),
 						len(Facilities))
 		sum = len(DatasetID[0])+len(IntegrationTimes[0])+len(StartTimes[0])+len(CentralWavelengths[0])+len(Bandpasses[0])+len(Bands[0])+len(ColorAssignments[0]) #+len(Instruments)+len(Facilities)
-		print 'NE:', im.id, sum
-		if sum > 0: 
-			print "DDD", im.id, (DatasetID),(IntegrationTimes), (StartTimes),(CentralWavelengths),(Bandpasses), (Bands), (ColorAssignments)
-		print (len(DatasetID),
-						len(IntegrationTimes), 
-						len(StartTimes), 
-						len(CentralWavelengths), 
-						len(Bandpasses), 
-						len(Bands), 
-						len(ColorAssignments), 
-						len(Instruments),
-						len(Facilities))
-		#print n_exposures
+		instrument_facilities = len(Instruments[0])+len(Facilities[0])
 		
-		#print "Check, how many ImageExposures exist for id", im.id
+		if sum > 0: 
+			print "AVM-DATA for ", im.id,': ', (DatasetID),(IntegrationTimes), (StartTimes),(CentralWavelengths),(Bandpasses), (Bands), (ColorAssignments)
+#		print (len(DatasetID),
+#						len(IntegrationTimes), 
+#						len(StartTimes), 
+#						len(CentralWavelengths), 
+#						len(Bandpasses), 
+#						len(Bands), 
+#						len(ColorAssignments), 
+#						len(Instruments),
+#						len(Facilities))
+#		#print n_exposures
+		
+				#print "Check, how many ImageExposures exist for id", im.id
 		
 		IEs = ImageExposure.objects.filter( image = im.id)
 		diag = ''
@@ -939,8 +940,20 @@ class ImagesAVMDataMapping( ImagesDataMapping ):
 		if len(IEs) == n_exposures: diag = 'fill existing Exposures'
 		if len(IEs) > n_exposures: diag = "that's strange"
 		
-		print im.id,'Exposures in DB:', len(IEs),'    Exposures in csv:', n_exposures, '  ', diag
-		return
+		#print im.id,'Exposures in DB:', len(IEs),'    Exposures in csv:', n_exposures, '  ', diag
+	
+		if len(IEs) == 0 and n_exposures > 0:
+			if len(Facilities[0]) > 0 and len(Facilities) > 1:
+				print 'add manually:', im.id, Instruments, Facilities
+			if len(Facilities[0]) > 0 and len(Facilities) == 1:
+				for Instrument in Instruments:
+					warning = ''
+					#sometimes there is the Facility-Instrument-combination Hubble ground-based or Hubble Chandra
+					# TODO, Instrument contains an object, not characters, so I guess
+					#if str(Facilities[0]).find('Hubble') > -1  and str(Instrument).find('round') > -1: warning = ' GROUND? !!'
+					print 'new IE for ', im.id, ': ', Facilities[0], Instrument, warning
+
+		return #END HERE
 	
 		print len(IEs)
 		print "singleIE.image, singleIE.instrument, singleIE.facility, singleIE.spectral_band"
