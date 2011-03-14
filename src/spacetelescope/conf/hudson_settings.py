@@ -13,7 +13,7 @@ from default_settings import *
 #############################
 # ENVIRONMENT CONFIGURATION #
 #############################
-ROOT = "/home/web/hubblei/"
+ROOT = "/var/lib/hudson/spacetelescope.org/build/"
 PRJBASE = "%s/projects/spacetelescope.org" % ROOT
 DJANGOPLICITY_ROOT = "%s/projects/djangoplicity" % ROOT
 LOG_DIR = "%s/logs" % ROOT
