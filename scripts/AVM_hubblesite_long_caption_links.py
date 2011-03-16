@@ -8,9 +8,7 @@
 #   Dirk Neumayer <dirk.neumayer@gmail.com>
 #
 #
-# Mantis 12079 short check which prefixes have a long_caption_link
-
-
+# Mantis 12079 retrieves long_caption_links for images related to a NASA Press Release 
 #*************************************************************************************************************
 
 from djangoplicity.utils import optionparser
@@ -63,12 +61,14 @@ def simplify_text(text):
     return text
 
 def similar_titles(titles):
+    '''
+    returns True if the two words in the list titles are similar
+    '''
     result = False
     titles[0] = simplify_text(titles[0])
     titles[1] = simplify_text(titles[1])    
       
     if titles[0] == titles[1]: result = True 
-    print 'compared:', titles
     return result
     
 def analyse_links(pr_id):
@@ -95,41 +95,6 @@ def analyse_links(pr_id):
         pass
     return long_caption_link
 
-
-
-def get_hubblelink(pr_id):
-    link = None
-    pat = re.compile(r'''.*<a href=(.*)>NASA\'s .ress .elease</a>''')
-    try:
-        related = Release.objects.filter(id__startswith = pr_id)[0]
-        link = pat.findall(related.links)[0]
-        #link = pat.search(related.links).group(1)
-
-        if link.find(r'''http://hubblesite.org/new''') == -1: link = None
-        # remove " if necessary
-        if link[0]  == '''"''': link = link[1:]
-        if link[-1] == '''"''': link = link[:-1] 
-    except:
-        pass
-    return link
-
-
-def get_heritagelink(pr_id):
-    link = None
-    pat = re.compile(r'''.*<a href=(.*)>Hubble Heritage Photo Release</a>''') 
-    try:
-        related = Release.objects.filter(id__startswith = pr_id)[0]
-        link = pat.findall(related.links)[0]
-        if link.find(r'''http://heritage.stsci.edu''') == -1: link = None
-        # remove " if necessary
-        if link[0]  == '''"''': link = link[1:]
-        if link[-1] == '''"''': link = link[:-1] 
-    except:
-        pass
-    return link
-
-
-
 def check_reachability(url):
     result = True
     
@@ -141,6 +106,13 @@ def check_reachability(url):
 
 
 def get_long_caption_link(url, iterator, check_reachability_flag = True):
+    '''
+    NOT VALID
+    This was the first try to get long_caption_links
+    by simply using the last letter of .id 
+    heic0515c --> hubblesite.org/...../image/c/
+    Unfortunately this points very often to a different image
+    '''
     long_c = None
     try:
         remote   = urllib2.urlopen(url)
@@ -219,9 +191,6 @@ def get_related_PR(id):
 
 
 if __name__ == '__main__':
-
-    print similar_titles(['"A B\n c"', 'a b c'])
-    
     # timeout in seconds
     timeout = 60
     socket.setdefaulttimeout(timeout)
@@ -229,28 +198,10 @@ if __name__ == '__main__':
     images = Image.objects.all()#filter(image__long_caption_link != '')
     n_images = str(len(images))
     print n_images, ' image objects'
-
-    # analyse(images)
-    
-    
-    # get related press releases
-    # assuming that the related press releases have the same ID as the image but without the ending characters
-    # heic0515a --> heic0515
-    
-    # then parse the related release and find the link to hubblesite
-    
-    # then on hubblesite, look for
-              
-    # then long_caption_link: <a href="/newscenter/archive/releases/2007/09/image/a/" class="intro-image-container no-zoomifyer-extra-padding"> 
-    # also the link to the thumb: <img class="icon" style="margin: 0px;" src="http://imgsrc.hubblesite.org/hu/db/images/hs-2007-09-a-small_web.jpg" alt="The Colorful Demise of a Sun-like Star"><span>Go to image download page</span>
-    
-
-            
+        
     hcount = 0
     savecount = 0
-    # get long_caption_links
-    long_c = None
-    images = Image.objects.all()# filter(id__startswith='hei')
+
     for image in images:
         link = None
         link_images = None
@@ -261,21 +212,17 @@ if __name__ == '__main__':
         # get only images without a long_caption_link
         
         # DEBUG
-        #if image.id == 'heic0904i': 
+        #if image.id == 'heic0904i':  in heic0904i the titles are almost the same appart of the date format
+        
         if image.long_caption_link.find('http') == -1:
             
-            # print '--------------------'
-            # print image.id, # image.title
-            # get id of related press release
+            # get id of related press release 
             related, iterator = get_related_PR(image.id)
-            # print image.id, ': get id of related press release', related
-                        
             # find the link to hubblesite.org NASA Press Release
             result =  analyse_links(related)
             if result: 
                 # print 'find the link to hubblesite.org NASA Press Release' , result
                 link = result[0]
-            
                 # get link to image releases of NASA Press release
                 if (link): 
                     link_images = hb.release_images(link)
@@ -283,8 +230,6 @@ if __name__ == '__main__':
                     if not link_images:
                         long_c = link
                         link_type = '''using link to NASA's Press Release, no link to NASA's release images'''
-
-                
                     # get links to individual image releases
                     if (link_images):
                         nasa_images = hb.list_links(link_images)
@@ -294,13 +239,11 @@ if __name__ == '__main__':
                             long_c = link_images
                             link_type = '''generate link list failed, using link to NASA's release images'''
                         else:
-                            
                             # maybe there is just one link?
                             if len(nasa_images) == 1:
                                 long_c = nasa_images[0][1]
                                 link_type = '''single image in NASA's release images'''
                                 # print 'LONG_C!', nasa_images[0]
-                            
                             else:
                             # if there are more links, compare the titles    
                                 for ni in nasa_images:
@@ -313,13 +256,12 @@ if __name__ == '__main__':
                                 if not long_c:
                                     long_c = link_images
                                     link_type = '''no match, using link to NASA's release images'''
-
-
             if long_c and long_c == link_images:
-                # often heic###a equals hubblesite.org/.../image/b/, unfortunatley not so often with b and even less with c,d,e....
+                # often heic###a equals hubblesite.org/.../image/a/, unfortunately not so often with b and even less with c,d,e....
                 if iterator == 'a':
                     long_c = link_images + iterator + '/'
                     link_type = '''try link + /a/'''
+            
             print image.id,';\t', long_c,';\t', link_type
      
             
