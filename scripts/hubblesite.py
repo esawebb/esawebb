@@ -42,15 +42,18 @@ def release_images(link):
     returns link to the release images section for a press release link
     '''
     link = get_redirect(link)
+    # some special cases that might occure
+    if link == '''http://hubblesite.org/newscenter/archive/''': link = None
     
-    if link.find('image') == -1:
-        if link[-1] == '/':
-            link = link + 'image/'
+    if link:
+        if link.find('image') == -1:
+            if link[-1] == '/':
+                link = link + 'image/'
+            else:
+                link = link + '/image/'
         else:
-            link = link + '/image/'
-    else:
-        end = link.find('image')
-        link = link[:end] + 'image/'
+            end = link.find('image')
+            link = link[:end] + 'image/'
     return link
 
 def list_links(url_images):   # [^>]
@@ -60,24 +63,30 @@ def list_links(url_images):   # [^>]
     ['A Giant Hubble Mosaic of the Crab Nebula', '/newscenter/archive/releases/2005/37/image/a/']
     ['Crab Nebula: a Dead Star Creates Celestial Havoc', '/newscenter/archive/releases/2005/37/image/b/']
     '''
-    site = urllib2.urlopen(url_images)
-    text = site.read()
-    
-    # remove all linebreaks and double whitespace
-    text = remove_void(text)
-     
-    pat = re.compile(r'(<a href="(/newscenter/archive/[^"]+)">)[\s]?<span class="link">(.*?)</span>.*?</a>')  
-    links = None
+    newlinks = None
     try:
-        links = pat.findall(text)
+        site = urllib2.urlopen(url_images)
+        text = site.read()
+        
+        # remove all linebreaks and double whitespace
+        text = remove_void(text)
+         
+        pat = re.compile(r'(<a href="(/newscenter/archive/[^"]+)">)[\s]?<span class="link">(.*?)</span>.*?</a>')  
+        links = None
+        try:
+            links = pat.findall(text)
+        except:
+            pass
+        newlinks = []
+        for l in links:
+            description = l[2]
+            link        = l[1]
+            if link.find('http://hubblesite.org') == -1: 
+                link = 'http://hubblesite.org' + link
+            newl = [description,link]
+            newlinks.append(newl)
     except:
-        pass
-    newlinks = []
-    for l in links:
-        description = l[2]
-        link        = l[1]
-        newl = [description,link]
-        newlinks.append(newl)
+        newlinks = None
     return newlinks
       
 
