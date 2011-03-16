@@ -26,7 +26,13 @@ import urllib2
 import logging, sys
 import socket
 
+import datetime
+
 def store_JSON(path_json, dict):
+    '''
+    stores the data in dict in JSON format
+    the JSON data will be presented by the website using dynamic.js
+    '''
     f = open(path_json,'w')
     
     ids = dict.keys()
@@ -84,9 +90,7 @@ if __name__ == '__main__':
     logger.addHandler(logging.StreamHandler(sys.stderr))
     logger.propagate = False
     logger.info("get hubblesite ids")
-    
-    
-    
+        
     # timeout in seconds
     timeout = 60
     socket.setdefaulttimeout(timeout)
@@ -125,9 +129,12 @@ if __name__ == '__main__':
     print "spacetelescope id\t hubblesite id\t spacetelescope url\t hubblesite url"
     n_images = str(len(images))
     count = 0
+    now = datetime.datetime.now()
+    jsonfile = '/Users/dneumayer/ESO/Mantis/12079/workdir/' + now.strftime("%Y-%m-%d") + 'a.js'
+    print 'store results in ', jsonfile
     for image in images:
         if image.long_caption_link.find('http://hubblesite.org') == -1: continue
-        if image.id[:3] == 'opo': continue
+        if image.id[:3] == 'opo': continue  # all opo images until 01-03-2011 are opo.js and have been manually compared 
         count = count + 1
         #if count > 30: break
         try:
@@ -167,7 +174,7 @@ if __name__ == '__main__':
         
         print "%s\t%s\t%s\t%s" % (image.id, hubble_id, spacetelescope_url, image.long_caption_link)
         logger.info(str(count)+' / '+n_images + ' ' + image.id + ' ' + hubble_id + ' ' + middle  + ' ' + image.long_caption_link + ' ' + thumberror)
-    store_JSON('/Users/dneumayer/ESO/Mantis/12079/heic.js',dict)
+    store_JSON(jsonfile,dict)
            
         
         
