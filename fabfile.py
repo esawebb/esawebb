@@ -48,6 +48,7 @@ PERMISSIONS = [
 		{'path' : '%(prefix)s/docs/static/css/', 'user' : None, 'group' : 'w3hst', 'perms' : 'g+ws' },
 		{'path' : '%(prefix)s/docs/static/js/', 'user' : None, 'group' : 'w3hst', 'perms' : 'g+ws' },
 		{'path' : '%(prefix)s/logs/', 'user' : None, 'group' : 'w3hst', 'perms' : 'g+ws' },
+		{'path' : '%(prefix)s/logs/*', 'user' : None, 'group' : 'w3hst', 'perms' : 'g+w' },
 		{'path' : '%(prefix)s/tmp/', 'user' : None, 'group' : 'w3hst', 'perms' : 'g+ws' },
 ]
 
