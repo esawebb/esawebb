@@ -474,6 +474,8 @@ DEFAULT_RIGHTS = ""
 DEFAULT_PUBLISHER = u"ESA/Hubble"
 DEFAULT_PUBLISHER_ID = u"vamp://esahubble"
 
+DEFAULT_CREDIT = u"NASA &amp; ESA"
+
 ARCHIVE_IMPORT_ROOT = local_settings.ARCHIVE_IMPORT_ROOT
 ARCHIVE_WORKFLOWS = {
 	'media.video.rename' : ('spacetelescope.workflows.media','video_rename'), 
