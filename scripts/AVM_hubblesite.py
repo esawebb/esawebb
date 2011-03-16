@@ -164,7 +164,6 @@ if __name__ == '__main__':
                 hubblesite_thumb = 'ERROR' + str(e.code) + ' ' + hubblesite_thumb               
                 thumberror = 'Thumb not found (' + str(e.code) + ') at ' + hubblesite_thumb
             
-            
         else:
             hubblesite_thumb = '-'
             hubblesite_huge  = '-'
