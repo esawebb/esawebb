@@ -40,18 +40,35 @@ def get_ranking(link):
     s = link.split('/')
     return int(s[-2])*1000 + int(s[-1])
 
-def remove_quotes(text):
-    if text[0] == '"': text = text[1:]
-    if text[-1] == '"': text = text[:-1]
+def simplify_text(text):
+    '''
+    remove "
+    remove ,
+    remove :
+    remove '
+    remove linebreaks and double spaces
+    make lower
+    '''
+    text = text.replace('"','')
+    text = text.replace(",","")
+    text = text.replace(":","")
+    text = text.replace("'","")
+        
+    text = text.replace("\r","")
+    text = text.replace("\n","")
+    text = ' '.join(text.split())
+    
+    text = hb.remove_void(text)
+    text = text.lower()
     return text
 
 def similar_titles(titles):
     result = False
-    titles[0] = remove_quotes(titles[0])
-    titles[1] = remove_quotes(titles[1])    
-    titles[0] = hb.remove_void(titles[0].lower())
-    titles[1] = hb.remove_void(titles[1].lower())    
+    titles[0] = simplify_text(titles[0])
+    titles[1] = simplify_text(titles[1])    
+      
     if titles[0] == titles[1]: result = True 
+    print 'compared:', titles
     return result
     
 def analyse_links(pr_id):
@@ -242,6 +259,9 @@ if __name__ == '__main__':
         long_c = None
         link_type = 'not found'
         # get only images without a long_caption_link
+        
+        # DEBUG
+        #if image.id == 'heic0904i': 
         if image.long_caption_link.find('http') == -1:
             
             # print '--------------------'
@@ -259,33 +279,47 @@ if __name__ == '__main__':
                 # get link to image releases of NASA Press release
                 if (link): 
                     link_images = hb.release_images(link)
-                
-                    # get links to individual image releases
-                    if (link_images):
-                        nasa_images = hb.list_links(link_images)
-                        
-                        # maybe there is just one link?
-                        if len(nasa_images) == 1:
-                            long_c = nasa_images[0][1]
-                            link_type = '''single image in NASA's release images'''
-                            # print 'LONG_C!', nasa_images[0]
-                        
-                        else:
-                        # if there are more links, compare the titles    
-                            for ni in nasa_images:
-                                if similar_titles([image.title,ni[0]]): 
-                                    long_c = ni[1]
-                                    link_type = '''titles match with a NASA's release image'''
-                                    # print 'TITLES match!',
-                                #print ni
-                            # if there was no match, use link to Press release release images as long_caption
-                            if not long_c:
-                                long_c = link_images
-                                link_type = '''no match, using link to NASA's release images'''
                     # if no link to release images exist, use original link to NASA Press Release
                     if not link_images:
                         long_c = link
                         link_type = '''using link to NASA's Press Release, no link to NASA's release images'''
+
+                
+                    # get links to individual image releases
+                    if (link_images):
+                        nasa_images = hb.list_links(link_images)
+
+                        # if there was no match, use link to Press release release images as long_caption
+                        if not nasa_images:
+                            long_c = link_images
+                            link_type = '''generate link list failed, using link to NASA's release images'''
+                        else:
+                            
+                            # maybe there is just one link?
+                            if len(nasa_images) == 1:
+                                long_c = nasa_images[0][1]
+                                link_type = '''single image in NASA's release images'''
+                                # print 'LONG_C!', nasa_images[0]
+                            
+                            else:
+                            # if there are more links, compare the titles    
+                                for ni in nasa_images:
+                                    if similar_titles([image.title,ni[0]]): 
+                                        long_c = ni[1]
+                                        link_type = '''titles match with a NASA's release image'''
+                                        # print 'TITLES match!',
+                                    #print ni
+                                # if there was no match, use link to Press release release images as long_caption
+                                if not long_c:
+                                    long_c = link_images
+                                    link_type = '''no match, using link to NASA's release images'''
+
+
+            if long_c and long_c == link_images:
+                # often heic###a equals hubblesite.org/.../image/b/, unfortunatley not so often with b and even less with c,d,e....
+                if iterator == 'a':
+                    long_c = link_images + iterator + '/'
+                    link_type = '''try link + /a/'''
             print image.id,';\t', long_c,';\t', link_type
      
             
