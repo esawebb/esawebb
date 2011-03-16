@@ -209,10 +209,11 @@ if __name__ == '__main__':
         result = None
         long_c = None
         link_type = 'not found'
-        # get only images without a long_caption_link
         
         # DEBUG
         #if image.id == 'heic0904i':  #in heic0904i the titles are almost the same appart of the date format
+        
+        # get only images without a long_caption_link
         if image.long_caption_link.find('http') == -1:
             
             # get id of related press release 
