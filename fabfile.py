@@ -41,11 +41,15 @@ MERGE_FILES = [
 	( 'logs/', False ),
 ]
 
+ctx = { 'DOMAIN' : DOMAIN }
 PERMISSIONS = [
 		{'path' : '%(prefix)s/virtualenv/bin/*', 'user' : None, 'group' : None, 'perms' : 'a+x' },
+	    {'path' : '%(prefix)s/projects/'+DOMAIN+'/bin/*', 'user' : None, 'group' : None, 'perms' : 'a+x' },
 		{'path' : '%(prefix)s/docs/static/css/', 'user' : None, 'group' : 'w3hst', 'perms' : 'g+ws' },
 		{'path' : '%(prefix)s/docs/static/js/', 'user' : None, 'group' : 'w3hst', 'perms' : 'g+ws' },
 		{'path' : '%(prefix)s/logs/', 'user' : None, 'group' : 'w3hst', 'perms' : 'g+ws' },
+		{'path' : '%(prefix)s/logs/*', 'user' : None, 'group' : 'w3hst', 'perms' : 'g+w' },
+		{'path' : '%(prefix)s/tmp/', 'user' : None, 'group' : 'w3hst', 'perms' : 'g+ws' },
 ]
 
 STATIC_FILES = [
@@ -58,11 +62,12 @@ local_apply_sql = djangoplicity.fabric.apply_sql( sqlfile='sql/deploy.sql', proj
 local_install_requirements = djangoplicity.fabric.install_requirements( bootstrap_settings=settings, prjapp=PRJAPP )
 
 # Integration deployment tasks
+integration_tag = djangoplicity.fabric.vcs_tag( vcs_projects=settings['vcs_projects'], tag='%s_integration'% DOMAIN )
 integration_clear_installation = djangoplicity.fabric.clear_installation( servers=[DEVSERVER,], prefix=PREFIXI )
 integration_bootstrap = djangoplicity.fabric.bootstrap( servers=[DEVSERVER,], prefix=PREFIXI, local_settings='integration_settings', py_version="2.5", relocate_to=PREFIX )
 integration_sync = djangoplicity.fabric.sync( servers=[DEVSERVER,], prefix=PREFIXI, sync=STATIC_FILES )
 integration_fix_perms = djangoplicity.fabric.fix_perms( servers=[SERVER1I], prefix=PREFIX, dirs=PERMISSIONS )
-integration = djangoplicity.fabric.vcs_update( servers=[DEVSERVER,], prefix=PREFIXI )
+integration = djangoplicity.fabric.vcs_update( servers=[DEVSERVER,], prefix=PREFIXI, rev='%s_integration' % DOMAIN )
 integration_stop = djangoplicity.fabric.stop( servers=[SERVER1I, SERVER2I], servername=SERVERNAME )
 integration_start = djangoplicity.fabric.start( servers=[SERVER1I, SERVER2I], servername=SERVERNAME )
 integration_stop_static = djangoplicity.fabric.stop_static( servers=[SERVER1I, SERVER2I], servername=SERVERNAME )
@@ -95,11 +100,12 @@ integration_bootstrap_online = djangoplicity.fabric.bootstrap_online(
 
 
 # Production deployment tasks
+production_tag = djangoplicity.fabric.vcs_tag( vcs_projects=settings['vcs_projects'], rev='%s_integration' % DOMAIN, tag='%s_production' % DOMAIN )
 production_clear_installation = djangoplicity.fabric.clear_installation( servers=[DEVSERVER,], prefix=PREFIX )
 production_bootstrap = djangoplicity.fabric.bootstrap( servers=[DEVSERVER,], prefix=PREFIX, local_settings='production_settings', py_version="2.5", relocate_to=PREFIX )
 production_sync = djangoplicity.fabric.sync( servers=[DEVSERVER,], prefix=PREFIX, sync=STATIC_FILES )
 production_fix_perms = djangoplicity.fabric.fix_perms( servers=[SERVER1], prefix=PREFIX, dirs=PERMISSIONS )
-production = djangoplicity.fabric.vcs_update( servers=[DEVSERVER,], prefix=PREFIX )
+production = djangoplicity.fabric.vcs_update( servers=[DEVSERVER,], prefix=PREFIX, rev='%s_production' % DOMAIN )
 production_stop = djangoplicity.fabric.stop( servers=[SERVER1, SERVER2], servername=SERVERNAME )
 production_start = djangoplicity.fabric.start( servers=[SERVER1, SERVER2], servername=SERVERNAME )
 production_stop_static = djangoplicity.fabric.stop_static( servers=[SERVER1, SERVER2], servername=SERVERNAME )
@@ -136,10 +142,19 @@ publish_docs = djangoplicity.fabric.publish_docs( domain=DOMAIN )
 make_docs = djangoplicity.fabric.make_docs()
 
 # Locale related tasks
-makemessages_new = djangoplicity.fabric.makemessages_new( dirs = [ DOMAIN, 'djangoplicity'], languages = ['de-at','nl-be','fr-be','de-be','cs','da','fi','fr','de','el','is','it','nl','no','pt','pt-br','pl','es','es-cl','sv','de-ch','fr-ch','it-ch','tr','is'] )
-makemessages = djangoplicity.fabric.makemessages( dirs = [ DOMAIN, 'djangoplicity'] )
-compilemessages = djangoplicity.fabric.compilemessages( dirs = [ DOMAIN, 'djangoplicity'] )
+makemessages_new = djangoplicity.fabric.makemessages_new( dirs = [ DOMAIN, 'djangoplicity'], languages = ['de-at','nl-be','fr-be','de-be','cs','da','fi','fr','de','el','is','it','nl','no','pt','pt-br','pl','es','es-cl','sv','de-ch','fr-ch','it-ch','tr','is'],paths=[PRJAPP,'djangoplicity']  )
+makemessages = djangoplicity.fabric.makemessages( dirs = [ DOMAIN, 'djangoplicity'], paths=[PRJAPP,'djangoplicity'] )
+compilemessages = djangoplicity.fabric.compilemessages( dirs = [ DOMAIN, 'djangoplicity'], paths=[PRJAPP,'djangoplicity'] )
 updatemessages = djangoplicity.fabric.updatemessages( file = '/Users/%s/Desktop/ESON\ Djangoplicity\ Translations\ Strings.csv' % getpass.getuser(), languages = [('de-at','Austria'), ('nl-be','Belgium-nl'), ('fr-be','Belgium-fr'), ('de-be','Belgium-de'), ('cs','Czech Republic'), ('da','Denmark'), ('fi','Finland'), ('fr','France'), ('de','Germany'), ('el','Greece'), ('is','Iceland'), ('it','Italy'), ('nl','The Netherlands'), ('no','Norway'), ('pt','Portugal'), ('pt-br','Brazil'), ('pl','Poland'), ('es','Spain'), ('es-cl','Chile'), ('sv','Sweden'), ('de-ch','Switzerland-de'), ('fr-ch','Switzerland-fr'), ('it-ch','Switzerland-it'), ('tr','Turkey'), ('is','Iceland'), ] )
+
+# Version control tasks operating on all projects
+vcs_status = djangoplicity.fabric.vcs_status( vcs_projects=settings['vcs_projects'] )
+vcs_outgoing = djangoplicity.fabric.vcs_outgoing( vcs_projects=settings['vcs_projects'] )
+vcs_incoming = djangoplicity.fabric.vcs_incoming( vcs_projects=settings['vcs_projects'] )
+vcs_outgoing_changes = djangoplicity.fabric.vcs_outgoing_changes( vcs_projects=settings['vcs_projects'] )
+vcs_incoming_changes = djangoplicity.fabric.vcs_incoming_changes( vcs_projects=settings['vcs_projects'] )
+vcs_push = djangoplicity.fabric.vcs_push( vcs_projects=settings['vcs_projects'] )
+vcs_pull = djangoplicity.fabric.vcs_pull( vcs_projects=settings['vcs_projects'] )
 
 # Database related tasks
 copydb_production_to_local = djangoplicity.fabric.copy_database( "production_settings", None, project_app=PRJAPP )

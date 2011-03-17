@@ -1304,6 +1304,7 @@ settings = {
 	'manage.py' : None,
 }
 
+
 			
 # ==========================================
 # Common tasks
@@ -1496,13 +1497,17 @@ def _activate_virtualenv( bin_dir ):
 			logger.error("Cannot activate virtual environment - bin/activate_this.py is missing.")
 	
 
-def run_script( script ):
+def run_script( script, args=[] ):
 	"""
 	Return a function that will run the script. Script must be set as executable and should
 	include the path from the base directory.
 	"""
 	def func( base_dir, home_dir, lib_dir, inc_dir, bin_dir, options ):
-		call_subprocess( [ os.path.join( base_dir, script ),  base_dir, home_dir, lib_dir, inc_dir, bin_dir ] )
+		ctx = { "base_dir" : base_dir, "home_dir" : home_dir, "lib_dir" : lib_dir, "inc_dir" : inc_dir, "bin_dir" : bin_dir }
+		cmd = [ script % ctx ]
+		for a in args:
+			cmd.append(a % ctx)
+		call_subprocess( cmd )
 	return func
 
 def run_function( runfunc, **kwargs ):
@@ -1526,7 +1531,7 @@ def run_function( runfunc, **kwargs ):
 import sys
 
 #
-# Make sure the settings can be loaded in other modules
+# Make sure the settings can be loaded in other modules (currently fabfile.py, deploy.py and bootstrap.py)
 # 
 if 'settings' not in globals():
 	from djangoplicity.bootstrap.defaults import settings, PY_VERSION, run_function, task_move, task_append, task_run_manage
@@ -1669,6 +1674,7 @@ def after_install( options, home_dir ):
 	"""
 	Entry point for post-install actions after virtualenv have been setup. 
 	"""
+	
 	logger.notify("")
 	logger.notify("Post install tasks")
 	logger.notify("==================")
@@ -1807,8 +1813,13 @@ def task_vcs_checkout( base_dir, options ):
 	
 	if vcs_projects:
 		# Register all version control modules
-		from pip import version_control
-		version_control()
+		try:
+			from pip import version_control
+			version_control()
+		except ImportError:
+			from pip import import_vcs_support
+			import_vcs_support()
+		
 		from pip.vcs import vcs
 		
 		# Loop over projects

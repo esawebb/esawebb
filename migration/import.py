@@ -340,7 +340,8 @@ archivetasks = [
 #    ArchiveInitializationTask ( FITSImage ),
     
 #    ArchiveMigrationTask( SpacetelescopeCSVDataSource( '/Volumes/webdocs/spacetelescope/docs/csvfiles/newsdata.csv'), NewsDataMapping ),
-    ArchiveMigrationTask( SpacetelescopeCSVDataSource( '/Users/lnielsen/Desktop/imagedata.csv'), ImagesAVMDataMapping ),
+	ArchiveMigrationTask( SpacetelescopeCSVDataSource( '/Users/dneumayer/Desktop/imagedata.csv'), ImagesAVMDataMapping ),
+#    ArchiveMigrationTask( SpacetelescopeCSVDataSource( '/Users/lnielsen/Desktop/imagedata.csv'), ImagesAVMDataMapping ),
 #    ArchiveMigrationTask( SpacetelescopeCSVDataSource( '/Volumes/webdocs/spacetelescope/docs/csvfiles/videodata.csv'), VideosDataMapping ),
 #    ArchiveMigrationTask( SpacetelescopeCSVDataSource( '/Volumes/webdocs/spacetelescope/docs/csvfiles/newsdata.csv'), NewsMainImageDataMapping ),
 #	ArchiveMigrationTask( SpacetelescopeCSVDataSource( '/Volumes/webdocs/spacetelescope/docs/csvfiles/edumatdata.csv'), EducationalMaterialsDataMapping ),

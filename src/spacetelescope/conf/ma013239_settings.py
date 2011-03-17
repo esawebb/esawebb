@@ -13,3 +13,9 @@ from default_settings import *
 ADMINS = (
 	('Lars Holm Nielsen','lnielsen@eso.org'),
 )
+
+#DATABASES['default']['USER'] = "spacetelescope"
+#DATABASES['default']['HOST'] = "mysql1.hq.eso.org"
+#DATABASES['default']['PASSWORD'] = "letoveumtold"
+
+#MEDIA_ROOT = "/Volumes/webdocs/hubble/docs/static"
