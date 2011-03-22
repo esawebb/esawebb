@@ -201,6 +201,7 @@ if __name__ == '__main__':
         
     hcount = 0
     savecount = 0
+    psavecount = 0
     pcount = 0
 
     for image in images:
@@ -273,7 +274,7 @@ if __name__ == '__main__':
                 image.press_release_link = press_release_link
                 try:
                     image.save()
-                    psavecount = savecount + 1
+                    psavecount = psavecount + 1
                 except:
                     print image.id, ': failed to store press_release_link ', press_release_link
                     
