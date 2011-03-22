@@ -1,8 +1,7 @@
 #
+# -*- coding: utf-8 -*-#
 # eso.org
 # Copyright 2011 ESO
-#
-# -*- coding: utf-8 -*-
 # Authors:
 #   Lars Holm Nielsen <lnielsen@eso.org>
 #   Dirk Neumayer <dirk.neumayer@gmail.com>
@@ -33,27 +32,62 @@ import urllib2
 import logging, sys
 import socket
 
-import datetime
+from datetime import datetime
+import pytz
 
-def new_id(long_caption_link):
+import hubblesite
+
+def convert_time():
+    dt = datetime( 1993, 1, 7, 12, 00, tzinfo=pytz.timezone( 'US/Eastern' ) )
+    newdt = dt.astimezone( pytz.timezone( 'Europe/Berlin' ) )
+    print dt, newdt
+    return
+
+
+def change_datetime(obj):
     '''
-    creates 2003-28-a out of the long caption link ...eases/2003/28/image/a/
-    returns '-' if failed
+    follows the long_caption_link or the press_release_link to get the correct date
     '''
-    id = ''
-    pattern = re.compile('.*?([0-9]*?)/([0-9]*?)/image/([a-z]?)')
-    try:
-        results = pattern.findall(long_caption_link)[0]
-        id  = results[0]+'-'+results[1]
-        if results[2] != '': id = id +'-'+results[2]
-    except:
-        id = '-'
-    return id
+    # get link to image or press release
+    link = None
+    success = False
+    if obj.long_caption_link.find('http') > -1:
+        link = obj.long_caption_link
+    elif obj.press_release_link.find('http') > -1:
+        link = obj.press_release_link
+    
+    # follow link and get new date
+    if link:
+        release_date = hubblesite.get_release_date(link)
+        if release_date:
+            try:
+                print '-------------------------------------------------------'
+                print obj.id, obj.release_date.strftime('%Y-%B-%d %I:%M %p %Z')
+                release_date = release_date.astimezone( pytz.timezone( 'Europe/Berlin' ) )
+                release_date = datetime.replace(release_date, tzinfo=None)
+                obj.release_date = release_date
+                print obj.id, obj.release_date.strftime('%Y-%B-%d %I:%M %p %Z')
+                obj.save()
+                success = True
+            except:
+                print obj.id,' save failed!'
+                pass
+    return success
 
 
 def process_objects(objs):
+    '''
+    find the objects that need a correction of the release_date
+    '''
+    finddate1 = datetime.strptime('2011-03-03 18:00:00','%Y-%m-%d %H:%M:%S')
+    finddate2 = datetime.strptime('2011-03-03 19:00:00','%Y-%m-%d %H:%M:%S')
     for obj in objs:
-        print obj.id
+        # obj.release_date is a datetime object
+        dt = obj.release_date
+        #print dt, dt.date
+        if (dt):
+            if dt >= finddate1 and dt <= finddate2:
+                change_datetime(obj)
     return
 
 
@@ -77,5 +111,6 @@ if __name__ == '__main__':
     process_objects(Image.objects.all())
     process_objects(Video.objects.all())
     
+    convert_time()
         
         
