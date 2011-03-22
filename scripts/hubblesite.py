@@ -45,12 +45,12 @@ def get_release_date(link):
     '''
     returns the release date in UTC found on the http://hubblesite.org/newsc...../image/ site
     
-                       <h2 class="date">  <strong>  August 13, 1990</strong> 12:00 AM (EDT) </h2>
+    <h2 class="date">  <strong>  August 13, 1990</strong> 12:00 AM (EDT) </h2>
     
     1990-June-22 12:00 AM EDT
     1990-June-22 04:00 AM UTC
-
     '''
+    
     pat = re.compile(r'<h2 class="date">.*?<strong>([\S]+)[\s]+([\S]+),[\s]*?([\S]+)[\s]*?</strong>[\s]+([\S]+):([\S]+)[\s]+([\S]+)[\s]+\(?([A-Z]+)\)?[\s]+</h2>') 
     
     release_date = None
@@ -93,6 +93,9 @@ def get_release_date(link):
                 #print 'US/Eastern'
                 tz = eastern
                 if Z == 'EDT': is_dts = True
+            else:
+                print 'unsupported timezone:', Z
+                print 'assuming UTC'
           
             aware = tz.localize(naive, is_dts)
             release_date = tz.normalize(aware)
