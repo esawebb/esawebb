@@ -1334,3 +1334,21 @@ a.teasertext:hover {
 .bulkpricing td {
 	padding: 2px;
 }
+
+sup,
+sub {
+	height: 0;
+	line-height: 1;
+	vertical-align: baseline;
+	_vertical-align: bottom;
+	position: relative;
+	font-size: 80%;
+}
+
+sup {
+	bottom: 1ex;
+}
+
+sub {
+	top: .5ex;
+}
