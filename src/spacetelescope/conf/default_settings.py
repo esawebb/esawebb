@@ -44,6 +44,8 @@ ADMINS = (
 	('EPO Monitoring','esoepo-monitoring@eso.org'),
 )
 
+LOGGING_HANDLER = ['file']
+
 ##################
 # DATABASE SETUP #
 ##################
@@ -81,11 +83,12 @@ CSRF_MIDDLEWARE_SECRET = "sadfpn870742kfasbvancp837rcnp3w8orypbw83ycnspo8r7"
 ##########
 # CACHE  #
 ##########
-CACHE_MIDDLEWARE_SECONDS = 600
-CACHE_BACKEND = "locmem://"
-CACHE_MIDDLEWARE_KEY_PREFIX = "spacetelescope_"
-CACHE_KEY_PREFIX = "spacetelescope_"
-CACHE_TEMPLATES = False
+CACHES = {
+	'default': {
+        'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
+        'LOCATION': SHORT_NAME,
+    }
+}
 
 ###############################
 # MIDDLEWARE AND APPLICATIONS #

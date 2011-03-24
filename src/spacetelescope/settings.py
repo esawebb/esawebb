@@ -133,6 +133,7 @@ MEDIA_ROOT = local_settings.MEDIA_ROOT
 # Examples: "http://media.lawrence.com", "http://example.com/media/"
 MEDIA_URL = local_settings.MEDIA_URL
 
+
 # URL prefix for admin media -- CSS, JavaScript and images. Make sure to use a
 # trailing slash.
 # Examples: "http://foo.com/media/", "/media/".
@@ -147,14 +148,14 @@ CSRF_MIDDLEWARE_SECRET = local_settings.CSRF_MIDDLEWARE_SECRET
 ##########
 # CACHE  #
 ##########
+CACHES = local_settings.CACHES
 CACHE_MIDDLEWARE_SECONDS = 600
-CACHE_BACKEND = local_settings.CACHE_BACKEND
-CACHE_MIDDLEWARE_KEY_PREFIX = local_settings.CACHE_MIDDLEWARE_KEY_PREFIX
-CACHE_KEY_PREFIX = local_settings.CACHE_KEY_PREFIX
-CACHE_PREFIX = CACHE_KEY_PREFIX 
+CACHE_MIDDLEWARE_KEY_PREFIX = SHORT_NAME
 CACHE_MIDDLEWARE_ANONYMOUS_ONLY = True
-CACHE_TEMPLATES = local_settings.CACHE_TEMPLATES
-CACHE_TIMEOUT = 60*5
+
+### keyedcached settings:
+CACHE_TIMEOUT = CACHE_MIDDLEWARE_SECONDS 
+CACHE_PREFIX = SHORT_NAME
 
 USE_ETAGS = True
 
@@ -254,9 +255,6 @@ MIDDLEWARE_CLASSES += (
     # - Handles ETags based on the USE_ETAGS setting.
     'django.middleware.common.CommonMiddleware', # Request/Response
     
-    # Logging of exceptions in database.
-    'djangodblog.DBLogMiddleware', # Exception
-	
 )
 
 
@@ -297,7 +295,6 @@ INSTALLED_APPS += (
 	'djangoplicity.menus',
 	'djangoplicity.pages',
 	'djangoplicity.cron',
-	#'djangoplicity.cache', 
 	'djangoplicity.media',
 	'djangoplicity.jobs',
 	'django.contrib.redirects',
@@ -317,7 +314,6 @@ INSTALLED_APPS += (
 	'spacetelescope',
 	'celery',
 	'mptt',
-	'djangodblog',
 	'django_extensions',
 	'django_assets',
 	# Satchmo
@@ -577,25 +573,74 @@ SITE_DOMAIN = "www.spacetelescope.org"
 ###########
 # LOGGING #
 ###########
+LOGGING = {
+	'version' : 1,
+	'disable_existing_loggers' : True,
+	'formatters': {
+        'verbose': {
+            'format': '%(levelname)s %(asctime)s %(module)s %(process)d %(thread)d %(message)s'
+        },
+        'default': {
+            'format': '%(asctime)s %(name)-12s %(levelname)-8s %(message)s'
+        },
+    },
+    'handlers': {
+        'null': {
+            'level':'DEBUG',
+            'class':'django.utils.log.NullHandler',
+        },
+        'console': {
+            'level':'DEBUG',
+            'class':'logging.StreamHandler',
+            'formatter': 'default'
+        },
+        'mail_admins': {
+            'level': 'ERROR',
+            'class': 'django.utils.log.AdminEmailHandler',
+            'include_html' : True,
+        },
+        'file' : {
+			'level' : 'DEBUG',
+			'class': 'logging.handlers.RotatingFileHandler',
+			'formatter' : 'default',
+			'filename' : os.path.join( LOG_DIR, "djangoplicity.log" ), 
+			'maxBytes' : 50 * 1024 * 1024, 
+			'backupCount' : 3,
+		}
+    },
+    'loggers': {
+        'django': {
+            'handlers': local_settings.LOGGING_HANDLER,
+            'propagate': True,
+            'level': 'DEBUG' if DEBUG else 'INFO',
+        },
+        'django.request': {
+            'handlers': ['mail_admins'],
+            'level': 'ERROR',
+            'propagate': False,
+        },
+        'djangoplicity': {
+            'handlers': local_settings.LOGGING_HANDLER,
+            'level': 'DEBUG' if DEBUG else 'INFO',
+        },
+        'django.db.backends' : {
+			'handlers': local_settings.LOGGING_HANDLER if DEBUG_SQL else ['null'],
+            'propagate': False,
+            'level': 'DEBUG' if DEBUG_SQL else 'INFO',
+		}
+    },
+}
 
-class NullHandler( logging.Handler ):
-	def emit( self, record ):
-		pass
 
-logging.getLogger( 'keyedcache' ).setLevel( logging.WARN )
-logging.getLogger( 'l10n' ).setLevel( logging.WARN )
-logging.getLogger( 'paramiko' ).setLevel( logging.WARN )
-logging.getLogger( 'sslurllib' ).addHandler( NullHandler() )
-
-logger = logging.getLogger()
-if not logger.handlers:
-	handler = logging.handlers.RotatingFileHandler( os.path.join( LOG_DIR, "djangoplicity.log" ), maxBytes=50 * 1024 * 1024, backupCount=3 )
-	formatter = logging.Formatter( '%(asctime)s %(name)-12s %(levelname)-8s %(message)s', '%a, %d %b %Y %H:%M:%S' )
-	handler.setFormatter( formatter )
-
-	logger.addHandler( handler )
-	logger.setLevel( logging.DEBUG if DEBUG else logging.INFO )
-	logger.info( "Djangoplicity started" )
+#logger = logging.getLogger()
+#if not logger.handlers:
+#	handler = logging.handlers.RotatingFileHandler(  )
+#	formatter = logging.Formatter( , '%a, %d %b %Y %H:%M:%S' )
+#	handler.setFormatter( formatter )
+#
+#	logger.addHandler( handler )
+#	logger.setLevel( logging.DEBUG if DEBUG else logging.INFO )
+#	logger.info( "Djangoplicity started" )
 
 ###################
 # REPORTLAB FONTS #

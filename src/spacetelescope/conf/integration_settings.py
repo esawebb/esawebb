@@ -35,7 +35,17 @@ DATABASES['default']['PASSWORD'] = "fivjeylvoked"
 ##########
 # CACHE  #
 ##########
-CACHE_BACKEND = "memcached://%(short_name)s1i:11211;%(short_name)s2i:11211/?timeout=86400" % { 'short_name' : SHORT_NAME}
+CACHES = {
+	'default' : {
+		'BACKEND' : 'django.core.cache.backends.memcached.MemcachedCache',
+		'KEY_PREFIX' : SHORT_NAME,
+		'LOCATION' : [
+			'%(short_name)s1i:11211' % { 'short_name' : SHORT_NAME},
+			'%(short_name)s2i:11211' % { 'short_name' : SHORT_NAME},
+		],
+		'TIMEOUT' : 86400
+	}
+}
 
 #########
 # EMAIL #
