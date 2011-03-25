@@ -44,7 +44,7 @@ SERVE_STATIC_MEDIA = True
 ##################
 DATABASES = copy_setting(DATABASES)
 DATABASES['default']['HOST'] = "localhost"
-DATABASES['default']['USER'] = "spacetelescope"
+DATABASES['default']['USER'] = "root"
 DATABASES['default']['PASSWORD'] = "WAFTS567"
 
 ###############
