@@ -51,7 +51,7 @@ LOGGING_HANDLER = ['file']
 ##################
 DATABASES = {
     'default': {
-        'ENGINE': 'mysql',
+        'ENGINE': 'django.db.backends.mysql',
         'NAME': 'spacetelescope',
         'USER' : 'root',
         'PASSWORD' : '',
