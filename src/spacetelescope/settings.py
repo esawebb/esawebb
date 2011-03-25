@@ -637,7 +637,11 @@ LOGGING = {
 			'handlers': local_settings.LOGGING_HANDLER if DEBUG_SQL else ['null'],
             'propagate': False,
             'level': 'DEBUG' if DEBUG_SQL else 'INFO',
-		}
+		},
+		'sslurllib' : {
+			'handlers' : ['null',],
+			'propagate': False,
+		},
     },
 }
 
