@@ -133,22 +133,14 @@ GEOIP_LIBRARY_PATH = "%s/virtualenv/lib/libGeoIP.dylib" % ROOT
 ARCHIVE_AUTO_RESOURCE_DELETION = False
 ARCHIVE_IMPORT_ROOT = "/Volumes/webdocs/importi"
 
-########	
-# AMQP #
-########
-AMQP_SERVER = "aweb9.hq.eso.org"
-AMQP_PORT = 5672
-AMQP_USER = "taskexchange"
-AMQP_PASSWORD = "D1~odvcO7"
-AMQP_VHOST = "taskexchange"
-
-CELERY_BACKEND = "cache"
-CELERY_CACHE_BACKEND = "memcached://aweb9.hq.eso.org:11212/"
-CELERY_AMQP_EXCHANGE = "tasks"
-CELERY_AMQP_PUBLISHER_ROUTING_KEY = "task.regular"
-CELERY_AMQP_CONSUMER_QUEUE = "regular_tasks"
-CELERY_AMQP_CONSUMER_ROUTING_KEY = "task.#"
-CELERY_AMQP_EXCHANGE_TYPE = "topic"
+##########	
+# CELERY #
+##########
+BROKER_HOST = "localhost"
+BROKER_USER = "spacetelescope"
+BROKER_PASSWORD = "letoveumtold"
+BROKER_VHOST = "spacetelescope_vhost"
+BROKER_USE_SSL = False
 
 #################
 # DJANGO ASSETS #

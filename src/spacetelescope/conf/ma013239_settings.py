@@ -16,10 +16,24 @@ ADMINS = (
 
 LOGGING_HANDLER = ['console']
 
-#CACHES = { 'default': { 'BACKEND': 'django.core.cache.backends.dummy.DummyCache', } }
-
+##################
+# DATABASE SETUP #
+##################
 #DATABASES['default']['USER'] = "spacetelescope"
 #DATABASES['default']['HOST'] = "mysql1.hq.eso.org"
 #DATABASES['default']['PASSWORD'] = "letoveumtold"
 
+###############
+# MEDIA SETUP #
+###############
 #MEDIA_ROOT = "/Volumes/webdocs/hubble/docs/static"
+
+##########
+# CACHE  #
+##########
+#CACHES = { 'default': { 'BACKEND': 'django.core.cache.backends.dummy.DummyCache', } }
+
+##########	
+# CELERY #
+##########
+BROKER_HOST = "localhost"

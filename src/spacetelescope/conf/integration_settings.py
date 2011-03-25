@@ -52,11 +52,10 @@ CACHES = {
 #########
 EMAIL_SUBJECT_PREFIX = '[SPACETELESCOPE-INTEGRATION]'
 
-########	
-# AMQP #
-########
-AMQP_SERVER = "aweb9.hq.eso.org"
-CELERY_CACHE_BACKEND = "memcached://aweb9.hq.eso.org:11212/"
+##########	
+# CELERY #
+##########
+BROKER_HOST = "aweb9.hq.eso.org"
 
 ########
 # SHOP #

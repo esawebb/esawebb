@@ -11,8 +11,6 @@
 from djangoplicity.settings import import_settings		
 import os
 import re
-import logging
-import logging.handlers
 
 local_settings = import_settings('spacetelescope')
 LOCAL_SETTINGS_MODULE = local_settings.LOCAL_SETTINGS_MODULE
@@ -312,7 +310,7 @@ INSTALLED_APPS += (
 	'djangoplicity.adminhistory',
     'djangoplicity.utils',
 	'spacetelescope',
-	'celery',
+	'djcelery',
 	'mptt',
 	'django_extensions',
 	'django_assets',
@@ -498,28 +496,40 @@ FEED_SETTINGS_MODULE = 'spacetelescope.feed_settings'
 REPORTS_DEFAULT_FORMATTER = 'html'
 REPORT_REGISTER_FORMATTERS = True
 
-########	
-# AMQP #
-########
-AMQP_SERVER = local_settings.AMQP_SERVER
-AMQP_PORT = local_settings.AMQP_PORT
-AMQP_USER = local_settings.AMQP_USER
-AMQP_PASSWORD = local_settings.AMQP_PASSWORD
-AMQP_VHOST = local_settings.AMQP_VHOST
+##########	
+# CELERY #
+##########
+import djcelery
+djcelery.setup_loader()
 
+## Broker settings.
+BROKER_HOST = local_settings.BROKER_HOST
+BROKER_PORT = 5672
+BROKER_USER = local_settings.BROKER_USER
+BROKER_PASSWORD = local_settings.BROKER_PASSWORD
+BROKER_VHOST = local_settings.BROKER_VHOST
+BROKER_USE_SSL = local_settings.BROKER_USE_SSL
 
-CELERY_BACKEND = local_settings.CELERY_BACKEND
-CELERY_CACHE_BACKEND = local_settings.CELERY_CACHE_BACKEND
-CELERY_AMQP_EXCHANGE = local_settings.CELERY_AMQP_EXCHANGE
-CELERY_AMQP_PUBLISHER_ROUTING_KEY = local_settings.CELERY_AMQP_EXCHANGE
-CELERY_AMQP_CONSUMER_QUEUE = local_settings.CELERY_AMQP_CONSUMER_QUEUE
-CELERY_AMQP_CONSUMER_ROUTING_KEY = local_settings.CELERY_AMQP_EXCHANGE
-CELERY_AMQP_EXCHANGE_TYPE = local_settings.CELERY_AMQP_EXCHANGE_TYPE
+# Task result backend
+CELERY_RESULT_BACKEND = "amqp"
 
-########
-# JOBS #
-########
-UPDATE_JOBS_RUN_EVERY = 300
+# AMQP backend settings 
+CELERY_RESULT_SERIALIZER = "json"
+CELERY_AMQP_TASK_RESULT_EXPIRES = 3600
+
+# Task execution
+CELERY_TASK_SERIALIZER='json'
+CELERY_IGNORE_RESULT = False
+CELERY_DISABLE_RATE_LIMITS = True
+
+# Error email 
+CELERY_SEND_TASK_ERROR_EMAILS = False
+
+# Events
+CELERY_SEND_EVENTS = True
+
+# Logging
+CELERYD_HIJACK_ROOT_LOGGER = False
 
 ##############
 # JavaScript #
@@ -630,17 +640,6 @@ LOGGING = {
 		}
     },
 }
-
-
-#logger = logging.getLogger()
-#if not logger.handlers:
-#	handler = logging.handlers.RotatingFileHandler(  )
-#	formatter = logging.Formatter( , '%a, %d %b %Y %H:%M:%S' )
-#	handler.setFormatter( formatter )
-#
-#	logger.addHandler( handler )
-#	logger.setLevel( logging.DEBUG if DEBUG else logging.INFO )
-#	logger.info( "Djangoplicity started" )
 
 ###################
 # REPORTLAB FONTS #

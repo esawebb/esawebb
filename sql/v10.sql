@@ -1,13 +1,4 @@
 BEGIN;
-ALTER TABLE `releases_release` ADD COLUMN `kids_title` varchar(255) NOT NULL after `meltwater_keywords`;
-ALTER TABLE `releases_release` ADD COLUMN `kids_description` longtext NOT NULL after `kids_title`;
-COMMIT;
--- Upgrade to django 1.3
-BEGIN;
-CREATE INDEX `django_session_c25c2c28` ON `django_session` (`expire_date`);
-COMMIT;
--- Upgrade to celery 2.2.4
-BEGIN;
 CREATE TABLE `djcelery_intervalschedule` (
     `id` integer AUTO_INCREMENT NOT NULL PRIMARY KEY,
     `every` integer NOT NULL,
@@ -79,7 +70,6 @@ CREATE INDEX `djcelery_taskstate_f0ba6500` ON `djcelery_taskstate` (`tstamp`);
 CREATE INDEX `djcelery_taskstate_20fc5b84` ON `djcelery_taskstate` (`worker_id`);
 CREATE INDEX `djcelery_taskstate_c91f1bf` ON `djcelery_taskstate` (`hidden`);
 COMMIT;
-
 BEGIN;
 DROP TABLE IF EXISTS `djangodblog_errorbatch`;
 DROP TABLE IF EXISTS `djangodblog_error`;

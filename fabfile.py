@@ -60,6 +60,7 @@ STATIC_FILES = [
 local_backupdb = djangoplicity.fabric.backup_database( project_app=PRJAPP )
 local_apply_sql = djangoplicity.fabric.apply_sql( sqlfile='sql/deploy.sql', project_app=PRJAPP )
 local_install_requirements = djangoplicity.fabric.install_requirements( bootstrap_settings=settings, prjapp=PRJAPP )
+local_rabbitmq_setup = djangoplicity.fabric.rabbitmq_setup( servers=['localhost'], project_app=PRJAPP )
 
 # Integration deployment tasks
 integration_tag = djangoplicity.fabric.vcs_tag( vcs_projects=settings['vcs_projects'], tag='%s_integration'% DOMAIN )

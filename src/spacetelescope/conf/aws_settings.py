@@ -50,7 +50,8 @@ DATABASES['default']['PASSWORD'] = "WAFTS567"
 ###############
 # MEDIA SETUP #
 ###############
-MEDIA_ROOT = "%s/docs/static" % ROOT
+MEDIA_ROOT = "%s/static" % PRJBASE
+#MEDIA_ROOT = "%s/docs/static" % ROOT
 SECRET_KEY = "g6ymvx$i1sv4k*g+nwfnx*3a1g&)^i6r9n6g4=f_$x^u(kwt8s"
 CSRF_MIDDLEWARE_SECRET = "g6ymvx$i1sv4k*g+nwfnx*3a1g&)^i6r9n6g4=f_$x^u(kwt8s"
 

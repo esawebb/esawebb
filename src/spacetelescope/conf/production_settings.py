@@ -40,11 +40,10 @@ CACHES = {
 #########
 EMAIL_SUBJECT_PREFIX = '[SPACETELESCOPE]'
 
-########	
-# AMQP #
-########
-AMQP_SERVER = "taskexchange.hq.eso.org"
-CELERY_CACHE_BACKEND = "memcached://taskexchange.hq.eso.org:11212/"
+##########	
+# CELERY #
+##########
+BROKER_HOST = "aweb26.hq.eso.org"
 
 ########
 # SHOP #

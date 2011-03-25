@@ -32,6 +32,7 @@ import djangoplicity.google.admin
 import djangoplicity.archives.contrib.satchmo.freeorder.admin
 import djangoplicity.archives.contrib.inventory_control.admin
 import djangoplicity.inventory.admin
+import djangoplicity.celery.admin
 
 # Register each applications admin interfaces with
 # an admin site.
@@ -55,7 +56,7 @@ autoregister( adminlogs_site, djangoplicity.search.admin )
 autoregister( adminlogs_site, djangoplicity.cron.admin )
 autoregister( adminlogs_site, djangoplicity.authtkt.admin )
 autoregister( adminlogs_site, djangoplicity.google.admin )
-
+autoregister( adminlogs_site, djangoplicity.celery.admin )
 
 
 # 
