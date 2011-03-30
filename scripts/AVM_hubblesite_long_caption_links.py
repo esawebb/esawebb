@@ -201,6 +201,8 @@ if __name__ == '__main__':
         
     hcount = 0
     savecount = 0
+    psavecount = 0
+    pcount = 0
 
     for image in images:
         link = None
@@ -208,6 +210,7 @@ if __name__ == '__main__':
         nasa_images = None
         result = None
         long_c = None
+        press_release_link = None
         link_type = 'not found'
         
         # DEBUG
@@ -215,47 +218,49 @@ if __name__ == '__main__':
         
         # get only images without a long_caption_link
         if image.long_caption_link.find('http') == -1:
-            
-            # get id of related press release 
-            related, iterator = get_related_PR(image.id)
-            # find the link to hubblesite.org NASA Press Release
-            result =  analyse_links(related)
-            if result: 
-                # print 'find the link to hubblesite.org NASA Press Release' , result
-                link = result[0]
-                # get link to image releases of NASA Press release
-                if (link): 
-                    link_images = hb.release_images(link)
-                    # if no link to release images exist, use original link to NASA Press Release
-                    if not link_images:
-                        long_c = link
-                        link_type = '''using link to NASA's Press Release, no link to NASA's release images'''
-                    # get links to individual image releases
-                    if (link_images):
-                        nasa_images = hb.list_links(link_images)
+            if image.press_release_link.find('http') == -1:
+                # get id of related press release 
+                related, iterator = get_related_PR(image.id)
+                # find the link to hubblesite.org NASA Press Release
+                result =  analyse_links(related)
+                if result: 
+                    # print 'find the link to hubblesite.org NASA Press Release' , result
+                    press_release_link = result[0]
+            else:
+                press_release_link = image.press_release_link 
+                    # get link to image releases of NASA Press release
+            if (press_release_link): 
+                link_images = hb.release_images(press_release_link)
+                # if no link to release images exist, use original link to NASA Press Release
+                if not link_images:
+                    long_c = press_release_link
+                    link_type = '''using link to NASA's Press Release, no link to NASA's release images'''
+                # get links to individual image releases
+                if (link_images):
+                    nasa_images = hb.list_links(link_images)
 
-                        # if there was no match, use link to Press release release images as long_caption
-                        if not nasa_images:
-                            long_c = link_images
-                            link_type = '''generate link list failed, using link to NASA's release images'''
+                    # if there was no match, use link to Press release release images as long_caption
+                    if not nasa_images:
+                        long_c = link_images
+                        link_type = '''generate link list failed, using link to NASA's release images'''
+                    else:
+                        # maybe there is just one link?
+                        if len(nasa_images) == 1:
+                            long_c = nasa_images[0][1]
+                            link_type = '''single image in NASA's release images'''
+                            # print 'LONG_C!', nasa_images[0]
                         else:
-                            # maybe there is just one link?
-                            if len(nasa_images) == 1:
-                                long_c = nasa_images[0][1]
-                                link_type = '''single image in NASA's release images'''
-                                # print 'LONG_C!', nasa_images[0]
-                            else:
-                            # if there are more links, compare the titles    
-                                for ni in nasa_images:
-                                    if similar_titles([image.title,ni[0]]): 
-                                        long_c = ni[1]
-                                        link_type = '''titles match with a NASA's release image'''
-                                        # print 'TITLES match!',
-                                    #print ni
-                                # if there was no match, use link to Press release release images as long_caption
-                                if not long_c:
-                                    long_c = link_images
-                                    link_type = '''no match, using link to NASA's release images'''
+                        # if there are more links, compare the titles    
+                            for ni in nasa_images:
+                                if similar_titles([image.title,ni[0]]): 
+                                    long_c = ni[1]
+                                    link_type = '''titles match with a NASA's release image'''
+                                    # print 'TITLES match!',
+                                #print ni
+                            # if there was no match, use link to Press release release images as long_caption
+                            if not long_c:
+                                long_c = link_images
+                                link_type = '''no match, using link to NASA's release images'''
             if long_c and long_c == link_images:
                 # often heic###a equals hubblesite.org/.../image/a/, unfortunately not so often with b and even less with c,d,e....
                 if iterator == 'a':
@@ -264,6 +269,15 @@ if __name__ == '__main__':
             
             print image.id,';\t', long_c,';\t', link_type
      
+            if(press_release_link  and image.press_release_link.find('http') == -1):
+                pcount = pcount + 1
+                image.press_release_link = press_release_link
+                try:
+                    image.save()
+                    psavecount = psavecount + 1
+                except:
+                    print image.id, ': failed to store press_release_link ', press_release_link
+                    
             
             if (long_c): 
                 hcount = hcount + 1
@@ -276,6 +290,7 @@ if __name__ == '__main__':
                     print image.id, ': failed to store long_caption_link ', long_c
                     
     print str(hcount), 'long_caption_links found'
-    print 'saved ', str(savecount), ' long_caption_links'
+    print str(pcount), 'press_release_link found'
+    print 'saved ', str(savecount), ' long_caption_links and ', str(psavecount), ' press_release_links.'
  
                

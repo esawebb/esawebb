@@ -1,8 +1,7 @@
 #
+# -*- coding: utf-8 -*-#
 # eso.org
 # Copyright 2011 ESO
-#
-# -*- coding: utf-8 -*-
 # Authors:
 #   Lars Holm Nielsen <lnielsen@eso.org>
 #   Dirk Neumayer <dirk.neumayer@gmail.com>
@@ -13,6 +12,7 @@
 #
 # Find wrong release_dates:
 # 1) Check id with release_date - e.g. opo0214a with release date in 2010 must be wrong
+#    should be opoYYNNx NN is a cont. number?
 # 2) Release dates with 2011-03-03 18:00-18:44 are wrong
 #
 # Don't bother about images connected to announcements, releases and potws.
@@ -33,28 +33,75 @@ import urllib2
 import logging, sys
 import socket
 
-import datetime
+from datetime import datetime
+import pytz
 
-def new_id(long_caption_link):
+import hubblesite
+
+def change_datetime(obj):
     '''
-    creates 2003-28-a out of the long caption link ...eases/2003/28/image/a/
-    returns '-' if failed
+    follows the long_caption_link or the press_release_link to get the correct date
     '''
-    id = ''
-    pattern = re.compile('.*?([0-9]*?)/([0-9]*?)/image/([a-z]?)')
-    try:
-        results = pattern.findall(long_caption_link)[0]
-        id  = results[0]+'-'+results[1]
-        if results[2] != '': id = id +'-'+results[2]
-    except:
-        id = '-'
-    return id
+    # get link to image or press release
+    link = None
+    success = False
+    if obj.long_caption_link.find('http') > -1:
+        link = obj.long_caption_link
+    elif obj.press_release_link.find('http') > -1:
+        link = obj.press_release_link
+    
+    # follow link and get new date
+    if link:
+        release_date = hubblesite.get_release_date(link)
+        if release_date:
+            try:
+                #print '-------------------------------------------------------'
+                #print obj.id, obj.release_date.strftime('%Y-%B-%d %I:%M %p %Z')
+                release_date = release_date.astimezone( pytz.timezone( 'Europe/Berlin' ) )
+                release_date = datetime.replace(release_date, tzinfo=None)
+                obj.release_date = release_date
+                #print obj.id, obj.release_date.strftime('%Y-%B-%d %I:%M %p %Z')
+                obj.save()
+                success = True
+            except:
+                print obj.id,' save failed!'
+                pass
+    return success
 
 
 def process_objects(objs):
+    '''
+    find the objects that need a correction of the release_date
+    '''
+    pat = re.compile('[a-zA-Z]+([0-9]{2})\S+')
+    
+    count = 0
+    finddate1 = datetime.strptime('2011-03-03 18:00:00','%Y-%m-%d %H:%M:%S')
+    finddate2 = datetime.strptime('2011-03-03 19:00:00','%Y-%m-%d %H:%M:%S')
     for obj in objs:
-        print obj.id
-    return
+
+        YY = None
+        dt = obj.release_date
+        if (dt):
+            # process all objects with 2011-03-03 18:00:00 - 19:00:00
+            if dt >= finddate1 and dt <= finddate2:
+                if change_datetime(obj): count = count + 1
+                print obj.id, 'old: ', dt, '\t new: ', obj.release_date ,'\t\t reason: 20110303'
+            # process all objects where opoYY YY does not match the year of the release_date 
+            else:
+                #only care about opo... and heic...
+                if obj.id.find('opo') == -1 and obj.id.find('heic') == -1: continue
+                YY = pat.findall(obj.id)
+                if len(YY) > 0:
+                    YY = YY[0]
+                    #print obj.id, YY, dt.strftime('%y'), dt
+                    if YY != dt.strftime('%y'):
+                        if change_datetime(obj): count = count + 1
+                        print obj.id, 'old: ', dt, '\t new: ', obj.release_date ,'\t\t reason: ', YY,' != ', dt.strftime('%y')
+        else:
+            pass
+            #print obj.id, ' no release_date'
+    return count
 
 
 if __name__ == '__main__':
@@ -73,9 +120,11 @@ if __name__ == '__main__':
 
     test =  '''<h2 class="release-number"><strong>News Release Number:</strong> STScI-2006-25</h2>'''
     pattern = re.compile('''h2 class="release-number".*?:.*?>\s*(.*?)<.*?h2''')    
-
-    process_objects(Image.objects.all())
-    process_objects(Video.objects.all())
     
-        
+    print 'videos' 
+    print process_objects(Video.objects.all()), ' videos have a new release_date'
+    print 'images'
+    print process_objects(Image.objects.all()), ' images have a new release_date'
+
+
         
