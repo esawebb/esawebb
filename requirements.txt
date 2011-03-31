@@ -46,8 +46,8 @@ django-celery==2.2.4
 django-config-gen==1.0.4
 
 # AVM/XMP
-python-xmp-toolkit==1.0-rc2
-python-avm-library==1.0b2
+python-xmp-toolkit==1.0
+python-avm-library==1.0b3
 
 # Translation/Timezone
 django-rosetta==0.5.5
