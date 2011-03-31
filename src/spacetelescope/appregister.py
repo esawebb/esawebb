@@ -20,12 +20,14 @@ PAGE_KEYS = {
 			  "hubblecast_sidebar" : "spacetelescope.hubblecast_sidebar",
 			  "access_denied" : "spacetelescope.access_denied",
 			  "shop_right_column" : "djangoplicity.shop_right_column",
-			  "free_order_form" : "djangoplicity.free_order_form",			  
+			  "free_order_form" : "djangoplicity.free_order_form",
+			  "frontpage_rightcol" : "spacetelescope.frontpage_rightcol",			  
 			}
 
 register_page_key( 'spacetelescope', PAGE_KEYS["login"], _('Login page'), _('Displayed above the login form.') )
 register_page_key( 'spacetelescope', PAGE_KEYS["logout"], _('Logout page'), _('Displayed on the logout page.') )
 register_page_key( 'spacetelescope', PAGE_KEYS["hubblecast_sidebar"], _('Hubblecast Sidebar'), _('Right-column displayed on the hubblecast feature page') )
 register_page_key( 'spacetelescope', PAGE_KEYS["access_denied"], _('Access Denied'), _('Displayed when users are denied access to embargoed/staging resources.') )
+register_page_key( 'spacetelescope', PAGE_KEYS["frontpage_rightcol"], _('Frontpage right column'), _('Displayed above archive picture of the day.') )
 register_page_key( 'djangoplicity', PAGE_KEYS["shop_right_column"], _('Shop Right Column'), _('Displayed on shop frontpage in right column.') )
 register_page_key( 'djangoplicity', PAGE_KEYS["free_order_form"], _('Free Order Form'), _('Displayed message on the Free Order form.') )
