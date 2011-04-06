@@ -309,6 +309,7 @@ INSTALLED_APPS += (
 	'djangoplicity.inventory',
 	'djangoplicity.adminhistory',
     'djangoplicity.utils',
+    'djangoplicity.celery',
 	'spacetelescope',
 	'djcelery',
 	'mptt',
@@ -530,6 +531,8 @@ CELERY_SEND_EVENTS = True
 
 # Logging
 CELERYD_HIJACK_ROOT_LOGGER = False
+
+CELERY_ALWAYS_EAGER=local_settings.CELERY_ALWAYS_EAGER
 
 ##############
 # JavaScript #

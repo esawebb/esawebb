@@ -37,3 +37,4 @@ LOGGING_HANDLER = ['console']
 # CELERY #
 ##########
 BROKER_HOST = "localhost"
+#BROKER_HOST = "aweb26.hq.eso.org"

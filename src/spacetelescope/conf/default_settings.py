@@ -14,6 +14,7 @@ import getpass
 # ENVIRONMENT CONFIGURATION #
 #############################
 ROOT = "/Users/%s/Workspaces/sites/spacetelescope" % getpass.getuser()
+BUILD_ROOT = ROOT
 PRJBASE = "%s/projects/spacetelescope.org" % ROOT
 DJANGOPLICITY_ROOT = "%s/projects/djangoplicity" % ROOT
 LOG_DIR = "%s/logs" % ROOT
@@ -28,6 +29,28 @@ WEBSERVERS = ()
 SSL_ASSETS_PREFIX = "www.spacetelescope.org"
 CONFIG_GEN_TEMPLATES_DIR = "%s/conf/templates/" % PRJBASE 
 CONFIG_GEN_GENERATED_DIR = "%s/conf/" % TMP_DIR
+
+##############
+# DEPLOYMENT #
+##############
+BUILD_NODES = ["localhost"]
+MANAGEMENT_NODES = ["localhost"]
+BROKERS = ["localhost"]
+
+WORKERS = ["localhost"]
+WORKERS_BEAT_HOST = "localhost"
+WORKER_UID = None
+WORKER_GID = None
+WORKER_LOG_LEVEL = "INFO"
+WORKERS_CAM_FREQ = "1.0"
+
+NORMAL_USER = None
+SUDO_USER = None
+
+APACHE_INIT_MAIN = '/etc/init.d/apache2'
+APACHE_INIT_STATIC = '/etc/init.d/apache2'
+DEPLOYMENT_TAG = None
+DEPLOYMENT_REVISION = None
 
 ###################
 # ERROR REPORTING #
@@ -141,6 +164,8 @@ BROKER_USER = "spacetelescope"
 BROKER_PASSWORD = "letoveumtold"
 BROKER_VHOST = "spacetelescope_vhost"
 BROKER_USE_SSL = False
+
+CELERY_ALWAYS_EAGER=False
 
 #################
 # DJANGO ASSETS #

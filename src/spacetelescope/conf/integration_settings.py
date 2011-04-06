@@ -10,6 +10,11 @@
 from deployment_settings import *
 from djangoplicity.settings import copy_setting
 
+#############################
+# ENVIRONMENT CONFIGURATION #
+#############################
+BUILD_ROOT = "/home/web/hubblei"
+
 #####################
 # CONFIG GENERATION #
 #####################
@@ -24,6 +29,17 @@ CONFIG_GEN_GENERATED_DIR = "/home/web/A/hubblei/tmp/conf/"
 ###################
 SITE_ENVIRONMENT = 'integration'
 DEBUG = False
+
+##############
+# DEPLOYMENT #
+##############
+MANAGEMENT_NODES = ["aweb5"]
+BROKERS = ["aweb9"]
+WORKERS = ["aweb5","aweb6"]
+WORKERS_BEAT_HOST = "aweb5"
+WORKERS_CAM_HOST = "aweb6"
+WEBSERVER_NODES = ["%s1i" % SHORT_NAME,"%s2i" % SHORT_NAME ]
+DEPLOYMENT_TAG = "spacetelescope.org_integration"
 
 ##################
 # DATABASE SETUP #

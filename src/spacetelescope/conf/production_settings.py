@@ -13,6 +13,18 @@ from djangoplicity.settings import copy_setting
 
 SITE_ENVIRONMENT = 'production'
 
+##############
+# DEPLOYMENT #
+##############
+MANAGEMENT_NODES = ["aweb14"]
+BROKERS = ["aweb26"]
+WORKERS = ["aweb14","aweb15"]
+WORKERS_BEAT_HOST = "aweb14"
+WORKERS_CAM_HOST = "aweb15"
+WEBSERVER_NODES = ["%s1" % SHORT_NAME,"%s2" % SHORT_NAME ]
+DEPLOYMENT_TAG = "spacetelescope.org_production"
+DEPLOYMENT_REVISION = "spacetelescope.org_integration"
+
 ##################
 # DATABASE SETUP #
 ##################
