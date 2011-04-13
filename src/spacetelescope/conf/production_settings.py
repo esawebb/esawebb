@@ -24,6 +24,7 @@ WORKERS_CAM_HOST = "aweb15"
 WEBSERVER_NODES = ["%s1" % SHORT_NAME,"%s2" % SHORT_NAME ]
 DEPLOYMENT_TAG = "spacetelescope.org_production"
 DEPLOYMENT_REVISION = "spacetelescope.org_integration"
+ALLOW_DATABASE_OVERWRITE = False
 
 ##################
 # DATABASE SETUP #
