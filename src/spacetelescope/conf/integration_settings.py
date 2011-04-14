@@ -13,7 +13,7 @@ from djangoplicity.settings import copy_setting
 #############################
 # ENVIRONMENT CONFIGURATION #
 #############################
-BUILD_ROOT = "/home/web/hubblei"
+BUILD_ROOT = "/home/web/%si" % SHORT_NAME
 
 #####################
 # CONFIG GENERATION #
