@@ -13,3 +13,5 @@ from default_settings import *
 ADMINS = (
 	('Luis Clara Gomes','lcgomes@eso.org'),
 )
+
+CELERY_ALWAYS_EAGER = True

@@ -77,3 +77,10 @@ Satchmo==0.9-1
 # Migration
 BareNecessities==0.2.4 
 DreamweaverTemplate==0.1.1
+
+#
+# djangoplicity-social packages
+#
+twitter==1.4.2
+#facebook-python-sdk==0.1
+facebook-python-sdk
