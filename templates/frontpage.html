@@ -48,6 +48,7 @@
 		</div>
 		<div class='grid_4 '>
 			<div class='leftbord2 xtrapad'>
+				{% load pages %}{% embed_page spacetelescope.frontpage_rightcol %}
 				<div class='potd_box'>
 				<h1>Archive Picture of the Day</h1>
 				<a href="{{potd.get_absolute_url}}"><img src='{{potd.resource_wallpaperthumbs.url}}' /></a>

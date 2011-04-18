@@ -11,8 +11,6 @@
 from djangoplicity.settings import import_settings		
 import os
 import re
-import logging
-import logging.handlers
 
 local_settings = import_settings('spacetelescope')
 LOCAL_SETTINGS_MODULE = local_settings.LOCAL_SETTINGS_MODULE
@@ -109,7 +107,7 @@ SITE_ID = 1
 USE_I18N = False
 USE_L10N = True
 
-LOCALE_PATHS = ( DJANGOPLICITY_ROOT + "/locale", PRJBASE + "/locale", )
+#LOCALE_PATHS = ( DJANGOPLICITY_ROOT + "/locale", PRJBASE + "/locale", )
 
 # Default date and time formats (con be overridden by locale)
 DATE_FORMAT = gettext_noop('j F Y')
@@ -133,6 +131,7 @@ MEDIA_ROOT = local_settings.MEDIA_ROOT
 # Examples: "http://media.lawrence.com", "http://example.com/media/"
 MEDIA_URL = local_settings.MEDIA_URL
 
+
 # URL prefix for admin media -- CSS, JavaScript and images. Make sure to use a
 # trailing slash.
 # Examples: "http://foo.com/media/", "/media/".
@@ -147,14 +146,14 @@ CSRF_MIDDLEWARE_SECRET = local_settings.CSRF_MIDDLEWARE_SECRET
 ##########
 # CACHE  #
 ##########
+CACHES = local_settings.CACHES
 CACHE_MIDDLEWARE_SECONDS = 600
-CACHE_BACKEND = local_settings.CACHE_BACKEND
-CACHE_MIDDLEWARE_KEY_PREFIX = local_settings.CACHE_MIDDLEWARE_KEY_PREFIX
-CACHE_KEY_PREFIX = local_settings.CACHE_KEY_PREFIX
-CACHE_PREFIX = CACHE_KEY_PREFIX 
+CACHE_MIDDLEWARE_KEY_PREFIX = SHORT_NAME
 CACHE_MIDDLEWARE_ANONYMOUS_ONLY = True
-CACHE_TEMPLATES = local_settings.CACHE_TEMPLATES
-CACHE_TIMEOUT = 60*5
+
+### keyedcached settings:
+CACHE_TIMEOUT = CACHE_MIDDLEWARE_SECONDS 
+CACHE_PREFIX = SHORT_NAME
 
 USE_ETAGS = True
 
@@ -254,9 +253,6 @@ MIDDLEWARE_CLASSES += (
     # - Handles ETags based on the USE_ETAGS setting.
     'django.middleware.common.CommonMiddleware', # Request/Response
     
-    # Logging of exceptions in database.
-    'djangodblog.DBLogMiddleware', # Exception
-	
 )
 
 
@@ -297,7 +293,6 @@ INSTALLED_APPS += (
 	'djangoplicity.menus',
 	'djangoplicity.pages',
 	'djangoplicity.cron',
-	#'djangoplicity.cache', 
 	'djangoplicity.media',
 	'djangoplicity.jobs',
 	'django.contrib.redirects',
@@ -314,10 +309,10 @@ INSTALLED_APPS += (
 	'djangoplicity.inventory',
 	'djangoplicity.adminhistory',
     'djangoplicity.utils',
+    'djangoplicity.celery',
 	'spacetelescope',
-	'celery',
+	'djcelery',
 	'mptt',
-	'djangodblog',
 	'django_extensions',
 	'django_assets',
 	# Satchmo
@@ -474,6 +469,8 @@ DEFAULT_RIGHTS = ""
 DEFAULT_PUBLISHER = u"ESA/Hubble"
 DEFAULT_PUBLISHER_ID = u"vamp://esahubble"
 
+DEFAULT_CREDIT = u"NASA &amp; ESA"
+
 ARCHIVE_IMPORT_ROOT = local_settings.ARCHIVE_IMPORT_ROOT
 ARCHIVE_WORKFLOWS = {
 	'media.video.rename' : ('spacetelescope.workflows.media','video_rename'), 
@@ -489,6 +486,16 @@ VIDEO_CONTENT_SERVERS = (
 import djangoplicity.crosslinks
 ARCHIVE_CROSSLINKS = djangoplicity.crosslinks.crosslinks_for_domain('spacetelescope.org')
 
+##########
+# SOCIAL #
+##########
+SOCIAL_FACEBOOK_TOKEN = '187807957898842|a7f1fed4a89e26492133c6e4-100001473653251|141347899254844|K4lqzDRBPyAVFa7msmusumliPwI'
+SOCIAL_TWITTER_TUPLE = ("226991078-bHYf0sHAUEs1v6fjnxy8F0KjTLtSLnqTpyKx2Bqh",
+                "oiRDpzBIZUmQ1m8xxrw16aiYBAMjBx9vEi4ddgLOjzc",
+                'uS6hO2sV6tDKIOeVjhnFnQ',
+                'MEYTOS97VvlHX7K1rwHPEqVpTSqZ71HtvoK4sVuYk')
+
+
 #########
 # FEEDS #
 #########
@@ -500,28 +507,42 @@ FEED_SETTINGS_MODULE = 'spacetelescope.feed_settings'
 REPORTS_DEFAULT_FORMATTER = 'html'
 REPORT_REGISTER_FORMATTERS = True
 
-########	
-# AMQP #
-########
-AMQP_SERVER = local_settings.AMQP_SERVER
-AMQP_PORT = local_settings.AMQP_PORT
-AMQP_USER = local_settings.AMQP_USER
-AMQP_PASSWORD = local_settings.AMQP_PASSWORD
-AMQP_VHOST = local_settings.AMQP_VHOST
+##########	
+# CELERY #
+##########
+import djcelery
+djcelery.setup_loader()
 
+## Broker settings.
+BROKER_HOST = local_settings.BROKER_HOST
+BROKER_PORT = 5672
+BROKER_USER = local_settings.BROKER_USER
+BROKER_PASSWORD = local_settings.BROKER_PASSWORD
+BROKER_VHOST = local_settings.BROKER_VHOST
+BROKER_USE_SSL = local_settings.BROKER_USE_SSL
 
-CELERY_BACKEND = local_settings.CELERY_BACKEND
-CELERY_CACHE_BACKEND = local_settings.CELERY_CACHE_BACKEND
-CELERY_AMQP_EXCHANGE = local_settings.CELERY_AMQP_EXCHANGE
-CELERY_AMQP_PUBLISHER_ROUTING_KEY = local_settings.CELERY_AMQP_EXCHANGE
-CELERY_AMQP_CONSUMER_QUEUE = local_settings.CELERY_AMQP_CONSUMER_QUEUE
-CELERY_AMQP_CONSUMER_ROUTING_KEY = local_settings.CELERY_AMQP_EXCHANGE
-CELERY_AMQP_EXCHANGE_TYPE = local_settings.CELERY_AMQP_EXCHANGE_TYPE
+# Task result backend
+CELERY_RESULT_BACKEND = "amqp"
 
-########
-# JOBS #
-########
-UPDATE_JOBS_RUN_EVERY = 300
+# AMQP backend settings 
+CELERY_RESULT_SERIALIZER = "json"
+CELERY_AMQP_TASK_RESULT_EXPIRES = 3600
+
+# Task execution
+CELERY_TASK_SERIALIZER='json'
+CELERY_IGNORE_RESULT = False
+CELERY_DISABLE_RATE_LIMITS = True
+
+# Error email 
+CELERY_SEND_TASK_ERROR_EMAILS = False
+
+# Events
+CELERY_SEND_EVENTS = True
+
+# Logging
+CELERYD_HIJACK_ROOT_LOGGER = False
+
+CELERY_ALWAYS_EAGER=local_settings.CELERY_ALWAYS_EAGER
 
 ##############
 # JavaScript #
@@ -575,25 +596,67 @@ SITE_DOMAIN = "www.spacetelescope.org"
 ###########
 # LOGGING #
 ###########
-
-class NullHandler( logging.Handler ):
-	def emit( self, record ):
-		pass
-
-logging.getLogger( 'keyedcache' ).setLevel( logging.WARN )
-logging.getLogger( 'l10n' ).setLevel( logging.WARN )
-logging.getLogger( 'paramiko' ).setLevel( logging.WARN )
-logging.getLogger( 'sslurllib' ).addHandler( NullHandler() )
-
-logger = logging.getLogger()
-if not logger.handlers:
-	handler = logging.handlers.RotatingFileHandler( os.path.join( LOG_DIR, "djangoplicity.log" ), maxBytes=50 * 1024 * 1024, backupCount=3 )
-	formatter = logging.Formatter( '%(asctime)s %(name)-12s %(levelname)-8s %(message)s', '%a, %d %b %Y %H:%M:%S' )
-	handler.setFormatter( formatter )
-
-	logger.addHandler( handler )
-	logger.setLevel( logging.DEBUG if DEBUG else logging.INFO )
-	logger.info( "Djangoplicity started" )
+LOGGING = {
+	'version' : 1,
+	'disable_existing_loggers' : True,
+	'formatters': {
+        'verbose': {
+            'format': '%(levelname)s %(asctime)s %(module)s %(process)d %(thread)d %(message)s'
+        },
+        'default': {
+            'format': '%(asctime)s %(name)-12s %(levelname)-8s %(message)s'
+        },
+    },
+    'handlers': {
+        'null': {
+            'level':'DEBUG',
+            'class':'django.utils.log.NullHandler',
+        },
+        'console': {
+            'level':'DEBUG',
+            'class':'logging.StreamHandler',
+            'formatter': 'default'
+        },
+        'mail_admins': {
+            'level': 'ERROR',
+            'class': 'django.utils.log.AdminEmailHandler',
+            'include_html' : True,
+        },
+        'file' : {
+			'level' : 'DEBUG',
+			'class': 'logging.handlers.RotatingFileHandler',
+			'formatter' : 'default',
+			'filename' : os.path.join( LOG_DIR, "djangoplicity.log" ), 
+			'maxBytes' : 50 * 1024 * 1024, 
+			'backupCount' : 3,
+		}
+    },
+    'loggers': {
+        'django': {
+            'handlers': local_settings.LOGGING_HANDLER,
+            'propagate': True,
+            'level': 'DEBUG' if DEBUG else 'INFO',
+        },
+        'django.request': {
+            'handlers': ['mail_admins'],
+            'level': 'ERROR',
+            'propagate': False,
+        },
+        'djangoplicity': {
+            'handlers': local_settings.LOGGING_HANDLER,
+            'level': 'DEBUG' if DEBUG else 'INFO',
+        },
+        'django.db.backends' : {
+			'handlers': local_settings.LOGGING_HANDLER if DEBUG_SQL else ['null'],
+            'propagate': False,
+            'level': 'DEBUG' if DEBUG_SQL else 'INFO',
+		},
+		'sslurllib' : {
+			'handlers' : ['null',],
+			'propagate': False,
+		},
+    },
+}
 
 ###################
 # REPORTLAB FONTS #

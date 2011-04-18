@@ -15,3 +15,5 @@ syntax: regexp
 ^static/djangoplicity$
 syntax: glob
 *.pyc
+syntax: regexp
+^celeryev\.pid$

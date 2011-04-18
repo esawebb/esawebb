@@ -9,11 +9,13 @@
 #
 
 import getpass
+import sys
 
 #############################
 # ENVIRONMENT CONFIGURATION #
 #############################
 ROOT = "/Users/%s/Workspaces/sites/spacetelescope" % getpass.getuser()
+BUILD_ROOT = ROOT
 PRJBASE = "%s/projects/spacetelescope.org" % ROOT
 DJANGOPLICITY_ROOT = "%s/projects/djangoplicity" % ROOT
 LOG_DIR = "%s/logs" % ROOT
@@ -28,6 +30,29 @@ WEBSERVERS = ()
 SSL_ASSETS_PREFIX = "www.spacetelescope.org"
 CONFIG_GEN_TEMPLATES_DIR = "%s/conf/templates/" % PRJBASE 
 CONFIG_GEN_GENERATED_DIR = "%s/conf/" % TMP_DIR
+
+##############
+# DEPLOYMENT #
+##############
+BUILD_NODES = ["localhost"]
+MANAGEMENT_NODES = ["localhost"]
+BROKERS = ["localhost"]
+
+WORKERS = ["localhost"]
+WORKERS_BEAT_HOST = "localhost"
+WORKER_UID = None
+WORKER_GID = None
+WORKER_LOG_LEVEL = "INFO"
+WORKERS_CAM_FREQ = "1.0"
+
+NORMAL_USER = None
+SUDO_USER = None
+
+APACHE_INIT_MAIN = '/etc/init.d/apache2'
+APACHE_INIT_STATIC = '/etc/init.d/apache2'
+DEPLOYMENT_TAG = None
+DEPLOYMENT_REVISION = None
+ALLOW_DATABASE_OVERWRITE = True
 
 ###################
 # ERROR REPORTING #
@@ -44,12 +69,14 @@ ADMINS = (
 	('EPO Monitoring','esoepo-monitoring@eso.org'),
 )
 
+LOGGING_HANDLER = ['file']
+
 ##################
 # DATABASE SETUP #
 ##################
 DATABASES = {
     'default': {
-        'ENGINE': 'mysql',
+        'ENGINE': 'django.db.backends.mysql',
         'NAME': 'spacetelescope',
         'USER' : 'root',
         'PASSWORD' : '',
@@ -63,6 +90,9 @@ DATABASES = {
     }
 }
 
+if 'test' in sys.argv:
+	DATABASES['default']['ENGINE'] = 'django.db.backends.sqlite3'
+	
 ###############
 # MEDIA SETUP #
 ###############
@@ -81,11 +111,12 @@ CSRF_MIDDLEWARE_SECRET = "sadfpn870742kfasbvancp837rcnp3w8orypbw83ycnspo8r7"
 ##########
 # CACHE  #
 ##########
-CACHE_MIDDLEWARE_SECONDS = 600
-CACHE_BACKEND = "locmem://"
-CACHE_MIDDLEWARE_KEY_PREFIX = "spacetelescope_"
-CACHE_KEY_PREFIX = "spacetelescope_"
-CACHE_TEMPLATES = False
+CACHES = {
+	'default': {
+        'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
+        'LOCATION': SHORT_NAME,
+    }
+}
 
 ###############################
 # MIDDLEWARE AND APPLICATIONS #
@@ -130,22 +161,16 @@ GEOIP_LIBRARY_PATH = "%s/virtualenv/lib/libGeoIP.dylib" % ROOT
 ARCHIVE_AUTO_RESOURCE_DELETION = False
 ARCHIVE_IMPORT_ROOT = "/Volumes/webdocs/importi"
 
-########	
-# AMQP #
-########
-AMQP_SERVER = "aweb9.hq.eso.org"
-AMQP_PORT = 5672
-AMQP_USER = "taskexchange"
-AMQP_PASSWORD = "D1~odvcO7"
-AMQP_VHOST = "taskexchange"
+##########	
+# CELERY #
+##########
+BROKER_HOST = "localhost"
+BROKER_USER = "spacetelescope"
+BROKER_PASSWORD = "letoveumtold"
+BROKER_VHOST = "spacetelescope_vhost"
+BROKER_USE_SSL = False
 
-CELERY_BACKEND = "cache"
-CELERY_CACHE_BACKEND = "memcached://aweb9.hq.eso.org:11212/"
-CELERY_AMQP_EXCHANGE = "tasks"
-CELERY_AMQP_PUBLISHER_ROUTING_KEY = "task.regular"
-CELERY_AMQP_CONSUMER_QUEUE = "regular_tasks"
-CELERY_AMQP_CONSUMER_ROUTING_KEY = "task.#"
-CELERY_AMQP_EXCHANGE_TYPE = "topic"
+CELERY_ALWAYS_EAGER=False
 
 #################
 # DJANGO ASSETS #

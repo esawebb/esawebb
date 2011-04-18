@@ -16,6 +16,7 @@ sys.stdout = sys.stderr
 # Set environment variables
 os.environ['DJANGO_SETTINGS_MODULE'] = '{{SETTINGS_MODULE}}'
 os.environ['DJANGOPLICITY_SETTINGS'] = '{{LOCAL_SETTINGS_MODULE}}'
+os.environ["CELERY_LOADER"] = "django"
 
 # Load Django
 from django.core.handlers.wsgi import WSGIHandler

@@ -20,6 +20,7 @@
 <div class='clear'></div>
 </div>
 {% endif %}
+{% load pages %}{% embed_page spacetelescope.image_archive_top %}
 {% if crosslinks %}
 <div class="seealso">{{crosslinks_string|safe}}</div>
 <div class='clear'></div>
@@ -39,7 +40,7 @@
 		<div class='descr'>
 			<div class='number'>{{forloop.counter}}</div>
 			<div class='title'>{{item.title}}</div>
-			<div class='credit'><strong>Credit:</strong> {{item.credit|safe|default:'ESA/Hubble'}}</div>
+			<div class='credit'><strong>Credit:</strong> {{item.credit|safe}}</div>
 		</div>
 	<div class='clear'></div>
 	</a>

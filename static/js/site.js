@@ -105,3 +105,10 @@ $(document).ready( function(){
     });
       
 });
+
+
+/* static files tracking */
+$('a[href*="'+MEDIA_URL+'"]').addClass('ga_static_tracking')
+$('.ga_static_tracking').click(function() { 
+	pageTracker._trackPageview($(this).attr('href'))
+})

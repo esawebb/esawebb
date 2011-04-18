@@ -44,7 +44,17 @@ CSRF_MIDDLEWARE_SECRET = "g6ymvx$i1sv4k*g+nwfnx*3a1g&)^i6r9n6g4=f_$x^u(kwt8s"
 ##########
 # CACHE  #
 ##########
-CACHE_BACKEND = "memcached://%(short_name)s1i:11211;%(short_name)s2i:11211/?timeout=86400" % { 'short_name' : SHORT_NAME}
+CACHES = {
+	'default' : {
+		'BACKEND' : 'django.core.cache.backends.memcached.MemcachedCache',
+		'KEY_PREFIX' : SHORT_NAME,
+		'LOCATION' : [
+			'%(short_name)s1i:11211' % { 'short_name' : SHORT_NAME},
+			'%(short_name)s2i:11211' % { 'short_name' : SHORT_NAME},
+		],
+		'TIMEOUT' : 86400
+	}
+}
 
 ################
 # FILE UPLOADS #

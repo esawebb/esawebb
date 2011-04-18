@@ -1543,6 +1543,9 @@ if 'settings' not in globals():
 requirements_repo = "http://www.djangoplicity.org/repository/packages/"
 requirements_files = [{'file':'projects/spacetelescope.org/requirements.txt', 'repository':requirements_repo, 'options':['--no-index']}]
 
+if sys.version_info[0] == 2 and sys.version_info[1] == 5:
+	requirements_files.append( {'file':'projects/eso.org/requirements-2.5.txt', 'repository':requirements_repo, 'options':['--no-index']} )
+	
 #
 # Settings
 #
@@ -1551,6 +1554,8 @@ projects_settings = {
 			( 'djangoplicity-bootstrap', 'hg+https://eso_readonly:pg11opc@bitbucket.org/eso/djangoplicity-bootstrap',),
 			( 'djangoplicity-settings', 'hg+https://eso_readonly:pg11opc@bitbucket.org/eso/djangoplicity-settings' ),
 			( 'djangoplicity-adminhistory', 'hg+https://eso_readonly:pg11opc@bitbucket.org/eso/djangoplicity-adminhistory' ),
+			( 'djangoplicity-fabric', 'hg+https://eso_readonly:pg11opc@bitbucket.org/eso/djangoplicity-fabric',),
+			( 'djangoplicity-social', 'hg+https://eso_readonly:pg11opc@bitbucket.org/eso/djangoplicity-social',),
 			( 'djangoplicity', 'hg+https://eso_readonly:pg11opc@bitbucket.org/eso/djangoplicity' ),
 			( 'spacetelescope.org', 'hg+https://eso_readonly:pg11opc@bitbucket.org/eso/spacetelescope.org' ), 
 		],	
