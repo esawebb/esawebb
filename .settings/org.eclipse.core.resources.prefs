@@ -1,5 +1,7 @@
-#Wed Feb 16 15:08:31 CET 2011
+#Mon Mar 21 15:40:59 CET 2011
 eclipse.preferences.version=1
+encoding//scripts/correct_dates.py=utf-8
+encoding//scripts/hubblesite.py=utf-8
 encoding//src/spacetelescope/admin.py=utf-8
 encoding//src/spacetelescope/appregister.py=utf-8
 encoding//src/spacetelescope/conf/__init__.py=utf-8
