@@ -9,6 +9,7 @@
 #
 
 from default_settings import *
+from djangoplicity.settings import copy_setting
 
 ADMINS = (
 	('Lars Holm Nielsen','lnielsen@eso.org'),
@@ -19,6 +20,11 @@ LOGGING_HANDLER = ['console']
 ##################
 # DATABASE SETUP #
 ##################
+#DATABASES = copy_setting(DATABASES)
+#DATABASES['default']['USER'] = "spacetelescope"
+#DATABASES['default']['HOST'] = "mysql1i.hq.eso.org"
+#DATABASES['default']['PASSWORD'] = "fivjeylvoked"
+
 #DATABASES['default']['USER'] = "spacetelescope"
 #DATABASES['default']['HOST'] = "mysql1.hq.eso.org"
 #DATABASES['default']['PASSWORD'] = "letoveumtold"
