@@ -130,11 +130,11 @@ if __name__ == '__main__':
     n_images = str(len(images))
     count = 0
     now = datetime.datetime.now()
-    jsonfile = '/Users/dneumayer/ESO/Mantis/12079/workdir/' + now.strftime("%Y-%m-%d") + 'a.js'
+    jsonfile = '/Users/lnielsen/Desktop/Hubble/' + now.strftime("%Y-%m-%d") + 'a.js'
     print 'store results in ', jsonfile
     for image in images:
         if image.long_caption_link.find('http://hubblesite.org') == -1: continue
-        if image.id[:3] == 'opo': continue  # all opo images until 01-03-2011 are opo.js and have been manually compared 
+        #if image.id[:3] == 'opo': continue  # all opo images until 01-03-2011 are opo.js and have been manually compared 
         count = count + 1
         #if count > 30: break
         try:
