@@ -90,7 +90,7 @@ def analyse_taxonomy(generate_code = False):
         for key in keys:
             print "    elif tag == '%s':" % key
             print "        # '%s' %d" % (X_Tags[key][0], X_Tags[key][1]) 
-            print "        print sc.name,';', object.id,';', object.title.encode('utf-8'),';', object.distance"
+            print "        print object.id ,';', sc.name ,';', object.title.encode('utf-8'),';', object.distance"
         print '-----------------------'
     
     pprint.pprint(X_Tags) 
@@ -135,9 +135,9 @@ def scan_subjectnames(object, name):
         if sn.name.find(name) > -1: found = True   
     return found
 
-def treat_x(sc, object, remove = False): 
+def treat_x(sc, object, remove = True): 
     tag = sc.avm_code()
-    changed = False
+    save_changes = False
     #    
     #A. Solar System: local to our Solar System 
     #Typical taxonomy types: 1-3, 7-8 
@@ -152,7 +152,8 @@ def treat_x(sc, object, remove = False):
 
     if tag == 'X.101.10':
         # 'Extrasolar Planets Videos' 1
-        print sc.name,';', object.id,';', object.title.encode('utf-8'),';', object.distance, '; TAGS: ', print_alltags(object)
+        # not treated
+        print object.id ,';', sc.name ,';', object.title.encode('utf-8'),';', object.distance, '; TAGS: ', print_alltags(object)
     elif tag == 'X.101.11':
         # 'JWST Images/Videos' 24
         # add subject_name JWST
@@ -161,58 +162,58 @@ def treat_x(sc, object, remove = False):
             new_name = SubjectName.objects.get(name = 'JWST')
             object.subject_name.add(new_name)
         # set image.type = 'Artwork'
-        print sc.name,' set object.type = "Artwork" for ', object.id, object.title.encode('utf-8')
+        print object.id, sc.name,' set object.type = "Artwork" ;', object.title.encode('utf-8')
         object.type = 'Artwork'
         if remove: object.subject_category.remove(sc)
-        changed = True
+        save_changes = True
         
     elif tag == 'X.101.12':
         # 'Spacecraft Images/Videos' 20
         # replace with 8.2.1 Spacecraft Orbiter
-        print sc.name,';', object.id,';', object.title.encode('utf-8'),';', object.distance, '; TAGS: ', print_alltags(object)
+        print object.id ,';', sc.name ,';', object.title.encode('utf-8'),';', object.distance, '; TAGS: ', print_alltags(object)
         if not scan_tags(object, 'Spacecraft'):
             new_tag = TaxonomyHierarchy.objects.get( top_level = 'E', level1 = 8, level2 = 2, level3 = 1, level4 = None)
-            print sc.name, 'add', new_tag.avm_code(), new_tag.name, ' to ', object.id,  object.title.encode('utf-8') 
+            print object.id, 'replace', sc.name, 'with', new_tag.avm_code(), new_tag.name, '; ', object.id,  object.title.encode('utf-8') 
             object.subject_category.add(new_tag)    
         if remove: object.subject_category.remove(sc)
-        changed = True        
+        save_changes = True        
 
     elif tag == 'X.101.13':
         # 'Miscellaneous  Images/Videos' 165
         # remove tag
-        print sc.name,';', object.id,';', object.title.encode('utf-8'),';', object.distance, '; TAGS: ', print_alltags(object)
+        print object.id ,';', sc.name ,';', object.title.encode('utf-8'),';', object.distance, '; TAGS: ', print_alltags(object)
         if remove: object.subject_category.remove(sc)
-        changed = True     
+        save_changes = True     
     elif tag == 'X.101.21':
         # 'Illustration Images' 237
-        print sc.name,';', object.id,';', object.title.encode('utf-8'),';', object.distance, object.type        
+        print object.id ,';', sc.name ,';', object.title.encode('utf-8'),';', object.distance, object.type        
         # set type to artwork and remove tag
-        print sc.name,' set object.type = "Artwork" for ', object.id, object.title.encode('utf-8')
+        print object.id, sc.name,' set object.type = "Artwork" ;', object.title.encode('utf-8')
         object.type = 'Artwork'
         if remove: object.subject_category.remove(sc)
-        changed = True
+        save_changes = True
         
     elif tag == 'X.101.22':
-        # 'Mission' 132     E.8.1.2 Telescope, E.9.2 Astronaut, subject_name Hubble
-        print sc.name,';', object.id,';', object.title.encode('utf-8'),';', object.distance, '; TAGS: ', print_alltags(object)
+        # 'Mission' 132     E.8.1.2 Telescope, E.9.2 Astronaut, subject_name Hubble?
+        print object.id ,';', sc.name ,';', object.title.encode('utf-8'),';', object.distance, '; TAGS: ', print_alltags(object)
     elif tag == 'X.101.3':
         # 'Solar System Images/Videos' 577
         if not scan_tags(object, 'Solar System'):
             new_tag = TaxonomyHierarchy.objects.get( top_level = 'A', level1 = None)
-            print sc.name, 'add', new_tag.avm_code(), new_tag.name, ' to ', object.id,  object.title.encode('utf-8') 
+            print object.id, 'replace', sc.name, 'with', new_tag.avm_code(), new_tag.name, '; ', object.id,  object.title.encode('utf-8') 
             object.subject_category.add(new_tag)    
         if remove: object.subject_category.remove(sc)
-        changed = True        
+        save_changes = True        
 
     elif tag == 'X.101.4':
         # 'Stars Images/Videos' 206
         # make B.3, change to C afterwards if necessary
-        print sc.name,';', object.id,';', object.title.encode('utf-8'),';', object.distance
+        print object.id ,';', sc.name ,';', object.title.encode('utf-8'),';', object.distance
         if not scan_tags(object, 'Star'):
             toplevel = get_toplevel(object)
             if not toplevel: toplevel = 'B'
             new_tag = TaxonomyHierarchy.objects.get( top_level = toplevel, level1 = 3, level2 = None)
-            print sc.name, 'add', new_tag.avm_code(), new_tag.name, ' to ', object.id,  object.title.encode('utf-8') 
+            print object.id, 'replace', sc.name, 'with', new_tag.avm_code(), new_tag.name, '; ', object.id,  object.title.encode('utf-8') 
             object.subject_category.add(new_tag)  
         # remove local-use tag 
         if remove: object.subject_category.remove(sc)
@@ -222,7 +223,7 @@ def treat_x(sc, object, remove = False):
         # B.3.6.4. 
         if not scan_tags(object, 'Cluster'):
             new_tag = TaxonomyHierarchy.objects.get( top_level = 'B', level1 = 3, level2 = 6, level3 = 4, level4 = None)
-            print sc.name, 'add', new_tag.avm_code(), new_tag.name, ' to ', object.id,  object.title.encode('utf-8') 
+            print object.id, 'replace', sc.name, 'with', new_tag.avm_code(), new_tag.name, '; ', object.id,  object.title.encode('utf-8') 
             object.subject_category.add(new_tag)  
         # remove local-use tag 
         if remove: object.subject_category.remove(sc)
@@ -231,13 +232,13 @@ def treat_x(sc, object, remove = False):
         # 'Nebulae Images/Videos' 330
         # B.4, change to C afterwards if necessary
         if not scan_tags(object, 'Nebula'):
-            print sc.name,';', object.id,';', object.title.encode('utf-8'),';', object.distance 
+            print object.id ,';', sc.name ,';', object.title.encode('utf-8'),';', object.distance 
             new_tag = TaxonomyHierarchy.objects.get( top_level = 'B', level1 = 4, level2 = None, level3 = None)
-            print sc.name, 'add', new_tag.avm_code(), new_tag.name, ' to ', object.id,  object.title.encode('utf-8') 
+            print object.id, 'replace', sc.name, 'with', new_tag.avm_code(), new_tag.name, '; ', object.id,  object.title.encode('utf-8') 
             object.subject_category.add(new_tag)      
         # remove local-use tag               
         if remove: object.subject_category.remove(sc)
-        changed = True           
+        save_changes = True           
     
     elif tag == 'X.101.7':
         # 'Galaxies Images/Videos' 474
@@ -266,16 +267,16 @@ def treat_x(sc, object, remove = False):
                 type = 'C'
             print sc.name,';',type, object.id,';', object.title.encode('utf-8'),';', object.distance
             new_tag = TaxonomyHierarchy.objects.get( top_level = type, level1 = 5, level2 = None)
-            print sc.name, 'add', new_tag.avm_code(), new_tag.name, ' to ', object.id,  object.title.encode('utf-8') 
+            print object.id, 'replace', sc.name, 'with', new_tag.avm_code(), new_tag.name, '; ', object.id,  object.title.encode('utf-8') 
             object.subject_category.add(new_tag)
         if remove: object.subject_category.remove(sc)
-        changed = True
+        save_changes = True
         
     elif tag == 'X.101.8':
         # 'Quasars/AGN/Black Hole Images/Videos' 85
         added = False
-        # 1. determin top_level
-        print sc.name, object.id,
+        # 1. determine top_level
+        print object.id, sc.name,
         type = ''
         if object.distance > 0.1 and object.distance < 11:
             type = 'D'
@@ -334,26 +335,24 @@ def treat_x(sc, object, remove = False):
             added = True
             
         if remove and added: object.subject_category.remove(sc)
-        if added == False: print object.title, 'NOTHING added'
-        changed = True
+        if added == False: print object.id, object.title, 'NOTHING added'
+        save_changes = True
         
     elif tag == 'X.101.9':
         # 'Cosmology Images/Videos' 241
         # D
         if not scan_tags(object, 'Cosmology'):
-            print sc.name,';', object.id,';', object.title.encode('utf-8'),';', object.distance 
+            print object.id ,';', sc.name ,';', object.title.encode('utf-8'),';', object.distance 
             new_tag = TaxonomyHierarchy.objects.get( top_level = 'D', level1 = None, level2 = None, level3 = None)
-            print sc.name, 'add', new_tag.avm_code(), new_tag.name, ' to ', object.id,  object.title.encode('utf-8') 
+            print object.id, 'replace', sc.name, 'with', new_tag.avm_code(), new_tag.name, '; ', object.id,  object.title.encode('utf-8') 
             object.subject_category.add(new_tag)      
         # remove local-use tag               
         if remove: object.subject_category.remove(sc)
-        changed = True        
-
-    
+        save_changes = True            
       
 #---------------------------------------------------------------------------
  
-    if changed:
+    if save_changes:
         try: 
             object.save() # force_insert=True
             print "saved changes for tag %s in %s" % (sc.name, object.id)
