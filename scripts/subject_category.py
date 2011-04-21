@@ -172,32 +172,27 @@ def treat_x(sc, image, remove = True):
         changed = add_avmtag(image,  'Spacecraft','E.8.2')
         image.subject_category.remove(sc)
         
-    elif tag == 'X.101.3':
-        # 'Solar System Images/Videos' 577
+    elif tag == 'X.101.3':        # 'Solar System Images/Videos' 577
         # A
         changed = add_avmtag(image,  'Solar System','A')
         image.subject_category.remove(sc)       
 
-    elif tag == 'X.101.4':
-        # 'Stars Images/Videos' 206
+    elif tag == 'X.101.4':        # 'Stars Images/Videos' 206
         # make B.3, change to C afterwards if necessary
         changed = add_avmtag(image,  'Star','B.4')
         image.subject_category.remove(sc)
         
-    elif tag == 'X.101.5':
-        # 'Star Clusters Images/Videos' 100
+    elif tag == 'X.101.5':        # 'Star Clusters Images/Videos' 100
         # B.3.6.4. 
         changed = add_avmtag(image,  'Cluster','B.3.6.4')
         image.subject_category.remove(sc)
     
-    elif tag == 'X.101.6':
-        # 'Nebulae Images/Videos' 330
+    elif tag == 'X.101.6':        # 'Nebulae Images/Videos' 330
         # B.4, change to C afterwards if necessary
         changed = add_avmtag(image,  'Nebula','B.4')           
         image.subject_category.remove(sc)
         
-    elif tag == 'X.101.7':
-        # 'Galaxies Images/Videos' 474
+    elif tag == 'X.101.7':        # 'Galaxies Images/Videos' 474
         Ds = ['opo9228b',''] # Cosmology
         Cs = [] # local universe
         Bs = [] # Milky Way
@@ -221,8 +216,7 @@ def treat_x(sc, image, remove = True):
         changed = add_avmtag(image, 'Galax', type + '.5')
         image.subject_category.remove(sc)
         
-    elif tag == 'X.101.8':
-        # 'Quasars/AGN/Black Hole Images/Videos' 85
+    elif tag == 'X.101.8':        # 'Quasars/AGN/Black Hole Images/Videos' 85
         # 1. determine top_level
         type = ''
         if image.distance > 0.1 and image.distance < 11:
@@ -235,8 +229,7 @@ def treat_x(sc, image, remove = True):
             type = 'B'
         else: type = ''
 
-        # determine sublevels AGN / BH / Quasar?
-            
+        # determine sub_levels AGN / BH / Quasar?           
         TITLE = str(image.title).upper()   
         if TITLE.find('MILKY WAY') > -1 and type == '':
             changed = add_avmtag(image, 'Black Hole', 'B' + '.5.4.6')
@@ -254,8 +247,7 @@ def treat_x(sc, image, remove = True):
         else: print "%-45s; %-9s; %s; BH or AGN? ;\t title: %s" % (image.id, sc.avm_code(), sc.name,  image.title)                                             
         
             
-    elif tag == 'X.101.9':
-        # 'Cosmology Images/Videos' 241
+    elif tag == 'X.101.9':        # 'Cosmology Images/Videos' 241
         # D
         changed = add_avmtag(image,  'Cosmology','D')
         image.subject_category.remove(sc)
