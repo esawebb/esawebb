@@ -224,7 +224,6 @@ def treat_x(sc, image, remove = True):
     elif tag == 'X.101.8':
         # 'Quasars/AGN/Black Hole Images/Videos' 85
         # 1. determine top_level
-        print image.id, sc.name,
         type = ''
         if image.distance > 0.1 and image.distance < 11:
             type = 'D'    
@@ -252,7 +251,7 @@ def treat_x(sc, image, remove = True):
             changed = add_avmtag(image, 'AGN', type + '.5.3.2')    
             
         if changed: image.subject_category.remove(sc)
-        else: print "%-45s; %-9s; %s; could not distinguish between BH and AGN ;\t title: %s" % (image.id, sc.avm_code(), sc.name,  image.title)                                             
+        else: print "%-45s; %-9s; %s; BH or AGN? ;\t title: %s" % (image.id, sc.avm_code(), sc.name,  image.title)                                             
         
             
     elif tag == 'X.101.9':
