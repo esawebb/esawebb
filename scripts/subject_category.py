@@ -10,7 +10,7 @@
 #
 #
 # Mantis ESO 3065, now for spacetelescope
-# this time Video and Images are take care off in the same go
+#
 # Tag all images with subject category and remove temporary taxonomy items.
 # 2011 Apr 18
 #*************************************************************************************************************
@@ -18,50 +18,14 @@
 import pprint
 
 from djangoplicity.media.models import Image
-from djangoplicity.media.models import ImageExposure
-
-
-# do I need this TODO?
+from djangoplicity.media.models import Video
+#from djangoplicity.media.models import ImageExposure
 from djangoplicity.metadata.models import TaxonomyHierarchy
 from djangoplicity.metadata.models import SubjectName
 
-def show_taxonomy():
-    print 'trying to find good matches for these locally used taxonomies with X'
-    for xth in TaxonomyHierarchy.objects.filter(top_level = 'X'):
-        print xth.avm_code(),';', xth.name
-    print '--------------------------------------------------------------------------------------------'
-    for xth in TaxonomyHierarchy.objects.filter(top_level = 'X'):
-        level = 10
-        for th in TaxonomyHierarchy.objects.exclude(top_level = 'X'):
-            # first try to find the x.name in the taxonomy
-            if th.name.find(xth.name) > -1: 
-                if len(th.avm_code().split('.')) <= level:
-                    level = len(th.avm_code().split('.'))
-                    print level, xth.avm_code(), xth.name, '\t ; \t',th.name, th.avm_code()
-                #break
-            # split the localy used name and try to find its integredients
-#            sloppy = -10
-#            xths = xth.name.split()
-#            n_words = len(xths)
-#            matching = 0
-#            splitter = ''    
-#            if n_words > 1:
-#                for splitter in xths:
-#                    if th.name.find(splitter) > -1: 
-#                        matching = matching + 1
-#                    if matching >= n_words - sloppy:     
-#                        print xth.avm_code(), xth.name, splitter, '\t; \t',th.name, th.avm_code()
-#                        break            
-#                
-    return
+import sys, codecs, locale
 
-def show_subjectnames():
-    sns = SubjectName.objects.all()
-    for sn in sns:
-        print sn
-    return
-
-def analyse_taxonomy(generate_code = False):
+def analyse_taxonomy(generate_code = False ):
     '''
     see which X.tags are used
     and generate sceleton for the code
@@ -83,298 +47,279 @@ def analyse_taxonomy(generate_code = False):
             [name, number] = X_Tags[sc.avm_code()]
             X_Tags[sc.avm_code()] = [name, number + 1]
             # print X_Tags[sc.avm_code()] 
-
-    if generate_code:  
-        keys = X_Tags.keys()
-        keys.sort()
+      
+    keys = X_Tags.keys()
+    keys.sort()
+    if generate_code:
         for key in keys:
-            print "    elif tag == '%s':" % key
-            print "        # '%s' %d" % (X_Tags[key][0], X_Tags[key][1]) 
-            print "        print object.id ,';', sc.name ,';', object.title.encode('utf-8'),';', object.distance"
+            print "    elif tag == '%s':       # '%s' %d" % (key, X_Tags[key][0], X_Tags[key][1]) 
+            print "        pass"
         print '-----------------------'
-    
     pprint.pprint(X_Tags) 
     return  
 
-
-def scan_tags(object, name):
-    found = False
-    for sc in  object.subject_category.exclude(top_level = 'X'):
-        if sc.name.find(name) > -1: found = True   
+def scan_tags(image, name):
+    found = None
+    for sc in  image.subject_category.exclude(top_level = 'X'):
+        if sc.name.upper().find(name.upper()) > -1: found = sc   
     return found
 
-def get_toplevel(object):
+def get_toplevel(image):
     toplevel = None
-    for sc in  object.subject_category.exclude(top_level = 'X'):
-        toplevel = sc.top_level
-        print toplevel,
-    print   
+    for sc in  image.subject_category.exclude(top_level = 'X'):
+        toplevel = sc.top_level   
+        # assuming that all existing toplevels are the same, if not, the last tag determines top_level   
     return toplevel
 
 
-def print_tags(object):
-    scs = object.subject_category.exclude(top_level = 'X')
-#    if len(scs) > 0: print object.id,
-    for sc in  scs:
-        print sc.name,
-    print
-    return 
-
-def print_alltags(object):
-    scs = object.subject_category.all()
-#    if len(scs) > 0: print object.id,
-    for sc in  scs:
-        print sc.name,
-    print
-    return 
-
-def scan_subjectnames(object, name):
+def print_tags(image):
     found = False
-    for sn in  object.subject_name.all():
-        print sn, sn.name.find(name)
+    scs = image.subject_category.exclude(top_level = 'X')
+    if len(scs) > 0: print image.id,
+    for sc in  scs:
+        print sc.name,
+    print
+    return found
+
+def scan_subjectnames(image, name):
+    found = False
+    for sn in  image.subject_name.all():
+        # print sn, sn.name.find(name)
         if sn.name.find(name) > -1: found = True   
     return found
 
-def treat_x(sc, object, remove = True): 
-    tag = sc.avm_code()
-    save_changes = False
-    #    
-    #A. Solar System: local to our Solar System 
-    #Typical taxonomy types: 1-3, 7-8 
-    #B. Milky Way: contained within the Milky Way Galaxy 
-    #Typical taxonomy types: 1-4 
-    #C. Local Universe: current era of the Universe (z <= 0.1) 
-    #Typical taxonomy types: 3-5 
-    #D. Early Universe: distant galaxies and cosmological epochs (z > 0.1) 
-    #Typical taxonomy types: 5-6 
-    #E. Unspecified: for generic instance of subject 
-    #Typical taxonomy types: any 
-
-    if tag == 'X.101.10':
-        # 'Extrasolar Planets Videos' 1
-        # not treated
-        print object.id ,';', sc.name ,';', object.title.encode('utf-8'),';', object.distance, '; TAGS: ', print_alltags(object)
-    elif tag == 'X.101.11':
-        # 'JWST Images/Videos' 24
-        # add subject_name JWST
-        if not scan_subjectnames(object,'JWST'): 
-            print 'add subject_name JWST to ', object.id
-            new_name = SubjectName.objects.get(name = 'JWST')
-            object.subject_name.add(new_name)
-        # set image.type = 'Artwork'
-        print object.id, sc.name,' set object.type = "Artwork" ;', object.title.encode('utf-8')
-        object.type = 'Artwork'
-        if remove: object.subject_category.remove(sc)
-        save_changes = True
-        
-    elif tag == 'X.101.12':
-        # 'Spacecraft Images/Videos' 20
-        # replace with 8.2 Spacecraft 
-        print object.id ,';', sc.name ,';', object.title.encode('utf-8'),';', object.distance, '; TAGS: ', print_alltags(object)
-        if not scan_tags(object, 'Spacecraft'):
-            new_tag = TaxonomyHierarchy.objects.get( top_level = 'E', level1 = 8, level2 = 2, level3 = None, level4 = None)
-            print object.id, 'replace', sc.name, 'with', new_tag.avm_code(), new_tag.name, '; ', object.id,  object.title.encode('utf-8') 
-            object.subject_category.add(new_tag)    
-        if remove: object.subject_category.remove(sc)
-        save_changes = True        
-
-    elif tag == 'X.101.13':
-        # 'Miscellaneous  Images/Videos' 165
-        # remove tag
-        print object.id ,';', sc.name ,';', object.title.encode('utf-8'),';', object.distance, '; TAGS: ', print_alltags(object)
-        if remove: object.subject_category.remove(sc)
-        save_changes = True     
-    elif tag == 'X.101.21':
-        # 'Illustration Images' 237
-        print object.id ,';', sc.name ,';', object.title.encode('utf-8'),';', object.distance, object.type        
-        # set type to artwork and remove tag
-        print object.id, sc.name,' set object.type = "Artwork" ;', object.title.encode('utf-8')
-        object.type = 'Artwork'
-        if remove: object.subject_category.remove(sc)
-        save_changes = True
-        
-    elif tag == 'X.101.22':
-        # 'Mission' 132     E.8.1.2 Telescope, E.9.2 Astronaut, subject_name Hubble?
-        # replace with 8.2 Spacecraft
-        print object.id ,';', sc.name ,';', object.title.encode('utf-8'),';', object.distance, '; TAGS: ', print_alltags(object)
-        if not scan_tags(object, 'Spacecraft'):
-            new_tag = TaxonomyHierarchy.objects.get( top_level = 'E', level1 = 8, level2 = 2, level3 = None, level4 = None)
-            print object.id, 'replace', sc.name, 'with', new_tag.avm_code(), new_tag.name, '; ', object.id,  object.title.encode('utf-8') 
-            object.subject_category.add(new_tag)    
-        if remove: object.subject_category.remove(sc)
-        save_changes = True 
+def add_subjectname(image, subject_name):
+    """
+    if there is not already a subject_name containing name
+    a new subject_name name is added
     
+    returns True, if a new subject_name was added
+    """
+    added = False
+    if not scan_subjectnames(image,subject_name): 
+        print "%-45s; %-9s; %s; add subject_name ;%s;\t title: %s" % (image.id, sc.avm_code(), sc.name, subject_name, image.title)                                             
+        new_name = SubjectName.objects.get(name = subject_name)
+        image.subject_name.add(new_name)
+        added = True
+    else: print "%-45s; %-9s; %s; subject_name ;%s; already exists;\t title: %s" % (image.id, sc.avm_code(), sc.name, subject_name, image.title)                                                     
+    return added
+
+def add_avmtag(image, name, code):
+    """
+    if there is not already a AVM-tag containing name
+    a new tag with code is added
+    and the old x-tag will be removed 
+    
+    returns True, if a new tag was added
+    """
+    added = False
+    existing_tag = scan_tags(image, name)
+    if not existing_tag:
+        codes = code.split('.')
+        toplevel = codes[0]
+        level = [None,None,None,None,None,None]
+        level[0] = codes[0]
+        for i in range(1,len(codes),1):
+            level[i] = int(codes[i])       
+        new_tag = TaxonomyHierarchy.objects.get( top_level = level[0], 
+                                                 level1 = level[1], 
+                                                 level2 = level[2], 
+                                                 level3 = level[3], 
+                                                 level4 = level[4], 
+                                                 level5 = level[5])
+        print "%-45s; %-9s; %s; replace with ;%s; %s;\t title: %s" % (image.id, sc.avm_code(), sc.name, new_tag.avm_code(), new_tag.name, image.title)                                             
+        image.subject_category.add(new_tag)
+        added = True 
+    else: print "%-45s; %-9s; %s; tag %s; %s; already exists;\t title: %s" % (image.id, sc.avm_code(), sc.name, existing_tag.avm_code(), existing_tag.name, image.title)                                             
+    return added
+
+def treat_x(sc, image, remove = True): 
+    tag = sc.avm_code()
+    changed = False
+    if tag == 'X.101.10':   # 'Extrasolar Planets Videos' 1
+        # not treated
+        print "%-45s; %-9s; %s; not treated" % (image.id, sc.avm_code(), sc.name)
+
+    elif tag == 'X.101.11':        # 'JWST Images/Videos' 24
+        # add subject_name JWST
+        changed = add_subjectname(image,'JWST')
+        # set image.type = 'Artwork'
+        print "%-45s; %-9s; %s; set image.type = 'Artwork'" % (image.id, sc.avm_code(), sc.name)
+        image.type = 'Artwork'
+        image.subject_category.remove(sc)
+        changed = True
+
+    elif tag == 'X.101.12':        # 'Spacecraft Images/Videos' 20
+        # replace with 8.2 Spacecraft 
+        changed = add_avmtag(image,  'Spacecraft','E.8.2')    
+        image.subject_category.remove(sc)
+
+    elif tag == 'X.101.13':        # 'Miscellaneous  Images/Videos' 165
+        # remove tag
+        print "%-45s; %-9s; %s; only removing tag" % (image.id, sc.avm_code(), sc.name)
+        image.subject_category.remove(sc)
+        changed = True     
+        
+    elif tag == 'X.101.21':        # 'Illustration Images' 237
+        # set type to artwork and remove tag
+        print "%-45s; %-9s; %s; set image.type = 'Artwork'" % (image.id, sc.avm_code(), sc.name)
+        image.type = 'Artwork'
+        image.subject_category.remove(sc)
+        changed = True
+        
+    elif tag == 'X.101.22':        # 'Mission' 132
+        # replace with 8.2 Spacecraft
+        changed = add_avmtag(image,  'Spacecraft','E.8.2')
+        image.subject_category.remove(sc)
+        
     elif tag == 'X.101.3':
         # 'Solar System Images/Videos' 577
-        if not scan_tags(object, 'Solar System'):
-            new_tag = TaxonomyHierarchy.objects.get( top_level = 'A', level1 = None)
-            print object.id, 'replace', sc.name, 'with', new_tag.avm_code(), new_tag.name, '; ', object.id,  object.title.encode('utf-8') 
-            object.subject_category.add(new_tag)    
-        if remove: object.subject_category.remove(sc)
-        save_changes = True        
+        # A
+        changed = add_avmtag(image,  'Solar System','A')
+        image.subject_category.remove(sc)       
 
     elif tag == 'X.101.4':
         # 'Stars Images/Videos' 206
         # make B.3, change to C afterwards if necessary
-        print object.id ,';', sc.name ,';', object.title.encode('utf-8'),';', object.distance
-        if not scan_tags(object, 'Star'):
-            toplevel = get_toplevel(object)
-            if not toplevel: toplevel = 'B'
-            new_tag = TaxonomyHierarchy.objects.get( top_level = toplevel, level1 = 3, level2 = None)
-            print object.id, 'replace', sc.name, 'with', new_tag.avm_code(), new_tag.name, '; ', object.id,  object.title.encode('utf-8') 
-            object.subject_category.add(new_tag)  
-        # remove local-use tag 
-        if remove: object.subject_category.remove(sc)
+        changed = add_avmtag(image,  'Star','B.4')
+        image.subject_category.remove(sc)
         
     elif tag == 'X.101.5':
         # 'Star Clusters Images/Videos' 100
         # B.3.6.4. 
-        if not scan_tags(object, 'Cluster'):
-            new_tag = TaxonomyHierarchy.objects.get( top_level = 'B', level1 = 3, level2 = 6, level3 = 4, level4 = None)
-            print object.id, 'replace', sc.name, 'with', new_tag.avm_code(), new_tag.name, '; ', object.id,  object.title.encode('utf-8') 
-            object.subject_category.add(new_tag)  
-        # remove local-use tag 
-        if remove: object.subject_category.remove(sc)
+        changed = add_avmtag(image,  'Cluster','B.3.6.4')
+        image.subject_category.remove(sc)
     
     elif tag == 'X.101.6':
         # 'Nebulae Images/Videos' 330
         # B.4, change to C afterwards if necessary
-        if not scan_tags(object, 'Nebula'):
-            print object.id ,';', sc.name ,';', object.title.encode('utf-8'),';', object.distance 
-            new_tag = TaxonomyHierarchy.objects.get( top_level = 'B', level1 = 4, level2 = None, level3 = None)
-            print object.id, 'replace', sc.name, 'with', new_tag.avm_code(), new_tag.name, '; ', object.id,  object.title.encode('utf-8') 
-            object.subject_category.add(new_tag)      
-        # remove local-use tag               
-        if remove: object.subject_category.remove(sc)
-        save_changes = True           
-    
+        changed = add_avmtag(image,  'Nebula','B.4')           
+        image.subject_category.remove(sc)
+        
     elif tag == 'X.101.7':
         # 'Galaxies Images/Videos' 474
         Ds = ['opo9228b',''] # Cosmology
-        D = False
         Cs = [] # local universe
-        C = False
         Bs = [] # Milky Way
-        B = False
         type = ''
-        #if there is not already a Galaxy tag:
-        if not scan_tags(object, 'Galax'):
-            # check if there is a tag for Milky Way => B
-            if scan_tags(object, 'ilky'):
-                B = True
-                type = 'B'
-            # or maybe a tag for Cosmology => D
-            elif scan_tags(object, 'Cosmology'): 
-                D = True
-                type = 'D'
-            elif object.id in Ds: 
-                D = True  
-                type = 'D'
-            else: 
-                C = True
-                type = 'C'
-            print sc.name,';',type, object.id,';', object.title.encode('utf-8'),';', object.distance
-            new_tag = TaxonomyHierarchy.objects.get( top_level = type, level1 = 5, level2 = None)
-            print object.id, 'replace', sc.name, 'with', new_tag.avm_code(), new_tag.name, '; ', object.id,  object.title.encode('utf-8') 
-            object.subject_category.add(new_tag)
-        if remove: object.subject_category.remove(sc)
-        save_changes = True
+        if image.id in Bs:
+            type = 'B'    
+        elif image.id in Cs: 
+            type = 'C'
+        elif image.id in Ds: 
+            type = 'D'
+        
+        # maybe there is a tag for Milky Way => B
+        elif scan_tags(image, 'ilky'):
+            type = 'B'
+        # or maybe a tag for Cosmology => D
+        elif scan_tags(image, 'Cosmology'): 
+            type = 'D'
+        else: 
+            type = 'C'
+    
+        changed = add_avmtag(image, 'Galax', type + '.5')
+        image.subject_category.remove(sc)
         
     elif tag == 'X.101.8':
         # 'Quasars/AGN/Black Hole Images/Videos' 85
-        added = False
         # 1. determine top_level
-        print object.id, sc.name,
+        print image.id, sc.name,
         type = ''
-        if object.distance > 0.1 and object.distance < 11:
-            type = 'D'
-           # print object.distance,'=>',type
-           
+        if image.distance > 0.1 and image.distance < 11:
+            type = 'D'    
         # maybe there is a tag for Cosmology => D
-        elif scan_tags(object, 'Cosmology'): 
+        elif scan_tags(image, 'Cosmology'): 
             type = 'D'
-           # print 'TAG: Cosmology =>', type
-            
         # check if there is a tag for Milky Way => B
-        elif scan_tags(object, 'ilky'):
+        elif scan_tags(image, 'ilky'):
             type = 'B'
-           # print 'TAG: Milky Way =>', type
         else: type = ''
 
-        # determin level1
-
+        # determine sublevels AGN / BH / Quasar?
             
-        TITLE = str(object.title).upper()   
-        if TITLE.find('MILKY WAY') > -1:
-            if type == '': type = 'B'
-            black_hole = TaxonomyHierarchy.objects.get( top_level = type, level1 = 5, level2 = 4, level3 = 6, level4 = None)
-            print 'add', black_hole.avm_code(), black_hole.name, ' to ', object.id,  object.title.encode('utf-8') 
-            object.subject_category.add(black_hole)
-            added = True 
-        if TITLE.find('GALACTIC CENTRE') > -1:
-            if type == '': type = 'B'
-            black_hole = TaxonomyHierarchy.objects.get( top_level = type, level1 = 5, level2 = 4, level3 = 6, level4 = None)
-            print 'add', black_hole.avm_code(), black_hole.name, ' to ', object.id,  object.title.encode('utf-8') 
-            object.subject_category.add(black_hole)
-            added = True 
+        TITLE = str(image.title).upper()   
+        if TITLE.find('MILKY WAY') > -1 and type == '':
+            changed = add_avmtag(image, 'Black Hole', 'B' + '.5.4.6')
         if TITLE.find('BLACK HOLE') > -1:
             if type == '': type = 'C'
-            black_hole = TaxonomyHierarchy.objects.get( top_level = type, level1 = 5, level2 = 4, level3 = 6, level4 = None)
-            print 'add', black_hole.avm_code(), black_hole.name, ' to ', object.id,  object.title.encode('utf-8') 
-            object.subject_category.add(black_hole)
-            added = True
-        if TITLE.find('NUCLE') > -1:
-            if type == '': type = 'C'
-            agn = TaxonomyHierarchy.objects.get( top_level = type, level1 = 5, level2 = 3, level3 =2, level4 = None)
-            print 'add', agn.avm_code(), agn.name, ' to ', object.id,  object.title.encode('utf-8') 
-            object.subject_category.add(agn)
-            added = True
-        if TITLE.find('ACTIVE') > -1:
-            if type == '': type = 'C'
-            agn = TaxonomyHierarchy.objects.get( top_level = type, level1 = 5, level2 = 3, level3 =2, level4 = None)
-            print 'add', agn.avm_code(), agn.name, ' to ', object.id,  object.title.encode('utf-8') 
-            object.subject_category.add(agn)
-            added = True    
+            changed = add_avmtag(image, 'Black Hole', type + '.5.4.6')
         if TITLE.find('QUASAR') > -1:
             if type == '': type = 'D'
-            quasar = TaxonomyHierarchy.objects.get( top_level = type, level1 = 5, level2 = 3, level3 =2, level4 = 1, level5 = None)
-            print 'add', quasar.avm_code(), quasar.name, ' to ', object.id,  object.title.encode('utf-8') 
-            object.subject_category.add(quasar)        
-            added = True
+            changed = add_avmtag(image, 'Quasar', type + '.5.3.2.1')
+        if TITLE.find('ACTIVE') > -1:
+            if type == '': type = 'C'
+            changed = add_avmtag(image, 'AGN', type + '.5.3.2')    
             
-        if remove and added: object.subject_category.remove(sc)
-        if added == False: print object.id, object.title, 'NOTHING added'
-        save_changes = True
+        if changed: image.subject_category.remove(sc)
+        else: print "%-45s; %-9s; %s; could not distinguish between BH and AGN ;\t title: %s" % (image.id, sc.avm_code(), sc.name,  image.title)                                             
         
+            
     elif tag == 'X.101.9':
         # 'Cosmology Images/Videos' 241
         # D
-        if not scan_tags(object, 'Cosmology'):
-            print object.id ,';', sc.name ,';', object.title.encode('utf-8'),';', object.distance 
-            new_tag = TaxonomyHierarchy.objects.get( top_level = 'D', level1 = None, level2 = None, level3 = None)
-            print object.id, 'replace', sc.name, 'with', new_tag.avm_code(), new_tag.name, '; ', object.id,  object.title.encode('utf-8') 
-            object.subject_category.add(new_tag)      
-        # remove local-use tag               
-        if remove: object.subject_category.remove(sc)
-        save_changes = True            
-      
-#---------------------------------------------------------------------------
- 
-    if save_changes:
-        try: 
-            object.save() # force_insert=True
-            print "saved changes for tag %s in %s" % (sc.name, object.id)
-        except:
-            print "save failed with %s in %s" % (sc.name, object.id)        
-    return
+        changed = add_avmtag(image,  'Cosmology','D')
+        image.subject_category.remove(sc)
+        
+        
+    ret_val = None
+    if changed: ret_val = image     
+    return ret_val
+
 
 if __name__ == '__main__':
-    #print "TEST"
-    #analyse_taxonomy() 
-    #show_taxonomy()
-    #show_subjectnames()
+
+    # this allows stdout > into a file
+    sys.stdout = codecs.getwriter('UTF-8')(sys.stdout)
     
-    #exit()
+    #little unicode test
+    star = unichr(9734)
+    print star
+    
+    changed_images = set()
+
+    count = 0
+    #  First process the easier tags, then in 2. round the newly created tags can be used to check the top_level       
+    print 'Images 1. round'
+    for Img in Image.objects.all():
+        n_tags = len(Img.subject_category.all()) 
+        for sc in  Img.subject_category.all():
+            if sc.top_level == 'X': 
+                if sc.avm_code() == 'X.101.8' or sc.avm_code() == 'X.101.7': continue  
+                count = count + 1
+                changed_images.add(treat_x(sc, Img))
+
+    print "apply the changes"
+    for Img in changed_images:
+        if Img:
+            try: 
+                Img.save() # force_insert=True
+                # print "saved changes for tag %s in %s" % (sc.name, image.id)
+            except Exception:
+                print "save failed with %s in %s" % (sc.name, Img.id)
+
+    print 'Images 2. round'
+    for Img in Image.objects.all():
+        n_tags = len(Img.subject_category.all()) 
+        for sc in  Img.subject_category.all():
+            if sc.top_level == 'X': 
+                if sc.avm_code() == 'X.101.8' or sc.avm_code() == 'X.101.7': 
+                    count = count + 1
+                    changed_images.add(treat_x(sc, Img))
+
+    print "apply the changes"
+    for Img in changed_images:
+        if Img:
+            try: 
+                Img.save() # force_insert=True
+                # print "saved changes for tag %s in %s" % (sc.name, image.id)
+            except Exception:
+                print "save failed with %s in %s" % (sc.name, Img.id)
+            
+    print 'treated', count, 'tags'
+    
+    
+    
     
     
     
@@ -394,32 +339,3 @@ if __name__ == '__main__':
 # O.K.'X.101.9': [u'Cosmology Images/Videos', 205]
 
 
-
-
-    images = True
-    count = 0
-    #  First process the easier tags, then in 2. round the newly created tags can be used to check the top_level
-    print 'Images 1. round'
-    for Obj in Image.objects.all():
-        x_tag = False
-        n_tags = len(Obj.subject_category.all()) 
-        for sc in  Obj.subject_category.all():
-            if sc.top_level == 'X': 
-                if sc.avm_code() == 'X.101.8' or sc.avm_code() == 'X.101.7': continue   
-                count = count + 1
-                treat_x(sc, Obj)
-    
-    print 'Images 2. round, AGN BH Quasare and Galaxies'
-    for Obj in Image.objects.all(): 
-        x_tag = False
-        n_tags = len(Obj.subject_category.all()) 
-        for sc in  Obj.subject_category.all():
-            if sc.top_level == 'X': 
-                if sc.avm_code() == 'X.101.8' or sc.avm_code() == 'X.101.7': 
-                    count = count + 1
-                    treat_x(sc, Obj)
-    
-    print 'treated', count, 'tags'
-    
-    
-    
