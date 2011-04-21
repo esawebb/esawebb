@@ -169,10 +169,10 @@ def treat_x(sc, object, remove = True):
         
     elif tag == 'X.101.12':
         # 'Spacecraft Images/Videos' 20
-        # replace with 8.2.1 Spacecraft Orbiter
+        # replace with 8.2 Spacecraft 
         print object.id ,';', sc.name ,';', object.title.encode('utf-8'),';', object.distance, '; TAGS: ', print_alltags(object)
         if not scan_tags(object, 'Spacecraft'):
-            new_tag = TaxonomyHierarchy.objects.get( top_level = 'E', level1 = 8, level2 = 2, level3 = 1, level4 = None)
+            new_tag = TaxonomyHierarchy.objects.get( top_level = 'E', level1 = 8, level2 = 2, level3 = None, level4 = None)
             print object.id, 'replace', sc.name, 'with', new_tag.avm_code(), new_tag.name, '; ', object.id,  object.title.encode('utf-8') 
             object.subject_category.add(new_tag)    
         if remove: object.subject_category.remove(sc)
@@ -195,7 +195,15 @@ def treat_x(sc, object, remove = True):
         
     elif tag == 'X.101.22':
         # 'Mission' 132     E.8.1.2 Telescope, E.9.2 Astronaut, subject_name Hubble?
+        # replace with 8.2 Spacecraft
         print object.id ,';', sc.name ,';', object.title.encode('utf-8'),';', object.distance, '; TAGS: ', print_alltags(object)
+        if not scan_tags(object, 'Spacecraft'):
+            new_tag = TaxonomyHierarchy.objects.get( top_level = 'E', level1 = 8, level2 = 2, level3 = None, level4 = None)
+            print object.id, 'replace', sc.name, 'with', new_tag.avm_code(), new_tag.name, '; ', object.id,  object.title.encode('utf-8') 
+            object.subject_category.add(new_tag)    
+        if remove: object.subject_category.remove(sc)
+        save_changes = True 
+    
     elif tag == 'X.101.3':
         # 'Solar System Images/Videos' 577
         if not scan_tags(object, 'Solar System'):
@@ -390,18 +398,19 @@ if __name__ == '__main__':
 
     images = True
     count = 0
+    #  First process the easier tags, then in 2. round the newly created tags can be used to check the top_level
     print 'Images 1. round'
-    for Obj in Image.objects.all():#.filter(pk = 'vista-m2-arriving'): 
+    for Obj in Image.objects.all():
         x_tag = False
         n_tags = len(Obj.subject_category.all()) 
         for sc in  Obj.subject_category.all():
             if sc.top_level == 'X': 
-                if sc.avm_code() == 'X.101.8' or sc.avm_code() == 'X.101.7': continue   # TODO First process the easier tags, then in 2. round the newly created tags can be used to check the top_level
+                if sc.avm_code() == 'X.101.8' or sc.avm_code() == 'X.101.7': continue   
                 count = count + 1
                 treat_x(sc, Obj)
     
     print 'Images 2. round, AGN BH Quasare and Galaxies'
-    for Obj in Image.objects.all():#.filter(pk = 'vista-m2-arriving'): 
+    for Obj in Image.objects.all(): 
         x_tag = False
         n_tags = len(Obj.subject_category.all()) 
         for sc in  Obj.subject_category.all():
