@@ -244,7 +244,7 @@ def treat_x(sc, image, remove = True):
             changed = add_avmtag(image, 'AGN', type + '.5.3.2')    
             
         if changed: image.subject_category.remove(sc)
-        else: print "%-45s; %-9s; %s; BH or AGN? ;\t title: %s" % (image.id, sc.avm_code(), sc.name,  image.title)                                             
+        else: print "%-45s; %-9s; %s; BH or AGN? ; ; ;\t title: %s" % (image.id, sc.avm_code(), sc.name,  image.title)                                             
         
             
     elif tag == 'X.101.9':        # 'Cosmology Images/Videos' 241
