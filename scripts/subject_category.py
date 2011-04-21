@@ -136,10 +136,11 @@ def add_avmtag(image, name, code):
 def treat_x(sc, image, remove = True): 
     tag = sc.avm_code()
     changed = False
-    if tag == 'X.101.10':   # 'Extrasolar Planets Videos' 1
-        # not treated
-        print "%-45s; %-9s; %s; not treated" % (image.id, sc.avm_code(), sc.name)
-
+    if tag == 'X.101.10':   # 'Extrasolar Planets Videos' 1  
+        # replace with B.3.7.1. Planetary System       
+        changed = add_avmtag(image,  'Planetary System','B.3.7.1')    
+        image.subject_category.remove(sc)
+        
     elif tag == 'X.101.11':        # 'JWST Images/Videos' 24
         # add subject_name JWST
         changed = add_subjectname(image,'JWST')
