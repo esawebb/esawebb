@@ -97,7 +97,7 @@ def add_subjectname(image, subject_name):
     """
     added = False
     if not scan_subjectnames(image,subject_name): 
-        print "%-45s; %-9s; %s; add subject_name ;%s;\t title: %s" % (image.id, sc.avm_code(), sc.name, subject_name, image.title)                                             
+        print "%-45s; %-9s; %s; subject_name ;%s; added;\t title: %s" % (image.id, sc.avm_code(), sc.name, subject_name, image.title)                                             
         new_name = SubjectName.objects.get(name = subject_name)
         image.subject_name.add(new_name)
         added = True
@@ -127,10 +127,10 @@ def add_avmtag(image, name, code):
                                                  level3 = level[3], 
                                                  level4 = level[4], 
                                                  level5 = level[5])
-        print "%-45s; %-9s; %s; replace with ;%s; %s;\t title: %s" % (image.id, sc.avm_code(), sc.name, new_tag.avm_code(), new_tag.name, image.title)                                             
+        print "%-45s; %-9s; %s; replace with;%s; %s;\t title: %s" % (image.id, sc.avm_code(), sc.name, new_tag.avm_code(), new_tag.name, image.title)                                             
         image.subject_category.add(new_tag)
         added = True 
-    else: print "%-45s; %-9s; %s; tag %s; %s; already exists;\t title: %s" % (image.id, sc.avm_code(), sc.name, existing_tag.avm_code(), existing_tag.name, image.title)                                             
+    else: print "%-45s; %-9s; %s; already existing tag;%s; %s;\t title: %s" % (image.id, sc.avm_code(), sc.name, existing_tag.avm_code(), existing_tag.name, image.title)                                             
     return added
 
 def treat_x(sc, image, remove = True): 
