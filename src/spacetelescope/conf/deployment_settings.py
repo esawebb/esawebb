@@ -15,6 +15,7 @@ from djangoplicity.settings import copy_setting
 # ENVIRONMENT CONFIGURATION #
 #############################
 ROOT = "/home/web/hubble"
+BUILD_ROOT = ROOT
 PRJBASE = "%s/projects/spacetelescope.org" % ROOT
 DJANGOPLICITY_ROOT = "%s/projects/djangoplicity" % ROOT
 LOG_DIR = "%s/logs" % ROOT

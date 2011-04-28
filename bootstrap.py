@@ -1853,7 +1853,7 @@ requirements_repo = "http://www.djangoplicity.org/repository/packages/"
 requirements_files = [{'file':'projects/spacetelescope.org/requirements.txt', 'repository':requirements_repo, 'options':['--no-index']}]
 
 if sys.version_info[0] == 2 and sys.version_info[1] == 5:
-	requirements_files.append( {'file':'projects/eso.org/requirements-2.5.txt', 'repository':requirements_repo, 'options':['--no-index']} )
+	requirements_files.append( {'file':'projects/spacetelescope.org/requirements-2.5.txt', 'repository':requirements_repo, 'options':['--no-index']} )
 	
 #
 # Settings

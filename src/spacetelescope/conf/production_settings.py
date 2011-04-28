@@ -11,6 +11,9 @@
 from deployment_settings import *
 from djangoplicity.settings import copy_setting
 
+###################
+# ERROR REPORTING #
+###################
 SITE_ENVIRONMENT = 'production'
 
 ##############
