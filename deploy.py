@@ -18,8 +18,11 @@ import optparse
 	
 ############################################################
 ## Main
+import virtualenv
 from virtualenv import Logger, make_environment_relocatable, path_locations, mkdir
 from pip import call_subprocess
+
+logger = Logger([(Logger.LEVELS[-1], sys.stdout)])
 
 def main():
 	parser = optparse.OptionParser( usage="%prog [OPTIONS] DEST_DIR" )
@@ -53,6 +56,9 @@ def main():
 		
 	verbosity = options.verbose - options.quiet
 	logger = Logger( [( Logger.level_for_integer( 2 - verbosity ), sys.stdout )] )
+	
+	# Ensure virtualenv will not complain about missing defined logger.
+	virtualenv.logger = logger
 	
 	if not args:
 		print 'You must provide a DEST_DIR'
@@ -572,7 +578,7 @@ def fixup_activate_scripts( home_dir, bin_dir, options ):
 		for l in lines:
 			m = p.search( l )
 			if m:
-				l = p.sub( join( options.relocate_to, VIRTUALENV_DIRNAME ), l )
+				l = p.sub( os.path.join( options.relocate_to, VIRTUALENV_DIRNAME ), l )
 				replacement = True				
 			newlines.append( l )
 		

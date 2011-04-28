@@ -17,6 +17,11 @@ ADMINS = (
 
 LOGGING_HANDLER = ['console']
 
+##############
+# DEPLOYMENT #
+##############
+DEPLOYMENT_EXISTING_CHECKOUT = "~/Workspaces/web/"
+
 ##################
 # DATABASE SETUP #
 ##################
