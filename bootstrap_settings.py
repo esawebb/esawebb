@@ -61,10 +61,10 @@ projects_settings = {
 	'settings_module' : 'spacetelescope.settings',
 	'finalize_tasks' : [ 
 		run_function( task_run_manage, task='config_gen' ), 
-		run_function( task_move, src='tmp/conf/django.wsgi', dst='virtualenv/apache/' ),
+		run_function( task_move, src='tmp/conf/django.wsgi', dst='virtualenv/apache/django.wsgi' ),
 		run_function( task_move, src='tmp/conf/httpd-djangoplicity.conf', dst='virtualenv/apache/'),
-		run_function( task_append, src='tmp/conf/activate-djangoplicity.sh', dst='virtualenv/bin/activate'),
-		run_function( task_append, src='tmp/conf/activate-djangoplicity.csh', dst='virtualenv/bin/activate.csh'), 
+		run_function( task_append, src='tmp/conf/activate-djangoplicity.sh', dst='virtualenv/bin/activate', marker="DJANGOPLICITY" ),
+		run_function( task_append, src='tmp/conf/activate-djangoplicity.csh', dst='virtualenv/bin/activate.csh', marker="DJANGOPLICITY" ), 
 	]
 }
 settings.update( projects_settings )

@@ -296,6 +296,7 @@ INSTALLED_APPS += (
 	'djangoplicity.media',
 	'djangoplicity.jobs',
 	'django.contrib.redirects',
+	'djangoplicity.archives',
 	'djangoplicity.archives.contrib.satchmo.freeorder',
     'djangoplicity.archives.contrib.security',
 	'djangoplicity.archives.contrib.inventory_control',
@@ -339,6 +340,10 @@ if DEBUG_TOOLBAR:
 	INSTALLED_APPS += (
 		'debug_toolbar',
 	)
+
+INSTALLED_APPS += (
+	'south',
+)
 
 ############
 # SESSIONS #
@@ -674,7 +679,17 @@ rl_config.TTFSearchPath.append( PRJBASE + "/fonts/" )
 SHOP_CONF = {
 	'DEFAULT_NAVISION_JOB' : '280E',
 	'DEFAULT_NAVISION_JSP' : 6265,
+	'DEFAULT_NAVISION_ACCOUNT' : '50.030',
 	'ORDER_FILE_PREFX' : "hb",
+	'ARCHIVE_DEFAULTS' : {
+		'djangoplicity.products.models.Poster' : { 'ACCOUNT' : '50.040', },
+		'djangoplicity.products.models.PostCard' : { 'ACCOUNT' : '50.040', },
+		'djangoplicity.products.models.Merchandise' : { 'ACCOUNT' : '50.040', },
+		'djangoplicity.products.models.CDROM' : { 'ACCOUNT' : '50.040', },
+		'djangoplicity.products.models.Calendar' : { 'ACCOUNT' : '50.040', },
+		'djangoplicity.products.models.ConferenceItem' : { 'ACCOUNT' : '50.230', },
+		'djangoplicity.products.models.Sticker' : { 'ACCOUNT' : '50.040', },
+	}
 }
 
 

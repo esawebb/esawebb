@@ -52,6 +52,7 @@ APACHE_INIT_MAIN = '/etc/init.d/apache2'
 APACHE_INIT_STATIC = '/etc/init.d/apache2'
 DEPLOYMENT_TAG = None
 DEPLOYMENT_REVISION = None
+DEPLOYMENT_DEVELOP = True
 ALLOW_DATABASE_OVERWRITE = True
 
 ###################

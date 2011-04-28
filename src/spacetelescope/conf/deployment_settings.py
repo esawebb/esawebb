@@ -47,6 +47,8 @@ SUDO_USER = 'web'
 APACHE_INIT_MAIN = '/etc/init.d/http.%s.main' % SHORT_NAME
 APACHE_INIT_STATIC = '/etc/init.d/http.%s.static' % SHORT_NAME
 
+DEPLOYMENT_DEVELOP = False
+
 DEPLOYMENT_PERMS = [
 	{'path' : '%(VIRTUALENV)s/bin/*', 'user' : None, 'group' : None, 'perms' : 'a+x' },
     {'path' : '%(PRJBASE)s/bin/*', 'user' : None, 'group' : None, 'perms' : 'a+x' },

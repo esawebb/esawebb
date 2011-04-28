@@ -18,12 +18,11 @@ import optparse
 	
 ############################################################
 ## Main
-
-logger = None
-call_subprocess = None
+from virtualenv import Logger, make_environment_relocatable, path_locations, mkdir
+from pip import call_subprocess
 
 def main():
-	parser = optparse.OptionParser( usage="%prog [OPTIONS] BASE_DIR" )
+	parser = optparse.OptionParser( usage="%prog [OPTIONS] DEST_DIR" )
 
 	parser.add_option( 
 		'-v', '--verbose',
@@ -31,118 +30,52 @@ def main():
 		dest = 'verbose',
 		default = 0,
 		help = "Increase verbosity" )
-	
-	parser.add_option( 
-		'-t', '--tag',
-		action = 'store',
-		dest = 'tag',
-		default = None,
-		help = "Deploy specific tag existing on all VCS projects" )
 
 	parser.add_option( 
 		'-q', '--quiet',
 		action = 'count',
 		dest = 'quiet',
 		default = 0,
-		help = 'Decrease verbosity' )
+		help = 'Decrease verbosity'
+	)
+	
+	EXCLUDE = []
+
+	if 'extend_parser' in globals():
+		extend_parser( parser, exclude=EXCLUDE )
 
 	options, args = parser.parse_args()
+	
+	global logger
 
+	if 'adjust_options' in globals():
+		adjust_options( options, args, exclude=EXCLUDE )
+		
+	verbosity = options.verbose - options.quiet
+	logger = Logger( [( Logger.level_for_integer( 2 - verbosity ), sys.stdout )] )
+	
 	if not args:
-		print 'You must provide a BASE_DIR'
+		print 'You must provide a DEST_DIR'
 		parser.print_help()
 		sys.exit(2)
 	if len(args) > 1:
-		print 'There must be only one argument: BASE_DIR (you gave %s)' % (
+		print 'There must be only one argument: DEST_DIR (you gave %s)' % (
 			' '.join(args))
 		parser.print_help()
 		sys.exit(2)
-
+	
+	home_dir = args[0]
+	
 	if 'settings' not in globals() or 'VIRTUALENV_DIRNAME' not in globals():
 		print 'Invalid script - no settings included in script.'
 		sys.exit(3)
 	
-	base_dir = args[0]
-	
-	global settings, VIRTUALENV_DIRNAME
-	
-	# Paths
-	home_dir = os.path.join( base_dir, VIRTUALENV_DIRNAME )
-	bin_dir = os.path.join( home_dir, 'Scripts' if sys.platform == 'win32' else 'bin' )
-	#_activate_virtualenv( bin_dir )
-		
-	# Logger
-	from virtualenv import Logger
-	from pip import call_subprocess as pip_call_subprocess
-	global call_subprocess
-	global logger
-	verbosity = options.verbose - options.quiet
-	logger = Logger( [( Logger.level_for_integer( 2 - verbosity ), sys.stdout )] )
-	call_subprocess = pip_call_subprocess
-	
-	#
-	# Modify project settings if specific tag has been specified
-	#
-	if options.tag:
-		if 'vcs_projects' in settings:
-			tmp = [] 
-			for prj,url in settings['vcs_projects']:
-				tmp.append( (prj, "%s@%s" % (url, options.tag) ) )
-			settings['vcs_projects'] = tmp
-			
-	class options:
-		develop = False
-		
-	
-	task_vcs_update( base_dir )
-	task_install_requirements( base_dir, home_dir, bin_dir )
-	task_vcs_install( base_dir, home_dir, bin_dir, options )
+	if 'after_install' in globals():
+		after_install( options, home_dir, title="Deployment tasks", activate=False )
 
-############################################################
-## Tasks
-
-def task_vcs_update( base_dir ):
-	"""
-	Checkout VCS project
-	"""
-	logger.notify("Running version controls updates")
-	
-	vcs_base_dir = os.path.join( base_dir, _get_setting( 'vcs_base_dir', 'projects' ) )
-	vcs_projects = _get_setting( 'vcs_projects', [] )
-	
-	if not os.path.exists( vcs_base_dir ):
-		logger.error("VCS base directory %s doesn't exists.")
-		return
-	
-	if vcs_projects:
-		# Register all version control modules
-		from pip import version_control
-		version_control()
-		from pip.vcs import vcs
-		
-		# Loop over projects
-		for vcs_dirname, vcs_url in vcs_projects:
-			vcs_dir = os.path.join( vcs_base_dir, vcs_dirname )
-			
-			# Update project
-			#try:
-			vc_type, url = vcs_url.split( '+', 1 )
-			backend = vcs.get_backend( vc_type )
-			if backend:
-				logger.info( "Updating VCS project from URL %s " % vcs_url )
-				vcs_backend = backend( vcs_url )
-				url, rev = vcs_backend.get_url_rev()
-				rev_options = [rev] if rev else []
-				vcs_backend.update( vcs_dir, rev_options )
-			else:
-				logger.error( "Unexpected version control type (in %s): %s" % ( url, vc_type ) )
-			#except Exception, e:
-			#	logger.error( unicode(e) )
-
-
-############################################################
-## Deploy script creation:
-
+# =======================================================
+# Deploy script creation:
+# =======================================================
 def create_deploy_script( extra_text, python_version = '' ):
 	"""
 	Creates a deploy script, which is like this script but with
@@ -202,6 +135,7 @@ and helper functions for both scripts.
 
 import sys
 import os
+import time
 
 PY_VERSION = "%s.%s" % ( sys.version_info[0], sys.version_info[1] )
 VIRTUALENV_DIRNAME = 'virtualenv'
@@ -230,7 +164,107 @@ settings = {
 }
 
 
-			
+# =======================================================
+# Hooks for virtualenv bootstrap script and deploy script
+# =======================================================
+start_time = None
+
+def extend_parser( parser, exclude=[] ):
+	"""
+	Add extra options to the parser
+	"""
+	global start_time
+	start_time = time.time()
+	
+	if 'tag' not in exclude:
+		parser.add_option( '-t', '--tag', action = 'store', dest = 'tag', default = None, help = "Deploy specific tag existing on all VCS projects" )
+	if 'existing-checkout' not in exclude:
+		parser.add_option( "--existing-checkout", dest='existing_checkout_dir', metavar="DIR", action='store', default=None, help='Path to already existing checkout of VCS projects. This is mostly used together with the --develop option.' )
+	if 'develop' not in exclude:
+		parser.add_option( "--develop", dest='develop', action='store_true', default=False, help='Install VCS projects in editable mode and create develop only symbolic links.' )
+	if 'delete' not in exclude:
+		parser.add_option( "--delete", dest='delete', action='store_true', default=False, help='Delete this script after bootstrapping.' )
+	if 'local-settings' not in exclude:
+		parser.add_option( "--local-settings", dest='local_settings', metavar="MODULE", action='store', default=None, help='Local settings module to use - e.g production_settings.' )
+	if 'relocate-to' not in exclude:
+		parser.add_option( "--relocate-to", dest='relocate_to', metavar="DIR", action='store', default=None, help='Path to relocate virtualenv to.' )
+
+
+def adjust_options( options, args, exclude=[] ):
+	"""
+	Adjust options and args of bootstrap script to ensure it can be called without arguments
+	"""
+	if not args:
+		# If no args are giving then run bootstrap in current directory.
+		args.append( os.path.dirname( os.path.abspath( __file__ ) ) )
+	
+	# Build virtualenv in a subdirectory.
+	base_dir = args[0]
+	args[0] = os.path.join( base_dir, VIRTUALENV_DIRNAME )
+	
+	# Set default options and remove possibility to set them
+	try:
+		options.no_site_packages = True
+		options.clear = True
+		options.use_distribute = True
+		options.unzip_setuptools = True
+		options.prompt = "(%s) " % _get_setting( 'prompt', VIRTUALENV_DIRNAME )
+	except AttributeError:
+		pass
+	
+	if 'existing-checkout' not in exclude and options.existing_checkout_dir:
+		tmppath = os.path.abspath( os.path.expandvars( os.path.expanduser( options.existing_checkout_dir ) ) )
+		options.existing_checkout_dir = tmppath if os.path.exists( tmppath ) else None
+	if 'relocate-to' not in exclude and options.relocate_to:
+		options.relocate_to = options.relocate_to if os.path.exists( options.relocate_to ) else None
+		
+	# Modify project settings if specific tag has been specified
+	if 'tag' not in exclude and options.tag:
+		if 'vcs_projects' in settings:
+			tmp = [] 
+			for prj,url in settings['vcs_projects']:
+				tmp.append( (prj, "%s@%s" % (url, options.tag) ) )
+			settings['vcs_projects'] = tmp
+		
+
+def after_install( options, home_dir, title = "Post install tasks", activate=True ):
+	"""
+	Entry point for post-install actions after virtualenv have been setup. 
+	"""
+	logger.notify("")
+	logger.notify( title )
+	logger.notify( "="*len( title ) )
+
+	# Setup bin dir
+	home_dir, lib_dir, inc_dir, bin_dir = path_locations( home_dir ) # path_locations defined in virtualenv
+	base_dir = os.path.dirname( home_dir )
+	
+	# Activate the virutal environment
+	if activate:
+		_activate_virtualenv( bin_dir )
+	
+	# Run tasks
+	task_create_directories( base_dir )
+	task_create_symlinks( base_dir )
+	task_vcs_checkout_update( base_dir, options )
+	if options.develop:
+		task_create_symlinks( base_dir, setting='develop-symlinks' )
+	task_hooks( base_dir, home_dir, lib_dir, inc_dir, bin_dir, options, setting_name='pre_install_tasks' ) 
+	task_install_requirements( base_dir, home_dir, bin_dir )
+	task_hooks( base_dir, home_dir, lib_dir, inc_dir, bin_dir, options, setting_name='post_install_tasks' )
+	task_vcs_install( base_dir, home_dir, bin_dir, options )
+	make_environment_relocatable( home_dir )
+	task_hooks( base_dir, home_dir, lib_dir, inc_dir, bin_dir, options, setting_name='finalize_tasks' )
+	fixup_activate_scripts( home_dir, bin_dir, options ) # Fix up last, otherwise tasks depending on activate scripts will not run
+	if options.delete:
+		logger.notify( "Removing bootstrap/deploy script" )
+		os.remove( __file__ )
+	
+	if start_time:
+		delta = time.time() - start_time
+		logger.notify("Bootstrap/deploy took %0.0f s" % delta )
+
+
 # ==========================================
 # Common tasks
 # ==========================================
@@ -258,6 +292,74 @@ def task_vcs_install( base_dir, home_dir, bin_dir, options ):
 			logger.error( unicode(e) )
 
 
+def task_vcs_checkout_update( base_dir, options ):
+	"""
+	Retrieve projects from version control system (using pip for checkout)
+	"""
+	logger.notify("Running version controls checkout/updates")
+	
+	vcs_base_dir = os.path.join( base_dir, _get_setting( 'vcs_base_dir', 'projects' ) )
+	vcs_projects = _get_setting( 'vcs_projects', [] )
+	
+	if not os.path.exists( vcs_base_dir ):
+		logger.warn("VCS base directory %s doesn't exists, so it will be created")
+		try:
+			os.makedirs( vcs_base_dir )
+		except Exception, e:
+			logger.error( unicode(e) )
+	
+	if vcs_projects:
+		# Register all version control modules
+		try:
+			from pip import version_control
+			version_control()
+		except ImportError:
+			from pip import import_vcs_support
+			import_vcs_support()
+		
+		from pip.vcs import vcs
+		
+		# Loop over projects
+		for vcs_dirname, vcs_url in vcs_projects:
+			vcs_dir = os.path.join( vcs_base_dir, vcs_dirname )
+			
+			# Check out or use already existing checkouts?
+			if options.existing_checkout_dir:
+				# Link to existing project
+				existing_vcs_dir = os.path.join( options.existing_checkout_dir, vcs_dirname )
+				
+				try:
+					_symlink( existing_vcs_dir, vcs_dir )
+				except Exception, e:
+					logger.error( unicode(e) )
+					
+				if not os.path.exists( existing_vcs_dir ):
+					logger.info( "Existing VCS project doesn't exists at %s" % existing_vcs_dir )
+					vcs_dir = existing_vcs_dir
+				else:
+					vcs_dir = None
+
+			if vcs_dir:
+				print vcs_dir
+				# Checkout/update project
+				try:
+					vc_type, url = vcs_url.split( '+', 1 )
+					backend = vcs.get_backend( vc_type )
+					if backend:
+						logger.info( "Retrieving VCS project from URL %s " % vcs_url )
+						vcs_backend = backend( vcs_url )
+						if os.path.exists( vcs_dir ):
+							url, rev = vcs_backend.get_url_rev()
+							rev_options = [rev] if rev else []
+							vcs_backend.update( vcs_dir, rev_options )
+						else: 
+							vcs_backend.obtain( vcs_dir )
+					else:
+						logger.error( "Unexpected version control type (in %s): %s" % ( url, vc_type ) )
+				except Exception, e:
+					logger.error( unicode(e) )
+				
+			
 def task_install_requirements( base_dir, home_dir, bin_dir ):
 	"""
 	Install all required Python modules 
@@ -340,22 +442,40 @@ def task_run_manage(  base_dir, home_dir, lib_dir, inc_dir, bin_dir, options, ta
 		logger.error( "Manage.py file %s does not exists" % manage_py_path )
 
 
-def task_move(  base_dir, home_dir, lib_dir, inc_dir, bin_dir, options, src=None, dst=None ):
+def task_move(  base_dir, home_dir, lib_dir, inc_dir, bin_dir, options, src=None, dst=None, remove_dst=True ):
 	if not src or not dst:
 		logger.errro("No source or destination defined")
 		return
 	
 	src = os.path.join( base_dir, src )
 	dst = os.path.join( base_dir, dst )
+	
+	# Normalize dst
 	logger.notify("Moving %s to %s" % (src,dst) )
+	
 	try:
 		import shutil
+		dstpath = os.path.join( dst, os.path.basename( src ) )
+		if os.path.exists( dstpath ):
+			if remove_dst:
+				logger.notify( "Destination %s already exists - removing. " % ( dstpath ) )
+				if os.path.isdir( dstpath ):
+					shutil.rmtree( dstpath )
+				else:
+					os.remove( dstpath )
+			else:
+				logger.error( "Destination % already exists." % ( dstpath ) )
+				return
+
 		shutil.move( src, dst )
 	except Exception, e:
 		logger.error( unicode(e) )
 	
 	
-def task_append( base_dir, home_dir, lib_dir, inc_dir, bin_dir, options, src=None, dst=None ):
+
+
+
+def task_append( base_dir, home_dir, lib_dir, inc_dir, bin_dir, options, src=None, dst=None, marker=None ):
 	if not src or not dst:
 		logger.errro("No source or destination defined")
 		return
@@ -368,14 +488,136 @@ def task_append( base_dir, home_dir, lib_dir, inc_dir, bin_dir, options, src=Non
 		append_text = f.read()
 		f.close()
 		
-		f = open( dst, 'a' )
-		f.write( append_text )
+		
+		if marker is None:
+			marker = src
+		text = _insert_section( dst, append_text, marker )
+		
+		f = open( dst, 'w+' )
+		f.write( text )
 		f.close()
 	except Exception, e:
 		logger.error( unicode(e) )
+		
+
+def task_create_directories( base_dir ):
+	"""
+	Task for creating directories.
+	"""
+	logger.notify("Creating directories in deployment root")
+	directories = _get_setting( 'directories', [] )
+	
+	for p in directories:
+		try:
+			mkdir( os.path.join( base_dir, p ) )
+		except Exception, e:
+			logger.error( unicode(e) )
+		
+
+def task_create_symlinks( base_dir, setting='symlinks' ):
+	"""
+	Task for creating symlinks
+	"""
+	if sys.platform == 'win32':
+		logger.warn("Windows doesn't support os.symlink so please make the following link yourself:")
+	else:
+		logger.notify("Creating symlinks in deployment root")
+	symlinks = _get_setting( setting, [] )
+	
+	for link_src, link_dest in symlinks:
+		link_dest = os.path.join( base_dir, link_dest )
+		try:
+			_symlink( link_src, link_dest )
+		except Exception, e:
+			logger.error( unicode(e) )
+	os.chdir( base_dir )
+
+	
+def task_hooks( base_dir, home_dir, lib_dir, inc_dir, bin_dir, options, setting_name=None ):
+	"""
+	Execute a number of callables that may be user-defined. 
+	"""
+	hooks = _get_setting( setting_name, [] )
+	if hooks:
+		logger.notify("Running %s hooks" % setting_name )
+	
+	for func in hooks:
+		if callable( func ):
+			try:
+				func( base_dir, home_dir, lib_dir, inc_dir, bin_dir, options )
+			except Exception, e:
+				logger.error( unicode(e) )	
+
+def fixup_activate_scripts( home_dir, bin_dir, options ):
+	if not options.relocate_to:
+		return
+	
+	scripts_fixup = ( "activate", "activate.fish", "activate.csh" )
+
+	for filename in os.listdir( bin_dir ):
+		if filename not in scripts_fixup:
+			continue #ignoring all scripts known not to need fixup.
+		filename = os.path.join( bin_dir, filename )
+		f = open( filename, 'rb' )
+		lines = f.readlines()
+		f.close()
+		if not lines:
+			logger.warn( 'Script %s is an empty file' % filename )
+			continue
+		
+		import re
+		replacement = False		
+		newlines = []
+		p = re.compile( home_dir )
+		for l in lines:
+			m = p.search( l )
+			if m:
+				l = p.sub( join( options.relocate_to, VIRTUALENV_DIRNAME ), l )
+				replacement = True				
+			newlines.append( l )
+		
+		if replacement:
+			logger.notify( 'Making script %s relative' % filename )
+			f = open( filename, 'wb' )
+			f.writelines( newlines )
+			f.close()
+
 # ==========================================
 # Helper functions
 # ==========================================
+def _insert_section( src, text, marker, start_comment="#", end_comment="" ):
+	f = open( src )
+	content = f.readlines()
+	f.close()
+	
+	final_content = ""
+	include = True
+	touched = False
+	
+	start_mark = "%s## BEGIN: %s ###%s\n" % ( start_comment, marker, end_comment )
+	end_mark = "%s## END: %s ###%s\n" % ( start_comment, marker, end_comment )
+	
+	for l in content:
+		if include:
+			final_content += l
+			
+		if l == start_mark:
+			final_content += text
+			touched = True
+			include = False
+			
+		if l == end_mark:
+			final_content += end_mark
+			include = True
+		
+	if not touched:	
+		final_content += "\n%s" % start_mark
+		final_content += text
+		final_content += "\n%s" % end_mark
+	
+	return final_content
+		
+
 def _symlink( link_src, link_dest_path ):
 	"""
 	Create a symbolic link from source to destination
@@ -506,10 +748,10 @@ projects_settings = {
 	'settings_module' : 'spacetelescope.settings',
 	'finalize_tasks' : [ 
 		run_function( task_run_manage, task='config_gen' ), 
-		run_function( task_move, src='tmp/conf/django.wsgi', dst='virtualenv/apache/' ),
+		run_function( task_move, src='tmp/conf/django.wsgi', dst='virtualenv/apache/django.wsgi' ),
 		run_function( task_move, src='tmp/conf/httpd-djangoplicity.conf', dst='virtualenv/apache/'),
-		run_function( task_append, src='tmp/conf/activate-djangoplicity.sh', dst='virtualenv/bin/activate'),
-		run_function( task_append, src='tmp/conf/activate-djangoplicity.csh', dst='virtualenv/bin/activate.csh'), 
+		run_function( task_append, src='tmp/conf/activate-djangoplicity.sh', dst='virtualenv/bin/activate', marker="DJANGOPLICITY" ),
+		run_function( task_append, src='tmp/conf/activate-djangoplicity.csh', dst='virtualenv/bin/activate.csh', marker="DJANGOPLICITY" ), 
 	]
 }
 settings.update( projects_settings )

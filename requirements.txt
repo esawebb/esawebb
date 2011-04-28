@@ -60,6 +60,9 @@ PIL==1.1.7
 # Text
 html2text==2.40
 
+# Database migration
+South==0.7.3
+
 # Satchmo
 trml2pdf==1.0
 setuptools_hg==0.2
