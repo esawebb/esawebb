@@ -15,7 +15,10 @@ ADMINS = (
 	('Lars Holm Nielsen','lnielsen@eso.org'),
 )
 
-LOGGING_HANDLER = ['console']
+###################
+# ERROR REPORTING #
+###################
+TEMPLATE_DEBUG=True
 
 ##############
 # DEPLOYMENT #
@@ -43,6 +46,11 @@ DEPLOYMENT_EXISTING_CHECKOUT = "~/Workspaces/web/"
 # CACHE  #
 ##########
 #CACHES = { 'default': { 'BACKEND': 'django.core.cache.backends.dummy.DummyCache', } }
+
+###########
+# LOGGING #
+###########
+LOGGING_HANDLER = ['console']
 
 ##########	
 # CELERY #

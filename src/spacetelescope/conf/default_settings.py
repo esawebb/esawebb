@@ -40,6 +40,7 @@ BROKERS = ["localhost"]
 
 WORKERS = ["localhost"]
 WORKERS_BEAT_HOST = "localhost"
+WORKERS_CAM_HOST = "localhost"
 WORKER_UID = None
 WORKER_GID = None
 WORKER_LOG_LEVEL = "INFO"
@@ -84,7 +85,9 @@ DATABASES = {
         'PASSWORD' : '',
         'HOST' : 'localhost',
         'PORT' : '3306',
-        'OPTIONS' : {},
+        'OPTIONS' : {
+			'connect_timeout' : 15,
+		},
         'TEST_CHARSET' : 'utf8',
         'TEST_COLLATION' : 'utf8_general_ci',
         'TEST_MIRROR' : None,
