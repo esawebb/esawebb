@@ -494,12 +494,8 @@ ARCHIVE_CROSSLINKS = djangoplicity.crosslinks.crosslinks_for_domain('spacetelesc
 ##########
 # SOCIAL #
 ##########
-SOCIAL_FACEBOOK_TOKEN = '187807957898842|a7f1fed4a89e26492133c6e4-100001473653251|141347899254844|K4lqzDRBPyAVFa7msmusumliPwI'
-SOCIAL_TWITTER_TUPLE = ("226991078-bHYf0sHAUEs1v6fjnxy8F0KjTLtSLnqTpyKx2Bqh",
-                "oiRDpzBIZUmQ1m8xxrw16aiYBAMjBx9vEi4ddgLOjzc",
-                'uS6hO2sV6tDKIOeVjhnFnQ',
-                'MEYTOS97VvlHX7K1rwHPEqVpTSqZ71HtvoK4sVuYk')
-
+SOCIAL_FACEBOOK_TOKEN = local_settings.SOCIAL_FACEBOOK_TOKEN
+SOCIAL_TWITTER_TUPLE = local_settings.SOCIAL_TWITTER_TUPLE
 
 #########
 # FEEDS #

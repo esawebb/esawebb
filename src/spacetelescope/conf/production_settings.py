@@ -66,3 +66,12 @@ BROKER_HOST = "aweb26.hq.eso.org"
 ########
 ORDER_PREFIX = "hb"
 LIVE = True
+
+##########
+# SOCIAL #
+##########
+SOCIAL_FACEBOOK_TOKEN = "144508505618279|5ff52306023505ab445993a2.1-1210975348|12383118425|U_oKxUW-oTKzWHksV5b7I5YCry8"
+SOCIAL_TWITTER_TUPLE = ("138725262-pvMvidxE9nB3JYlLkR7aBExaSUkm9TFlzawX8wq7",
+						"bClNsjLM33fXqtseS0NeXCMwnsggeS9Gi2z3kGl0c",
+						"elGtKvRIq8qVCihslKWRQ",
+						"syd83XYDRGEDwr0LaZufxs7t7h766L9UM0foxkH0")
