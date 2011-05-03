@@ -54,6 +54,9 @@ django-rosetta==0.5.5
 polib==0.5.1
 pytz==2010o
 
+# Database migration
+South==0.7.3
+
 # Imaging
 PIL==1.1.7
 
