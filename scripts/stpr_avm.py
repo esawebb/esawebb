@@ -17,40 +17,23 @@ import pprint
 
 from django.utils import simplejson as json
 
-json = "    'BandPass ID'
-    ''
-    'CD matrix'
-    'Dec (J2000)'
-    'Equinox'
-    'Exposure Start Times'
-    'Exposure Times'
-    'File Size'
-    'Identifier'
-    'Image Format'
-    'Image Length'
-    'Image Scale'
-    'Image Width'
-    'Ingest Date'
-    'Press Release Images'
-    'Proposal ID'
-    'RA (J2000)'
-    'Ref Frame'
-   ? 'Related Resources'
-
-"
+# mapping of the json fields from http://archdev.stsci.edu/stpr/search.php 
+# to names in media.models.AVMImageSerializer
+# and if not there, to new names 
+# '' for the empty fields, no corresponding stsci-field could be found
 
 mapping = {
-    'JSON': 'Contact.Address',
-    'JSON': 'Contact.City',
-    'JSON': 'Contact.Country',
+    '': 'Contact.Address',
+    '': 'Contact.City',
+    '': 'Contact.Country',
     'Contact Email': 'Contact.Email',
-    'JSON': 'Contact.Name',
-    'JSON': 'Contact.PostalCode',
-    'JSON': 'Contact.StateProvince',
-    'JSON': 'Contact.Telephone',
-    'JSON': 'Content',
-    'JSON': 'Coordinate',
-    'JSON': 'Creator',
+    '': 'Contact.Name',
+    '': 'Contact.PostalCode',
+    '': 'Contact.StateProvince',
+    '': 'Contact.Telephone',
+    '': 'Content',
+    '': 'Coordinate',
+    '': 'Creator',
     'CreatorURL': 'CreatorURL',
     'Credit': 'Credit',
     'Dataset IDs': 'DatasetID',
@@ -60,29 +43,30 @@ mapping = {
     'Distance Notes': 'Distance.Notes',
     'Facility': 'Facility',
     'Headline': 'Headline',
-    'JSON': 'Image.ProductQuality',
+    '': 'Image.ProductQuality',
+    'Identifier' : 'ID',
     'Instrument': 'Instrument',
-    'JSON': 'Metadata',
+    '': 'Metadata',
     'Metadata Date': 'MetadataDate',
     'Meta Version': 'MetadataVersion',
-    'JSON': 'Observation',
-    'JSON': 'Publisher',
+    '': 'Observation',
+    '': 'Publisher',
     'Publisher ID': 'PublisherID',
-    'JSON': 'ReferenceURL',
+    '': 'ReferenceURL',
     'Resource ID': 'ResourceID',
-    'URL': 'ResourceURL',
+    'URL': 'ResourceURL',                     #?
     'Usage Terms': 'Rights',
-    'JSON': 'Serialization',
-    'Ref Frame': 'Spatial.CoordinateFrame',
+    '': 'Serialization',
+    'Ref Frame': 'Spatial.CoordinateFrame',   #?
     'Coord Proj': 'Spatial.CoordsystemProjection',
-    'JSON': 'Spatial.Equinox',
+    'Equinox': 'Spatial.Equinox',
     'Spatial Notes': 'Spatial.Notes',
-    'JSON': 'Spatial.Quality',
+    '': 'Spatial.Quality',
     'Spatial Reference Dimension': 'Spatial.ReferenceDimension',
     'Spatial Reference Pixel': 'Spatial.ReferencePixel',
     'Spatial Reference Value': 'Spatial.ReferenceValue',
     'Spatial Rotation': 'Spatial.Rotation',
-    'JSON': 'Spatial.Scale',
+    '': 'Spatial.Scale',
     'Spectral Band': 'Spectral.Band',
     'BandPass ID': 'Spectral.Bandpass',
     'BandPass RefValue': 'Spectral.CentralWavelength',
@@ -90,17 +74,57 @@ mapping = {
     'Spectral Notes': 'Spectral.Notes',
     'Subject Category': 'Subject.Category',
     'Subject': 'Subject.Name',
-    'JSON': 'Syntax',
-    'JSON': 'Temporal.IntegrationTime',
-    'JSON': 'Temporal.StartTime',
+    '': 'Syntax',
+    'Exposure Times': 'Temporal.IntegrationTime',
+    'Exposure Start Times': 'Temporal.StartTime',
     'Title': 'Title',
-    'JSON': 'Type'
+    '': 'Type',
+    # new fields from json file (http://archdev.stsci.edu) starting with n.      
+    'CD matrix'  : 'n.CD.Matrix',
+    'Dec (J2000)': 'n.Spatial.Dec',
+    'RA (J2000)' : 'n.Spatial.RA',
+    'File Size'  : 'n.FileSize',
+    'Image Format': 'n.Image.Format',
+    'Image Length': 'n.Image.Length',
+    'Image Scale' : 'n.Image.Scale',
+    'Image Width' : 'n.Image.Width',
+    'Ingest Date' : 'n.Image.Date',
+    'Press Release Images': 'n.PressReleaseImages',
+    'Proposal ID' : 'n.ProposalID',
+    'Related Resouuces' : 'n.RelatedResources',
+    'Related Resources' : 'n.RelatedResources'     # in case they fix the typo
 }
 
 
-
+def load_json(json_file):
+    '''
+    loads the content of the json file into a dictionary using the keywords from mapping for the new dict
+    returns the filled dict containing metadata
+    '''
+    data = {}
+    try:
+        fp = open(json_file,'r')
+        json_data = json.load(fp)
+        fp.close()
+    except IOError, (errno, strerror):
+        print json_file
+        print "I/O error(%s): %s" % (errno, strerror)
+    else:
+        # convert json_data to a dict of dicts with the identifier as key and using the keys from mapping for the fields:
+        for item in json_data:
+            # build new dict:
+            newitem = {}
+            for key in item.keys():
+                #newitem[mapping[key]] = item[key]  
+                newitem.update( { mapping[key]: item[key] }  )
+            data[item['Identifier']] = newitem
+    
+    return data
 
 def list_eso_fields():
+    """
+    helper function to generate code for the field-mapping dictionary
+    """
     script_path = os.path.dirname(sys.argv[0])
     eso_fields = os.path.join(script_path, 'eso_fields.txt')
     pat = re.compile(r'[A-Z]{1}[a-z.]+[A-Za-z]+')
@@ -127,144 +151,14 @@ if __name__ == '__main__':
     script_path = os.path.dirname(sys.argv[0])
     json_file = os.path.join(script_path, 'stpr_search.json')
     
-#    list_eso_fields()
-#    exit()
+    data = load_json(json_file)
 
-    
-    data = {}
-    try:
-        fp = open(json_file,'r')
-        json_data = json.load(fp)
-        fp.close()
-    except IOError, (errno, strerror):
-        print json_file
-        print "I/O error(%s): %s" % (errno, strerror)
-    else:
-        # convert json_data to a dict of dicts with the st identifier as key:
-        for item in json_data:
-            data[item['Identifier']] = item
-        
-        pprint.pprint( data['STScI-PRC-2008-02-d'] )
-        ks =  data['STScI-PRC-2008-02-d'].keys()
-        ks.sort()
-        for k in ks: print "    '%s'" % k
+    for d in data.keys():
+        print "%-25s %-85s %s" % (d, data[d]['Title'], data[d]['Spectral.ColorAssignment'])
+        #pprint.pprint( data[d] )
         
 
                          
 
-'''
-    def serialize( self, image, related_cache=None ):
-        """
-        Serialize image object
-        """
-        data = {}
-        
-        def cached_objects( qs, key ):
-            if related_cache and key in related_cache:
-                return [obj for (pk, obj) in related_cache[key] if pk == image.id]
-            else:
-                return qs
 
-        def field_to_python( obj, attr ):
-            return obj.__class__._meta._name_map[attr][0].from_internal( getattr( obj, attr ) )
-        
-        def include_related( objs, mapping ):
-            d = {}
-            for obj in objs:
-                for field, tag in mapping.items():
-                    try:
-                        val = d[tag]
-                    except KeyError:
-                        val = []
-                    
-                    attrval = getattr( obj, field )
-                    if callable( attrval ): 
-                        attrval = attrval()
-                    
-                    val.append( attrval )
-                    d[tag] = val
-                    
-            return d
-        
-        #
-        # Creator Metadata
-        #
-        data.update( { 'Creator': image.creator } )
-        data.update( { 'CreatorURL': image.creator_url } )
-        data.update( 
-                    include_related( cached_objects( image.imagecontact_set.all(), 'imagecontact_set' ), 
-                    { 'contact_name' :  'Contact.Name', 
-                      'contact_email' : 'Contact.Email', 
-                      'contact_telephone' : 'Contact.Telephone' 
-                    } ) )
-        data.update( { 'Contact.Address': prepare_str( image.contact_address ) } )
-        data.update( { 'Contact.City': prepare_str( image.contact_city ) } )
-        data.update( { 'Contact.StateProvince': prepare_str( image.contact_state_province ) } )
-        data.update( { 'Contact.PostalCode': prepare_str( image.contact_postal_code ) } )
-        data.update( { 'Contact.Country': prepare_str( image.contact_country) } )
-        data.update( { 'Rights': prepare_str(image.rights) } )
-        
-        #
-        # Content Metadata
-        #
-        data.update( { 'Title': prepare_str( image.title ) } )
-        data.update( { 'Headline': prepare_str( image.headline ) } )
-        data.update( { 'Description': prepare_str( image.description, html=True ) } )
-        data.update( include_related( cached_objects( image.subject_category.exclude( top_level='X' ), 'subject_category' ), { 'avm_code' : 'Subject.Category' } ) )
-        data.update( include_related( cached_objects( image.subject_name.all(), 'subject_name'), { 'name' : 'Subject.Name' } ) )
-        data.update( { 'Distance': field_to_python( image, 'distance' ) } )
-        data.update( { 'Distance.Notes': prepare_str( image.distance_notes ) } )
-        data.update( { 'ReferenceURL': image.reference_url } )
-        data.update( { 'Credit': prepare_str( image.credit, html=True ) } )
-        data.update( { 'Date': image.release_date } )
-        data.update( { 'ID': image.id } )
-        data.update( { 'Type': image.type } )
-        #serializer.add( { 'Image.ProductQuality': image.image_productquality } )
-        
-        #
-        # Observation Metadata
-        #
-        data.update( include_related(
-                cached_objects( image.imageexposure_set.all(), 'imageexposure_set' ), 
-                { 
-                    'facility' : 'Facility',
-                    'instrument' : 'Instrument', 
-                    'spectral_color_assignment' : 'Spectral.ColorAssignment', 
-                    'spectral_band' : 'Spectral.Band', 
-                    'spectral_bandpass' : 'Spectral.Bandpass', 
-                    'spectral_central_wavelength' : 'Spectral.CentralWavelength', 
-                    'temporal_start_time' : 'Temporal.StartTime', 
-                    'temporal_integration_time' : 'Temporal.IntegrationTime', 
-                    'dataset_id' : 'DatasetID',  
-                } 
-            ) )
-
-        data.update( { 'Spectral.Notes': prepare_str( image.spectral_notes ) } )
-        
-        #
-        # Coordinate Metadata
-        #
-        data.update( { 'Spatial.CoordinateFrame': image.spatial_coordinate_frame } )
-        data.update( { 'Spatial.Equinox': image.spatial_equinox } )
-        data.update( { 'Spatial.ReferenceValue': field_to_python( image, 'spatial_reference_value' ) } )
-        data.update( { 'Spatial.ReferenceDimension': field_to_python( image, 'spatial_reference_dimension' ) } )
-        data.update( { 'Spatial.ReferencePixel': field_to_python( image, 'spatial_reference_pixel' ) } )
-        data.update( { 'Spatial.Scale': field_to_python( image, 'spatial_scale' ) } )
-        data.update( { 'Spatial.Rotation': image.spatial_rotation } )
-        data.update( { 'Spatial.CoordsystemProjection': image.spatial_coordsystem_projection } )
-        data.update( { 'Spatial.Quality': image.spatial_quality } )
-        data.update( { 'Spatial.Notes': prepare_str( image.spatial_notes ) } )
-        
-        #
-        # Publisher Metadata
-        #
-        data.update( { 'Publisher': image.publisher } )
-        #serializer.add( { 'PublisherID': image.publisher_id } ) # Syntax not yet decided upon
-        #serializer.add( { 'ResourceID': image.resource_id } )
-        #serializer.add( { 'ResourceURL': image.resource_url } )
-        data.update( { 'MetadataDate': image.metadata_date } )
-        data.update( { 'MetadataVersion': image.metadata_version } )
-        
-        return Serialization( data ) 
-'''
 
