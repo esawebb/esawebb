@@ -20,6 +20,7 @@ from django.utils import simplejson as json
 # mapping of the json fields from http://archdev.stsci.edu/stpr/search.php 
 # to names in media.models.AVMImageSerializer
 # and if not there, to new names 
+# dict { 'JSON': 'AVMImageSerializer', ....}
 
 mapping = {
     'Contact Email': 'Contact.Email',
@@ -88,6 +89,8 @@ def load_json(json_file):
     except IOError, (errno, strerror):
         print json_file
         print "I/O error(%s): %s" % (errno, strerror)
+        print "the script looks for json file here: %s (in the same folder as the script itself, sorry ;-)" % json_file
+        return None
     else:
         # convert json_data to a dict of dicts with the identifier as key and using the keys from mapping for the fields:
         for item in json_data:
@@ -100,42 +103,18 @@ def load_json(json_file):
     
     return data
 
-def list_eso_fields():
-    """
-    helper function to generate code for the field-mapping dictionary
-    """
-    script_path = os.path.dirname(sys.argv[0])
-    eso_fields = os.path.join(script_path, 'eso_fields.txt')
-    pat = re.compile(r'[A-Z]{1}[a-z.]+[A-Za-z]+')
-    f = open ( eso_fields )
-    fc = ''
-    names = set()
-    for l in f.readlines(): 
-        results = pat.findall(l)    
-        for r in results:
-            names.add(r)
-    
-    list = []
-    for n in names:
-        list.append(n)
-    list.sort()
-    print "{"
-    for l in list:
-        print "    'JSON': '%s'," % l
-    print "}"
-    return
-
 
 if __name__ == '__main__':
     script_path = os.path.dirname(sys.argv[0])
     json_file = os.path.join(script_path, 'stpr_search.json')
     
     data = load_json(json_file)
-
-    for d in data.keys():
-        print "%-25s %-85s %s" % (d, data[d]['Title'], data[d]['Spectral.ColorAssignment'])
-        #pprint.pprint( data[d] )
-        
+    if data:
+        for d in data.keys():
+            print "%-25s %-85s %s" % (d, data[d]['Title'], data[d]['Spectral.ColorAssignment'])
+            
+        pprint.pprint( data['STScI-PRC-2010-36-a'] )
+            
 
                          
 
