@@ -14,7 +14,6 @@
 
 import os, sys
 import re
-import pprint
 import logging
 logger = logging.getLogger(__name__)
 
@@ -91,7 +90,7 @@ def jsondict2avmdict(jsondict):
         'Title': 'Title',
         # new fields from json file (http://archdev.stsci.edu), using tag names from avm 1.1 where possible
         'CD matrix'  : 'Spatial.CDMatrix', # AVM 1.1 (depreciated) 
-        'Dec (J2000)': 'Spatial.Dec',
+        'Dec (J2000)': 'Spatial.Dec', 
         'RA (J2000)' : 'Spatial.RA',
         'File Size'  : 'File.Size',  # AVM 1.1
         'Image Format': 'File.Type', # AVM 1.1   TODO: image/tiff ==> TIFF
@@ -126,6 +125,7 @@ def jsondict2avmdict(jsondict):
 
 if __name__ == '__main__':
     # for testing
+    import pprint
     logging.basicConfig()
     
     script_path = os.path.dirname(sys.argv[0])
