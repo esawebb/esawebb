@@ -15,6 +15,16 @@ ADMINS = (
 	('Lars Holm Nielsen','lnielsen@eso.org'),
 )
 
+#####################
+# CONFIG GENERATION #
+#####################
+SHORT_NAME = 'hubble'
+WEBSERVERS = ()
+SSL_ASSETS_PREFIX = "www.spacetelescope.org"
+CONFIG_GEN_TEMPLATES_DIR = "%s/conf/templates/" % PRJBASE 
+CONFIG_GEN_GENERATED_DIR = "%s/conf/" % TMP_DIR
+
+
 ###################
 # ERROR REPORTING #
 ###################

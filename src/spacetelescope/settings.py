@@ -477,6 +477,8 @@ DEFAULT_PUBLISHER_ID = u"vamp://esahubble"
 DEFAULT_CREDIT = u"NASA &amp; ESA"
 
 ARCHIVE_IMPORT_ROOT = local_settings.ARCHIVE_IMPORT_ROOT
+PHOTOSHOP_ROOT = local_settings.PHOTOSHOP_ROOT
+
 ARCHIVE_WORKFLOWS = {
 	'media.video.rename' : ('spacetelescope.workflows.media','video_rename'), 
 }
@@ -490,6 +492,10 @@ VIDEO_CONTENT_SERVERS = (
 
 import djangoplicity.crosslinks
 ARCHIVE_CROSSLINKS = djangoplicity.crosslinks.crosslinks_for_domain('spacetelescope.org')
+
+ARCHIVE_DERIVATIVES_OVERRIDE = {
+	'images' : 'new_hst',
+}
 
 ##########
 # SOCIAL #
@@ -513,6 +519,25 @@ REPORT_REGISTER_FORMATTERS = True
 ##########
 import djcelery
 djcelery.setup_loader()
+
+# Message routing
+CELERY_DEFAULT_QUEUE = "celery"
+CELERY_DEFAULT_EXCHANGE = "celery"
+CELERY_DEFAULT_EXCHANGE_TYPE = "direct"
+CELERY_DEFAULT_ROUTING_KEY = "celery"
+CELERY_QUEUES = {
+    "celery": {
+        "exchange": "celery",
+        "exchange_type": "direct",
+        "binding_key": "celery"},
+    "photoshop": {
+        "exchange": "photoshop",
+        "exchange_type": "direct",
+        "binding_key": "photoshop"},
+}
+CELERY_ROUTES = {
+	"media.image_derivatives" : { "queue" : "photoshop" }
+}
 
 ## Broker settings.
 BROKER_HOST = local_settings.BROKER_HOST

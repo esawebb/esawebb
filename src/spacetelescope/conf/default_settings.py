@@ -164,7 +164,8 @@ GEOIP_LIBRARY_PATH = "%s/virtualenv/lib/libGeoIP.dylib" % ROOT
 # ARCHIVE #
 ###########
 ARCHIVE_AUTO_RESOURCE_DELETION = False
-ARCHIVE_IMPORT_ROOT = "/Volumes/webdocs/importi"
+ARCHIVE_IMPORT_ROOT = "%s/import" % ROOT
+PHOTOSHOP_ROOT = "/Users/%s/Workspaces/sites/import" % getpass.getuser()
 
 ##########	
 # CELERY #
