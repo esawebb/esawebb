@@ -67,10 +67,12 @@ def jsondict2avmdict(jsondict):
     TODO: add function to report if the return of json_load is different than expected (new fields, no list anymore,....)
     '''
 
-    # Dates => DateTime object
-    # Distance lly / z ? return list [ly,z CHECK order] if one is not specified use None
-    # image/tiff => TIFF
-    
+    # TODO: check the fields and apply a function if needed
+    # for example:
+    # TODO: Dates => DateTime object
+    # TODO: Distance lightyears / z ? return list [ly,z CHECK order] if one is not specified use None
+    # TODO: image/tiff => TIFF
+    # TODO: check the fields and apply a function if needed
     # in future, use this in a Deserializer function
     
     mapping = {
