@@ -495,6 +495,7 @@ ARCHIVE_CROSSLINKS = djangoplicity.crosslinks.crosslinks_for_domain('spacetelesc
 
 ARCHIVE_DERIVATIVES_OVERRIDE = {
 	'images' : 'new_hst',
+	'videos' : 'new_hst',
 }
 
 ##########
