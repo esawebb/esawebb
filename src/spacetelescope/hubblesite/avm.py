@@ -42,23 +42,49 @@ def load_json(json_file):
                 data.update( { metadataset['Identifier']: metadataset}  )
     return data
 
+def remove_duplicates():
+    return
+
+
+def fun1(x):
+    return x
+
 def jsondict2avmdict(jsondict):
     ''' 
+    todo: only process a single dict
+    
     transforms the json data into a dictionary of subdictionaries 
     using the keywords from mapping for the subdictionaries
+    
+    TODO: add functions to process field content
+    TODO: 
     '''
     # mapping of the json fields from http://archdev.stsci.edu/stpr/search.php 
     # to names in defined in AVM 1.1 and used in media.models.AVMImageSerializer
     # and if not there, to new names 
     # dict { 'JSON': 'AVM', ....}
+    
+    
+    # TODO: Metadata a; b, c => list [a,b,c]
+    # Dates => DateTime object
+    # Distance lly / z ? return list [ly,z CHECK order] if one is not specified use None
+    # image/tiff => TIFF
+    
+    # extra task: improt script processess all dicts and returns list of avm-dicts
+    # remove duplicates
+    # convert to avm dicts
+    # return list of avm dicts
+     
+    # Deserializer
+    
     mapping = {
-        'Contact Email': 'Contact.Email',
+        'Contact Email': {'fieldname': 'Contact.Email', 'func': fun1 },
         'CreatorURL': 'CreatorURL',
         'Credit': 'Credit',
         'Dataset IDs': 'DatasetID',
         'Date Created': 'Date',
         'Description': 'Description',
-        'Distance': 'Distance',
+        'Distance': 'Distance',   # return a list of STRINGS (not floats)
         'Distance Notes': 'Distance.Notes',
         'Facility': 'Facility',
         'Headline': 'Headline',
@@ -70,7 +96,7 @@ def jsondict2avmdict(jsondict):
         'Resource ID': 'ResourceID',
         'URL': 'ResourceURL',                     #? ambigous
         'Usage Terms': 'Rights',
-        'Ref Frame': 'Spatial.CoordinateFrame',   
+        'Ref Frame': 'Spatial.CoordinateFrame',   # Equinox
         'Coord Proj': 'Spatial.CoordsystemProjection',
         'Equinox': 'Spatial.Equinox',
         'Spatial Notes': 'Spatial.Notes',
@@ -83,14 +109,14 @@ def jsondict2avmdict(jsondict):
         'BandPass RefValue': 'Spectral.CentralWavelength',
         'Color Assignments': 'Spectral.ColorAssignment',
         'Spectral Notes': 'Spectral.Notes',
-        'Subject Category': 'Subject.Category',
-        'Subject': 'Subject.Name',
+        'Subject Category': 'Subject.Category', # skip x.  , return list with category objects
+        'Subject': 'Subject.Name',  # list of strings
         'Exposure Times': 'Temporal.IntegrationTime',
         'Exposure Start Times': 'Temporal.StartTime',
         'Title': 'Title',
         # new fields from json file (http://archdev.stsci.edu), using tag names from avm 1.1 where possible
         'CD matrix'  : 'Spatial.CDMatrix', # AVM 1.1 (depreciated) 
-        'Dec (J2000)': 'Spatial.Dec', 
+        'Dec (J2000)': 'Spatial.Dec', # ReferenceValue
         'RA (J2000)' : 'Spatial.RA',
         'File Size'  : 'File.Size',  # AVM 1.1
         'Image Format': 'File.Type', # AVM 1.1   TODO: image/tiff ==> TIFF
@@ -99,7 +125,7 @@ def jsondict2avmdict(jsondict):
         'Image Width' : 'Image.Width',
         'Ingest Date' : 'Image.Date',
         'Press Release Images': 'PressReleaseImages',
-        'Proposal ID' : 'ProposalID',
+        'Proposal ID' : 'ProposalID', #=> List
         'Related Resouuces' : 'RelatedResources',
         'Related Resources' : 'RelatedResources'     # in case they fix the typo
     }
@@ -112,7 +138,11 @@ def jsondict2avmdict(jsondict):
             # build dict with replaced keys:
             metadataset = jsondict[key]
             newitem = {}
-            for key in metadataset.keys():  
+            for key in metadataset.keys():
+                if 'func' in mapping[key]:
+                    func = mapping[key]['func']
+                    if callable(func):
+                        func( val )
                 newitem.update( { mapping[key]: metadataset[key] }  )
             data.update( { metadataset['Identifier']: newitem })
     except Exception:
