@@ -4,13 +4,20 @@
 # eso.org
 # Copyright 2011 ESO
 # Authors:
-#   Lars Holm Nielsen <lnielsen@eso.org>
-#   Dirk Neumayer <dirk.neumayer@gmail.com>
+#  Lars Holm Nielsen <lnielsen@eso.org>
+#  Dirk Neumayer <dirk.neumayer@gmail.com>
 #
-#   access avm metadata as dict, source is a json file from
-#   http://archdev.stsci.edu/stpr/search.php 
-#   
-#*************************************************************************************************************
+#  access avm metadata as dict, source is a json file from
+#  http://archdev.stsci.edu/stpr/search.php 
+#
+#  to get the json file:
+#  for all fields goto Output Columns and push button add all, 
+#  choose the maximum value in Maximum Records and
+#  in Output Format choose 'File: JSON Format'
+#  then press search
+# 
+#  TODO: ??? have a definition of avm tag names and format for versions 1.1, 1.2,... at a central place, as a dictionary or class
+#***********************************************************************************************************************
 
 import os, sys
 import re
@@ -21,157 +28,151 @@ from django.utils import simplejson as json
 
 def load_json(json_file):
     '''
-    loads and returns the content of the given json file as a dictionary of subdictionaries 
-    with image identifier as key
+    loads the content of the given JSON file and returns it.
     '''
-    data = {}
+    json_data = None
     try:
         fp = open(json_file,'r')
         json_data = json.load(fp)
         fp.close()
     except IOError, (errno, strerror):
         logger.error("I/O error(%s): %s" % (errno, strerror))
-        logger.error("file %s not found, return None" % json_file )
-        data = None
-    else:
-        # convert json_data to a dict of dicts with the identifier as key:
-        for metadataset in json_data:
-            if type(metadataset) != type({}):
-                logger.error("type of json metadataset is not a dict %s" % type(metadataset) )
-            else:
-                data.update( { metadataset['Identifier']: metadataset}  )
-    return data
+        logger.error("Problem opening file %s, returning None" % json_file )   
+    return json_data
 
 def remove_duplicates():
+    raise NotImplementedError
     return
 
+def strings2list(strings):
+    ''' converts comma (;) separated values to a list of strings
+    '''
+    list = None  
+    if strings and strings.find(';'): list = [s.strip() for s in strings.split(';')]
+    return list
 
-def fun1(x):
-    return x
+def subjectcategories(strings):
+    ''' skip X., return list with category objects
+    '''
+    print strings
+    strings = strings.replace(u' &gt; ', '.')
+    if strings and strings.find(','): list = [s.strip() for s in strings.split(',')]
+    for l in list: 
+        if l[0] == 'X': list.remove(l) 
+    return list
 
 def jsondict2avmdict(jsondict):
     ''' 
-    todo: only process a single dict
-    
-    transforms the json data into a dictionary of subdictionaries 
-    using the keywords from mapping for the subdictionaries
-    
-    TODO: add functions to process field content
-    TODO: 
+    creates an avmdict using the values of the jsondict
+    TODO: add function to report if the return of json_load is different than expected (new fields, no list anymore,....)
     '''
-    # mapping of the json fields from http://archdev.stsci.edu/stpr/search.php 
-    # to names in defined in AVM 1.1 and used in media.models.AVMImageSerializer
-    # and if not there, to new names 
-    # dict { 'JSON': 'AVM', ....}
-    
-    
-    # TODO: Metadata a; b, c => list [a,b,c]
+
     # Dates => DateTime object
     # Distance lly / z ? return list [ly,z CHECK order] if one is not specified use None
     # image/tiff => TIFF
     
-    # extra task: improt script processess all dicts and returns list of avm-dicts
-    # remove duplicates
-    # convert to avm dicts
-    # return list of avm dicts
-     
-    # Deserializer
+    # in future, use this in a Deserializer function
     
     mapping = {
-        'Contact Email': {'fieldname': 'Contact.Email', 'func': fun1 },
-        'CreatorURL': 'CreatorURL',
-        'Credit': 'Credit',
-        'Dataset IDs': 'DatasetID',
-        'Date Created': 'Date',
-        'Description': 'Description',
-        'Distance': 'Distance',   # return a list of STRINGS (not floats)
-        'Distance Notes': 'Distance.Notes',
-        'Facility': 'Facility',
-        'Headline': 'Headline',
-        'Identifier' : 'ID',
-        'Instrument': 'Instrument',
-        'Metadata Date': 'MetadataDate',
-        'Meta Version': 'MetadataVersion',
-        'Publisher ID': 'PublisherID',
-        'Resource ID': 'ResourceID',
-        'URL': 'ResourceURL',                     #? ambigous
-        'Usage Terms': 'Rights',
-        'Ref Frame': 'Spatial.CoordinateFrame',   # Equinox
-        'Coord Proj': 'Spatial.CoordsystemProjection',
-        'Equinox': 'Spatial.Equinox',
-        'Spatial Notes': 'Spatial.Notes',
-        'Spatial Reference Dimension': 'Spatial.ReferenceDimension',
-        'Spatial Reference Pixel': 'Spatial.ReferencePixel',
-        'Spatial Reference Value': 'Spatial.ReferenceValue',
-        'Spatial Rotation': 'Spatial.Rotation',
-        'Spectral Band': 'Spectral.Band',
-        'BandPass ID': 'Spectral.Bandpass',
-        'BandPass RefValue': 'Spectral.CentralWavelength',
-        'Color Assignments': 'Spectral.ColorAssignment',
-        'Spectral Notes': 'Spectral.Notes',
-        'Subject Category': 'Subject.Category', # skip x.  , return list with category objects
-        'Subject': 'Subject.Name',  # list of strings
-        'Exposure Times': 'Temporal.IntegrationTime',
-        'Exposure Start Times': 'Temporal.StartTime',
-        'Title': 'Title',
-        # new fields from json file (http://archdev.stsci.edu), using tag names from avm 1.1 where possible
-        'CD matrix'  : 'Spatial.CDMatrix', # AVM 1.1 (depreciated) 
-        'Dec (J2000)': 'Spatial.Dec', # ReferenceValue
-        'RA (J2000)' : 'Spatial.RA',
-        'File Size'  : 'File.Size',  # AVM 1.1
-        'Image Format': 'File.Type', # AVM 1.1   TODO: image/tiff ==> TIFF
-        'Image Length': 'Image.Length',
-        'Image Scale' : 'Image.Scale',
-        'Image Width' : 'Image.Width',
-        'Ingest Date' : 'Image.Date',
-        'Press Release Images': 'PressReleaseImages',
-        'Proposal ID' : 'ProposalID', #=> List
-        'Related Resouuces' : 'RelatedResources',
-        'Related Resources' : 'RelatedResources'     # in case they fix the typo
-    }
-    data = {}
-    
+        # 3.1 Creator Metadata
+         'Creator':                       { 'fieldname': 'Creator'},
+         'CreatorURL':                    { 'fieldname': 'CreatorURL'},
+         'Contact.Name':                  { 'fieldname': None,  'func': strings2list},
+         'Contact.Email':                 { 'fieldname': 'Contact Email'},
+         'Contact.Telephone':             { 'fieldname': 'Contact Phone'},
+         'Contact.Address':               { 'fieldname': 'Contact Address'},
+         'Contact.City':                  { 'fieldname': 'Contact City'},
+         'Contact.StateProvince':         { 'fieldname': 'Contact State'},
+         'Contact.PostalCode':            { 'fieldname': 'Contact code'},                               # TODO: ['Contact code','Contact Code'] in case they fix the typo
+         'Contact.Country':               { 'fieldname': 'Contact Country'},
+         'Contact.Email':                 { 'fieldname': 'Contact Email'},
+         'Contact.Email':                 { 'fieldname': 'Contact Email'},
+         'Rights':                        { 'fieldname': 'Usage Terms'},
+        # 3.2 Content Metadata         
+         'Title':                         { 'fieldname': 'Title'},
+         'Headline':                      { 'fieldname': 'Headline'},
+         'Description':                   { 'fieldname': 'Description'},
+         'Subject.Category':              { 'fieldname': 'Subject Category', 'func': subjectcategories},                           
+         'Subject.Name':                  { 'fieldname': 'Subject', 'func': strings2list},              
+         'Distance':                      { 'fieldname': 'Distance', 'func': strings2list},
+         'Distance.Notes':                { 'fieldname': 'Distance Notes'},
+         'ReferenceURL':                  { 'fieldname': 'Press Release Images' },
+         'Credit':                        { 'fieldname': 'Credit'},
+         'Date':                          { 'fieldname': 'Date Created'},
+         'ID':                            { 'fieldname': 'Identifier'},
+         'Type':                          { 'fieldname': 'Image Type'},
+         'Image.ProductQuality':          { 'fieldname': 'Image Product Quality'},
+        # 3.3 Observation Metadata         
+         'Facility':                      { 'fieldname': 'Facility',  'func': strings2list},
+         'Instrument':                    { 'fieldname': 'Instrument','func': strings2list},
+         'Spectral.ColorAssignment':      { 'fieldname': 'Color Assignments','func': strings2list},
+         'Spectral.Band':                 { 'fieldname': 'Spectral Band','func': strings2list},
+         'Spectral.Bandpass':             { 'fieldname': 'BandPass ID',  'func': strings2list},
+         'Spectral.CentralWavelength':    { 'fieldname': 'BandPass RefValue','func': strings2list},
+         'Spectral.Notes':                { 'fieldname': 'Spectral Notes'},
+         'Temporal.StartTime':            { 'fieldname': 'Exposure Start Times','func': strings2list},
+         'Temporal.IntegrationTime':      { 'fieldname': 'Exposure Times','func': strings2list},
+         'DatasetID':                     { 'fieldname': 'Dataset IDs',  'func': strings2list},
+        # 3.4 Coordinate Metadata
+         'Spatial.CoordinateFrame':       { 'fieldname': 'Ref Frame'},
+         'Spatial.Equinox':               { 'fieldname': 'Equinox'},
+          # TODO: Decide which json-fields to use
+         'Spatial.ReferenceValue':        { 'fieldname': 'Spatial Reference Value'}, # or 'Spatial.ReferenceValue':{ 'fieldname': ['Dec (J2000)','RA (J2000)']},   # Spatial Reference Values seems to match better with the AVM guid
+         'Spatial.ReferenceDimension':    { 'fieldname': 'Spatial Reference Dimension'},
+         'Spatial.ReferencePixel':        { 'fieldname': 'Spatial Reference Pixel'},
+         'Spatial.Scale':                 { 'fieldname': 'Image Scale', 'func': lambda x: [ s.strip() for s in x.split(',') ]},    # 1.3877e-05, 1.3877037e-05
+         'Spatial.Rotation':              { 'fieldname': 'Spatial Rotation'},
+         'Spatial.CoordsystemProjection': { 'fieldname': 'Coord Proj'},
+         'Spatial.Quality':               { 'fieldname': 'Spatial Quality'},
+         'Spatial.Notes':                 { 'fieldname': 'Spatial Notes'},
+         'Spatial.FITSHeader':            { 'fieldname': 'SpatialFITSHeader'},
+         'Spatial.CDMatrix':              { 'fieldname': 'CD matrix'},                                  # AVM 1.1 (depreciated) 
+        # 3.5 Publixher Metadata
+         'Publisher':                     { 'fieldname': 'Publisher'},
+         'PublisherID':                   { 'fieldname': 'Publisher ID'},
+         'ResourceID':                    { 'fieldname': 'Resource ID'},   
+         'ResourceURL':                   { 'fieldname': 'URL'},    
+         'RelatedResources':              { 'fieldname': 'Related Resouuces'},                          # ['Related Resources','Related Resouuces'] in case they fix the typo
+         'MetadataDate':                  { 'fieldname': 'Metadata Date'},
+         'MetadataVersion':               { 'fieldname': 'Meta Version'},
+        # 3.6 File Metadata
+         'File.Type':                     { 'fieldname': 'Image Format'},                               #  TODO: image/tiff ==> TIFF
+         'File.Dimension':                { 'fieldname': '', 'func': lambda fieldname: [ jsondict['Image Length'], jsondict['Image Width'] ]},         
+         'File.Size':                     { 'fieldname': 'File Size'},        
+         'File.BitDepth':                 { 'fieldname': 'Bit Depth'}, 
+        # X in AVM 1.1 not defined      
+         'X.IngestDate':                  { 'fieldname': 'Ingest Date'},
+         'X.ProposalID':                  { 'fieldname': 'Proposal ID'},                                #=> List
+         'X.ImageScale':                  { 'fieldname': 'Image Scale', 'func': lambda x: [ s.strip() for s in x.split(',') ]},       
+         'X.ImageCount':                  { 'fieldname': 'Image Count'},      
+         'X.Source':                      { 'fieldname': 'Source'},        
+   }
+
+        
+    avmdata = {}
     try:
-        # convert jsondict to an avmdict replacing the keys with the above mapping:
-        # TODO: process the metadata to make it AVM conform (ie File.Type image/tiff ==> TIFF)
-        for key in jsondict.keys():
-            # build dict with replaced keys:
-            metadataset = jsondict[key]
-            newitem = {}
-            for key in metadataset.keys():
-                if 'func' in mapping[key]:
+        # create an avmdict using the values of the jsondict
+        for key in mapping.keys():
+            json_fieldname = mapping[key]['fieldname']
+            value = None
+            if json_fieldname in jsondict: value = jsondict[json_fieldname]
+            if 'func' in mapping[key]:
                     func = mapping[key]['func']
                     if callable(func):
-                        func( val )
-                newitem.update( { mapping[key]: metadataset[key] }  )
-            data.update( { metadataset['Identifier']: newitem })
-    except Exception:
-        data = None
+                        value = func( value )
+                    else:
+                        logger.error("function %s to process JSON field %s not callable" % (str(func), str(key)))
+            elif json_fieldname in jsondict: 
+                value = jsondict[json_fieldname]
+            avmdata.update( { key: value })
+
+        
+                
+    except IOError: #Exception:
+        avmdata = None
         logger.error("jsondict = %s" % str(jsondict))
         logger.error("invalid jsondict, return None")    
-    return data
-
-
-
-if __name__ == '__main__':
-    # for testing
-    import pprint
-    logging.basicConfig()
-    
-    script_path = os.path.dirname(sys.argv[0])
-    json_file = os.path.join(script_path, 'stpr_search.json')
-    
-    data = load_json(json_file)
-    avm = jsondict2avmdict(data)
-    
-    pprint.pprint(avm)
-    if avm:
-        pprint.pprint( avm['STScI-PRC-2010-36-a'] )
-        for d in avm.keys():
-            print "%-25s %-85s %s" % (d, avm[d]['Title'], avm[d]['Spectral.ColorAssignment'])
-            
-        
-            
+    return avmdata
 
                          
 
