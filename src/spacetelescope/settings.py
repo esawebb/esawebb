@@ -291,6 +291,9 @@ INSTALLED_APPS += (
 	'django.contrib.humanize',
 	'django.contrib.sitemaps',
 	'djangoplicity.menus',
+	#'djangoplicity.reports',
+	#'djangoplicity.massmailer',
+	#'djangoplicity.news',
 	'djangoplicity.pages',
 	'djangoplicity.cron',
 	'djangoplicity.media',
@@ -302,7 +305,7 @@ INSTALLED_APPS += (
 	'djangoplicity.archives.contrib.inventory_control',
 	'djangoplicity.announcements',
 	'djangoplicity.releases',
-	'djangoplicity.products',  
+	'djangoplicity.products',
 	'djangoplicity.search',
 	'djangoplicity.metadata',  
 	'djangoplicity.authtkt',
@@ -310,6 +313,7 @@ INSTALLED_APPS += (
 	'djangoplicity.inventory',
 	'djangoplicity.adminhistory',
     'djangoplicity.utils',
+    #'djangoplicity.admincomments',
     'djangoplicity.celery',
 	'spacetelescope',
 	'djcelery',
@@ -571,6 +575,9 @@ CELERYD_HIJACK_ROOT_LOGGER = False
 
 CELERY_ALWAYS_EAGER=local_settings.CELERY_ALWAYS_EAGER
 
+# Beat
+CELERYBEAT_SCHEDULER = "djcelery.schedulers.DatabaseScheduler" 
+
 ##############
 # JavaScript #
 ##############
@@ -690,6 +697,11 @@ LOGGING = {
 ###################
 from reportlab import rl_config
 rl_config.TTFSearchPath.append( PRJBASE + "/fonts/" )
+
+####################
+# SOUTH MIGRATIONS #
+####################
+DATABASE_STORAGE_ENGINE="MyISAM"
 
 # ======================================================================
 # SITE SPECIFIC SECTIONS 
