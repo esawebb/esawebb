@@ -61,7 +61,7 @@ long_caption_link_pattern = re.compile( '.*?([0-9]*?)/([0-9]*?)/image/([a-z]{1,2
 def stsci_image_id( long_caption_link ):
 	"""
 	creates 2003-28-a out of the long caption link ...eases/2003/28/image/a/
-	returns '-' if failed
+	returns None if failed
 	"""
 	
 	try:
@@ -114,7 +114,7 @@ def get_release_date( text ):
 		# take care of timezones
 		tz_eastern = pytz.timezone( 'US/Eastern' )
 		release_date = tz_eastern.localize( release_date )
-	except:
+	except:      # TODO: remove catch all
 		release_date = None
 
 	return release_date
@@ -171,7 +171,7 @@ def opo_image_list_links( url_images ):
 	links = None
 	try:
 		links = pat.findall( text )
-	except:
+	except:      # TODO: remove catch all
 		pass
 	newlinks = []
 	for l in links:
