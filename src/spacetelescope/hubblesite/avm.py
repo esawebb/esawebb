@@ -44,18 +44,43 @@ def load_json(json_file):
         logger.error("Problem opening file %s, returning None" % json_file )   
     return json_data
 
-def remove_duplicates():
-    raise NotImplementedError
-    return
+def remove_duplicates(data):
+    '''
+    reomve duplicates, prefere jpeg entries
+    in the jsondata are often more than one entries for each ID, one with tiff, one with jpeg
+    take all the jpeg versions and add all other image IDs that do not have a jpeg version
+    '''
+    list = []
+    list_ids = []
+    other = []
+    for dataset in data:
+        if dataset['Image Format'] == u'image/jpeg': 
+            list.append(dataset)
+            list_ids.append(dataset['Identifier'])
+        else: other.append(dataset)
+    for o in other:
+        if o['Identifier'] not in list_ids:
+            list.append(o)
+            list_ids.append(o['Identifier'])          
+    return list
 
 class jsonmapper(object):
+    '''
+    this class provides the function avmdict() that converts the json dict in jsonmapper.jsondict into an AVM dict
+    the main logic is in the mapping dictionary. It contains for each AVM field the corresponding JSON fieldname 
+    and function if string processing is necessary
+    '''
+    # TODO: replace "-" with None in lists of strings?
+    # TODO: sometimes AVMFormat should be string, but in json it is a csv list of strings like in Credit, 
+    #       return a list of strings instead?
+    # in future, use this in a Deserializer function  
     def __init__(self, dataset = {}):
         self.jsondict = dataset
         self.mapping = {
     # 3.1 Creator Metadata
      'Creator':                       { 'fieldname': 'Creator'},
      'CreatorURL':                    { 'fieldname': 'CreatorURL'},
-     'Contact.Name':                  { 'fieldname': None,  'func': self.semicolonstrings2stringlist},
+     'Contact.Name':                  { 'fieldname': 'Contact Name',   'func': self.semicolonstrings2stringlist},
      'Contact.Email':                 { 'fieldname': 'Contact Email',  'func': self.semicolonstrings2stringlist},
      'Contact.Telephone':             { 'fieldname': 'Contact Phone',  'func': self.semicolonstrings2stringlist},
      'Contact.Address':               { 'fieldname': 'Contact Address'},
@@ -103,23 +128,23 @@ class jsonmapper(object):
      'Spatial.Quality':               { 'fieldname': 'Spatial Quality', 'func': self.string2spatialqualityCV},
      'Spatial.Notes':                 { 'fieldname': 'Spatial Notes', 'func':   self.replace_html},
      'Spatial.FITSHeader':            { 'fieldname': 'SpatialFITSHeader'},
-     'Spatial.CDMatrix':              { 'fieldname': 'CD matrix',  'func': self.strings2stringlist},                                  # AVM 1.1 (depreciated) 
+     'Spatial.CDMatrix':              { 'fieldname': 'CD matrix',  'func': self.strings2stringlist},                 # AVM 1.1 (depreciated) 
     # 3.5 Publixher Metadata
      'Publisher':                     { 'fieldname': 'Publisher'},
      'PublisherID':                   { 'fieldname': 'Publisher ID'},
      'ResourceID':                    { 'fieldname': 'Resource ID'},   
      'ResourceURL':                   { 'fieldname': 'URL'},    
-     'RelatedResources':              { 'fieldname': 'Related Resouuces',  'func': self.semicolonstrings2stringlist},                          # ['Related Resources','Related Resouuces'] in case they fix the typo
+     'RelatedResources':              { 'fieldname': 'Related Resouuces',  'func': self.semicolonstrings2stringlist}, # ['Related Resources','Related Resouuces'] in case they fix the typo
      'MetadataDate':                  { 'fieldname': 'Metadata Date', 'func': self.datetimestring2datetime},
      'MetadataVersion':               { 'fieldname': 'Meta Version'},
     # 3.6 File Metadata
-     'File.Type':                     { 'fieldname': 'Image Format',   'func': self.string2filetypeCV},                               #  TODO: image/tiff ==> TIFF
+     'File.Type':                     { 'fieldname': 'Image Format',   'func': self.string2filetypeCV},                               
      'File.Dimension':                { 'fieldname': 'Image Length', 'func': lambda fieldname: [ self.jsondict['Image Length'], self.jsondict['Image Width'] ]},         
      'File.Size':                     { 'fieldname': 'File Size', 'func': self.strings2stringlist},        
      'File.BitDepth':                 { 'fieldname': 'Bit Depth'}, 
     # X in AVM 1.1 not defined      
      'X.IngestDate':                  { 'fieldname': 'Ingest Date', 'func': self.datetimestring2datetime},
-     'X.ProposalID':                  { 'fieldname': 'Proposal ID', 'func': self.strings2stringlist},                                #=> List      
+     'X.ProposalID':                  { 'fieldname': 'Proposal ID', 'func': self.strings2stringlist},
      'X.ImageCount':                  { 'fieldname': 'Image Count'},      
      'X.Source':                      { 'fieldname': 'Source'}, 
      'X.Dec':                         { 'fieldname': 'Dec (J2000)'},
@@ -231,7 +256,7 @@ class jsonmapper(object):
             frameCV = CV[frame]
         except KeyError:
             frameCV = None
-            logger.error("ValueError in string2filetypeCV trying to convert %s" % frame)    
+            logger.error("ValueError in string2coordinateframeCV trying to convert %s" % frame)    
         return frameCV
     
         return frame
@@ -280,16 +305,8 @@ class jsonmapper(object):
     def avmdict(self):
         ''' 
         returns an avmdict using the values of the jsondict
-        TODO: add function to report if the return of json_load is different than expected (new fields, no list anymore,....)
-        '''
-  
-        # TODO: replace "-" with None in lists of strings?
-        # TODO: sometimes AVMFormat should be string, but in json it is a csv list of strings like in Credit, 
-        #       return a list of strings instead?
-        # in future, use this in a Deserializer function      
-            
+        '''   
         avmdata = {}
-        # create an avmdict using the values of the jsondict
         for key in self.mapping.keys():
             json_fieldname = self.mapping[key]['fieldname']
             value = None
@@ -297,7 +314,7 @@ class jsonmapper(object):
                 value = self.jsondict[json_fieldname]       
             except KeyError:
                 value = None
-                logger.error(" for avm field %s, invalid fieldname %s" % (key, json_fieldname))
+                logger.debug(" for avm field %s, invalid fieldname %s" % (key, json_fieldname))
             else:
                 if 'func' in self.mapping[key]:
                     func = self.mapping[key]['func']
