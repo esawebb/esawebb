@@ -18,9 +18,9 @@ logger = logging.getLogger(__name__)
 
 def prepare4unicode():
     import sys, codecs, locale
-    #this allows stdout > into a file
+    # this allows stdout > into a file
     sys.stdout = codecs.getwriter('UTF-8')(sys.stdout)
-    #little unicode test
+    # little unicode test
     star = unichr(9734)
     print star
     return 
@@ -33,12 +33,16 @@ if __name__ == '__main__':
     script_path = os.path.dirname(sys.argv[0])
     json_file = os.path.join(script_path, 'stpr_search.json')
     
+    jsonmapper = avm.jsonmapper()
     data = avm.load_json(json_file)
     for dataset in data:
-        avmdict = avm.jsondict2avmdict(dataset)
-        if avmdict:
-            for key in avmdict.keys():
-                print "%-30s: %s" % (key, avmdict[key])
+        print "______________________________________________________________________________"
+        jsonmapper.jsondict = dataset
+        avmdict = jsonmapper.avmdict()
+        for key in avmdict.keys():
+            jsonkey = jsonmapper.mapping[key]['fieldname']
+            if jsonkey in dataset.keys(): jsondata = dataset[jsonkey]
+            print "%-30s: %-90s JSON: %s" % (key, avmdict[key], jsondata)
         
 
             
