@@ -114,7 +114,7 @@ class jsonmapper(object):
      'MetadataVersion':               { 'fieldname': 'Meta Version'},
     # 3.6 File Metadata
      'File.Type':                     { 'fieldname': 'Image Format',   'func': self.string2filetypeCV},                               #  TODO: image/tiff ==> TIFF
-     'File.Dimension':                { 'fieldname': '', 'func': lambda fieldname: [ self.jsondict['Image Length'], self.jsondict['Image Width'] ]},         
+     'File.Dimension':                { 'fieldname': 'Image Length', 'func': lambda fieldname: [ self.jsondict['Image Length'], self.jsondict['Image Width'] ]},         
      'File.Size':                     { 'fieldname': 'File Size', 'func': self.strings2stringlist},        
      'File.BitDepth':                 { 'fieldname': 'Bit Depth'}, 
     # X in AVM 1.1 not defined      
@@ -289,25 +289,25 @@ class jsonmapper(object):
         # in future, use this in a Deserializer function      
             
         avmdata = {}
-        try:
-            # create an avmdict using the values of the jsondict
-            for key in self.mapping.keys():
-                json_fieldname = self.mapping[key]['fieldname']
+        # create an avmdict using the values of the jsondict
+        for key in self.mapping.keys():
+            json_fieldname = self.mapping[key]['fieldname']
+            value = None
+            try:
+                value = self.jsondict[json_fieldname]       
+            except KeyError:
                 value = None
-                if json_fieldname in self.jsondict: value = self.jsondict[json_fieldname]
+                logger.error(" for avm field %s, invalid fieldname %s" % (key, json_fieldname))
+            else:
                 if 'func' in self.mapping[key]:
-                        func = self.mapping[key]['func']
-                        if callable(func):
-                            value = func( value )
-                        else:
-                            logger.error("function %s to process JSON field %s not callable" % (str(func), str(key)))
+                    func = self.mapping[key]['func']
+                    if callable(func):
+                        value = func( value )
+                    else:
+                        logger.error("function %s to process JSON field %s not callable" % (str(func), str(key)))
                 elif json_fieldname in self.jsondict: 
                     value = self.jsondict[json_fieldname]
-                avmdata.update( { key: value })         
-        except IOError: #Exception:
-            avmdata = None
-            logger.error("jsondict = %s" % str(self.jsondict))
-            logger.error("invalid jsondict, return None")    
+                avmdata.update( { key: value })                        
         return avmdata
     
                              
