@@ -35,6 +35,9 @@ if __name__ == '__main__':
     
     jsonmapper = avm.jsonmapper()
     data = avm.load_json(json_file)
+    print len(data), "entries in original data"
+    data = avm.remove_duplicates(data)
+    print len(data), "after remove_duplicates"
     for dataset in data:
         print "______________________________________________________________________________"
         jsonmapper.jsondict = dataset
