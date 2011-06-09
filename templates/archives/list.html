@@ -18,9 +18,9 @@
 <input id="id_archivesearch" type="text" value="{%if search_specific %}Search {{search_specific|capfirst}}...{%else%}{{search_str|default:"Search..."}}{%endif%}" name="search" class="archivesearch" onblur="searchbox_blur(this,'{%if search_specific %}Search {{search_specific|capfirst}}...{%else%}{{search_str|default:"Search..."}}{%endif%}');" onfocus="searchbox_focus(this,'{%if search_specific %}Search {{search_specific|capfirst}}...{%else%}{{search_str|default:"Search..."}}{%endif%}');" />
 <input class="archivesearch_submit" type="submit" value="Go" />
 </form>
+{% endif %}
 </div>
 <div class='clear'></div>
-{% endif %}
 {% load pages %}{% embed_page spacetelescope.image_archive_top %}
 {% if crosslinks %}
 <div class="seealso">{{crosslinks_string|safe}}</div>
