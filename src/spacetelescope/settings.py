@@ -716,13 +716,13 @@ SHOP_CONF = {
 	'DEFAULT_NAVISION_ACCOUNT' : '50.030',
 	'ORDER_FILE_PREFX' : "hb",
 	'ARCHIVE_DEFAULTS' : {
-		'djangoplicity.products.models.Poster' : { 'ACCOUNT' : '50.040', },
-		'djangoplicity.products.models.PostCard' : { 'ACCOUNT' : '50.040', },
-		'djangoplicity.products.models.Merchandise' : { 'ACCOUNT' : '50.040', },
-		'djangoplicity.products.models.CDROM' : { 'ACCOUNT' : '50.040', },
-		'djangoplicity.products.models.Calendar' : { 'ACCOUNT' : '50.040', },
+		'djangoplicity.products.models.Poster' : { 'ACCOUNT' : '50.050', },
+		'djangoplicity.products.models.PostCard' : { 'ACCOUNT' : '50.050', },
+		'djangoplicity.products.models.Merchandise' : { 'ACCOUNT' : '50.050', },
+		'djangoplicity.products.models.CDROM' : { 'ACCOUNT' : '50.050', },
+		'djangoplicity.products.models.Calendar' : { 'ACCOUNT' : '50.050', },
 		'djangoplicity.products.models.ConferenceItem' : { 'ACCOUNT' : '50.230', },
-		'djangoplicity.products.models.Sticker' : { 'ACCOUNT' : '50.040', },
+		'djangoplicity.products.models.Sticker' : { 'ACCOUNT' : '50.050', },
 	}
 }
 
