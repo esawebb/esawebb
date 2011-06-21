@@ -86,9 +86,7 @@ DATABASES = {
         'PASSWORD' : '',
         'HOST' : 'localhost',
         'PORT' : '3306',
-        'OPTIONS' : {
-			'connect_timeout' : 15,
-		},
+        'OPTIONS' : { 'init_command' : 'SET storage_engine=MyISAM', } if ('migrate' in sys.argv or 'syncdb' in sys.argv) else {},
         'TEST_CHARSET' : 'utf8',
         'TEST_COLLATION' : 'utf8_general_ci',
         'TEST_MIRROR' : None,

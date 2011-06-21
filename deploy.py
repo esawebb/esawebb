@@ -289,9 +289,9 @@ def task_vcs_install( base_dir, home_dir, bin_dir, options ):
 			vcs_dir = os.path.join( vcs_base_dir, vcs_dirname )
 			if os.path.exists( os.path.join( vcs_dir, "setup.py" ) ):
 				if options.develop:
-					call_subprocess( [os.path.join( bin_dir, "pip" ), "install", "-E", home_dir, "-e", vcs_dir ] ) 
+					call_subprocess( [os.path.join( bin_dir, "pip" ), "install", "-I", "-U", "-E", home_dir, "-e", vcs_dir ] ) 
 				else:
-					call_subprocess( [os.path.join( bin_dir, "pip" ), "install", "-E", home_dir,  vcs_dir ] )
+					call_subprocess( [os.path.join( bin_dir, "pip" ), "install", "-I", "-U", "-E", home_dir,  vcs_dir ] )
 			else:
 				logger.error( "Project located at %s has no setup.py file" % vcs_dir )
 		except Exception, e:
@@ -754,10 +754,10 @@ projects_settings = {
 	'settings_module' : 'spacetelescope.settings',
 	'finalize_tasks' : [ 
 		run_function( task_run_manage, task='config_gen' ), 
-		run_function( task_move, src='tmp/conf/django.wsgi', dst='virtualenv/apache/django.wsgi' ),
-		run_function( task_move, src='tmp/conf/httpd-djangoplicity.conf', dst='virtualenv/apache/'),
 		run_function( task_append, src='tmp/conf/activate-djangoplicity.sh', dst='virtualenv/bin/activate', marker="DJANGOPLICITY" ),
 		run_function( task_append, src='tmp/conf/activate-djangoplicity.csh', dst='virtualenv/bin/activate.csh', marker="DJANGOPLICITY" ), 
+		run_function( task_move, src='tmp/conf/httpd-djangoplicity.conf', dst='virtualenv/apache/'),
+		run_function( task_move, src='tmp/conf/django.wsgi', dst='virtualenv/apache/django.wsgi' ),
 	]
 }
 settings.update( projects_settings )
