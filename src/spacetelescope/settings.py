@@ -470,7 +470,7 @@ DEFAULT_CONTACT_CITY = u"Garching bei München"
 DEFAULT_CONTACT_STATE_PROVINCE = ""
 DEFAULT_CONTACT_POSTAL_CODE= u"D-85748"
 DEFAULT_CONTACT_COUNTRY = u"Germany" 
-DEFAULT_RIGHTS = ""
+DEFAULT_RIGHTS = "Creative Commons Attribution 3.0 Unported license."
 DEFAULT_PUBLISHER = u"ESA/Hubble"
 DEFAULT_PUBLISHER_ID = u"vamp://esahubble"
 
