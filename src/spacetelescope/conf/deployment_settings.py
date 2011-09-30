@@ -15,9 +15,13 @@ from djangoplicity.settings import copy_setting
 # ENVIRONMENT CONFIGURATION #
 #############################
 ROOT = "/home/web/hubble"
-BUILD_ROOT = ROOT
 PRJBASE = "%s/projects/spacetelescope.org" % ROOT
 DJANGOPLICITY_ROOT = "%s/projects/djangoplicity" % ROOT
+
+BUILD_ROOT = ROOT
+BUILD_PRJBASE = PRJBASE 
+BUILD_DJANGOPLICITY_ROOT = DJANGOPLICITY_ROOT
+
 LOG_DIR = "%s/logs" % ROOT
 TMP_DIR = "%s/tmp" % ROOT
 ENABLE_SSL = True
@@ -61,8 +65,8 @@ DEPLOYMENT_PERMS = [
 ]
 
 DEPLOYMENT_SYNC = [
-	('%(PRJBASE)s/static/','%(ROOT)s/docs/static/'),
-	('%(DJANGOPLICITY_ROOT)s/static/','%(ROOT)s/docs/static/djangoplicity/'),
+	('%(BUILD_PRJBASE)s/static/','%(BUILD_ROOT)s/docs/static/'),
+	('%(BUILD_DJANGOPLICITY_ROOT)s/static/','%(BUILD_ROOT)s/docs/static/djangoplicity/'),
 ]
 
 
@@ -81,7 +85,9 @@ DATABASES['default']['USER'] = "spacetelescope"
 ###############
 # MEDIA SETUP #
 ###############
-MEDIA_ROOT = "%s/docs/static" % ROOT
+MEDIA_ROOT = "%s/docs/static/" % ROOT
+STATIC_ROOT = "%s/docs/static/app/" % ROOT
+DJANGOPLICITY_MEDIA_ROOT = "%s/static" % DJANGOPLICITY_ROOT
 SECRET_KEY = "g6ymvx$i1sv4k*g+nwfnx*3a1g&)^i6r9n6g4=f_$x^u(kwt8s"
 CSRF_MIDDLEWARE_SECRET = "g6ymvx$i1sv4k*g+nwfnx*3a1g&)^i6r9n6g4=f_$x^u(kwt8s"
 

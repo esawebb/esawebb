@@ -25,15 +25,14 @@ CONFIG_GEN_TEMPLATES_DIR = "%s/conf/templates/" % PRJBASE
 CONFIG_GEN_GENERATED_DIR = "%s/conf/" % TMP_DIR
 
 
-###################
-# ERROR REPORTING #
-###################
-TEMPLATE_DEBUG=True
-
 ##############
 # DEPLOYMENT #
 ##############
 DEPLOYMENT_EXISTING_CHECKOUT = "~/Workspaces/web/"
+DEBUG=True
+TEMPLATE_DEBUG=True
+DEBUG_SQL=False
+DEBUG_PROFILER=False
 
 ##################
 # DATABASE SETUP #
@@ -67,4 +66,12 @@ LOGGING_HANDLER = ['console']
 ##########
 BROKER_HOST = "localhost"
 #BROKER_HOST = "aweb26.hq.eso.org"
-#CELERY_ALWAYS_EAGER = True
+
+CELERY_ALWAYS_EAGER = False
+
+
+#########
+# EMAIL #
+#########
+#EMAIL_HOST = 'smtphost.hq.eso.org'
+#EMAIL_PORT = '25'

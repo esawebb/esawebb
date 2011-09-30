@@ -13,9 +13,11 @@ from django.conf.urls.defaults import *
 from django.utils.translation import ugettext as _
 from django.contrib import admin
 from spacetelescope.admin import admin_site, adminlogs_site, adminshop_site
+from spacetelescope import listener
 
-from djangoplicity.announcements.models import Announcement
-from djangoplicity.announcements.options import AnnouncementOptions
+
+from djangoplicity.announcements.models import Announcement, WebUpdate
+from djangoplicity.announcements.options import AnnouncementOptions, WebUpdateOptions
 from djangoplicity.media.models import Image, Video, PictureOfTheWeek
 from djangoplicity.media.options import ImageOptions, VideoOptions, PictureOfTheWeekOptions
 from django.views.generic.simple import redirect_to
@@ -26,8 +28,11 @@ from djangoplicity.products.options import *
 from djangoplicity.releases.models import Release
 from djangoplicity.releases.options import ReleaseOptions
 
-from djangoplicity.products.models import *
-from djangoplicity.products.options import *
+#from djangoplicity.events.models import Event
+#from djangoplicity.events.options import EventOptions
+
+from satchmo_store.urls import basepatterns
+from shipping.urls import adminpatterns
 
 urlpatterns = []
 
@@ -39,12 +44,13 @@ urlpatterns += patterns( '',
     ( r'^admin/doc/', include( 'django.contrib.admindocs.urls' ), { 'SSL': True } ),
     ( r'^admin/menus/', include( 'djangoplicity.menus.urls' ), { 'SSL' : True } ),
     ( r'^admin(.*)({{\s?MEDIA_URL\s?}})(?P<path>.*)', 'djangoplicity.views.adm_translate_static_media_path', { 'SSL' : True } ),
-    ( r'^admin/shop/shop/order/(?P<order_id>[0-9]+)/csv/', 'djangoplicity.coposweb.views.order_csv_file', { 'SSL': True } ),
+#    ( r'^admin/shop/shop/order/(?P<order_id>[0-9]+)/csv/', 'djangoplicity.coposweb.views.order_csv_file', { 'SSL': True } ),
 	( r'^admin/shop/', include( 'djangoplicity.archives.contrib.satchmo.urls_admin' ), { 'SSL': True } ), 
 	( r'^admin/shop/', include(adminshop_site.urls), { 'SSL': True, 'extra_context' : { 'ADMINSHOP_SITE' : True } } ),
 	( r'^admin/system/', include(adminlogs_site.urls), { 'SSL': True, 'extra_context' : { 'ADMINLOGS_SITE' : True }  } ),
 	( r'^admin/', include(admin_site.urls), { 'SSL': True, 'extra_context' : { 'ADMIN_SITE' : True }  } ),
 	( r'^admin/import/', include('djangoplicity.archives.importer.urls'), { 'SSL': True } ),
+	( r'^tinymce/', include('tinymce.urls'), { 'SSLAllow': True } ),
 	
     # Server alive check (used for load balancers - called every 5 secs )
     ( r'^alive-check.dat$', 'djangoplicity.views.alive_check', { 'SSLAllow' : True } ),
@@ -59,6 +65,7 @@ urlpatterns += patterns( '',
     ( r'^videos/', include('djangoplicity.media.urls_videos'), { 'model': Video, 'options': VideoOptions } ),
 
 	# Other archives
+	( r'^webupdates/', include('djangoplicity.announcements.urls_webupdates'), { 'model': WebUpdate, 'options': WebUpdateOptions } ),
     ( r'^announcements/', include('djangoplicity.announcements.urls'), { 'model': Announcement, 'options': AnnouncementOptions } ),
     ( r'^about/further_information/books/', include('djangoplicity.products.urls.books'), { 'model': Book, 'options': BookOptions } ),
     ( r'^about/further_information/brochures/', include('djangoplicity.products.urls.brochures'), { 'model': Brochure, 'options': BrochureOptions } ),
@@ -110,7 +117,11 @@ urlpatterns += patterns( '',
  	( r'^shop/bulkorders/', redirect_to, { 'url': '/shop/bulk_orders/' }, 'shop_bulkorders' ),
  	( r'^shop/freeorder/$', include( 'djangoplicity.archives.contrib.satchmo.freeorder.urls' ) ),
  	( r'^shop/', include( 'djangoplicity.archives.contrib.satchmo.urls' ) ),
- 	
+ 	( r'^newsletters/', include( 'djangoplicity.mailinglists.urls', namespace='djangoplicity_mailinglists', app_name='djangoplicity_mailinglists' ), { 'SSLAllow' : True } ),
+	( r'^newsletters/', include( 'djangoplicity.newsletters.urls', { } ) ),
+	#( r'^public/djangoplicity/events/', include('djangoplicity.events.urls'), { 'model': Event, 'options': EventOptions } ),
+	( r'^facebook/', include('djangoplicity.iframe.urls'), { 'SSLAllow' : True }  ),
+	
  	# Google Webmaster Toolkit verification
  	( r'^', include( 'djangoplicity.google.urls' ) ), 
 

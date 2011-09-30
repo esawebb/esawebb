@@ -14,6 +14,8 @@ from djangoplicity.settings import copy_setting
 # ENVIRONMENT CONFIGURATION #
 #############################
 BUILD_ROOT = "/home/web/%si" % SHORT_NAME
+BUILD_PRJBASE = "%s/projects/spacetelescope.org" % BUILD_ROOT 
+BUILD_DJANGOPLICITY_ROOT = "%s/projects/djangoplicity" % BUILD_ROOT
 
 #####################
 # CONFIG GENERATION #
@@ -40,6 +42,11 @@ WORKERS_BEAT_HOST = "aweb5"
 WORKERS_CAM_HOST = "aweb6"
 WEBSERVER_NODES = ["%s1i" % SHORT_NAME,"%s2i" % SHORT_NAME ]
 DEPLOYMENT_TAG = "spacetelescope.org_integration"
+DEPLOYMENT_NOTIFICATION = {
+	"subject" : "[DEPLOY] %(DEPLOYMENT_TAG)s by %(local_user)s",
+	"from" : "esoepo-monitoring@eso.org",
+	"to" : ["esoepo-monitoring@eso.org"],
+}
 
 ##################
 # DATABASE SETUP #

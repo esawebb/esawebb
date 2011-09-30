@@ -27,6 +27,12 @@ WORKERS_CAM_HOST = "aweb15"
 WEBSERVER_NODES = ["%s1" % SHORT_NAME,"%s2" % SHORT_NAME ]
 DEPLOYMENT_TAG = "spacetelescope.org_production"
 DEPLOYMENT_REVISION = "spacetelescope.org_integration"
+DEPLOYMENT_NOTIFICATION = {
+	"subject" : "[DEPLOY] %(DEPLOYMENT_TAG)s by %(local_user)s",
+	"from" : "esoepo-monitoring@eso.org",
+	"to" : ["webmaster@eso.org", "esoepo-monitoring@eso.org"],
+}
+
 ALLOW_DATABASE_OVERWRITE = False
 
 ##################

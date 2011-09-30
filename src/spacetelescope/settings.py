@@ -126,6 +126,7 @@ WIDGET_FORMAT = gettext_noop("j/m/Y")
 # Example: "/home/media/media.lawrence.com/"
 MEDIA_ROOT = local_settings.MEDIA_ROOT
 
+
 # URL that handles the media served from MEDIA_ROOT. Make sure to use a
 # trailing slash if there is a path component (optional in other cases).
 # Examples: "http://media.lawrence.com", "http://example.com/media/"
@@ -138,6 +139,14 @@ MEDIA_URL = local_settings.MEDIA_URL
 ADMIN_MEDIA_PREFIX = local_settings.ADMIN_MEDIA_PREFIX
 DJANGOPLICITY_MEDIA_URL = local_settings.DJANGOPLICITY_MEDIA_URL
 DJANGOPLICITY_MEDIA_ROOT = local_settings.DJANGOPLICITY_MEDIA_ROOT
+
+# Staticfiles app
+STATICFILES_DIRS = [
+	( 'djangoplicity', DJANGOPLICITY_MEDIA_ROOT ),
+]
+
+STATIC_ROOT = local_settings.STATIC_ROOT
+STATIC_URL = local_settings.STATIC_URL
 
 # Make this unique, and don't share it with anybody.
 SECRET_KEY = local_settings.SECRET_KEY
@@ -162,15 +171,16 @@ USE_ETAGS = True
 #############
 # List of callables that know how to import templates from various sources.
 TEMPLATE_LOADERS = (
-	'django.template.loaders.filesystem.load_template_source',
-	'django.template.loaders.app_directories.load_template_source',
+	'django.template.loaders.filesystem.Loader',
+	'django.template.loaders.app_directories.Loader',
 )
 
 TEMPLATE_CONTEXT_PROCESSORS = (
 	'django.core.context_processors.request',
-	'django.core.context_processors.auth',
+	'django.contrib.auth.context_processors.auth',
 	'django.core.context_processors.i18n',
 	'django.core.context_processors.media',
+    'django.core.context_processors.static',
 	'djangoplicity.utils.context_processors.site_environment',
 	'djangoplicity.utils.context_processors.project_environment',
 	'djangoplicity.utils.context_processors.google_analytics_id',
@@ -281,6 +291,7 @@ if USE_I18N:
 	)
 
 INSTALLED_APPS += (
+	'django.contrib.staticfiles',
 	'django.contrib.sites',
 	'satchmo_store.shop',
     'django.contrib.auth',
@@ -291,9 +302,6 @@ INSTALLED_APPS += (
 	'django.contrib.humanize',
 	'django.contrib.sitemaps',
 	'djangoplicity.menus',
-	#'djangoplicity.reports',
-	#'djangoplicity.massmailer',
-	#'djangoplicity.news',
 	'djangoplicity.pages',
 	'djangoplicity.cron',
 	'djangoplicity.media',
@@ -305,7 +313,7 @@ INSTALLED_APPS += (
 	'djangoplicity.archives.contrib.inventory_control',
 	'djangoplicity.announcements',
 	'djangoplicity.releases',
-	'djangoplicity.products',
+	'djangoplicity.products',  
 	'djangoplicity.search',
 	'djangoplicity.metadata',  
 	'djangoplicity.authtkt',
@@ -313,8 +321,17 @@ INSTALLED_APPS += (
 	'djangoplicity.inventory',
 	'djangoplicity.adminhistory',
     'djangoplicity.utils',
-    #'djangoplicity.admincomments',
     'djangoplicity.celery',
+    #'djangoplicity.events',
+    'djangoplicity.mailinglists',
+    'djangoplicity.newsletters',
+    'djangoplicity.iframe',
+    #'djangoplicity.contacts',
+    #'djangoplicity.customsearch',
+    'djangoplicity.admincomments',
+    'djangoplicity.simplearchives',
+    #'djangoplicity.eventcalendar',
+    'djangoplicity.actions',
 	'spacetelescope',
 	'djcelery',
 	'mptt',
@@ -337,6 +354,7 @@ INSTALLED_APPS += (
     'app_plugins',
     'shipping.modules.tieredweight',
     'django_config_gen',
+    'tinymce',
 )
 
 
@@ -378,11 +396,54 @@ EMAIL_SUBJECT_PREFIX = local_settings.EMAIL_SUBJECT_PREFIX
 ##################
 # AUTHENTICATION #
 ##################
-AUTHENTICATION_BACKENDS = ( 'django.contrib.auth.backends.ModelBackend', )
+AUTHENTICATION_BACKENDS = ( 
+	'django_auth_ldap.backend.LDAPBackend',
+	'django.contrib.auth.backends.ModelBackend',
+)
 #AUTH_PROFILE_MODULE = ''
 LOGIN_URL = '/login/'
 LOGOUT_URL = '/logout/'
 LOGIN_REDIRECT_URL = '/'
+
+#############
+# LDAP AUTH #
+#############
+import ldap
+from django_auth_ldap.config import LDAPSearch, ActiveDirectoryGroupType
+
+AUTH_LDAP_SERVER_URI = "ldaps://ldap.ads.eso.org:636/ads.eso.org"
+
+AUTH_LDAP_GLOBAL_OPTIONS = {
+	ldap.OPT_REFERRALS : 0,
+	ldap.OPT_PROTOCOL_VERSION : 3,
+	ldap.OPT_X_TLS_REQUIRE_CERT : ldap.OPT_X_TLS_NEVER
+}
+
+AUTH_LDAP_BIND_DN = "xskioskldap"
+AUTH_LDAP_BIND_PASSWORD = "LDAP1420"
+AUTH_LDAP_USER_SEARCH = LDAPSearch( "DC=ads,DC=eso,DC=org",
+    ldap.SCOPE_SUBTREE, "(&(objectCategory=user)(objectClass=person)(sAMAccountName=%(user)s)(!(userAccountControl:1.2.840.113556.1.4.803:=2)))" )
+
+AUTH_LDAP_USER_ATTR_MAP = {
+          "first_name": "givenName",
+          "last_name": "sn",
+          "email": "mail"
+}
+
+AUTH_LDAP_GROUP_TYPE = ActiveDirectoryGroupType()
+AUTH_LDAP_GROUP_SEARCH = LDAPSearch( "dc=ads,dc=eso,dc=org",
+    ldap.SCOPE_SUBTREE, "(objectClass=group)"
+)
+
+# Defaults:
+# - ePOD staff will get active/staff account - but no permissions.
+# - All ESO staff will get an inactive account on login - this account has to manually be activated.
+AUTH_LDAP_ALWAYS_UPDATE_USER = False # Prevent user from being updated every time a user logs in.
+
+AUTH_LDAP_USER_FLAGS_BY_GROUP = {
+	"is_active": "CN=SA-PAD-EPR,OU=Garching,OU=Shared Acess Groups,OU=Groups,DC=ads,DC=eso,DC=org",
+	"is_staff": "CN=SA-PAD-EPR,OU=Garching,OU=Shared Acess Groups,OU=Groups,DC=ads,DC=eso,DC=org",
+}
 
 ############
 # AUTH_TKT #
@@ -443,7 +504,7 @@ ARCHIVES = (
 	('djangoplicity.releases.models.Release','djangoplicity.releases.options.ReleaseOptions'),		    
 )
 
-ARCHIVE_EMBARGO_LOGIN = ('hst','hotnews')
+ARCHIVE_EMBARGO_LOGIN = ('hst','vxiofpia')
 ARCHIVE_EMAIL_SENDER = "ESA/Hubble Information Centre <hubble@eso.org>" 
 
 ARCHIVE_RESOURCE_FIELDS = False
@@ -466,6 +527,7 @@ ANNOUNCEMENTS_ARCHIVE_ROOT = 'archives/announcements/'
 
 VIDEOS_FEATURED_SUBJECT = 'hubblecast'
 
+#VIDEOS_SUBTITLES_FORMATS = ('hd_and_apple','medium_podcast')
 
 DEFAULT_CREATOR = u"ESA/Hubble"  
 DEFAULT_CREATOR_URL = "http://www.spacetelescope.org"
@@ -508,6 +570,9 @@ ARCHIVE_DERIVATIVES_OVERRIDE = {
 SOCIAL_FACEBOOK_TOKEN = local_settings.SOCIAL_FACEBOOK_TOKEN
 SOCIAL_TWITTER_TUPLE = local_settings.SOCIAL_TWITTER_TUPLE
 
+
+SOCIAL_FACEBOOK_WALL = 'http://www.facebook.com/hubbleESA?sk=wall'
+
 #########
 # FEEDS #
 #########
@@ -524,6 +589,11 @@ REPORT_REGISTER_FORMATTERS = True
 ##########
 import djcelery
 djcelery.setup_loader()
+
+CELERY_IMPORTS = [
+	"djangoplicity.archives.contrib.security.tasks" ,
+	"djangoplicity.celery.tasks",
+]
 
 # Message routing
 CELERY_DEFAULT_QUEUE = "celery"
@@ -576,7 +646,7 @@ CELERYD_HIJACK_ROOT_LOGGER = False
 CELERY_ALWAYS_EAGER=local_settings.CELERY_ALWAYS_EAGER
 
 # Beat
-CELERYBEAT_SCHEDULER = "djcelery.schedulers.DatabaseScheduler" 
+CELERYBEAT_SCHEDULER = "djcelery.schedulers.DatabaseScheduler"
 
 ##############
 # JavaScript #
@@ -625,6 +695,34 @@ REGEX_REDIRECTS = (
 )
 
 SITE_DOMAIN = "www.spacetelescope.org"
+
+##################
+# django-tinymce #
+##################
+TINYMCE_JS_URL = STATIC_URL + "js/tiny_mce/tiny_mce.js"
+TINYMCE_JS_ROOT = STATIC_ROOT + "js/tiny_mce"
+TINYMCE_DEFAULT_CONFIG = {
+	"mode" : "textareas",
+	"theme" : "advanced",
+	"plugins" : "style,layer,table,advimage,insertdatetime,searchreplace,contextmenu,paste,fullscreen,visualchars,nonbreaking",
+	"theme_advanced_buttons1" : "fullscreen,code,cleanup,|,cut,copy,paste,pastetext,pasteword,|,search,replace,|,justifyleft,justifycenter,justifyright,justifyfull,|,styleselect,formatselect",
+	"theme_advanced_buttons2" : ",bold,italic,underline,strikethrough,|,bullist,numlist,|,outdent,indent,|,undo,redo,|,link,unlink,anchor,image,media,charmap,|,forecolor,backcolor|,styleprops,|,nonbreaking",
+	"theme_advanced_buttons3" : "tablecontrols,|,hr,removeformat,visualaid,|,sub,sup,|,insertdate,inserttime,|,insertlayer,moveforward,movebackward,absolute",
+	"theme_advanced_toolbar_location" : "top",
+	"theme_advanced_toolbar_align" : "left",
+	"theme_advanced_statusbar_location" : "bottom",
+	"extended_valid_elements" : "a[name|class|href|target|title|onclick],img[usemap|class|src|border=0|alt|title|hspace|vspace|width|height|align|onmouseover|onmouseout|name|style],hr[class|width|size|noshade],span[class|align|style],script[language|type|src],object[width|height|classid|codebase|data|type|id|class|style],param[name|value],embed[src|type|width|height|flashvars|wmode|style],iframe[src|width|height|frameborder|marginheight|marginwidth|align]",
+	"editor_selector" : "vRichTextAreaField",
+	"media_strict" : False,
+	#//relative_urls : False,
+	#//remove_script_host : True,
+	#//urlconverter_callback : "url_converter"
+	"convert_urls" : False,
+	"gecko_spellcheck" : True,
+} 
+TINYMCE_SPELLCHECKER = False
+TINYMCE_COMPRESSOR = False
+TINYMCE_FILEBROWSER = False
 
 
 ###########
@@ -689,6 +787,11 @@ LOGGING = {
 			'handlers' : ['null',],
 			'propagate': False,
 		},
+		'django_auth_ldap' : {
+			'handlers': local_settings.LOGGING_HANDLER,
+            'propagate': True,
+            'level': 'DEBUG' if DEBUG else 'INFO',
+		}
     },
 }
 
@@ -703,9 +806,11 @@ rl_config.TTFSearchPath.append( PRJBASE + "/fonts/" )
 ####################
 DATABASE_STORAGE_ENGINE="MyISAM"
 
+SOUTH_TESTS_MIGRATE = local_settings.SOUTH_TESTS_MIGRATE
 SOUTH_MIGRATION_MODULES = {
     'redirects': 'ignore', # We are using django.redirects and not djangoplicity.redirects where the migration is stored.
 }
+
 
 # ======================================================================
 # SITE SPECIFIC SECTIONS 

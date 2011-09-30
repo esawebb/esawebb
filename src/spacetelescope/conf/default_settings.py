@@ -15,9 +15,13 @@ import sys
 # ENVIRONMENT CONFIGURATION #
 #############################
 ROOT = "/Users/%s/Workspaces/sites/spacetelescope" % getpass.getuser()
-BUILD_ROOT = ROOT
 PRJBASE = "%s/projects/spacetelescope.org" % ROOT
 DJANGOPLICITY_ROOT = "%s/projects/djangoplicity" % ROOT
+
+BUILD_ROOT = ROOT
+BUILD_PRJBASE = PRJBASE 
+BUILD_DJANGOPLICITY_ROOT = DJANGOPLICITY_ROOT
+
 LOG_DIR = "%s/logs" % ROOT
 TMP_DIR = "%s/tmp" % ROOT
 ENABLE_SSL = False
@@ -55,7 +59,8 @@ APACHE_INIT_STATIC = '/etc/init.d/apache2'
 DEPLOYMENT_TAG = None
 DEPLOYMENT_REVISION = None
 DEPLOYMENT_DEVELOP = True
-DEPLOYMENT_EXISTING_CHECKOUT = None
+DEPLOYMENT_EXISTING_CHECKOUT = "/Users/%s/Workspaces/web" % getpass.getuser()
+DEPLOYMENT_NOTIFICATION = None
 ALLOW_DATABASE_OVERWRITE = True
 
 ###################
@@ -78,6 +83,7 @@ LOGGING_HANDLER = ['file']
 ##################
 # DATABASE SETUP #
 ##################
+SOUTH_TESTS_MIGRATE = False
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
@@ -86,7 +92,9 @@ DATABASES = {
         'PASSWORD' : '',
         'HOST' : 'localhost',
         'PORT' : '3306',
-        'OPTIONS' : { 'init_command' : 'SET storage_engine=MyISAM', } if ('migrate' in sys.argv or 'syncdb' in sys.argv) else {},
+        'OPTIONS' : {
+			'connect_timeout' : 15,
+		} if 'test' not in sys.argv else {},
         'TEST_CHARSET' : 'utf8',
         'TEST_COLLATION' : 'utf8_general_ci',
         'TEST_MIRROR' : None,
@@ -94,18 +102,25 @@ DATABASES = {
     }
 }
 
+if ('migrate' in sys.argv or 'syncdb' in sys.argv):
+	DATABASES['default']['OPTIONS']['init_command'] = 'SET storage_engine=MyISAM'
+
 if 'test' in sys.argv:
 	DATABASES['default']['ENGINE'] = 'django.db.backends.sqlite3'
+	SOUTH_TESTS_MIGRATE = False
+	
 	
 ###############
 # MEDIA SETUP #
 ###############
 SERVE_STATIC_MEDIA = True
-MEDIA_ROOT = "%s/static" % PRJBASE
+MEDIA_ROOT = "%s/static/" % PRJBASE
 MEDIA_URL = "/static/"
+STATIC_ROOT = "%s/static/app/" % PRJBASE
+STATIC_URL = "/static/app/"
 DJANGOPLICITY_MEDIA_URL = "/static/djangoplicity/"
 DJANGOPLICITY_MEDIA_ROOT = "%s/static" % DJANGOPLICITY_ROOT
-ADMIN_MEDIA_PREFIX = "/static/media/"
+ADMIN_MEDIA_PREFIX = "/static/app/admin/"
 
 
 # Make this unique, and don't share it with anybody.
