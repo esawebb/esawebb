@@ -1,4 +1,4 @@
-#Tue Jun 14 14:35:22 CEST 2011
+#Wed Oct 05 16:23:35 CEST 2011
 eclipse.preferences.version=1
 encoding//scripts/correct_dates.py=utf-8
 encoding//scripts/hubblesite.py=utf-8
@@ -29,6 +29,7 @@ encoding//src/spacetelescope/urls.py=utf-8
 encoding//src/spacetelescope/views.py=utf-8
 encoding//src/spacetelescope/workflows/__init__.py=utf-8
 encoding//src/spacetelescope/workflows/media.py=utf-8
+encoding//templates/newsletters/includes/text/press_release.txt=UTF-8
 encoding/bootstrap_settings.py=utf-8
 encoding/fabfile.py=utf-8
 encoding/fabfile_old.py=utf-8
