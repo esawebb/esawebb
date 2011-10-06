@@ -17,7 +17,7 @@
 
 
 {% block header %}
-	{% with width="700" height="280" color="#000000" logo_width="140" logo_url="http://www.spacetelescope.org/static/archives/logos/transparent/esa_screen_white.png" %}
+	{% with width="700" height="280" color="#000000" logo_width="140" logo_url=base_url|add:MEDIA_URL|add:"esa_nl_logo.png" %}
 	{% block header_content %}
 		{% with header_title="ESA/Hubble" %}
 		{% include "newsletters/includes/header.html" %}

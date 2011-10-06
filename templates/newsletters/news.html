@@ -7,13 +7,13 @@
 
 {% block header_content %}
 	{% if data.release %}
-		{% with header_title="ESA/Hubble News" header_subtitle=data.release.release_date|date %}
+		{% with text_color="#ffffff" header_title="ESA/Hubble News" header_subtitle=data.release.release_date|date %}
 		{% with release_date=data.release.release_date link_url=base_url|add:data.release.get_absolute_url pretitle="ESA/Hubble "|add:data.release.release_type.name|add:" "|add:data.release.id embargo="" title=data.release.title subtitle=data.release.subtitle main_image=data.release.main_image %}
 		{% include "newsletters/includes/header.html" %}
 		{% endwith %}
 		{% endwith %}
 	{% else %}
-		{% with header_title="ESA/Hubble News" header_subtitle="" %}
+		{% with text_color="#ffffff" header_title="ESA/Hubble News" header_subtitle="" %}
 		{% include "newsletters/includes/header.html" %}
 		{% endwith %}
 	{% endif %}

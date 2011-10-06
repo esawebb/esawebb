@@ -6,23 +6,43 @@
 {% block text_only %}{% include "newsletters/includes/text_only_embargo.html" %}{% endblock %}
 
 {% block header_content %}
-	{% if data.release %}
-		{% with text_color="#f4c819" header_title="ESA/Hubble Media Newsletter" header_subtitle=data.release.embargo_date|date %}
-		{% with release_date="" link_url=base_url|add:data.release.get_absolute_url pretitle="ESA/Hubble "|add:data.release.release_type.name|add:" "|add:data.release.id embargo="yes" title=data.release.title subtitle=data.release.subtitle main_image=data.release.main_image %}
-		{% include "newsletters/includes/header.html" %}
-		{% endwith %}
-		{% endwith %}
+	{% if data.release.release_date < now %}
+		{% if data.release %}
+			{% with text_color="#f4c819" header_title="ESA/Hubble Media Newsletter" header_subtitle=data.release.release_date|date %}
+			{% with release_date=data.release.release_date link_url=base_url|add:data.release.get_absolute_url pretitle="ESA/Hubble "|add:data.release.release_type.name|add:" "|add:data.release.id embargo="" title=data.release.title subtitle=data.release.subtitle main_image=data.release.main_image %}
+			{% include "newsletters/includes/header.html" %}
+			{% endwith %}
+			{% endwith %}
+		{% else %}
+			{% with text_color="#f4c819" header_title="ESA/Hubble Media Newsletter" header_subtitle="" %}
+			{% include "newsletters/includes/header.html" %}
+			{% endwith %}
+		{% endif %}
 	{% else %}
-		{% with text_color="#f4c819" header_title="ESA/Hubble News" header_subtitle="" %}
-		{% include "newsletters/includes/header.html" %}
-		{% endwith %}
+		{% if data.release %}
+			{% with text_color="#f4c819" header_title="ESA/Hubble Media Newsletter" header_subtitle=data.release.embargo_date|date %}
+			{% with release_date="" link_url=base_url|add:data.release.get_absolute_url pretitle="ESA/Hubble "|add:data.release.release_type.name|add:" "|add:data.release.id embargo="yes" title=data.release.title subtitle=data.release.subtitle main_image=data.release.main_image %}
+			{% include "newsletters/includes/header.html" %}
+			{% endwith %}
+			{% endwith %}
+		{% else %}
+			{% with text_color="#f4c819" header_title="ESA/Hubble Media Newsletter" header_subtitle="" %}
+			{% include "newsletters/includes/header.html" %}
+			{% endwith %}
+		{% endif %}
 	{% endif %}
 {% endblock %}
 
 {% block content %}
-	{% with embargo="yes" release=data.release signature_date=data.release.embargo_date signature="ESA/Hubble Information Centre<br />The ESO Education and Public Outreach Department" %}
-		{% include "newsletters/includes/press_release.html" %}
-	{% endwith %}
+	{% if data.release.release_date < now %}
+		{% with embargo="" release=data.release signature_date=data.release.release_date signature="ESA/Hubble Information Centre<br />The ESO Education and Public Outreach Department" %}
+			{% include "newsletters/includes/press_release.html" %}
+		{% endwith %}
+	{% else %}
+		{% with embargo="yes" release=data.release signature_date=data.release.embargo_date signature="ESA/Hubble Information Centre<br />The ESO Education and Public Outreach Department" %}
+			{% include "newsletters/includes/press_release.html" %}
+		{% endwith %}
+	{% endif %}
 	
 	{% if editorial %}
 	<br /><hr style="{{hr_style}}"><br />
@@ -39,8 +59,13 @@
 
 {% block footer %} 
 	{% with followus="yes" reason="you subscribed to ESO & ESA/Hubble Media Newsletter." %}
-	{% with footer_note='* The embargo that ePOD uses for its press releases acts as an advanced notice system and it is not meant to "hype" news items. Given the often complex nature of the astronomical discoveries, we prefer to make our press releases and additional materials available about 48 hours in advance of the public release to give media representatives the time to research a topic, gather relevant information or conduct interviews. This ultimately leads to a better and a more accurate coverage of our news and therefore a better informing of the general public.' %}
+	{% if data.release.release_date < now %}
 		{% include "newsletters/includes/footer.html" %}
-	{% endwith %}
+	{% else %}
+		{% with footer_note='* The embargo that ePOD uses for its press releases acts as an advanced notice system and it is not meant to "hype" news items. Given the often complex nature of the astronomical discoveries, we prefer to make our press releases and additional materials available about 48 hours in advance of the public release to give media representatives the time to research a topic, gather relevant information or conduct interviews. This ultimately leads to a better and a more accurate coverage of our news and therefore a better informing of the general public.' %}
+		{% include "newsletters/includes/footer.html" %}
+		{% endwith %}
+	{% endif %}
+	
 	{% endwith %}
 {% endblock %}
