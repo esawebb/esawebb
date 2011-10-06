@@ -1,4 +1,4 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+{% load static %}{% get_static_prefix as STATIC_PREFIX %}<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -299,7 +299,7 @@
                                                         <!-- // Begin Module: Standard Content \\ --> 
                                                         <table border="0" cellpadding="20" cellspacing="0" width="100%"> 
                                                             <tr> 
-                                                                <td valign="top" style="background-image: url({{base_url}}/static/newsletter/tile.png); background-repeat: repeat-x;"> 
+                                                                <td valign="top" style="background-image: url({{base_url}}{{STATIC_PREFIX}}newsletters/tile.png); background-repeat: repeat-x;"> 
 				                                                  <div style="color: #505050;font-family: Helvetica, Arial;font-size: 12px;line-height: 130%;text-align: left;"> 
 				                                                   {% with a_style="color: #285A97;font-size: 12px;font-family: Helvetica, Arial;" hr_style="height:1px;border:0;border-bottom:1px solid #DEDEDE;" h2_style="color: #285A97;display: block;font-family: Helvetica, Arial;font-size: 15px;font-weight: bold;line-height: 130%;margin-top: 0;margin-right: 0;margin-bottom: 10px;margin-left: 0;text-align: left;" %}
 				                                                   {% block content %}
@@ -309,9 +309,7 @@
                                                                 </td>
                                                             </tr>
                                                         </table>
-                                                                       
                                                         <!-- // End Module: Standard Content \\ -->
-                                            
                                                     </td>
                                                 </tr>
                                             </table>
@@ -324,7 +322,7 @@
                         	<td valign="top" width="192" id="templateSidebar" style="background-color: #FFFFFF;"> 
                             	<table border="0" cellpadding="10" cellspacing="0" width="192" > 
                                 	<tr > 
-                                    	<td valign="top" class="sidebarContent" style="background-image: url({{base_url}}/static/newsletter/tile.png); background-repeat: repeat-x; color: #505050; font-family: Helvetica, Arial; font-size: 12px; line-height: 130%; text-align: left;"> 
+                                    	<td valign="top" class="sidebarContent" style="background-image: url({{base_url}}{{STATIC_PREFIX}}newsletters/tile.png); background-repeat: repeat-x; color: #505050; font-family: Helvetica, Arial; font-size: 12px; line-height: 130%; text-align: left;"> 
                                         	{% if enable_sharing %}{% if is_mailchimp_mailer %}
                                             <!-- // Begin Module: Top Image with Content \\ --> 
                                             <h3 class="h3" style="color: #285A97;display: block;font-family: Helvetica, Arial;font-size: 12px;font-weight: bold;line-height: 100%;margin-top: 10px;margin-right: 0;margin-bottom: 10px;margin-left: 0;text-align: left;">Share this newsletter on:</h3> 

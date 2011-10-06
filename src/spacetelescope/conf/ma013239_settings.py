@@ -24,6 +24,8 @@ SSL_ASSETS_PREFIX = "www.spacetelescope.org"
 CONFIG_GEN_TEMPLATES_DIR = "%s/conf/templates/" % PRJBASE 
 CONFIG_GEN_GENERATED_DIR = "%s/conf/" % TMP_DIR
 
+SECRET_KEY = "g6ymvx$i1sv4k*g+nwfnx*3a1g&)^i6r9n6g4=f_$x^u(kwt8s"
+CSRF_MIDDLEWARE_SECRET = "g6ymvx$i1sv4k*g+nwfnx*3a1g&)^i6r9n6g4=f_$x^u(kwt8s"
 
 ##############
 # DEPLOYMENT #
@@ -33,6 +35,10 @@ DEBUG=True
 TEMPLATE_DEBUG=True
 DEBUG_SQL=False
 DEBUG_PROFILER=False
+
+#MEDIA_ROOT = "/Volumes/webdocs/hubble/docs/static/"
+#STATIC_ROOT = "/Volumes/webdocs/hubble/docs/static/app/"
+#DJANGOPLICITY_MEDIA_ROOT = "/Volumes/webdocs/hubble/docs/static/djangoplicity"
 
 ##################
 # DATABASE SETUP #

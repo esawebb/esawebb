@@ -1,3 +1,4 @@
+{% with image_url=base_url|add:"/images/download/"|add:main_image.newsfeature_image_token|add:"/newsfeature/"|add:main_image.id|add:".jpg" %}
 <tr> 
 <td colspan="2" class="headerContent" height="{{height}}px"  background="{{image_url}}" style="color: #202020;font-family: Helvetica, Arial;font-size: 24px;font-weight: bold;line-height: 100%;padding: 0;text-align: left;vertical-align: bottom;background-color:black;"> 
 <!-- Outlook 2007 only -->
@@ -18,3 +19,4 @@
 </div> 
 </td> 
 </tr>
+{% endwith %}

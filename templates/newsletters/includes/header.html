@@ -10,9 +10,8 @@
     </td> 
     <td style="text-align:right; padding:20px; font-family: Helvetica,Arial; font-size: 26px; color: {% if text_color %}{{text_color}}{% else %}#ffffff{% endif %}" width="542">{{ header_title }}<div style="font-size:13px; color: #ffffff;">{{ header_subtitle }}</div></td> 
 </tr>
-{% if image_url %}
-{% include "newsletters/includes/main_image.html" %}
+{% if main_image %}
+	{% include "newsletters/includes/main_image.html" %}
 {% endif %} 
 </table>
 <!-- // End Template Header \\ -->
-
