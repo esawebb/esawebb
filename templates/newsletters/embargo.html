@@ -2,8 +2,8 @@
 {% load release_links djangoplicity_datetime %}
 
 {% block html_title %}ESA/Hubble Media Newsletter{% endblock %}
-{% block facebook_title %}Hubble Media Newsletter{% endblock %}
-{% block text_only %}{% include "newsletters/includes/text_only_embargo.html" %}{% endblock %}
+{% block facebook_title %}ESA/Hubble Media Newsletter{% endblock %}
+{% block text_only %}{% include "newsletters/includes/text_only_embargo.html" with org="ESA/Hubble" %}{% endblock %}
 
 {% block header_content %}
 	{% if data.release.release_date < now %}
@@ -51,8 +51,8 @@
 	
 	{% if data.announcements %}
 	<br /><hr style="{{hr_style}}"><br />
-	{% with announcements=data.announcements org="ESA/Hubble" feed_url="http://feeds.feedburner.com/hubble_announcements/" %}
-		{% include "newsletters/includes/announcements.html" %}
+	{% with objects=data.announcements org="ESA/Hubble" title="Announcements" feed_url="http://feeds.feedburner.com/hubble_announcements" urlpattern="announcements_defaultquery" %}
+		{% include "newsletters/includes/archiveobjects.html" %}
 	{% endwith %}
 	{% endif %}
 {% endblock %}
@@ -60,10 +60,10 @@
 {% block footer %} 
 	{% with followus="yes" reason="you subscribed to ESO & ESA/Hubble Media Newsletter." %}
 	{% if data.release.release_date < now %}
-		{% include "newsletters/includes/footer.html" %}
+		{% include "newsletters/includes/footer.html" with width="660" %}
 	{% else %}
 		{% with footer_note='* The embargo that ePOD uses for its press releases acts as an advanced notice system and it is not meant to "hype" news items. Given the often complex nature of the astronomical discoveries, we prefer to make our press releases and additional materials available about 48 hours in advance of the public release to give media representatives the time to research a topic, gather relevant information or conduct interviews. This ultimately leads to a better and a more accurate coverage of our news and therefore a better informing of the general public.' %}
-		{% include "newsletters/includes/footer.html" %}
+		{% include "newsletters/includes/footer.html" with width="660" %}
 		{% endwith %}
 	{% endif %}
 	

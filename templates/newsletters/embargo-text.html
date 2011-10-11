@@ -5,7 +5,7 @@
 We would also like to direct your attention to the following:
 {% if announcements %}
 {% include "newsletters/includes/text/announcements.txt" %}{% endif %}{% if newon %}
-{% include "newsletters/includes/text/newon.txt" %}
+{% include "newsletters/includes/text/newon.txt" with title="spacetelescope.org" %}
 {% endif %}{% endif %}
 {% include "newsletters/includes/text/footer.txt" %}
 {% endwith %}
