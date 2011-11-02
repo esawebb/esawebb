@@ -3,7 +3,7 @@
 
 {% block html_title %}ESA/Hubble Media Newsletter{% endblock %}
 {% block facebook_title %}ESA/Hubble Media Newsletter{% endblock %}
-{% block text_only %}{% include "newsletters/includes/text_only_embargo.html" with org="ESA/Hubble" %}{% endblock %}
+{% block text_only %}{% if data.release.release_date < now %}{% include "newsletters/includes/text_only_release.html" with org="ESA/Hubble" %}{% else %}{% include "newsletters/includes/text_only_embargo.html" with org="ESA/Hubble" %}{% endif %}{% endblock %}
 
 {% block header_content %}
 	{% if data.release.release_date < now %}
