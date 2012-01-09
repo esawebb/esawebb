@@ -318,6 +318,7 @@ INSTALLED_APPS += (
 	'djangoplicity.metadata',  
 	'djangoplicity.authtkt',
 	'djangoplicity.google',
+	'djangoplicity.cache',
 	'djangoplicity.inventory',
 	'djangoplicity.adminhistory',
     'djangoplicity.utils',
@@ -522,6 +523,7 @@ ADV_SEARCH_START_YEAR = 1998
 ARCHIVE_AUTO_RESOURCE_DELETION = local_settings.ARCHIVE_AUTO_RESOURCE_DELETION
 RELEASE_ARCHIVE_ROOT = 'archives/releases/'
 IMAGES_ARCHIVE_ROOT = 'archives/images/'
+IMAGECOMPARISON_ARCHIVE_ROOT = 'archives/imagecomparisons/'
 VIDEOS_ARCHIVE_ROOT = 'archives/videos/'
 ANNOUNCEMENTS_ARCHIVE_ROOT = 'archives/announcements/'
 
