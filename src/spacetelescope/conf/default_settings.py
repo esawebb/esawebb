@@ -180,6 +180,7 @@ GEOIP_LIBRARY_PATH = "%s/virtualenv/lib/libGeoIP.dylib" % ROOT
 ARCHIVE_AUTO_RESOURCE_DELETION = False
 ARCHIVE_IMPORT_ROOT = "%s/import" % ROOT
 PHOTOSHOP_ROOT = "/Users/%s/Workspaces/sites/import" % getpass.getuser()
+MP4BOX_PATH = '/Applications/Osmo4.app/Contents/MacOS/MP4Box'
 
 ##########	
 # CELERY #

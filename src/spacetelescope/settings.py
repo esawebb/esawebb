@@ -546,6 +546,7 @@ DEFAULT_CREDIT = u"NASA &amp; ESA"
 
 ARCHIVE_IMPORT_ROOT = local_settings.ARCHIVE_IMPORT_ROOT
 PHOTOSHOP_ROOT = local_settings.PHOTOSHOP_ROOT
+MP4BOX_PATH = local_settings.MP4BOX_PATH
 
 ARCHIVE_WORKFLOWS = {
 	'media.video.rename' : ('spacetelescope.workflows.media','video_rename'), 

@@ -36,9 +36,11 @@ TEMPLATE_DEBUG=True
 DEBUG_SQL=False
 DEBUG_PROFILER=False
 
-#MEDIA_ROOT = "/Volumes/webdocs/hubble/docs/static/"
+#MEDIA_ROOT = 
 #STATIC_ROOT = "/Volumes/webdocs/hubble/docs/static/app/"
 #DJANGOPLICITY_MEDIA_ROOT = "/Volumes/webdocs/hubble/docs/static/djangoplicity"
+
+#ARCHIVE_IMPORT_ROOT = "/Volumes/webdocs/hubble/import/"
 
 ##################
 # DATABASE SETUP #
@@ -74,7 +76,6 @@ BROKER_HOST = "localhost"
 #BROKER_HOST = "aweb26.hq.eso.org"
 
 CELERY_ALWAYS_EAGER = False
-
 
 #########
 # EMAIL #
