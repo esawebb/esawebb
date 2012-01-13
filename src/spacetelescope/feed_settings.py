@@ -23,11 +23,11 @@ class VideoPodcastFeedSettings():
 	link = 'http://www.spacetelescope.org/videos/'
 	description = 'The Latest Videos from Spacetelescope.org'
 	enclosure_resources = {	
-			''   : 'resource_hd720p_screen',
-			'hd' : 'resource_hd720p_screen',
-			'sd' : 'resource_vodcast',
-			'fullhd': 'resource_hd1080p_screen'
-		}
+			'' : ['resource_hd_and_apple', 'resource_hd720p_screen', ],
+			'hd' : ['resource_hd_and_apple', 'resource_hd720p_screen', ],
+			'sd' : ['resource_medium_podcast', 'resource_vodcast', ],
+			'fullhd' : ['hd_1080p25_screen', 'resource_hd1080p_screen', ],
+	}
 
 	override_guids_format = { 
 					'sd': {
