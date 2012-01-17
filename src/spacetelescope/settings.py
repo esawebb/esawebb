@@ -545,7 +545,6 @@ DEFAULT_PUBLISHER_ID = u"vamp://esahubble"
 DEFAULT_CREDIT = u"NASA &amp; ESA"
 
 ARCHIVE_IMPORT_ROOT = local_settings.ARCHIVE_IMPORT_ROOT
-PHOTOSHOP_ROOT = local_settings.PHOTOSHOP_ROOT
 MP4BOX_PATH = local_settings.MP4BOX_PATH
 
 ARCHIVE_WORKFLOWS = {
@@ -586,6 +585,12 @@ FEED_SETTINGS_MODULE = 'spacetelescope.feed_settings'
 ############
 REPORTS_DEFAULT_FORMATTER = 'html'
 REPORT_REGISTER_FORMATTERS = True
+
+##########################	
+# PHOTOSHOP CELERYWORKER #
+##########################
+PHOTOSHOP_ROOT = local_settings.PHOTOSHOP_ROOT
+PHOTOSHOP_BROKER = local_settings.PHOTOSHOP_BROKER
 
 ##########	
 # CELERY #
