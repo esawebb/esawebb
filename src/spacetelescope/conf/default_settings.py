@@ -218,6 +218,11 @@ COPOSWEB_CONFIG_INI = "%s/conf/coposweb.ini" % PRJBASE
 LIVE = False
 ORDER_PREFIX = "hbl"
 
+########
+# LDAP #
+########
+DISABLE_LDAP = False
+
 ##########
 # SOCIAL #
 ##########

@@ -296,17 +296,19 @@ INSTALLED_APPS += (
 	'satchmo_store.shop',
     'django.contrib.auth',
     'django.contrib.contenttypes',
+    'django.contrib.redirects',
     'django.contrib.sessions',
     'django.contrib.admin',
     'django.contrib.admindocs',
+	#'django.contrib.comments',
 	'django.contrib.humanize',
 	'django.contrib.sitemaps',
 	'djangoplicity.menus',
 	'djangoplicity.pages',
-	'djangoplicity.cron',
+	#'djangoplicity.cron',
 	'djangoplicity.media',
 	'djangoplicity.jobs',
-	'django.contrib.redirects',
+	#'djangoplicity.contrib.redirects',
 	'djangoplicity.archives',
 	'djangoplicity.archives.contrib.satchmo.freeorder',
     'djangoplicity.archives.contrib.security',
@@ -333,6 +335,8 @@ INSTALLED_APPS += (
     'djangoplicity.simplearchives',
     #'djangoplicity.eventcalendar',
     'djangoplicity.actions',
+    #'djangoplicity.mailer',
+    #'djangoplicity.scrum',
 	'spacetelescope',
 	'djcelery',
 	'mptt',
@@ -397,10 +401,16 @@ EMAIL_SUBJECT_PREFIX = local_settings.EMAIL_SUBJECT_PREFIX
 ##################
 # AUTHENTICATION #
 ##################
-AUTHENTICATION_BACKENDS = ( 
-	'django_auth_ldap.backend.LDAPBackend',
-	'django.contrib.auth.backends.ModelBackend',
-)
+
+if  local_settings.DISABLE_LDAP:
+    AUTHENTICATION_BACKENDS = ( 
+        'django.contrib.auth.backends.ModelBackend',
+    )
+else:
+    AUTHENTICATION_BACKENDS = ( 
+        'django_auth_ldap.backend.LDAPBackend',
+        'django.contrib.auth.backends.ModelBackend',
+    )
 #AUTH_PROFILE_MODULE = ''
 LOGIN_URL = '/login/'
 LOGOUT_URL = '/logout/'
@@ -502,6 +512,7 @@ PROFANITIES_LIST = ( 'asshat', 'asshead', 'asshole', 'cunt', 'fuck', 'gook', 'ni
 ARCHIVES = (
 	('djangoplicity.media.models.Image','djangoplicity.media.options.ImageOptions'),
 	('djangoplicity.media.models.Video','djangoplicity.media.options.VideoOptions'),
+	('djangoplicity.media.models.ImageComparison','djangoplicity.media.options.ImageComparisonOptions'),
 	('djangoplicity.releases.models.Release','djangoplicity.releases.options.ReleaseOptions'),		    
 )
 
@@ -529,7 +540,7 @@ ANNOUNCEMENTS_ARCHIVE_ROOT = 'archives/announcements/'
 
 VIDEOS_FEATURED_SUBJECT = 'hubblecast'
 
-#VIDEOS_SUBTITLES_FORMATS = ('hd_and_apple','medium_podcast')
+VIDEOS_SUBTITLES_FORMATS = ('hd_and_apple','medium_podcast')
 
 DEFAULT_CREATOR = u"ESA/Hubble"  
 DEFAULT_CREATOR_URL = "http://www.spacetelescope.org"
@@ -561,11 +572,6 @@ VIDEO_CONTENT_SERVERS = (
 import djangoplicity.crosslinks
 ARCHIVE_CROSSLINKS = djangoplicity.crosslinks.crosslinks_for_domain('spacetelescope.org')
 
-ARCHIVE_DERIVATIVES_OVERRIDE = {
-	'images' : 'new_hst',
-	'videos' : 'new_hst',
-}
-
 ##########
 # SOCIAL #
 ##########
@@ -590,7 +596,14 @@ REPORT_REGISTER_FORMATTERS = True
 # PHOTOSHOP CELERYWORKER #
 ##########################
 PHOTOSHOP_ROOT = local_settings.PHOTOSHOP_ROOT
+
+# For several djangoplicity installations to share a common
+# photoshop server, they must direct tasks to a common broker/vhost.
+# If the photoshop server is only to generate image derivatives for
+# one djangoplicity installation this setting can just be set to
+# none (which means the default broker for celery is used).
 PHOTOSHOP_BROKER = local_settings.PHOTOSHOP_BROKER
+NEWSFEATURE_FORMAT = 'newsfeature_hst'
 
 ##########	
 # CELERY #
@@ -618,6 +631,7 @@ CELERY_QUEUES = {
         "exchange_type": "direct",
         "binding_key": "photoshop"},
 }
+# Directs all image generation tasks to the "photoshop" queue
 CELERY_ROUTES = {
 	"media.image_derivatives" : { "queue" : "photoshop" }
 }

@@ -28,3 +28,8 @@ DEPLOYMENT_EXISTING_CHECKOUT = "~/Workspaces/web/"
 BROKER_HOST = "localhost"
 #BROKER_HOST = "aweb26.hq.eso.org"
 CELERY_ALWAYS_EAGER = True
+
+########
+# LDAP #
+########
+DISABLE_LDAP = True
