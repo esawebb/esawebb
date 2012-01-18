@@ -118,7 +118,7 @@ MEDIA_ROOT = "%s/static/" % PRJBASE
 MEDIA_URL = "/static/"
 STATIC_ROOT = "%s/static/app/" % PRJBASE
 STATIC_URL = "/static/app/"
-DJANGOPLICITY_MEDIA_URL = "/static/djangoplicity/"
+DJANGOPLICITY_MEDIA_URL = "/static/app/djangoplicity/"
 DJANGOPLICITY_MEDIA_ROOT = "%s/static" % DJANGOPLICITY_ROOT
 ADMIN_MEDIA_PREFIX = "/static/app/admin/"
 
