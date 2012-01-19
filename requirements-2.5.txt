@@ -8,3 +8,4 @@
 
 # Extra requirements needed for Python 2.5
 importlib==1.0.2
+ordereddict==1.1
