@@ -57,11 +57,13 @@ DEPLOYMENT_DEVELOP = False
 DEPLOYMENT_PERMS = [
 	{'path' : '%(VIRTUALENV)s/bin/*', 'user' : None, 'group' : None, 'perms' : 'a+x' },
     {'path' : '%(PRJBASE)s/bin/*', 'user' : None, 'group' : None, 'perms' : 'a+x' },
-	{'path' : '%(ROOT)s/docs/static/css/', 'user' : None, 'group' : 'w3hst', 'perms' : 'g+ws' },
-	{'path' : '%(ROOT)s/docs/static/js/', 'user' : None, 'group' : 'w3hst', 'perms' : 'g+ws' },
+	{'path' : '%(ROOT)s/docs/static/css/', 'user' : None, 'group' : 'w3hst', 'perms' : 'g+ws,o=rx' },
+	{'path' : '%(ROOT)s/docs/static/js/', 'user' : None, 'group' : 'w3hst', 'perms' : 'g+ws,o=rx' },
 	{'path' : '%(LOG_DIR)s/', 'user' : None, 'group' : 'w3hst', 'perms' : 'g+ws' },
 	{'path' : '%(LOG_DIR)s/*', 'user' : None, 'group' : 'w3hst', 'perms' : 'g+w' },
-	{'path' : '%(TMP_DIR)s/tmp/', 'user' : None, 'group' : 'w3hst', 'perms' : 'g+ws' },
+	{'path' : '%(TMP_DIR)s/', 'user' : None, 'group' : 'w3hst', 'perms' : 'g+ws,o=rx' },
+	{'path' : '%(ROOT)s/import', 'user' : None, 'group' : 'w3hst', 'perms' : 'g+ws,o=rx' },
+	{'path' : '%(ROOT)s/import/*', 'user' : None, 'group' : '-R w3hst', 'perms' : '-R g+ws,o=rx' },
 ]
 
 DEPLOYMENT_SYNC = [

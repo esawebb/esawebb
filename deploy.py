@@ -77,7 +77,7 @@ def main():
 		sys.exit(3)
 	
 	if 'after_install' in globals():
-		after_install( options, home_dir, title="Deployment tasks", activate=False )
+		after_install( options, home_dir, title="Deployment tasks", activate=True )
 
 # =======================================================
 # Deploy script creation:
@@ -260,6 +260,9 @@ def after_install( options, home_dir, title = "Post install tasks", activate=Tru
 	task_hooks( base_dir, home_dir, lib_dir, inc_dir, bin_dir, options, setting_name='post_install_tasks' )
 	task_vcs_install( base_dir, home_dir, bin_dir, options )
 	make_environment_relocatable( home_dir )
+	# Activate the virutal environment (needed to make all installed packages available for hooks).
+	if activate:
+		_activate_virtualenv( bin_dir )
 	task_hooks( base_dir, home_dir, lib_dir, inc_dir, bin_dir, options, setting_name='finalize_tasks' )
 	fixup_activate_scripts( home_dir, bin_dir, options ) # Fix up last, otherwise tasks depending on activate scripts will not run
 	if options.delete:
@@ -481,9 +484,9 @@ def task_move(  base_dir, home_dir, lib_dir, inc_dir, bin_dir, options, src=None
 
 
 
-def task_append( base_dir, home_dir, lib_dir, inc_dir, bin_dir, options, src=None, dst=None, marker=None ):
+def task_append( base_dir, home_dir, lib_dir, inc_dir, bin_dir, options, src=None, dst=None, marker=None, settings_module=None ):
 	if not src or not dst:
-		logger.errro("No source or destination defined")
+		logger.error("No source or destination defined")
 		return
 	
 	src = os.path.join( base_dir, src )
@@ -494,7 +497,19 @@ def task_append( base_dir, home_dir, lib_dir, inc_dir, bin_dir, options, src=Non
 		append_text = f.read()
 		f.close()
 		
-		
+		# If settings_module is provided (e.g "photoshop-celeryworker" or "spacetelescope", i.e a moduel with a conf
+		# package that can be loaded by djangoplicity-settings), then the local settings module specified on 
+		# the command-line will be used to substitute template variables in the src file, before being appended
+		# to the destination file.
+		if settings_module:
+			try:
+				from djangoplicity.settings import import_settings
+				settings_mod = import_settings( settings_module, local_settings_module=options.local_settings )
+				settings_ctx = dict( filter( lambda x: not x[0].startswith( "_" ), settings_mod.__dict__.items() ) )
+				append_text = append_text % settings_ctx
+			except ImportError, e:
+				logger.error( "task_append: settings_module can only be used if djangoplicity.settings is installed." )
+				
 		if marker is None:
 			marker = src
 		text = _insert_section( dst, append_text, marker )
@@ -691,6 +706,7 @@ def run_function( runfunc, **kwargs ):
 	def func( base_dir, home_dir, lib_dir, inc_dir, bin_dir, options ):
 		return runfunc( base_dir, home_dir, lib_dir, inc_dir, bin_dir, options, **kwargs )		
 	return func
+
 # -*- coding: utf-8 -*-
 #
 # spacetelescope.org
@@ -707,7 +723,7 @@ import sys
 # Make sure the settings can be loaded in other modules (currently fabfile.py, deploy.py and bootstrap.py)
 # 
 if 'settings' not in globals():
-	from djangoplicity.bootstrap.defaults import settings, PY_VERSION, run_function, task_move, task_append, task_run_manage
+	from djangoplicity.bootstrap.defaults import settings, PY_VERSION, run_function, task_move, task_append, task_run_manage, run_script
 	 
 	
 #
@@ -743,6 +759,7 @@ projects_settings = {
             'docs/static/archives/images/',
 			'docs/static/archives/videos/',
 			'docs/static/archives/releases/',
+			'import',
 		],
 	'symlinks' : [
 			( '../../virtualenv/lib/python%(version)s/site-packages/django/contrib/admin/media' % { 'version' : PY_VERSION }, 'docs/static/media' ),
@@ -761,6 +778,7 @@ projects_settings = {
 		run_function( task_append, src='tmp/conf/activate-djangoplicity.csh', dst='virtualenv/bin/activate.csh', marker="DJANGOPLICITY" ), 
 		run_function( task_move, src='tmp/conf/httpd-djangoplicity.conf', dst='virtualenv/apache/'),
 		run_function( task_move, src='tmp/conf/django.wsgi', dst='virtualenv/apache/django.wsgi' ),
+		run_script( "%(bin_dir)s/python", args=[ "%(base_dir)s/projects/djangoplicity/scripts/archive.create.dirs.py" ] ),
 	]
 }
 settings.update( projects_settings )

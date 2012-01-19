@@ -14,7 +14,7 @@ import sys
 # Make sure the settings can be loaded in other modules (currently fabfile.py, deploy.py and bootstrap.py)
 # 
 if 'settings' not in globals():
-	from djangoplicity.bootstrap.defaults import settings, PY_VERSION, run_function, task_move, task_append, task_run_manage
+	from djangoplicity.bootstrap.defaults import settings, PY_VERSION, run_function, task_move, task_append, task_run_manage, run_script
 	 
 	
 #
@@ -50,6 +50,7 @@ projects_settings = {
             'docs/static/archives/images/',
 			'docs/static/archives/videos/',
 			'docs/static/archives/releases/',
+			'import',
 		],
 	'symlinks' : [
 			( '../../virtualenv/lib/python%(version)s/site-packages/django/contrib/admin/media' % { 'version' : PY_VERSION }, 'docs/static/media' ),
@@ -68,6 +69,7 @@ projects_settings = {
 		run_function( task_append, src='tmp/conf/activate-djangoplicity.csh', dst='virtualenv/bin/activate.csh', marker="DJANGOPLICITY" ), 
 		run_function( task_move, src='tmp/conf/httpd-djangoplicity.conf', dst='virtualenv/apache/'),
 		run_function( task_move, src='tmp/conf/django.wsgi', dst='virtualenv/apache/django.wsgi' ),
+		run_script( "%(bin_dir)s/python", args=[ "%(base_dir)s/projects/djangoplicity/scripts/archive.create.dirs.py" ] ),
 	]
 }
 settings.update( projects_settings )
