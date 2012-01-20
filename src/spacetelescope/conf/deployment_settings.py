@@ -63,7 +63,9 @@ DEPLOYMENT_PERMS = [
 	{'path' : '%(LOG_DIR)s/*', 'user' : None, 'group' : 'w3hst', 'perms' : 'g+w' },
 	{'path' : '%(TMP_DIR)s/', 'user' : None, 'group' : 'w3hst', 'perms' : 'g+ws,o=rx' },
 	{'path' : '%(ROOT)s/import', 'user' : None, 'group' : 'w3hst', 'perms' : 'g+ws,o=rx' },
-	{'path' : '%(ROOT)s/import/*', 'user' : None, 'group' : '-R w3hst', 'perms' : '-R g+ws,o=rx' },
+	{'path' : '%(ROOT)s/import/*', 'user' : None, 'group' : 'w3hst', 'perms' : 'g+ws,o=rx' },
+	# o+w needded to allow video encoder to write files to the directories.
+	{'path' : '%(ROOT)s/import/**/*', 'user' : None, 'group' : '-R w3hst', 'perms' : '-R g+ws,o=rwx' },
 ]
 
 DEPLOYMENT_SYNC = [
