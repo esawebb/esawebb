@@ -755,10 +755,10 @@ SITE_DOMAIN = "www.spacetelescope.org"
 ##################
 # django-tinymce #
 ##################
-TINYMCE_JS_URL = STATIC_URL + "js/tiny_mce/tiny_mce.js"
-TINYMCE_JS_ROOT = STATIC_ROOT + "js/tiny_mce"
+TINYMCE_JS_URL = STATIC_URL + "tiny_mce/tiny_mce.js"
+TINYMCE_JS_ROOT = STATIC_ROOT + "tiny_mce"
 TINYMCE_DEFAULT_CONFIG = {
-	"mode" : "textareas",
+	#"mode" : "textareas",
 	"theme" : "advanced",
 	"plugins" : "style,layer,table,advimage,insertdatetime,searchreplace,contextmenu,paste,fullscreen,visualchars,nonbreaking",
 	"theme_advanced_buttons1" : "fullscreen,code,cleanup,|,cut,copy,paste,pastetext,pasteword,|,search,replace,|,justifyleft,justifycenter,justifyright,justifyfull,|,styleselect,formatselect",
@@ -768,14 +768,14 @@ TINYMCE_DEFAULT_CONFIG = {
 	"theme_advanced_toolbar_align" : "left",
 	"theme_advanced_statusbar_location" : "bottom",
 	"extended_valid_elements" : "a[name|class|href|target|title|onclick],img[usemap|class|src|border=0|alt|title|hspace|vspace|width|height|align|onmouseover|onmouseout|name|style],hr[class|width|size|noshade],span[class|align|style],script[language|type|src],object[width|height|classid|codebase|data|type|id|class|style],param[name|value],embed[src|type|width|height|flashvars|wmode|style],iframe[src|width|height|frameborder|marginheight|marginwidth|align]",
-	"editor_selector" : "vRichTextAreaField",
+	#"editor_selector" : "vRichTextAreaField",
 	"media_strict" : False,
 	#//relative_urls : False,
 	#//remove_script_host : True,
 	#//urlconverter_callback : "url_converter"
 	"convert_urls" : False,
 	"gecko_spellcheck" : True,
-} 
+}  
 TINYMCE_SPELLCHECKER = False
 TINYMCE_COMPRESSOR = False
 TINYMCE_FILEBROWSER = False
