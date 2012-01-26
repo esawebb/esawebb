@@ -11,7 +11,11 @@
 {% block content %}
 {% if object_list and page_obj.start_index == 1  %}
 <div class="featured_category_box">
+{%if object.videosubtitle_set.all %}
+{% embedvideo_subs object_list.0 "medium_flash,medium_podcast,h264" "hd_and_apple,hd720p_screen" "medium_podcast,h264" object.videosubtitle_set.all %}
+{%else %}
 {% embedvideo object_list.0 "medium_flash,medium_podcast,h264" "hd_and_apple,hd720p_screen" "medium_podcast,h264" %}
+{%endif%}
 <h1>{{object_list.0.title}}</h1>
 <p>{{object_list.0.headline}}</p>
 <div align="right"><a href="{{object_list.0.get_absolute_url}}">More information and download options</a></div>

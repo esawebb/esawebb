@@ -17,7 +17,11 @@ min-width: 860px;
 </style>
 <h1 style="min-width:640px;">{{ object.title }}</h1>
 {% include 'archives/embargo_notice.html' %}
-{% embedvideo object "medium_flash,h264" "hd720p_screen" "h264" %}
+{%if object.videosubtitle_set.all %}
+{% embedvideo_subs object "medium_flash,medium_podcast,h264" "hd_and_apple,hd720p_screen" "medium_podcast,h264" object.videosubtitle_set.all %}
+{%else %}
+{% embedvideo object "medium_flash,medium_podcast,h264" "hd_and_apple,hd720p_screen" "medium_podcast,h264" %}
+{%endif%}
 {% endblock %}
 
 {% block content %}
@@ -37,5 +41,6 @@ min-width: 860px;
 {% include "images/embedded_list.html" %}
 {% include "videos/embedded_list.html" %}
 {% include resources_template %}
+{% include "subtitles/embedded_list.html" %}
 {% include "archives/crosslinks.html" %}
 {% endblock %}
