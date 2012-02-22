@@ -516,7 +516,8 @@ PROFANITIES_LIST = ( 'asshat', 'asshead', 'asshole', 'cunt', 'fuck', 'gook', 'ni
 ARCHIVES = (
 	('djangoplicity.media.models.Image','djangoplicity.media.options.ImageOptions'),
 	('djangoplicity.media.models.Video','djangoplicity.media.options.VideoOptions'),
-	('djangoplicity.media.models.ImageComparison','djangoplicity.media.options.ImageComparisonOptions'),
+	('djangoplicity.media.models.VideoSubtitle','djangoplicity.media.options.VideoSubtitleOptions'),
+    ('djangoplicity.media.models.ImageComparison','djangoplicity.media.options.ImageComparisonOptions'),
 	('djangoplicity.releases.models.Release','djangoplicity.releases.options.ReleaseOptions'),
 	#('djangoplicity.announcements.models.Announcement','djangoplicity.announcements.options.AnnouncementOptions'),
 	('djangoplicity.products.models.AnnualReport','djangoplicity.products.options.AnnualReportOptions'),
