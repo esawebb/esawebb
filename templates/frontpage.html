@@ -51,12 +51,12 @@
 				{% load pages %}{% embed_page spacetelescope.frontpage_rightcol %}
 				<div class='potd_box'>
 				<h1>Archive Picture of the Day</h1>
-				<a href="{{potd.get_absolute_url}}"><img src='{{potd.resource_wallpaperthumbs.url}}' /></a>
+				<a href="{{potd.get_absolute_url}}"><img src='{% if potd.resource_potwmedium %}{{potd.resource_potwmedium.url}}{% else %}{{potd.resource_wallpaperthumbs.url}}{% endif %}' /></a>
 				<div class='title'><a href="{{potd.get_absolute_url}}">{{potd.title}}</a></div>
 				</div>
 				<div class='potd_box'>
 				<h1>Archive Video of the Day</h1>
-				<a href="{{votd.get_absolute_url}}"><img src='{{votd.resource_thumb.url}}' /></a>
+				<a href="{{votd.get_absolute_url}}"><img src='{% if votd.resource_potwmedium %}{{votd.resource_potwmedium.url}}{% else %}{{votd.resource_thumb.url}}{% endif %}' /></a>
 				<div class='title'><a href="{{votd.get_absolute_url}}">{{votd.title}}</a></div>
 				</div>
 			</div>
