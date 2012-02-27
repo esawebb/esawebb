@@ -18,7 +18,6 @@ import django.contrib.redirects.admin
 import django.contrib.sites.admin
 import djangoplicity.announcements.admin
 import djangoplicity.contrib.statistics.admin
-import djangoplicity.cron.admin
 import djangoplicity.menus.admin
 import djangoplicity.pages.admin
 import djangoplicity.search.admin
@@ -66,7 +65,6 @@ autoregister( admin_site, djangoplicity.newsletters.admin )
 
 #autoregister ( adminlogs_site, djangoplicity.contrib.redirects.admin )
 autoregister( adminlogs_site, djangoplicity.search.admin )
-autoregister( adminlogs_site, djangoplicity.cron.admin )
 autoregister( adminlogs_site, djangoplicity.authtkt.admin )
 autoregister( adminlogs_site, djangoplicity.google.admin )
 autoregister( adminlogs_site, djangoplicity.celery.admin )
