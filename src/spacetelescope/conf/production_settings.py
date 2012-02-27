@@ -32,8 +32,8 @@ DEPLOYMENT_NOTIFICATION = {
 	"from" : "esoepo-monitoring@eso.org",
 	"to" : ["webmaster@eso.org", "esoepo-monitoring@eso.org"],
 }
-
 ALLOW_DATABASE_OVERWRITE = False
+
 
 ##################
 # DATABASE SETUP #

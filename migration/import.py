@@ -1,7 +1,7 @@
 from django.conf import settings
 from django.contrib.redirects.models import Redirect
 from django.contrib.sites.models import Site
-from djangoplicity.logger import define_logger
+from djangoplicity.utils.logger import define_logger
 from djangoplicity.media.models import Image
 from djangoplicity.migration import run_migration, RedirectTask
 from djangoplicity.migration.apps.archives import ArchiveInitializationTask, \

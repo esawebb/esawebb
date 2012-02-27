@@ -8,11 +8,31 @@
 #   Luis Clara Gomes <lcgomes@eso.org>
 #
 
+"""
+DEPRECATED - Please use South data migrations instead.
+
+Certain templates embeds pages defined via the djangoplicity.poages app. They 
+use a page key to select which page to embed. To ensure that these keys are
+created a special management command "appsregister" will execute the code 
+in this module to ensure that the keys exists.
+
+Currently, the "appsregister" command must be run manually by the developer
+after a new deployment. Also, "appsregister" is no longer the preferred method
+for creating data in the database. Instead South data migrations should be used
+instead, which provides much better management and features. 
+"""
+
+
+
 # ========================   
 # Register global page key
 # ========================
 from djangoplicity.pages.models import register_page_key
 from django.utils.translation import ugettext as _
+
+import warnings
+
+warnings.warn( "Use of appsregister have been deprecated. Please use South data migrations instead.", DeprecationWarning )
 
 PAGE_KEYS = { 
 			  "login" : 'spacetelescope.login',

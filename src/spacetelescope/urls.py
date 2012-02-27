@@ -18,8 +18,8 @@ from spacetelescope import listener
 
 from djangoplicity.announcements.models import Announcement, WebUpdate
 from djangoplicity.announcements.options import AnnouncementOptions, WebUpdateOptions
-from djangoplicity.media.models import Image, Video, PictureOfTheWeek
-from djangoplicity.media.options import ImageOptions, VideoOptions, PictureOfTheWeekOptions
+from djangoplicity.media.models import Image, Video, PictureOfTheWeek, ImageComparison
+from djangoplicity.media.options import ImageOptions, VideoOptions, PictureOfTheWeekOptions, ImageComparisonOptions
 from django.views.generic.simple import redirect_to
 
 from djangoplicity.products.models import *
@@ -58,6 +58,7 @@ urlpatterns += patterns( '',
 
     # Media Archive
     ( r'^images/potw/', include('djangoplicity.media.urls_potw'), { 'model': PictureOfTheWeek, 'options': PictureOfTheWeekOptions } ),
+    ( r'^images/comparisons/', include('djangoplicity.media.urls_imagecomparisons'), { 'model': ImageComparison, 'options': ImageComparisonOptions } ),
 	( r'^images/', include('djangoplicity.media.urls_images'), { 'model': Image, 'options': ImageOptions } ),
     #( r'^news/feed/(?P<url>.*)/?$', 'django.contrib.syndication.views.feed', { 'feed_dict': ReleaseOptions.get_feeds() } ),
     ( r'^news/', include('djangoplicity.releases.urls'), { 'model': Release, 'options': ReleaseOptions } ),
@@ -91,12 +92,6 @@ urlpatterns += patterns( '',
 	
     ( r'^projects/fits_liberator/fitsimages/', include('djangoplicity.products.urls.fitsimages'), { 'model': FITSImage, 'options': FITSImageOptions } ),
     
-    
-#    ( r'^rss/feed.xml$', 'spacetelescope.views.rssfeedhack', { 'rssfile': 'feed.xml' } ),
-#    ( r'^rss/vodcast.xml$', 'spacetelescope.views.rssfeedhack', { 'rssfile': 'vodcast.xml' } ),
-#    ( r'^rss/vodcastfullhd.xml$', 'spacetelescope.views.rssfeedhack', { 'rssfile': 'vodcastfullhd.xml' } ),
-#    ( r'^rss/vodcasthd.xml$', 'spacetelescope.views.rssfeedhack', { 'rssfile': 'vodcasthd.xml' } ),
-#    ( r'^rss/hubblecasthd_amp.xml$', 'spacetelescope.views.rssfeedhack', { 'rssfile': 'hubblecasthd_amp.xml' } ),
     ( r'^rss/feed.xml$', redirect_to, { 'url': 'http://feeds.feedburner.com/hubble_news/' } ),
     ( r'^rss/vodcast.xml$', redirect_to, { 'url': 'http://feeds.feedburner.com/hubblecast_sd/' } ),
     ( r'^rss/vodcasthd.xml$', redirect_to, { 'url': 'http://feeds.feedburner.com/hubblecast/' } ),

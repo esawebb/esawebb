@@ -1,11 +1,25 @@
+# -*- coding: utf-8 -*-
+#
+# spacetelescope.org
+# Copyright 2010 ESO & ESA/Hubble
+#
+# Authors:
+#   Lars Holm Nielsen <lnielsen@eso.org>
+#   Luis Clara Gomes <lcgomes@eso.org>
+#
+
+"""
+Creation of LDAP/ADS users. 
+"""
+
 from django.db.models.signals import post_save
 from django.contrib.auth.models import User
-from django_auth_ldap.backend import populate_user
 from django_auth_ldap.backend import LDAPBackend
 
 def user_create_handler( sender=None, instance=None, created=None, raw=False, **kwargs ):
 	"""
-	When creating a user via the admin. Populate the user from ldap if possible.
+	When creating a user via the admin. Populate the user from ldap if possible and set 
+	an unusuable password.
 	"""
 	if created and not raw:
 		try:
@@ -15,9 +29,13 @@ def user_create_handler( sender=None, instance=None, created=None, raw=False, **
 			u.save()
 		except Exception:
 			pass
-		
-#def populate_user_handler( sender=None, user=None, ldap_user=None, **kwargs ):
-#	print ldap_user.attrs
 
 post_save.connect( user_create_handler, User )
+
+#
+#from django_auth_ldap.backend import populate_user
+#
+#def populate_user_handler( sender=None, user=None, ldap_user=None, **kwargs ):
+#	print ldap_user.attrs
+#
 #populate_user.connect( populate_user_handler, LDAPBackend )

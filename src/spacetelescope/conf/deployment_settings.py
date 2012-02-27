@@ -42,8 +42,8 @@ CONFIG_GEN_GENERATED_DIR = "%s/conf/" % TMP_DIR
 # DEPLOYMENT #
 ##############
 BUILD_NODES = ["aweb8"]
-WORKER_UID = None
-WORKER_GID = None
+#WORKER_UID = 2996
+#WORKER_GID = 31811
 WORKER_LOG_LEVEL = "INFO"
 WORKERS_CAM_FREQ = "1.0"
 
@@ -61,7 +61,7 @@ DEPLOYMENT_PERMS = [
 	{'path' : '%(ROOT)s/docs/static/js/', 'user' : None, 'group' : 'w3hst', 'perms' : 'g+ws,o=rx' },
 	{'path' : '%(LOG_DIR)s/', 'user' : None, 'group' : 'w3hst', 'perms' : 'g+ws' },
 	{'path' : '%(LOG_DIR)s/*', 'user' : None, 'group' : 'w3hst', 'perms' : 'g+w' },
-	{'path' : '%(TMP_DIR)s/', 'user' : None, 'group' : 'w3hst', 'perms' : 'g+ws,o=rx' },
+	{'path' : '%(TMP_DIR)s/', 'user' : None, 'group' : 'w3hst', 'perms' : 'g+ws,o=rwx' },
 	{'path' : '%(ROOT)s/import', 'user' : None, 'group' : 'w3hst', 'perms' : 'g+ws,o=rx' },
 	{'path' : '%(ROOT)s/import/*', 'user' : None, 'group' : 'w3hst', 'perms' : 'g+ws,o=rx' },
 	# o+w needded to allow video encoder to write files to the directories.
@@ -94,6 +94,11 @@ STATIC_ROOT = "%s/docs/static/app/" % ROOT
 DJANGOPLICITY_MEDIA_ROOT = "%s/static" % DJANGOPLICITY_ROOT
 SECRET_KEY = "g6ymvx$i1sv4k*g+nwfnx*3a1g&)^i6r9n6g4=f_$x^u(kwt8s"
 CSRF_MIDDLEWARE_SECRET = "g6ymvx$i1sv4k*g+nwfnx*3a1g&)^i6r9n6g4=f_$x^u(kwt8s"
+
+############
+# SESSIONS #
+############
+SESSION_ENGINE = 'django.contrib.sessions.backends.cached_db'
 
 ################
 # FILE UPLOADS #

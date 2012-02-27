@@ -49,14 +49,9 @@ projects_settings = {
             'docs/static',
             'docs/static/djangoplicity',
             'docs/static/archives',
-            'docs/static/archives/images/',
-			'docs/static/archives/videos/',
-			'docs/static/archives/releases/',
 			'import',
 		],
 	'symlinks' : [
-			( '../../virtualenv/lib/python%(version)s/site-packages/django/contrib/admin/media' % { 'version' : PY_VERSION }, 'docs/static/media' ),
-			( '../import' % { 'version' : PY_VERSION }, 'import' ), 
 		],
 	'develop-symlinks' : [
 			( '../../djangoplicity/static', 'projects/spacetelescope.org/static/djangoplicity' ), 
@@ -66,12 +61,12 @@ projects_settings = {
 	'manage.py' : 'projects/spacetelescope.org/src/spacetelescope/manage.py',
 	'settings_module' : 'spacetelescope.settings',
 	'finalize_tasks' : [ 
-		run_function( task_run_manage, task='config_gen' ), 
+		run_function( task_run_manage, task='config_gen' ), # Generate WSGi file, as well as tmp/conf/activate-djangoplicity.sh and friends  
 		run_function( task_append, src='tmp/conf/activate-djangoplicity.sh', dst='virtualenv/bin/activate', marker="DJANGOPLICITY" ),
 		run_function( task_append, src='tmp/conf/activate-djangoplicity.csh', dst='virtualenv/bin/activate.csh', marker="DJANGOPLICITY" ), 
-		run_function( task_move, src='tmp/conf/httpd-djangoplicity.conf', dst='virtualenv/apache/'),
-		run_function( task_move, src='tmp/conf/django.wsgi', dst='virtualenv/apache/django.wsgi' ),
-		run_script( "%(bin_dir)s/python", args=[ "%(base_dir)s/projects/djangoplicity/scripts/archive.create.dirs.py" ] ),
+		run_function( task_move, src='tmp/conf/httpd-djangoplicity.conf', dst='virtualenv/apache/'), # Currently not used
+		run_function( task_move, src='tmp/conf/django.wsgi', dst='virtualenv/apache/django.wsgi' ), # Move WSGI file into place.
+		run_script( "%(bin_dir)s/python", args=[ "%(base_dir)s/projects/djangoplicity/scripts/archive.create.dirs.py" ] ), # Create archive and import directories.
 	]
 }
 settings.update( projects_settings )

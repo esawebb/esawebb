@@ -56,9 +56,10 @@ python-xmp-toolkit==1.0.2
 python-avm-library==1.0b3
 
 # Translation/Timezone
-django-rosetta==0.5.5
+django-rosetta==0.6.5
 polib==0.5.1
 pytz==2011n
+pycountry==0.14.1
 
 # Imaging
 PIL==1.1.7

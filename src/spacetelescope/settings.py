@@ -26,6 +26,7 @@ LOG_DIR = local_settings.LOG_DIR
 TMP_DIR = local_settings.TMP_DIR
 ENABLE_SSL = local_settings.ENABLE_SSL
 GA_ID = "UA-2368492-6"
+FACEBOOK_APP_ID = "144508505618279"
 
 #####################
 # CONFIG GENERATION #
@@ -39,7 +40,35 @@ CONFIG_GEN_GENERATED_DIR = local_settings.CONFIG_GEN_GENERATED_DIR
 ###################
 # ERROR REPORTING #
 ###################
-INTERNAL_IPS = ('127.0.0.1',)
+class internal_ips( list ):
+	"""
+	INTERNAL_IPS container that allows more specific check if an IP is an internal IP.
+
+	Each entry must be a complete ( a.b.c.d ) or partial ( a.b.c. ) IP address. If
+	an entry is prefixed with tilde ( ~ ) it means the IP address is excluded. This allows
+	you e.g include the entire range 134.171. but exclude certain subnets and specific IP 
+	addresses.
+	"""
+	def __contains__( self, key ):
+		is_internal = False
+		for ip in self:
+			if ip[0] == '~':
+				if key.startswith( ip[1:] ):
+					return False
+			else:
+				if key.startswith( ip ):
+					is_internal = True
+		return is_internal
+
+INTERNAL_IPS = internal_ips( [
+	'127.0.0.1',
+	'134.171.',
+	'~134.171.17.',
+	'~134.171.86.',
+	'~134.171.172.',
+	'~134.171.185.',
+	'~134.171.80.85',
+] )
 
 SITE_ENVIRONMENT = local_settings.SITE_ENVIRONMENT
 DEBUG = local_settings.DEBUG
@@ -161,7 +190,7 @@ CACHE_MIDDLEWARE_KEY_PREFIX = SHORT_NAME
 CACHE_MIDDLEWARE_ANONYMOUS_ONLY = True
 
 ### keyedcached settings:
-CACHE_TIMEOUT = CACHE_MIDDLEWARE_SECONDS 
+CACHE_TIMEOUT = CACHE_MIDDLEWARE_SECONDS if CACHES['default']['BACKEND'] != 'django.core.cache.backends.dummy.DummyCache' else 0 # prevents stupid error from keyecache
 CACHE_PREFIX = SHORT_NAME
 
 USE_ETAGS = True
@@ -185,6 +214,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
 	'djangoplicity.utils.context_processors.project_environment',
 	'djangoplicity.utils.context_processors.google_analytics_id',
 	'djangoplicity.utils.context_processors.djangoplicity_environment',
+	'djangoplicity.archives.context_processors.internal_request',
 )
 
 ROOT_URLCONF = 'spacetelescope.urls'
@@ -263,6 +293,9 @@ MIDDLEWARE_CLASSES += (
     # - Handles ETags based on the USE_ETAGS setting.
     'django.middleware.common.CommonMiddleware', # Request/Response
     
+    
+    # Sets a boolean session variable INTERNAL_REQUEST if request.META['REMOTE_ADDR'] is in INTERNAL_IPS 
+    'djangoplicity.archives.middleware.InternalRequestMiddleware', # Request
 )
 
 
@@ -423,42 +456,43 @@ LOGIN_REDIRECT_URL = '/'
 #############
 # LDAP AUTH #
 #############
-import ldap
-from django_auth_ldap.config import LDAPSearch, ActiveDirectoryGroupType
-
-AUTH_LDAP_SERVER_URI = "ldaps://ldap.ads.eso.org:636/ads.eso.org"
-
-AUTH_LDAP_GLOBAL_OPTIONS = {
-	ldap.OPT_REFERRALS : 0,
-	ldap.OPT_PROTOCOL_VERSION : 3,
-	ldap.OPT_X_TLS_REQUIRE_CERT : ldap.OPT_X_TLS_NEVER
-}
-
-AUTH_LDAP_BIND_DN = "xskioskldap"
-AUTH_LDAP_BIND_PASSWORD = "LDAP1420"
-AUTH_LDAP_USER_SEARCH = LDAPSearch( "DC=ads,DC=eso,DC=org",
-    ldap.SCOPE_SUBTREE, "(&(objectCategory=user)(objectClass=person)(sAMAccountName=%(user)s)(!(userAccountControl:1.2.840.113556.1.4.803:=2)))" )
-
-AUTH_LDAP_USER_ATTR_MAP = {
-          "first_name": "givenName",
-          "last_name": "sn",
-          "email": "mail"
-}
-
-AUTH_LDAP_GROUP_TYPE = ActiveDirectoryGroupType()
-AUTH_LDAP_GROUP_SEARCH = LDAPSearch( "dc=ads,dc=eso,dc=org",
-    ldap.SCOPE_SUBTREE, "(objectClass=group)"
-)
-
-# Defaults:
-# - ePOD staff will get active/staff account - but no permissions.
-# - All ESO staff will get an inactive account on login - this account has to manually be activated.
-AUTH_LDAP_ALWAYS_UPDATE_USER = False # Prevent user from being updated every time a user logs in.
-
-AUTH_LDAP_USER_FLAGS_BY_GROUP = {
-	"is_active": "CN=SA-PAD-EPR,OU=Garching,OU=Shared Acess Groups,OU=Groups,DC=ads,DC=eso,DC=org",
-	"is_staff": "CN=SA-PAD-EPR,OU=Garching,OU=Shared Acess Groups,OU=Groups,DC=ads,DC=eso,DC=org",
-}
+if not  local_settings.DISABLE_LDAP: # Ensure that module is not loaded if disabled
+	import ldap
+	from django_auth_ldap.config import LDAPSearch, ActiveDirectoryGroupType
+	
+	AUTH_LDAP_SERVER_URI = "ldaps://ldap.ads.eso.org:636/ads.eso.org"
+	
+	AUTH_LDAP_GLOBAL_OPTIONS = {
+		ldap.OPT_REFERRALS : 0,
+		ldap.OPT_PROTOCOL_VERSION : 3,
+		ldap.OPT_X_TLS_REQUIRE_CERT : ldap.OPT_X_TLS_NEVER
+	}
+	
+	AUTH_LDAP_BIND_DN = "xskioskldap"
+	AUTH_LDAP_BIND_PASSWORD = "LDAP1420"
+	AUTH_LDAP_USER_SEARCH = LDAPSearch( "DC=ads,DC=eso,DC=org",
+	    ldap.SCOPE_SUBTREE, "(&(objectCategory=user)(objectClass=person)(sAMAccountName=%(user)s)(!(userAccountControl:1.2.840.113556.1.4.803:=2)))" )
+	
+	AUTH_LDAP_USER_ATTR_MAP = {
+	          "first_name": "givenName",
+	          "last_name": "sn",
+	          "email": "mail"
+	}
+	
+	AUTH_LDAP_GROUP_TYPE = ActiveDirectoryGroupType()
+	AUTH_LDAP_GROUP_SEARCH = LDAPSearch( "dc=ads,dc=eso,dc=org",
+	    ldap.SCOPE_SUBTREE, "(objectClass=group)"
+	)
+	
+	# Defaults:
+	# - ePOD staff will get active/staff account - but no permissions.
+	# - All ESO staff will get an inactive account on login - this account has to manually be activated.
+	AUTH_LDAP_ALWAYS_UPDATE_USER = False # Prevent user from being updated every time a user logs in.
+	
+	AUTH_LDAP_USER_FLAGS_BY_GROUP = {
+		"is_active": "CN=SA-PAD-EPR,OU=Garching,OU=Shared Acess Groups,OU=Groups,DC=ads,DC=eso,DC=org",
+		"is_staff": "CN=SA-PAD-EPR,OU=Garching,OU=Shared Acess Groups,OU=Groups,DC=ads,DC=eso,DC=org",
+	}
 
 ############
 # AUTH_TKT #
@@ -513,9 +547,12 @@ PROFANITIES_LIST = ( 'asshat', 'asshead', 'asshole', 'cunt', 'fuck', 'gook', 'ni
 # ARCHIVE #
 ###########
 
+# For static media protection to be enabled, and archive must be present here
+# For file import to work, the archive must be present here.
 ARCHIVES = (
 	('djangoplicity.media.models.Image','djangoplicity.media.options.ImageOptions'),
 	('djangoplicity.media.models.Video','djangoplicity.media.options.VideoOptions'),
+	('djangoplicity.media.models.VideoSubtitle','djangoplicity.media.options.VideoSubtitleOptions'),
 	('djangoplicity.media.models.ImageComparison','djangoplicity.media.options.ImageComparisonOptions'),
 	('djangoplicity.releases.models.Release','djangoplicity.releases.options.ReleaseOptions'),
 	#('djangoplicity.announcements.models.Announcement','djangoplicity.announcements.options.AnnouncementOptions'),
@@ -544,6 +581,7 @@ ARCHIVES = (
 	('djangoplicity.products.models.Presentation','djangoplicity.products.options.PresentationOptions'),
 	('djangoplicity.products.models.PressKit','djangoplicity.products.options.PressKitOptions'),
 	('djangoplicity.products.models.SlideShow','djangoplicity.products.options.SlideShowOptions'),
+	('djangoplicity.products.models.ElectronicCard','djangoplicity.products.options.ElectronicCardOptions'),
 	('djangoplicity.products.models.Sticker','djangoplicity.products.options.StickerOptions'),
 	('djangoplicity.products.models.TechnicalDocument','djangoplicity.products.options.TechnicalDocumentOptions'),
 	('djangoplicity.products.models.UserVideo','djangoplicity.products.options.UserVideoOptions'),
@@ -553,7 +591,6 @@ ARCHIVES = (
 ARCHIVE_EMBARGO_LOGIN = ('hst','vxiofpia')
 ARCHIVE_EMAIL_SENDER = "ESA/Hubble Information Centre <hubble@eso.org>" 
 
-ARCHIVE_RESOURCE_FIELDS = False
 ARCHIVE_URL_QUERY_PREFIX = 'archive'
 ARCHIVE_URL_DETAIL_PREFIX = ''
 ARCHIVE_URL_FEED_PREFIX = 'feed'
@@ -575,6 +612,10 @@ ANNOUNCEMENTS_ARCHIVE_ROOT = 'archives/announcements/'
 VIDEOS_FEATURED_SUBJECT = 'hubblecast'
 
 VIDEOS_SUBTITLES_FORMATS = ('hd_and_apple','medium_podcast')
+# List of extra formats which should be removed when importing new videos.
+VIDEOS_FORMATS_REMOVE = [
+	#'hd_broadcast_720p25',
+]
 
 DEFAULT_CREATOR = u"ESA/Hubble"  
 DEFAULT_CREATOR_URL = "http://www.spacetelescope.org"
@@ -585,7 +626,7 @@ DEFAULT_CONTACT_POSTAL_CODE= u"D-85748"
 DEFAULT_CONTACT_COUNTRY = u"Germany" 
 DEFAULT_RIGHTS = "Creative Commons Attribution 3.0 Unported license"
 DEFAULT_PUBLISHER = u"ESA/Hubble"
-DEFAULT_PUBLISHER_ID = u"vamp://esahubble"
+DEFAULT_PUBLISHER_ID = u"esahubble"
 
 DEFAULT_CREDIT = u"NASA &amp; ESA"
 
@@ -775,7 +816,7 @@ TINYMCE_DEFAULT_CONFIG = {
 	#//urlconverter_callback : "url_converter"
 	"convert_urls" : False,
 	"gecko_spellcheck" : True,
-}  
+} 
 TINYMCE_SPELLCHECKER = False
 TINYMCE_COMPRESSOR = False
 TINYMCE_FILEBROWSER = False
