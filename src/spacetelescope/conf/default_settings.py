@@ -14,8 +14,7 @@ import sys
 #############################
 # ENVIRONMENT CONFIGURATION #
 #############################
-ROOT = "/Users/%s/Workspaces/sites/spacetelescope" % getpass.getuser()
-PRJBASE = "%s/projects/spacetelescope.org" % ROOT
+ROOT = "/Users/%s/Workspaces/sites/spacetelescope" % getpass.getuser() if platform.system() == 'Darwin' else "/home/%s/Workspaces/sites/eso" % getpass.getuser()
 DJANGOPLICITY_ROOT = "%s/projects/djangoplicity" % ROOT
 
 BUILD_ROOT = ROOT
