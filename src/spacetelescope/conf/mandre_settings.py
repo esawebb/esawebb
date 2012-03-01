@@ -46,7 +46,6 @@ DEBUG_PROFILER=False
 # DATABASE SETUP #
 ##################
 DATABASES = copy_setting(DATABASES)
-DATABASES['default']['PASSWORD'] = "M:Uel10h1"
 #DATABASES['default']['HOST'] = "mysql1i.hq.eso.org"
 #DATABASES['default']['PASSWORD'] = "fivjeylvoked"
 
