@@ -215,14 +215,19 @@ def adjust_options( options, args, exclude=[] ):
 		options.use_distribute = True
 		options.unzip_setuptools = True
 		options.prompt = "(%s) " % _get_setting( 'prompt', VIRTUALENV_DIRNAME )
+		options.never_download = True
 	except AttributeError:
 		pass
 	
 	if 'existing-checkout' not in exclude and options.existing_checkout_dir:
 		tmppath = os.path.abspath( os.path.expandvars( os.path.expanduser( options.existing_checkout_dir ) ) )
+		if not tmppath:
+			print( "Existing checkout directory %s does not exists." % tmppath )
 		options.existing_checkout_dir = tmppath if os.path.exists( tmppath ) else None
 	if 'relocate-to' not in exclude and options.relocate_to:
 		options.relocate_to = options.relocate_to if os.path.exists( options.relocate_to ) else None
+		if options.relocate_to is None:
+			print( "Relocate to directory %s does not exists." % options.relocate_to )
 		
 	# Modify project settings if specific tag has been specified
 	if 'tag' not in exclude and options.tag:
@@ -258,7 +263,7 @@ def after_install( options, home_dir, title = "Post install tasks", activate=Tru
 	task_hooks( base_dir, home_dir, lib_dir, inc_dir, bin_dir, options, setting_name='pre_install_tasks' ) 
 	task_install_requirements( base_dir, home_dir, bin_dir )
 	task_hooks( base_dir, home_dir, lib_dir, inc_dir, bin_dir, options, setting_name='post_install_tasks' )
-	task_vcs_install( base_dir, home_dir, bin_dir, options )
+	task_vcs_install( base_dir, home_dir, bin_dir, lib_dir, options )
 	make_environment_relocatable( home_dir )
 	# Activate the virutal environment (needed to make all installed packages available for hooks).
 	if activate:
@@ -277,7 +282,7 @@ def after_install( options, home_dir, title = "Post install tasks", activate=Tru
 # ==========================================
 # Common tasks
 # ==========================================
-def task_vcs_install( base_dir, home_dir, bin_dir, options ):
+def task_vcs_install( base_dir, home_dir, bin_dir, lib_dir, options ):
 	"""
 	Install checked out VCS projects. Use the --develop option to install them as 
 	editable.
@@ -286,15 +291,19 @@ def task_vcs_install( base_dir, home_dir, bin_dir, options ):
 	
 	vcs_base_dir = os.path.join( base_dir, _get_setting( 'vcs_base_dir', 'projects' ) )
 	vcs_projects = _get_setting( 'vcs_projects', [] )
+	
+	site_packages_dir = os.path.join( lib_dir, "site-packages" )
 
 	for vcs_dirname, vcs_url in vcs_projects:
 		try:
 			vcs_dir = os.path.join( vcs_base_dir, vcs_dirname )
 			if os.path.exists( os.path.join( vcs_dir, "setup.py" ) ):
 				if options.develop:
-					call_subprocess( [os.path.join( bin_dir, "pip" ), "install", "-I", "-U", "-E", home_dir, "-e", vcs_dir ] ) 
+					cmds = [os.path.join( bin_dir, "pip" ), "install", "-I", "-U", "-E", home_dir, "-e", vcs_dir ]
 				else:
-					call_subprocess( [os.path.join( bin_dir, "pip" ), "install", "-I", "-U", "-E", home_dir,  vcs_dir ] )
+					cmds = [os.path.join( bin_dir, "pip" ), "install", "-I", "-U", "-E", home_dir, vcs_dir ]
+				logger.debug( "Running %s" % " ".join( cmds ) )
+				call_subprocess( cmds )
 			else:
 				logger.error( "Project located at %s has no setup.py file" % vcs_dir )
 		except Exception, e:
@@ -349,7 +358,6 @@ def task_vcs_checkout_update( base_dir, options ):
 					vcs_dir = None
 
 			if vcs_dir:
-				print vcs_dir
 				# Checkout/update project
 				try:
 					vc_type, url = vcs_url.split( '+', 1 )
@@ -405,7 +413,8 @@ def task_install_requirements( base_dir, home_dir, bin_dir ):
 			cmd += ["--find-links", repository]
 		if options:
 			cmd += options
-		cmd += ["-E", home_dir, "-r", reqfile] 
+		cmd += ["-E", home_dir]
+		cmd += ["-r", reqfile] 
 		
 		logger.notify( "Installing packages defined in %s" % reqfile )
 		try:
@@ -758,14 +767,9 @@ projects_settings = {
             'docs/static',
             'docs/static/djangoplicity',
             'docs/static/archives',
-            'docs/static/archives/images/',
-			'docs/static/archives/videos/',
-			'docs/static/archives/releases/',
 			'import',
 		],
 	'symlinks' : [
-			( '../../virtualenv/lib/python%(version)s/site-packages/django/contrib/admin/media' % { 'version' : PY_VERSION }, 'docs/static/media' ),
-			( '../import' % { 'version' : PY_VERSION }, 'import' ), 
 		],
 	'develop-symlinks' : [
 			( '../../djangoplicity/static', 'projects/spacetelescope.org/static/djangoplicity' ), 
@@ -775,12 +779,12 @@ projects_settings = {
 	'manage.py' : 'projects/spacetelescope.org/src/spacetelescope/manage.py',
 	'settings_module' : 'spacetelescope.settings',
 	'finalize_tasks' : [ 
-		run_function( task_run_manage, task='config_gen' ), 
+		run_function( task_run_manage, task='config_gen' ), # Generate WSGi file, as well as tmp/conf/activate-djangoplicity.sh and friends  
 		run_function( task_append, src='tmp/conf/activate-djangoplicity.sh', dst='virtualenv/bin/activate', marker="DJANGOPLICITY" ),
 		run_function( task_append, src='tmp/conf/activate-djangoplicity.csh', dst='virtualenv/bin/activate.csh', marker="DJANGOPLICITY" ), 
-		run_function( task_move, src='tmp/conf/httpd-djangoplicity.conf', dst='virtualenv/apache/'),
-		run_function( task_move, src='tmp/conf/django.wsgi', dst='virtualenv/apache/django.wsgi' ),
-		run_script( "%(bin_dir)s/python", args=[ "%(base_dir)s/projects/djangoplicity/scripts/archive.create.dirs.py" ] ),
+		run_function( task_move, src='tmp/conf/httpd-djangoplicity.conf', dst='virtualenv/apache/'), # Currently not used
+		run_function( task_move, src='tmp/conf/django.wsgi', dst='virtualenv/apache/django.wsgi' ), # Move WSGI file into place.
+		run_script( "%(bin_dir)s/python", args=[ "%(base_dir)s/projects/djangoplicity/scripts/archive.create.dirs.py" ] ), # Create archive and import directories.
 	]
 }
 settings.update( projects_settings )

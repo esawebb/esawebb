@@ -888,7 +888,11 @@ LOGGING = {
 			'handlers': local_settings.LOGGING_HANDLER,
             'propagate': True,
             'level': 'DEBUG' if DEBUG else 'INFO',
-		}
+		},
+		'pycountry.db' : {
+			'handlers': ['null'],
+            'propagate': False,
+		},
     },
 }
 
