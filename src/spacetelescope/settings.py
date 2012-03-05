@@ -341,7 +341,6 @@ INSTALLED_APPS += (
 	#'djangoplicity.massmailer',
 	#'djangoplicity.news',
 	'djangoplicity.pages',
-	#'djangoplicity.cron',
 	'djangoplicity.media',
 	#'djangoplicity.contrib.redirects',
 	'djangoplicity.archives',
