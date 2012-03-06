@@ -355,7 +355,7 @@ INSTALLED_APPS += (
 	'djangoplicity.authtkt',
 	'djangoplicity.google',
 	'djangoplicity.cache',
-	#'djangoplicity.inventory',
+	'djangoplicity.inventory',
 	'djangoplicity.adminhistory',
     'djangoplicity.utils',
     'djangoplicity.celery',
