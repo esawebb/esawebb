@@ -13,10 +13,10 @@
 {% include 'archives/embargo_notice.html' %}
 {% if object.disclaimer %}<div class="disclaimer">{{ object.disclaimer|safe }}</div>{% endif %}
 <h3 class="pr_typeid">{{object.id}} - {{object.release_type}}</h3>
-{% if translations %}
+{% if translations.countries %}
 <div align="left"><div align="left" style="margin-top: 10px; width: 590px;">
 <div style="font-size: 11px; margin-bottom:5px;">Translations:</div>
-<span>{% for t in translations %}
+<span>{% for t in translations.languages %}
 <a href="{{t.release_url}}" class="noicon" title="{{ t.name }}" style="{% ifequal t.name "Chile" %}margin-left:15px;{% endifequal %}margin-right: 5px;"><img src="{{t.flag_url}}" alt="{{ t.name }}" class="nopadding"/></a>
 
 {% endfor %}
