@@ -210,7 +210,7 @@ def adjust_options( options, args, exclude=[] ):
 	
 	# Set default options and remove possibility to set them
 	try:
-		options.no_site_packages = True
+		#options.no_site_packages = True
 		options.clear = True
 		options.use_distribute = True
 		options.unzip_setuptools = True
@@ -220,9 +220,12 @@ def adjust_options( options, args, exclude=[] ):
 	
 	if 'existing-checkout' not in exclude and options.existing_checkout_dir:
 		tmppath = os.path.abspath( os.path.expandvars( os.path.expanduser( options.existing_checkout_dir ) ) )
+		logger.warn( "Existing checkout directory %s does not exists." % tmppath )
 		options.existing_checkout_dir = tmppath if os.path.exists( tmppath ) else None
 	if 'relocate-to' not in exclude and options.relocate_to:
 		options.relocate_to = options.relocate_to if os.path.exists( options.relocate_to ) else None
+		if options.relocate_to is None:
+			logger.warn( "Relocate to directory %s does not exists." % options.relocate_to )
 		
 	# Modify project settings if specific tag has been specified
 	if 'tag' not in exclude and options.tag:
@@ -292,9 +295,9 @@ def task_vcs_install( base_dir, home_dir, bin_dir, options ):
 			vcs_dir = os.path.join( vcs_base_dir, vcs_dirname )
 			if os.path.exists( os.path.join( vcs_dir, "setup.py" ) ):
 				if options.develop:
-					call_subprocess( [os.path.join( bin_dir, "pip" ), "install", "-I", "-U", "-E", home_dir, "-e", vcs_dir ] ) 
+					call_subprocess( [os.path.join( bin_dir, "pip" ), "install", "-I", "-U", "-e", vcs_dir ] ) 
 				else:
-					call_subprocess( [os.path.join( bin_dir, "pip" ), "install", "-I", "-U", "-E", home_dir,  vcs_dir ] )
+					call_subprocess( [os.path.join( bin_dir, "pip" ), "install", "-I", "-U", vcs_dir ] )
 			else:
 				logger.error( "Project located at %s has no setup.py file" % vcs_dir )
 		except Exception, e:
@@ -405,7 +408,7 @@ def task_install_requirements( base_dir, home_dir, bin_dir ):
 			cmd += ["--find-links", repository]
 		if options:
 			cmd += options
-		cmd += ["-E", home_dir, "-r", reqfile] 
+		cmd += ["-r", reqfile] 
 		
 		logger.notify( "Installing packages defined in %s" % reqfile )
 		try:
@@ -758,14 +761,9 @@ projects_settings = {
             'docs/static',
             'docs/static/djangoplicity',
             'docs/static/archives',
-            'docs/static/archives/images/',
-			'docs/static/archives/videos/',
-			'docs/static/archives/releases/',
 			'import',
 		],
 	'symlinks' : [
-			( '../../virtualenv/lib/python%(version)s/site-packages/django/contrib/admin/media' % { 'version' : PY_VERSION }, 'docs/static/media' ),
-			( '../import' % { 'version' : PY_VERSION }, 'import' ), 
 		],
 	'develop-symlinks' : [
 			( '../../djangoplicity/static', 'projects/spacetelescope.org/static/djangoplicity' ), 
@@ -775,12 +773,12 @@ projects_settings = {
 	'manage.py' : 'projects/spacetelescope.org/src/spacetelescope/manage.py',
 	'settings_module' : 'spacetelescope.settings',
 	'finalize_tasks' : [ 
-		run_function( task_run_manage, task='config_gen' ), 
+		run_function( task_run_manage, task='config_gen' ), # Generate WSGi file, as well as tmp/conf/activate-djangoplicity.sh and friends  
 		run_function( task_append, src='tmp/conf/activate-djangoplicity.sh', dst='virtualenv/bin/activate', marker="DJANGOPLICITY" ),
 		run_function( task_append, src='tmp/conf/activate-djangoplicity.csh', dst='virtualenv/bin/activate.csh', marker="DJANGOPLICITY" ), 
-		run_function( task_move, src='tmp/conf/httpd-djangoplicity.conf', dst='virtualenv/apache/'),
-		run_function( task_move, src='tmp/conf/django.wsgi', dst='virtualenv/apache/django.wsgi' ),
-		run_script( "%(bin_dir)s/python", args=[ "%(base_dir)s/projects/djangoplicity/scripts/archive.create.dirs.py" ] ),
+		run_function( task_move, src='tmp/conf/httpd-djangoplicity.conf', dst='virtualenv/apache/'), # Currently not used
+		run_function( task_move, src='tmp/conf/django.wsgi', dst='virtualenv/apache/django.wsgi' ), # Move WSGI file into place.
+		run_script( "%(bin_dir)s/python", args=[ "%(base_dir)s/projects/djangoplicity/scripts/archive.create.dirs.py" ] ), # Create archive and import directories.
 	]
 }
 settings.update( projects_settings )

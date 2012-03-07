@@ -341,7 +341,6 @@ INSTALLED_APPS += (
 	#'djangoplicity.massmailer',
 	#'djangoplicity.news',
 	'djangoplicity.pages',
-	#'djangoplicity.cron',
 	'djangoplicity.media',
 	#'djangoplicity.contrib.redirects',
 	'djangoplicity.archives',
@@ -888,7 +887,11 @@ LOGGING = {
 			'handlers': local_settings.LOGGING_HANDLER,
             'propagate': True,
             'level': 'DEBUG' if DEBUG else 'INFO',
-		}
+		},
+		'pycountry.db' : {
+			'handlers': ['null'],
+            'propagate': False,
+		},
     },
 }
 

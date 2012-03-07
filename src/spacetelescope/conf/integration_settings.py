@@ -47,6 +47,7 @@ DEPLOYMENT_NOTIFICATION = {
 	"from" : "esoepo-monitoring@eso.org",
 	"to" : ["esoepo-monitoring@eso.org"],
 }
+PYTHON = "python2.5"
 
 ##################
 # DATABASE SETUP #
