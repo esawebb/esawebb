@@ -35,6 +35,7 @@ DEBUG=True
 TEMPLATE_DEBUG=True
 DEBUG_SQL=False
 DEBUG_PROFILER=False
+DEBUG_TOOLBAR = True
 
 #MEDIA_ROOT = 
 #STATIC_ROOT = "/Volumes/webdocs/hubble/docs/static/app/"
