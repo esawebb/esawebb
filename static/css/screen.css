@@ -4,7 +4,7 @@
 
 body {
 	background-color:;
-	background: #051226 url('../images/background.jpg') no-repeat top center;
+	background: #000922 url('../images/background.jpg') no-repeat top center;
 	font-family: Arial, Helvetica, san-serif;
 	font-size:12px;
 	
@@ -108,7 +108,7 @@ ol li {
 
 #topcontent .shadow {
 	margin-left:1px;
-	margin-top:-3px;
+	margin-top:0px;
 	border: none;
 	background-color:white;
 }
