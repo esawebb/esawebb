@@ -17,7 +17,6 @@
 					<div class='date'>{{ object.release_date|datetime:"DATE_LONG"}}</div>
 					<div class='title'><a href="{{object.get_absolute_url}}">{{ object.title }}</a></div>
 				</div>
-				
 			</div>
 			<div class="clear"></div>
 			{% endfor %}
@@ -50,25 +49,28 @@
 			<div class='leftbord2 xtrapad'>
 				{% load pages %}{% embed_page spacetelescope.frontpage_rightcol %}
 				<div class='potd_box'>
-				<h1>Archive Picture of the Day</h1>
+				<h1 class='thin'>Archive</h1><h1>Picture of the Day</h1>
 				<a href="{{potd.get_absolute_url}}"><img src='{% if potd.resource_potwmedium %}{{potd.resource_potwmedium.url}}{% else %}{{potd.resource_wallpaperthumbs.url}}{% endif %}' /></a>
 				<div class='title'><a href="{{potd.get_absolute_url}}">{{potd.title}}</a></div>
 				</div>
+				<div class="potd_separator"></div>
 				<div class='potd_box'>
-				<h1>Archive Video of the Day</h1>
+				<h1 class='thin'>Archive</h1><h1>Video of the Day</h1>
 				<a href="{{votd.get_absolute_url}}"><img src='{% if votd.resource_potwmedium %}{{votd.resource_potwmedium.url}}{% else %}{{votd.resource_thumb.url}}{% endif %}' /></a>
 				<div class='title'><a href="{{votd.get_absolute_url}}">{{votd.title}}</a></div>
 				</div>
 			</div>
 		</div>
 	
-		<div class='clear'></div>
-		
-		<div class='grid_6 fp_news fpviewall'>
+		<div class='grid_6 fp_news'>
+		<div class='fpviewall'
 		<a href="{% url announcements_defaultquery %}">View all announcements</a>
 		</div>
-		<div class='grid_6 fp_news fpviewall'>
+		</div>
+		<div class='grid_6 fp_news'>
+		<div class='fpviewall'
 		<a href="{% url videos_query_category "hubblecast" %}">View all Hubblecast episodes</a>
+		</div>
 		</div>
 		
 		<div class='clear'></div>
