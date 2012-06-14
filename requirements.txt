@@ -64,6 +64,7 @@ pycountry==0.14.1
 
 # Imaging
 PIL==1.1.7
+magickwand==0.2
 
 # Text
 html2text==2.40
