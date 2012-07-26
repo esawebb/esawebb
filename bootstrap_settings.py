@@ -42,6 +42,7 @@ projects_settings = {
 			( 'djangoplicity-newsletters', 'hg+https://eso_readonly:pg11opc@bitbucket.org/eso/djangoplicity-newsletters',),
 			( 'djangoplicity-actions', 'hg+https://eso_readonly:pg11opc@bitbucket.org/eso/djangoplicity-actions',),
 			( 'djangoplicity', 'hg+https://eso_readonly:pg11opc@bitbucket.org/eso/djangoplicity' ),
+			( 'djangoplicity-imgvote', 'hg+https://eso_readonly:pg11opc@bitbucket.org/eso/djangoplicity-imgvote',),
 			( 'spacetelescope.org', 'hg+https://eso_readonly:pg11opc@bitbucket.org/eso/spacetelescope.org' ), 
 		],	
 	'directories' : settings['directories'] + [

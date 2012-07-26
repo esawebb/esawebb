@@ -39,6 +39,7 @@ import djangoplicity.newsletters.admin
 #import djangoplicity.customsearch.admin
 #import djangoplicity.eventcalendar.admin
 import djangoplicity.actions.admin
+import djangoplicity.imgvote.admin
 
 # Register each applications admin interfaces with
 # an admin site.
@@ -93,3 +94,5 @@ adminshop_site = satchmo_admin( adminshop_site )
 autoregister( adminshop_site, djangoplicity.archives.contrib.satchmo.freeorder.admin )
 #autoregister( adminshop_site, djangoplicity.archives.contrib.inventory_control.admin )
 #autoregister( adminshop_site, djangoplicity.inventory.admin )
+
+autoregister( admin_site, djangoplicity.imgvote.admin )

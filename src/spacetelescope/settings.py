@@ -396,6 +396,7 @@ INSTALLED_APPS += (
     'shipping.modules.tieredweight',
     'django_config_gen',
     'tinymce',
+	'djangoplicity.imgvote',
 )
 
 
@@ -1042,3 +1043,7 @@ SHOP_PICKUP_LOCATIONS = (
 	  'delivery' : _("Karl-Schwarzschild-Str. 2, 85748 Garching, GERMANY"),
 	},
 )
+
+RECAPTCHA_PUBLIC_KEY='6LcUjdQSAAAAAHWYDCgHT40vC0NLzUPcmwVDh9yU'
+RECAPTCHA_PRIVATE_KEY='6LcUjdQSAAAAAPHRoDu56rlNylGTtKvHgfJFTGcE'
+IMGVOTE_EMAIL_FROM='no-reply@spacetelescope.org'
