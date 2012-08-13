@@ -53,7 +53,7 @@ PYTHON = "python2.5"
 # DATABASE SETUP #
 ##################
 DATABASES = copy_setting(DATABASES)
-DATABASES['default']['HOST'] = "mysql1i.hq.eso.org"
+DATABASES['default']['HOST'] = "hqdb1i.hq.eso.org"
 DATABASES['default']['PASSWORD'] = "fivjeylvoked"
 
 ##########
