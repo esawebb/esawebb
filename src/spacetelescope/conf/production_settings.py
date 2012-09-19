@@ -39,7 +39,7 @@ ALLOW_DATABASE_OVERWRITE = False
 # DATABASE SETUP #
 ##################
 DATABASES = copy_setting(DATABASES)
-DATABASES['default']['HOST'] = "mysql1.hq.eso.org"
+DATABASES['default']['HOST'] = "hqdb1.hq.eso.org"
 DATABASES['default']['PASSWORD'] = "letoveumtold"
 
 ##########
