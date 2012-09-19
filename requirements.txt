@@ -71,7 +71,7 @@ html2text==2.40
 django-tinymce==1.5.1b2
 
 # Database migration
-South==0.7.3
+South==0.7.6
 
 # Satchmo
 trml2pdf==1.0
