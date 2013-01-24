@@ -279,6 +279,10 @@ MIDDLEWARE_CLASSES += (
     # Adds the user attribute, representing the currently-logged-in user, to every incoming 
     # HttpRequest object. 
     'django.contrib.auth.middleware.AuthenticationMiddleware', # Request
+
+	# enables Messaging middleware
+	'django.contrib.messages.middleware.MessageMiddleware',
+
 )    
 
 if USE_I18N:
