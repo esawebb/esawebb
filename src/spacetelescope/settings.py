@@ -165,7 +165,8 @@ MEDIA_URL = local_settings.MEDIA_URL
 # URL prefix for admin media -- CSS, JavaScript and images. Make sure to use a
 # trailing slash.
 # Examples: "http://foo.com/media/", "/media/".
-#ADMIN_MEDIA_PREFIX = local_settings.ADMIN_MEDIA_PREFIX
+# ADMIN_MEDIA_PREFIX is necessary due to satchmo current version. TODO: remove when Satchmo is upgraded
+ADMIN_MEDIA_PREFIX = local_settings.ADMIN_MEDIA_PREFIX
 DJANGOPLICITY_MEDIA_URL = local_settings.DJANGOPLICITY_MEDIA_URL
 DJANGOPLICITY_MEDIA_ROOT = local_settings.DJANGOPLICITY_MEDIA_ROOT
 
