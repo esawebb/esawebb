@@ -977,7 +977,7 @@ CHECKOUT_SSL=True
 
 L10N_SETTINGS = {
   'currency_formats' : {
-     'EURO' : {'symbol': u'‚Ç¨', 'positive' : u"‚Ç¨ %(val)0.2f", 'negative': u"‚Ç¨ (%(val)0.2f)", 'decimal' : ','},
+     'EURO' : {'symbol': u'€', 'positive' : u"€ %(val)0.2f", 'negative': u"€ (%(val)0.2f)", 'decimal' : ','},
   },
   'default_currency' : 'EURO',
   'show_admin_translations': False,
