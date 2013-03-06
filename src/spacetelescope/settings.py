@@ -208,6 +208,7 @@ TEMPLATE_LOADERS = (
 TEMPLATE_CONTEXT_PROCESSORS = (
 	'django.core.context_processors.request',
 	'django.contrib.auth.context_processors.auth',
+    'django.contrib.messages.context_processors.messages',
 	'django.core.context_processors.i18n',
 	'django.core.context_processors.media',
     'django.core.context_processors.static',
@@ -339,6 +340,7 @@ INSTALLED_APPS += (
     'django.contrib.admin',
     'django.contrib.admindocs',
 	#'django.contrib.comments',
+    'django.contrib.messages',
 	'django.contrib.humanize',
 	'django.contrib.sitemaps',
 	'djangoplicity.menus',
