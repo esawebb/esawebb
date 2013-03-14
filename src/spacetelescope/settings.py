@@ -8,7 +8,7 @@
 #   Luis Clara Gomes <lcgomes@eso.org>
 #
 
-from djangoplicity.settings import import_settings		
+from djangoplicity.settings import import_settings
 import os
 import re
 
@@ -34,7 +34,7 @@ FACEBOOK_APP_ID = "144508505618279"
 SHORT_NAME = local_settings.SHORT_NAME
 WEBSERVERS = local_settings.WEBSERVERS
 SSL_ASSETS_PREFIX = local_settings.SSL_ASSETS_PREFIX
-CONFIG_GEN_TEMPLATES_DIR = local_settings.CONFIG_GEN_TEMPLATES_DIR 
+CONFIG_GEN_TEMPLATES_DIR = local_settings.CONFIG_GEN_TEMPLATES_DIR
 CONFIG_GEN_GENERATED_DIR = local_settings.CONFIG_GEN_GENERATED_DIR
 
 ###################
@@ -46,7 +46,7 @@ class internal_ips( list ):
 
 	Each entry must be a complete ( a.b.c.d ) or partial ( a.b.c. ) IP address. If
 	an entry is prefixed with tilde ( ~ ) it means the IP address is excluded. This allows
-	you e.g include the entire range 134.171. but exclude certain subnets and specific IP 
+	you e.g include the entire range 134.171. but exclude certain subnets and specific IP
 	addresses.
 	"""
 	def __contains__( self, key ):
@@ -119,7 +119,7 @@ TIME_ZONE = 'Europe/Berlin'
 # Language code for this installation. All choices can be found here:
 # http://www.w3.org/TR/REC-html40/struct/dirlang.html#langcodes
 gettext_noop = lambda s: s
-_ = gettext_noop 
+_ = gettext_noop
 
 LANGUAGES = (
 	( 'en', gettext_noop( 'English' ) ),
@@ -234,18 +234,18 @@ TEMPLATE_DIRS = (
 MIDDLEWARE_CLASSES = (
 	# Middleware hack to do some initialization when django is started. Middleware is removed immediately afterwards.
 	'djangoplicity.startup.StartupMiddleware',
-					
+
 	# Compresses content for browsers that understand gzip compression (all modern browsers).
 	'django.middleware.gzip.GZipMiddleware', # Response
 
-	# Handles conditional GET operations. If the response has a ETag or Last-Modified header, 
-	# and the request has If-None-Match or If-Modified-Since, the response is replaced by an 
+	# Handles conditional GET operations. If the response has a ETag or Last-Modified header,
+	# and the request has If-None-Match or If-Modified-Since, the response is replaced by an
 	# HttpNotModified.
 	'django.middleware.http.ConditionalGetMiddleware',
-	
+
 	# The CsrfMiddleware class provides easy-to-use protection against Cross Site Request Forgeries.
 	#'django.contrib.csrf.middleware.CsrfMiddleware',
-	
+
 	# Based on 'SSL' and 'SSLAllow' boolean URL paramters it will redirect to
 	# HTTP or HTTPS.
 	'sslmiddleware.SSLRedirect',
@@ -262,29 +262,29 @@ if DEBUG_SQL:
 if DEBUG_PROFILER:
 	# Enabled profiling of code. Add ?prof to URL to profile request.
 	MIDDLEWARE_CLASSES += ('djangoplicity_ext.middleware.profilemiddleware.ProfileMiddleware',)
-	
+
 if DEBUG_TOOLBAR:
 	# Add debug toolbar to request
 	MIDDLEWARE_CLASSES += (
 		'debug_toolbar.middleware.DebugToolbarMiddleware',
 	)
-	
+
 ENABLE_REDIRECT_MIDDLEWARE = local_settings.ENABLE_REDIRECT_MIDDLEWARE
-REDIRECT_MIDDLEWARE_URI = local_settings.REDIRECT_MIDDLEWARE_URI	
-	
+REDIRECT_MIDDLEWARE_URI = local_settings.REDIRECT_MIDDLEWARE_URI
+
 
 MIDDLEWARE_CLASSES += (
 	# Enables session support
 	'django.contrib.sessions.middleware.SessionMiddleware', # Request/Response (db)
-	
-    # Adds the user attribute, representing the currently-logged-in user, to every incoming 
-    # HttpRequest object. 
+
+    # Adds the user attribute, representing the currently-logged-in user, to every incoming
+    # HttpRequest object.
     'django.contrib.auth.middleware.AuthenticationMiddleware', # Request
 
 	# enables Messaging middleware
 	'django.contrib.messages.middleware.MessageMiddleware',
 
-)    
+)
 
 if USE_I18N:
 	MIDDLEWARE_CLASSES += (
@@ -292,25 +292,25 @@ if USE_I18N:
 	    'djangoplicity.translation.middleware.LocaleMiddleware', # Request/Response
     )
 
-MIDDLEWARE_CLASSES += (    
+MIDDLEWARE_CLASSES += (
     # - Forbids access to user agents in the DISALLOWED_USER_AGENTS setting
     # - Performs URL rewriting based on the APPEND_SLASH and PREPEND_WWW settings.
     # - Handles ETags based on the USE_ETAGS setting.
     'django.middleware.common.CommonMiddleware', # Request/Response
-    
-    
-    # Sets a boolean session variable INTERNAL_REQUEST if request.META['REMOTE_ADDR'] is in INTERNAL_IPS 
+
+
+    # Sets a boolean session variable INTERNAL_REQUEST if request.META['REMOTE_ADDR'] is in INTERNAL_IPS
     'djangoplicity.archives.middleware.InternalRequestMiddleware', # Request
 )
 
 
 MIDDLEWARE_CLASSES += (
-	# Module for URL redirection. 
+	# Module for URL redirection.
 	'django.contrib.redirects.middleware.RedirectFallbackMiddleware', # Response
-	
+
 	# Module for URL redirection based on regular expressions
 	'djangoplicity.utils.middleware.RegexRedirectMiddleware', # Response
-	
+
 	# Djangoplicity static pages
 	'djangoplicity.pages.middleware.PageFallbackMiddleware', # Response
 )
@@ -319,7 +319,7 @@ if ENABLE_REDIRECT_MIDDLEWARE:
 	MIDDLEWARE_CLASSES += (
 		'djangoplicity.contrib.redirects.middleware.SinkRedirectMiddleware',
 		)
-		
+
 INSTALLED_APPS = ()
 
 if USE_I18N:
@@ -354,9 +354,9 @@ INSTALLED_APPS += (
 	'djangoplicity.archives.contrib.inventory_control',
 	'djangoplicity.announcements',
 	'djangoplicity.releases',
-	'djangoplicity.products',  
+	'djangoplicity.products',
 	'djangoplicity.search',
-	'djangoplicity.metadata',  
+	'djangoplicity.metadata',
 	'djangoplicity.authtkt',
 	'djangoplicity.google',
 	'djangoplicity.cache',
@@ -429,7 +429,7 @@ SESSION_COOKIE_HTTPONLY = False
 ################
 FILE_UPLOAD_TEMP_DIR = local_settings.FILE_UPLOAD_TEMP_DIR
 FILE_UPLOAD_PERMISSIONS = 0666
-#FILE_UPLOAD_MAX_MEMORY_SIZE = 2621440 <-- default 
+#FILE_UPLOAD_MAX_MEMORY_SIZE = 2621440 <-- default
 
 #########
 # EMAIL #
@@ -448,11 +448,11 @@ EMAIL_SUBJECT_PREFIX = local_settings.EMAIL_SUBJECT_PREFIX
 ##################
 
 if  local_settings.DISABLE_LDAP:
-    AUTHENTICATION_BACKENDS = ( 
+    AUTHENTICATION_BACKENDS = (
         'django.contrib.auth.backends.ModelBackend',
     )
 else:
-    AUTHENTICATION_BACKENDS = ( 
+    AUTHENTICATION_BACKENDS = (
         'django_auth_ldap.backend.LDAPBackend',
         'django.contrib.auth.backends.ModelBackend',
     )
@@ -467,36 +467,36 @@ LOGIN_REDIRECT_URL = '/'
 if not  local_settings.DISABLE_LDAP: # Ensure that module is not loaded if disabled
 	import ldap
 	from django_auth_ldap.config import LDAPSearch, ActiveDirectoryGroupType
-	
+
 	AUTH_LDAP_SERVER_URI = "ldaps://ldap.ads.eso.org:636/ads.eso.org"
-	
+
 	AUTH_LDAP_GLOBAL_OPTIONS = {
 		ldap.OPT_REFERRALS : 0,
 		ldap.OPT_PROTOCOL_VERSION : 3,
 		ldap.OPT_X_TLS_REQUIRE_CERT : ldap.OPT_X_TLS_NEVER
 	}
-	
+
 	AUTH_LDAP_BIND_DN = "xskioskldap"
 	AUTH_LDAP_BIND_PASSWORD = "LDAP1420"
 	AUTH_LDAP_USER_SEARCH = LDAPSearch( "DC=ads,DC=eso,DC=org",
 	    ldap.SCOPE_SUBTREE, "(&(objectCategory=user)(objectClass=person)(sAMAccountName=%(user)s)(!(userAccountControl:1.2.840.113556.1.4.803:=2)))" )
-	
+
 	AUTH_LDAP_USER_ATTR_MAP = {
 	          "first_name": "givenName",
 	          "last_name": "sn",
 	          "email": "mail"
 	}
-	
+
 	AUTH_LDAP_GROUP_TYPE = ActiveDirectoryGroupType()
 	AUTH_LDAP_GROUP_SEARCH = LDAPSearch( "dc=ads,dc=eso,dc=org",
 	    ldap.SCOPE_SUBTREE, "(objectClass=group)"
 	)
-	
+
 	# Defaults:
 	# - ePOD staff will get active/staff account - but no permissions.
 	# - All ESO staff will get an inactive account on login - this account has to manually be activated.
 	AUTH_LDAP_ALWAYS_UPDATE_USER = False # Prevent user from being updated every time a user logs in.
-	
+
 	AUTH_LDAP_USER_FLAGS_BY_GROUP = {
 		"is_active": "CN=SA-PAD-EPR,OU=Garching,OU=Shared Acess Groups,OU=Groups,DC=ads,DC=eso,DC=org",
 		"is_staff": "CN=SA-PAD-EPR,OU=Garching,OU=Shared Acess Groups,OU=Groups,DC=ads,DC=eso,DC=org",
@@ -511,7 +511,7 @@ AUTH_TKT_HTACCESS = '.esoacc'
 # AUTH_TKT_REDIRECT_FIELD_NAME = 'next'
 # AUTH_TKT_IGNOREIP = 'off'
 # AUTH_TKT_TIMEOUT_URL = ''
-# AUTH_TKT_FILEPERMS = 
+# AUTH_TKT_FILEPERMS =
 
 
 #########
@@ -597,7 +597,7 @@ ARCHIVES = (
 )
 
 ARCHIVE_EMBARGO_LOGIN = ('hst','vxiofpia')
-ARCHIVE_EMAIL_SENDER = "ESA/Hubble Information Centre <hubble@eso.org>" 
+ARCHIVE_EMAIL_SENDER = "ESA/Hubble Information Centre <hubble@eso.org>"
 
 ARCHIVE_URL_QUERY_PREFIX = 'archive'
 ARCHIVE_URL_DETAIL_PREFIX = ''
@@ -625,13 +625,13 @@ VIDEOS_FORMATS_REMOVE = [
 	#'hd_broadcast_720p25',
 ]
 
-DEFAULT_CREATOR = u"ESA/Hubble"  
+DEFAULT_CREATOR = u"ESA/Hubble"
 DEFAULT_CREATOR_URL = "http://www.spacetelescope.org"
-DEFAULT_CONTACT_ADDRESS = u"Karl-Schwarzschild-Strasse 2" 
+DEFAULT_CONTACT_ADDRESS = u"Karl-Schwarzschild-Strasse 2"
 DEFAULT_CONTACT_CITY = u"Garching bei M√ºnchen"
 DEFAULT_CONTACT_STATE_PROVINCE = ""
 DEFAULT_CONTACT_POSTAL_CODE= u"D-85748"
-DEFAULT_CONTACT_COUNTRY = u"Germany" 
+DEFAULT_CONTACT_COUNTRY = u"Germany"
 DEFAULT_RIGHTS = "Creative Commons Attribution 3.0 Unported license"
 DEFAULT_PUBLISHER = u"ESA/Hubble"
 DEFAULT_PUBLISHER_ID = u"esahubble"
@@ -642,7 +642,7 @@ ARCHIVE_IMPORT_ROOT = local_settings.ARCHIVE_IMPORT_ROOT
 MP4BOX_PATH = local_settings.MP4BOX_PATH
 
 ARCHIVE_WORKFLOWS = {
-	'media.video.rename' : ('spacetelescope.workflows.media','video_rename'), 
+	'media.video.rename' : ('spacetelescope.workflows.media','video_rename'),
 }
 
 VIDEO_RENAME_NOTIFY = ['mkornmes@eso.org',]
@@ -675,7 +675,7 @@ FEED_SETTINGS_MODULE = 'spacetelescope.feed_settings'
 REPORTS_DEFAULT_FORMATTER = 'html'
 REPORT_REGISTER_FORMATTERS = True
 
-##########################	
+##########################
 # PHOTOSHOP CELERYWORKER #
 ##########################
 PHOTOSHOP_ROOT = local_settings.PHOTOSHOP_ROOT
@@ -688,7 +688,7 @@ PHOTOSHOP_ROOT = local_settings.PHOTOSHOP_ROOT
 PHOTOSHOP_BROKER = local_settings.PHOTOSHOP_BROKER
 NEWSFEATURE_FORMAT = 'newsfeature_hst'
 
-##########	
+##########
 # CELERY #
 ##########
 import djcelery
@@ -730,7 +730,7 @@ BROKER_USE_SSL = local_settings.BROKER_USE_SSL
 # Task result backend
 CELERY_RESULT_BACKEND = "amqp"
 
-# AMQP backend settings 
+# AMQP backend settings
 CELERY_RESULT_SERIALIZER = "json"
 CELERY_TASK_RESULT_EXPIRES = 3600
 
@@ -739,7 +739,7 @@ CELERY_TASK_SERIALIZER='json'
 CELERY_IGNORE_RESULT = False
 CELERY_DISABLE_RATE_LIMITS = True
 
-# Error email 
+# Error email
 CELERY_SEND_TASK_ERROR_EMAILS = False
 
 # Events
@@ -749,6 +749,9 @@ CELERY_SEND_EVENTS = True
 CELERYD_HIJACK_ROOT_LOGGER = False
 
 CELERY_ALWAYS_EAGER=local_settings.CELERY_ALWAYS_EAGER
+
+# File to save revoked tasks across workers restart
+CELERYD_STATE_DB = "%s/tmp/celery_states" % ROOT
 
 # Beat
 CELERYBEAT_SCHEDULER = "djcelery.schedulers.DatabaseScheduler"
@@ -824,7 +827,7 @@ TINYMCE_DEFAULT_CONFIG = {
 	#//urlconverter_callback : "url_converter"
 	"convert_urls" : False,
 	"gecko_spellcheck" : True,
-} 
+}
 TINYMCE_SPELLCHECKER = False
 TINYMCE_COMPRESSOR = False
 TINYMCE_FILEBROWSER = False
@@ -863,8 +866,8 @@ LOGGING = {
 			'level' : 'DEBUG',
 			'class': 'logging.handlers.RotatingFileHandler',
 			'formatter' : 'default',
-			'filename' : os.path.join( LOG_DIR, "djangoplicity.log" ), 
-			'maxBytes' : 50 * 1024 * 1024, 
+			'filename' : os.path.join( LOG_DIR, "djangoplicity.log" ),
+			'maxBytes' : 50 * 1024 * 1024,
 			'backupCount' : 3,
 		}
     },
@@ -922,7 +925,7 @@ SOUTH_MIGRATION_MODULES = {
 
 
 # ======================================================================
-# SITE SPECIFIC SECTIONS 
+# SITE SPECIFIC SECTIONS
 # ======================================================================
 
 ###########
@@ -949,9 +952,9 @@ import os
 DIRNAME = os.path.abspath( os.path.dirname( __file__ ) )
 LOCAL_DEV = True
 
-MIDDLEWARE_CLASSES += ( 
+MIDDLEWARE_CLASSES += (
 					"threaded_multihost.middleware.ThreadLocalMiddleware",
-					#"satchmo_store.shop.SSLMiddleware.SSLRedirect", 
+					#"satchmo_store.shop.SSLMiddleware.SSLRedirect",
 					)
 
 TEMPLATE_CONTEXT_PROCESSORS += ( 'satchmo_store.shop.context_processors.settings', )
@@ -985,11 +988,11 @@ L10N_SETTINGS = {
   'allow_translation_choice': False,
 }
 
-LIVESETTINGS_OPTIONS = {   
-	1: { 
-		'DB' : False, 
-		'SETTINGS' : { 
-		    u'LANGUAGE': {   
+LIVESETTINGS_OPTIONS = {
+	1: {
+		'DB' : False,
+		'SETTINGS' : {
+		    u'LANGUAGE': {
 				u'CURRENCY': u'\u20ac',
 				u'SHOW_TRANSLATIONS': u'False'
 			},
@@ -997,13 +1000,13 @@ LIVESETTINGS_OPTIONS = {
 				u'COUNTRY_MATCH': u'False',
                 u'MINIMUM_ORDER': u'2.99',
                 #u'ORDER_EMAIL_EXTRA': u'distribution@spacetelescope.org',
-                u'ORDER_EMAIL_OWNER': u'True',                
+                u'ORDER_EMAIL_OWNER': u'True',
                 u'MODULES': u'["PAYMENT_COPOSWEB"]'
             },
             u'PAYMENT_DUMMY': {
 				u'CREDITCHOICES': u'["Visa", "Mastercard", "Discover", "American Express"]'
 			},
-            u'PRODUCT': {   
+            u'PRODUCT': {
 				u'IMAGE_DIR': u'satchmoimages',
 				u'MEASUREMENT_SYSTEM': u'["metric"]',
 				# Note the string below is too long to store in the database since PRODUCT_TYPES is not a LongSetting
@@ -1012,7 +1015,7 @@ LIVESETTINGS_OPTIONS = {
 				u'NUM_PAGINATED': u'10',
 				u'NUM_DISPLAY': u'20',
 			},
-            u'SHIPPING': {   
+            u'SHIPPING': {
 				#u'PER_DAYS': u'1 - 3 business days',
 				#u'PER_SERVICE': u'Deutsche Post/DHL',
 				u'SELECT_CHEAPEST': u'False',
@@ -1021,7 +1024,7 @@ LIVESETTINGS_OPTIONS = {
 			},
             u'TAX' : {
 				u'PRODUCTS_TAXABLE_BY_DEFAULT' :u'False',
-				u'TAX_SHIPPING' : u'False', 
+				u'TAX_SHIPPING' : u'False',
 			},
             u'SHOP': {
 				u'REQUIRED_BILLING_DATA': u'["email", "first_name", "last_name", "phone", "street1", "city", "postal_code", "country"]',
@@ -1044,9 +1047,9 @@ LIVESETTINGS_OPTIONS = {
 ORDER_PREFIX = local_settings.ORDER_PREFIX
 LIVE = local_settings.LIVE
 SHOP_PICKUP_LOCATIONS = (
-	{ 'id' : 'PUP1', 
+	{ 'id' : 'PUP1',
 	  'name' : 'ESO HQ',
-	  'desc' : _( "Self-pickup/ESO HQ in Munich, Germany" ), 
+	  'desc' : _( "Self-pickup/ESO HQ in Munich, Germany" ),
 	  'method' : _("Pickup (9-17 CET/CEST) at ESO HQ Reception,"),
 	  'delivery' : _("Karl-Schwarzschild-Str. 2, 85748 Garching, GERMANY"),
 	},

@@ -15,12 +15,12 @@ import platform
 #############################
 # ENVIRONMENT CONFIGURATION #
 #############################
-ROOT = "/Users/%s/Workspaces/sites/spacetelescope" % getpass.getuser() if platform.system() == 'Darwin' else "/home/%s/Workspaces/sites/spacetelescope" % getpass.getuser()
+ROOT = "/Users/%s/Workspaces/sites/spacetelescope" % getpass.getuser() if platform.system() == 'Darwin' else "/scratch/loc/spacetelescope"
 PRJBASE = "%s/projects/spacetelescope.org" % ROOT
 DJANGOPLICITY_ROOT = "%s/projects/djangoplicity" % ROOT
 
 BUILD_ROOT = ROOT
-BUILD_PRJBASE = PRJBASE 
+BUILD_PRJBASE = PRJBASE
 BUILD_DJANGOPLICITY_ROOT = DJANGOPLICITY_ROOT
 
 LOG_DIR = "%s/logs" % ROOT
@@ -33,7 +33,7 @@ ENABLE_SSL = False
 SHORT_NAME = 'hubble'
 WEBSERVERS = ()
 SSL_ASSETS_PREFIX = "www.spacetelescope.org"
-CONFIG_GEN_TEMPLATES_DIR = "%s/conf/templates/" % PRJBASE 
+CONFIG_GEN_TEMPLATES_DIR = "%s/conf/templates/" % PRJBASE
 CONFIG_GEN_GENERATED_DIR = "%s/conf/" % TMP_DIR
 
 ##############
@@ -109,8 +109,8 @@ if ('migrate' in sys.argv or 'syncdb' in sys.argv):
 if 'test' in sys.argv:
 	DATABASES['default']['ENGINE'] = 'django.db.backends.sqlite3'
 	SOUTH_TESTS_MIGRATE = False
-	
-	
+
+
 ###############
 # MEDIA SETUP #
 ###############
@@ -142,7 +142,7 @@ CACHES = {
 # MIDDLEWARE AND APPLICATIONS #
 ###############################
 ENABLE_REDIRECT_MIDDLEWARE = False
-REDIRECT_MIDDLEWARE_URI = 'http://www.spacetelescope.org'	
+REDIRECT_MIDDLEWARE_URI = 'http://www.spacetelescope.org'
 
 ############
 # SESSIONS #
@@ -182,7 +182,7 @@ ARCHIVE_AUTO_RESOURCE_DELETION = False
 ARCHIVE_IMPORT_ROOT = "%s/import" % ROOT
 MP4BOX_PATH = '/Applications/Osmo4.app/Contents/MacOS/MP4Box'
 
-##########################	
+##########################
 # PHOTOSHOP CELERYWORKER #
 ##########################
 PHOTOSHOP_ROOT = "/Users/%s/Workspaces/sites/import" % getpass.getuser()
@@ -196,7 +196,7 @@ PHOTOSHOP_BROKER = {
 }
 
 
-##########	
+##########
 # CELERY #
 ##########
 BROKER_HOST = "localhost"
