@@ -28,6 +28,9 @@ from djangoplicity.products.options import *
 from djangoplicity.releases.models import Release
 from djangoplicity.releases.options import ReleaseOptions
 
+from djangoplicity.newsletters.models import Newsletter
+from djangoplicity.newsletters.options import NewsletterOptions
+
 #from djangoplicity.events.models import Event
 #from djangoplicity.events.options import EventOptions
 
@@ -36,22 +39,22 @@ from shipping.urls import adminpatterns
 
 urlpatterns = []
 
-urlpatterns += patterns( '',    
+urlpatterns += patterns( '',
 
-    # Djangoplicity Adminstration 
+    # Djangoplicity Adminstration
     ( r'^admin/cache/', include( 'djangoplicity.cache.urls', namespace="admincache_site", app_name="cache" ), { 'SSL': True } ),
     ( r'^admin/history/', include( 'djangoplicity.adminhistory.urls', namespace="adminhistory_site", app_name="history" ), { 'SSL': True } ),
     ( r'^admin/doc/', include( 'django.contrib.admindocs.urls' ), { 'SSL': True } ),
     ( r'^admin/menus/', include( 'djangoplicity.menus.urls' ), { 'SSL' : True } ),
     ( r'^admin(.*)({{\s?MEDIA_URL\s?}})(?P<path>.*)', 'djangoplicity.views.adm_translate_static_media_path', { 'SSL' : True } ),
 #    ( r'^admin/shop/shop/order/(?P<order_id>[0-9]+)/csv/', 'djangoplicity.coposweb.views.order_csv_file', { 'SSL': True } ),
-	( r'^admin/shop/', include( 'djangoplicity.archives.contrib.satchmo.urls_admin' ), { 'SSL': True } ), 
+	( r'^admin/shop/', include( 'djangoplicity.archives.contrib.satchmo.urls_admin' ), { 'SSL': True } ),
 	( r'^admin/shop/', include(adminshop_site.urls), { 'SSL': True, 'extra_context' : { 'ADMINSHOP_SITE' : True } } ),
 	( r'^admin/system/', include(adminlogs_site.urls), { 'SSL': True, 'extra_context' : { 'ADMINLOGS_SITE' : True }  } ),
 	( r'^admin/', include(admin_site.urls), { 'SSL': True, 'extra_context' : { 'ADMIN_SITE' : True }  } ),
 	( r'^admin/import/', include('djangoplicity.archives.importer.urls'), { 'SSL': True } ),
 	( r'^tinymce/', include('tinymce.urls'), { 'SSLAllow': True } ),
-	
+
     # Server alive check (used for load balancers - called every 5 secs )
     ( r'^alive-check.dat$', 'djangoplicity.views.alive_check', { 'SSLAllow' : True } ),
     ( r'^sitemap/', 'djangoplicity.menus.views.sitemap' ),
@@ -70,7 +73,7 @@ urlpatterns += patterns( '',
     ( r'^announcements/', include('djangoplicity.announcements.urls'), { 'model': Announcement, 'options': AnnouncementOptions } ),
     ( r'^about/further_information/books/', include('djangoplicity.products.urls.books'), { 'model': Book, 'options': BookOptions } ),
     ( r'^about/further_information/brochures/', include('djangoplicity.products.urls.brochures'), { 'model': Brochure, 'options': BrochureOptions } ),
-    ( r'^about/further_information/newsletters/', include('djangoplicity.products.urls.newsletters'), { 'model': Newsletter, 'options': NewsletterOptions } ),
+    ( r'^about/further_information/newsletters/', include('djangoplicity.products.urls.periodicals'), { 'model': Periodical, 'options': PeriodicalOptions } ),
     ( r'^about/further_information/techdocs/', include('djangoplicity.products.urls.techdocs'), { 'model': TechnicalDocument, 'options': TechnicalDocumentOptions } ),
 	( r'^extras/calendars/', include('djangoplicity.products.urls.calendars'), { 'model': Calendar, 'options': CalendarOptions } ),
 	( r'^extras/art/', include('djangoplicity.products.urls.art'), { 'model': OnlineArt, 'options': OnlineArtOptions } ),
@@ -89,15 +92,15 @@ urlpatterns += patterns( '',
 	( r'^kidsandteachers/education/', include('djangoplicity.products.urls.education'), { 'model': EducationalMaterial, 'options': EducationalMaterialOptions } ),
 	( r'^kidsandteachers/drawings/', include('djangoplicity.products.urls.drawings'), { 'model': KidsDrawing, 'options': KidsDrawingOptions } ),
 	( r'^press/kits/', include('djangoplicity.products.urls.presskits'), { 'model': PressKit, 'options': PressKitOptions } ),
-	
+
     ( r'^projects/fits_liberator/fitsimages/', include('djangoplicity.products.urls.fitsimages'), { 'model': FITSImage, 'options': FITSImageOptions } ),
-    
+
     ( r'^rss/feed.xml$', redirect_to, { 'url': 'http://feeds.feedburner.com/hubble_news/' } ),
     ( r'^rss/vodcast.xml$', redirect_to, { 'url': 'http://feeds.feedburner.com/hubblecast_sd/' } ),
     ( r'^rss/vodcasthd.xml$', redirect_to, { 'url': 'http://feeds.feedburner.com/hubblecast/' } ),
     ( r'^rss/vodcastfullhd.xml$', redirect_to, { 'url': 'http://feeds.feedburner.com/hubblecast_fullhd/' } ),
     ( r'^rss/hubblecasthd_amp.xml$', redirect_to, { 'url': 'http://feeds.feedburner.com/hubblecast/' } ),
-    
+
     # User authentication
     ( r'^login/$', 'djangoplicity.authtkt.views.login', { 'template_name': 'login.html', 'SSL' : True } ),
  	( r'^logout/$', 'djangoplicity.authtkt.views.logout', { 'template_name': 'logout.html', 'SSL' : True } ),
@@ -105,8 +108,8 @@ urlpatterns += patterns( '',
 	( r'^password_reset/done/$', 'django.contrib.auth.views.password_reset_done', { 'SSL' : True } ),
 	( r'^reset/(?P<uidb36>[0-9A-Za-z]+)-(?P<token>.+)/$', 'django.contrib.auth.views.password_reset_confirm', { 'SSL' : True } ),
 	( r'^reset/done/$', 'django.contrib.auth.views.password_reset_complete', { 'SSL' : True } ),
-	
- 	# Shop 
+
+ 	# Shop
  	( r'^shop/terms/', redirect_to, { 'url': '/shop/terms_conditions/' }, 'shop_terms' ),
  	( r'^shop/ccv/', redirect_to, { 'url': '/shop/cvc_info/' }, 'shop_ccv' ),
  	( r'^shop/bulkorders/', redirect_to, { 'url': '/shop/bulk_orders/' }, 'shop_bulkorders' ),
@@ -114,19 +117,20 @@ urlpatterns += patterns( '',
  	( r'^shop/', include( 'djangoplicity.archives.contrib.satchmo.urls' ) ),
  	( r'^newsletters/', include( 'djangoplicity.mailinglists.urls', namespace='djangoplicity_mailinglists', app_name='djangoplicity_mailinglists' ), { 'SSLAllow' : True } ),
 	( r'^newsletters/', include( 'djangoplicity.newsletters.urls', { } ) ),
+	( r'^newsletters/', include( 'djangoplicity.newsletters.urls'), { 'model': Newsletter, 'options': NewsletterOptions, } ),
 	#( r'^public/djangoplicity/events/', include('djangoplicity.events.urls'), { 'model': Event, 'options': EventOptions } ),
 	( r'^facebook/', include('djangoplicity.iframe.urls'), { 'SSLAllow' : True }  ),
-	
+
  	# Google Webmaster Toolkit verification
- 	( r'^', include( 'djangoplicity.google.urls' ) ), 
+ 	( r'^', include( 'djangoplicity.google.urls' ) ),
 
 	# Image votes
-	( r'^projects/hiddentreasures/vote/', include('djangoplicity.imgvote.urls'), ), 
+	( r'^projects/hiddentreasures/vote/', include('djangoplicity.imgvote.urls'), ),
 
  	# Main view
  	( r'^$', 'spacetelescope.views.main_page' ),
- 	
- 	
+
+
  )
 
 #handler404 = 'spacetelescope.views.page_not_found'

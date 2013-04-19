@@ -21,7 +21,7 @@ ADMINS = (
 SHORT_NAME = 'hubble'
 WEBSERVERS = ()
 SSL_ASSETS_PREFIX = "www.spacetelescope.org"
-CONFIG_GEN_TEMPLATES_DIR = "%s/conf/templates/" % PRJBASE 
+CONFIG_GEN_TEMPLATES_DIR = "%s/conf/templates/" % PRJBASE
 CONFIG_GEN_GENERATED_DIR = "%s/conf/" % TMP_DIR
 
 SECRET_KEY = "g6ymvx$i1sv4k*g+nwfnx*3a1g&)^i6r9n6g4=f_$x^u(kwt8s"
@@ -68,7 +68,7 @@ DATABASES = copy_setting(DATABASES)
 ###########
 LOGGING_HANDLER = ['console']
 
-##########	
+##########
 # CELERY #
 ##########
 BROKER_HOST = "localhost"

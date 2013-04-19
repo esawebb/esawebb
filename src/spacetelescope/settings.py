@@ -581,7 +581,7 @@ ARCHIVES = (
 	('djangoplicity.products.models.Logo','djangoplicity.products.options.LogoOptions'),
 	('djangoplicity.products.models.Merchandise','djangoplicity.products.options.MerchandiseOptions'),
 	('djangoplicity.products.models.MiniSite','djangoplicity.products.options.MiniSiteOptions'),
-	('djangoplicity.products.models.Newsletter','djangoplicity.products.options.NewsletterOptions'),
+	('djangoplicity.products.models.Periodical','djangoplicity.products.options.PeriodicalOptions'),
 	('djangoplicity.products.models.OnlineArt','djangoplicity.products.options.OnlineArtOptions'),
 	('djangoplicity.products.models.OnlineArtAuthor','djangoplicity.products.options.OnlineArtAuthorOptions'),
 	('djangoplicity.products.models.PaperModel','djangoplicity.products.options.PaperModelOptions'),
@@ -596,6 +596,7 @@ ARCHIVES = (
 	('djangoplicity.products.models.TechnicalDocument','djangoplicity.products.options.TechnicalDocumentOptions'),
 	('djangoplicity.products.models.UserVideo','djangoplicity.products.options.UserVideoOptions'),
 	('djangoplicity.products.models.VirtualTour','djangoplicity.products.options.VirtualTourOptions'),
+	('djangoplicity.newsletters.models.Newsletter','djangoplicity.newsletters.options.NewsletterOptions'),
 )
 
 ARCHIVE_EMBARGO_LOGIN = ('hst','vxiofpia')
@@ -618,6 +619,7 @@ IMAGES_ARCHIVE_ROOT = 'archives/images/'
 IMAGECOMPARISON_ARCHIVE_ROOT = 'archives/imagecomparisons/'
 VIDEOS_ARCHIVE_ROOT = 'archives/videos/'
 ANNOUNCEMENTS_ARCHIVE_ROOT = 'archives/announcements/'
+NEWSLETTERS_ARCHIVE_ROOT = 'archives/newsletters/'
 
 VIDEOS_FEATURED_SUBJECT = 'hubblecast'
 
