@@ -566,6 +566,8 @@ ARCHIVES = (
 	('djangoplicity.media.models.ImageComparison','djangoplicity.media.options.ImageComparisonOptions'),
 	('djangoplicity.releases.models.Release','djangoplicity.releases.options.ReleaseOptions'),
 	#('djangoplicity.announcements.models.Announcement','djangoplicity.announcements.options.AnnouncementOptions'),
+	('djangoplicity.products.models.Application','djangoplicity.products.options.ApplicationOptions'),
+	
 	('djangoplicity.products.models.AnnualReport','djangoplicity.products.options.AnnualReportOptions'),
 	('djangoplicity.products.models.Book','djangoplicity.products.options.BookOptions'),
 	('djangoplicity.products.models.Brochure','djangoplicity.products.options.BrochureOptions'),
