@@ -69,7 +69,7 @@ urlpatterns += patterns( '',
     ( r'^videos/', include('djangoplicity.media.urls_videos'), { 'model': Video, 'options': VideoOptions } ),
 
 	# Other archives
-	( r'^webupdates/', include('djangoplicity.announcements.urls_webupdates'), { 'model': WebUpdate, 'options': WebUpdateOptions } ),
+	( r'^announcements/webupdates/', include('djangoplicity.announcements.urls_webupdates'), { 'model': WebUpdate, 'options': WebUpdateOptions } ),
     ( r'^announcements/', include('djangoplicity.announcements.urls'), { 'model': Announcement, 'options': AnnouncementOptions } ),
     ( r'^about/further_information/books/', include('djangoplicity.products.urls.books'), { 'model': Book, 'options': BookOptions } ),
     ( r'^about/further_information/brochures/', include('djangoplicity.products.urls.brochures'), { 'model': Brochure, 'options': BrochureOptions } ),
