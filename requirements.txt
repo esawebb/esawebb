@@ -24,7 +24,7 @@ django-extensions==0.6
 django-mptt==0.5.5
 djangodblog==1.0
 #django-db-log==2.2.1
-django-debug-toolbar==0.8.4
+django-debug-toolbar==0.9.4
 webassets==0.4
 django-sslmiddleware==dev
 recaptcha-client==1.0.3
