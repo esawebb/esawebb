@@ -67,7 +67,7 @@ PIL==1.1.7
 magickwand==0.2
 
 # Text
-html2text==2.40
+html2text==3.200.3
 django-tinymce==1.5.1b2
 
 # Database migration
