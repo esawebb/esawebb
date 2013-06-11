@@ -106,3 +106,6 @@ xlwt==0.7.2
 xlrd==0.7.1
 suds==0.4
 PyAVM==0.1.4
+
+# constellation / coordinate lookups
+pyephem==3.7.5.1
