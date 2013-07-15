@@ -37,7 +37,7 @@ DEBUG_SQL=False
 DEBUG_PROFILER=False
 DEBUG_TOOLBAR = True
 
-#MEDIA_ROOT = "/media/ecfwebstore/ecfwebvol0/diskwa/webdocs/hubble/docs/static/"
+MEDIA_ROOT = "/media/ecfwebstore/ecfwebvol0/diskwa/webdocs/hubble/docs/static/"
 #DJANGOPLICITY_MEDIA_ROOT = "/Volumes/webdocs/hubble/docs/static/djangoplicity"
 
 #ARCHIVE_IMPORT_ROOT = "/Volumes/webdocs/hubble/import/"
@@ -61,7 +61,7 @@ DATABASES = copy_setting(DATABASES)
 ##########
 # CACHE  #
 ##########
-#CACHES = { 'default': { 'BACKEND': 'django.core.cache.backends.dummy.DummyCache', } }
+CACHES = { 'default': { 'BACKEND': 'django.core.cache.backends.dummy.DummyCache', } }
 
 ###########
 # LOGGING #

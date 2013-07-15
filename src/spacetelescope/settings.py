@@ -355,6 +355,7 @@ INSTALLED_APPS += (
     'djangoplicity.archives.contrib.security',
 	'djangoplicity.archives.contrib.inventory_control',
 	'djangoplicity.announcements',
+	'djangoplicity.science',
 	'djangoplicity.releases',
 	'djangoplicity.products',
 	'djangoplicity.search',
@@ -567,7 +568,7 @@ ARCHIVES = (
 	('djangoplicity.releases.models.Release','djangoplicity.releases.options.ReleaseOptions'),
 	#('djangoplicity.announcements.models.Announcement','djangoplicity.announcements.options.AnnouncementOptions'),
 	('djangoplicity.products.models.Application','djangoplicity.products.options.ApplicationOptions'),
-	
+
 	('djangoplicity.products.models.AnnualReport','djangoplicity.products.options.AnnualReportOptions'),
 	('djangoplicity.products.models.Book','djangoplicity.products.options.BookOptions'),
 	('djangoplicity.products.models.Brochure','djangoplicity.products.options.BrochureOptions'),
@@ -622,6 +623,7 @@ IMAGECOMPARISON_ARCHIVE_ROOT = 'archives/imagecomparisons/'
 VIDEOS_ARCHIVE_ROOT = 'archives/videos/'
 ANNOUNCEMENTS_ARCHIVE_ROOT = 'archives/announcements/'
 NEWSLETTERS_ARCHIVE_ROOT = 'archives/newsletters/'
+SCIENCEANNOUNCEMENTS_ARCHIVE_ROOT = 'archives/science/'
 
 VIDEOS_FEATURED_SUBJECT = 'hubblecast'
 

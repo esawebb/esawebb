@@ -40,6 +40,7 @@ import djangoplicity.customsearch.admin
 #import djangoplicity.eventcalendar.admin
 import djangoplicity.actions.admin
 import djangoplicity.imgvote.admin
+import djangoplicity.science.admin
 
 # Register each applications admin interfaces with
 # an admin site.
@@ -62,6 +63,7 @@ autoregister( admin_site, djangoplicity.newsletters.admin )
 #autoregister( admin_site, djangoplicity.contacts.admin )
 autoregister( admin_site, djangoplicity.customsearch.admin )
 #autoregister( admin_site, djangoplicity.eventcalendar.admin )
+autoregister( admin_site, djangoplicity.science.admin )
 
 
 #autoregister ( adminlogs_site, djangoplicity.contrib.redirects.admin )

@@ -31,6 +31,9 @@ from djangoplicity.releases.options import ReleaseOptions
 from djangoplicity.newsletters.models import Newsletter
 from djangoplicity.newsletters.options import NewsletterOptions
 
+from djangoplicity.science.models import ScienceAnnouncement
+from djangoplicity.science.options import ScienceAnnouncementOptions
+
 #from djangoplicity.events.models import Event
 #from djangoplicity.events.options import EventOptions
 
@@ -93,6 +96,7 @@ urlpatterns += patterns( '',
 	( r'^kidsandteachers/education/', include('djangoplicity.products.urls.education'), { 'model': EducationalMaterial, 'options': EducationalMaterialOptions } ),
 	( r'^kidsandteachers/drawings/', include('djangoplicity.products.urls.drawings'), { 'model': KidsDrawing, 'options': KidsDrawingOptions } ),
 	( r'^press/kits/', include('djangoplicity.products.urls.presskits'), { 'model': PressKit, 'options': PressKitOptions } ),
+	( r'^science/announcements/', include('djangoplicity.science.urls'), { 'model': ScienceAnnouncement, 'options': ScienceAnnouncementOptions } ),
 
     ( r'^projects/fits_liberator/fitsimages/', include('djangoplicity.products.urls.fitsimages'), { 'model': FITSImage, 'options': FITSImageOptions } ),
 
