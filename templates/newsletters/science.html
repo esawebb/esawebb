@@ -1,0 +1,57 @@
+{% extends "newsletters/base_science.html" %}
+{% load release_links djangoplicity_datetime %}
+
+{% block html_title %}ESA/Hubble Science Newsletter{% endblock %}
+
+{% block header %}
+	{% with width="733" height="300" color="#383838" logo_width="140" logo_url=base_url|add:MEDIA_URL|add:"esa_nl_logo.png" %}
+		{% block header_content %}
+			{% if editorial_subject %}
+			{% with text_color="#99d7ff" header_title="ESA/Hubble Science Newsletter" header_subtitle=data.announcement.release_date|date%}
+				{% with release_date=data.announcement.release_date link_url=base_url|add:data.announcement.get_absolute_url pretitle="Editorial" embargo="" title=editorial_subject subtitle=data.announcement.subtitle main_image=data.announcement.main_visual titlesize="small" %}
+				{% include "newsletters/includes/header.html" %}
+				{% endwith %}
+				{% endwith %}
+			{% else %}{% if data.announcement %}
+				{% with text_color="#99d7ff" header_title="ESA/Hubble Science Newsletter" header_subtitle=data.announcement.release_date|date %}
+				{% with release_date=data.announcement.release_date link_url=base_url|add:data.announcement.get_absolute_url pretitle="ESA/Hubble "|add:data.announcement.id embargo="" title=data.announcement.title subtitle=data.announcement.subtitle main_image=data.announcement.main_visual titlesize="small" %}
+				{% include "newsletters/includes/header.html" %}
+				{% endwith %}
+				{% endwith %}
+			{% else %}
+				{% with text_color="#99d7ff" header_title="ESA/Hubble Science Newsletter" header_subtitle=release_date|date %}
+				{% include "newsletters/includes/header.html" %}
+				{% endwith %}
+			{% endif %}
+			{% endif %}
+		{% endblock %}
+	{% endwith %}
+{% endblock %}
+
+{% block fullsidebar %}
+{% endblock %}
+
+{% block content %}
+	{% with embargo="" release=data.release signature_date=data.release.release_date signature="ESA/Hubble Information Centre" %}
+		{% include "newsletters/includes/press_release.html" %}
+	{% endwith %}
+	
+	{% if editorial %}
+	<h2>Editorial</h2>
+	{% include "newsletters/includes/editorial.html" %}
+	{% endif %}
+
+	{% if data.scienceannouncements %}
+	<br /><hr style="{{hr_style}}"><br />
+	{% with objects=data.scienceannouncements org="" title="Science Announcements" urlpattern="scienceannouncements_defaultquery" truncatelength=60 %}
+		{% include "newsletters/includes/archiveobjects.html" with width_right="100%" %}
+	{% endwith %}
+	{% endif %}
+
+{% endblock %}
+
+{% block footer %} 
+{% with org="ESA/Hubble" potw_feed_url="http://feeds.feedburner.com/hubble_potw/" reason="you subscribed to the ESA/Hubble Science Newsletter." footer_potws=data.footer_potws footer_note='' unsubscribe_link='' preferences_link='' browser_link=base_url|add:"//newsletters/science/html/"|add:newsletter_id|add:"/"%}
+		{% include "newsletters/includes/footer.html" with width="693" %}
+	{% endwith %}
+{% endblock %}
