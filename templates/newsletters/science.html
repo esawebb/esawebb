@@ -4,7 +4,7 @@
 {% block html_title %}ESA/Hubble Science Newsletter{% endblock %}
 
 {% block header %}
-	{% with width="733" height="300" color="#383838" logo_width="140" logo_url=base_url|add:MEDIA_URL|add:"esa_nl_logo.png" %}
+	{% with width="700" height="300" color="#383838" logo_width="140" logo_url=base_url|add:MEDIA_URL|add:"esa_nl_logo.png" %}
 		{% block header_content %}
 			{% if editorial_subject %}
 			{% with text_color="#99d7ff" header_title="ESA/Hubble Science Newsletter" header_subtitle=data.announcement.release_date|date%}
