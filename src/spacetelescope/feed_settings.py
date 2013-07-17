@@ -10,26 +10,29 @@
 
 # Feed settings for website project
 
+
 class PictureOfTheWeekFeedSettings():
 	external_feed_url = 'http://feeds.feedburner.com/hubble_potw/'
-	
+
+
 class AnnouncementFeedSettings():
 	title = 'Hubble Announcements'
 	link = 'http://www.spacetelescope.org/announcements/'
 	external_feed_url = "http://feeds.feedburner.com/hubble_announcements/"
 
+
 class VideoPodcastFeedSettings():
 	title = 'Spacetelescope.org Video Feed'
 	link = 'http://www.spacetelescope.org/videos/'
 	description = 'The Latest Videos from Spacetelescope.org'
-	enclosure_resources = {	
-			'' : ['resource_hd_and_apple', 'resource_hd720p_screen', ],
-			'hd' : ['resource_hd_and_apple', 'resource_hd720p_screen', ],
-			'sd' : ['resource_medium_podcast', 'resource_vodcast', ],
-			'fullhd' : ['resource_hd_1080p25_screen', 'resource_hd1080p_screen', ],
+	enclosure_resources = {
+			'': ['resource_hd_and_apple', 'resource_hd720p_screen', ],
+			'hd': ['resource_hd_and_apple', 'resource_hd720p_screen', ],
+			'sd': ['resource_medium_podcast', 'resource_vodcast', ],
+			'fullhd': ['resource_hd_1080p25_screen', 'resource_hd1080p_screen', ],
 	}
 
-	override_guids_format = { 
+	override_guids_format = {
 					'sd': {
 						'hubblecast35a': u'http://www.spacetelescope.org/videos/vodcast/hubblecast35a.m4v',
 						'heic1006a': u'http://www.spacetelescope.org/videos/vodcast/heic1006a.m4v',
@@ -67,8 +70,8 @@ class VideoPodcastFeedSettings():
 						'heic0706a': u'http://www.spacetelescope.org/videos/vodcast/heic0706a.m4v',
 						'heic0705a': u'http://www.spacetelescope.org/videos/vodcast/heic0705a.m4v'
 					},
-					
-					'hd':{ 
+
+					'hd': {
 						'hubblecast35a': u'http://www.spacetelescope.org/videos/hd720p_screen/hubblecast35a.m4v',
 						'heic1006a': u'http://www.spacetelescope.org/videos/hd720p_screen/heic1006a.m4v',
 						'heic1003a': u'http://www.spacetelescope.org/videos/hd720p_screen/heic1003a.m4v',
@@ -105,7 +108,7 @@ class VideoPodcastFeedSettings():
 						'heic0706a': u'http://www.spacetelescope.org/videos/hd720p_screen/heic0706a.m4v',
 						'heic0705a': u'http://www.spacetelescope.org/videos/hd720p_screen/heic0705a.m4v'
 					},
-					'fullhd': { 
+					'fullhd': {
 						'hubblecast35a': u'http://www.spacetelescope.org/videos/hd1080p_screen/hubblecast35a.mp4',
 						'heic1006a': u'http://www.spacetelescope.org/videos/hd1080p_screen/heic1006a.mp4',
 						'heic1003a': u'http://www.spacetelescope.org/videos/hd1080p_screen/heic1003a.mp4',
@@ -143,16 +146,16 @@ class VideoPodcastFeedSettings():
 						'heic0705a': u'http://www.spacetelescope.org/videos/hd1080p_screen/heic0705a.mp4'
 					}
 					}
-	
+
 	override_guids = override_guids_format[''] = override_guids_format['hd']
-	
+
 
 class ReleaseFeedSettings():
 	title = 'Hubble News'
 	link = 'http://www.spacetelescope.org/news/'
 	description = "The latest news about astronomy and the NASA/ESA Hubble Space Telescope"
 	external_feed_url = 'http://feeds.feedburner.com/hubble_news/'
-	
+
 	override_guids = {
 			'heic1006': u'http://www.spacetelescope.org/news/html/heic1006.html',
 			'heic1005': u'http://www.spacetelescope.org/news/html/heic1005.html',
@@ -180,7 +183,7 @@ class ReleaseFeedSettings():
 			'heic0901': u'http://www.spacetelescope.org/news/html/heic0901.html',
 			'heic0823': u'http://www.spacetelescope.org/news/html/heic0823.html'
 		}
-	
+
 
 class HubblecastFeedSettings():
 	title = 'Hubblecast %s'
@@ -191,21 +194,29 @@ class HubblecastFeedSettings():
 
 
 class FeedRedirectSettings():
-	redirects = { 
-				'/images/potw/feed/' : PictureOfTheWeekFeedSettings.external_feed_url,
-				'/videos/feed/category/hubblecast/hd/' : HubblecastFeedSettings.external_feed_url,
-				'/videos/feed/category/hubblecast/sd/' : 'http://feeds.feedburner.com/hubblecast_sd/',
-				'/videos/feed/category/hubblecast/fullhd/' : 'http://feeds.feedburner.com/hubblecast_fullhd/',
-				'/videos/feed/category/hubblecast/' : HubblecastFeedSettings.external_feed_url,
-				'/news/feed/' : ReleaseFeedSettings.external_feed_url,
-				'/announcements/feed/' : 'http://feeds.feedburner.com/hubble_announcements/',
+	redirects = {
+				'/images/potw/feed/': PictureOfTheWeekFeedSettings.external_feed_url,
+				'/videos/feed/category/hubblecast/hd/': HubblecastFeedSettings.external_feed_url,
+				'/videos/feed/category/hubblecast/sd/': 'http://feeds.feedburner.com/hubblecast_sd/',
+				'/videos/feed/category/hubblecast/fullhd/': 'http://feeds.feedburner.com/hubblecast_fullhd/',
+				'/videos/feed/category/hubblecast/': HubblecastFeedSettings.external_feed_url,
+				'/news/feed/': ReleaseFeedSettings.external_feed_url,
+				'/announcements/feed/': 'http://feeds.feedburner.com/hubble_announcements/',
 	}
-	
-	whitelist = ['FeedBurner',]#,'Mozilla']
-	whitelist_ips = ['134.171.','127.0.0.1'] # must use ?bypass=1 in request
+
+	whitelist = ['FeedBurner', ] # ,'Mozilla']
+	whitelist_ips = ['134.171.', '127.0.0.1'] # must use ?bypass=1 in request
+
 
 class Top100FeedSettings():
 	title = 'Hubble Top 100 Images'
+
+
+class ScienceAnnouncementFeedSettings():
+	title = 'ESA/Hubble Science Announcements'
+	link = 'http://www.spacetelescope.org/science/announcements/'
+	description = 'ESA/Hubble Science Announcements Feed'
+
 
 CATEGORY_SPECIFIC_SETTINGS = {
 	'hubblecast': 'HubblecastFeedSettings',
@@ -215,5 +226,5 @@ FORMATS = {
 	'': ( 'HD', '' ),
 	'hd': ( 'HD', '' ),
 	'sd': ( 'SD', '' ),
-	'fullhd' : ( 'Full HD', '' ),
+	'fullhd': ( 'Full HD', '' ),
 }
