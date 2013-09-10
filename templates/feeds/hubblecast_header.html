@@ -3,7 +3,7 @@
 <itunes:new-feed-url>{% if not format %}http://feeds.feedburner.com/hubblecast/{% else %}{% ifequal format "hd" %}http://feeds.feedburner.com/hubblecast/{% else %}http://feeds.feedburner.com/hubblecast_{{format}}/{% endifequal %}{% endif %}</itunes:new-feed-url>
 
 <itunes:author>ESA/Hubble</itunes:author> 
-<itunes:summary>The latest news about astronomy, space, and the NASA/ESA Hubble Space Telescope{% ifnotequal format "sd" %} presented in High Definition{% endifnotequal %}.</itunes:summary>
+<itunes:summary>The latest news about astronomy, space, and the NASA/ESA Hubble Space Telescope{% if format != "sd" %} presented in{% if format == "fullhd" %} Full{% endif %} High Definition{% endif %}.</itunes:summary>
 
 <itunes:owner> 
 	<itunes:name>ESA/Hubble</itunes:name> 
@@ -11,9 +11,9 @@
 </itunes:owner>
 
 <itunes:explicit>no</itunes:explicit>
-<itunes:keywords>astronomy, space, science, Hubble, telescope, astronaut, cosmos, Hubblecast, NASA{% ifnotequal format "sd" %}, HD, High-Definition, high definition{% endifnotequal %}</itunes:keywords>
+<itunes:keywords>astronomy, space, science, Hubble, telescope, stronaut, cosmos, Hubblecast, NASA, Dr. J, stars, universe, sky{% if format != "sd" %}, {% if format == "fullhd" %}Full{% endif %}HD, High-Definition, high definition{% endif%}</itunes:keywords>
  
-<itunes:image href="http://www.spacetelescope.org/static/design/{{format|default:'hd'}}/hubblecast.png" /> 
+<itunes:image href="http://www.spacetelescope.org/static/design/{{format|default:'hd'}}/hubblecast_01.png" /> 
         
 <category>Science</category> 
 
@@ -24,7 +24,7 @@
 <image>
 	<title>Hubblecast {% ifequal format "hd"%}HD{% endifequal %}{% ifequal format "sd"%}SD{% endifequal %}{% ifequal format "fullhd"%}Full HD{% endifequal %}</title>
 	<link>http://www.spacetelescope.org/videos/hubblecast/</link>
-	<url>http://www.spacetelescope.org/static/design/hubblecast_{{format|default:'hd'}}_03.png</url> 
+	<url>http://www.spacetelescope.org/static/design/hubblecast_{{format|default:'hd'}}_04.png</url> 
 </image>
 
 <amp:logo>http://www.spacetelescope.org/static/design/{{format|default:'hd'}}/amp_logo.jpg</amp:logo>
