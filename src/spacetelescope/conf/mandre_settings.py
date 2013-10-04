@@ -38,6 +38,7 @@ DEBUG_PROFILER=False
 DEBUG_TOOLBAR = True
 
 MEDIA_ROOT = "/media/ecfwebstore/ecfwebvol0/diskwa/webdocs/hubble/docs/static/"
+#MEDIA_ROOT = "/tmp/archives/"
 #DJANGOPLICITY_MEDIA_ROOT = "/Volumes/webdocs/hubble/docs/static/djangoplicity"
 
 #ARCHIVE_IMPORT_ROOT = "/Volumes/webdocs/hubble/import/"
