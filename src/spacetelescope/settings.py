@@ -591,6 +591,7 @@ ARCHIVES = (
 	('djangoplicity.products.models.MiniSite','djangoplicity.products.options.MiniSiteOptions'),
 	('djangoplicity.products.models.Bulletin','djangoplicity.products.options.BulletinOptions'),
 	('djangoplicity.products.models.Stationery','djangoplicity.products.options.StationeryOptions'),
+	('djangoplicity.products.models.Periodical','djangoplicity.products.options.PeriodicalOptions'),
 	('djangoplicity.products.models.ScienceInSchool','djangoplicity.products.options.ScienceInSchoolOptions'),
 	('djangoplicity.products.models.Messenger','djangoplicity.products.options.MessengerOptions'),
 	('djangoplicity.products.models.CapJournal','djangoplicity.products.options.CapJournalOptions'),
