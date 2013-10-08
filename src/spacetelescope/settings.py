@@ -591,7 +591,6 @@ ARCHIVES = (
 	('djangoplicity.products.models.MiniSite','djangoplicity.products.options.MiniSiteOptions'),
 	('djangoplicity.products.models.Bulletin','djangoplicity.products.options.BulletinOptions'),
 	('djangoplicity.products.models.Stationery','djangoplicity.products.options.StationeryOptions'),
-	('djangoplicity.products.models.Periodical','djangoplicity.products.options.PeriodicalOptions'),
 	('djangoplicity.products.models.ScienceInSchool','djangoplicity.products.options.ScienceInSchoolOptions'),
 	('djangoplicity.products.models.Messenger','djangoplicity.products.options.MessengerOptions'),
 	('djangoplicity.products.models.CapJournal','djangoplicity.products.options.CapJournalOptions'),
@@ -600,7 +599,6 @@ ARCHIVES = (
 	('djangoplicity.products.models.PaperModel','djangoplicity.products.options.PaperModelOptions'),
 	('djangoplicity.products.models.PlanetariumShow','djangoplicity.products.options.PlanetariumShowOptions'),
 	('djangoplicity.products.models.PostCard','djangoplicity.products.options.PostCardOptions'),
-	('djangoplicity.products.models.Poster','djangoplicity.products.options.PosterOptions'),
 	('djangoplicity.products.models.PrintedPoster','djangoplicity.products.options.PrintedPosterOptions'),
 	('djangoplicity.products.models.ConferencePoster','djangoplicity.products.options.ConferencePosterOptions'),
 	('djangoplicity.products.models.ElectronicPoster','djangoplicity.products.options.ElectronicPosterOptions'),
@@ -960,7 +958,6 @@ SHOP_CONF = {
 	'DEFAULT_NAVISION_ACCOUNT' : '50.030',
 	'ORDER_FILE_PREFX' : "hb",
 	'ARCHIVE_DEFAULTS' : {
-		'djangoplicity.products.models.Poster' : { 'ACCOUNT' : '50.050', },
 		'djangoplicity.products.models.PostCard' : { 'ACCOUNT' : '50.050', },
 		'djangoplicity.products.models.Merchandise' : { 'ACCOUNT' : '50.050', },
 		'djangoplicity.products.models.CDROM' : { 'ACCOUNT' : '50.050', },
