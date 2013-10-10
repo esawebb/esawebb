@@ -17,8 +17,7 @@
 {% embedvideo object_list.0 "medium_flash,medium_podcast,h264" "hd_and_apple,hd720p_screen" "medium_podcast,h264" %}
 {%endif%}
 <h1>{{object_list.0.title}}</h1>
-<p>{{object_list.0.headline}}</p>
-<div align="right"><a href="{{object_list.0.get_absolute_url}}">More information and download options</a></div>
+<p>{{object_list.0.headline}}</p> <div align="right"><a href="{{object_list.0.get_absolute_url}}">More information and download options</a></div>
 </div>
 {% endif %}
 
@@ -54,6 +53,11 @@
 <div class="leftdivider">
 
 <table class="archive_normal" width="">
+{% comment %}
+	On the first page we only display the thumnails starting from index 1
+	since we have the latest podcast as main page item
+{% endcomment %}
+{% if page_obj.start_index == 1  %}
 {% for list in object_list|slice:"1:"|split_list:"3" %}
 
 <tr>{% for item in list %}
@@ -66,6 +70,20 @@
 
 <tr><td colspan='4' class='breaker'></td></tr>
 {% endfor %}
+{% else %}
+{% for list in object_list|split_list:"3" %}
+
+<tr>{% for item in list %}
+<td class="imagerow {%if forloop.first%} alpha{%endif%}{%if forloop.last%} omega{%endif%}" ><a href="{{ item.get_absolute_url }}"><img src="{{ item.resource_thumb.url }}" width="122" alt="{{item.title}}" /></a></td>{% endfor %}
+</tr>
+<tr>{% for item in list %}
+<td class="titlerow {%if forloop.first%} alpha{%endif%}{%if forloop.last%} omega{%endif%}">{{item.title}}</td>{% endfor %}
+</tr>
+
+
+<tr><td colspan='4' class='breaker'></td></tr>
+{% endfor %}
+{% endif %}
 <tr><td colspan='4' class='breaker'></td></tr>
 </table>
 {% paginator paginator page_obj paginator_url paginator_prefix %}
