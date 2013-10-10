@@ -595,6 +595,7 @@ ARCHIVES = (
 	('djangoplicity.products.models.ScienceInSchool','djangoplicity.products.options.ScienceInSchoolOptions'),
 	('djangoplicity.products.models.Messenger','djangoplicity.products.options.MessengerOptions'),
 	('djangoplicity.products.models.CapJournal','djangoplicity.products.options.CapJournalOptions'),
+	('djangoplicity.products.models.STECFNewsletter','djangoplicity.products.options.STECFNewsletterOptions'),
 	('djangoplicity.products.models.OnlineArt','djangoplicity.products.options.OnlineArtOptions'),
 	('djangoplicity.products.models.OnlineArtAuthor','djangoplicity.products.options.OnlineArtAuthorOptions'),
 	('djangoplicity.products.models.PaperModel','djangoplicity.products.options.PaperModelOptions'),
