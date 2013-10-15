@@ -58,6 +58,6 @@
 
 {% block footer %} 
 {% with org="ESA/Hubble" potw_feed_url="http://feeds.feedburner.com/hubble_potw/" reason="you subscribed to the ESA/Hubble Science Newsletter." footer_potws=data.footer_potws footer_note='' unsubscribe_link='' preferences_link='' browser_link=base_url|add:"/newsletters/science/html/"|add:newsletter_id|add:"/" address="ESA/Hubble c/o ESO, Karl-Schwarzschild-Str 2, D-85748 Garching bei M&uuml;nchen, Germany" %}
-		{% include "newsletters/includes/footer.html" with width="693" %}
+		{% include "newsletters/includes/science-footer.html" with width="693" %}
 	{% endwith %}
 {% endblock %}
