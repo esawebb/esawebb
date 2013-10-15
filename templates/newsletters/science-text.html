@@ -19,5 +19,10 @@ Science Announcements
 
 {{ announcement.release_date|date }}: {{ announcement.description|striptags|truncatewords:50|unescape|safe }} [read more on {{base_url}}{{ announcement.get_absolute_url }}]
 
+
+
+How to advertise your Hubble results:
+http://www.spacetelescope.org/forscientists/announcements/sci13001/
+
 {% endfor %}{% endif %}
 {% with email="hubble@eso.org" %}{% include "newsletters/includes/text/footer.txt" %}{% endwith %}
