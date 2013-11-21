@@ -25,7 +25,6 @@ import djangoplicity.media.admin
 import djangoplicity.products.admin
 import djangoplicity.releases.admin
 import djangoplicity.metadata.admin
-import djangoplicity.contrib.redirects.admin
 import djangoplicity.authtkt.admin
 import djangoplicity.google.admin
 import djangoplicity.archives.contrib.satchmo.freeorder.admin
@@ -66,7 +65,6 @@ autoregister( admin_site, djangoplicity.customsearch.admin )
 autoregister( admin_site, djangoplicity.science.admin )
 
 
-#autoregister ( adminlogs_site, djangoplicity.contrib.redirects.admin )
 autoregister( adminlogs_site, djangoplicity.search.admin )
 autoregister( adminlogs_site, djangoplicity.authtkt.admin )
 autoregister( adminlogs_site, djangoplicity.google.admin )
