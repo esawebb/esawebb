@@ -20,7 +20,7 @@ from djangoplicity.announcements.models import Announcement, WebUpdate
 from djangoplicity.announcements.options import AnnouncementOptions, WebUpdateOptions
 from djangoplicity.media.models import Image, Video, PictureOfTheWeek, ImageComparison
 from djangoplicity.media.options import ImageOptions, VideoOptions, PictureOfTheWeekOptions, ImageComparisonOptions
-from django.views.generic.simple import redirect_to
+from django.views.generic.base import RedirectView
 
 from djangoplicity.products.models import *
 from djangoplicity.products.options import *
@@ -112,11 +112,11 @@ urlpatterns += patterns( '',
 
     ( r'^projects/fits_liberator/fitsimages/', include('djangoplicity.products.urls.fitsimages'), { 'model': FITSImage, 'options': FITSImageOptions } ),
 
-    ( r'^rss/feed.xml$', redirect_to, { 'url': 'http://feeds.feedburner.com/hubble_news/' } ),
-    ( r'^rss/vodcast.xml$', redirect_to, { 'url': 'http://feeds.feedburner.com/hubblecast_sd/' } ),
-    ( r'^rss/vodcasthd.xml$', redirect_to, { 'url': 'http://feeds.feedburner.com/hubblecast/' } ),
-    ( r'^rss/vodcastfullhd.xml$', redirect_to, { 'url': 'http://feeds.feedburner.com/hubblecast_fullhd/' } ),
-    ( r'^rss/hubblecasthd_amp.xml$', redirect_to, { 'url': 'http://feeds.feedburner.com/hubblecast/' } ),
+    ( r'^rss/feed.xml$', RedirectView.as_view(url='http://feeds.feedburner.com/hubble_news/') ),
+    ( r'^rss/vodcast.xml$', RedirectView.as_view(url='http://feeds.feedburner.com/hubblecast_sd/') ),
+    ( r'^rss/vodcasthd.xml$', RedirectView.as_view(url='http://feeds.feedburner.com/hubblecast/') ),
+    ( r'^rss/vodcastfullhd.xml$', RedirectView.as_view(url='http://feeds.feedburner.com/hubblecast_fullhd/') ),
+    ( r'^rss/hubblecasthd_amp.xml$', RedirectView.as_view(url='http://feeds.feedburner.com/hubblecast/') ),
 
     # User authentication
     ( r'^login/$', 'djangoplicity.authtkt.views.login', { 'template_name': 'login.html', 'SSL' : True } ),
@@ -127,9 +127,9 @@ urlpatterns += patterns( '',
 	( r'^reset/done/$', 'django.contrib.auth.views.password_reset_complete', { 'SSL' : True } ),
 
  	# Shop
- 	( r'^shop/terms/', redirect_to, { 'url': '/shop/terms_conditions/' }, 'shop_terms' ),
- 	( r'^shop/ccv/', redirect_to, { 'url': '/shop/cvc_info/' }, 'shop_ccv' ),
- 	( r'^shop/bulkorders/', redirect_to, { 'url': '/shop/bulk_orders/' }, 'shop_bulkorders' ),
+ 	url( r'^shop/terms/', RedirectView.as_view(url='/shop/terms_conditions/'), name='shop_terms' ),
+ 	url( r'^shop/ccv/', RedirectView.as_view(url='/shop/cvc_info/'), name='shop_ccv' ),
+ 	url( r'^shop/bulkorders/', RedirectView.as_view(url='/shop/bulk_orders/'), name='shop_bulkorders' ),
  	( r'^shop/freeorder/$', include( 'djangoplicity.archives.contrib.satchmo.freeorder.urls' ) ),
  	( r'^shop/', include( 'djangoplicity.archives.contrib.satchmo.urls' ) ),
  	( r'^newsletters/', include( 'djangoplicity.mailinglists.urls', namespace='djangoplicity_mailinglists', app_name='djangoplicity_mailinglists' ), { 'SSLAllow' : True } ),
