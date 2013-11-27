@@ -10,7 +10,7 @@
 			<a href="{{potw.visual.get_absolute_url}}" ><img src='{{potw.visual.resource_potwmedium.url}}' class='pxwb' width="220" height="140" /></a>
 			<h1>Picture Of The Week<a href="http://feeds.feedburner.com/hubble_potw/" class='rssicon'><img src='{{MEDIA_URL}}images/rssicon.png' /></a> </h1>
 			<p><a href="{{potw.visual.get_absolute_url}}">{{potw.id}}: {{potw.visual.title}}</a>
-			<br/><a class="viewall" href="{% url potw_defaultquery %}">View All</a></p>
+			<br/><a class="viewall" href="{% url 'potw_defaultquery' %}">View All</a></p>
 		</div>				
 		
 		<div class='clear'>
@@ -23,7 +23,7 @@
 
  		
 		<div class="rotator" id='feature_rotator'>   
-			<div id="feat-nav-viewall"><a class="rssicon" href="http://feeds.feedburner.com/hubble_news/"><img src="/static/images/rssicon.png" /></a><a href="{% url releases_defaultquery %}">View All</a></div>
+			<div id="feat-nav-viewall"><a class="rssicon" href="http://feeds.feedburner.com/hubble_news/"><img src="/static/images/rssicon.png" /></a><a href="{% url 'releases_defaultquery' %}">View All</a></div>
 			
 			
 			<div class="fbut_selector">
