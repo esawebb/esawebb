@@ -984,7 +984,7 @@ TEMPLATE_CONTEXT_PROCESSORS += ( 'satchmo_store.shop.context_processors.settings
 
 AUTHENTICATION_BACKENDS += ( 'satchmo_store.accounts.email-auth.EmailBackend', )
 
-from django.conf.urls.defaults import patterns, include
+from django.conf.urls import patterns, include
 SATCHMO_SETTINGS = {
                     'SHOP_BASE' : '/shop',
                     'MULTISHOP' : False,

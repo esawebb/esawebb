@@ -9,7 +9,7 @@
 #
 
 from django.conf import settings
-from django.conf.urls.defaults import *
+from django.conf.urls import *
 from django.utils.translation import ugettext as _
 from django.contrib import admin
 from spacetelescope.admin import admin_site, adminlogs_site, adminshop_site
