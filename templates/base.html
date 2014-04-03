@@ -9,7 +9,7 @@
 <link href="{{MEDIA_URL}}css/base_grid.css" rel="stylesheet" type="text/css" media="screen" />
 <link href="{{MEDIA_URL}}css/screen.css" rel="stylesheet" type="text/css" media="screen" />
 <link href="{{MEDIA_URL}}css/print.css" rel="stylesheet" type="text/css" media="print" />
-<link href="{{MEDIA_URL}}djangoplicity/shadowbox3/shadowbox.css" rel="stylesheet" type="text/css" media="screen"/>
+<link href="{{MEDIA_URL}}djangoplicity/shadowbox/shadowbox.css" rel="stylesheet" type="text/css" media="screen"/>
 <meta name="ROBOTS" content="INDEX,FOLLOW" />
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="Keywords" content="Hubble, Hubble Space Telescope, HST, JWST, James Webb Space Telescope, images, information centre, news, video, European Space Agency, ESA, ACS, WFPC2, WFPC, FOS, FOC, GHRS, NICMOS, STIS, FGS, goodies, wallpaper, calendar, posters">
@@ -120,7 +120,7 @@ src="http://s7.addthis.com/js/250/addthis_widget.js#username
 <div class='clear'></div>
 </div>
 <script type="text/javascript">var MEDIA_URL = "{{MEDIA_URL}}"</script>
-{% load assets %}{% assets filter="jsmin", output="js/packed.js", "djangoplicity/js/jquery-1.4.2.min.js", "djangoplicity/js/jquery.cycle.min.js", "djangoplicity/js/jquery.jclock-1.2.0.js", "djangoplicity/shadowbox3/shadowbox.js", "djangoplicity/js/shadowbox_conf.js", "js/site.js" %}<script type="text/javascript" src="{{ ASSET_URL }}"></script>{% endassets %}
+{% load assets %}{% assets filter="jsmin", output="js/packed.js", "djangoplicity/js/jquery-1.4.2.min.js", "djangoplicity/js/jquery.cycle.min.js", "djangoplicity/js/jquery.jclock-1.2.0.js", "djangoplicity/shadowbox/shadowbox.js", "djangoplicity/js/shadowbox_conf.js", "js/site.js" %}<script type="text/javascript" src="{{ ASSET_URL }}"></script>{% endassets %}
 {% if not request.is_secure %}<script type="text/javascript" src="http://www.google.com/coop/cse/brand?form=cse-search-box&lang=en"></script>{% endif %}
 {% block extra_scripts %}{% endblock %}
 <script type="text/javascript">

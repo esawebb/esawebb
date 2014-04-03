@@ -639,6 +639,8 @@ ANNOUNCEMENTS_ARCHIVE_ROOT = 'archives/announcements/'
 NEWSLETTERS_ARCHIVE_ROOT = 'archives/newsletters/'
 SCIENCEANNOUNCEMENTS_ARCHIVE_ROOT = 'archives/science/'
 
+SHOP_NEWSLETTER_FROM = 'ESO & ESA/Hubble'
+
 VIDEOS_FEATURED_SUBJECT = 'hubblecast'
 
 VIDEOS_SUBTITLES_FORMATS = ('hd_and_apple','medium_podcast')
