@@ -574,7 +574,7 @@ ARCHIVES = (
 	('djangoplicity.products.models.Book','djangoplicity.products.options.BookOptions'),
 	('djangoplicity.products.models.Brochure','djangoplicity.products.options.BrochureOptions'),
 	('djangoplicity.products.models.Calendar','djangoplicity.products.options.CalendarOptions'),
-	('djangoplicity.products.models.CDROM','djangoplicity.products.options.CDROMOptions'),
+	('djangoplicity.products.models.Media','djangoplicity.products.options.MediaOptions'),
 	('djangoplicity.products.models.ConferenceItem','djangoplicity.products.options.ConferenceItemOptions'),
 	#('djangoplicity.products.models.ConferencePoster','djangoplicity.products.options.ConferencePosterOptions'),
 	('djangoplicity.products.models.EducationalMaterial','djangoplicity.products.options.EducationalMaterialOptions'),
@@ -963,7 +963,7 @@ SHOP_CONF = {
 	'ARCHIVE_DEFAULTS' : {
 		'djangoplicity.products.models.PostCard' : { 'ACCOUNT' : '50.050', },
 		'djangoplicity.products.models.Merchandise' : { 'ACCOUNT' : '50.050', },
-		'djangoplicity.products.models.CDROM' : { 'ACCOUNT' : '50.050', },
+		'djangoplicity.products.models.Media' : { 'ACCOUNT' : '50.050', },
 		'djangoplicity.products.models.Calendar' : { 'ACCOUNT' : '50.050', },
 		'djangoplicity.products.models.ConferenceItem' : { 'ACCOUNT' : '50.230', },
 		'djangoplicity.products.models.Sticker' : { 'ACCOUNT' : '50.050', },
