@@ -1089,4 +1089,4 @@ RECAPTCHA_PRIVATE_KEY='6LfXJOkSAAAAAMETeG2zL8idVr9tW3F0Ndb12GK3'
 IMGVOTE_EMAIL_FROM='no-reply@spacetelescope.org'
 
 # Required since Django 1.5:
-ALLOWED_HOSTS = ['.spacetelescope.org']
+ALLOWED_HOSTS = ['.spacetelescope.org', '.eso.org']
