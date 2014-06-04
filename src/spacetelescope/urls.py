@@ -42,6 +42,11 @@ from shipping.urls import adminpatterns
 
 urlpatterns = []
 
+if not settings.DEBUG:
+    urlpatterns += patterns( '',
+        ( r'^%s(?P<path>.*)' % settings.MEDIA_URL[1:], 'djangoplicity.archives.contrib.security.views.static_files_protection', { 'SSLAllow': True } ),
+    )
+
 urlpatterns += patterns( '',
 
     # Djangoplicity Adminstration
