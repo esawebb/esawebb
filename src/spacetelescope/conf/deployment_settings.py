@@ -32,10 +32,10 @@ SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 # CONFIG GENERATION #
 #####################
 WEBSERVERS = (
-	('aweb38', '%s3i' % SHORT_NAME, '134.171.74.206', 'int' ),
-	('aweb39', '%s4i' % SHORT_NAME, '134.171.74.207', 'int' ),
-	('aweb41', '%s3' % SHORT_NAME, '134.171.75.210', 'prod' ),
-	('aweb42', '%s4' % SHORT_NAME, '134.171.75.211', 'prod' ),
+	('aweb38', '%s3i' % SHORT_NAME, '134.171.74.208', 'int' ),
+	('aweb39', '%s4i' % SHORT_NAME, '134.171.74.209', 'int' ),
+	('aweb41', '%s3' % SHORT_NAME, '134.171.75.212', 'prod' ),
+	('aweb42', '%s4' % SHORT_NAME, '134.171.75.213', 'prod' ),
 )
 CONFIG_GEN_TEMPLATES_DIR = "%s/conf/templates/" % PRJBASE 
 CONFIG_GEN_GENERATED_DIR = "%s/conf/" % ROOT  # was: "%s/conf/" % TMP_DIR
