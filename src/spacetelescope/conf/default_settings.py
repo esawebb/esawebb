@@ -15,7 +15,7 @@ import platform
 #############################
 # ENVIRONMENT CONFIGURATION #
 #############################
-ROOT = "/Users/%s/dev/spacetelescope" % getpass.getuser() if platform.system() == 'Darwin' else "/scratch/loc/spacetelescope"
+ROOT = "/Users/%s/dev/spacetelescope" % getpass.getuser() if platform.system() == 'Darwin' else "/scratch/src/hubble"
 PRJBASE = "%s/src/spacetelescope" % ROOT
 DJANGOPLICITY_ROOT = "%s/src/djangoplicity" % ROOT
 
