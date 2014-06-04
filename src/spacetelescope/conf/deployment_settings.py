@@ -14,9 +14,10 @@ from djangoplicity.settings import copy_setting
 #############################
 # ENVIRONMENT CONFIGURATION #
 #############################
-ROOT = "/home/web/hubble"
-PRJBASE = "%s/projects/spacetelescope.org" % ROOT
-DJANGOPLICITY_ROOT = "%s/projects/djangoplicity" % ROOT
+ROOT = "/data/www/hubble"
+BUILD_ROOT = "/data/www/%s" % SHORT_NAME
+PRJBASE = "%s/src/spacetelescope" % ROOT
+DJANGOPLICITY_ROOT = "%s/src/djangoplicity" % ROOT
 
 BUILD_ROOT = ROOT
 BUILD_PRJBASE = PRJBASE 
@@ -25,47 +26,43 @@ BUILD_DJANGOPLICITY_ROOT = DJANGOPLICITY_ROOT
 LOG_DIR = "%s/logs" % ROOT
 TMP_DIR = "%s/tmp" % ROOT
 ENABLE_SSL = True
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 #####################
 # CONFIG GENERATION #
 #####################
 WEBSERVERS = (
-	('aweb5', '%s1i' % SHORT_NAME, '134.171.74.147', 'int' ),
-	('aweb6', '%s2i' % SHORT_NAME, '134.171.74.148', 'int' ),
-	('aweb14', '%s1' % SHORT_NAME, '134.171.75.139', 'prod' ),
-	('aweb15', '%s2' % SHORT_NAME, '134.171.75.140', 'prod' ),
+	('aweb38', '%s3i' % SHORT_NAME, '134.171.74.206', 'int' ),
+	('aweb39', '%s4i' % SHORT_NAME, '134.171.74.207', 'int' ),
+	('aweb41', '%s3' % SHORT_NAME, '134.171.75.210', 'prod' ),
+	('aweb42', '%s4' % SHORT_NAME, '134.171.75.211', 'prod' ),
 )
 CONFIG_GEN_TEMPLATES_DIR = "%s/conf/templates/" % PRJBASE 
-CONFIG_GEN_GENERATED_DIR = "%s/conf/" % TMP_DIR
+CONFIG_GEN_GENERATED_DIR = "%s/conf/" % ROOT  # was: "%s/conf/" % TMP_DIR
 
 ##############
 # DEPLOYMENT #
 ##############
-BUILD_NODES = ["aweb8"]
+BUILD_NODES = ["aweb37"]
 #WORKER_UID = 2996
 #WORKER_GID = 31811
 WORKER_LOG_LEVEL = "INFO"
 WORKERS_CAM_FREQ = "1.0"
 
-NORMAL_USER = 'lchriste'
+NORMAL_USER = 'epodadm'
 SUDO_USER = 'web'
-APACHE_INIT_MAIN = '/etc/init.d/http.%s.main' % SHORT_NAME
-APACHE_INIT_STATIC = '/etc/init.d/http.%s.static' % SHORT_NAME
 
 DEPLOYMENT_DEVELOP = False
 
 DEPLOYMENT_PERMS = [
-	{'path' : '%(VIRTUALENV)s/bin/*', 'user' : None, 'group' : None, 'perms' : 'a+x' },
-    {'path' : '%(PRJBASE)s/bin/*', 'user' : None, 'group' : None, 'perms' : 'a+x' },
-	{'path' : '%(ROOT)s/docs/static/css/', 'user' : None, 'group' : 'w3hst', 'perms' : 'g+ws,o=rx' },
-	{'path' : '%(ROOT)s/docs/static/js/', 'user' : None, 'group' : 'w3hst', 'perms' : 'g+ws,o=rx' },
-	{'path' : '%(LOG_DIR)s/', 'user' : None, 'group' : 'w3hst', 'perms' : 'g+ws' },
-	{'path' : '%(LOG_DIR)s/*', 'user' : None, 'group' : 'w3hst', 'perms' : 'g+w' },
-	{'path' : '%(TMP_DIR)s/', 'user' : None, 'group' : 'w3hst', 'perms' : 'g+ws,o=rwx' },
-	{'path' : '%(ROOT)s/import', 'user' : None, 'group' : 'w3hst', 'perms' : 'g+ws,o=rx' },
-	{'path' : '%(ROOT)s/import/*', 'user' : None, 'group' : 'w3hst', 'perms' : 'g+ws,o=rx' },
+	{'path' : '%(ROOT)s/docs/static/css/', 'user' : None, 'group' : 'epodadm', 'perms' : 'g+ws,o=rx' },
+	{'path' : '%(ROOT)s/docs/static/js/', 'user' : None, 'group' : 'epodadm', 'perms' : 'g+ws,o=rx' },
+	{'path' : '%(TMP_DIR)s/', 'user' : None, 'group' : 'epodadm', 'perms' : 'g+ws,o=rwx' },
+	{'path' : '%(ROOT)s/import', 'user' : None, 'group' : 'epodadm', 'perms' : 'g+ws,o=rx' },
+	{'path' : '%(ROOT)s/import/*', 'user' : None, 'group' : 'epodadm', 'perms' : 'g+ws,o=rx' },
 	# o+w needded to allow video encoder to write files to the directories.
-	{'path' : '%(ROOT)s/import/**/*', 'user' : None, 'group' : '-R w3hst', 'perms' : '-R g+ws,o=rwx' },
+	{'path' : '%(ROOT)s/import/**/*', 'user' : None, 'group' : '-R epodadm', 'perms' : '-R g+ws,o=rwx' },
+	{'path' : '%(ROOT)s/etc/**/*', 'user' : None, 'group' : None, 'perms' : '-R 664' },
 ]
 
 DEPLOYMENT_SYNC = [

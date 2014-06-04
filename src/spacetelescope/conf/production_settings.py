@@ -11,6 +11,13 @@
 from deployment_settings import *
 from djangoplicity.settings import copy_setting
 
+#############################
+# ENVIRONMENT CONFIGURATION #
+#############################
+BUILD_ROOT = "/data/www/%s" % SHORT_NAME
+
+LOG_DIR = "/data/logs/%s" % SHORT_NAME
+
 ###################
 # ERROR REPORTING #
 ###################
@@ -19,14 +26,15 @@ SITE_ENVIRONMENT = 'production'
 ##############
 # DEPLOYMENT #
 ##############
-MANAGEMENT_NODES = ["aweb14"]
+BUILDOUT_CONFIG = "conf/production.cfg"
+MANAGEMENT_NODES = ["aweb41"]
 BROKERS = ["aweb26"]
-WORKERS = ["aweb14","aweb15"]
-WORKERS_BEAT_HOST = "aweb14"
-WORKERS_CAM_HOST = "aweb15"
-WEBSERVER_NODES = ["%s1" % SHORT_NAME,"%s2" % SHORT_NAME ]
-DEPLOYMENT_TAG = "spacetelescope.org_production"
-DEPLOYMENT_REVISION = "spacetelescope.org_integration"
+WORKERS = ["aweb41", "aweb42"]
+WORKERS_BEAT_HOST = "aweb41"
+WORKERS_CAM_HOST = "aweb42"
+WEBSERVER_NODES = ["%s3" % SHORT_NAME, "%s4" % SHORT_NAME ]
+DEPLOYMENT_TAG = "spacetelescope.org_prod"
+DEPLOYMENT_REVISION = "spacetelescope.org_int"
 DEPLOYMENT_NOTIFICATION = {
 	"subject" : "[DEPLOY] %(DEPLOYMENT_TAG)s by %(local_user)s",
 	"from" : "esoepo-monitoring@eso.org",
@@ -50,8 +58,8 @@ CACHES = {
 		'BACKEND' : 'django.core.cache.backends.memcached.MemcachedCache',
 		'KEY_PREFIX' : SHORT_NAME,
 		'LOCATION' : [
-			'%(short_name)s1:11211' % { 'short_name' : SHORT_NAME},
-			'%(short_name)s2:11211' % { 'short_name' : SHORT_NAME},
+			'%(short_name)s3:11211' % { 'short_name' : SHORT_NAME},
+			'%(short_name)s4:11211' % { 'short_name' : SHORT_NAME},
 		],
 		'TIMEOUT' : 86400
 	}
