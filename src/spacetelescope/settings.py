@@ -405,6 +405,7 @@ INSTALLED_APPS += (
     'tinymce',
 	'djangoplicity.imgvote',
 	'captcha',
+	'gunicorn',
 )
 
 
