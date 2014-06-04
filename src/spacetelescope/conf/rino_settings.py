@@ -38,7 +38,7 @@ DEBUG_PROFILER=False
 DEBUG_TOOLBAR = False
 
 #STATIC_ROOT = "%s/static/" % PRJBASE
-MEDIA_ROOT = "/Users/rino/Workspaces/sites/spacetelescope/projects/spacetelescope.org/static/"
+MEDIA_ROOT = "/Users/rino/dev/spacetelescope/src/spacetelescope/static/"
 # MEDIA_URL = "/static/" #"/static/archives/"
 # STATIC_ROOT = "/Users/rino/Workspaces/sites/spacetelescope_media/"
 # STATIC_URL = "/static/archives/"

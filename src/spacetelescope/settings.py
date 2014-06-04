@@ -360,7 +360,6 @@ INSTALLED_APPS += (
 	'djangoplicity.products',
 	'djangoplicity.search',
 	'djangoplicity.metadata',
-	'djangoplicity.authtkt',
 	'djangoplicity.google',
 	'djangoplicity.cache',
 	'djangoplicity.inventory',
@@ -871,6 +870,11 @@ LOGGING = {
             'format': '%(asctime)s %(name)-12s %(levelname)-8s %(message)s'
         },
     },
+    'filters': {
+        'require_debug_false': {
+            '()': 'django.utils.log.RequireDebugFalse'
+        }
+    },
     'handlers': {
         'null': {
             'level':'DEBUG',
@@ -883,6 +887,7 @@ LOGGING = {
         },
         'mail_admins': {
             'level': 'ERROR',
+            'filters': ['require_debug_false'],
             'class': 'django.utils.log.AdminEmailHandler',
             'include_html' : True,
         },
