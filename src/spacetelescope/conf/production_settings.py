@@ -85,6 +85,7 @@ BROKER_HOST = "aweb26.hq.eso.org"
 # SHOP #
 ########
 ORDER_PREFIX = "hb"
+COPOSWEB_CONFIG_INI = "%s/etc/coposweb/coposweb-prod.ini" % ROOT
 LIVE = True
 
 ##########
