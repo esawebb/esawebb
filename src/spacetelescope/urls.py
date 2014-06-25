@@ -44,7 +44,7 @@ urlpatterns = []
 
 if not settings.DEBUG:
     urlpatterns += patterns( '',
-        ( r'^%s(?P<path>.*)' % settings.MEDIA_URL[1:], 'djangoplicity.archives.contrib.security.views.static_files_protection', { 'SSLAllow': True } ),
+        ( r'^%s(?P<path>.*)' % settings.MEDIA_URL[1:], 'djangoplicity.archives.contrib.security.views.serve_static_file', { 'SSLAllow': True } ),
     )
 
 urlpatterns += patterns( '',
