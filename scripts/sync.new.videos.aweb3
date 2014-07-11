@@ -1,6 +1,5 @@
 #!/bin/tcsh -f
 
-setenv PATH .:/home/web/bin:/home/web/scripts:/bin:/usr/bin:/vlt/current/gnu/bin
 set args = ""
 
 if ($1 == "run") then
@@ -10,6 +9,6 @@ else
 endif
 
 
-rsync -e 'ssh' $args /home/web/hubble/docs/static/archives/videos/medium_podcast/$2.* web@aweb3:/home/web/spacetelescope/docs/videos/medium_podcast/
-rsync -e 'ssh' $args /home/web/hubble/docs/static/archives/videos/hd_and_apple/$2.* web@aweb3:/home/web/spacetelescope/docs/videos/hd_and_apple/
-rsync -e 'ssh' $args /home/web/hubble/docs/static/archives/videos/hd_1080p25_screen/$2.* web@aweb3:/home/web/spacetelescope/docs/videos/hd_1080p25_screen/
+rsync -e 'ssh' $args /data/www/hubble/docs/static/archives/videos/medium_podcast/$2.* web@aweb3:/home/web/spacetelescope/docs/videos/medium_podcast/
+rsync -e 'ssh' $args /data/www/hubble/docs/static/archives/videos/hd_and_apple/$2.* web@aweb3:/home/web/spacetelescope/docs/videos/hd_and_apple/
+rsync -e 'ssh' $args /data/www/hubble/docs/static/archives/videos/hd_1080p25_screen/$2.* web@aweb3:/home/web/spacetelescope/docs/videos/hd_1080p25_screen/
