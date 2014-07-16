@@ -72,8 +72,7 @@ LOGGING_HANDLER = ['console']
 ##########
 # CELERY #
 ##########
-BROKER_HOST = "localhost"
-#BROKER_HOST = "aweb26.hq.eso.org"
+BROKER_URL = 'amqp://spacetelescope:letoveumtold@localhost:5672/spacetelescope_vhost'
 
 CELERY_ALWAYS_EAGER = False
 

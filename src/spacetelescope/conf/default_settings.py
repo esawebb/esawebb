@@ -204,11 +204,8 @@ PHOTOSHOP_BROKER = {
 ##########
 # CELERY #
 ##########
-BROKER_HOST = "localhost"
-BROKER_USER = "spacetelescope"
-BROKER_PASSWORD = "letoveumtold"
-BROKER_VHOST = "spacetelescope_vhost"
 BROKER_USE_SSL = False
+BROKER_URL = 'amqp://spacetelescope:letoveumtold@localhost:5672/spacetelescope_vhost'
 
 CELERY_ALWAYS_EAGER=False
 

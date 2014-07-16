@@ -28,7 +28,6 @@ import djangoplicity.google.admin
 import djangoplicity.archives.contrib.satchmo.freeorder.admin
 #import djangoplicity.archives.contrib.inventory_control.admin
 #import djangoplicity.inventory.admin
-import djangoplicity.celery.admin
 #import djangoplicity.events.admin
 import djangoplicity.mailinglists.admin
 import djangoplicity.newsletters.admin
@@ -65,7 +64,6 @@ autoregister( admin_site, djangoplicity.science.admin )
 
 autoregister( adminlogs_site, djangoplicity.search.admin )
 autoregister( adminlogs_site, djangoplicity.google.admin )
-autoregister( adminlogs_site, djangoplicity.celery.admin )
 autoregister( adminlogs_site, djangoplicity.actions.admin )
 
 

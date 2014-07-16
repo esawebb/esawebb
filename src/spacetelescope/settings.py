@@ -381,7 +381,6 @@ INSTALLED_APPS += (
     #'djangoplicity.kiosk.engine',
 	#'djangoplicity.kiosk.slides',
 	'spacetelescope',
-	'djcelery',
 	'mptt',
 	'django_extensions',
 	'django_assets',
@@ -715,8 +714,6 @@ NEWSFEATURE_FORMAT = 'newsfeature_hst'
 ##########
 # CELERY #
 ##########
-import djcelery
-djcelery.setup_loader()
 
 CELERY_IMPORTS = [
 	"djangoplicity.archives.contrib.security.tasks" ,
@@ -744,12 +741,8 @@ CELERY_ROUTES = {
 }
 
 ## Broker settings.
-BROKER_HOST = local_settings.BROKER_HOST
-BROKER_PORT = 5672
-BROKER_USER = local_settings.BROKER_USER
-BROKER_PASSWORD = local_settings.BROKER_PASSWORD
-BROKER_VHOST = local_settings.BROKER_VHOST
 BROKER_USE_SSL = local_settings.BROKER_USE_SSL
+BROKER_URL = local_settings.BROKER_URL
 
 # Task result backend
 CELERY_RESULT_BACKEND = "amqp"
@@ -764,7 +757,7 @@ CELERY_IGNORE_RESULT = False
 CELERY_DISABLE_RATE_LIMITS = True
 
 # Error email
-CELERY_SEND_TASK_ERROR_EMAILS = False
+CELERY_SEND_TASK_ERROR_EMAILS = True
 
 # Events
 CELERY_SEND_EVENTS = True
@@ -776,9 +769,6 @@ CELERY_ALWAYS_EAGER=local_settings.CELERY_ALWAYS_EAGER
 
 # File to save revoked tasks across workers restart
 CELERYD_STATE_DB = "%s/tmp/celery_states" % ROOT
-
-# Beat
-CELERYBEAT_SCHEDULER = "djcelery.schedulers.DatabaseScheduler"
 
 ##############
 # JavaScript #

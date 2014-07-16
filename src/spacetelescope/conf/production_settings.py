@@ -79,7 +79,7 @@ PHOTOSHOP_BROKER['HOST'] = "aweb26.hq.eso.org"
 ##########	
 # CELERY #
 ##########
-BROKER_HOST = "aweb26.hq.eso.org"
+BROKER_URL = 'amqp://spacetelescope:letoveumtold@aweb26.hq.eso.org:5672/spacetelescope_vhost'
 
 ########
 # SHOP #
