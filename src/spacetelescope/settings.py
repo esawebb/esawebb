@@ -11,7 +11,6 @@
 from djangoplicity.settings import import_settings
 
 from celery.schedules import crontab
-from datetime import timedelta
 import os
 import re
 
@@ -39,6 +38,7 @@ WEBSERVERS = local_settings.WEBSERVERS
 SSL_ASSETS_PREFIX = local_settings.SSL_ASSETS_PREFIX
 CONFIG_GEN_TEMPLATES_DIR = local_settings.CONFIG_GEN_TEMPLATES_DIR
 CONFIG_GEN_GENERATED_DIR = local_settings.CONFIG_GEN_GENERATED_DIR
+
 
 ###################
 # ERROR REPORTING #
@@ -87,16 +87,16 @@ MANAGERS = ADMINS
 SERVE_STATIC_MEDIA = local_settings.SERVE_STATIC_MEDIA
 
 DEBUG_TOOLBAR_PANELS = (
-    'debug_toolbar.panels.version.VersionDebugPanel',
-    'debug_toolbar.panels.timer.TimerDebugPanel',
-    #'debug_toolbar.panels.settings_vars.SettingsVarsDebugPanel',
-    'debug_toolbar.panels.headers.HeaderDebugPanel',
-    'debug_toolbar.panels.request_vars.RequestVarsDebugPanel',
-    'debug_toolbar.panels.template.TemplateDebugPanel',
-    'debug_toolbar.panels.sql.SQLDebugPanel',
-    #'debug_toolbar.panels.signals.SignalDebugPanel',
-    'debug_toolbar.panels.cache.CacheDebugPanel',
-    'debug_toolbar.panels.logger.LoggingPanel',
+	'debug_toolbar.panels.version.VersionDebugPanel',
+	'debug_toolbar.panels.timer.TimerDebugPanel',
+	#'debug_toolbar.panels.settings_vars.SettingsVarsDebugPanel',
+	'debug_toolbar.panels.headers.HeaderDebugPanel',
+	'debug_toolbar.panels.request_vars.RequestVarsDebugPanel',
+	'debug_toolbar.panels.template.TemplateDebugPanel',
+	'debug_toolbar.panels.sql.SQLDebugPanel',
+	#'debug_toolbar.panels.signals.SignalDebugPanel',
+	'debug_toolbar.panels.cache.CacheDebugPanel',
+	'debug_toolbar.panels.logger.LoggingPanel',
 )
 
 ##################
@@ -194,7 +194,7 @@ CACHE_MIDDLEWARE_KEY_PREFIX = SHORT_NAME
 CACHE_MIDDLEWARE_ANONYMOUS_ONLY = True
 
 ### keyedcached settings:
-CACHE_TIMEOUT = CACHE_MIDDLEWARE_SECONDS if CACHES['default']['BACKEND'] != 'django.core.cache.backends.dummy.DummyCache' else 0 # prevents stupid error from keyecache
+CACHE_TIMEOUT = CACHE_MIDDLEWARE_SECONDS if CACHES['default']['BACKEND'] != 'django.core.cache.backends.dummy.DummyCache' else 0  # prevents stupid error from keyecache
 CACHE_PREFIX = SHORT_NAME
 
 USE_ETAGS = True
@@ -211,10 +211,10 @@ TEMPLATE_LOADERS = (
 TEMPLATE_CONTEXT_PROCESSORS = (
 	'django.core.context_processors.request',
 	'django.contrib.auth.context_processors.auth',
-    'django.contrib.messages.context_processors.messages',
+	'django.contrib.messages.context_processors.messages',
 	'django.core.context_processors.i18n',
 	'django.core.context_processors.media',
-    'django.core.context_processors.static',
+	'django.core.context_processors.static',
 	'djangoplicity.utils.context_processors.site_environment',
 	'djangoplicity.utils.context_processors.project_environment',
 	'djangoplicity.utils.context_processors.google_analytics_id',
@@ -240,7 +240,7 @@ MIDDLEWARE_CLASSES = (
 	'djangoplicity.startup.StartupMiddleware',
 
 	# Compresses content for browsers that understand gzip compression (all modern browsers).
-	'django.middleware.gzip.GZipMiddleware', # Response
+	'django.middleware.gzip.GZipMiddleware',  # Response
 
 	# Handles conditional GET operations. If the response has a ETag or Last-Modified header,
 	# and the request has If-None-Match or If-Modified-Since, the response is replaced by an
@@ -279,11 +279,11 @@ REDIRECT_MIDDLEWARE_URI = local_settings.REDIRECT_MIDDLEWARE_URI
 
 MIDDLEWARE_CLASSES += (
 	# Enables session support
-	'django.contrib.sessions.middleware.SessionMiddleware', # Request/Response (db)
+	'django.contrib.sessions.middleware.SessionMiddleware',  # Request/Response (db)
 
-    # Adds the user attribute, representing the currently-logged-in user, to every incoming
-    # HttpRequest object.
-    'django.contrib.auth.middleware.AuthenticationMiddleware', # Request
+	# Adds the user attribute, representing the currently-logged-in user, to every incoming
+	# HttpRequest object.
+	'django.contrib.auth.middleware.AuthenticationMiddleware',  # Request
 
 	# enables Messaging middleware
 	'django.contrib.messages.middleware.MessageMiddleware',
@@ -292,31 +292,31 @@ MIDDLEWARE_CLASSES += (
 
 if USE_I18N:
 	MIDDLEWARE_CLASSES += (
-    	# Sets local for request based on URL prefix.
-	    'djangoplicity.translation.middleware.LocaleMiddleware', # Request/Response
-    )
+		# Sets local for request based on URL prefix.
+		'djangoplicity.translation.middleware.LocaleMiddleware',  # Request/Response
+	)
 
 MIDDLEWARE_CLASSES += (
-    # - Forbids access to user agents in the DISALLOWED_USER_AGENTS setting
-    # - Performs URL rewriting based on the APPEND_SLASH and PREPEND_WWW settings.
-    # - Handles ETags based on the USE_ETAGS setting.
-    'django.middleware.common.CommonMiddleware', # Request/Response
+	# - Forbids access to user agents in the DISALLOWED_USER_AGENTS setting
+	# - Performs URL rewriting based on the APPEND_SLASH and PREPEND_WWW settings.
+	# - Handles ETags based on the USE_ETAGS setting.
+	'django.middleware.common.CommonMiddleware',  # Request/Response
 
 
-    # Sets a boolean session variable INTERNAL_REQUEST if request.META['REMOTE_ADDR'] is in INTERNAL_IPS
-    'djangoplicity.archives.middleware.InternalRequestMiddleware', # Request
+	# Sets a boolean session variable INTERNAL_REQUEST if request.META['REMOTE_ADDR'] is in INTERNAL_IPS
+	'djangoplicity.archives.middleware.InternalRequestMiddleware',  # Request
 )
 
 
 MIDDLEWARE_CLASSES += (
 	# Module for URL redirection.
-	'django.contrib.redirects.middleware.RedirectFallbackMiddleware', # Response
+	'django.contrib.redirects.middleware.RedirectFallbackMiddleware',  # Response
 
 	# Module for URL redirection based on regular expressions
-	'djangoplicity.utils.middleware.RegexRedirectMiddleware', # Response
+	'djangoplicity.utils.middleware.RegexRedirectMiddleware',  # Response
 
 	# Djangoplicity static pages
-	'djangoplicity.pages.middleware.PageFallbackMiddleware', # Response
+	'djangoplicity.pages.middleware.PageFallbackMiddleware',  # Response
 )
 
 if ENABLE_REDIRECT_MIDDLEWARE:
@@ -336,14 +336,14 @@ INSTALLED_APPS += (
 	'django.contrib.staticfiles',
 	'django.contrib.sites',
 	'satchmo_store.shop',
-    'django.contrib.auth',
-    'django.contrib.contenttypes',
-    'django.contrib.redirects',
-    'django.contrib.sessions',
-    'django.contrib.admin',
-    'django.contrib.admindocs',
+	'django.contrib.auth',
+	'django.contrib.contenttypes',
+	'django.contrib.redirects',
+	'django.contrib.sessions',
+	'django.contrib.admin',
+	'django.contrib.admindocs',
 	#'django.contrib.comments',
-    'django.contrib.messages',
+	'django.contrib.messages',
 	'django.contrib.humanize',
 	'django.contrib.sitemaps',
 	'djangoplicity.menus',
@@ -355,7 +355,7 @@ INSTALLED_APPS += (
 	#'djangoplicity.contrib.redirects',
 	'djangoplicity.archives',
 	'djangoplicity.archives.contrib.satchmo.freeorder',
-    'djangoplicity.archives.contrib.security',
+	'djangoplicity.archives.contrib.security',
 	'djangoplicity.archives.contrib.inventory_control',
 	'djangoplicity.announcements',
 	'djangoplicity.science',
@@ -367,21 +367,21 @@ INSTALLED_APPS += (
 	'djangoplicity.cache',
 	'djangoplicity.inventory',
 	'djangoplicity.adminhistory',
-    'djangoplicity.utils',
-    'djangoplicity.celery',
-    #'djangoplicity.events',
-    'djangoplicity.mailinglists',
-    'djangoplicity.newsletters',
-    'djangoplicity.iframe',
-    #'djangoplicity.contacts',
-    'djangoplicity.customsearch',
-    'djangoplicity.admincomments',
-    'djangoplicity.simplearchives',
-    #'djangoplicity.eventcalendar',
-    'djangoplicity.actions',
-    #'djangoplicity.mailer',
-    #'djangoplicity.scrum',
-    #'djangoplicity.kiosk.engine',
+	'djangoplicity.utils',
+	'djangoplicity.celery',
+	#'djangoplicity.events',
+	'djangoplicity.mailinglists',
+	'djangoplicity.newsletters',
+	'djangoplicity.iframe',
+	#'djangoplicity.contacts',
+	'djangoplicity.customsearch',
+	'djangoplicity.admincomments',
+	'djangoplicity.simplearchives',
+	#'djangoplicity.eventcalendar',
+	'djangoplicity.actions',
+	#'djangoplicity.mailer',
+	#'djangoplicity.scrum',
+	#'djangoplicity.kiosk.engine',
 	#'djangoplicity.kiosk.slides',
 	'spacetelescope',
 	'mptt',
@@ -398,13 +398,13 @@ INSTALLED_APPS += (
 	'shipping',
 	'payment',
 	'djangoplicity.coposweb',
-    'l10n',
-    'tax',
-    'tax.modules.no',
-    'app_plugins',
-    'shipping.modules.tieredweight',
-    'django_config_gen',
-    'tinymce',
+	'l10n',
+	'tax',
+	'tax.modules.no',
+	'app_plugins',
+	'shipping.modules.tieredweight',
+	'django_config_gen',
+	'tinymce',
 	'djangoplicity.imgvote',
 	'captcha',
 	'gunicorn',
@@ -423,9 +423,9 @@ INSTALLED_APPS += (
 ############
 # SESSIONS #
 ############
-SESSION_ENGINE=local_settings.SESSION_ENGINE
-SESSION_COOKIE_AGE=local_settings.SESSION_COOKIE_AGE
-SESSION_COOKIE_DOMAIN=local_settings.SESSION_COOKIE_DOMAIN
+SESSION_ENGINE = local_settings.SESSION_ENGINE
+SESSION_COOKIE_AGE = local_settings.SESSION_COOKIE_AGE
+SESSION_COOKIE_DOMAIN = local_settings.SESSION_COOKIE_DOMAIN
 #TODO: remove when python 2.7 is installed on productino
 SESSION_COOKIE_HTTPONLY = False
 
@@ -453,15 +453,15 @@ EMAIL_SUBJECT_PREFIX = local_settings.EMAIL_SUBJECT_PREFIX
 # AUTHENTICATION #
 ##################
 
-if  local_settings.DISABLE_LDAP:
-    AUTHENTICATION_BACKENDS = (
-        'django.contrib.auth.backends.ModelBackend',
-    )
+if local_settings.DISABLE_LDAP:
+	AUTHENTICATION_BACKENDS = (
+		'django.contrib.auth.backends.ModelBackend',
+	)
 else:
-    AUTHENTICATION_BACKENDS = (
-        'django_auth_ldap.backend.LDAPBackend',
-        'django.contrib.auth.backends.ModelBackend',
-    )
+	AUTHENTICATION_BACKENDS = (
+		'django_auth_ldap.backend.LDAPBackend',
+		'django.contrib.auth.backends.ModelBackend',
+	)
 #AUTH_PROFILE_MODULE = ''
 LOGIN_URL = '/login/'
 LOGOUT_URL = '/logout/'
@@ -470,38 +470,38 @@ LOGIN_REDIRECT_URL = '/'
 #############
 # LDAP AUTH #
 #############
-if not  local_settings.DISABLE_LDAP: # Ensure that module is not loaded if disabled
+if not local_settings.DISABLE_LDAP:  # Ensure that module is not loaded if disabled
 	import ldap
 	from django_auth_ldap.config import LDAPSearch, ActiveDirectoryGroupType
 
 	AUTH_LDAP_SERVER_URI = "ldaps://ldap.ads.eso.org:636/ads.eso.org"
 
 	AUTH_LDAP_GLOBAL_OPTIONS = {
-		ldap.OPT_REFERRALS : 0,
-		ldap.OPT_PROTOCOL_VERSION : 3,
-		ldap.OPT_X_TLS_REQUIRE_CERT : ldap.OPT_X_TLS_NEVER
+		ldap.OPT_REFERRALS: 0,
+		ldap.OPT_PROTOCOL_VERSION: 3,
+		ldap.OPT_X_TLS_REQUIRE_CERT: ldap.OPT_X_TLS_NEVER
 	}
 
 	AUTH_LDAP_BIND_DN = "xskioskldap"
 	AUTH_LDAP_BIND_PASSWORD = "LDAP1420"
 	AUTH_LDAP_USER_SEARCH = LDAPSearch( "DC=ads,DC=eso,DC=org",
-	    ldap.SCOPE_SUBTREE, "(&(objectCategory=user)(objectClass=person)(sAMAccountName=%(user)s)(!(userAccountControl:1.2.840.113556.1.4.803:=2)))" )
+		ldap.SCOPE_SUBTREE, "(&(objectCategory=user)(objectClass=person)(sAMAccountName=%(user)s)(!(userAccountControl:1.2.840.113556.1.4.803:=2)))" )
 
 	AUTH_LDAP_USER_ATTR_MAP = {
-	          "first_name": "givenName",
-	          "last_name": "sn",
-	          "email": "mail"
+		"first_name": "givenName",
+		"last_name": "sn",
+		"email": "mail"
 	}
 
 	AUTH_LDAP_GROUP_TYPE = ActiveDirectoryGroupType()
 	AUTH_LDAP_GROUP_SEARCH = LDAPSearch( "dc=ads,dc=eso,dc=org",
-	    ldap.SCOPE_SUBTREE, "(objectClass=group)"
+		ldap.SCOPE_SUBTREE, "(objectClass=group)"
 	)
 
 	# Defaults:
 	# - ePOD staff will get active/staff account - but no permissions.
 	# - All ESO staff will get an inactive account on login - this account has to manually be activated.
-	AUTH_LDAP_ALWAYS_UPDATE_USER = False # Prevent user from being updated every time a user logs in.
+	AUTH_LDAP_ALWAYS_UPDATE_USER = False  # Prevent user from being updated every time a user logs in.
 
 	AUTH_LDAP_USER_FLAGS_BY_GROUP = {
 		"is_active": "CN=SA-PAD-EPR,OU=Garching,OU=Shared Acess Groups,OU=Groups,DC=ads,DC=eso,DC=org",
@@ -523,16 +523,16 @@ AUTH_TKT_HTACCESS = '.esoacc'
 #########
 # GEOIP #
 #########
-GEOIP_PATH =local_settings.GEOIP_PATH
+GEOIP_PATH = local_settings.GEOIP_PATH
 GEOIP_LIBRARY_PATH = local_settings.GEOIP_LIBRARY_PATH
 
 #########
 # PAGES #
 #########
 PAGE_TEMPLATE_CHOICES = (
-    ('pages/page_onecolumn.html','Default one column layout'),
-    ('pages/page_twocolumn.html','Default two column layout'),
-    ('pages/page_search.html','Google custom search layout')
+	('pages/page_onecolumn.html', 'Default one column layout'),
+	('pages/page_twocolumn.html', 'Default two column layout'),
+	('pages/page_search.html', 'Google custom search layout')
 )
 
 #############
@@ -546,7 +546,7 @@ BREADCRUMB_SEPARATOR = '&raquo;'
 # DJANGO ASSETS #
 #################
 ASSETS_DEBUG = local_settings.ASSETS_DEBUG
-ASSETS_UPDATER="timestamp"
+ASSETS_UPDATER = "timestamp"
 #ASSETS_AUTO_CREATE
 #ASSETS_EXPIRE = 'filename'
 
@@ -564,61 +564,61 @@ PROFANITIES_LIST = ( 'asshat', 'asshead', 'asshole', 'cunt', 'fuck', 'gook', 'ni
 # For static media protection to be enabled, and archive must be present here
 # For file import to work, the archive must be present here.
 ARCHIVES = (
-	('djangoplicity.media.models.Image','djangoplicity.media.options.ImageOptions'),
-	('djangoplicity.media.models.Video','djangoplicity.media.options.VideoOptions'),
-	('djangoplicity.media.models.VideoSubtitle','djangoplicity.media.options.VideoSubtitleOptions'),
-	('djangoplicity.media.models.ImageComparison','djangoplicity.media.options.ImageComparisonOptions'),
-	('djangoplicity.releases.models.Release','djangoplicity.releases.options.ReleaseOptions'),
+	('djangoplicity.media.models.Image', 'djangoplicity.media.options.ImageOptions'),
+	('djangoplicity.media.models.Video', 'djangoplicity.media.options.VideoOptions'),
+	('djangoplicity.media.models.VideoSubtitle', 'djangoplicity.media.options.VideoSubtitleOptions'),
+	('djangoplicity.media.models.ImageComparison', 'djangoplicity.media.options.ImageComparisonOptions'),
+	('djangoplicity.releases.models.Release', 'djangoplicity.releases.options.ReleaseOptions'),
 	#('djangoplicity.announcements.models.Announcement','djangoplicity.announcements.options.AnnouncementOptions'),
-	('djangoplicity.products.models.Application','djangoplicity.products.options.ApplicationOptions'),
+	('djangoplicity.products.models.Application', 'djangoplicity.products.options.ApplicationOptions'),
 
-	('djangoplicity.products.models.AnnualReport','djangoplicity.products.options.AnnualReportOptions'),
-	('djangoplicity.products.models.Book','djangoplicity.products.options.BookOptions'),
-	('djangoplicity.products.models.Brochure','djangoplicity.products.options.BrochureOptions'),
-	('djangoplicity.products.models.Calendar','djangoplicity.products.options.CalendarOptions'),
-	('djangoplicity.products.models.Media','djangoplicity.products.options.MediaOptions'),
-	('djangoplicity.products.models.ConferenceItem','djangoplicity.products.options.ConferenceItemOptions'),
+	('djangoplicity.products.models.AnnualReport', 'djangoplicity.products.options.AnnualReportOptions'),
+	('djangoplicity.products.models.Book', 'djangoplicity.products.options.BookOptions'),
+	('djangoplicity.products.models.Brochure', 'djangoplicity.products.options.BrochureOptions'),
+	('djangoplicity.products.models.Calendar', 'djangoplicity.products.options.CalendarOptions'),
+	('djangoplicity.products.models.Media', 'djangoplicity.products.options.MediaOptions'),
+	('djangoplicity.products.models.ConferenceItem', 'djangoplicity.products.options.ConferenceItemOptions'),
 	#('djangoplicity.products.models.ConferencePoster','djangoplicity.products.options.ConferencePosterOptions'),
-	('djangoplicity.products.models.EducationalMaterial','djangoplicity.products.options.EducationalMaterialOptions'),
-	('djangoplicity.products.models.Exhibition','djangoplicity.products.options.ExhibitionOptions'),
-	('djangoplicity.products.models.FITSImage','djangoplicity.products.options.FITSImageOptions'),
-	('djangoplicity.products.models.Flyer','djangoplicity.products.options.FlyerOptions'),
-	('djangoplicity.products.models.Handout','djangoplicity.products.options.HandoutOptions'),
+	('djangoplicity.products.models.EducationalMaterial', 'djangoplicity.products.options.EducationalMaterialOptions'),
+	('djangoplicity.products.models.Exhibition', 'djangoplicity.products.options.ExhibitionOptions'),
+	('djangoplicity.products.models.FITSImage', 'djangoplicity.products.options.FITSImageOptions'),
+	('djangoplicity.products.models.Flyer', 'djangoplicity.products.options.FlyerOptions'),
+	('djangoplicity.products.models.Handout', 'djangoplicity.products.options.HandoutOptions'),
 	#('djangoplicity.products.models.Handout','djangoplicity.products.options.HandoutOptions'),
-	('djangoplicity.products.models.IMAXFilm','djangoplicity.products.options.IMAXFilmOptions'),
-	('djangoplicity.products.models.KidsDrawing','djangoplicity.products.options.KidsDrawingOptions'),
-	('djangoplicity.products.models.Logo','djangoplicity.products.options.LogoOptions'),
-	('djangoplicity.products.models.Apparel','djangoplicity.products.options.ApparelOptions'),
-	('djangoplicity.products.models.Map','djangoplicity.products.options.MapOptions'),
-	('djangoplicity.products.models.Merchandise','djangoplicity.products.options.MerchandiseOptions'),
-	('djangoplicity.products.models.MiniSite','djangoplicity.products.options.MiniSiteOptions'),
-	('djangoplicity.products.models.Bulletin','djangoplicity.products.options.BulletinOptions'),
-	('djangoplicity.products.models.Stationery','djangoplicity.products.options.StationeryOptions'),
-	('djangoplicity.products.models.Periodical','djangoplicity.products.options.PeriodicalOptions'),
-	('djangoplicity.products.models.ScienceInSchool','djangoplicity.products.options.ScienceInSchoolOptions'),
-	('djangoplicity.products.models.Messenger','djangoplicity.products.options.MessengerOptions'),
-	('djangoplicity.products.models.CapJournal','djangoplicity.products.options.CapJournalOptions'),
-	('djangoplicity.products.models.STECFNewsletter','djangoplicity.products.options.STECFNewsletterOptions'),
-	('djangoplicity.products.models.OnlineArt','djangoplicity.products.options.OnlineArtOptions'),
-	('djangoplicity.products.models.OnlineArtAuthor','djangoplicity.products.options.OnlineArtAuthorOptions'),
-	('djangoplicity.products.models.PaperModel','djangoplicity.products.options.PaperModelOptions'),
-	('djangoplicity.products.models.PlanetariumShow','djangoplicity.products.options.PlanetariumShowOptions'),
-	('djangoplicity.products.models.PostCard','djangoplicity.products.options.PostCardOptions'),
-	('djangoplicity.products.models.PrintedPoster','djangoplicity.products.options.PrintedPosterOptions'),
-	('djangoplicity.products.models.ConferencePoster','djangoplicity.products.options.ConferencePosterOptions'),
-	('djangoplicity.products.models.ElectronicPoster','djangoplicity.products.options.ElectronicPosterOptions'),
-	('djangoplicity.products.models.Presentation','djangoplicity.products.options.PresentationOptions'),
-	('djangoplicity.products.models.PressKit','djangoplicity.products.options.PressKitOptions'),
-	('djangoplicity.products.models.SlideShow','djangoplicity.products.options.SlideShowOptions'),
-	('djangoplicity.products.models.ElectronicCard','djangoplicity.products.options.ElectronicCardOptions'),
-	('djangoplicity.products.models.Sticker','djangoplicity.products.options.StickerOptions'),
-	('djangoplicity.products.models.TechnicalDocument','djangoplicity.products.options.TechnicalDocumentOptions'),
-	('djangoplicity.products.models.UserVideo','djangoplicity.products.options.UserVideoOptions'),
-	('djangoplicity.products.models.VirtualTour','djangoplicity.products.options.VirtualTourOptions'),
-	('djangoplicity.newsletters.models.Newsletter','djangoplicity.newsletters.options.NewsletterOptions'),
+	('djangoplicity.products.models.IMAXFilm', 'djangoplicity.products.options.IMAXFilmOptions'),
+	('djangoplicity.products.models.KidsDrawing', 'djangoplicity.products.options.KidsDrawingOptions'),
+	('djangoplicity.products.models.Logo', 'djangoplicity.products.options.LogoOptions'),
+	('djangoplicity.products.models.Apparel', 'djangoplicity.products.options.ApparelOptions'),
+	('djangoplicity.products.models.Map', 'djangoplicity.products.options.MapOptions'),
+	('djangoplicity.products.models.Merchandise', 'djangoplicity.products.options.MerchandiseOptions'),
+	('djangoplicity.products.models.MiniSite', 'djangoplicity.products.options.MiniSiteOptions'),
+	('djangoplicity.products.models.Bulletin', 'djangoplicity.products.options.BulletinOptions'),
+	('djangoplicity.products.models.Stationery', 'djangoplicity.products.options.StationeryOptions'),
+	('djangoplicity.products.models.Periodical', 'djangoplicity.products.options.PeriodicalOptions'),
+	('djangoplicity.products.models.ScienceInSchool', 'djangoplicity.products.options.ScienceInSchoolOptions'),
+	('djangoplicity.products.models.Messenger', 'djangoplicity.products.options.MessengerOptions'),
+	('djangoplicity.products.models.CapJournal', 'djangoplicity.products.options.CapJournalOptions'),
+	('djangoplicity.products.models.STECFNewsletter', 'djangoplicity.products.options.STECFNewsletterOptions'),
+	('djangoplicity.products.models.OnlineArt', 'djangoplicity.products.options.OnlineArtOptions'),
+	('djangoplicity.products.models.OnlineArtAuthor', 'djangoplicity.products.options.OnlineArtAuthorOptions'),
+	('djangoplicity.products.models.PaperModel', 'djangoplicity.products.options.PaperModelOptions'),
+	('djangoplicity.products.models.PlanetariumShow', 'djangoplicity.products.options.PlanetariumShowOptions'),
+	('djangoplicity.products.models.PostCard', 'djangoplicity.products.options.PostCardOptions'),
+	('djangoplicity.products.models.PrintedPoster', 'djangoplicity.products.options.PrintedPosterOptions'),
+	('djangoplicity.products.models.ConferencePoster', 'djangoplicity.products.options.ConferencePosterOptions'),
+	('djangoplicity.products.models.ElectronicPoster', 'djangoplicity.products.options.ElectronicPosterOptions'),
+	('djangoplicity.products.models.Presentation', 'djangoplicity.products.options.PresentationOptions'),
+	('djangoplicity.products.models.PressKit', 'djangoplicity.products.options.PressKitOptions'),
+	('djangoplicity.products.models.SlideShow', 'djangoplicity.products.options.SlideShowOptions'),
+	('djangoplicity.products.models.ElectronicCard', 'djangoplicity.products.options.ElectronicCardOptions'),
+	('djangoplicity.products.models.Sticker', 'djangoplicity.products.options.StickerOptions'),
+	('djangoplicity.products.models.TechnicalDocument', 'djangoplicity.products.options.TechnicalDocumentOptions'),
+	('djangoplicity.products.models.UserVideo', 'djangoplicity.products.options.UserVideoOptions'),
+	('djangoplicity.products.models.VirtualTour', 'djangoplicity.products.options.VirtualTourOptions'),
+	('djangoplicity.newsletters.models.Newsletter', 'djangoplicity.newsletters.options.NewsletterOptions'),
 )
 
-ARCHIVE_EMBARGO_LOGIN = ('hst','vxiofpia')
+ARCHIVE_EMBARGO_LOGIN = ('hst', 'vxiofpia')
 ARCHIVE_EMAIL_SENDER = "ESA/Hubble Information Centre <hubble@eso.org>"
 
 ARCHIVE_URL_QUERY_PREFIX = 'archive'
@@ -643,7 +643,7 @@ SCIENCEANNOUNCEMENTS_ARCHIVE_ROOT = 'archives/science/'
 
 VIDEOS_FEATURED_SUBJECT = 'hubblecast'
 
-VIDEOS_SUBTITLES_FORMATS = ('hd_and_apple','medium_podcast')
+VIDEOS_SUBTITLES_FORMATS = ('hd_and_apple', 'medium_podcast')
 # List of extra formats which should be removed when importing new videos.
 VIDEOS_FORMATS_REMOVE = [
 	#'hd_broadcast_720p25',
@@ -656,7 +656,7 @@ DEFAULT_CREATOR_URL = "http://www.spacetelescope.org"
 DEFAULT_CONTACT_ADDRESS = u"Karl-Schwarzschild-Strasse 2"
 DEFAULT_CONTACT_CITY = u"Garching bei M√ºnchen"
 DEFAULT_CONTACT_STATE_PROVINCE = ""
-DEFAULT_CONTACT_POSTAL_CODE= u"D-85748"
+DEFAULT_CONTACT_POSTAL_CODE = u"D-85748"
 DEFAULT_CONTACT_COUNTRY = u"Germany"
 DEFAULT_RIGHTS = "Creative Commons Attribution 3.0 Unported license"
 DEFAULT_PUBLISHER = u"ESA/Hubble"
@@ -668,10 +668,10 @@ ARCHIVE_IMPORT_ROOT = local_settings.ARCHIVE_IMPORT_ROOT
 MP4BOX_PATH = local_settings.MP4BOX_PATH
 
 ARCHIVE_WORKFLOWS = {
-	'media.video.rename' : ('spacetelescope.workflows.media','video_rename'),
+	'media.video.rename': ('spacetelescope.workflows.media', 'video_rename'),
 }
 
-VIDEO_RENAME_NOTIFY = ['mkornmes@eso.org',]
+VIDEO_RENAME_NOTIFY = ['mkornmes@eso.org', ]
 
 VIDEO_CONTENT_SERVERS = (
 	( '', 'Default' ),
@@ -719,7 +719,7 @@ NEWSFEATURE_FORMAT = 'newsfeature_hst'
 ##########
 
 CELERY_IMPORTS = [
-	"djangoplicity.archives.contrib.security.tasks" ,
+	"djangoplicity.archives.contrib.security.tasks",
 	"djangoplicity.celery.tasks",
 ]
 
@@ -729,18 +729,18 @@ CELERY_DEFAULT_EXCHANGE = "celery"
 CELERY_DEFAULT_EXCHANGE_TYPE = "direct"
 CELERY_DEFAULT_ROUTING_KEY = "celery"
 CELERY_QUEUES = {
-    "celery": {
-        "exchange": "celery",
-        "exchange_type": "direct",
-        "binding_key": "celery"},
-    "photoshop": {
-        "exchange": "photoshop",
-        "exchange_type": "direct",
-        "binding_key": "photoshop"},
+	"celery": {
+		"exchange": "celery",
+		"exchange_type": "direct",
+		"binding_key": "celery"},
+	"photoshop": {
+		"exchange": "photoshop",
+		"exchange_type": "direct",
+		"binding_key": "photoshop"},
 }
 # Directs all image generation tasks to the "photoshop" queue
 CELERY_ROUTES = {
-	"media.image_derivatives" : { "queue" : "photoshop" }
+	"media.image_derivatives": { "queue": "photoshop" }
 }
 
 ## Broker settings.
@@ -755,7 +755,7 @@ CELERY_RESULT_SERIALIZER = "json"
 CELERY_TASK_RESULT_EXPIRES = 3600
 
 # Task execution
-CELERY_TASK_SERIALIZER='json'
+CELERY_TASK_SERIALIZER = 'json'
 CELERY_IGNORE_RESULT = False
 CELERY_DISABLE_RATE_LIMITS = True
 
@@ -768,7 +768,7 @@ CELERY_SEND_EVENTS = True
 # Logging
 CELERYD_HIJACK_ROOT_LOGGER = False
 
-CELERY_ALWAYS_EAGER=local_settings.CELERY_ALWAYS_EAGER
+CELERY_ALWAYS_EAGER = local_settings.CELERY_ALWAYS_EAGER
 
 # File to save revoked tasks across workers restart
 CELERYD_STATE_DB = "%s/tmp/celery_states" % ROOT
@@ -804,32 +804,32 @@ SWFOBJECT_JS = "djangoplicity/js/swfobject.js"
 
 REGEX_REDIRECTS = (
 #	( re.compile( '/hubbleshop/webshop/webshop\.php\?show=sales&section=(books|cdroms)' ), '/shop/category/\g<1>/' ),
-	( re.compile( '/about/history/sm4blog/(.+)' ), '/static/sm4blog/\g<1>' ),
-	( re.compile( '/news/(doc|pdf|text)/(.+)' ), '/static/archives/releases/\g<1>/\g<2>' ),
-	( re.compile( '/news/(science_paper)/(.+)' ), '/static/archives/releases/science_papers/\g<1>' ),
-	( re.compile( '/images/html/([a-z0-9-_]+)\.html' ), '/images/\g<1>/' ),
-	( re.compile( '/videos/(vodcast|hd1080p_screen|hd1080p_broadcast|hd720p_screen|hd720p_broadcast|h264|broadcast)/(.+)' ), '/static/archives/videos/\g<1>/\g<2>' ),
-	( re.compile( '/images/html/zoomable/([a-z0-9-_]+).html' ), '/images/\g<1>/zoomable/' ),
-	( re.compile( '/videos/html/mov/(320px|180px)/([a-z0-9-_]+).html' ), '/videos/\g<2>/' ),
-	( re.compile( '/bin/videos.pl\?(searchtype=news&)?string=([a-z0-9-_]+)' ), '/videos/?search=\g<2>' ),
-	( re.compile( '/bin/images.pl\?(searchtype=news&)?string=([a-z0-9-_]+)' ), '/images/?search=\g<2>' ),
-	( re.compile( '/about/further_information/(brochures|books|newsletters)/(pdf|pdfsm)/(.+)' ), '/static/archives/\g<1>/\g<2>/\g<3>' ),
-	( re.compile( '/bin/calendar.pl' ), '/extras/calendars/' ),
-	( re.compile( '/bin/calendar.pl\?string=(\d+)' ), '/extras/calendars/archive/year/\g<1>/' ),
-	( re.compile( '/bin/images.pl\?embargo=0&viewtype=standard&searchtype=freesearch&lang=en&string=(.+)' ), '/images/?search=\g<1>' ),
-	( re.compile( '/bin/images.pl\?searchtype=freesearch&string=(.+)' ), '/images/?search=\g<1>' ),
-	( re.compile( '/bin/images.pl\?searchtype=top100' ), '/images/archive/top100/' ),
-	( re.compile( '/bin/images.pl\?searchtype=wallpaper' ), '/images/archive/wallpapers/' ),
-	( re.compile( '/bin/news.pl\?string=([a-z0-9-_]+)' ), '/news/\g<1>/' ),
-	( re.compile( '/goodies/printlayouts/html/([a-z0-9-_]+).html' ), '/news/\g<1>/' ),
-	( re.compile( '/images/archive/freesearch/([^/]+)/viewall/\d+' ), '/images/?search=\g<1>' ),
-	( re.compile( '/images/archive/topic/([^/]+)/(|standard)/(\d+)?' ), '/images/archive/category/\g<1>/' ),
-	( re.compile( '/images/archive/wallpaper/(.+)' ), '/images/archive/wallpapers/' ),
-	( re.compile( '/kidsandteachers/education/lowres_pdf/([a-z0-9-_]+)\.pdf' ), '/static/archives/education/pdfsm/\g<1>.pdf' ),
-	( re.compile( '/projects/python-xmp-toolkit/(.*)' ), '/static/projects/python-xmp-toolkit/\g<1>' ),
-	( re.compile( '/videos/archive/topic/([^/]+)/(|standard|viewall)/(\d+)?' ), '/videos/archive/category/\g<1>/' ),
-	( re.compile( '/videos/html/mpeg/320px/([a-z0-9-_]+).html' ), '/videos/\g<1>/' ),
-	( re.compile( '/videos/scripts/(.+)' ), '/static/archives/videos/script/\g<1>' ),
+	( re.compile( r'/about/history/sm4blog/(.+)' ), r'/static/sm4blog/\g<1>' ),
+	( re.compile( r'/news/(doc|pdf|text)/(.+)' ), r'/static/archives/releases/\g<1>/\g<2>' ),
+	( re.compile( r'/news/(science_paper)/(.+)' ), r'/static/archives/releases/science_papers/\g<1>' ),
+	( re.compile( r'/images/html/([a-z0-9-_]+)\.html' ), r'/images/\g<1>/' ),
+	( re.compile( r'/videos/(vodcast|hd1080p_screen|hd1080p_broadcast|hd720p_screen|hd720p_broadcast|h264|broadcast)/(.+)' ), r'/static/archives/videos/\g<1>/\g<2>' ),
+	( re.compile( r'/images/html/zoomable/([a-z0-9-_]+).html' ), r'/images/\g<1>/zoomable/' ),
+	( re.compile( r'/videos/html/mov/(320px|180px)/([a-z0-9-_]+).html' ), r'/videos/\g<2>/' ),
+	( re.compile( r'/bin/videos.pl\?(searchtype=news&)?string=([a-z0-9-_]+)' ), r'/videos/?search=\g<2>' ),
+	( re.compile( r'/bin/images.pl\?(searchtype=news&)?string=([a-z0-9-_]+)' ), r'/images/?search=\g<2>' ),
+	( re.compile( r'/about/further_information/(brochures|books|newsletters)/(pdf|pdfsm)/(.+)' ), r'/static/archives/\g<1>/\g<2>/\g<3>' ),
+	( re.compile( r'/bin/calendar.pl' ), r'/extras/calendars/' ),
+	( re.compile( r'/bin/calendar.pl\?string=(\d+)' ), r'/extras/calendars/archive/year/\g<1>/' ),
+	( re.compile( r'/bin/images.pl\?embargo=0&viewtype=standard&searchtype=freesearch&lang=en&string=(.+)' ), r'/images/?search=\g<1>' ),
+	( re.compile( r'/bin/images.pl\?searchtype=freesearch&string=(.+)' ), r'/images/?search=\g<1>' ),
+	( re.compile( r'/bin/images.pl\?searchtype=top100' ), r'/images/archive/top100/' ),
+	( re.compile( r'/bin/images.pl\?searchtype=wallpaper' ), r'/images/archive/wallpapers/' ),
+	( re.compile( r'/bin/news.pl\?string=([a-z0-9-_]+)' ), r'/news/\g<1>/' ),
+	( re.compile( r'/goodies/printlayouts/html/([a-z0-9-_]+).html' ), r'/news/\g<1>/' ),
+	( re.compile( r'/images/archive/freesearch/([^/]+)/viewall/\d+' ), r'/images/?search=\g<1>' ),
+	( re.compile( r'/images/archive/topic/([^/]+)/(|standard)/(\d+)?' ), r'/images/archive/category/\g<1>/' ),
+	( re.compile( r'/images/archive/wallpaper/(.+)' ), r'/images/archive/wallpapers/' ),
+	( re.compile( r'/kidsandteachers/education/lowres_pdf/([a-z0-9-_]+)\.pdf' ), r'/static/archives/education/pdfsm/\g<1>.pdf' ),
+	( re.compile( r'/projects/python-xmp-toolkit/(.*)' ), r'/static/projects/python-xmp-toolkit/\g<1>' ),
+	( re.compile( r'/videos/archive/topic/([^/]+)/(|standard|viewall)/(\d+)?' ), r'/videos/archive/category/\g<1>/' ),
+	( re.compile( r'/videos/html/mpeg/320px/([a-z0-9-_]+).html' ), r'/videos/\g<1>/' ),
+	( re.compile( r'/videos/scripts/(.+)' ), r'/static/archives/videos/script/\g<1>' ),
 )
 
 SITE_DOMAIN = "www.spacetelescope.org"
@@ -840,23 +840,23 @@ SITE_DOMAIN = "www.spacetelescope.org"
 TINYMCE_JS_URL = STATIC_URL + "tiny_mce/tiny_mce.js"
 TINYMCE_JS_ROOT = STATIC_ROOT + "tiny_mce"
 TINYMCE_DEFAULT_CONFIG = {
-	#"mode" : "textareas",
-	"theme" : "advanced",
-	"plugins" : "style,layer,table,advimage,insertdatetime,searchreplace,contextmenu,paste,fullscreen,visualchars,nonbreaking",
-	"theme_advanced_buttons1" : "fullscreen,code,cleanup,|,cut,copy,paste,pastetext,pasteword,|,search,replace,|,justifyleft,justifycenter,justifyright,justifyfull,|,styleselect,formatselect",
-	"theme_advanced_buttons2" : ",bold,italic,underline,strikethrough,|,bullist,numlist,|,outdent,indent,|,undo,redo,|,link,unlink,anchor,image,media,charmap,|,forecolor,backcolor|,styleprops,|,nonbreaking",
-	"theme_advanced_buttons3" : "tablecontrols,|,hr,removeformat,visualaid,|,sub,sup,|,insertdate,inserttime,|,insertlayer,moveforward,movebackward,absolute",
-	"theme_advanced_toolbar_location" : "top",
-	"theme_advanced_toolbar_align" : "left",
-	"theme_advanced_statusbar_location" : "bottom",
-	"extended_valid_elements" : "a[name|class|href|target|title|onclick],img[usemap|class|src|border=0|alt|title|hspace|vspace|width|height|align|onmouseover|onmouseout|name|style],hr[class|width|size|noshade],span[class|align|style],script[language|type|src],object[width|height|classid|codebase|data|type|id|class|style],param[name|value],embed[src|type|width|height|flashvars|wmode|style],iframe[src|width|height|frameborder|marginheight|marginwidth|align]",
-	#"editor_selector" : "vRichTextAreaField",
-	"media_strict" : False,
-	#//relative_urls : False,
-	#//remove_script_host : True,
-	#//urlconverter_callback : "url_converter"
-	"convert_urls" : False,
-	"gecko_spellcheck" : True,
+	#"mode": "textareas",
+	"theme": "advanced",
+	"plugins": "style,layer,table,advimage,insertdatetime,searchreplace,contextmenu,paste,fullscreen,visualchars,nonbreaking",
+	"theme_advanced_buttons1": "fullscreen,code,cleanup,|,cut,copy,paste,pastetext,pasteword,|,search,replace,|,justifyleft,justifycenter,justifyright,justifyfull,|,styleselect,formatselect",
+	"theme_advanced_buttons2": ",bold,italic,underline,strikethrough,|,bullist,numlist,|,outdent,indent,|,undo,redo,|,link,unlink,anchor,image,media,charmap,|,forecolor,backcolor|,styleprops,|,nonbreaking",
+	"theme_advanced_buttons3": "tablecontrols,|,hr,removeformat,visualaid,|,sub,sup,|,insertdate,inserttime,|,insertlayer,moveforward,movebackward,absolute",
+	"theme_advanced_toolbar_location": "top",
+	"theme_advanced_toolbar_align": "left",
+	"theme_advanced_statusbar_location": "bottom",
+	"extended_valid_elements": "a[name|class|href|target|title|onclick],img[usemap|class|src|border=0|alt|title|hspace|vspace|width|height|align|onmouseover|onmouseout|name|style],hr[class|width|size|noshade],span[class|align|style],script[language|type|src],object[width|height|classid|codebase|data|type|id|class|style],param[name|value],embed[src|type|width|height|flashvars|wmode|style],iframe[src|width|height|frameborder|marginheight|marginwidth|align]",
+	#"editor_selector": "vRichTextAreaField",
+	"media_strict": False,
+	#//relative_urls: False,
+	#//remove_script_host: True,
+	#//urlconverter_callback: "url_converter"
+	"convert_urls": False,
+	"gecko_spellcheck": True,
 }
 TINYMCE_SPELLCHECKER = False
 TINYMCE_COMPRESSOR = False
@@ -867,80 +867,80 @@ TINYMCE_FILEBROWSER = False
 # LOGGING #
 ###########
 LOGGING = {
-	'version' : 1,
-	'disable_existing_loggers' : True,
+	'version': 1,
+	'disable_existing_loggers': True,
 	'formatters': {
-        'verbose': {
-            'format': '%(levelname)s %(asctime)s %(module)s %(process)d %(thread)d %(message)s'
-        },
-        'default': {
-            'format': '%(asctime)s %(name)-12s %(levelname)-8s %(message)s'
-        },
-    },
-    'filters': {
-        'require_debug_false': {
-            '()': 'django.utils.log.RequireDebugFalse'
-        }
-    },
-    'handlers': {
-        'null': {
-            'level':'DEBUG',
-            'class':'django.utils.log.NullHandler',
-        },
-        'console': {
-            'level':'DEBUG',
-            'class':'logging.StreamHandler',
-            'formatter': 'default'
-        },
-        'mail_admins': {
-            'level': 'ERROR',
-            'filters': ['require_debug_false'],
-            'class': 'django.utils.log.AdminEmailHandler',
-            'include_html' : True,
-        },
-        'file' : {
-			'level' : 'DEBUG',
-			'class': 'logging.handlers.RotatingFileHandler',
-			'formatter' : 'default',
-			'filename' : os.path.join( LOG_DIR, "djangoplicity.log" ),
-			'maxBytes' : 50 * 1024 * 1024,
-			'backupCount' : 3,
-		}
-    },
-    'loggers': {
-        'django': {
-            'handlers': local_settings.LOGGING_HANDLER,
-            'propagate': True,
-            'level': 'DEBUG' if DEBUG else 'INFO',
-        },
-        'django.request': {
-            'handlers': ['mail_admins'],
-            'level': 'ERROR',
-            'propagate': False,
-        },
-        'djangoplicity': {
-            'handlers': local_settings.LOGGING_HANDLER,
-            'level': 'DEBUG' if DEBUG else 'INFO',
-        },
-        'django.db.backends' : {
-			'handlers': local_settings.LOGGING_HANDLER if DEBUG_SQL else ['null'],
-            'propagate': False,
-            'level': 'DEBUG' if DEBUG_SQL else 'INFO',
+		'verbose': {
+			'format': '%(levelname)s %(asctime)s %(module)s %(process)d %(thread)d %(message)s'
 		},
-		'sslurllib' : {
-			'handlers' : ['null',],
+		'default': {
+			'format': '%(asctime)s %(name)-12s %(levelname)-8s %(message)s'
+		},
+	},
+	'filters': {
+		'require_debug_false': {
+			'()': 'django.utils.log.RequireDebugFalse'
+		}
+	},
+	'handlers': {
+		'null': {
+			'level': 'DEBUG',
+			'class': 'django.utils.log.NullHandler',
+		},
+		'console': {
+			'level': 'DEBUG',
+			'class': 'logging.StreamHandler',
+			'formatter': 'default'
+		},
+		'mail_admins': {
+			'level': 'ERROR',
+			'filters': ['require_debug_false'],
+			'class': 'django.utils.log.AdminEmailHandler',
+			'include_html': True,
+		},
+		'file': {
+			'level': 'DEBUG',
+			'class': 'logging.handlers.RotatingFileHandler',
+			'formatter': 'default',
+			'filename': os.path.join( LOG_DIR, "djangoplicity.log" ),
+			'maxBytes': 50 * 1024 * 1024,
+			'backupCount': 3,
+		}
+	},
+	'loggers': {
+		'django': {
+			'handlers': local_settings.LOGGING_HANDLER,
+			'propagate': True,
+			'level': 'DEBUG' if DEBUG else 'INFO',
+		},
+		'django.request': {
+			'handlers': ['mail_admins'],
+			'level': 'ERROR',
 			'propagate': False,
 		},
-		'django_auth_ldap' : {
+		'djangoplicity': {
 			'handlers': local_settings.LOGGING_HANDLER,
-            'propagate': True,
-            'level': 'DEBUG' if DEBUG else 'INFO',
+			'level': 'DEBUG' if DEBUG else 'INFO',
 		},
-		'pycountry.db' : {
+		'django.db.backends': {
+			'handlers': local_settings.LOGGING_HANDLER if DEBUG_SQL else ['null'],
+			'propagate': False,
+			'level': 'DEBUG' if DEBUG_SQL else 'INFO',
+		},
+		'sslurllib': {
+			'handlers': ['null', ],
+			'propagate': False,
+		},
+		'django_auth_ldap': {
+			'handlers': local_settings.LOGGING_HANDLER,
+			'propagate': True,
+			'level': 'DEBUG' if DEBUG else 'INFO',
+		},
+		'pycountry.db': {
 			'handlers': ['null'],
-            'propagate': False,
+			'propagate': False,
 		},
-    },
+	},
 }
 
 ###################
@@ -952,11 +952,11 @@ rl_config.TTFSearchPath.append( PRJBASE + "/fonts/" )
 ####################
 # SOUTH MIGRATIONS #
 ####################
-DATABASE_STORAGE_ENGINE="MyISAM"
+DATABASE_STORAGE_ENGINE = "MyISAM"
 
 SOUTH_TESTS_MIGRATE = local_settings.SOUTH_TESTS_MIGRATE
 SOUTH_MIGRATION_MODULES = {
-    'redirects': 'ignore', # We are using django.redirects and not djangoplicity.redirects where the migration is stored.
+	'redirects': 'ignore',  # We are using django.redirects and not djangoplicity.redirects where the migration is stored.
 }
 
 
@@ -968,22 +968,21 @@ SOUTH_MIGRATION_MODULES = {
 # SATCHMO #
 ###########
 SHOP_CONF = {
-	'DEFAULT_NAVISION_JOB' : '050',
-	'DEFAULT_NAVISION_JSP' : 8900,
-	'DEFAULT_NAVISION_ACCOUNT' : '50.030',
-	'ORDER_FILE_PREFX' : "hb",
-	'ARCHIVE_DEFAULTS' : {
-		'djangoplicity.products.models.PostCard' : { 'ACCOUNT' : '50.050', },
-		'djangoplicity.products.models.Merchandise' : { 'ACCOUNT' : '50.050', },
-		'djangoplicity.products.models.Media' : { 'ACCOUNT' : '50.050', },
-		'djangoplicity.products.models.Calendar' : { 'ACCOUNT' : '50.050', },
-		'djangoplicity.products.models.ConferenceItem' : { 'ACCOUNT' : '50.230', },
-		'djangoplicity.products.models.Sticker' : { 'ACCOUNT' : '50.050', },
+	'DEFAULT_NAVISION_JOB': '050',
+	'DEFAULT_NAVISION_JSP': 8900,
+	'DEFAULT_NAVISION_ACCOUNT': '50.030',
+	'ORDER_FILE_PREFX': "hb",
+	'ARCHIVE_DEFAULTS': {
+		'djangoplicity.products.models.PostCard': { 'ACCOUNT': '50.050', },
+		'djangoplicity.products.models.Merchandise': { 'ACCOUNT': '50.050', },
+		'djangoplicity.products.models.Media': { 'ACCOUNT': '50.050', },
+		'djangoplicity.products.models.Calendar': { 'ACCOUNT': '50.050', },
+		'djangoplicity.products.models.ConferenceItem': { 'ACCOUNT': '50.230', },
+		'djangoplicity.products.models.Sticker': { 'ACCOUNT': '50.050', },
 	}
 }
 
 
-import os
 DIRNAME = os.path.abspath( os.path.dirname( __file__ ) )
 LOCAL_DEV = True
 
@@ -996,52 +995,49 @@ TEMPLATE_CONTEXT_PROCESSORS += ( 'satchmo_store.shop.context_processors.settings
 
 AUTHENTICATION_BACKENDS += ( 'satchmo_store.accounts.email-auth.EmailBackend', )
 
-from django.conf.urls import patterns, include
 SATCHMO_SETTINGS = {
-                    'SHOP_BASE' : '/shop',
-                    'MULTISHOP' : False,
-                    'SSL' : True,
-#                    'SHOP_URLS' : patterns('',
-#										( r'^checkout/', 'spacetelescope.views.shop_closed' ),
-#								)
-                    }
-
-
+	'SHOP_BASE': '/shop',
+	'MULTISHOP': False,
+	'SSL': True,
+#	'SHOP_URLS': patterns('',
+#		( r'^checkout/', 'spacetelescope.views.shop_closed' ),
+#	)
+}
 
 SITE_NAME = "Hubbleshop"
 SITE_DOMAIN = "www.spacetelescope.org"
 LOGDIR = LOG_DIR
 LOGFILE = 'satchmo.log'
-CHECKOUT_SSL=True
+CHECKOUT_SSL = True
 
 L10N_SETTINGS = {
-  'currency_formats' : {
-     'EURO' : {'symbol': u'€', 'positive' : u"€ %(val)0.2f", 'negative': u"€ (%(val)0.2f)", 'decimal' : ','},
-  },
-  'default_currency' : 'EURO',
-  'show_admin_translations': False,
-  'allow_translation_choice': False,
+	'currency_formats': {
+		'EURO': {'symbol': u'€', 'positive': u"€ %(val)0.2f", 'negative': u"€ (%(val)0.2f)", 'decimal': ','},
+	},
+	'default_currency': 'EURO',
+	'show_admin_translations': False,
+	'allow_translation_choice': False,
 }
 
 LIVESETTINGS_OPTIONS = {
 	1: {
-		'DB' : False,
-		'SETTINGS' : {
-		    u'LANGUAGE': {
+		'DB': False,
+		'SETTINGS': {
+			u'LANGUAGE': {
 				u'CURRENCY': u'\u20ac',
 				u'SHOW_TRANSLATIONS': u'False'
 			},
-            u'PAYMENT': {
+			u'PAYMENT': {
 				u'COUNTRY_MATCH': u'False',
-                u'MINIMUM_ORDER': u'2.99',
-                #u'ORDER_EMAIL_EXTRA': u'distribution@spacetelescope.org',
-                u'ORDER_EMAIL_OWNER': u'True',
-                u'MODULES': u'["PAYMENT_COPOSWEB"]'
-            },
-            u'PAYMENT_DUMMY': {
+				u'MINIMUM_ORDER': u'2.99',
+				#u'ORDER_EMAIL_EXTRA': u'distribution@spacetelescope.org',
+				u'ORDER_EMAIL_OWNER': u'True',
+				u'MODULES': u'["PAYMENT_COPOSWEB"]'
+			},
+			u'PAYMENT_DUMMY': {
 				u'CREDITCHOICES': u'["Visa", "Mastercard", "Discover", "American Express"]'
 			},
-            u'PRODUCT': {
+			u'PRODUCT': {
 				u'IMAGE_DIR': u'satchmoimages',
 				u'MEASUREMENT_SYSTEM': u'["metric"]',
 				# Note the string below is too long to store in the database since PRODUCT_TYPES is not a LongSetting
@@ -1050,27 +1046,27 @@ LIVESETTINGS_OPTIONS = {
 				u'NUM_PAGINATED': u'10',
 				u'NUM_DISPLAY': u'20',
 			},
-            u'SHIPPING': {
+			u'SHIPPING': {
 				#u'PER_DAYS': u'1 - 3 business days',
 				#u'PER_SERVICE': u'Deutsche Post/DHL',
 				u'SELECT_CHEAPEST': u'False',
 				u'HIDING': u'NO',
 				u'MODULES': u'["shipping.modules.tieredweight","djangoplicity.archives.contrib.satchmo.esoshipping.officedelivery","djangoplicity.archives.contrib.satchmo.esoshipping.pickup"]',
 			},
-            u'TAX' : {
-				u'PRODUCTS_TAXABLE_BY_DEFAULT' :u'False',
-				u'TAX_SHIPPING' : u'False',
+			u'TAX': {
+				u'PRODUCTS_TAXABLE_BY_DEFAULT': u'False',
+				u'TAX_SHIPPING': u'False',
 			},
-            u'SHOP': {
+			u'SHOP': {
 				u'REQUIRED_BILLING_DATA': u'["email", "first_name", "last_name", "phone", "street1", "city", "postal_code", "country"]',
 				u'ENFORCE_STATE': u'False',
 				u'SHOW_SITE': u'False',
 				u'LOGO_URI': u'http://www.spacetelescope.org/static/archives/logos/screen/eso_colour.jpg',
 			},
-            u'PAYMENT_COPOSWEB': {
+			u'PAYMENT_COPOSWEB': {
 				u'USER_TEST': u'testeso',
 				u'PASSWORD_TEST': u'Kw6&gHKi',
-				u'LIVE_CONFIG_FILE' : local_settings.COPOSWEB_CONFIG_INI,
+				u'LIVE_CONFIG_FILE': local_settings.COPOSWEB_CONFIG_INI,
 				u'CAPTURE': u'True',
 				u'LIVE': u'True' if local_settings.LIVE else u'False',
 				u'EXTRA_LOGGING': u'True',
@@ -1081,18 +1077,18 @@ LIVESETTINGS_OPTIONS = {
 
 ORDER_PREFIX = local_settings.ORDER_PREFIX
 LIVE = local_settings.LIVE
-SHOP_PICKUP_LOCATIONS = (
-	{ 'id' : 'PUP1',
-	  'name' : 'ESO HQ',
-	  'desc' : _( "Self-pickup/ESO HQ in Munich, Germany" ),
-	  'method' : _("Pickup (9-17 CET/CEST) at ESO HQ Reception,"),
-	  'delivery' : _("Karl-Schwarzschild-Str. 2, 85748 Garching, GERMANY"),
+SHOP_PICKUP_LOCATIONS = ({
+	'id': 'PUP1',
+		'name': 'ESO HQ',
+		'desc': _( "Self-pickup/ESO HQ in Munich, Germany" ),
+		'method': _("Pickup (9-17 CET/CEST) at ESO HQ Reception,"),
+		'delivery': _("Karl-Schwarzschild-Str. 2, 85748 Garching, GERMANY"),
 	},
 )
 
-RECAPTCHA_PUBLIC_KEY='6LfXJOkSAAAAAE1-HoZR7_iA6D2tT0hGspsqG5mW'
-RECAPTCHA_PRIVATE_KEY='6LfXJOkSAAAAAMETeG2zL8idVr9tW3F0Ndb12GK3'
-IMGVOTE_EMAIL_FROM='no-reply@spacetelescope.org'
+RECAPTCHA_PUBLIC_KEY = '6LfXJOkSAAAAAE1-HoZR7_iA6D2tT0hGspsqG5mW'
+RECAPTCHA_PRIVATE_KEY = '6LfXJOkSAAAAAMETeG2zL8idVr9tW3F0Ndb12GK3'
+IMGVOTE_EMAIL_FROM = 'no-reply@spacetelescope.org'
 
 # Required since Django 1.5:
 ALLOWED_HOSTS = ['.spacetelescope.org', '.eso.org']
