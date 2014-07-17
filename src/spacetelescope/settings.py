@@ -8,6 +8,8 @@
 #   Luis Clara Gomes <lcgomes@eso.org>
 #
 
+from __future__ import absolute_import
+
 from djangoplicity.settings import import_settings
 
 from celery.schedules import crontab
