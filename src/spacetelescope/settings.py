@@ -9,6 +9,9 @@
 #
 
 from djangoplicity.settings import import_settings
+
+from celery.schedules import crontab
+from datetime import timedelta
 import os
 import re
 
@@ -769,6 +772,19 @@ CELERY_ALWAYS_EAGER=local_settings.CELERY_ALWAYS_EAGER
 
 # File to save revoked tasks across workers restart
 CELERYD_STATE_DB = "%s/tmp/celery_states" % ROOT
+CELERYBEAT_SCHEDULE_FILENAME = '%s/tmp/celerybeat_schedule' % ROOT
+
+# Define Celery periodic tasks
+CELERYBEAT_SCHEDULE = {
+	'mailchimp-abuse-report': {
+		'task': 'newsletters.abuse_reports',
+		'schedule': crontab(minute=0, hour=8, day_of_week='fri'),
+	},
+#	'update-vote-counts': {
+#		'task': 'imgvote.count_votes',
+#		'schedule': timedelta(seconds=300),
+#	},
+}
 
 ##############
 # JavaScript #
