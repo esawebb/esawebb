@@ -745,6 +745,8 @@ CELERY_ROUTES = {
 	"media.image_derivatives": { "queue": "photoshop" }
 }
 
+CELERY_TIMEZONE = TIME_ZONE
+
 ## Broker settings.
 BROKER_USE_SSL = local_settings.BROKER_USE_SSL
 BROKER_URL = local_settings.BROKER_URL
