@@ -746,6 +746,7 @@ CELERY_ROUTES = {
 }
 
 CELERY_TIMEZONE = TIME_ZONE
+CELERY_ENABLE_UTC = False
 
 ## Broker settings.
 BROKER_USE_SSL = local_settings.BROKER_USE_SSL
