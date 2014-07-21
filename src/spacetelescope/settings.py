@@ -782,6 +782,18 @@ CELERYBEAT_SCHEDULE = {
 		'task': 'newsletters.abuse_reports',
 		'schedule': crontab(minute=0, hour=8, day_of_week='fri'),
 	},
+	'mailchimp-fetch-info': {
+		'task': 'mailinglists.mailchimplist_fetch_info',
+		'schedule': crontab(minute=0, hour=8),
+	},
+	'mailchimp-install-hooks': {
+		'task': 'mailinglists.webhooks',
+		'schedule': crontab(minute=50, hour=4),
+	},
+	'mailchimp-clean-tokens': {
+		'task': 'mailinglists.clean_tokens',
+		'schedule': crontab(minute=5, hour=5),
+	},
 #	'update-vote-counts': {
 #		'task': 'imgvote.count_votes',
 #		'schedule': timedelta(seconds=300),
