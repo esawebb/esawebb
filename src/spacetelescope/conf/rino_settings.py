@@ -11,6 +11,7 @@
 from default_settings import *
 from djangoplicity.settings import copy_setting
 
+ROOT_RELOCATE = "/Users/rino/dev/spacetelescope"
 ADMINS = (
 	('Bruno Rino','brino@partner.eso.org'),
 )

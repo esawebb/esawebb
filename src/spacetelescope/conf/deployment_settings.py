@@ -14,7 +14,7 @@ from djangoplicity.settings import copy_setting
 #############################
 # ENVIRONMENT CONFIGURATION #
 #############################
-ROOT = "/data/www/hubble"
+ROOT_RELOCATE = "/data/www/hubble"
 BUILD_ROOT = "/data/www/%s" % SHORT_NAME
 PRJBASE = "%s/src/spacetelescope" % ROOT
 DJANGOPLICITY_ROOT = "%s/src/djangoplicity" % ROOT
@@ -75,7 +75,6 @@ DEPLOYMENT_SYNC = [
 # ERROR REPORTING #
 ###################
 DEBUG = False
-SERVE_STATIC_MEDIA = False
 
 ##################
 # DATABASE SETUP #
@@ -86,6 +85,7 @@ DATABASES['default']['USER'] = "spacetelescope"
 ###############
 # MEDIA SETUP #
 ###############
+SERVE_STATIC_MEDIA = False
 MEDIA_ROOT = "%s/docs/static/" % ROOT
 STATIC_ROOT = "%s/docs/static/app/" % ROOT
 DJANGOPLICITY_MEDIA_ROOT = "%s/static" % DJANGOPLICITY_ROOT

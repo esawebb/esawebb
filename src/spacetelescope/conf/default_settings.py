@@ -8,14 +8,12 @@
 #   Luis Clara Gomes <lcgomes@eso.org>
 #
 
-import getpass
 import sys
-import platform
 
 #############################
 # ENVIRONMENT CONFIGURATION #
 #############################
-ROOT = "/Users/%s/dev/spacetelescope" % getpass.getuser() if platform.system() == 'Darwin' else "/scratch/src/hubble"
+ROOT = '%%ROOT%%'  # "/Users/%s/dev/spacetelescope" % getpass.getuser() if platform.system() == 'Darwin' else "/scratch/src/hubble"
 PRJBASE = "%s/src/spacetelescope" % ROOT
 DJANGOPLICITY_ROOT = "%s/src/djangoplicity" % ROOT
 
@@ -63,7 +61,7 @@ NGINX_INIT = '/etc/init.d/nginx'
 DEPLOYMENT_TAG = None
 DEPLOYMENT_REVISION = None
 DEPLOYMENT_DEVELOP = True
-DEPLOYMENT_EXISTING_CHECKOUT = "/Users/%s/Workspaces/web" % getpass.getuser()
+DEPLOYMENT_EXISTING_CHECKOUT = None
 DEPLOYMENT_NOTIFICATION = None
 ALLOW_DATABASE_OVERWRITE = True
 
@@ -190,7 +188,7 @@ MP4BOX_PATH = '/Applications/Osmo4.app/Contents/MacOS/MP4Box'
 ##########################
 # PHOTOSHOP CELERYWORKER #
 ##########################
-PHOTOSHOP_ROOT = "/Users/%s/Workspaces/sites/import" % getpass.getuser()
+PHOTOSHOP_ROOT = None
 PHOTOSHOP_BROKER = {
 	'HOST' : 'localhost',
 	'PORT' : 5672,

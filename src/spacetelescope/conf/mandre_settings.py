@@ -11,6 +11,7 @@
 from default_settings import *
 from djangoplicity.settings import copy_setting
 
+ROOT_RELOCATE = "/scratch/src/hubble"
 ADMINS = (
 	('Mathias Andre','mandre@eso.org'),
 )

@@ -15,7 +15,7 @@ from djangoplicity.settings import copy_setting
 # ENVIRONMENT CONFIGURATION #
 #############################
 BUILD_ROOT = "/data/www/%s" % SHORT_NAME
-
+BUILDOUT_CONFIG = "conf/production.cfg"
 LOG_DIR = "/data/logs/%s" % SHORT_NAME
 
 ###################
@@ -26,7 +26,6 @@ SITE_ENVIRONMENT = 'production'
 ##############
 # DEPLOYMENT #
 ##############
-BUILDOUT_CONFIG = "conf/production.cfg"
 MANAGEMENT_NODES = ["aweb41"]
 BROKERS = ["aweb26"]
 WORKERS = ["aweb41", "aweb42"]
