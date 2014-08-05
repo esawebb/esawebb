@@ -31,7 +31,7 @@ CSRF_MIDDLEWARE_SECRET = "g6ymvx$i1sv4k*g+nwfnx*3a1g&)^i6r9n6g4=f_$x^u(kwt8s"
 ##############
 # DEPLOYMENT #
 ##############
-DEPLOYMENT_EXISTING_CHECKOUT = "~/Workspaces/web/"
+DEPLOYMENT_EXISTING_CHECKOUT = "/scratch/scr/hubble/src/"
 DEBUG=True
 TEMPLATE_DEBUG=False
 DEBUG_SQL=False
