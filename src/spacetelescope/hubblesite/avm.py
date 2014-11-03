@@ -28,7 +28,7 @@ import logging
 
 logger = logging.getLogger(__name__)
 
-from django.utils import simplejson as json
+import json
 
 def load_json(json_file):
     '''

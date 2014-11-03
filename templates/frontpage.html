@@ -3,7 +3,7 @@
 {%block mainblock%}
 		<div class='grid_6 fp_news'>
 			<h1>
-				<a href="{% url announcements_defaultquery %}">Announcements</a>
+				<a href="{% url 'announcements_defaultquery' %}">Announcements</a>
 				<a href="http://feeds.feedburner.com/hubble_announcements/" class=''><img src='{{MEDIA_URL}}images/rssicon.png' /></a> 
 			</h1>
 			
@@ -24,7 +24,7 @@
 		</div>
 		<div class='grid_6 fp_news'>
 			<h1>
-				<a href="{% url videos_query_category "hubblecast" %}">Hubblecast</a>
+				<a href="{% url 'videos_query_category' "hubblecast" %}">Hubblecast</a>
 				<a href="http://feeds.feedburner.com/hubblecast/" class=''><img src='{{MEDIA_URL}}images/rssicon.png' /></a> 
 				
 			</h1>
@@ -64,12 +64,12 @@
 	
 		<div class='grid_6 fp_news'>
 		<div class='fpviewall'>
-		<a href="{% url announcements_defaultquery %}">View all announcements</a>
+		<a href="{% url 'announcements_defaultquery' %}">View all announcements</a>
 		</div>
 		</div>
 		<div class='grid_6 fp_news'>
 		<div class='fpviewall'>
-		<a href="{% url videos_query_category "hubblecast" %}">View all Hubblecast episodes</a>
+		<a href="{% url 'videos_query_category' "hubblecast" %}">View all Hubblecast episodes</a>
 		</div>
 		</div>
 		

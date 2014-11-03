@@ -11,6 +11,7 @@
 from default_settings import *
 from djangoplicity.settings import copy_setting
 
+ROOT_RELOCATE = "/Users/rino/dev/spacetelescope"
 ADMINS = (
 	('Bruno Rino','brino@partner.eso.org'),
 )
@@ -38,7 +39,8 @@ DEBUG_PROFILER=False
 DEBUG_TOOLBAR = False
 
 #STATIC_ROOT = "%s/static/" % PRJBASE
-MEDIA_ROOT = "/Users/rino/Workspaces/sites/spacetelescope/projects/spacetelescope.org/static/"
+# MEDIA_ROOT = "/Users/rino/dev/spacetelescope/src/spacetelescope/static/"
+MEDIA_ROOT = "/Volumes/ecfwebvol0/diskwa/webdocs/hubble/docs/static/"
 # MEDIA_URL = "/static/" #"/static/archives/"
 # STATIC_ROOT = "/Users/rino/Workspaces/sites/spacetelescope_media/"
 # STATIC_URL = "/static/archives/"
@@ -77,8 +79,7 @@ LOGGING_HANDLER = ['console']
 ##########
 # CELERY #
 ##########
-BROKER_HOST = "localhost"
-#BROKER_HOST = "aweb26.hq.eso.org"
+BROKER_URL = 'amqp://spacetelescope:letoveumtold@localhost:5672/spacetelescope_vhost'
 
 CELERY_ALWAYS_EAGER = False
 

@@ -9,7 +9,6 @@
 #
 
 from djangoplicity.contrib.admin.sites import AdminSite
-from djangoplicity.authtkt.utils import authtkt_decorator
 from djangoplicity.contrib.admin.discover import autoregister
 
 # Import all admin interfaces we need
@@ -25,12 +24,10 @@ import djangoplicity.media.admin
 import djangoplicity.products.admin
 import djangoplicity.releases.admin
 import djangoplicity.metadata.admin
-import djangoplicity.authtkt.admin
 import djangoplicity.google.admin
 import djangoplicity.archives.contrib.satchmo.freeorder.admin
 #import djangoplicity.archives.contrib.inventory_control.admin
 #import djangoplicity.inventory.admin
-import djangoplicity.celery.admin
 #import djangoplicity.events.admin
 import djangoplicity.mailinglists.admin
 import djangoplicity.newsletters.admin
@@ -43,9 +40,9 @@ import djangoplicity.science.admin
 
 # Register each applications admin interfaces with
 # an admin site.
-admin_site = authtkt_decorator( AdminSite( name="admin_site" ) )
-adminlogs_site = authtkt_decorator( AdminSite( name="adminlogs_site" ) )
-adminshop_site = authtkt_decorator( AdminSite( name="adminshop_site" ) )
+admin_site = AdminSite( name="admin_site" )
+adminlogs_site = AdminSite( name="adminlogs_site" )
+adminshop_site = AdminSite( name="adminshop_site" )
 
 autoregister( admin_site, djangoplicity.announcements.admin )
 autoregister( admin_site, django.contrib.auth.admin )
@@ -66,9 +63,7 @@ autoregister( admin_site, djangoplicity.science.admin )
 
 
 autoregister( adminlogs_site, djangoplicity.search.admin )
-autoregister( adminlogs_site, djangoplicity.authtkt.admin )
 autoregister( adminlogs_site, djangoplicity.google.admin )
-autoregister( adminlogs_site, djangoplicity.celery.admin )
 autoregister( adminlogs_site, djangoplicity.actions.admin )
 
 

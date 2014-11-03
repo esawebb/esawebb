@@ -8,10 +8,6 @@
 #   Luis Clara Gomes <lcgomes@eso.org>
 #
 
-# Using distribute instead of setuptools
-import distribute_setup
-distribute_setup.use_setuptools()
-
 import os
 from setuptools import setup, find_packages
 
@@ -20,5 +16,6 @@ setup(
 	packages = find_packages('src'),
 	package_dir = { '': 'src' },
 	include_package_data = True,
+    install_requires = ['setuptools'],
 	zip_safe = False,
 )

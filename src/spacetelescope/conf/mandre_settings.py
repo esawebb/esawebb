@@ -11,6 +11,7 @@
 from default_settings import *
 from djangoplicity.settings import copy_setting
 
+ROOT_RELOCATE = "/scratch/src/hubble"
 ADMINS = (
 	('Mathias Andre','mandre@eso.org'),
 )
@@ -30,12 +31,29 @@ CSRF_MIDDLEWARE_SECRET = "g6ymvx$i1sv4k*g+nwfnx*3a1g&)^i6r9n6g4=f_$x^u(kwt8s"
 ##############
 # DEPLOYMENT #
 ##############
-DEPLOYMENT_EXISTING_CHECKOUT = "~/Workspaces/web/"
-DEBUG=True
-TEMPLATE_DEBUG=False
-DEBUG_SQL=False
-DEBUG_PROFILER=False
-DEBUG_TOOLBAR = False
+DEPLOYMENT_EXISTING_CHECKOUT = "/scratch/scr/hubble/src/"
+DEBUG = True
+TEMPLATE_DEBUG = True
+DEBUG_SQL = False
+DEBUG_PROFILER = False
+DEBUG_TOOLBAR = True
+DEBUG_TOOLBAR_CONFIG = {
+	'INTERCEPT_REDIRECTS': False,
+}
+DEBUG_TOOLBAR_PANELS = [
+	'debug_toolbar.panels.versions.VersionsPanel',
+	'debug_toolbar.panels.timer.TimerPanel',
+#	'debug_toolbar.panels.settings.SettingsPanel',
+	'debug_toolbar.panels.headers.HeadersPanel',
+	'debug_toolbar.panels.request.RequestPanel',
+	'debug_toolbar.panels.sql.SQLPanel',
+#	'debug_toolbar.panels.staticfiles.StaticFilesPanel',
+	'debug_toolbar.panels.templates.TemplatesPanel',
+	'debug_toolbar.panels.cache.CachePanel',
+	'debug_toolbar.panels.signals.SignalsPanel',
+	'debug_toolbar.panels.logging.LoggingPanel',
+	'debug_toolbar.panels.redirects.RedirectsPanel',
+]
 
 MEDIA_ROOT = "/media/ecfwebstore/ecfwebvol0/diskwa/webdocs/hubble/docs/static/"
 #MEDIA_ROOT = "/tmp/archives/"
@@ -84,8 +102,7 @@ LOGGING_HANDLER = ['console']
 ##########
 # CELERY #
 ##########
-BROKER_HOST = "localhost"
-#BROKER_HOST = "aweb26.hq.eso.org"
+BROKER_URL = 'amqp://spacetelescope:letoveumtold@localhost:5672/spacetelescope_vhost'
 
 CELERY_ALWAYS_EAGER = False
 

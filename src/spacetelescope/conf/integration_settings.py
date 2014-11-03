@@ -7,24 +7,22 @@
 #   Lars Holm Nielsen <lnielsen@eso.org>
 #   Luis Clara Gomes <lcgomes@eso.org>
 #
+
 from deployment_settings import *
 from djangoplicity.settings import copy_setting
 
 #############################
 # ENVIRONMENT CONFIGURATION #
 #############################
-BUILD_ROOT = "/home/web/%si" % SHORT_NAME
-BUILD_PRJBASE = "%s/projects/spacetelescope.org" % BUILD_ROOT 
-BUILD_DJANGOPLICITY_ROOT = "%s/projects/djangoplicity" % BUILD_ROOT
+ROOT_RELOCATE = "/data/www/hubbled"
 
-#####################
-# CONFIG GENERATION #
-#####################
+#############################
+# ENVIRONMENT CONFIGURATION #
+#############################
+BUILD_ROOT = "/data/www/%sd" % SHORT_NAME
+BUILDOUT_CONFIG = "conf/integration.cfg"
 
-# Needed since config_gen command is usually running on aweb8, and will thus put
-# config files in the production environment. 
-CONFIG_GEN_TEMPLATES_DIR = "/home/web/A/hubblei/projects/spacetelescope.org/conf/templates/"  
-CONFIG_GEN_GENERATED_DIR = "/home/web/A/hubblei/tmp/conf/"
+LOG_DIR = "/data/logs/%sd" % SHORT_NAME
 
 ###################
 # ERROR REPORTING #
@@ -35,19 +33,19 @@ DEBUG = False
 ##############
 # DEPLOYMENT #
 ##############
-MANAGEMENT_NODES = ["aweb5"]
+MANAGEMENT_NODES = ["aweb38"]
 BROKERS = ["aweb9"]
-WORKERS = ["aweb5","aweb6"]
-WORKERS_BEAT_HOST = "aweb5"
-WORKERS_CAM_HOST = "aweb6"
-WEBSERVER_NODES = ["%s1i" % SHORT_NAME,"%s2i" % SHORT_NAME ]
-DEPLOYMENT_TAG = "spacetelescope.org_integration"
+WORKERS = ["aweb38","aweb39"]
+WORKERS_BEAT_HOST = "aweb38"
+WORKERS_CAM_HOST = "aweb39"
+WEBSERVER_NODES = ["%s3i" % SHORT_NAME,"%s4i" % SHORT_NAME ]
+DEPLOYMENT_TAG = "spacetelescope.org_int"
 DEPLOYMENT_NOTIFICATION = {
 	"subject" : "[DEPLOY] %(DEPLOYMENT_TAG)s by %(local_user)s",
 	"from" : "esoepo-monitoring@eso.org",
-	"to" : ["esoepo-monitoring@eso.org"],
+	"to" : ["mandre@eso.org"],
 }
-PYTHON = "python2.5"
+PYTHON = "python2.7"
 
 ##################
 # DATABASE SETUP #
@@ -64,8 +62,8 @@ CACHES = {
 		'BACKEND' : 'django.core.cache.backends.memcached.MemcachedCache',
 		'KEY_PREFIX' : SHORT_NAME,
 		'LOCATION' : [
-			'%(short_name)s1i:11211' % { 'short_name' : SHORT_NAME},
-			'%(short_name)s2i:11211' % { 'short_name' : SHORT_NAME},
+			'%(short_name)s3i:11211' % { 'short_name' : SHORT_NAME},
+			'%(short_name)s4i:11211' % { 'short_name' : SHORT_NAME},
 		],
 		'TIMEOUT' : 86400
 	}
@@ -85,7 +83,7 @@ PHOTOSHOP_BROKER['HOST'] = "aweb9.hq.eso.org"
 ##########	
 # CELERY #
 ##########
-BROKER_HOST = "aweb9.hq.eso.org"
+BROKER_URL = 'amqp://spacetelescope:letoveumtold@aweb9.hq.eso.org:5672/spacetelescope_vhost'
 
 ########
 # SHOP #

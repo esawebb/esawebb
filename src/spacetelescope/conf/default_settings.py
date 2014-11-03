@@ -8,24 +8,26 @@
 #   Luis Clara Gomes <lcgomes@eso.org>
 #
 
-import getpass
 import sys
-import platform
 
 #############################
 # ENVIRONMENT CONFIGURATION #
 #############################
-ROOT = "/Users/%s/Workspaces/sites/spacetelescope" % getpass.getuser() if platform.system() == 'Darwin' else "/scratch/loc/spacetelescope"
-PRJBASE = "%s/projects/spacetelescope.org" % ROOT
-DJANGOPLICITY_ROOT = "%s/projects/djangoplicity" % ROOT
+ROOT = '%%ROOT%%'  # "/Users/%s/dev/spacetelescope" % getpass.getuser() if platform.system() == 'Darwin' else "/scratch/src/hubble"
+PRJBASE = "%s/src/spacetelescope" % ROOT
+DJANGOPLICITY_ROOT = "%s/src/djangoplicity" % ROOT
 
 BUILD_ROOT = ROOT
 BUILD_PRJBASE = PRJBASE
 BUILD_DJANGOPLICITY_ROOT = DJANGOPLICITY_ROOT
+BUILDOUT_CONFIG = "buildout.cfg"
 
 LOG_DIR = "%s/logs" % ROOT
 TMP_DIR = "%s/tmp" % ROOT
 ENABLE_SSL = False
+SECURE_PROXY_SSL_HEADER = None
+CSRF_COOKIE_SECURE = False
+SESSION_COOKIE_SECURE = False
 
 #####################
 # CONFIG GENERATION #
@@ -34,7 +36,7 @@ SHORT_NAME = 'hubble'
 WEBSERVERS = ()
 SSL_ASSETS_PREFIX = "www.spacetelescope.org"
 CONFIG_GEN_TEMPLATES_DIR = "%s/conf/templates/" % PRJBASE
-CONFIG_GEN_GENERATED_DIR = "%s/conf/" % TMP_DIR
+CONFIG_GEN_GENERATED_DIR = "%s/conf/" % ROOT  # was: "%s/conf/" % TMP_DIR
 
 ##############
 # DEPLOYMENT #
@@ -55,14 +57,15 @@ WORKERS_QUEUE = "celery"
 NORMAL_USER = None
 SUDO_USER = None
 
-APACHE_INIT_MAIN = '/etc/init.d/apache2'
-APACHE_INIT_STATIC = '/etc/init.d/apache2'
+NGINX_INIT = '/etc/init.d/nginx'
 DEPLOYMENT_TAG = None
 DEPLOYMENT_REVISION = None
 DEPLOYMENT_DEVELOP = True
-DEPLOYMENT_EXISTING_CHECKOUT = "/Users/%s/Workspaces/web" % getpass.getuser()
+DEPLOYMENT_EXISTING_CHECKOUT = None
 DEPLOYMENT_NOTIFICATION = None
 ALLOW_DATABASE_OVERWRITE = True
+
+SUPERVISORTCTL_PROCESS = 'gunicorn-' + SHORT_NAME
 
 ###################
 # ERROR REPORTING #
@@ -79,7 +82,7 @@ ADMINS = (
 	('EPO Monitoring','esoepo-monitoring@eso.org'),
 )
 
-LOGGING_HANDLER = ['file']
+LOGGING_HANDLER = ['file', 'mail_admins']
 
 ##################
 # DATABASE SETUP #
@@ -185,7 +188,7 @@ MP4BOX_PATH = '/Applications/Osmo4.app/Contents/MacOS/MP4Box'
 ##########################
 # PHOTOSHOP CELERYWORKER #
 ##########################
-PHOTOSHOP_ROOT = "/Users/%s/Workspaces/sites/import" % getpass.getuser()
+PHOTOSHOP_ROOT = None
 PHOTOSHOP_BROKER = {
 	'HOST' : 'localhost',
 	'PORT' : 5672,
@@ -199,11 +202,8 @@ PHOTOSHOP_BROKER = {
 ##########
 # CELERY #
 ##########
-BROKER_HOST = "localhost"
-BROKER_USER = "spacetelescope"
-BROKER_PASSWORD = "letoveumtold"
-BROKER_VHOST = "spacetelescope_vhost"
 BROKER_USE_SSL = False
+BROKER_URL = 'amqp://spacetelescope:letoveumtold@localhost:5672/spacetelescope_vhost'
 
 CELERY_ALWAYS_EAGER=False
 
