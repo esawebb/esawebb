@@ -410,6 +410,7 @@ INSTALLED_APPS += (
 	'djangoplicity.imgvote',
 	'captcha',
 	'gunicorn',
+	'django_ace',
 )
 
 
