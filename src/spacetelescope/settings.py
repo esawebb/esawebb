@@ -411,6 +411,7 @@ INSTALLED_APPS += (
 	'captcha',
 	'gunicorn',
 	'django_ace',
+	'pipeline',
 )
 
 
@@ -497,7 +498,8 @@ if not local_settings.DISABLE_LDAP:  # Ensure that module is not loaded if disab
 	}
 
 	AUTH_LDAP_GROUP_TYPE = ActiveDirectoryGroupType()
-	AUTH_LDAP_GROUP_SEARCH = LDAPSearch( "dc=ads,dc=eso,dc=org",
+	AUTH_LDAP_GROUP_SEARCH = LDAPSearch(
+		"dc=ads,dc=eso,dc=org",
 		ldap.SCOPE_SUBTREE, "(objectClass=group)"
 	)
 
@@ -1109,6 +1111,65 @@ SHOP_PICKUP_LOCATIONS = ({
 RECAPTCHA_PUBLIC_KEY = '6LfXJOkSAAAAAE1-HoZR7_iA6D2tT0hGspsqG5mW'
 RECAPTCHA_PRIVATE_KEY = '6LfXJOkSAAAAAMETeG2zL8idVr9tW3F0Ndb12GK3'
 IMGVOTE_EMAIL_FROM = 'no-reply@spacetelescope.org'
+
+#
+# Pipeline configuration (CSS/JS packing)
+#
+
+STATICFILES_STORAGE = 'pipeline.storage.PipelineCachedStorage'
+
+# We split the CSS into main and extras to load the more important first
+# and the rest in the end. This also solves a problem with IE9 which stops
+# loading CSS rules if there are "too many"
+PIPELINE_CSS = {
+	'main': {
+		'source_filenames': (
+			'css/reset.css',
+			'css/base_grid.css',
+			'css/screen.css',
+			'djangoplicity/shadowbox/shadowbox.css',
+		),
+		'output_filename': 'css/main.css',
+		'extra_context': {
+			'media': 'screen',
+		},
+	},
+	'print': {
+		'source_filenames': (
+			'css/print.css"',
+		),
+		'output_filename': 'css/print.css',
+		'extra_context': {
+			'media': 'print',
+		},
+	},
+}
+
+PIPELINE_JS = {
+	'main': {
+		'source_filenames': (
+			'djangoplicity/js/jquery-1.4.2.min.js',
+			'djangoplicity/js/jquery.cycle.min.js',
+			'djangoplicity/js/jquery.jclock-1.2.0.js',
+			'djangoplicity/shadowbox/shadowbox.js',
+			'djangoplicity/js/shadowbox_conf.js',
+			'js/site.js',
+		),
+		'output_filename': 'js/main.js',
+	},
+}
+PIPELINE_CSS_COMPRESSOR = False
+PIPELINE_JS_COMPRESSOR = False
+PIPELINE_DISABLE_WRAPPER = True
+
+# IE8 doesn't support application/javascript so we override the default:
+PIPELINE_MIMETYPES = (
+	(b'text/coffeescript', '.coffee'),
+	(b'text/less', '.less'),
+	(b'text/javascript', '.js'),
+	(b'text/x-sass', '.sass'),
+	(b'text/x-scss', '.scss')
+)
 
 # Required since Django 1.5:
 ALLOWED_HOSTS = ['.spacetelescope.org', '.eso.org']

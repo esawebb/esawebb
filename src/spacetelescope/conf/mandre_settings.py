@@ -8,12 +8,12 @@
 #   Luis Clara Gomes <lcgomes@eso.org>
 #
 
-from default_settings import *
+from spacetelescope.conf.default_settings import *
 from djangoplicity.settings import copy_setting
 
 ROOT_RELOCATE = "/scratch/src/hubble"
 ADMINS = (
-	('Mathias Andre','mandre@eso.org'),
+	('Mathias Andre', 'mandre@eso.org'),
 )
 
 #####################
@@ -89,7 +89,7 @@ CACHES = {
 		# ],
 		# 'TIMEOUT' : 86400
 	# },
-	'default' : {
+	'default': {
 	'BACKEND': 'django.core.cache.backends.dummy.DummyCache',
 	}
 }
