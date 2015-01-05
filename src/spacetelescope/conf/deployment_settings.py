@@ -119,7 +119,7 @@ GEOIP_LIBRARY_PATH = "%s/virtualenv/lib/libGeoIP.dylib" % ROOT
 ###########
 ARCHIVE_AUTO_RESOURCE_DELETION = True
 ARCHIVE_IMPORT_ROOT = "%s/import" % ROOT
-MP4BOX_PATH = '/usr/local/bin/MP4Box'
+MP4BOX_PATH = '/usr/bin/MP4Box'
 
 #################
 # DJANGO ASSETS #
