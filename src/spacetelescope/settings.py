@@ -1155,6 +1155,7 @@ PIPELINE_JS = {
 			'djangoplicity/shadowbox/shadowbox.js',
 			'djangoplicity/js/shadowbox_conf.js',
 			'djangoplicity/zoomify/js/ZoomifyImageViewerExpress-min.js',
+			'djangoplicity/js/widgets.js',
 			'js/site.js',
 		),
 		'output_filename': 'js/main.js',
