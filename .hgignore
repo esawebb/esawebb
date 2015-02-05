@@ -13,7 +13,8 @@ syntax: regexp
 ^src/spacetelescope\.egg-info$
 syntax: regexp
 ^static/djangoplicity$
-syntax: glob
-*.pyc
 syntax: regexp
 ^celeryev\.pid$
+syntax: glob
+*.pyc
+.nfs*
