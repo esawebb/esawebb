@@ -679,7 +679,7 @@ ARCHIVE_WORKFLOWS = {
 	'media.video.rename': ('spacetelescope.workflows.media', 'video_rename'),
 }
 
-VIDEO_RENAME_NOTIFY = ['mkornmes@eso.org', ]
+VIDEO_RENAME_NOTIFY = ['hzodet@eso.org', 'mkornmes@eso.org']
 
 VIDEO_CONTENT_SERVERS = (
 	( '', 'Default' ),
