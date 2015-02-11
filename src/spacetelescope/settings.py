@@ -1195,7 +1195,7 @@ MEDIA_CONTENT_SERVERS = {
 			'dome_mov',
 			'dome_preview',
 		),
-		url='http://videos.spacetelescope.org/videos/',
+		url='http://videos.spacetelescope.org/',
 	),
 }
 
