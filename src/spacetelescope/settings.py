@@ -1195,14 +1195,13 @@ MEDIA_CONTENT_SERVERS = {
 			'dome_mov',
 			'dome_preview',
 		),
-		url='http://media.eso.org/public/archives/videos/',
+		url='http://videos.spacetelescope.org/videos/',
 	),
 }
 
 MEDIA_CONTENT_SERVERS_CHOICES = (
 	('', 'Default'),
-	('media.eso.org', 'media.eso.org'),
-	('CDN77', 'CDN77'),
+	('videos.spacetelescope.org', 'videos.spacetelescope.org'),
 )
 
-DEFAULT_MEDIA_CONTENT_SERVER = 'media.eso.org'
+DEFAULT_MEDIA_CONTENT_SERVER = ''
