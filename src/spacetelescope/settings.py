@@ -1220,11 +1220,11 @@ MEDIA_CONTENT_SERVERS = {
 			'dome_mov',
 			'dome_preview',
 		),
-		url='http://cdn.eso.org/',
+		url='http://196985802.r.cdn77.net/',
 		remote_dir='/www/',
 		host='push-19.cdn77.com',
-		username='user_xl453dw2',
-		password='juVMV9Dzm9E77X4vM6jb',
+		username='user_v220pif3',
+		password='5nkOk3mgr8MDw2d4SZw3',
 	),
 }
 
