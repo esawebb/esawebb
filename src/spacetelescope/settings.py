@@ -1177,7 +1177,7 @@ VIDEO_CONTENT_SERVERS = (
 	( 'http://videos.spacetelescope.org/videos/', 'videos.spacetelescope.org' )
 )
 
-from djangoplicity.contentserver import ContentServer
+from djangoplicity.contentserver import ContentServer, CDN77ContentServer
 MEDIA_CONTENT_SERVERS = {
 	'videos.spacetelescope.org': ContentServer(
 		name='videos.spacetelescope.org',
@@ -1196,6 +1196,35 @@ MEDIA_CONTENT_SERVERS = {
 			'dome_preview',
 		),
 		url='http://videos.spacetelescope.org/',
+	),
+	'CDN77': CDN77ContentServer(
+		name='CDN77',
+		formats=(
+			'dome_2kmaster',
+			'small_flash',
+			'medium_podcast',
+			'medium_mpeg1',
+			'medium_flash',
+			'large_qt',
+			'broadcast_sd',
+			'hd_and_apple',
+			'hd_broadcast_720p50',
+			'hd_1080p25_screen',
+			'hd_1080p25_broadcast',
+			'ultra_hd',
+			'ultra_hd_h265',
+			'ultra_hd_broadcast',
+			'dome_8kmaster',
+			'dome_4kmaster',
+			'dome_2kmaster',
+			'dome_mov',
+			'dome_preview',
+		),
+		url='http://cdn.eso.org/',
+		remote_dir='/www/',
+		host='push-19.cdn77.com',
+		username='user_xl453dw2',
+		password='juVMV9Dzm9E77X4vM6jb',
 	),
 }
 
