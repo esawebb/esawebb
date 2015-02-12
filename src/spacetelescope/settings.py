@@ -1231,6 +1231,7 @@ MEDIA_CONTENT_SERVERS = {
 MEDIA_CONTENT_SERVERS_CHOICES = (
 	('', 'Default'),
 	('videos.spacetelescope.org', 'videos.spacetelescope.org'),
+	('CDN77', 'CDN77'),
 )
 
 DEFAULT_MEDIA_CONTENT_SERVER = ''
