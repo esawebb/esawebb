@@ -1225,6 +1225,9 @@ MEDIA_CONTENT_SERVERS = {
 		host='push-19.cdn77.com',
 		username='user_v220pif3',
 		password='5nkOk3mgr8MDw2d4SZw3',
+		api_login='lars@eso.org',
+		api_password='054FBaC792mdXA3QkpngOhvWcRqGZJV1',
+		cdn_id='29445',
 	),
 }
 
