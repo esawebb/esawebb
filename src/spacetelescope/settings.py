@@ -421,10 +421,6 @@ if DEBUG_TOOLBAR:
 		'debug_toolbar',
 	)
 
-INSTALLED_APPS += (
-	'south',
-)
-
 ############
 # SESSIONS #
 ############
@@ -600,7 +596,6 @@ ARCHIVES = (
 	('djangoplicity.products.models.MiniSite', 'djangoplicity.products.options.MiniSiteOptions'),
 	('djangoplicity.products.models.Bulletin', 'djangoplicity.products.options.BulletinOptions'),
 	('djangoplicity.products.models.Stationery', 'djangoplicity.products.options.StationeryOptions'),
-	('djangoplicity.products.models.Periodical', 'djangoplicity.products.options.PeriodicalOptions'),
 	('djangoplicity.products.models.ScienceInSchool', 'djangoplicity.products.options.ScienceInSchoolOptions'),
 	('djangoplicity.products.models.Messenger', 'djangoplicity.products.options.MessengerOptions'),
 	('djangoplicity.products.models.CapJournal', 'djangoplicity.products.options.CapJournalOptions'),
@@ -1171,6 +1166,9 @@ PIPELINE_MIMETYPES = (
 
 # Required since Django 1.5:
 ALLOWED_HOSTS = ['.spacetelescope.org', '.eso.org']
+
+# Required since Django 1.6:
+TEST_RUNNER = 'django.test.runner.DiscoverRunner'
 
 VIDEO_CONTENT_SERVERS = (
 	( '', 'Default' ),
