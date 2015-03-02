@@ -141,9 +141,6 @@ urlpatterns += patterns( '',
     #( r'^public/djangoplicity/events/', include('djangoplicity.events.urls'), { 'model': Event, 'options': EventOptions } ),
     ( r'^facebook/', include('djangoplicity.iframe.urls'), { 'SSLAllow' : True }  ),
 
-    # Google Webmaster Toolkit verification
-    ( r'^', include( 'djangoplicity.google.urls' ) ),
-
     # Image votes
     ( r'^projects/hiddentreasures/vote/', include('djangoplicity.imgvote.urls'), ),
 

@@ -24,7 +24,6 @@ import djangoplicity.media.admin
 import djangoplicity.products.admin
 import djangoplicity.releases.admin
 import djangoplicity.metadata.admin
-import djangoplicity.google.admin
 import djangoplicity.archives.contrib.satchmo.freeorder.admin
 #import djangoplicity.archives.contrib.inventory_control.admin
 #import djangoplicity.inventory.admin
@@ -65,7 +64,6 @@ autoregister( admin_site, djangoplicity.crawler.admin )
 
 
 autoregister( adminlogs_site, djangoplicity.search.admin )
-autoregister( adminlogs_site, djangoplicity.google.admin )
 autoregister( adminlogs_site, djangoplicity.actions.admin )
 
 
