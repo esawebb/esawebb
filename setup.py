@@ -8,7 +8,6 @@
 #   Luis Clara Gomes <lcgomes@eso.org>
 #
 
-import os
 from setuptools import setup, find_packages
 
 setup(
@@ -16,6 +15,9 @@ setup(
 	packages = find_packages('src'),
 	package_dir = { '': 'src' },
 	include_package_data = True,
-    install_requires = ['setuptools'],
+    install_requires = [
+		'setuptools'
+		'netaddr',
+	],
 	zip_safe = False,
 )

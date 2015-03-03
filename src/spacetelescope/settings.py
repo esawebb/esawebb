@@ -75,6 +75,12 @@ INTERNAL_IPS = internal_ips( [
 	'~134.171.80.85',
 ] )
 
+GARCHING_INTERNAL_IPS = (
+	'134.171.0.0/18',
+	'134.171.64.0/20',
+	'127.0.0.1',
+)
+
 SITE_ENVIRONMENT = local_settings.SITE_ENVIRONMENT
 DEBUG = local_settings.DEBUG
 DEBUG_SQL = local_settings.DEBUG_SQL
@@ -316,6 +322,9 @@ MIDDLEWARE_CLASSES += (
 
 	# Module for URL redirection based on regular expressions
 	'djangoplicity.utils.middleware.RegexRedirectMiddleware',  # Response
+
+	# Middleware to bypass CDN when client is from Garching Intranet
+	'spacetelescope.middleware.DisableInternalCDN',
 
 	# Djangoplicity static pages
 	'djangoplicity.pages.middleware.PageFallbackMiddleware',  # Response
@@ -1217,7 +1226,7 @@ MEDIA_CONTENT_SERVERS = {
 			'dome_mov',
 			'dome_preview',
 		),
-		url='http://196985802.r.cdn77.net/',
+		url='http://cdn.spacetelescope.org/',
 		remote_dir='/www/',
 		host='push-19.cdn77.com',
 		username='user_v220pif3',
