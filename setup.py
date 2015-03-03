@@ -16,7 +16,7 @@ setup(
 	package_dir = { '': 'src' },
 	include_package_data = True,
     install_requires = [
-		'setuptools'
+		'setuptools',
 		'netaddr',
 	],
 	zip_safe = False,
