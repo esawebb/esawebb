@@ -406,6 +406,7 @@ INSTALLED_APPS += (
 	'satchmo_utils',
 	'satchmo_store.contact',
 	'product',
+	'product.modules.configurable',
 	'shipping',
 	'payment',
 	'djangoplicity.coposweb',
