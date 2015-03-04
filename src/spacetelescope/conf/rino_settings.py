@@ -11,7 +11,7 @@
 from default_settings import *
 from djangoplicity.settings import copy_setting
 
-ROOT_RELOCATE = "/Users/rino/dev/spacetelescope"
+ROOT_RELOCATE = "/Users/rino/dev/spacetelescope17"
 ADMINS = (
 	('Bruno Rino','brino@partner.eso.org'),
 )
@@ -81,7 +81,7 @@ LOGGING_HANDLER = ['console']
 ##########
 BROKER_URL = 'amqp://spacetelescope:letoveumtold@localhost:5672/spacetelescope_vhost'
 
-CELERY_ALWAYS_EAGER = False
+CELERY_ALWAYS_EAGER = True
 
 #########
 # EMAIL #
