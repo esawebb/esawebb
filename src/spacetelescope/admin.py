@@ -19,14 +19,11 @@ import djangoplicity.announcements.admin
 import djangoplicity.contrib.statistics.admin
 import djangoplicity.menus.admin
 import djangoplicity.pages.admin
-import djangoplicity.search.admin
 import djangoplicity.media.admin
 import djangoplicity.products.admin
 import djangoplicity.releases.admin
 import djangoplicity.metadata.admin
 import djangoplicity.archives.contrib.satchmo.freeorder.admin
-#import djangoplicity.archives.contrib.inventory_control.admin
-#import djangoplicity.inventory.admin
 #import djangoplicity.events.admin
 import djangoplicity.mailinglists.admin
 import djangoplicity.newsletters.admin
@@ -63,7 +60,6 @@ autoregister( admin_site, djangoplicity.science.admin )
 autoregister( admin_site, djangoplicity.crawler.admin )
 
 
-autoregister( adminlogs_site, djangoplicity.search.admin )
 autoregister( adminlogs_site, djangoplicity.actions.admin )
 
 
@@ -87,7 +83,5 @@ from djangoplicity.archives.contrib.satchmo.admin import satchmo_admin
 adminshop_site = satchmo_admin( adminshop_site )
 
 autoregister( adminshop_site, djangoplicity.archives.contrib.satchmo.freeorder.admin )
-#autoregister( adminshop_site, djangoplicity.archives.contrib.inventory_control.admin )
-#autoregister( adminshop_site, djangoplicity.inventory.admin )
 
 autoregister( admin_site, djangoplicity.imgvote.admin )
