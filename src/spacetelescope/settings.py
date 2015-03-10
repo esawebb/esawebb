@@ -263,10 +263,6 @@ MIDDLEWARE_CLASSES = (
 	'sslmiddleware.SSLRedirect',
 )
 
-if DEBUG:
-	# Add label to all HTML pages displaying the environment
-	MIDDLEWARE_CLASSES += ('djangoplicity.utils.middleware.SiteEnvironmentMiddleware',)
-
 if DEBUG_SQL:
 	# Show all SQL queries being executed as well execution time.
 	MIDDLEWARE_CLASSES += ('djangoplicity_ext.middleware.sqlmiddleware.SQLLogMiddleware',)

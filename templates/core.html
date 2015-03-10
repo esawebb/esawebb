@@ -1,0 +1,109 @@
+{% load i18n %}
+<!DOCTYPE HTML>
+<html lang="{{ LANGUAGE_CODE }}">
+<head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb#">
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="google-site-verification" content="KTjYtxjG6PEMU6XMF7LY4nMnJ7MXxYaNzVY6SYTo1Qc" />
+	<meta property="og:type" content="website" />
+	<meta property="og:title" content="ESO Supernova" />
+	<meta name="author" content="information@eso.org" />
+	{% spaceless %}
+	{% endspaceless %}
+	<!-- <meta property="og:image" content="http://supernova.eso.org" /> -->
+	<!-- <meta property="og:image:secure_url" content="https://supernova.eso.org" /> -->
+	<link href="http://www.spacetelescope.org/rss/feed.xml" rel="alternate" type="application/rss+xml" title="Hubble Space Telescope News">
+	<link type="text/css" rel="stylesheet" href="//fast.fonts.net/cssapi/02c4fda9-c362-4778-8957-ac86ff9054c6.css"/>
+
+	<title>{% block site_title %}ESO Supernova{% endblock %}</title>
+{% load compressed %}
+{% compressed_css 'main' %}
+	<!--[if IE]><link rel="shortcut icon" href="/static/web/icons/favicon.ico"><![endif]-->
+	<link rel="apple-touch-icon" href="/static/web/icons/apple-touch-favicon.png">
+	<link rel="icon" href="/static/web/icons/favicon.png">
+</head>
+<body>
+
+<nav class="navbar-general-wrapper" role="navigation">
+	<div class="navbar-general">
+		<div class="quicklinks">
+			<a href="/contact">Contact</a>
+			<a href="/subscribe/">Subscribe to Hubble News</a>
+			<a href="/sitemap/">Site Map</a>
+			<a href="/search/"><span class="fa fa-search"></span></a>
+		</div>
+		{% load menus %}
+		{% init_menu 'Main Menu' as main_menu %}
+		<div class="main-menu">
+			<div class="mobile-menu clearfix">
+				<button class="menu-trigger"><span class="fa fa-navicon"></span> {% trans "Open Menu" %}</button>
+			</div>
+			{% render_menu main_menu main %}
+		</div>
+	</div>
+</nav>
+
+{% comment %}
+
+<nav class="main-menu-wrapper" role="navigation">
+	<div class="container">
+	</div>
+</nav>
+
+<div id="content">
+
+{% block side-logo %}
+<div id="supernova-side-logo">
+	<a href="/">
+	<div data-spy="affix" class="affix">
+		<div class="sprites-es120a"></div>
+	</div>
+	</a>
+</div>
+{% endblock %}
+
+{% block content_area %}
+{% endblock %}
+</div>
+
+{% block footer %}
+<div id="footer-wrapper">
+<div class="container" id="footer">
+	<div class="row">                                                 
+		<div class="col-md-8">
+			<p>The <strong>ESO Supernova Planetarium &amp; Visitor Centre</strong> is made possible by a cooperation between the <a href="http://www.eso.org/public/">European Southern Observatory</a> (ESO) and the <a href="http://www.h-its.org/de/">Heidelberg Institute for Theoretical Studies</a> (HITS). The building is a donation from the <a href="http://www.klaus-tschira-stiftung.de/">Klaus Tschira Stiftung</a> (KTS), a German foundation, and ESO will run the facility.</p>
+		</div>
+		<div class="col-md-4">
+			<a href="http://maps.google.com/maps?q=48%C2%B015%2736.90%22N+11%C2%B040%2715.16%22E&hl=en&ie=UTF8&sll=37.0625,-95.677068&sspn=42.224734,79.013672&vpsrc=0&t=h&z=16">
+				<h4>ESO</h4>
+				Karl-Schwarzschild-Str. 2, 85748<br />
+				Garching bei München, Germany
+			</a>
+		</div>
+	</div>
+</div> <!-- #footer -->
+</div> <!-- #footer-wrapper -->
+{% endblock %}
+
+{% endcomment %}
+
+<script type="text/javascript">var MEDIA_URL = "{{MEDIA_URL}}"</script>
+{% compressed_js 'main' %}
+{% block extra_scripts %}
+{% endblock %}
+
+<!-- Google Analytics -->
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-2368492-6', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+</body>
+</html>
