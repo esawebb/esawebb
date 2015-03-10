@@ -11,20 +11,19 @@
 """
 DEPRECATED - Please use South data migrations instead.
 
-Certain templates embeds pages defined via the djangoplicity.poages app. They 
+Certain templates embeds pages defined via the djangoplicity.poages app. They
 use a page key to select which page to embed. To ensure that these keys are
-created a special management command "appsregister" will execute the code 
+created a special management command "appsregister" will execute the code
 in this module to ensure that the keys exists.
 
 Currently, the "appsregister" command must be run manually by the developer
 after a new deployment. Also, "appsregister" is no longer the preferred method
 for creating data in the database. Instead South data migrations should be used
-instead, which provides much better management and features. 
+instead, which provides much better management and features.
 """
 
 
-
-# ========================   
+# ========================
 # Register global page key
 # ========================
 from djangoplicity.pages.models import register_page_key
@@ -34,15 +33,15 @@ import warnings
 
 warnings.warn( "Use of appsregister have been deprecated. Please use South data migrations instead.", DeprecationWarning )
 
-PAGE_KEYS = { 
-			  "login" : 'spacetelescope.login',
-			  "logout" : 'spacetelescope.logout',
-			  "hubblecast_sidebar" : "spacetelescope.hubblecast_sidebar",
-			  "access_denied" : "spacetelescope.access_denied",
-			  "shop_right_column" : "djangoplicity.shop_right_column",
-			  "free_order_form" : "djangoplicity.free_order_form",
-			  "frontpage_rightcol" : "spacetelescope.frontpage_rightcol",			  
-			  "image_archive_top" : "spacetelescope.image_archive_top",
+PAGE_KEYS = {
+			  "login": 'spacetelescope.login',
+			  "logout": 'spacetelescope.logout',
+			  "hubblecast_sidebar": "spacetelescope.hubblecast_sidebar",
+			  "access_denied": "spacetelescope.access_denied",
+			  "shop_right_column": "djangoplicity.shop_right_column",
+			  "free_order_form": "djangoplicity.free_order_form",
+			  "frontpage_rightcol": "spacetelescope.frontpage_rightcol",
+			  "image_archive_top": "spacetelescope.image_archive_top",
 			}
 
 register_page_key( 'spacetelescope', PAGE_KEYS["login"], _('Login page'), _('Displayed above the login form.') )

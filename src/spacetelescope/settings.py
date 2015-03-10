@@ -1124,40 +1124,51 @@ STATICFILES_STORAGE = 'pipeline.storage.PipelineCachedStorage'
 PIPELINE_CSS = {
 	'main': {
 		'source_filenames': (
-			'css/reset.css',
-			'css/base_grid.css',
-			'css/screen.css',
-			'djangoplicity/shadowbox/shadowbox.css',
+			'font-awesome/css/font-awesome.min.css',
+			'sprites/sprites.css',
+			'css/main.css',
 		),
 		'output_filename': 'css/main.css',
-		'extra_context': {
-			'media': 'screen',
-		},
 	},
-	'print': {
+	'extras': {
 		'source_filenames': (
-			'css/print.css"',
+			'jquery-ui-1.11.1/jquery-ui.min.css',
+			'slick/slick/slick.css',
+			'justified-gallery/css/justifiedGallery.min.css',
+			'magnific-popup/magnific-popup.css',
 		),
-		'output_filename': 'css/print.css',
-		'extra_context': {
-			'media': 'print',
-		},
+		'output_filename': 'css/extras.css',
 	},
 }
 
 PIPELINE_JS = {
 	'main': {
 		'source_filenames': (
-			'djangoplicity/js/jquery-1.4.2.min.js',
-			'djangoplicity/js/jquery.cycle.min.js',
-			'djangoplicity/js/jquery.jclock-1.2.0.js',
-			'djangoplicity/shadowbox/shadowbox.js',
-			'djangoplicity/js/shadowbox_conf.js',
+			'jquery/jquery-1.11.1.min.js',
+			'jquery-ui-1.11.1/jquery-ui.min.js',
+			'bootstrap/bootstrap-3.1.1-dist/js/bootstrap.min.js',
+			'js/jquery.menu-aim.js',
+			'slick/slick/slick.min.js',
+			'djangoplicity/jwplayer/jwplayer.js',
+			'djangoplicity/js/jquery.beforeafter-1.4.js',
 			'djangoplicity/zoomify/js/ZoomifyImageViewerExpress-min.js',
+			'js/masonry.pkgd.min.js',
+			'justified-gallery/js/jquery.justifiedGallery.min.js',
+			'magnific-popup/jquery.magnific-popup.min.js',
 			'djangoplicity/js/widgets.js',
-			'js/site.js',
+			'djangoplicity/js/pages.js',
+			'js/picturefill.min.js',
+			'js/enquire/enquire.min.js',
+			'js/main.js',
 		),
 		'output_filename': 'js/main.js',
+	},
+	'ie8compat': {
+		'source_filenames': (
+			'js/ie8compat/matchMedia/matchMedia.js',
+			'js/ie8compat/matchMedia/matchMedia.addListener.js',
+		),
+		'output_filename': 'js/ie8compat.js',
 	},
 }
 PIPELINE_CSS_COMPRESSOR = False

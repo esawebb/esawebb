@@ -73,10 +73,10 @@ adminlogs_site.register(django.contrib.sites.models.Site,
                         django.contrib.sites.admin.SiteAdmin)
 
 admin_site.register(django.contrib.auth.models.User,
-                        django.contrib.auth.admin.UserAdmin)
+                    django.contrib.auth.admin.UserAdmin)
 
 admin_site.register(django.contrib.auth.models.Group,
-                        django.contrib.auth.admin.GroupAdmin)
+                    django.contrib.auth.admin.GroupAdmin)
 
 
 from djangoplicity.archives.contrib.satchmo.admin import satchmo_admin
