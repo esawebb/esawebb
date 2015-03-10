@@ -1,0 +1,624 @@
+// These rules are placehoders extended in other selectors:
+
+.frontpage-title {
+	position: absolute;
+	z-index: 2;
+	margin: 1px 0 0 1px;  // To compensate for border
+	text-transform: uppercase;
+	font-size: 12px;
+	font-weight: 600;
+
+	a {
+		text-decoration: none;
+		display: block;
+		color: #fff;
+		background-color: rgba(0, 129, 201, 0.8); // eso-blue
+		padding: 4px 8px;
+
+		&:hover {
+			background-color: #fff;
+			color: $hubble-blue;
+		}
+	}
+}
+
+.frontpage-description {
+
+	&:hover {
+		background-color: $hubble-blue;
+		color: #fff;
+
+		.date {
+			color: #fff;
+		}
+	}
+
+	.date {
+		padding: 8px;
+		padding-bottom: 0;
+		color: $hubble-blue;
+	}
+
+	.title {
+		padding: 8px;
+		padding-top: 0;
+		line-height: 16px;
+		/* white-space: nowrap; */
+		overflow: hidden;
+	}
+}
+
+.frontpage-description-hover a {
+	background-color: $hubble-blue;
+	color: #fff;
+
+	.date {
+		color: #fff;
+	}
+}
+
+.frontpage-description-title {
+	padding: 8px;
+	padding-top: 0;
+	line-height: 16px;
+}
+
+.frontpage-description-date {
+	padding: 8px;
+	padding-bottom: 0;
+
+	a {
+		color: $hubble-blue;
+	}
+}
+
+
+#pr-carousel-wrapper {
+	position: relative;
+	background-color: #000;
+
+	&:hover {
+		.slide-prev, .slide-next {
+			@extend .slide-prev-next-hover;
+		}
+	}
+
+	#eso-logo-wrapper {
+		position: relative;
+		max-width: $body-width;
+		margin-left: auto;
+		margin-right: auto;
+
+		.section-title {
+			@extend .frontpage-title;
+			margin: 0;
+			right: 0;
+		}
+
+		.eso-logo {
+			position: absolute;
+			top: 34px;
+			z-index: 2;
+			font-weight: 600;
+			font-size: 14px;
+
+			a {
+				color: #fff;
+
+				&:hover {
+					text-decoration: none;
+				}
+			} 
+
+			div {
+				margin-bottom: 5px;
+			}
+		}
+
+		// Hide logo on mobile
+		@media (max-width: $mobile-breakpoint) {
+			display: none;
+		}
+	}
+
+	#pr-carousel {
+		color: #fff;
+		font-weight: 600;
+
+		&.slick-initialized .slide {
+			visibility: visible;
+		}
+
+		.slide {
+			visibility: hidden; // slides are made visible by JS
+			position: relative;
+
+			@media (min-width: $mobile-breakpoint) {
+				height: $pr-carousel-height;
+			}
+
+			> a {
+				display: block;
+				height: 100%;
+			}
+
+			img {
+				position: relative;
+				width: 100%;
+				opacity: 1;
+
+				@media (min-width: $mobile-breakpoint) {
+					top: 50%;
+					@include transform(translateY(-50%));
+
+					@include transition(opacity 0.2s linear); 
+
+					// Workaround for bug with Chrome where the image jumps by
+					// a few pixels onhover:
+					-webkit-backface-visibility: hidden;
+
+					&.hover {
+						opacity: 0.5 !important;  // Important to compensate for the slick loadin opacity
+						filter: alpha(opacity=50) !important;
+						@include transition(opacity 0.2s linear); 
+					}
+				}
+			}
+
+			a {
+				color: #fff;
+			}
+
+			.pr-content {
+				margin-left: auto;
+				margin-right: auto;
+				height: 100%;
+				padding: $grid-gutter-width / 2;
+
+				@media (min-width: $mobile-breakpoint) {
+					width: $body-width;
+					position: absolute;
+					top: 0;
+					left: 0;
+					right: 0;
+					padding: 0;
+				}
+
+				.pr-description {
+					padding-bottom: 10px;
+					font-size: 14px;
+					text-shadow: 1px 1px 3px #000;
+					padding-top: 50px; // This is just to make the hover target larger
+
+					&:hover {
+						text-shadow: none;
+
+						.pr-extra {
+							max-height: 200px;
+							@include transition(max-height 0.2s); 
+						}
+					}
+
+					@media (min-width: $mobile-breakpoint) {
+						width: $body-width;
+						position: absolute;
+						bottom: 0;
+					}
+
+					.pr-extra {
+						max-height: 0;
+						@include transition(max-height 0.2s); 
+						overflow: hidden;
+
+						.pr-headline {
+							margin-bottom: 20px;
+						}
+					}
+
+					.pr-type {
+						text-transform: uppercase;
+						font-size: 14px;
+					}
+
+					.pr-title {
+						font-size: 30px;
+
+						@media (max-width: $mobile-breakpoint) {
+							line-height: 1.2;
+						}
+
+						a:hover {
+							text-decoration: none;
+							color: $hubble-blue;
+						}
+					}
+				}
+			}
+		}
+
+		button {
+			@extend .slide-button;
+		}
+
+		.slide-prev {
+			@extend .slide-prev;
+		}
+
+		.slide-next {
+			@extend .slide-next;
+		}
+	}
+}
+
+
+.announcements {
+	margin-top: $frontpage-row-top-margin;
+
+	.section-title {
+		@extend .frontpage-title;
+	}
+
+}
+
+#ann-carousel-wrapper {
+	background-color: #fff;
+	border: 1px solid $border-color;
+	overflow: hidden;
+
+	#ann-carousel {
+		margin: 0 0 - $grid-gutter-width / 2;
+
+		&.slick-initialized .slide {
+			visibility: visible;
+		}
+
+		.slide {
+			visibility: hidden; // slides are made visible by JS
+			margin: 0 $grid-gutter-width / 2;
+			font-size: 13px;
+
+			img {
+				display: block;
+				width: 100%;
+				height: auto;
+			}
+
+			a {
+				color: $text-color;
+				text-decoration: none;
+			}
+
+			.ann-description {
+				@extend .frontpage-description;
+			}
+		}
+
+		button {
+			@extend .slide-button;
+		}
+
+		.slide-prev {
+			@extend .slide-prev;
+		}
+
+		.slide-next {
+			@extend .slide-next;
+		}
+
+		&:hover {
+			.slide-prev, .slide-next {
+				@extend .slide-prev-next-hover;
+			}
+		}
+	}
+}
+
+
+.frontpage-section {
+
+	.section-title {
+		@extend .frontpage-title;
+	}
+
+	.highlights {
+		.section-title {
+			@extend .frontpage-title;
+			color: #fff;
+			background-color: rgba(0, 129, 201, 0.8); // eso-blue
+			padding: 4px 8px;
+		}
+	}
+
+	& > div {
+		margin-top: $frontpage-row-top-margin;
+	}
+	
+	#esocast-carousel {
+		background-color: #fff;
+		border: 1px solid $border-color;
+
+		// The jwplayer somehow adds a few pixels, so we cap the max-height
+		// when displayed in two columns
+		@media (min-width: 992px) {
+			max-height: 313px;
+		}
+
+		.slide-prev {
+			@extend .slide-prev;
+		}
+
+		.slide-next {
+			@extend .slide-next;
+		}
+
+		a {
+			color: $text-color;
+			text-decoration: none;
+		}
+
+		&:hover {
+			.slide-prev, .slide-next {
+				@extend .slide-prev-next-hover;
+			}
+		}
+
+		.esocast-description {
+			@extend .frontpage-description;
+			// The jwplayer somehow adds a few pixels, so we move the description
+			// up by a few pixles
+			@media (min-width: 992px) {
+				margin-top: -6px;
+			}
+		}
+	}
+
+	#potw-carousel {
+		background-color: #fff;
+		border: 1px solid $border-color;
+
+		&:hover {
+			.potw-description {
+				@extend .frontpage-description-hover;
+			}
+		}
+
+		&.slick-initialized .slide {
+			visibility: visible;
+		}
+
+		button {
+			@extend .slide-button;
+		}
+
+		.slide {
+			visibility: hidden; // slides are made visible by JS
+
+			a {
+				color: $text-color;
+				text-decoration: none;
+			}
+		}
+
+		.slide-prev {
+			@extend .slide-prev;
+		}
+
+		.slide-next {
+			@extend .slide-next;
+		}
+
+		&:hover {
+			.slide-prev, .slide-next {
+				@extend .slide-prev-next-hover;
+			}
+		}
+
+		img {
+			width: 100%;
+		}
+
+		.potw-description {
+			@extend .frontpage-description;
+		}
+	}
+
+	#highlight-carousel {
+		background-color: #fff;
+		border: 1px solid $border-color;
+
+		&.slick-initialized .slide {
+			visibility: visible;
+		}
+
+		.slide {
+			visibility: hidden; // slides are made visible by JS
+		}
+
+		button {
+			@extend .slide-button;
+		}
+
+		.slide-prev {
+			@extend .slide-prev;
+		}
+
+		.slide-next {
+			@extend .slide-next;
+		}
+
+		&:hover {
+			.slide-prev, .slide-next {
+				@extend .slide-prev-next-hover;
+			}
+		}
+
+		img {
+			width: 100%;
+		}
+	}
+
+	#social-links {
+		background-color: $hubble-very-dark-grey;
+
+		@media (min-width: $screen-md-min) {
+			height: 265px;
+		}
+
+		.title {
+			padding: 20px 0 10px;
+			letter-spacing: 1.4px;
+			color: #fff;
+			font-size: 20px;
+			text-align: center;
+		}
+
+		.icons {
+			padding: 0 40px 5px;
+
+			div {
+				display: inline-block;
+
+				&:hover {
+					background-color: $hubble-blue;
+					opacity: 0.3;
+					filter: alpha(opacity=30);
+				}
+			}
+		}
+	}
+
+	#esoshop-link {
+		background-color: #fff;
+		border: 1px solid $border-color;
+
+		@media (min-width: $screen-md-min) {
+			height: 265px;
+			overflow: hidden;
+		}
+
+		img {
+			margin: 0 auto;
+		}
+	}
+
+	.sections {
+		margin-top: $frontpage-row-top-margin;
+		background-color: #fff;
+		border: 1px solid $border-color;
+		padding:  $grid-gutter-width;
+		padding-top: 0;
+
+		img {
+			max-width: 100%;
+		}
+	}
+}
+
+
+.top100 {
+	margin-top: $frontpage-row-top-margin;
+
+	a {
+		color: $text-color;
+	}
+
+	.section-title {
+		@extend .frontpage-title;
+	}
+	
+	#top100-frontpage-carousel {
+		background-color: #fff;
+		border: 1px solid $border-color;
+
+		&:hover {
+			.top100-description {
+				@extend .frontpage-description-hover;
+			}
+		}
+
+		&.slick-initialized .slide {
+			visibility: visible;
+		}
+
+		.slide {
+			visibility: hidden; // slides are made visible by JS
+
+			a {
+				color: $text-color;
+				text-decoration: none;
+			}
+		}
+
+		button {
+			@extend .slide-button;
+		}
+
+		.slide-prev {
+			@extend .slide-prev;
+		}
+
+		.slide-next {
+			@extend .slide-next;
+		}
+
+		&:hover {
+			.slide-prev, .slide-next {
+				@extend .slide-prev-next-hover;
+			}
+		}
+
+		.img-wrapper {
+			/* max-height: $top100-frontpage-carousel-height; */
+			overflow: hidden;
+		}
+
+		.top100-description {
+			@extend .frontpage-description;
+
+			.title {
+				padding: 8px;
+			}
+		}
+	}
+}
+
+.slogan {
+	margin-top: $frontpage-row-top-margin;
+	border: 1px solid $border-color;
+	background-color: #fff;
+
+	&:hover {
+
+		.slogan-description {
+			background-color: $hubble-blue;
+			color: #fff;
+		}
+	}
+
+	a {
+		text-decoration: none;
+	}
+
+	.img-wrapper {
+		position: relative;
+
+		img {
+			width: 100%;
+		}
+
+		.title {
+			position: absolute;
+			bottom: 0;
+			left: 10px;
+			font-size: 30px;
+			letter-spacing: 1.4px;
+			color: #fff;
+		}
+	}
+
+	.slogan-description {
+		padding: 10px;
+		color: $text-color;
+		min-height: 56px
+	}
+}

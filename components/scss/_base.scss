@@ -1,0 +1,496 @@
+body {
+	position: relative;
+}
+
+#edit-info-block {
+	width: 75%;
+}
+
+.admin_bar {
+	position: absolute;
+	right: $grid-gutter-width;
+	z-index: $zindex-navbar-fixed;
+
+	#djlinks {
+		float: right;
+		margin: 2px;
+	}
+}
+
+#content {
+	@media (min-width: $mobile-breakpoint) {
+		margin-top: 100px;
+	}
+
+	// Reset slick carousel settings
+	.slick-slider {
+		margin-bottom: 0;
+	}
+}
+
+#body {
+	.page {
+		background-color: #fff;
+		border: 1px solid $border-color;
+		margin-top: $frontpage-row-top-margin;
+		
+		@media (max-width: $mobile-breakpoint) {
+			margin: 10px 0 0;
+		}
+
+		.one-column, .left-column, .right-column {
+			padding: 25px;
+		}
+
+		.left-column { 
+			padding-right: 20px;
+		}
+
+		.right-column { 
+			padding-left: 20px;
+		}
+	}
+
+	.no-page {
+		.box {
+			background-color: #fff;
+			border: 1px solid $border-color;
+			margin-top: $frontpage-row-top-margin;
+			padding: 25px;
+		}
+	}
+
+	.breadcrumb {
+		display: none;
+		background-color: transparent;
+		margin: 0;
+		padding: 0;
+
+		@media (max-width: $mobile-breakpoint) {
+			/* padding: $grid-gutter-width / 2 0; */
+			display: block;
+		}
+
+		a {
+			color: $text-color;
+		}
+	}
+
+	max-width: $body-width + $grid-gutter-width;
+}
+
+#dark {
+	background-color: $hubble-very-dark-grey;
+	font-weight: 600;
+	color: #fff;
+
+	#dark-header {
+		@extend #body;
+
+		.media-categories ul li a {
+			border: 1px solid $dark-box-border;
+			color: #ccc;
+
+			&:hover, &.selected {
+				border: 1px solid $hubble-blue;
+			}
+		}
+	}
+
+	.breadcrumb a {
+		color: #fff;
+	}
+
+	#dark-body {
+		@extend #body;
+		background-color: $hubble-very-dark-grey;
+		max-width: none;
+		padding-bottom: $grid-gutter-width;
+
+		#dark-header {
+			max-width: $body-width + $grid-gutter-width;
+			margin-left: auto;
+			margin-right: auto;
+		}
+
+
+		.page {
+			background-color: $hubble-very-dark-grey;
+			border: none;
+		}
+	}
+}
+
+.sprites-esologo {
+	// IE doesn't seem to catch the following rules for sprites.css
+	// so we explicity set them here
+	background-image: url('../sprites/sprites.png');
+	background-repeat: no-repeat;
+}
+
+#eso-side-logo {
+	@media (max-width: $minilogo-breakpoint) {
+		display: none;
+	}
+
+	width: $body-width;
+	margin-left: auto;
+	margin-right: auto;
+	position: relative;
+	top: $frontpage-row-top-margin;
+	font-size: 14px;
+
+	div {
+		margin-bottom: 5px;
+	}
+
+	a {
+		color: $text-color;
+	} 
+
+	#frontpage-side-logo {
+		display: none;
+	}
+
+	.affix-top {
+		position: absolute;
+		margin-left: -105px;
+	}
+
+	.affix {
+		margin-left: -105px;
+		top: 100px + $frontpage-row-top-margin;
+	}
+
+	@media (max-width: $mobile-breakpoint) {
+		display: none;
+	}
+}
+
+// Similar to side logo but without affix spying
+#eso-top-logo {
+	@extend #eso-side-logo;
+	top: $frontpage-row-top-margin;
+
+	a {
+		font-weight: 600;
+		color: #fff;
+	} 
+}
+
+#error404-wrapper {
+	position: fixed;
+	background-image: url('http://www.eso.org/public/archives/images/screen/eso0934a.jpg');
+	background-size: cover;
+	height: 100%;
+	width: 100%;
+}
+
+#error404 {
+	font-weight: 600;
+	color: #fff;
+	text-align: center;
+	text-shadow: 1px 1px 3px #000;
+
+	.title, .subtitle, .search {
+		max-width: $body-width;
+		margin-left: auto;
+		margin-right: auto;
+	}
+
+	.title {
+		vertical-align: top;
+		font-size: 150px;
+
+		.logo {
+			display: inline-block;
+			font-size: 14px;
+
+			a {
+				color: #fff;
+			}
+
+			div, span {
+				display: inline-block;
+				vertical-align: bottom;
+				margin-left: 5px;
+			}
+		}
+	}
+
+	.subtitle {
+		font-size: 40px;
+		line-height: 40px;
+	}
+
+	.search {
+		padding: 40px
+	}
+
+
+	@media (max-width: $mobile-breakpoint) {
+		.title {
+			font-size: 75px;
+
+			.logo {
+				display: none;
+			}
+		}
+
+		.subtitle {
+			font-size: 20px;
+			line-height: 20px;
+		}
+
+		.search {
+			padding: 20px;
+		}
+	}
+}
+
+
+// General navbar (with flags, etc.)
+.navbar-general-wrapper {
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	background-color: $hubble-very-dark-grey;
+	border: 0;
+	font-weight: 600;
+	z-index: $zindex-navbar-fixed + 1; // To go over navbar-main-menu
+	border-bottom: 1px solid #fff;
+
+	.navbar-general {
+		max-width: $content-width;
+		margin-left: auto;
+		margin-right: auto;
+		padding-left: $grid-gutter-width / 2;
+		padding-right: $grid-gutter-width / 2;
+		height: 118px;
+		overflow: hidden;
+
+		.quicklinks {
+			float: right;
+			padding: 10px;
+			text-transform: uppercase;
+			color: #fff;
+
+			a {
+				padding: 10px;
+			}
+		}
+	}
+}
+
+#sitemap {
+
+	ul {
+		padding-left: 20px;
+	}
+
+	li {
+		list-style-type: none;
+		margin-left: 0;
+		font-weight: 600;
+
+		ul li ul li {
+			font-weight: 400;
+
+			&::before {
+				content: '↳ ';
+				color: #666;
+			}
+		}
+	}
+}
+
+.statusbar {
+	margin-top: $grid-gutter-width / 2;
+	font-size: 14px;
+
+	.prev-next {
+		text-align: right;
+		font-weight: 600;
+		text-transform: uppercase;
+
+		a {
+			margin-left: 25px;
+		}
+	}
+}
+
+.pagination {
+	padding: 0;
+
+	li {
+		display: inline;
+
+		& + li:before {
+			content: '/';
+		}
+
+		&.active {
+			font-weight: 600;
+
+			a {
+				color: $text-color;
+			}
+		}
+
+		a {
+			display: inline-block;
+			padding: 0px 6px;
+		}
+	}
+}
+
+.page-content {
+
+	img {
+		max-width: 100%;
+
+		&.padding-10 {
+			padding: 10px;
+		}
+	}
+
+	table {
+		margin-left: 1px;
+		margin-top: 0.5em;
+
+		tr td {
+			padding: 0.5em;
+			text-align: left;
+		}
+	}
+
+	.webcam-wrapper {
+		position: relative;
+		display: inline-block;
+		color: #fff;
+		font-weight: bold;
+
+		img {
+			padding: 0px !important;
+		}
+	}
+
+	.webcam-timestamp, .webcam-nolive {
+		background-color: rgba(0, 0, 0, 0.2);
+		font-weight: 600;
+		position: absolute;
+		top: 0;
+		margin: 20px;
+		padding: 5px 10px;
+		border: 1px solid #fff;
+		font-size: 11px;
+	}
+
+	.webcam-nolive, .webcam-live {
+		right: 0;
+	}
+
+	.webcam-live {
+		background-color: #bc3738;
+		position: absolute;
+		top: 0;
+		margin: 20px;
+		padding: 5px 10px;
+		text-transform: uppercase;
+	}
+}
+
+
+.listviewrsslink {
+	font-size: 20px;
+}
+
+.footernote {
+	max-width: $body-width + $grid-gutter-width;
+	margin: 20px auto;
+	font-size: 12px;
+	text-align: center;
+
+	@media (min-width: $mobile-breakpoint) {
+		& div:first-child {
+			text-align: right;
+		}
+
+		& div:last-child {
+			text-align: left;
+		}
+	}
+
+	a {
+		display: block;
+		color: #777;
+	}
+}
+
+
+.jwplayer {
+	&:hover {
+		cursor: pointer;
+	}
+}
+
+
+// Generic carousel prev/next buttons
+.slide-button {
+	position: absolute;
+	top: 0px;
+	height: 100%;
+	border: none;
+	padding: 0;
+	outline: 0;
+	font-size: x-large;
+	text-align: center;
+	min-width: 50px;
+	color: #fff;
+}
+
+.slide-prev {
+	left: 0px;
+	background: none;
+	font-size: 35px;
+	/* opacity: 0.2; */
+	/* filter: alpha(opacity=20); */
+	/* @include transition(opacity 0.3s);  */
+
+	&.slick-disabled {
+		display: none !important;
+	}
+}
+
+.slide-next {
+	right: 0px;
+	background: none;
+	font-size: 35px;
+	/* opacity: 0.2; */
+	/* filter: alpha(opacity=20); */
+	/* @include transition(opacity 0.3s);  */
+
+	&.slick-disabled {
+		display: none !important;
+	}
+}
+
+.slide-prev-next-hover {
+	/* opacity: 1; */
+	/* filter: alpha(opacity=100); */
+	/* @include transition(opacity 0.3s);  */
+}
+
+
+// Class to display 5 columns per line in md mode
+.col-md-10-2 {
+	@media (min-width: $screen-xs-min) {
+		width: 20%;
+	}
+}
+
+.inlinesprite {
+	// Used to display e.g. sprite flags inline
+	display: inline-block;
+}
