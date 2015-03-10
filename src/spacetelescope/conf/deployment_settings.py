@@ -8,7 +8,7 @@
 #   Luis Clara Gomes <lcgomes@eso.org>
 #
 
-from default_settings import *
+from spacetelescope.conf.default_settings import *
 from djangoplicity.settings import copy_setting
 
 #############################
@@ -20,7 +20,7 @@ PRJBASE = "%s/src/spacetelescope" % ROOT
 DJANGOPLICITY_ROOT = "%s/src/djangoplicity" % ROOT
 
 BUILD_ROOT = ROOT
-BUILD_PRJBASE = PRJBASE 
+BUILD_PRJBASE = PRJBASE
 BUILD_DJANGOPLICITY_ROOT = DJANGOPLICITY_ROOT
 
 LOG_DIR = "%s/logs" % ROOT
@@ -37,7 +37,7 @@ WEBSERVERS = (
 	('aweb41', '%s3' % SHORT_NAME, '134.171.75.212', 'prod' ),
 	('aweb42', '%s4' % SHORT_NAME, '134.171.75.213', 'prod' ),
 )
-CONFIG_GEN_TEMPLATES_DIR = "%s/conf/templates/" % PRJBASE 
+CONFIG_GEN_TEMPLATES_DIR = "%s/conf/templates/" % PRJBASE
 CONFIG_GEN_GENERATED_DIR = "%s/conf/" % ROOT  # was: "%s/conf/" % TMP_DIR
 
 ##############
@@ -55,19 +55,19 @@ SUDO_USER = 'web'
 DEPLOYMENT_DEVELOP = False
 
 DEPLOYMENT_PERMS = [
-	{'path' : '%(ROOT)s/docs/static/css/', 'user' : None, 'group' : 'epodadm', 'perms' : 'g+ws,o=rx' },
-	{'path' : '%(ROOT)s/docs/static/js/', 'user' : None, 'group' : 'epodadm', 'perms' : 'g+ws,o=rx' },
-	{'path' : '%(TMP_DIR)s/', 'user' : None, 'group' : 'epodadm', 'perms' : 'g+ws,o=rwx' },
-	{'path' : '%(ROOT)s/import', 'user' : None, 'group' : 'epodadm', 'perms' : 'g+ws,o=rx' },
-	{'path' : '%(ROOT)s/import/*', 'user' : None, 'group' : 'epodadm', 'perms' : 'g+ws,o=rx' },
+	{'path': '%(ROOT)s/docs/static/css/', 'user': None, 'group': 'epodadm', 'perms': 'g+ws,o=rx' },
+	{'path': '%(ROOT)s/docs/static/js/', 'user': None, 'group': 'epodadm', 'perms': 'g+ws,o=rx' },
+	{'path': '%(TMP_DIR)s/', 'user': None, 'group': 'epodadm', 'perms': 'g+ws,o=rwx' },
+	{'path': '%(ROOT)s/import', 'user': None, 'group': 'epodadm', 'perms': 'g+ws,o=rx' },
+	{'path': '%(ROOT)s/import/*', 'user': None, 'group': 'epodadm', 'perms': 'g+ws,o=rx' },
 	# o+w needded to allow video encoder to write files to the directories.
-	{'path' : '%(ROOT)s/import/**/*', 'user' : None, 'group' : '-R epodadm', 'perms' : '-R g+ws,o=rwx' },
-	{'path' : '%(ROOT)s/etc/**/*', 'user' : None, 'group' : None, 'perms' : '-R 664' },
+	{'path': '%(ROOT)s/import/**/*', 'user': None, 'group': '-R epodadm', 'perms': '-R g+ws,o=rwx' },
+	{'path': '%(ROOT)s/etc/**/*', 'user': None, 'group': None, 'perms': '-R 664' },
 ]
 
 DEPLOYMENT_SYNC = [
-	('%(BUILD_PRJBASE)s/static/','%(BUILD_ROOT)s/docs/static/'),
-	('%(BUILD_DJANGOPLICITY_ROOT)s/static/','%(BUILD_ROOT)s/docs/static/djangoplicity/'),
+	('%(BUILD_PRJBASE)s/static/', '%(BUILD_ROOT)s/docs/static/'),
+	('%(BUILD_DJANGOPLICITY_ROOT)s/static/', '%(BUILD_ROOT)s/docs/static/djangoplicity/'),
 ]
 
 

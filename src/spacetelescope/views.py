@@ -7,6 +7,7 @@
 #   Lars Holm Nielsen <lnielsen@eso.org>
 #   Luis Clara Gomes <lcgomes@eso.org>
 #
+from datetime import datetime
 from django.shortcuts import render_to_response
 from django.template import RequestContext
 from django.views.decorators.cache import cache_page
@@ -20,7 +21,6 @@ from djangoplicity.releases.models import Release
 def frontpage( request ):
 	""" Front page """
 
-	from datetime import datetime
 	now = datetime.now()
 	potd = ImageOptions.Queries.default.queryset( Image, ImageOptions, request )[0][now.day]
 	votd = VideoOptions.Queries.default.queryset( Video, VideoOptions, request )[0][now.day]

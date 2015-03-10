@@ -94,18 +94,7 @@ MANAGERS = ADMINS
 
 SERVE_STATIC_MEDIA = local_settings.SERVE_STATIC_MEDIA
 
-DEBUG_TOOLBAR_PANELS = (
-	'debug_toolbar.panels.version.VersionDebugPanel',
-	'debug_toolbar.panels.timer.TimerDebugPanel',
-	#'debug_toolbar.panels.settings_vars.SettingsVarsDebugPanel',
-	'debug_toolbar.panels.headers.HeaderDebugPanel',
-	'debug_toolbar.panels.request_vars.RequestVarsDebugPanel',
-	'debug_toolbar.panels.template.TemplateDebugPanel',
-	'debug_toolbar.panels.sql.SQLDebugPanel',
-	#'debug_toolbar.panels.signals.SignalDebugPanel',
-	'debug_toolbar.panels.cache.CacheDebugPanel',
-	'debug_toolbar.panels.logger.LoggingPanel',
-)
+DEBUG_TOOLBAR_PANELS = local_settings.DEBUG_TOOLBAR_PANELS
 
 ##################
 # DATABASE SETUP #
@@ -180,6 +169,8 @@ MEDIA_URL = local_settings.MEDIA_URL
 ADMIN_MEDIA_PREFIX = local_settings.ADMIN_MEDIA_PREFIX
 DJANGOPLICITY_MEDIA_URL = local_settings.DJANGOPLICITY_MEDIA_URL
 DJANGOPLICITY_MEDIA_ROOT = local_settings.DJANGOPLICITY_MEDIA_ROOT
+
+MIDENTIFY_PATH = local_settings.MIDENTIFY_PATH
 
 # Staticfiles app
 STATICFILES_DIRS = [
