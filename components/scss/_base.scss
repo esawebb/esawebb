@@ -19,7 +19,7 @@ body {
 
 #content {
 	@media (min-width: $mobile-breakpoint) {
-		margin-top: 100px;
+		margin-top: 118px;
 	}
 
 	// Reset slick carousel settings
@@ -126,56 +126,6 @@ body {
 	// so we explicity set them here
 	background-image: url('../sprites/sprites.png');
 	background-repeat: no-repeat;
-}
-
-#eso-side-logo {
-	@media (max-width: $minilogo-breakpoint) {
-		display: none;
-	}
-
-	width: $body-width;
-	margin-left: auto;
-	margin-right: auto;
-	position: relative;
-	top: $frontpage-row-top-margin;
-	font-size: 14px;
-
-	div {
-		margin-bottom: 5px;
-	}
-
-	a {
-		color: $text-color;
-	} 
-
-	#frontpage-side-logo {
-		display: none;
-	}
-
-	.affix-top {
-		position: absolute;
-		margin-left: -105px;
-	}
-
-	.affix {
-		margin-left: -105px;
-		top: 100px + $frontpage-row-top-margin;
-	}
-
-	@media (max-width: $mobile-breakpoint) {
-		display: none;
-	}
-}
-
-// Similar to side logo but without affix spying
-#eso-top-logo {
-	@extend #eso-side-logo;
-	top: $frontpage-row-top-margin;
-
-	a {
-		font-weight: 600;
-		color: #fff;
-	} 
 }
 
 #error404-wrapper {

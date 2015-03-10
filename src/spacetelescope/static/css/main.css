@@ -5226,7 +5226,7 @@ body {
 
 @media (min-width: 1025px) {
   #content {
-    margin-top: 100px; } }
+    margin-top: 118px; } }
 #content .slick-slider {
   margin-bottom: 0; }
 
@@ -5288,38 +5288,6 @@ body {
 .sprites-esologo {
   background-image: url("../sprites/sprites.png");
   background-repeat: no-repeat; }
-
-#eso-side-logo, #eso-top-logo {
-  width: 960px;
-  margin-left: auto;
-  margin-right: auto;
-  position: relative;
-  top: 20px;
-  font-size: 14px; }
-  @media (max-width: 1190px) {
-    #eso-side-logo, #eso-top-logo {
-      display: none; } }
-  #eso-side-logo div, #eso-top-logo div {
-    margin-bottom: 5px; }
-  #eso-side-logo a, #eso-top-logo a {
-    color: #333333; }
-  #eso-side-logo #frontpage-side-logo, #eso-top-logo #frontpage-side-logo {
-    display: none; }
-  #eso-side-logo .affix-top, #eso-top-logo .affix-top {
-    position: absolute;
-    margin-left: -105px; }
-  #eso-side-logo .affix, #eso-top-logo .affix {
-    margin-left: -105px;
-    top: 120px; }
-  @media (max-width: 1025px) {
-    #eso-side-logo, #eso-top-logo {
-      display: none; } }
-
-#eso-top-logo {
-  top: 20px; }
-  #eso-top-logo a {
-    font-weight: 600;
-    color: #fff; }
 
 #error404-wrapper {
   position: fixed;
@@ -5744,20 +5712,20 @@ body {
 @media print {
   .navbar-general-wrapper, .main-menu-wrapper {
     display: none; } }
-.frontpage-title, #pr-carousel-wrapper #eso-logo-wrapper .section-title, .announcements .section-title, .frontpage-section .section-title, .frontpage-section .highlights .section-title, .top100 .section-title {
+.frontpage-title, .announcements .section-title, .frontpage-section .section-title, .frontpage-section .highlights .section-title, .top100 .section-title {
   position: absolute;
   z-index: 2;
   margin: 1px 0 0 1px;
   text-transform: uppercase;
   font-size: 12px;
   font-weight: 600; }
-  .frontpage-title a, #pr-carousel-wrapper #eso-logo-wrapper .section-title a, .announcements .section-title a, .frontpage-section .section-title a, .frontpage-section .highlights .section-title a, .top100 .section-title a {
+  .frontpage-title a, .announcements .section-title a, .frontpage-section .section-title a, .frontpage-section .highlights .section-title a, .top100 .section-title a {
     text-decoration: none;
     display: block;
     color: #fff;
     background-color: rgba(0, 129, 201, 0.8);
     padding: 4px 8px; }
-    .frontpage-title a:hover, #pr-carousel-wrapper #eso-logo-wrapper .section-title a:hover, .announcements .section-title a:hover, .frontpage-section .section-title a:hover, .top100 .section-title a:hover {
+    .frontpage-title a:hover, .announcements .section-title a:hover, .frontpage-section .section-title a:hover, .top100 .section-title a:hover {
       background-color: #fff;
       color: #0081c9; }
 
@@ -5797,29 +5765,6 @@ body {
 #pr-carousel-wrapper {
   position: relative;
   background-color: #000; }
-  #pr-carousel-wrapper #eso-logo-wrapper {
-    position: relative;
-    max-width: 960px;
-    margin-left: auto;
-    margin-right: auto; }
-    #pr-carousel-wrapper #eso-logo-wrapper .section-title {
-      margin: 0;
-      right: 0; }
-    #pr-carousel-wrapper #eso-logo-wrapper .eso-logo {
-      position: absolute;
-      top: 34px;
-      z-index: 2;
-      font-weight: 600;
-      font-size: 14px; }
-      #pr-carousel-wrapper #eso-logo-wrapper .eso-logo a {
-        color: #fff; }
-        #pr-carousel-wrapper #eso-logo-wrapper .eso-logo a:hover {
-          text-decoration: none; }
-      #pr-carousel-wrapper #eso-logo-wrapper .eso-logo div {
-        margin-bottom: 5px; }
-    @media (max-width: 1025px) {
-      #pr-carousel-wrapper #eso-logo-wrapper {
-        display: none; } }
   #pr-carousel-wrapper #pr-carousel {
     color: #fff;
     font-weight: 600; }

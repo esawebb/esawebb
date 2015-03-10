@@ -22,6 +22,14 @@
 	<!--[if IE]><link rel="shortcut icon" href="/static/web/icons/favicon.ico"><![endif]-->
 	<link rel="apple-touch-icon" href="/static/web/icons/apple-touch-favicon.png">
 	<link rel="icon" href="/static/web/icons/favicon.png">
+
+	<!--[if lte IE 9]>
+		{% compressed_js 'ie8compat' %}
+		<script src="//oss.maxcdn.com/respond/1.4.2/respond.min.js"></SCRIpt>
+		<script src="//oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+	<![endif]-->
+	{% block extra_header %}
+	{% endblock %}
 </head>
 <body>
 
@@ -44,29 +52,13 @@
 	</div>
 </nav>
 
-{% comment %}
-
-<nav class="main-menu-wrapper" role="navigation">
-	<div class="container">
-	</div>
-</nav>
 
 <div id="content">
-
-{% block side-logo %}
-<div id="supernova-side-logo">
-	<a href="/">
-	<div data-spy="affix" class="affix">
-		<div class="sprites-es120a"></div>
-	</div>
-	</a>
-</div>
-{% endblock %}
-
 {% block content_area %}
 {% endblock %}
 </div>
 
+{% comment %}
 {% block footer %}
 <div id="footer-wrapper">
 <div class="container" id="footer">
@@ -87,6 +79,8 @@
 {% endblock %}
 
 {% endcomment %}
+
+{% compressed_css 'extras' %}
 
 <script type="text/javascript">var MEDIA_URL = "{{MEDIA_URL}}"</script>
 {% compressed_js 'main' %}
