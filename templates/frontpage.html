@@ -120,6 +120,36 @@
 	{% endif %}
 </div>
 
+{% if top100 %}
+<div class="row top100">
+	<div class="col-md-12">
+		<div id="top100-frontpage-carousel-wrapper">
+			<div class="section-header">
+				<div class="section-title">
+					<a href="{% url 'images_query_top100' %}">{% trans "Top 100 Images" %}</a>
+				</div>
+				<div class="section-navigation">
+				</div>
+			</div>
+			<div id="top100-frontpage-carousel">
+				{% for image in top100 %}
+				<div class="slide">
+					<a href="{{ image.get_absolute_url }}">
+						<div class="img-wrapper">
+							<img draggable="false" data-lazy="{{ image.resource_wallpaper1.url }}" class="img-responsive" alt="{{ image.title }}">
+						</div>
+						<div class="top100-description">
+							<div class="title">{{ image.title }}</div>
+						</div>
+					</a>
+				</div> <!-- slide -->
+				{% endfor %}
+			</div> <!-- #top100-frontpage-carousel -->
+		</div>
+	</div>
+</div>
+{% endif %}
+
 </div> <!-- #body -->
 
 {% endblock content_area %}

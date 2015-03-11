@@ -11,8 +11,8 @@ from django.shortcuts import render_to_response
 from django.template import RequestContext
 from django.views.decorators.cache import cache_page
 from djangoplicity.announcements.models import Announcement
-from djangoplicity.media.models import Video, PictureOfTheWeek
-from djangoplicity.media.options import VideoOptions, PictureOfTheWeekOptions
+from djangoplicity.media.models import Image, Video, PictureOfTheWeek
+from djangoplicity.media.options import ImageOptions, VideoOptions, PictureOfTheWeekOptions
 from djangoplicity.releases.models import Release
 
 
@@ -27,6 +27,7 @@ def frontpage( request ):
 		'potws': PictureOfTheWeekOptions.Queries.default.queryset( PictureOfTheWeek, PictureOfTheWeekOptions, request )[0][:10],
 		'announcements': Announcement.get_latest_announcement(5, only_featured=True),
 		'hubblecasts': hubblecasts,
+		'top100': ImageOptions.Queries.top100.queryset( Image, ImageOptions, request )[0][:20],
 	}, context_instance=RequestContext(request) )
 
 
