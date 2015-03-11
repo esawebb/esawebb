@@ -1,0 +1,25 @@
+{% extends "base_onecolumn_dark.html" %}
+{% load i18n %}
+
+{% block extra_header %}{{block.super}}{% for furl,title in feed_urls %}<link href='{{furl}}' rel="alternate" type="application/rss+xml" title='{{title}}' />{%endfor%}{% if archive_title %}
+	<meta property="og:title" content="{{ archive_title }}" />{% endif %}{% if archive_opengraph_image %}
+	<meta property="og:image" content="{{ archive_opengraph_image }}" />{% endif %}{% if archive_description %}
+	<meta property="og:description" content="{{ archive_description }}" />
+	<meta name="description" content="{{ archive_description }}" />{% endif %}
+{%endblock%}
+
+{% block site_title %}{% if archive_title %}{{archive_title}}{% else %}{{ archive|capfirst }} Archive{%endif%} | {{block.super}}{% endblock %}
+
+{% block archive_search %}
+{% with archive_search_position="outside" %}
+	{% include "archives/searchbox.html" %}
+{% endwith %}
+{% endblock %}
+
+{% block content %}
+
+{% include index_template with columns="4" %}
+
+{% endblock %}
+
+{% include 'archives/extra_footer.html' %}

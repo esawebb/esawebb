@@ -1,0 +1,43 @@
+{% extends "base_twocolumn.html" %}
+{% load media_video %}
+
+{% block content %}
+
+{% if object_list and page_obj.start_index == 1  %}
+	<h1>Hubblecast</h1>
+	<h3>{{object_list.0.title}}</h3>
+	<p>{{object_list.0.headline}}</p>
+	<div align="right"><a href="{{object_list.0.get_absolute_url}}">More information and download options</a></div>
+	{% load media_video %}
+	{% if object_list.0.videosubtitle_set.all %}
+		{% embedvideo_subs object_list.0 "medium_podcast,h264" "hd_and_apple,hd720p_screen" "medium_podcast,h264" object_list.0.videosubtitle_set.all %}
+	{% else %}
+		{% embedvideo object_list.0 "medium_podcast,h264" "hd_and_apple,hd720p_screen" "medium_podcast,h264" %}
+	{% endif%}
+	{% embed_playlist object_list "medium_podcast,h264" "hd_and_apple,hd720p_screen" %}
+	&nbsp;
+{% endif %}
+
+<h2>All ESOcasts</h2>
+
+{% include index_template with columns="3" %}
+
+{% endblock %}
+
+{% block rightcolumn %}
+{% include "archives/searchbox.html" %}
+{% load pages %}{% embed_page spacetelescope.hubblecast_sidebar %}
+{% endblock %}
+
+{% block extra_scripts %}
+<script type="text/javascript">
+
+	var listbar = {
+		position: 'bottom',
+		size: 400
+	};
+
+	setupVideoPlayer('{{ object_list.0.id }}');
+
+</script>
+{% endblock %}

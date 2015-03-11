@@ -1,0 +1,122 @@
+{# this text is placed by the satchmo_order template tag "order_tracking_details" #}
+{% load i18n %}
+{% load djangoplicity_satchmo %}
+{% load djangoplicity_text_utils %}
+{% load satchmo_currency %}
+{% load satchmo_checkout %}
+{% load satchmo_util normalize_decimal %}
+{% load djangoplicity_satchmo %}
+
+<div class="row">
+	<div class="col-md-12">
+		<strong>Order ID:</strong>: {{ order|order_variable:"ORDER_ID" }}
+	</div>
+</div>
+
+<div class="row"
+	<div class="cold-md-12">
+		<h3>Order Status</h3>
+	</div>
+	<table class="table">
+		<tr><th>Date/time</th><th>Status</th></tr>
+		{% for status in order.orderstatus_set.all %}
+		<tr><td>{{ status.time_stamp|date:"j F Y H:i" }}</td><td>{{ status.status|status_label }}{% if status.notes %} ({{ status.notes }}){% endif %}</td></tr>
+		{% endfor %}
+	</table>
+</div>
+
+{% order_payment_summary order paylink %}
+
+<div class="row">
+	<div class="col-md-12">
+		<h3>{% trans "Contact Information" %}</h3>
+		{{ order.contact.full_name }}<br/>
+		{{ order.contact.email }}<br/>
+		{{ order.contact.primary_phone.phone }}<br/>
+	</div>
+</div>
+
+<div class="row">
+	<div class="col-md-6">
+		<h3>{% trans "Billing Information" %}</h3>
+		{{ order.contact.billing_address.addressee }}<br/>
+		{{ order.full_bill_street|linebreaksbr }}<br/>
+		{{ order.bill_postal_code }} {{ order.bill_city }}<br/>
+		{% if order.bill_state %}{{ order.bill_state }}<br/>{% endif %}
+		{{ order.bill_country|isocode2country }}<br/>
+	</div>
+	<div class="col-md-6">
+		{% if order.is_shippable %}
+			<h3>{% trans "Shipping Address" %}</h3>
+			<p>
+			{{ order.contact.shipping_address.addressee }}<br/>
+			{{ order.full_ship_street|linebreaksbr }}<br/>
+			{{ order.ship_postal_code }} {{ order.ship_city }}<br/>
+			{% if order.ship_state %}{{ order.ship_state }}<br/>{% endif %}
+			{{ order.ship_country|isocode2country }}<br/>
+			</p>
+		{% endif %}
+	</div>
+</div>
+
+<h3>{% trans "Items Ordered" %}</h3>
+<table class="table">
+<tr>
+	<th>Item</th><th>Unit Price</th><th></th><th>Quantity</th><th>{% if order.item_discount %}Item Discount{% endif %}</th><th></th><th>Price</th>
+</tr>
+{% for item in order.orderitem_set.all %}
+<tr>
+	{% if default_view_tax %}
+		{{ item }} - {{item.unit_price_with_tax|currency}} x {{item.quantity|normalize_decimal}}{% if item.discount %} - {{ item.discount|currency }}{% endif %} = {{item.total_with_tax|currency}}<br/>
+	{% else %}
+		<td>{{ item }}<div class="small product-id">ID: {{item.product.sku}}</div></td>
+		<td>{{ item.unit_price|currency }}</td>
+		<td>x</td>
+		<td>{{ item.quantity|normalize_decimal }}</td>
+		<td>{% if item.discount %} - {{ item.discount|currency }}{% endif %}</td>
+		<td>=</td>
+		<td>{{ item.sub_total|currency|sp2nbsp }}</td>
+	{% endif %}
+{% endfor %}
+</tr>
+
+<tr><td colspan="7">&nbsp;</td></tr>
+<tr>
+	<th colspan="5">Subtotal{% if order.discount %} (without discount){% endif %}</th>
+	<td>=</td>
+	<td>{% if default_view_tax %}{{ order.sub_total_with_tax|currency }}{% else %}{{ order.sub_total|currency }}{% endif %}</td>
+</tr>
+
+{% if order.discount %}
+<tr><td colspan="7">&nbsp;</td></tr>
+<tr>
+<td colspan="5">Discount ({{order.discount_code}})</td><td>-</td><td>{{order.item_discount|currency}}</td>
+</tr>
+{% endif %}
+
+{% if order.shipping_method %}
+<tr><td colspan="7">&nbsp;</td></tr>
+<tr>
+	<th colspan="7">Shipping &amp; Handling</th>
+</tr>
+
+{% if order.shipping_discount %}
+	<tr>
+		<td>{{ order.shipping_description }} via {{ order.shipping_method }}.</td><td></td><td></td><td></td><td></td><td>+</td><td>{{order.shipping_cost|currency}}</td>
+	</tr>
+	<tr>
+		<td>Shipping Discount</td><td></td><td></td><td></td><td></td><td>-</td><td>{{order.shipping_discount|currency}}</td>
+	</tr>
+{% else %}
+	<tr>
+		<td>{{ order.shipping_description }}</td><td></td><td></td><td></td><td></td><td>+</td><td>{% if default_view_tax %}{{ order.shipping_with_tax|currency }}{% else %}{{ order.shipping_sub_total|currency|sp2nbsp }}{% endif %}</td>
+	</tr>
+{% endif %}
+{% endif %}
+
+<tr><td colspan="7">&nbsp;</td></tr>
+<tr class="info total">
+	<th colspan="5">TOTAL</td><td>=</td><td>{{ order.total|currency|sp2nbsp }}</th>
+</tr>
+
+</table>

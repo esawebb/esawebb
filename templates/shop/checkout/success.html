@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% load satchmo_order %}
+{% load satchmo_google %}
+{% load i18n %}
+
+{% block body %}
+<div class="row page shop review">
+	<div class="col-md-12">
+		<h1>Receipt</h1>
+		<h2>Order successfully completed</h2>
+
+		<div id="ordersuccess">
+		<p>{% trans "Thank you for your order!" %} {% trans 'Please print out this page as a receipt. You will also receive an email with this information.' %}
+		Please allow 1-3 business days for handling the order. You will receive a notification via email once the order is shipped/ready for pickup.</p>
+		</div>
+
+		{% for i in order.orderitem_set.all %}
+			{% if i.product.category.all.0.name == 'Donations' %}
+				<p><br>
+				<a href="http://twitter.com/home?status=I%27ve%20just%20made%20a%20%23donation%20for%20@ESOSupernova!%20You%20too%20can%20bring%20astronomy%20closer%20to%20people%20by%20donating%20here:%20http://t.co/DA6wJ0pJ1M"><img src="/public/archives/static/shop/twitter_donation_sharing.png" alt="Let your friends know you've contributed!"></a>
+				</p><br>
+			{% endif %}
+		{% endfor %}
+
+		{% order_tracking_details order %}
+	</div>
+</div>
+{% endblock %}
+
+{% block google-tracker %}
+{% if shop.options.GOOGLE.ANALYTICS.value %}
+{% show_tracker %}
+{% show_receipt %}
+{% endif %}
+{% if shop.options.GOOGLE.ADWORDS.value %}
+{% google_adwords_sale %}
+{% endif %}
+{% endblock %}

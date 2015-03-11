@@ -1,0 +1,335 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load djangoplicity_translation %}
+
+{% block site_title %}Checkout | {{ shop_name }}{% endblock%}
+
+{% block body %}
+<div class="row page shop checkout">
+	<div class="col-md-12">
+
+		{% if not DJANGOPLICITY.SHOP_LIVE %}<div class="alert alert-danger" role="alert">Shop in test mode</div>{% endif %}
+
+		<h1>{% trans "Checkout" %}</h1>
+		<h2>Step 1 of 3: Enter billing{% if cart.is_shippable %}/shipping{% endif %} information</h2>
+
+		<p>{% trans "Please complete the following information in order to submit your order." %}</p>
+
+		{% if form.non_field_errors %}
+			<div class="alert alert-danger" role="alert">{% trans "Please correct the following error:" %}<br />{{ form.non_field_errors }}</div>
+		{% endif %}
+
+		{% if form.errors %}
+			<div class="alert alert-danger" role="alert">{% trans "Please correct the fields marked in red below:" %}</div>
+		{% endif %}
+
+		<p>Fields marked with <span class="required">*</span> a required.</p>
+
+		{% url 'satchmo_checkout-step1' as satchmo_checkout_step1 %}
+		<form class="form-horizontal" role="form" method="post" action="{{ satchmo_checkout_step1|url_for_lang:LANGUAGE_CODE }}">{% csrf_token %}
+
+			{% ifequal paymentmethod_ct 1 %}
+				{% comment %}If we only have one payment method, then the form renders it as a hidden field {% endcomment %}{{ form.paymentmethod }}
+			{% else %}
+				<h4>{% trans "How do you want to pay?" %}</h4>
+				<label for="id_paymentmethod">{% trans "Payment method" %}</label><div id="payment">{{ form.paymentmethod }}</div>
+			{% if form.paymentmethod.errors %}<tr><td>&nbsp;</td><td class="error">*** {{ form.paymentmethod.errors|join:", " }}</td></tr>{% endif %}
+			{% endifequal %}
+
+			<h2>{% trans "Basic Information" %}</h2>
+			<div class="form-group{% if form.email.errors %} has-error has-feedback{% endif %}">
+				<label class="col-sm-2" for="{{ form.email.id_for_label }}">{% trans "Email address" %}</label>
+				<div class="col-sm-10">
+					<input type="email" class="form-control" name="{{ form.email.html_name }}" id="{{ form.email.id_for_label }}" placeholder="{% trans form.email.label %}" value="{{ form.email.value }}">
+					{% if form.email.errors %}
+						<span class="glyphicon glyphicon-remove form-control-feedback"></span>
+						<p class="help-block">{{ form.email.errors|join:", " }}</p>
+					{% endif %}
+				</div>
+			</div>
+
+			<div class="form-group{% if form.city.errors %} has-error has-feedback{% endif %}">
+				<label class="col-sm-2" for="{{ form.city.id_for_label }}">{% trans form.city.label %}</label>
+				<div class="col-sm-10">
+					<input type="text" class="form-control" id="{{ form.city.id_for_label }}" placeholder="{% trans form.city.label %}" {% if form.city.value %} value="{{ form.city.value }}{% endif %}">
+					{% if form.city.errors %}
+						<span class="glyphicon glyphicon-remove form-control-feedback"></span>
+						<div class="error-message">{{ form.city.errors|join:", " }}</div>
+					{% endif %}
+				</div>
+			</div>
+
+			<div class="form-group">
+				<div class="col-sm-12">
+					{{ form.newsletter }} {{ form.newsletter.label_tag}}
+				</div>
+			</div>
+			
+			<div class="form-group{% if form.first_name.errors %} has-error has-feedback{% endif %}">
+				<label class="col-sm-2" for="{{ form.first_name.id_for_label }}">{% trans form.first_name.label %}</label>
+				<div class="col-sm-10">
+					<input type="text" class="form-control" name="{{ form.first_name.html_name }}" id="{{ form.first_name.id_for_label }}" placeholder="{% trans form.first_name.label %}"{% if form.first_name.value %} value="{{ form.first_name.value }}{% endif %}">
+					{% if form.first_name.errors %}
+						<span class="glyphicon glyphicon-remove form-control-feedback"></span>
+						<p class="help-block">{{ form.first_name.errors|join:", " }}</p>
+					{% endif %}
+				</div>
+			</div>
+
+			<div class="form-group{% if form.last_name.errors %} has-error has-feedback{% endif %}">
+				<label class="col-sm-2" for="{{ form.last_name.id_for_label }}">{% trans form.last_name.label %}</label>
+				<div class="col-sm-10">
+					<input type="text" class="form-control" name="{{ form.last_name.html_name }}" id="{{ form.last_name.id_for_label }}" placeholder="{% trans form.last_name.label %}" {% if form.last_name.value %} value="{{ form.last_name.value }}{% endif %}">
+					{% if form.last_name.errors %}
+						<span class="glyphicon glyphicon-remove form-control-feedback"></span>
+						<p class="help-block">{{ form.last_name.errors|join:", " }}</p>
+					{% endif %}
+				</div>
+			</div>
+
+			<div class="form-group{% if form.phone.errors %} has-error has-feedback{% endif %}">
+				<label class="col-sm-2" for="{{ form.phone.id_for_label }}">{% trans form.phone.label %}</label>
+				<div class="col-sm-10">
+					<input type="text" class="form-control" name="{{ form.phone.html_name }}" id="{{ form.phone.id_for_label }}" placeholder="{% trans form.phone.label %}" {% if form.phone.value %} value="{{ form.phone.value }}{% endif %}">
+					{% if form.phone.errors %}
+						<span class="glyphicon glyphicon-remove form-control-feedback"></span>
+						<p class="help-block">{{ form.phone.errors|join:", " }}</p>
+					{% endif %}
+				</div>
+			</div>
+
+			<h2>{% trans "Billing Information" %}</h2>
+
+			<div class="form-group{% if form.addressee.errors %} has-error has-feedback{% endif %}">
+				<label class="col-sm-2" for="{{ form.addressee.id_for_label }}">{% trans "Bill To" %}</label>
+				<div class="col-sm-10">
+					<input type="text" class="form-control" name="{{ form.addressee.html_name }}" id="{{ form.addressee.id_for_label }}" placeholder="{% trans "Bill To" %}" {% if form.addressee.value %} value="{{ form.addressee.value }}{% endif %}">
+					<p class="help-block">{% trans "If different from the first and last names above" %}</p>
+					{% if form.addressee.errors %}
+						<span class="glyphicon glyphicon-remove form-control-feedback"></span>
+						<p class="help-block">{{ form.addressee.errors|join:", " }}</p>
+					{% endif %}
+				</div>
+			</div>
+
+			<div class="form-group{% if form.street1.errors %} has-error has-feedback{% endif %}">
+				<label class="col-sm-2" for="{{ form.street1.id_for_label }}">{% trans form.street1.label %}</label>
+				<div class="col-sm-10">
+					<input type="text" class="form-control" name="{{ form.street1.html_name }}" id="{{ form.street1.id_for_label }}" placeholder="{% trans form.street1.label %}" {% if form.street1.value %} value="{{ form.street1.value }}{% endif %}">
+					{% if form.street1.errors %}
+						<span class="glyphicon glyphicon-remove form-control-feedback"></span>
+						<p class="help-block">{{ form.street1.errors|join:", " }}</p>
+					{% endif %}
+				</div>
+			</div>
+
+			<div class="form-group{% if form.street2.errors %} has-error has-feedback{% endif %}">
+				<label class="col-sm-2" for="{{ form.street2.id_for_label }}">{% trans "Street" %}</label>
+				<div class="col-sm-10">
+					<input type="text" class="form-control" name="{{ form.street2.html_name }}" id="{{ form.street2.id_for_label }}" placeholder="{% trans "Street" %}" {% if form.street2.value %} value="{{ form.street2.value }}{% endif %}">
+					{% if form.street2.errors %}
+						<span class="glyphicon glyphicon-remove form-control-feedback"></span>
+						<p class="help-block">{{ form.street2.errors|join:", " }}</p>
+					{% endif %}
+				</div>
+			</div>
+
+			<div class="form-group{% if form.city.errors %} has-error has-feedback{% endif %}">
+				<label class="col-sm-2" for="{{ form.city.id_for_label }}">{% trans form.city.label %}</label>
+				<div class="col-sm-10">
+					<input type="text" class="form-control" name="{{ form.city.html_name }}" id="{{ form.city.id_for_label }}" placeholder="{% trans form.city.label %}" {% if form.city.value %} value="{{ form.city.value }}{% endif %}">
+					{% if form.city.errors %}
+						<span class="glyphicon glyphicon-remove form-control-feedback"></span>
+						<p class="help-block">{{ form.city.errors|join:", " }}</p>
+					{% endif %}
+				</div>
+			</div>
+
+			<div class="form-group{% if form.state.errors %} has-error has-feedback{% endif %}">
+				<label class="col-sm-2" for="{{ form.state.id_for_label }}">{% trans "State/Province" %}</label>
+				<div class="col-sm-10">
+					<input type="text" class="form-control" name="{{ form.state.html_name }}" id="{{ form.state.id_for_label }}" placeholder="{% trans "State/Province" %}" {% if form.state.value %} value="{{ form.state.value }}"{% endif %}>
+					{% if form.state.errors %}
+						<span class="glyphicon glyphicon-remove form-control-feedback"></span>
+						<p class="help-block">{{ form.state.errors|join:", " }}</p>
+					{% endif %}
+				</div>
+			</div>
+
+			<div class="form-group{% if form.postal_code.errors %} has-error has-feedback{% endif %}">
+				<label class="col-sm-2" for="{{ form.postal_code.id_for_label }}">{% trans form.postal_code.label %}</label>
+				<div class="col-sm-10">
+					<input type="text" class="form-control" name="{{ form.postal_code.html_name }}" id="{{ form.postal_code.id_for_label }}" placeholder="{% trans form.postal_code.label %}" {% if form.postal_code.value %} value="{{ form.postal_code.value }}{% endif %}">
+					{% if form.postal_code.errors %}
+						<span class="glyphicon glyphicon-remove form-control-feedback"></span>
+						<p class="help-block">{{ form.postal_code.errors|join:", " }}</p>
+					{% endif %}
+				</div>
+			</div>
+
+			<div class="form-group{% if form.country.errors %} has-error has-feedback{% endif %}">
+				<label class="col-sm-2" for="{{ form.country.id_for_label }}">{% trans form.country.label %}</label>
+				<div class="col-sm-10">
+					{{ form.country }}
+					{% comment %}
+					<select class="form-control" name="{{ form.country.html_name }}" id="{{ form.country.id_for_label }}">
+						<option value=""></option>
+					{% for x,y in form.country.field.choices %}
+						<option value="{{ x }}"{% if form.country.value == x %} selected="selected"{% endif %}>{{ y }}</option>
+					{% endfor %}
+					</select>
+					{% endcomment %}
+					{% if form.country.errors %}
+						<p class="help-block">{{ form.country.errors|join:", " }}</p>
+					{% endif %}
+				</div>
+			</div>
+
+			{% comment %}
+			{% if cart.is_shippable %}
+			{% endcomment %}
+				<h2>{% trans "Shipping Information" %}</h2>
+
+				<div class="form-group">
+					<div class="col-sm-2">
+						{{ form.copy_address.label_tag}}
+					</div>
+					<div class="col-sm-10">
+						{{ form.copy_address }}
+					</div>
+				</div>
+
+				<div class="form-group{% if form.ship_addressee.errors %} has-error has-feedback{% endif %}">
+					<label class="col-sm-2" for="{{ form.ship_addressee.id_for_label }}">{% trans "Ship To" %}</label>
+					<div class="col-sm-10">
+						<input type="text" class="form-control" name="{{ form.ship_addressee.html_name }}" id="{{ form.ship_addressee.id_for_label }}" placeholder="{% trans "Ship To" %}" {% if form.ship_addressee.value %} value="{{ form.ship_addressee.value }}{% endif %}">
+						<p class="help-block">{% trans "If different from the first and last names above" %}</p>
+						{% if form.ship_addressee.errors %}
+							<span class="glyphicon glyphicon-remove form-control-feedback"></span>
+							<p class="help-block">{{ form.ship_addressee.errors|join:", " }}</p>
+						{% endif %}
+					</div>
+				</div>
+
+				<div class="form-group{% if form.ship_street1.errors %} has-error has-feedback{% endif %}">
+					<label class="col-sm-2" for="{{ form.ship_street1.id_for_label }}">{% trans form.ship_street1.label %}</label>
+					<div class="col-sm-10">
+						<input type="text" class="form-control" name="{{ form.ship_street1.html_name }}" id="{{ form.ship_street1.id_for_label }}" placeholder="{% trans form.ship_street1.label %}" {% if form.ship_street1.value %} value="{{ form.ship_street1.value }}{% endif %}">
+						{% if form.ship_street1.errors %}
+							<span class="glyphicon glyphicon-remove form-control-feedback"></span>
+							<p class="help-block">{{ form.ship_street1.errors|join:", " }}</p>
+						{% endif %}
+					</div>
+				</div>
+
+				<div class="form-group{% if form.ship_street2.errors %} has-error has-feedback{% endif %}">
+					<label class="col-sm-2" for="{{ form.ship_street2.id_for_label }}">{% trans "Street" %}</label>
+					<div class="col-sm-10">
+						<input type="text" class="form-control" name="{{ form.ship_street2.html_name }}" id="{{ form.ship_street2.id_for_label }}" placeholder="{% trans "Street" %}" {% if form.ship_street2.value %} value="{{ form.ship_street2.value }}{% endif %}">
+						{% if form.ship_street2.errors %}
+							<span class="glyphicon glyphicon-remove form-control-feedback"></span>
+							<p class="help-block">{{ form.street2.errors|join:", " }}</p>
+						{% endif %}
+					</div>
+				</div>
+
+				<div class="form-group{% if form.ship_city.errors %} has-error has-feedback{% endif %}">
+					<label class="col-sm-2" for="{{ form.ship_city.id_for_label }}">{% trans form.ship_city.label %}</label>
+					<div class="col-sm-10">
+						<input type="text" class="form-control" name="{{ form.ship_city.html_name }}" id="{{ form.ship_city.id_for_label }}" placeholder="{% trans form.ship_city.label %}" {% if form.ship_city.value %} value="{{ form.ship_city.value }}{% endif %}">
+						{% if form.ship_city.errors %}
+							<span class="glyphicon glyphicon-remove form-control-feedback"></span>
+							<p class="help-block">{{ form.ship_city.errors|join:", " }}</p>
+						{% endif %}
+					</div>
+				</div>
+
+				<div class="form-group{% if form.ship_state.errors %} has-error has-feedback{% endif %}">
+					<label class="col-sm-2" for="{{ form.ship_state.id_for_label }}">{% trans "State/Province" %}</label>
+					<div class="col-sm-10">
+						<input type="text" class="form-control" name="{{ form.ship_state.html_name }}" id="{{ form.ship_state.id_for_label }}" placeholder="{% trans "State/Province" %}" {% if form.ship_state.value %} value="{{ form.ship_state.value }}{% endif %}">
+						{% if form.ship_state.errors %}
+							<span class="glyphicon glyphicon-remove form-control-feedback"></span>
+							<p class="help-block">{{ form.ship_state.errors|join:", " }}</p>
+						{% endif %}
+					</div>
+				</div>
+
+				<div class="form-group{% if form.ship_postal_code.errors %} has-error has-feedback{% endif %}">
+					<label class="col-sm-2" for="{{ form.ship_postal_code.id_for_label }}">{% trans form.ship_postal_code.label %}</label>
+					<div class="col-sm-10">
+						<input type="text" class="form-control" name="{{ form.ship_postal_code.html_name }}" id="{{ form.ship_postal_code.id_for_label }}" placeholder="{% trans form.ship_postal_code.label %}" {% if form.ship_postal_code.value %} value="{{ form.ship_postal_code.value }}{% endif %}">
+						{% if form.ship_postal_code.errors %}
+							<span class="glyphicon glyphicon-remove form-control-feedback"></span>
+							<p class="help-block">{{ form.ship_postal_code.errors|join:", " }}</p>
+						{% endif %}
+					</div>
+				</div>
+
+				<div class="form-group{% if form.ship_country.errors %} has-error has-feedback{% endif %}">
+					<label class="col-sm-2" for="{{ form.ship_country.id_for_label }}">{% trans form.ship_country.label %}</label>
+					<div class="col-sm-10">
+						{{ form.ship_country }}
+						{% comment %}
+						<select class="form-control" name="{{ form.ship_country.html_name }}" id="{{ form.ship_country.id_for_label }}">
+							<option value=""></option>
+						{% for x,y in form.ship_country.field.choices %}
+							<option value="{{ x }}"{% if form.ship_country.value = x %} selected="selected"{%endif %}>{{ y }}</option>
+						{% endfor %}
+						</select>
+						{% endcomment %}
+						{% if form.ship_country.errors %}
+							<p class="help-block">{{ form.ship_country.errors|join:", " }}</p>
+						{% endif %}
+					</div>
+				</div>
+			{% comment %}
+			{% endif %}
+			{% endcomment %}
+
+			{% if form.discount.is_hidden %}
+				{{ form.discount }}
+			{% else %}
+				<h2>{% trans "Discounts" %}</h2>
+				<p>In case you have received a discount code, please enter it below. Also you may wish to see if you are eligible for <a href="{% url 'free_order_form' %}">free orders for educators and media</a>.</p>
+				<p>Note that all orders with ESO staff discount are delivered to your ESO office.</p>
+
+				<div class="form-group{% if form.discount.errors %} has-error has-feedback{% endif %}">
+					<label class="col-sm-2" for="{{ form.discount.id_for_label }}">{% trans "Discount code" %}</label>
+					<div class="col-sm-10">
+						<input type="text" class="form-control" name="{{ form.discount.html_name }}" id="{{ form.discount.id_for_label }}" placeholder="{% trans "Discount code" %}" {% if form.discount.value %} value="{{ form.discount.value }}{% endif %}">
+						{% if form.discount.errors %}
+							<span class="glyphicon glyphicon-remove form-control-feedback"></span>
+							<p class="help-block">{{ form.discount.errors|join:", " }}</p>
+						{% endif %}
+					</div>
+				</div>
+			{% endif %}
+
+			{% if sale %}
+				{% include "product/sale_details.html" %}
+			{% endif %}
+
+			<h2>{% trans "Terms & Conditions" %}</h2>
+
+			<div class="form-group{% if form.terms.errors %} has-error has-feedback{% endif %}">
+				<div class="col-sm-12">
+					{{ form.terms }} <label for="{{ form.terms.id_for_label }}">I accept the <a href="{% url 'shop_terms' %}">Terms &amp; Conditions</a></label>
+				</div>
+				{% if form.terms.errors %}
+				<div class="col-sm-12">
+					<p class="help-block">{{ form.terms.errors|join:", " }}</p>
+				</div>
+				{% endif %}
+			</div>
+
+			<div class="form-group">
+				<div class=" col-sm-12 text-center">
+					<button type="submit" class="btn btn-default">{% trans "Continue Checkout" %}</button>
+				</div>
+			</div>
+
+		</form>
+	</div>
+</div>
+{% endblock %}

@@ -1,0 +1,19 @@
+{% extends "base_twocolumn.html" %}
+
+{% block site_title %}{{ object.title }} {% if archive_title %}| {{ archive_title }} {% endif %}| {{ block.super }}{% endblock %}
+
+{% load menus %}
+
+{% block content %}
+{% include description_template %}
+{% endblock %}
+
+{% block rightcolumn %}
+{% include "archives/searchbox.html" %}
+
+{% include admin_template %}
+{% include info_template %}
+{% include "images/embedded_list.html" %}
+{% include "videos/embedded_list.html" %}
+{% include resources_template %}
+{% endblock %}

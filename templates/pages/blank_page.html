@@ -16,7 +16,6 @@
 <meta name="Language" content="en" />
 <meta name="publisher" content="ESO" />
 <meta name="copyright" content="1999-2008 ESO" />
-<meta name="keywords" content="ESO, eso.org, Astronomy, Astrophysics, Astronomie, Suedsternwarte, telescopes, detectors, comets, planets, stars, galaxies, nebulae, universe, NTT, VLT, VLTI, ALMA, E-ELT, La Silla, Paranal, Garching, Chile" />
 
 {% load djangoplicity_translation %}
 {% spaceless %}
@@ -25,18 +24,12 @@
 {% endfor %}
 {% endspaceless %}
 
-<link rel="shortcut icon" href="http://www.eso.org/public/archives/favicon.ico" />
+<!-- <link rel="shortcut icon" href="http://www.eso.org/public/archives/favicon.ico" /> -->
 {% load djangoplicity_utils %}
 <title>{{page.title}} {{page.section.append_title}} | ESO{% if LANGUAGE_CODE != 'en' %} {{ LANGUAGE_CODE|code_to_local_country }}{% endif %}</title>
 
 
 {% load djangoplicity_utils %}
-
-<link href="http://feeds.feedburner.com/EsoTopNews" rel="alternate"  type="application/rss+xml" title="ESO Top News" />
-<link href="http://feeds.feedburner.com/EsoAnnouncements" rel="alternate"  type="application/rss+xml" title="ESO Announcements" />
-<link href="http://feeds.feedburner.com/ESOcast" rel="alternate"  type="application/rss+xml" title="ESOCast" />
-<link href="https://jobs.eso.org/ESOCP370/rss.asp" rel="alternate" type="application/rss+xml" title="Jobs@ESO" />
-<link type="text/css" rel="stylesheet" href="http://fast.fonts.net/cssapi/02c4fda9-c362-4778-8957-ac86ff9054c6.css"/>
 
 <!--[if lt IE 9]>
 	{% compressed_js 'ie8compat' %}

@@ -1,0 +1,82 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block extra_header %}{{block.super}}{% for furl,title in feed_urls %}<link href='{{furl}}' rel="alternate" type="application/rss+xml" title='{{title}}' />{%endfor%}{% if archive_title %}
+	<meta property="og:title" content="{{ archive_title }}" />{% endif %}{% if archive_opengraph_image %}
+	<meta property="og:image" content="{{ archive_opengraph_image }}" />{% endif %}{% if archive_description %}
+	<meta property="og:description" content="{{ archive_description }}" />
+	<meta name="description" content="{{ archive_description }}" />{% endif %}
+{%endblock%}
+
+{% block site_title %}{% if archive_title %}{{archive_title}}{% else %}{{ archive|capfirst }} Archive{%endif%} | {{block.super}}{% endblock %}
+
+{% block archive_search %}
+{% with archive_search_position="outside" %}
+	{% include "archives/searchbox.html" %}
+{% endwith %}
+{% endblock %}
+
+{% block body %}
+
+<div class="row no-page">
+	<div class="col-md-12">
+{% block content %}
+		<h1>{% if archive_title %}{% trans archive_title %}{% else %}{{ archive|capfirst }} {% trans "Archive" %}{% endif %}{% if listview_feed_url %} <a href="{{ listview_feed_url }}" class="listviewrsslink"><span class="fa fa-rss"></span></a>{% endif %}</h1>
+	</div>
+
+	{% if 'products' in request.path %}
+	<div class="col-md-12 media-categories">
+		<ul>
+			<li><a href="/public/products/models3d/"{% if '/products/models3d/' in request.path %} class="selected"{% endif %}>{% trans "3D Models" %}</a></li>
+			<li><a href="/public/products/annualreports/"{% if '/products/annualreports/' in request.path %} class="selected"{% endif %}>{% trans "Annual Reports" %}</a></li>
+			<li><a href="/public/products/books/"{% if '/products/books/' in request.path %} class="selected"{% endif %}>{% trans "Books" %}</a></li>
+			<li><a href="/public/products/apparel/"{% if '/products/apparel/' in request.path %} class="selected"{% endif %}>{% trans "Apparel" %}</a></li>
+			<li><a href="/public/products/applications/"{% if '/products/applications/' in request.path %} class="selected"{% endif %}>{% trans "Apps" %}</a></li>
+			<li><a href="/public/products/brochures/"{% if '/products/brochures/' in request.path %} class="selected"{% endif %}>{% trans "Brochures" %}</a></li>
+			<li><a href="/public/products/bulletins/"{% if '/products/bulletins/' in request.path %} class="selected"{% endif %}>{% trans "Bulletins" %}</a></li>
+			<li><a href="/public/products/calendars/"{% if '/products/calendars/' in request.path %} class="selected"{% endif %}>{% trans "Calendars" %}</a></li>
+			<li><a href="/public/products/capjournals/"{% if '/products/capjournals/' in request.path %} class="selected"{% endif %}>{% trans "CAPjournal" %}</a></li>
+			<li><a href="/public/products/education/"{% if '/products/education/' in request.path %} class="selected"{% endif %}>{% trans "Educational Material" %}</a></li>
+			<li><a href="/public/products/electroniccards/"{% if '/products/electroniccards/' in request.path %} class="selected"{% endif %}>{% trans "Electronic Cards" %}</a></li>
+			<li><a href="/public/products/epublications/"{% if '/products/epublications/' in request.path %} class="selected"{% endif %}>{% trans "ePublications" %}</a></li>
+			<li><a href="/public/products/exhibitions/"{% if '/products/exhibitions/' in request.path %} class="selected"{% endif %}>{% trans "Exhibition Panels" %}</a></li>
+			<li><a href="/public/products/flyers/"{% if '/products/flyers/' in request.path %} class="selected"{% endif %}>{% trans "Flyers" %}</a></li>
+			<li><a href="/public/products/handouts/"{% if '/products/handouts/' in request.path %} class="selected"{% endif %}>{% trans "Handouts" %}</a></li>
+			<li><a href="/public/products/imaxfilms/"{% if '/products/imaxfilms/' in request.path %} class="selected"{% endif %}>{% trans "IMAX Films" %}</a></li>
+			<li><a href="/public/products/logos/"{% if '/products/logos/' in request.path %} class="selected"{% endif %}>{% trans "Logos" %}</a></li>
+			<li><a href="/public/products/maps/"{% if '/products/maps/' in request.path %} class="selected"{% endif %}>{% trans "Maps" %}</a></li>
+			<li><a href="/public/products/media/"{% if '/products/media/' in request.path %} class="selected"{% endif %}>{% trans "Media" %}</a></li>
+			<li><a href="/public/products/merchandise/"{% if '/products/merchandise/' in request.path %} class="selected"{% endif %}>{% trans "Merchandise" %}</a></li>
+			<li><a href="/public/products/messengers/"{% if '/products/messengers/' in request.path %} class="selected"{% endif %}>{% trans "Messenger" %}</a></li>
+			<li><a href="/public/products/minisites/"{% if '/products/minisites/' in request.path %} class="selected"{% endif %}>{% trans "Mini-sites" %}</a></li>
+			<li><a href="/public/products/mountedimages/"{% if '/products/mountedimages/' in request.path %} class="selected"{% endif %}>{% trans "Mounted Images" %}</a></li>
+			<li><a href="/public/products/papermodels/"{% if '/products/papermodels/' in request.path %} class="selected"{% endif %}>{% trans "Paper Models" %}</a></li>
+			<li><a href="/public/products/planetariumshows/"{% if '/products/planetariumshows/' in request.path %} class="selected"{% endif %}>{% trans "Planetarium Shows" %}</a></li>
+			<li><a href="/public/products/postcards/"{% if '/products/postcards/' in request.path %} class="selected"{% endif %}>{% trans "Postcards" %}</a></li>
+			<li><a href="/public/products/print_posters/"{% if '/products/print_posters/' in request.path %} class="selected"{% endif %}>{% trans "Printed Posters" %}</a></li>
+			<li><a href="/public/products/conf_posters/"{% if '/products/conf_posters/' in request.path %} class="selected"{% endif %}>{% trans "Conferences Posters" %}</a></li>
+			<li><a href="/public/products/elec_posters/"{% if '/products/elec_posters/' in request.path %} class="selected"{% endif %}>{% trans "Electronic Posters" %}</a></li>
+			<li><a href="/public/products/presentations/"{% if '/products/presentations/' in request.path %} class="selected"{% endif %}>{% trans "Presentations" %}</a></li>
+			<li><a href="/public/products/presskits/"{% if '/products/presskits/' in request.path %} class="selected"{% endif %}>{% trans "Press Kits" %}</a></li>
+			<li><a href="/public/products/reports/"{% if '/products/reports/' in request.path %} class="selected"{% endif %}>{% trans "Reports" %}</a></li>
+			<li><a href="/public/products/schools/"{% if '/products/schools/' in request.path %} class="selected"{% endif %}>{% trans "Science in School" %}</a></li>
+			<li><a href="/public/products/stationery/"{% if '/products/stationery/' in request.path %} class="selected"{% endif %}>{% trans "Stationery" %}</a></li>
+			<li><a href="/public/products/stickers/"{% if '/products/stickers/' in request.path %} class="selected"{% endif %}>{% trans "Stickers" %}</a></li>
+			<li><a href="/public/products/virtualtours/"{% if '/products/virtualtours/' in request.path %} class="selected"{% endif %}>{% trans "Virtual Tours" %}</a></li>
+		</ul>
+	</div>
+	{% endif %}
+</div>
+
+<div class="row no-page">
+	<div class="col-md-12">
+		{% include index_template %}
+	</div>
+</div>
+
+{% endblock %}
+	</div>
+</div>
+{% endblock %}
+
+{% include 'archives/extra_footer.html' %}

@@ -1,0 +1,22 @@
+{% load i18n %}
+{% spaceless %}
+{% include 'archives/embargo_notice.html' %}
+<h1>{{ object.title }}</h1>
+
+{% if object.resource_medium %}
+<div class="archive-image archive-image-dark{% if not object.zoomable %} popup{% endif %}">
+	{% if object.resource_screen %}
+	<a class="popup" href="{% if object.zoomable %}{{ object.get_absolute_url }}zoomable/{% else %}{{ object.resource_screen.url }}{% endif %}" title="{{object.title|safe}}"/>
+		<img class="img-responsive" src="{{ object.resource_screen.url }}" border="0" alt="{{ object.title|safe }}" />
+	</a>
+	{% else %}
+		<img class="img-responsive" src="{{ object.resource_medium.url }}" border="0" alt="{{ object.title|safe }}" />
+	{% endif %}
+</div>
+{% endif %}
+
+{% if object.headline %}<p>{{ object.headline }}</p>{% endif %}
+<p>{{ object.description|safe }}</p>
+<strong>{% trans "Credit" %}:</strong><div class="credit">{{ object.credit|safe }}</div>
+{% include 'archives/image/extra_footer.html' %}
+{% endspaceless %}
