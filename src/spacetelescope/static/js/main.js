@@ -252,8 +252,9 @@ $(document).ready(function(){
 				}
 			}
 		],
-		prevArrow: '<button type="button" class="slide-prev"><span class="fa fa-angle-left"></span</button>',
-		nextArrow: '<button type="button" class="slide-next"><span class="fa fa-angle-right"></span></button>'
+		prevArrow: '<button type="button" class="frontpage-slide-prev"><span class="fa fa-angle-left"></span</button>',
+		nextArrow: '<button type="button" class="frontpage-slide-next"><span class="fa fa-angle-right"></span></button>',
+		appendArrows: '.announcements .section-navigation'
 	});
 });
 

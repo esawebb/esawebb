@@ -5285,10 +5285,6 @@ body {
       background-color: #101010;
       border: none; }
 
-.sprites-esologo {
-  background-image: url("../sprites/sprites.png");
-  background-repeat: no-repeat; }
-
 #error404-wrapper {
   position: fixed;
   background-image: url("http://www.eso.org/public/archives/images/screen/eso0934a.jpg");
@@ -5364,7 +5360,7 @@ body {
     .navbar-general-wrapper .navbar-general .toplogo {
       position: absolute;
       right: 0;
-      top: 25px; }
+      top: 20px; }
 
 #sitemap ul {
   padding-left: 20px; }
@@ -5458,7 +5454,7 @@ body {
 .jwplayer:hover {
   cursor: pointer; }
 
-.slide-button, #pr-carousel-wrapper #pr-carousel button, #ann-carousel-wrapper #ann-carousel button, .frontpage-section #potw-carousel button, .frontpage-section #highlight-carousel button, .top100 #top100-frontpage-carousel button, #top100-carousel-wrapper #top100-carousel button {
+.slide-button, #pr-carousel-wrapper #pr-carousel button, .frontpage-section #potw-carousel button, .frontpage-section #highlight-carousel button, .top100 #top100-frontpage-carousel button, #top100-carousel-wrapper #top100-carousel button {
   position: absolute;
   top: 0px;
   height: 100%;
@@ -5470,27 +5466,27 @@ body {
   min-width: 50px;
   color: #fff; }
 
-.slide-prev, #pr-carousel-wrapper #pr-carousel .slide-prev, #ann-carousel-wrapper #ann-carousel .slide-prev, .frontpage-section #esocast-carousel .slide-prev, .frontpage-section #potw-carousel .slide-prev, .frontpage-section #highlight-carousel .slide-prev, .top100 #top100-frontpage-carousel .slide-prev, #top100-carousel-wrapper #top100-carousel .slide-prev {
+.slide-prev, #pr-carousel-wrapper #pr-carousel .slide-prev, .frontpage-section #esocast-carousel .slide-prev, .frontpage-section #potw-carousel .slide-prev, .frontpage-section #highlight-carousel .slide-prev, .top100 #top100-frontpage-carousel .slide-prev, #top100-carousel-wrapper #top100-carousel .slide-prev {
   left: 0px;
   background: none;
   font-size: 35px;
   /* opacity: 0.2; */
   /* filter: alpha(opacity=20); */
   /* @include transition(opacity 0.3s);  */ }
-  .slide-prev.slick-disabled, #pr-carousel-wrapper #pr-carousel .slick-disabled.slide-prev, #ann-carousel-wrapper #ann-carousel .slick-disabled.slide-prev, .frontpage-section #esocast-carousel .slick-disabled.slide-prev, .frontpage-section #potw-carousel .slick-disabled.slide-prev, .frontpage-section #highlight-carousel .slick-disabled.slide-prev, .top100 #top100-frontpage-carousel .slick-disabled.slide-prev, #top100-carousel-wrapper #top100-carousel .slick-disabled.slide-prev {
+  .slide-prev.slick-disabled, #pr-carousel-wrapper #pr-carousel .slick-disabled.slide-prev, .frontpage-section #esocast-carousel .slick-disabled.slide-prev, .frontpage-section #potw-carousel .slick-disabled.slide-prev, .frontpage-section #highlight-carousel .slick-disabled.slide-prev, .top100 #top100-frontpage-carousel .slick-disabled.slide-prev, #top100-carousel-wrapper #top100-carousel .slick-disabled.slide-prev {
     display: none !important; }
 
-.slide-next, #pr-carousel-wrapper #pr-carousel .slide-next, #ann-carousel-wrapper #ann-carousel .slide-next, .frontpage-section #esocast-carousel .slide-next, .frontpage-section #potw-carousel .slide-next, .frontpage-section #highlight-carousel .slide-next, .top100 #top100-frontpage-carousel .slide-next, #top100-carousel-wrapper #top100-carousel .slide-next {
+.slide-next, #pr-carousel-wrapper #pr-carousel .slide-next, .frontpage-section #esocast-carousel .slide-next, .frontpage-section #potw-carousel .slide-next, .frontpage-section #highlight-carousel .slide-next, .top100 #top100-frontpage-carousel .slide-next, #top100-carousel-wrapper #top100-carousel .slide-next {
   right: 0px;
   background: none;
   font-size: 35px;
   /* opacity: 0.2; */
   /* filter: alpha(opacity=20); */
   /* @include transition(opacity 0.3s);  */ }
-  .slide-next.slick-disabled, #pr-carousel-wrapper #pr-carousel .slick-disabled.slide-next, #ann-carousel-wrapper #ann-carousel .slick-disabled.slide-next, .frontpage-section #esocast-carousel .slick-disabled.slide-next, .frontpage-section #potw-carousel .slick-disabled.slide-next, .frontpage-section #highlight-carousel .slick-disabled.slide-next, .top100 #top100-frontpage-carousel .slick-disabled.slide-next, #top100-carousel-wrapper #top100-carousel .slick-disabled.slide-next {
+  .slide-next.slick-disabled, #pr-carousel-wrapper #pr-carousel .slick-disabled.slide-next, .frontpage-section #esocast-carousel .slick-disabled.slide-next, .frontpage-section #potw-carousel .slick-disabled.slide-next, .frontpage-section #highlight-carousel .slick-disabled.slide-next, .top100 #top100-frontpage-carousel .slick-disabled.slide-next, #top100-carousel-wrapper #top100-carousel .slick-disabled.slide-next {
     display: none !important; }
 
-.slide-prev-next-hover, #pr-carousel-wrapper:hover .slide-prev, #pr-carousel-wrapper:hover #pr-carousel .slide-prev, #pr-carousel-wrapper:hover #ann-carousel-wrapper #ann-carousel .slide-prev, #ann-carousel-wrapper #ann-carousel #pr-carousel-wrapper:hover .slide-prev, #pr-carousel-wrapper:hover #top100-carousel-wrapper #top100-carousel .slide-prev, #top100-carousel-wrapper #top100-carousel #pr-carousel-wrapper:hover .slide-prev, #pr-carousel-wrapper:hover .slide-next, #pr-carousel-wrapper:hover #pr-carousel .slide-next, #pr-carousel-wrapper:hover #ann-carousel-wrapper #ann-carousel .slide-next, #ann-carousel-wrapper #ann-carousel #pr-carousel-wrapper:hover .slide-next, #pr-carousel-wrapper:hover #top100-carousel-wrapper #top100-carousel .slide-next, #top100-carousel-wrapper #top100-carousel #pr-carousel-wrapper:hover .slide-next, #ann-carousel-wrapper #ann-carousel:hover .slide-prev, #ann-carousel-wrapper #ann-carousel:hover .slide-next, .frontpage-section #esocast-carousel:hover #pr-carousel-wrapper #pr-carousel .slide-prev, #pr-carousel-wrapper #pr-carousel .frontpage-section #esocast-carousel:hover .slide-prev, .frontpage-section #esocast-carousel:hover #ann-carousel-wrapper #ann-carousel .slide-prev, #ann-carousel-wrapper #ann-carousel .frontpage-section #esocast-carousel:hover .slide-prev, .frontpage-section #esocast-carousel:hover .slide-prev, .frontpage-section #esocast-carousel:hover #top100-carousel-wrapper #top100-carousel .slide-prev, #top100-carousel-wrapper #top100-carousel .frontpage-section #esocast-carousel:hover .slide-prev, .frontpage-section #esocast-carousel:hover #pr-carousel-wrapper #pr-carousel .slide-next, #pr-carousel-wrapper #pr-carousel .frontpage-section #esocast-carousel:hover .slide-next, .frontpage-section #esocast-carousel:hover #ann-carousel-wrapper #ann-carousel .slide-next, #ann-carousel-wrapper #ann-carousel .frontpage-section #esocast-carousel:hover .slide-next, .frontpage-section #esocast-carousel:hover .slide-next, .frontpage-section #esocast-carousel:hover #top100-carousel-wrapper #top100-carousel .slide-next, #top100-carousel-wrapper #top100-carousel .frontpage-section #esocast-carousel:hover .slide-next, .frontpage-section #potw-carousel:hover #pr-carousel-wrapper #pr-carousel .slide-prev, #pr-carousel-wrapper #pr-carousel .frontpage-section #potw-carousel:hover .slide-prev, .frontpage-section #potw-carousel:hover #ann-carousel-wrapper #ann-carousel .slide-prev, #ann-carousel-wrapper #ann-carousel .frontpage-section #potw-carousel:hover .slide-prev, .frontpage-section #potw-carousel:hover .slide-prev, .frontpage-section #potw-carousel:hover #top100-carousel-wrapper #top100-carousel .slide-prev, #top100-carousel-wrapper #top100-carousel .frontpage-section #potw-carousel:hover .slide-prev, .frontpage-section #potw-carousel:hover #pr-carousel-wrapper #pr-carousel .slide-next, #pr-carousel-wrapper #pr-carousel .frontpage-section #potw-carousel:hover .slide-next, .frontpage-section #potw-carousel:hover #ann-carousel-wrapper #ann-carousel .slide-next, #ann-carousel-wrapper #ann-carousel .frontpage-section #potw-carousel:hover .slide-next, .frontpage-section #potw-carousel:hover .slide-next, .frontpage-section #potw-carousel:hover #top100-carousel-wrapper #top100-carousel .slide-next, #top100-carousel-wrapper #top100-carousel .frontpage-section #potw-carousel:hover .slide-next, .frontpage-section #highlight-carousel:hover #pr-carousel-wrapper #pr-carousel .slide-prev, #pr-carousel-wrapper #pr-carousel .frontpage-section #highlight-carousel:hover .slide-prev, .frontpage-section #highlight-carousel:hover #ann-carousel-wrapper #ann-carousel .slide-prev, #ann-carousel-wrapper #ann-carousel .frontpage-section #highlight-carousel:hover .slide-prev, .frontpage-section #highlight-carousel:hover .slide-prev, .frontpage-section #highlight-carousel:hover #top100-carousel-wrapper #top100-carousel .slide-prev, #top100-carousel-wrapper #top100-carousel .frontpage-section #highlight-carousel:hover .slide-prev, .frontpage-section #highlight-carousel:hover #pr-carousel-wrapper #pr-carousel .slide-next, #pr-carousel-wrapper #pr-carousel .frontpage-section #highlight-carousel:hover .slide-next, .frontpage-section #highlight-carousel:hover #ann-carousel-wrapper #ann-carousel .slide-next, #ann-carousel-wrapper #ann-carousel .frontpage-section #highlight-carousel:hover .slide-next, .frontpage-section #highlight-carousel:hover .slide-next, .frontpage-section #highlight-carousel:hover #top100-carousel-wrapper #top100-carousel .slide-next, #top100-carousel-wrapper #top100-carousel .frontpage-section #highlight-carousel:hover .slide-next, .top100 #top100-frontpage-carousel:hover #pr-carousel-wrapper #pr-carousel .slide-prev, #pr-carousel-wrapper #pr-carousel .top100 #top100-frontpage-carousel:hover .slide-prev, .top100 #top100-frontpage-carousel:hover #ann-carousel-wrapper #ann-carousel .slide-prev, #ann-carousel-wrapper #ann-carousel .top100 #top100-frontpage-carousel:hover .slide-prev, .top100 #top100-frontpage-carousel:hover .slide-prev, .top100 #top100-frontpage-carousel:hover #top100-carousel-wrapper #top100-carousel .slide-prev, #top100-carousel-wrapper #top100-carousel .top100 #top100-frontpage-carousel:hover .slide-prev, .top100 #top100-frontpage-carousel:hover #pr-carousel-wrapper #pr-carousel .slide-next, #pr-carousel-wrapper #pr-carousel .top100 #top100-frontpage-carousel:hover .slide-next, .top100 #top100-frontpage-carousel:hover #ann-carousel-wrapper #ann-carousel .slide-next, #ann-carousel-wrapper #ann-carousel .top100 #top100-frontpage-carousel:hover .slide-next, .top100 #top100-frontpage-carousel:hover .slide-next, .top100 #top100-frontpage-carousel:hover #top100-carousel-wrapper #top100-carousel .slide-next, #top100-carousel-wrapper #top100-carousel .top100 #top100-frontpage-carousel:hover .slide-next, #top100-carousel-wrapper #top100-carousel:hover .slide-prev, #top100-carousel-wrapper #top100-carousel:hover .slide-next {
+.slide-prev-next-hover, #pr-carousel-wrapper:hover .slide-prev, #pr-carousel-wrapper:hover #pr-carousel .slide-prev, #pr-carousel-wrapper:hover #top100-carousel-wrapper #top100-carousel .slide-prev, #top100-carousel-wrapper #top100-carousel #pr-carousel-wrapper:hover .slide-prev, #pr-carousel-wrapper:hover .slide-next, #pr-carousel-wrapper:hover #pr-carousel .slide-next, #pr-carousel-wrapper:hover #top100-carousel-wrapper #top100-carousel .slide-next, #top100-carousel-wrapper #top100-carousel #pr-carousel-wrapper:hover .slide-next, .frontpage-section #esocast-carousel:hover #pr-carousel-wrapper #pr-carousel .slide-prev, #pr-carousel-wrapper #pr-carousel .frontpage-section #esocast-carousel:hover .slide-prev, .frontpage-section #esocast-carousel:hover .slide-prev, .frontpage-section #esocast-carousel:hover #top100-carousel-wrapper #top100-carousel .slide-prev, #top100-carousel-wrapper #top100-carousel .frontpage-section #esocast-carousel:hover .slide-prev, .frontpage-section #esocast-carousel:hover #pr-carousel-wrapper #pr-carousel .slide-next, #pr-carousel-wrapper #pr-carousel .frontpage-section #esocast-carousel:hover .slide-next, .frontpage-section #esocast-carousel:hover .slide-next, .frontpage-section #esocast-carousel:hover #top100-carousel-wrapper #top100-carousel .slide-next, #top100-carousel-wrapper #top100-carousel .frontpage-section #esocast-carousel:hover .slide-next, .frontpage-section #potw-carousel:hover #pr-carousel-wrapper #pr-carousel .slide-prev, #pr-carousel-wrapper #pr-carousel .frontpage-section #potw-carousel:hover .slide-prev, .frontpage-section #potw-carousel:hover .slide-prev, .frontpage-section #potw-carousel:hover #top100-carousel-wrapper #top100-carousel .slide-prev, #top100-carousel-wrapper #top100-carousel .frontpage-section #potw-carousel:hover .slide-prev, .frontpage-section #potw-carousel:hover #pr-carousel-wrapper #pr-carousel .slide-next, #pr-carousel-wrapper #pr-carousel .frontpage-section #potw-carousel:hover .slide-next, .frontpage-section #potw-carousel:hover .slide-next, .frontpage-section #potw-carousel:hover #top100-carousel-wrapper #top100-carousel .slide-next, #top100-carousel-wrapper #top100-carousel .frontpage-section #potw-carousel:hover .slide-next, .frontpage-section #highlight-carousel:hover #pr-carousel-wrapper #pr-carousel .slide-prev, #pr-carousel-wrapper #pr-carousel .frontpage-section #highlight-carousel:hover .slide-prev, .frontpage-section #highlight-carousel:hover .slide-prev, .frontpage-section #highlight-carousel:hover #top100-carousel-wrapper #top100-carousel .slide-prev, #top100-carousel-wrapper #top100-carousel .frontpage-section #highlight-carousel:hover .slide-prev, .frontpage-section #highlight-carousel:hover #pr-carousel-wrapper #pr-carousel .slide-next, #pr-carousel-wrapper #pr-carousel .frontpage-section #highlight-carousel:hover .slide-next, .frontpage-section #highlight-carousel:hover .slide-next, .frontpage-section #highlight-carousel:hover #top100-carousel-wrapper #top100-carousel .slide-next, #top100-carousel-wrapper #top100-carousel .frontpage-section #highlight-carousel:hover .slide-next, .top100 #top100-frontpage-carousel:hover #pr-carousel-wrapper #pr-carousel .slide-prev, #pr-carousel-wrapper #pr-carousel .top100 #top100-frontpage-carousel:hover .slide-prev, .top100 #top100-frontpage-carousel:hover .slide-prev, .top100 #top100-frontpage-carousel:hover #top100-carousel-wrapper #top100-carousel .slide-prev, #top100-carousel-wrapper #top100-carousel .top100 #top100-frontpage-carousel:hover .slide-prev, .top100 #top100-frontpage-carousel:hover #pr-carousel-wrapper #pr-carousel .slide-next, #pr-carousel-wrapper #pr-carousel .top100 #top100-frontpage-carousel:hover .slide-next, .top100 #top100-frontpage-carousel:hover .slide-next, .top100 #top100-frontpage-carousel:hover #top100-carousel-wrapper #top100-carousel .slide-next, #top100-carousel-wrapper #top100-carousel .top100 #top100-frontpage-carousel:hover .slide-next, #top100-carousel-wrapper #top100-carousel:hover .slide-prev, #top100-carousel-wrapper #top100-carousel:hover .slide-next {
   /* opacity: 1; */
   /* filter: alpha(opacity=100); */
   /* @include transition(opacity 0.3s);  */ }
@@ -5707,22 +5703,50 @@ body {
 @media print {
   .navbar-general-wrapper, .main-menu-wrapper {
     display: none; } }
-.frontpage-title, .announcements .section-title, .frontpage-section .section-title, .frontpage-section .highlights .section-title, .top100 .section-title {
-  position: absolute;
-  z-index: 2;
-  margin: 1px 0 0 1px;
+.frontpage-title, .announcements .section-header .section-title, .frontpage-section .section-title, .frontpage-section .highlights .section-title, .top100 .section-title {
   text-transform: uppercase;
-  font-size: 12px;
-  font-weight: 600; }
-  .frontpage-title a, .announcements .section-title a, .frontpage-section .section-title a, .frontpage-section .highlights .section-title a, .top100 .section-title a {
+  font-size: 16px;
+  font-weight: 600;
+  display: inline-block; }
+  .frontpage-title a, .announcements .section-header .section-title a, .frontpage-section .section-title a, .frontpage-section .highlights .section-title a, .top100 .section-title a {
     text-decoration: none;
-    display: block;
-    color: #fff;
-    background-color: rgba(0, 129, 201, 0.8);
-    padding: 4px 8px; }
-    .frontpage-title a:hover, .announcements .section-title a:hover, .frontpage-section .section-title a:hover, .top100 .section-title a:hover {
-      background-color: #fff;
-      color: #3f9efa; }
+    color: #3f9efa; }
+    .frontpage-title a:hover, .announcements .section-header .section-title a:hover, .frontpage-section .section-title a:hover, .top100 .section-title a:hover {
+      color: #3f9efa;
+      text-decoration: underline; }
+
+.section-navigation {
+  color: #3f9efa;
+  font-weight: bold; }
+  .section-navigation a {
+    margin-right: 5px; }
+
+.frontpage-slide-button, .announcements .section-header .section-navigation button {
+  border: none;
+  background-color: #3f9efa;
+  border-radius: 50%;
+  color: #fff;
+  font-size: 15px;
+  width: 25px;
+  height: 25px;
+  margin-left: 5px; }
+  .frontpage-slide-button:focus, .announcements .section-header .section-navigation button:focus {
+    outline: none; }
+  .frontpage-slide-button span, .announcements .section-header .section-navigation button span {
+    font-size: 20px; }
+
+.frontpage-slide-prev {
+  border: none; }
+  .frontpage-slide-prev span {
+    margin-left: -2px; }
+
+.frontpage-slide-next {
+  border: none; }
+  .frontpage-slide-next span {
+    margin-right: -2px; }
+
+.section-navigation {
+  float: right; }
 
 .frontpage-description:hover, .frontpage-section #esocast-carousel .esocast-description:hover, .frontpage-section #potw-carousel .potw-description:hover, .top100 #top100-frontpage-carousel .top100-description:hover {
   background-color: #3f9efa;
@@ -5850,6 +5874,8 @@ body {
 
 .announcements {
   margin-top: 20px; }
+  .announcements .section-header {
+    padding-bottom: 10px; }
 
 #ann-carousel-wrapper {
   overflow: hidden; }
@@ -5862,6 +5888,8 @@ body {
       margin: 0 10px;
       font-size: 13px;
       border: 1px solid gainsboro; }
+      #ann-carousel-wrapper #ann-carousel .slide:hover {
+        border: 1px solid #3f9efa; }
       #ann-carousel-wrapper #ann-carousel .slide img {
         display: block;
         width: 100%;
@@ -5877,6 +5905,12 @@ body {
         #ann-carousel-wrapper #ann-carousel .slide .ann-description .date {
           color: #999;
           margin-top: 5px; }
+      #ann-carousel-wrapper #ann-carousel .slide .readmore {
+        padding: 10px;
+        color: #3f9efa;
+        text-align: right; }
+        #ann-carousel-wrapper #ann-carousel .slide .readmore::before {
+          content: '[Read More]'; }
 
 .frontpage-section .highlights .section-title {
   color: #fff;

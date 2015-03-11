@@ -42,6 +42,46 @@
 {% if announcements %}
 <div class="row announcements">
 	<div class="col-md-12">
+		<div class="section-header">
+			<div class="section-title">
+				<a href="{% url "announcements_defaultquery" %}">{% trans "Announcements" %}</a>
+			</div>
+			<div class="section-navigation">
+				<a href="{% url "announcements_defaultquery" %}">{% trans "View All" %}</a>
+				<a href="{% url 'announcements_feed' %}"><span class="fa fa-rss"></span></a>
+			</div>
+		</div>
+		<div id="ann-carousel-wrapper">
+			<div id="ann-carousel">
+				{% for announcement in announcements %}
+				<div class="slide">
+					<a href="{{ announcement.get_absolute_url }}">
+						<div class="ann-description">
+							<div class="title">{{ announcement.title }}</div>
+							<div class="date">{{ announcement.release_date|date:"j N Y" }} — {{ announcement.id }}</div>
+						</div>
+						<img draggable="false" data-lazy="{{ announcement.main_visual.resource_thumb350x.url }}" alt="{{ announcement.main_visual.title }}">
+						<div class="readmore"></div>
+					</a>
+				</div> <!-- slide -->
+				{% endfor %}
+			</div> <!-- ann-carousel -->
+		</div> <!-- ann-carousel-wrapper -->
+	</div>
+</div> <!-- announcements -->
+{% endif %}
+
+</div> <!-- #body -->
+
+{% endblock content_area %}
+
+{% block extra_scripts %}
+<script type="text/javascript">
+
+$(document).ready(function(){                                                   
+	{% comment %}
+	Set hover target on pr-description, this cannot be done fully in CSS         
+		</div>
 		<div id="ann-carousel-wrapper">
 			<div id="ann-carousel">
 				{% for announcement in announcements %}

@@ -121,13 +121,6 @@ body {
 	}
 }
 
-.sprites-esologo {
-	// IE doesn't seem to catch the following rules for sprites.css
-	// so we explicity set them here
-	background-image: url('../sprites/sprites.png');
-	background-repeat: no-repeat;
-}
-
 #error404-wrapper {
 	position: fixed;
 	background-image: url('http://www.eso.org/public/archives/images/screen/eso0934a.jpg');
@@ -237,7 +230,7 @@ body {
 		.toplogo {
 			position: absolute;
 			right: 0;
-			top: 25px;
+			top: 20px;
 		}
 	}
 }
