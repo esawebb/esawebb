@@ -42,16 +42,14 @@
 {% if announcements %}
 <div class="row announcements">
 	<div class="col-md-12">
-		<div class="section-header">
-			<div class="section-title">
-				<a href="{% url "announcements_defaultquery" %}">{% trans "Announcements" %}</a>
-			</div>
-			<div class="section-navigation">
-				<a href="{% url "announcements_defaultquery" %}">{% trans "View All" %}</a>
-				<a href="{% url 'announcements_feed' %}"><span class="fa fa-rss"></span></a>
-			</div>
-		</div>
 		<div id="ann-carousel-wrapper">
+			<div class="section-header">
+				<div class="section-title">
+					<a href="{% url 'announcements_defaultquery' %}">{% trans 'Announcements' %}</a>
+				</div>
+				<div class="section-navigation">
+				</div>
+			</div>
 			<div id="ann-carousel">
 				{% for announcement in announcements %}
 				<div class="slide">
@@ -70,6 +68,57 @@
 	</div>
 </div> <!-- announcements -->
 {% endif %}
+
+<div class="row frontpage-section">
+	{% if hubblecasts %}
+	<div class="col-md-6">
+		<div id="hubblecast-carousel-wrapper">
+			<div class="section-header">
+				<div class="section-title">
+					<a href="{% url 'videos_query_category' 'hubblecast' %}">{% trans "Hubblecast" %}</a>
+				</div>
+				<div class="section-navigation">
+				</div>
+			</div>
+			<div id="hubblecast-carousel">
+				{% embedvideo_subs hubblecasts.0 'medium_podcast,h264' 'hd_and_apple,hd720p_screen,dome_preview' '' hubblecasts.0.videosubtitle_set.all 0 %}
+				<a href="{{ hubblecasts.0.get_absolute_url }}">
+				<div class="hubblecast-description">
+						<div class="date">{{ hubblecasts.0.release_date|datetime:"DATE" }} — {{ hubblecasts.0.id }}</div>
+						<div class="title">{{ hubblecasts.0.title }}</div>
+				</div>
+				</a>
+			</div> <!-- hubblecast-carousel -->
+	</div>
+	</div>
+	{% endif %}
+	{% if potws %}
+	<div class="col-md-6">
+		<div id="potw-carousel-wrapper">
+			<div class="section-header">
+				<div class="section-title">
+					<a href="{% url 'potw_defaultquery' %}">{% trans "Picture of the Week" %}</a>
+				</div>
+				<div class="section-navigation">
+				</div>
+			</div>
+			<div id="potw-carousel">
+				{% for potw in potws %}
+				<div class="slide">
+					<a href="{{ potw.get_absolute_url }}">
+						<img draggable="false" data-lazy="{{ potw.visual.resource_screen640.url }}" class="img-responsive" alt="{{ potw.visual.title }}">
+						<div class="potw-description">
+							<div class="date">{{ potw.release_date|datetime:"DATE" }} — {{ potw.id }}</div>
+							<div class="title">{{ potw.visual.title }}</div>
+						</div>
+					</a>
+				</div> <!-- slide -->
+				{% endfor %}
+			</div> <!-- potw-carousel -->
+	</div>
+	</div>
+	{% endif %}
+</div>
 
 </div> <!-- #body -->
 

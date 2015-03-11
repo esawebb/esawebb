@@ -17,16 +17,23 @@
 	}
 }
 
-.section-navigation {
-	color: $hubble-blue;
-	font-weight: bold;
+.section-header {
+	padding: 10px 20px;
 
-	a {
-		margin-right: 5px;
+	.section-title {
+		@extend .frontpage-title;
+	}
+
+	.section-navigation {
+		color: $hubble-blue;
+
+		a {
+			margin-right: 5px;
+		}
 	}
 }
 
-.frontpage-slide-button {
+.frontpage-slide-prev, .frontpage-slide-next {
 	border: none;
 	background-color: $hubble-blue;
 	border-radius: 50%;
@@ -38,6 +45,11 @@
 
 	&:focus {
 		outline: none;
+	}
+
+	&.slick-disabled {
+		color: #999;
+		background: none;
 	}
 
 	span {
@@ -78,14 +90,12 @@
 	}
 
 	.date {
-		padding: 8px;
-		padding-bottom: 0;
+		padding: 10px 20px 0;
 		color: $hubble-blue;
 	}
 
 	.title {
-		padding: 8px;
-		padding-top: 0;
+		padding: 0 20px 10px;
 		line-height: 16px;
 		/* white-space: nowrap; */
 		overflow: hidden;
@@ -157,7 +167,7 @@
 					top: 50%;
 					@include transform(translateY(-50%));
 
-					@include transition(opacity 0.2s linear); 
+					@include transition(opacity 0.2s linear);
 
 					// Workaround for bug with Chrome where the image jumps by
 					// a few pixels onhover:
@@ -166,7 +176,7 @@
 					&.hover {
 						opacity: 0.5 !important;  // Important to compensate for the slick loadin opacity
 						filter: alpha(opacity=50) !important;
-						@include transition(opacity 0.2s linear); 
+						@include transition(opacity 0.2s linear);
 					}
 				}
 			}
@@ -201,7 +211,7 @@
 
 						.pr-extra {
 							max-height: 200px;
-							@include transition(max-height 0.2s); 
+							@include transition(max-height 0.2s);
 						}
 					}
 
@@ -213,7 +223,7 @@
 
 					.pr-extra {
 						max-height: 0;
-						@include transition(max-height 0.2s); 
+						@include transition(max-height 0.2s);
 						overflow: hidden;
 
 						.pr-headline {
@@ -261,17 +271,8 @@
 	margin-top: $frontpage-row-top-margin;
 
 	.section-header {
+		padding: 0;
 		padding-bottom: 10px;
-
-		.section-title {
-			@extend .frontpage-title;
-		}
-
-		.section-navigation {
-			button {
-				@extend .frontpage-slide-button;
-			}
-		}
 	}
 }
 
@@ -352,93 +353,96 @@
 	& > div {
 		margin-top: $frontpage-row-top-margin;
 	}
-	
-	#esocast-carousel {
-		background-color: #fff;
-		border: 1px solid $border-color;
 
-		// The jwplayer somehow adds a few pixels, so we cap the max-height
-		// when displayed in two columns
-		@media (min-width: 992px) {
-			max-height: 313px;
-		}
+	#hubblecast-carousel-wrapper {
+		border: 1px solid $border-grey;
 
-		.slide-prev {
-			@extend .slide-prev;
-		}
-
-		.slide-next {
-			@extend .slide-next;
-		}
-
-		a {
-			color: $text-color;
-			text-decoration: none;
-		}
-
-		&:hover {
-			.slide-prev, .slide-next {
-				@extend .slide-prev-next-hover;
-			}
-		}
-
-		.esocast-description {
-			@extend .frontpage-description;
-			// The jwplayer somehow adds a few pixels, so we move the description
-			// up by a few pixles
+		#hubblecast-carousel {
+			// The jwplayer somehow adds a few pixels, so we cap the max-height
+			// when displayed in two columns
 			@media (min-width: 992px) {
-				margin-top: -6px;
+				max-height: 313px;
 			}
-		}
-	}
 
-	#potw-carousel {
-		background-color: #fff;
-		border: 1px solid $border-color;
-
-		&:hover {
-			.potw-description {
-				@extend .frontpage-description-hover;
+			.slide-prev {
+				@extend .slide-prev;
 			}
-		}
 
-		&.slick-initialized .slide {
-			visibility: visible;
-		}
-
-		button {
-			@extend .slide-button;
-		}
-
-		.slide {
-			visibility: hidden; // slides are made visible by JS
+			.slide-next {
+				@extend .slide-next;
+			}
 
 			a {
 				color: $text-color;
 				text-decoration: none;
 			}
-		}
 
-		.slide-prev {
-			@extend .slide-prev;
-		}
+			&:hover {
+				.slide-prev, .slide-next {
+					@extend .slide-prev-next-hover;
+				}
+			}
 
-		.slide-next {
-			@extend .slide-next;
-		}
-
-		&:hover {
-			.slide-prev, .slide-next {
-				@extend .slide-prev-next-hover;
+			.hubblecast-description {
+				@extend .frontpage-description;
+				// The jwplayer somehow adds a few pixels, so we move the description
+				// up by a few pixles
+				@media (min-width: 992px) {
+					margin-top: -6px;
+				}
 			}
 		}
+	}
 
-		img {
-			width: 100%;
-		}
+	#potw-carousel-wrapper {
+		border: 1px solid $border-grey;
 
-		.potw-description {
-			@extend .frontpage-description;
+		#potw-carousel {
+
+			&:hover {
+				.potw-description {
+					@extend .frontpage-description-hover;
+				}
+			}
+
+			&.slick-initialized .slide {
+				visibility: visible;
+			}
+
+			button {
+				@extend .slide-button;
+			}
+
+			.slide {
+				visibility: hidden; // slides are made visible by JS
+
+				a {
+					color: $text-color;
+					text-decoration: none;
+				}
+			}
+
+			.slide-prev {
+				@extend .slide-prev;
+			}
+
+			.slide-next {
+				@extend .slide-next;
+			}
+
+			&:hover {
+				.slide-prev, .slide-next {
+					@extend .slide-prev-next-hover;
+				}
+			}
+
+			img {
+				width: 100%;
+			}
+
+			.potw-description {
+				@extend .frontpage-description;
+			}
 		}
 	}
 
@@ -545,7 +549,7 @@
 	.section-title {
 		@extend .frontpage-title;
 	}
-	
+
 	#top100-frontpage-carousel {
 		background-color: #fff;
 		border: 1px solid $border-color;

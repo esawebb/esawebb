@@ -259,27 +259,28 @@ $(document).ready(function(){
 });
 
 
-// // Prepare POTW carousel
+// Prepare POTW carousel
+$(document).ready(function(){
+	$('#potw-carousel').slick({
+		infinite: false,
+		lazyLoad: 'ondemand',
+		prevArrow: '<button type="button" class="frontpage-slide-prev"><span class="fa fa-angle-left"></span</button>',
+		nextArrow: '<button type="button" class="frontpage-slide-next"><span class="fa fa-angle-right"></span></button>',
+		appendArrows: '#potw-carousel-wrapper .section-navigation'
+	});
+});
+
+
+// Prepare Hubblecast carousel
 // $(document).ready(function(){
-	// $('#potw-carousel').slick({
+	// $('#esocast-carousel').slick({
 		// infinite: false,
-		// lazyLoad: 'ondemand',
-		// prevArrow: '<button type="button" class="slide-prev"><span class="fa fa-angle-left"></span</button>',
-		// nextArrow: '<button type="button" class="slide-next"><span class="fa fa-angle-right"></span></button>'
+		// lazyLoad: 'progressive',
+		// prevArrow: '<button type="button" class="frontpage-slide-prev"><span class="fa fa-angle-left"></span</button>',
+		// nextArrow: '<button type="button" class="frontpage-slide-next"><span class="fa fa-angle-right"></span></button>',
+		// appendArrows: '#huublecast-carousel-wrapper .section-navigation'
 	// });
 // });
-
-
-// // Prepare ESOCast carousel
-// // $(document).ready(function(){
-	// // $('#esocast-carousel').slick({
-		// // infinite: false,
-		// // lazyLoad: 'progressive',
-		// // prevArrow: '<button type="button" class="slide-prev"><span class="fa
-		// // fa-angle-left"></span</button>',
-		// // nextArrow: '<button type="button" class="slide-next"><span class="fa fa-angle-right"></span></button>'
-	// // });
-// // });
 
 
 // // Prepare Highlights carousel
