@@ -222,40 +222,40 @@ $(document).ready(function(){
 	});
 });
 
-// // Prepare Ann carousel
-// $(document).ready(function(){
-	// $('#ann-carousel').slick({
-		// infinite: false,
-		// lazyLoad: 'ondemand',
-		// slidesToShow: 4,
-		// slidesToScroll: 4,
-		// responsive: [
-			// {
-				// breakpoint: 970,
-				// settings: {
-					// slidesToShow: 3,
-					// slidesToScroll: 3
-				// }
-			// },
-			// {
-				// breakpoint: 750,
-				// settings: {
-					// slidesToShow: 2,
-					// slidesToScroll: 2
-				// }
-			// },
-			// {
-				// breakpoint: 600,
-				// settings: {
-					// slidesToShow: 1,
-					// slidesToScroll: 1
-				// }
-			// }
-		// ],
-		// prevArrow: '<button type="button" class="slide-prev"><span class="fa fa-angle-left"></span</button>',
-		// nextArrow: '<button type="button" class="slide-next"><span class="fa fa-angle-right"></span></button>'
-	// });
-// });
+// Prepare Ann carousel
+$(document).ready(function(){
+	$('#ann-carousel').slick({
+		infinite: false,
+		lazyLoad: 'ondemand',
+		slidesToShow: 4,
+		slidesToScroll: 4,
+		responsive: [
+			{
+				breakpoint: 970,
+				settings: {
+					slidesToShow: 3,
+					slidesToScroll: 3
+				}
+			},
+			{
+				breakpoint: 750,
+				settings: {
+					slidesToShow: 2,
+					slidesToScroll: 2
+				}
+			},
+			{
+				breakpoint: 600,
+				settings: {
+					slidesToShow: 1,
+					slidesToScroll: 1
+				}
+			}
+		],
+		prevArrow: '<button type="button" class="slide-prev"><span class="fa fa-angle-left"></span</button>',
+		nextArrow: '<button type="button" class="slide-next"><span class="fa fa-angle-right"></span></button>'
+	});
+});
 
 
 // // Prepare POTW carousel

@@ -2,6 +2,7 @@
 
 {% load djangoplicity_datetime %}
 {% load media_video %}
+{% load i18n %} 
 
 {% block extra_header %}
 	<meta property="og:title" content="ESO — The European Southern Observatory" />
@@ -37,6 +38,29 @@
 </div> <!-- pr-carousel-wrapper -->
 
 <div class="container" id="body">
+
+{% if announcements %}
+<div class="row announcements">
+	<div class="col-md-12">
+		<div id="ann-carousel-wrapper">
+			<div id="ann-carousel">
+				{% for announcement in announcements %}
+				<div class="slide">
+					<a href="{{ announcement.get_absolute_url }}">
+						<div class="ann-description">
+							<div class="title">{{ announcement.title }}</div>
+							<div class="date">{{ announcement.release_date|date:"j N Y" }} — {{ announcement.id }}</div>
+						</div>
+						<img draggable="false" data-lazy="{{ announcement.main_visual.resource_thumb350x.url }}" alt="{{ announcement.main_visual.title }}">
+					</a>
+				</div> <!-- slide -->
+				{% endfor %}
+			</div> <!-- ann-carousel -->
+		</div> <!-- ann-carousel-wrapper -->
+	</div>
+</div> <!-- announcements -->
+{% endif %}
+
 </div> <!-- #body -->
 
 {% endblock content_area %}
@@ -54,10 +78,18 @@ $(document).ready(function(){
 		$(this).parents('.pr-content').prev('img').toggleClass('hover');	
 	});
 
+	// Set the announcements titles to the same heights:
+	var annTitleSelector = '#ann-carousel .ann-description .title';
+	var maxAnnHeight = Math.max.apply(null, $(annTitleSelector).map(function ()
+	{
+		return $(this).height();
+	}).get());
+	$(annTitleSelector).height(maxAnnHeight);
+
 	// Setup hubblecasts video
-{% if hubblecasts.0 %}
-	setupVideoPlayer('{{ hubblecasts.0.id }}');
-{% endif %}
+	{% if hubblecasts.0 %}
+		setupVideoPlayer('{{ hubblecasts.0.id }}');
+	{% endif %}
 });                                                                             
             
 </script>

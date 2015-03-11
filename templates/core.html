@@ -16,7 +16,7 @@
 	<link href="http://www.spacetelescope.org/rss/feed.xml" rel="alternate" type="application/rss+xml" title="Hubble Space Telescope News">
 	<link type="text/css" rel="stylesheet" href="//fast.fonts.net/cssapi/02c4fda9-c362-4778-8957-ac86ff9054c6.css"/>
 
-	<title>{% block site_title %}ESO Supernova{% endblock %}</title>
+	<title>{% block site_title %}ESA/Hubble{% endblock %}</title>
 {% load compressed %}
 {% compressed_css 'main' %}
 	<!--[if IE]><link rel="shortcut icon" href="/static/web/icons/favicon.ico"><![endif]-->
@@ -41,6 +41,7 @@
 			<a href="/sitemap/">Site Map</a>
 			<a href="/search/"><span class="fa fa-search"></span></a>
 		</div>
+		<div class="sprites-esa-logo inlinesprite toplogo" title="ESA/Hubble"></div>
 		{% load menus %}
 		{% init_menu 'Main Menu' as main_menu %}
 		<div class="main-menu">

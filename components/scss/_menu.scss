@@ -1,15 +1,5 @@
 // Main menu navbar
 @media (min-width: $mobile-breakpoint) {
-	/* .main-menu-wrapper { */
-		/* position: fixed; */
-		/* left: 0; */
-		/* right: 0; */
-		/* z-index: 1030; */
-		/* top: 40px; */
-		/* background-color: #fff; */
-		/* border: 0; */
-		/* box-shadow: 0 1px 4px rgba(0, 0, 0, .2); */
-
 	.main-menu {
 		max-width: $content-width;
 		margin-left: auto;
@@ -249,78 +239,73 @@
 }
 
 @media (max-width: $mobile-breakpoint - 1) {
-	.main-menu-wrapper {
-		margin-top: 40px;
-		font-size: 18px;
+	.main-menu {
+		.menu-trigger {
+			float: left;
+			border: 0;
+			background-color: transparent;
+			outline: 0;
+			padding: $grid-gutter-width / 2;
+		}
 
-		.main-menu {
-			.menu-trigger {
-				float: left;
-				border: 0;
-				background-color: transparent;
-				outline: 0;
-				padding: $grid-gutter-width / 2;
+		.desktop-children {
+			display: none;
+		}
+
+		.mobile-children {
+			float: right;
+			display: inline-block;
+			padding: 5px $grid-gutter-width;
+			cursor: pointer;
+		}
+
+		ul {
+			background-color: $hubble-menu-bg;
+			padding: 0;
+			margin: 0;
+			max-height: 0;
+			@include transition(max-height 0.3s); 
+			overflow: hidden;
+
+			&.open-menu {
+				max-height: 3000px;
 			}
+		}
 
-			.desktop-children {
-				display: none;
-			}
+		li {
+			list-style: none;
+			border-top: 1px solid $hubble-menu-separator-color;
 
-			.mobile-children {
-				float: right;
+			a {
+				padding: 5px 0 5px $grid-gutter-width;
 				display: inline-block;
-				padding: 5px $grid-gutter-width;
-				cursor: pointer;
 			}
 
-			ul {
-				background-color: $hubble-menu-bg;
-				padding: 0;
-				margin: 0;
-				max-height: 0;
-				@include transition(max-height 0.3s); 
-				overflow: hidden;
+			&.current {
+				background-color: #fff;
 
-				&.open-menu {
-					max-height: 3000px;
-				}
-			}
+				&.current-leaf {
+					background-color: $hubble-blue;
 
-			li {
-				list-style: none;
-				border-top: 1px solid $hubble-menu-separator-color;
-
-				a {
-					padding: 5px 0 5px $grid-gutter-width;
-					display: inline-block;
-				}
-
-				&.current {
-					background-color: #fff;
-
-					&.current-leaf {
-						background-color: $hubble-blue;
-
-						> a {
-							color: #fff;
-						}
+					> a {
+						color: #fff;
 					}
 				}
 			}
+		}
 
-			.level0 {
-				.level0-children-arrows {
-					display: none
-				}
+		.level0 {
+			.level0-children-arrows {
+				display: none
 			}
+		}
 
-			.level1 > ul, .sublevel {
-				padding-left: $grid-gutter-width;
-			}
+		.level1 > ul, .sublevel {
+			padding-left: $grid-gutter-width;
+		}
 
-			.sublevel {
-				display: block;
-			}
+		.sublevel {
+			display: block;
 		}
 	}
 }

@@ -219,16 +219,25 @@ body {
 		padding-right: $grid-gutter-width / 2;
 		height: 118px;
 		overflow: hidden;
+		position: relative;
 
 		.quicklinks {
-			float: right;
-			padding: 10px;
+			position: absolute;
+			top: 20px;
+			right: 100px;
 			text-transform: uppercase;
 			color: #fff;
 
 			a {
+				display: inline-block;
 				padding: 10px;
 			}
+		}
+
+		.toplogo {
+			position: absolute;
+			right: 0;
+			top: 25px;
 		}
 	}
 }

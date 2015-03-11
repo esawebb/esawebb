@@ -223,8 +223,6 @@
 }
 
 #ann-carousel-wrapper {
-	background-color: #fff;
-	border: 1px solid $border-color;
 	overflow: hidden;
 
 	#ann-carousel {
@@ -238,6 +236,7 @@
 			visibility: hidden; // slides are made visible by JS
 			margin: 0 $grid-gutter-width / 2;
 			font-size: 13px;
+			border: 1px solid $border-grey;
 
 			img {
 				display: block;
@@ -251,7 +250,17 @@
 			}
 
 			.ann-description {
-				@extend .frontpage-description;
+				padding: 20px;
+
+				.title {
+					font-weight: bold;
+					font-size: 16px;
+				}
+
+				.date {
+					color: #999;
+					margin-top: 5px;
+				}
 			}
 		}
 
