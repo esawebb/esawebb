@@ -53,6 +53,9 @@ urlpatterns += patterns( '',
 	( r'^admin/import/', include('djangoplicity.archives.importer.urls'), { 'SSL': True } ),
 	( r'^tinymce/', include('tinymce.urls'), { 'SSLAllow': True } ),
 
+	# Djangoplicity pages API
+	( r'^public/djangoplicity/admin/pages/', include('djangoplicity.pages.urls'), { 'SSLAllow': True } ),
+
 	# Server alive check (used for load balancers - called every 5 secs )
 	( r'^alive-check.dat$', 'djangoplicity.views.alive_check', { 'SSLAllow': True } ),
 	( r'^sitemap/', 'djangoplicity.menus.views.sitemap' ),

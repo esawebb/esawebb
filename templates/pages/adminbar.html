@@ -1,0 +1,23 @@
+<div class="admin_bar">
+
+	<div class="panel-group" id="translation-accordion">
+		<div class="panel panel-default">
+			<div class="panel-heading"><a data-toggle="collapse" data-parent="#translation-accordion" href="#collapseOne">Djangoplicity Admin</a>
+			</div>
+			<div id="collapseOne" class="panel-collapse collapse" style="height: auto;">
+				<div class="panel-body">
+					<div class="btn-group-vertical center-block" role="group" aria-label="Page edit buttons">
+						<a class="btn btn-primary btn-sm" href="{{ admin_edit }}" role="button">Edit</a>
+						<button id="edit-button" class="btn btn-primary btn-sm" onclick="livePageEdit()">Live edit</button>
+						<button id="save-button" data-loading-text="Saving..." class="btn btn-danger btn-sm" style="display: none" onclick="livePageSave()">Save page</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Set variables for live page edit -->
+	<script>
+		var api_url = "{% url 'page-detail' page.id %}";
+	</script>
+</div>

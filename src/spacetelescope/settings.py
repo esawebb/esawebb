@@ -408,6 +408,7 @@ INSTALLED_APPS += (
 	'captcha',
 	'gunicorn',
 	'django_ace',
+	'rest_framework',
 	'pipeline',
 )
 
