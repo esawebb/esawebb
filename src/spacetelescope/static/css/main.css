@@ -5341,7 +5341,7 @@ body {
   border-bottom: 1px solid #fff;
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2); }
   .navbar-general-wrapper .navbar-general {
-    background-image: url("/static/banner.jpg");
+    background-image: url("../images/banner.jpg");
     max-width: 1160px;
     margin-left: auto;
     margin-right: auto;
