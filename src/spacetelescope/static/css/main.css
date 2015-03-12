@@ -5231,7 +5231,6 @@ body {
   margin-bottom: 0; }
 
 #body, #dark #dark-header, #dark #dark-body {
-  margin-bottom: 100px;
   max-width: 980px; }
   #body .page, #dark #dark-header .page, #dark #dark-body .page {
     background-color: #fff;
@@ -5342,6 +5341,7 @@ body {
   border-bottom: 1px solid #fff;
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2); }
   .navbar-general-wrapper .navbar-general {
+    background-image: url("/static/banner.jpg");
     max-width: 1160px;
     margin-left: auto;
     margin-right: auto;
@@ -5512,7 +5512,7 @@ body {
     max-width: 1160px;
     margin-left: auto;
     margin-right: auto;
-    height: 50px;
+    height: 40px;
     position: absolute;
     bottom: 0; }
     .main-menu .mobile-menu {
@@ -5531,7 +5531,7 @@ body {
             display: block; }
         .main-menu .level0 > li > a {
           color: #fff;
-          line-height: 50px;
+          line-height: 40px;
           padding: 0 6px;
           font-size: 12px;
           font-weight: 600;
