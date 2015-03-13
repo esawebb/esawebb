@@ -33,11 +33,11 @@ DEBUG = False
 ##############
 # DEPLOYMENT #
 ##############
-MANAGEMENT_NODES = ["aweb38"]
+MANAGEMENT_NODES = ["aweb33"]
 BROKERS = ["aweb9"]
-WORKERS = ["aweb38", "aweb39"]
-WORKERS_BEAT_HOST = "aweb38"
-WORKERS_CAM_HOST = "aweb39"
+WORKERS = ["aweb33", "aweb34"]
+WORKERS_BEAT_HOST = "aweb33"
+WORKERS_CAM_HOST = "aweb34"
 WEBSERVER_NODES = ["%s3i" % SHORT_NAME, "%s4i" % SHORT_NAME ]
 DEPLOYMENT_TAG = "spacetelescope.org_int"
 DEPLOYMENT_NOTIFICATION = {
