@@ -32,8 +32,8 @@ SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 # CONFIG GENERATION #
 #####################
 WEBSERVERS = (
-	('aweb38', '%s3i' % SHORT_NAME, '134.171.74.208', 'int' ),
-	('aweb39', '%s4i' % SHORT_NAME, '134.171.74.209', 'int' ),
+	('aweb33', '%s3i' % SHORT_NAME, '134.171.74.208', 'int' ),
+	('aweb34', '%s4i' % SHORT_NAME, '134.171.74.209', 'int' ),
 	('aweb41', '%s3' % SHORT_NAME, '134.171.75.212', 'prod' ),
 	('aweb42', '%s4' % SHORT_NAME, '134.171.75.213', 'prod' ),
 )
