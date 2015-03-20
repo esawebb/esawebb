@@ -34,7 +34,7 @@ DEBUG = False
 # DEPLOYMENT #
 ##############
 MANAGEMENT_NODES = ["aweb33"]
-BROKERS = ["aweb9"]
+BROKERS = ["aweb36"]
 WORKERS = ["aweb33","aweb34"]
 WORKERS_BEAT_HOST = "aweb33"
 WORKERS_CAM_HOST = "aweb34"
@@ -78,12 +78,12 @@ EMAIL_SUBJECT_PREFIX = '[SPACETELESCOPE-INTEGRATION]'
 # PHOTOSHOP CELERYWORKER #
 ##########################
 PHOTOSHOP_ROOT = "/home/web/A/importi"
-PHOTOSHOP_BROKER['HOST'] = "aweb9.hq.eso.org"
+PHOTOSHOP_BROKER['HOST'] = "aweb36.hq.eso.org"
 
 ##########	
 # CELERY #
 ##########
-BROKER_URL = 'amqp://spacetelescope:letoveumtold@aweb9.hq.eso.org:5672/spacetelescope_vhost'
+BROKER_URL = 'amqp://spacetelescope:letoveumtold@aweb36.hq.eso.org:5672/spacetelescope_vhost'
 
 ########
 # SHOP #
