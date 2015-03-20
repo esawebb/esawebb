@@ -1178,31 +1178,8 @@ ALLOWED_HOSTS = ['.spacetelescope.org', '.eso.org']
 # Required since Django 1.6:
 TEST_RUNNER = 'django.test.runner.DiscoverRunner'
 
-VIDEO_CONTENT_SERVERS = (
-	( '', 'Default' ),
-	( 'http://videos.spacetelescope.org/videos/', 'videos.spacetelescope.org' )
-)
-
-from djangoplicity.contentserver import ContentServer, CDN77ContentServer
+from djangoplicity.contentserver import CDN77ContentServer
 MEDIA_CONTENT_SERVERS = {
-	'videos.spacetelescope.org': ContentServer(
-		name='videos.spacetelescope.org',
-		formats=(
-			'medium_podcast',
-			'hd_and_apple',
-			'hd_1080p25_screen',
-			'hd_1080p25_broadcast',
-			'ultra_hd',
-			'ultra_hd_h265',
-			'ultra_hd_broadcast',
-			'dome_8kmaster',
-			'dome_4kmaster',
-			'dome_2kmaster',
-			'dome_mov',
-			'dome_preview',
-		),
-		url='http://videos.spacetelescope.org/',
-	),
 	'CDN77': CDN77ContentServer(
 		name='CDN77',
 		formats=(
@@ -1239,8 +1216,7 @@ MEDIA_CONTENT_SERVERS = {
 
 MEDIA_CONTENT_SERVERS_CHOICES = (
 	('', 'Default'),
-	('videos.spacetelescope.org', 'videos.spacetelescope.org'),
 	('CDN77', 'CDN77'),
 )
 
-DEFAULT_MEDIA_CONTENT_SERVER = ''
+DEFAULT_MEDIA_CONTENT_SERVER = 'CDN77'
