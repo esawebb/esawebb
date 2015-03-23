@@ -5450,12 +5450,15 @@ body {
   max-width: 980px;
   margin: 20px auto;
   font-size: 12px;
-  text-align: center; }
-  @media (min-width: 1025px) {
-    .footernote div:first-child {
-      text-align: right; }
-    .footernote div:last-child {
-      text-align: left; } }
+  text-align: center;
+  /* @media (min-width: $mobile-breakpoint) { */
+  /* & div:first-child { */
+  /* text-align: right; */
+  /* } */
+  /* & div:last-child { */
+  /* text-align: left; */
+  /* } */
+  /* } */ }
   .footernote a {
     display: block;
     color: #777; }
@@ -5950,6 +5953,8 @@ body {
     width: 100%; }
 .frontpage-section #highlight-carousel-wrapper {
   border: 1px solid gainsboro; }
+  .frontpage-section #highlight-carousel-wrapper .section-title {
+    color: #3f9efa; }
   .frontpage-section #highlight-carousel-wrapper #highlight-carousel.slick-initialized .slide {
     visibility: visible; }
   .frontpage-section #highlight-carousel-wrapper #highlight-carousel .slide {
@@ -5957,10 +5962,10 @@ body {
   .frontpage-section #highlight-carousel-wrapper #highlight-carousel img {
     width: 100%; }
 .frontpage-section #social-links {
-  background-color: #101010; }
+  background-color: #292929; }
   @media (min-width: 992px) {
     .frontpage-section #social-links {
-      height: 265px; } }
+      height: 307px; } }
   .frontpage-section #social-links .title {
     padding: 20px 0 10px;
     letter-spacing: 1.4px;
@@ -5975,15 +5980,15 @@ body {
         background-color: #3f9efa;
         opacity: 0.3;
         filter: alpha(opacity=30); }
-.frontpage-section #esoshop-link {
+.frontpage-section #hubbleshop-link {
   background-color: #fff;
-  border: 1px solid #e0e0e0; }
+  border: 1px solid gainsboro; }
   @media (min-width: 992px) {
-    .frontpage-section #esoshop-link {
-      height: 265px;
+    .frontpage-section #hubbleshop-link {
+      height: 307px;
       overflow: hidden; } }
-  .frontpage-section #esoshop-link img {
-    margin: 0 auto; }
+  .frontpage-section #hubbleshop-link img {
+    margin: 30px auto; }
 .frontpage-section .sections {
   margin-top: 20px;
   background-color: #fff;

@@ -123,7 +123,7 @@
 		<div id="highlight-carousel-wrapper">
 			<div class="section-header">
 				<div class="section-title">
-					<a href="{% url 'potw_defaultquery' %}">{% trans "Highlights" %}</a>
+					{% trans "Highlights" %}
 				</div>
 				<div class="section-navigation">
 				</div>
@@ -142,6 +142,26 @@
 		</div>
 	</div>
 	{% endif %}
+	<div class="col-md-3">
+		<div id="hubbleshop-link">
+			<a href="/shop/">
+				<img src="/static/images/hubbleshop.png" class="img-responsive" alt="Hubble Shop">
+			</a>
+		</div>
+	</div>
+	<div class="col-md-3">
+		<div id="social-links">
+			<div class="title">{% trans "Find us on" %}</div>
+			<div class="icons">
+				<a href="http://www.facebook.com/HubbleESA"><div class="sprites-facebook_42px_flat"></div></a>
+				<a href="http://twitter.com/hubble_space"><div class="sprites-twitter_42px_flat"></div></a>
+				<a href="http://www.youtube.com/user/HubbleESA"><div class="sprites-youtube_42px_flat"></div></a>
+				<a href="http://itunes.apple.com/de/podcast/hubblecast-hd/id258935617 "><div class="sprites-apple_42px_flat"></div></a>
+				<a href="http://www.vimeo.com/hubbleesa"><div class="sprites-vimeo_42px_flat"></div></a>
+				<a href="http://www.flickr.com/photos/hubble_esa "><div class="sprites-flickr_42px_flat"></div></a>
+			</div>
+		</div>
+	</div>
 </div>
 
 {% if top100 %}

@@ -440,6 +440,10 @@
 	#highlight-carousel-wrapper {
 		border: 1px solid $border-grey;
 
+		.section-title {
+			color: $hubble-blue;
+		}
+
 		#highlight-carousel {
 
 			&.slick-initialized .slide {
@@ -475,10 +479,10 @@
 	}
 
 	#social-links {
-		background-color: $hubble-very-dark-grey;
+		background-color: #292929;
 
 		@media (min-width: $screen-md-min) {
-			height: 265px;
+			height: 307px;
 		}
 
 		.title {
@@ -504,17 +508,17 @@
 		}
 	}
 
-	#esoshop-link {
+	#hubbleshop-link {
 		background-color: #fff;
-		border: 1px solid $border-color;
+		border: 1px solid $border-grey;
 
 		@media (min-width: $screen-md-min) {
-			height: 265px;
+			height: 307px;
 			overflow: hidden;
 		}
 
 		img {
-			margin: 0 auto;
+			margin: 30px auto;
 		}
 	}
 

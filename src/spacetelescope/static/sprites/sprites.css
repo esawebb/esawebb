@@ -1,5 +1,40 @@
-/* glue: 0.11.0 hash: 41ffced16c */
-        .sprites-esa-logo {
+/* glue: 0.11.0 hash: cd026b38c8 */
+        .sprites-esa-logo,
+.sprites-logo_esocast,
+.sprites-youtube_42px_flat,
+.sprites-vimeo_42px_flat,
+.sprites-twitter_42px_flat,
+.sprites-scribd_42px_flat,
+.sprites-pinterest_42px_flat,
+.sprites-livestream_42px_flat,
+.sprites-linkedin_42px_flat,
+.sprites-issu_42px_flat,
+.sprites-googleplus_42px_flat,
+.sprites-flickr_42px_flat,
+.sprites-facebook_42px_flat,
+.sprites-apple_42px_flat,
+.sprites-magnet,
+.sprites-icon_zoom,
+.sprites-icon_zip,
+.sprites-icon_slides,
+.sprites-icon_shop,
+.sprites-icon_ppt,
+.sprites-icon_phot,
+.sprites-icon_pdf,
+.sprites-icon_movie,
+.sprites-icon_magnet,
+.sprites-icon_doc,
+.sprites-icon_audio,
+.sprites-icon_word,
+.sprites-icon_wallpaper,
+.sprites-icon_txt,
+.sprites-icon_qt,
+.sprites-icon_pal,
+.sprites-icon_mpeg,
+.sprites-icon_images,
+.sprites-icon_flv,
+.sprites-icon_film,
+.sprites-rssicon {
             background-image: url('../sprites/sprites.png');
             background-repeat: no-repeat;
         }
@@ -10,12 +45,257 @@
             height: 37px;
         }
         
+        .sprites-logo_esocast {
+            background-position: 0 -37px;
+            width: 50px;
+            height: 29px;
+        }
+        
+        .sprites-youtube_42px_flat {
+            background-position: -100px 0;
+            width: 44px;
+            height: 44px;
+        }
+        
+        .sprites-vimeo_42px_flat {
+            background-position: 0 -66px;
+            width: 44px;
+            height: 44px;
+        }
+        
+        .sprites-twitter_42px_flat {
+            background-position: -44px -66px;
+            width: 44px;
+            height: 44px;
+        }
+        
+        .sprites-scribd_42px_flat {
+            background-position: -88px -66px;
+            width: 44px;
+            height: 44px;
+        }
+        
+        .sprites-pinterest_42px_flat {
+            background-position: -144px 0;
+            width: 44px;
+            height: 44px;
+        }
+        
+        .sprites-livestream_42px_flat {
+            background-position: -144px -44px;
+            width: 44px;
+            height: 44px;
+        }
+        
+        .sprites-linkedin_42px_flat {
+            background-position: 0 -110px;
+            width: 44px;
+            height: 44px;
+        }
+        
+        .sprites-issu_42px_flat {
+            background-position: -44px -110px;
+            width: 44px;
+            height: 44px;
+        }
+        
+        .sprites-googleplus_42px_flat {
+            background-position: -88px -110px;
+            width: 44px;
+            height: 44px;
+        }
+        
+        .sprites-flickr_42px_flat {
+            background-position: -132px -110px;
+            width: 44px;
+            height: 44px;
+        }
+        
+        .sprites-facebook_42px_flat {
+            background-position: -188px 0;
+            width: 44px;
+            height: 44px;
+        }
+        
+        .sprites-apple_42px_flat {
+            background-position: -188px -44px;
+            width: 44px;
+            height: 44px;
+        }
+        
+        .sprites-magnet {
+            background-position: -188px -88px;
+            width: 27px;
+            height: 27px;
+        }
+        
+        .sprites-icon_zoom {
+            background-position: -188px -115px;
+            width: 27px;
+            height: 26px;
+        }
+        
+        .sprites-icon_zip {
+            background-position: -50px -37px;
+            width: 27px;
+            height: 26px;
+        }
+        
+        .sprites-icon_slides {
+            background-position: 0 -154px;
+            width: 27px;
+            height: 26px;
+        }
+        
+        .sprites-icon_shop {
+            background-position: -27px -154px;
+            width: 27px;
+            height: 26px;
+        }
+        
+        .sprites-icon_ppt {
+            background-position: -54px -154px;
+            width: 27px;
+            height: 26px;
+        }
+        
+        .sprites-icon_phot {
+            background-position: -81px -154px;
+            width: 27px;
+            height: 26px;
+        }
+        
+        .sprites-icon_pdf {
+            background-position: -108px -154px;
+            width: 27px;
+            height: 26px;
+        }
+        
+        .sprites-icon_movie {
+            background-position: -135px -154px;
+            width: 27px;
+            height: 26px;
+        }
+        
+        .sprites-icon_magnet {
+            background-position: 0 -180px;
+            width: 27px;
+            height: 27px;
+        }
+        
+        .sprites-icon_doc {
+            background-position: -162px -154px;
+            width: 27px;
+            height: 26px;
+        }
+        
+        .sprites-icon_audio {
+            background-position: -189px -154px;
+            width: 27px;
+            height: 26px;
+        }
+        
+        .sprites-icon_word {
+            background-position: -144px -88px;
+            width: 22px;
+            height: 22px;
+        }
+        
+        .sprites-icon_wallpaper {
+            background-position: -166px -88px;
+            width: 22px;
+            height: 22px;
+        }
+        
+        .sprites-icon_txt {
+            background-position: -100px -44px;
+            width: 22px;
+            height: 22px;
+        }
+        
+        .sprites-icon_qt {
+            background-position: -122px -44px;
+            width: 22px;
+            height: 22px;
+        }
+        
+        .sprites-icon_pal {
+            background-position: -77px -37px;
+            width: 22px;
+            height: 22px;
+        }
+        
+        .sprites-icon_mpeg {
+            background-position: -27px -180px;
+            width: 22px;
+            height: 22px;
+        }
+        
+        .sprites-icon_images {
+            background-position: -49px -180px;
+            width: 22px;
+            height: 22px;
+        }
+        
+        .sprites-icon_flv {
+            background-position: -71px -180px;
+            width: 22px;
+            height: 22px;
+        }
+        
+        .sprites-icon_film {
+            background-position: -93px -180px;
+            width: 22px;
+            height: 22px;
+        }
+        
+        .sprites-rssicon {
+            background-position: -115px -180px;
+            width: 18px;
+            height: 18px;
+        }
+        
         @media screen and (-webkit-min-device-pixel-ratio: 1.0), screen and (min--moz-device-pixel-ratio: 1.0), screen and (-o-min-device-pixel-ratio: 100/100), screen and (min-device-pixel-ratio: 1.0), screen and (min-resolution: 1.0dppx) {
-            .sprites-esa-logo {
+            .sprites-esa-logo,
+    .sprites-logo_esocast,
+    .sprites-youtube_42px_flat,
+    .sprites-vimeo_42px_flat,
+    .sprites-twitter_42px_flat,
+    .sprites-scribd_42px_flat,
+    .sprites-pinterest_42px_flat,
+    .sprites-livestream_42px_flat,
+    .sprites-linkedin_42px_flat,
+    .sprites-issu_42px_flat,
+    .sprites-googleplus_42px_flat,
+    .sprites-flickr_42px_flat,
+    .sprites-facebook_42px_flat,
+    .sprites-apple_42px_flat,
+    .sprites-magnet,
+    .sprites-icon_zoom,
+    .sprites-icon_zip,
+    .sprites-icon_slides,
+    .sprites-icon_shop,
+    .sprites-icon_ppt,
+    .sprites-icon_phot,
+    .sprites-icon_pdf,
+    .sprites-icon_movie,
+    .sprites-icon_magnet,
+    .sprites-icon_doc,
+    .sprites-icon_audio,
+    .sprites-icon_word,
+    .sprites-icon_wallpaper,
+    .sprites-icon_txt,
+    .sprites-icon_qt,
+    .sprites-icon_pal,
+    .sprites-icon_mpeg,
+    .sprites-icon_images,
+    .sprites-icon_flv,
+    .sprites-icon_film,
+    .sprites-rssicon {
                 background-image: url('../sprites/sprites.png');
-                -webkit-background-size: 100px 37px;
-                -moz-background-size: 100px 37px;
-                background-size: 100px 37px;
+                -webkit-background-size: 232px 207px;
+                -moz-background-size: 232px 207px;
+                background-size: 232px 207px;
             }
         }
         
