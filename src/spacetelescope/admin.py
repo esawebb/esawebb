@@ -34,6 +34,7 @@ import djangoplicity.actions.admin
 import djangoplicity.imgvote.admin
 import djangoplicity.science.admin
 import djangoplicity.crawler.admin
+import spacetelescope.frontpage.admin
 
 # Register each applications admin interfaces with
 # an admin site.
@@ -58,6 +59,7 @@ autoregister( admin_site, djangoplicity.customsearch.admin )
 #autoregister( admin_site, djangoplicity.eventcalendar.admin )
 autoregister( admin_site, djangoplicity.science.admin )
 autoregister( admin_site, djangoplicity.crawler.admin )
+autoregister( admin_site, spacetelescope.frontpage.admin )
 
 
 autoregister( adminlogs_site, djangoplicity.actions.admin )

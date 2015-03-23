@@ -341,15 +341,6 @@
 		@extend .frontpage-title;
 	}
 
-	.highlights {
-		.section-title {
-			@extend .frontpage-title;
-			color: #fff;
-			background-color: rgba(0, 129, 201, 0.8); // eso-blue
-			padding: 4px 8px;
-		}
-	}
-
 	& > div {
 		margin-top: $frontpage-row-top-margin;
 	}
@@ -446,38 +437,40 @@
 		}
 	}
 
-	#highlight-carousel {
-		background-color: #fff;
-		border: 1px solid $border-color;
+	#highlight-carousel-wrapper {
+		border: 1px solid $border-grey;
 
-		&.slick-initialized .slide {
-			visibility: visible;
-		}
+		#highlight-carousel {
 
-		.slide {
-			visibility: hidden; // slides are made visible by JS
-		}
-
-		button {
-			@extend .slide-button;
-		}
-
-		.slide-prev {
-			@extend .slide-prev;
-		}
-
-		.slide-next {
-			@extend .slide-next;
-		}
-
-		&:hover {
-			.slide-prev, .slide-next {
-				@extend .slide-prev-next-hover;
+			&.slick-initialized .slide {
+				visibility: visible;
 			}
-		}
 
-		img {
-			width: 100%;
+			.slide {
+				visibility: hidden; // slides are made visible by JS
+			}
+
+			button {
+				@extend .slide-button;
+			}
+
+			.slide-prev {
+				@extend .slide-prev;
+			}
+
+			.slide-next {
+				@extend .slide-next;
+			}
+
+			&:hover {
+				.slide-prev, .slide-next {
+					@extend .slide-prev-next-hover;
+				}
+			}
+
+			img {
+				width: 100%;
+			}
 		}
 	}
 

@@ -217,8 +217,8 @@ $(document).ready(function(){
 		lazyLoad: 'progressive',
 		prevArrow: '<button type="button" class="slide-prev"><span class="fa fa-angle-left"></span</button>',
 		nextArrow: '<button type="button" class="slide-next"><span class="fa fa-angle-right"></span></button>',
-		// autoplay: true,
-		// autoplaySpeed: 10000
+		autoplay: true,
+		autoplaySpeed: 10000
 	});
 });
 
@@ -283,16 +283,17 @@ $(document).ready(function(){
 // });
 
 
-// // Prepare Highlights carousel
-// $(document).ready(function(){
-	// $('#highlight-carousel').slick({
-		// infinite: true,
-		// lazyLoad: 'ondemand',
-		// autoplay: true,
-		// prevArrow: '<button type="button" class="slide-prev"><span class="fa fa-angle-left"></span</button>',
-		// nextArrow: '<button type="button" class="slide-next"><span class="fa fa-angle-right"></span></button>'
-	// });
-// });
+// Prepare Highlights carousel
+$(document).ready(function(){
+	$('#highlight-carousel').slick({
+		infinite: true,
+		lazyLoad: 'ondemand',
+		autoplay: true,
+		prevArrow: '<button type="button" class="frontpage-slide-prev"><span class="fa fa-angle-left"></span</button>',
+		nextArrow: '<button type="button" class="frontpage-slide-next"><span class="fa fa-angle-right"></span></button>',
+		appendArrows: '#highlight-carousel-wrapper .section-navigation'
+	});
+});
 
 
 // Prepare Top100 frontpage carousel

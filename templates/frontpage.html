@@ -115,7 +115,31 @@
 				</div> <!-- slide -->
 				{% endfor %}
 			</div> <!-- potw-carousel -->
+		</div>
 	</div>
+	{% endif %}
+	{% if highlights %}
+	<div class="col-md-6 highlights">
+		<div id="highlight-carousel-wrapper">
+			<div class="section-header">
+				<div class="section-title">
+					<a href="{% url 'potw_defaultquery' %}">{% trans "Highlights" %}</a>
+				</div>
+				<div class="section-navigation">
+				</div>
+			</div>
+			<div id="highlight-carousel">
+			{% for highlight in highlights %}
+				{% if highlight.image %}
+				<div class="slide">
+					{% if highlight.link %}<a href="{{ highlight.link}}">{% endif %}
+						<img draggable="false" data-lazy="{{ highlight.image }}" class="img-responsive" alt="{% if highlight.title %}{{ highlight.title }}{% else %}Highlights{% endif %}">
+					{% if highlight.link %}</a>{% endif %}
+				</div> <!-- slide -->
+				{% endif %}
+			{% endfor %}
+			</div> <!-- highlight-carousel -->
+		</div>
 	</div>
 	{% endif %}
 </div>
@@ -148,36 +172,6 @@
 		</div>
 	</div>
 </div>
-{% endif %}
-
-</div> <!-- #body -->
-
-{% endblock content_area %}
-
-{% block extra_scripts %}
-<script type="text/javascript">
-
-$(document).ready(function(){                                                   
-	{% comment %}
-	Set hover target on pr-description, this cannot be done fully in CSS         
-		</div>
-		<div id="ann-carousel-wrapper">
-			<div id="ann-carousel">
-				{% for announcement in announcements %}
-				<div class="slide">
-					<a href="{{ announcement.get_absolute_url }}">
-						<div class="ann-description">
-							<div class="title">{{ announcement.title }}</div>
-							<div class="date">{{ announcement.release_date|date:"j N Y" }} — {{ announcement.id }}</div>
-						</div>
-						<img draggable="false" data-lazy="{{ announcement.main_visual.resource_thumb350x.url }}" alt="{{ announcement.main_visual.title }}">
-					</a>
-				</div> <!-- slide -->
-				{% endfor %}
-			</div> <!-- ann-carousel -->
-		</div> <!-- ann-carousel-wrapper -->
-	</div>
-</div> <!-- announcements -->
 {% endif %}
 
 </div> <!-- #body -->

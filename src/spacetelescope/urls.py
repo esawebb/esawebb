@@ -138,7 +138,7 @@ urlpatterns += patterns( '',
 	( r'^projects/hiddentreasures/vote/', include('djangoplicity.imgvote.urls'), ),
 
 	# Main view
-	( r'^$', 'spacetelescope.views.frontpage' ),
+	( r'^$', 'spacetelescope.frontpage.views.frontpage' ),
 
 
  )

@@ -382,6 +382,7 @@ INSTALLED_APPS += (
 	#'djangoplicity.kiosk.engine',
 	#'djangoplicity.kiosk.slides',
 	'spacetelescope',
+	'spacetelescope.frontpage',
 	'mptt',
 	'django_extensions',
 	'django_assets',
