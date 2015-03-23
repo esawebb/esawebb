@@ -10,25 +10,24 @@
 
 from django.conf import settings
 from django.conf.urls import patterns, include, url
-from spacetelescope.admin import admin_site, adminlogs_site, adminshop_site
+from django.views.decorators.cache import cache_page
 
 from djangoplicity.announcements.models import Announcement, WebUpdate
 from djangoplicity.announcements.options import AnnouncementOptions, WebUpdateOptions
 from djangoplicity.media.models import Image, Video, PictureOfTheWeek, ImageComparison
 from djangoplicity.media.options import ImageOptions, VideoOptions, PictureOfTheWeekOptions, ImageComparisonOptions
-from django.views.generic.base import RedirectView
-
-from djangoplicity.products.models import *
-from djangoplicity.products.options import *
-
-from djangoplicity.releases.models import Release
-from djangoplicity.releases.options import ReleaseOptions
-
 from djangoplicity.newsletters.models import Newsletter
 from djangoplicity.newsletters.options import NewsletterOptions
-
+from djangoplicity.products.models import *
+from djangoplicity.products.options import *
+from djangoplicity.releases.models import Release
+from djangoplicity.releases.options import ReleaseOptions
 from djangoplicity.science.models import ScienceAnnouncement
 from djangoplicity.science.options import ScienceAnnouncementOptions
+from django.views.generic.base import RedirectView
+
+from spacetelescope.admin import admin_site, adminlogs_site, adminshop_site
+from spacetelescope.frontpage.views import FrontpageView
 
 urlpatterns = []
 
@@ -138,9 +137,7 @@ urlpatterns += patterns( '',
 	( r'^projects/hiddentreasures/vote/', include('djangoplicity.imgvote.urls'), ),
 
 	# Main view
-	( r'^$', 'spacetelescope.frontpage.views.frontpage' ),
-
-
+	( r'^$', cache_page(60 * 5)(FrontpageView.as_view()) ),
  )
 
 #handler404 = 'spacetelescope.views.page_not_found'
