@@ -404,7 +404,6 @@ INSTALLED_APPS += (
 	'app_plugins',
 	'shipping.modules.tieredweight',
 	'django_config_gen',
-	'tinymce',
 	'djangoplicity.imgvote',
 	'captcha',
 	'gunicorn',

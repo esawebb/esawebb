@@ -8,7 +8,6 @@
 #   Luis Clara Gomes <lcgomes@eso.org>
 
 from django.db import models
-from tinymce import models as tinymce_models
 
 
 class Highlight(models.Model):
@@ -17,7 +16,7 @@ class Highlight(models.Model):
 	"""
 	name = models.SlugField()
 	title = models.CharField(max_length=255, blank=True)
-	description = tinymce_models.HTMLField(blank=True)
+	description = models.TextField(blank=True)
 	image = models.CharField(max_length=255, blank=True)
 	link = models.CharField(max_length=255, blank=True)
 	order = models.PositiveSmallIntegerField()
