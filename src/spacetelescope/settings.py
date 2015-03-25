@@ -813,16 +813,12 @@ CELERYBEAT_SCHEDULE = {
 ##############
 TINYMCE_JS = "djangoplicity/js/tiny_mce_v3392/tiny_mce.js"
 TINYMCE_JQUERY_JS = "djangoplicity/js/tiny_mce_v3392/jquery.tinymce.js"
-JQUERY_JS = "djangoplicity/js/jquery-1.4.2.min.js"
-ZCLIPBOARD_JS = "djangoplicity/js/ZeroClipboard.js"
-JQUERY_UI_JS = "djangoplicity/js/jquery-ui-1.8.1.custom.min.js"
-JQUERY_UI_CSS = "djangoplicity/css/ui-lightness/jquery-ui-1.8.1.custom.css"
+JQUERY_JS = "jquery/jquery-1.11.1.min.js"
+JQUERY_UI_JS = "jquery-ui-1.11.1/jquery-ui.min.js"
+JQUERY_UI_CSS = "jquery-ui-1.11.1/jquery-ui.min.css"
 DJANGOPLICITY_ADMIN_CSS = "djangoplicity/css/admin.css"
 DJANGOPLICITY_ADMIN_JS = "djangoplicity/js/admin.js"
 SUBJECT_CATEGORY_CSS = "djangoplicity/css/widgets.css"
-SHADOWBOX_JS = "djangoplicity/shadowbox3/shadowbox.js"
-SHADOWBOX_CSS = "djangoplicity/shadowbox3/shadowbox.css"
-SWFOBJECT_JS = "djangoplicity/js/swfobject.js"
 
 REGEX_REDIRECTS = (
 #	( re.compile( '/hubbleshop/webshop/webshop\.php\?show=sales&section=(books|cdroms)' ), '/shop/category/\g<1>/' ),
@@ -1148,11 +1144,12 @@ PIPELINE_CSS = {
 PIPELINE_JS = {
 	'main': {
 		'source_filenames': (
-			'djangoplicity/js/jquery-1.4.2.min.js',
-			'djangoplicity/js/jquery.cycle.min.js',
-			'djangoplicity/js/jquery.jclock-1.2.0.js',
-			'djangoplicity/shadowbox/shadowbox.js',
-			'djangoplicity/js/shadowbox_conf.js',
+			'jquery/jquery-1.11.1.min.js',
+			'jquery-ui-1.11.1/jquery-ui.min.js',
+			'js/jquery.cycle.min.js',
+			'js/jquery.jclock-1.2.0.js',
+			'shadowbox-3.0.3/shadowbox.js',
+			'shadowbox-3.0.3/shadowbox_conf.js',
 			'djangoplicity/zoomify/js/ZoomifyImageViewerExpress-min.js',
 			'djangoplicity/js/widgets.js',
 			'js/site.js',
