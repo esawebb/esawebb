@@ -61,7 +61,6 @@ urlpatterns += patterns( '',
     ( r'^admin/system/', include(adminlogs_site.urls), { 'SSL': True, 'extra_context' : { 'ADMINLOGS_SITE' : True }  } ),
     ( r'^admin/', include(admin_site.urls), { 'SSL': True, 'extra_context' : { 'ADMIN_SITE' : True }  } ),
     ( r'^admin/import/', include('djangoplicity.archives.importer.urls'), { 'SSL': True } ),
-    ( r'^tinymce/', include('tinymce.urls'), { 'SSLAllow': True } ),
 
     # Server alive check (used for load balancers - called every 5 secs )
     ( r'^alive-check.dat$', 'djangoplicity.views.alive_check', { 'SSLAllow' : True } ),
