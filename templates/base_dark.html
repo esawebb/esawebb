@@ -32,55 +32,44 @@ We don't display the children pages widget in the dark pages
 			{% if archive == 'image' %}
 			<div class="col-md-12 media-categories">
 				<ul>
-					<li><a href="/public/images/viewall/">{% trans "View All" %}</a></li>
-					<li><a href="/public/images/archive/category/alma/"{% if '/images/archive/category/alma/' in request.path %} class="selected"{% endif %}>{% trans "ALMA" %}</a></li>
-					<li><a href="/public/images/archive/category/apex/"{% if '/images/archive/category/apex/' in request.path %} class="selected"{% endif %}>{% trans "APEX" %}</a></li>
-					<li><a href="/public/images/archive/category/chile/"{% if '/images/archive/category/chile/' in request.path %} class="selected"{% endif %}>{% trans "Chile" %}</a></li>
-					<li><a href="/public/images/archive/category/cosmology/"{% if '/images/archive/category/cosmology/' in request.path %} class="selected"{% endif %}>{% trans "Cosmology" %}</a></li>
-					<li><a href="/public/images/archive/category/e-elt/"{% if '/images/archive/category/e-elt/' in request.path %} class="selected"{% endif %}>{% trans "E-ELT" %}</a></li>
-					<li><a href="/public/images/archive/category/eso-supernova/"{% if '/images/archive/category/eso-supernova/' in request.path %} class="selected"{% endif %}>{% trans "ESO Supernova" %}</a></li>
-					<li><a href="/public/images/archive/category/exoplanets/"{% if '/images/archive/category/exoplanets/' in request.path %} class="selected"{% endif %}>{% trans "Exoplanets" %}</a></li>
-					<li><a href="/public/images/archive/category/galaxies/"{% if '/images/archive/category/galaxies/' in request.path %} class="selected"{% endif %}>{% trans "Galaxies" %}</a></li>
-					<li><a href="/public/images/archive/category/galaxyclusters/"{% if '/images/archive/category/galaxyclusters/' in request.path %} class="selected"{% endif %}>{% trans "Galaxy Clusters" %}</a></li>
-					<li><a href="/public/images/archive/category/illustrations/"{% if '/images/archive/category/illustrations/' in request.path %} class="selected"{% endif %}>{% trans "Illustrations" %}</a></li>
-					<li><a href="/public/images/archive/category/lasilla/"{% if '/images/archive/category/lasilla/' in request.path %} class="selected"{% endif %}>{% trans "La Silla" %}</a></li>
-					<li><a href="/public/images/archive/category/nebulae/"{% if '/images/archive/category/nebulae/' in request.path %} class="selected"{% endif %}>{% trans "Nebulae" %}</a></li>
-					<li><a href="/public/images/archive/category/paranal/"{% if '/images/archive/category/paranal/' in request.path %} class="selected"{% endif %}>{% trans "Paranal" %}</a></li>
-					<li><a href="/public/images/archive/category/peopleandevents/"{% if '/images/archive/category/peopleandevents/' in request.path %} class="selected"{% endif %}>{% trans "People and Events" %}</a></li>
-					<li><a href="/public/images/archive/category/premises/"{% if '/images/archive/category/premises/' in request.path %} class="selected"{% endif %}>{% trans "Premises" %}</a></li>
-					<li><a href="/public/images/archive/category/blackholes/"{% if '/images/archive/category/blackholes/' in request.path %} class="selected"{% endif %}>{% trans "Quasars and Black Holes" %}</a></li>
-					<li><a href="/public/images/archive/category/solarsystem/"{% if '/images/archive/category/solarsystem/' in request.path %} class="selected"{% endif %}>{% trans "Solar System" %}</a></li>
-					<li><a href="/public/images/archive/category/starclusters/"{% if '/images/archive/category/starclusters/' in request.path %} class="selected"{% endif %}>{% trans "Star Clusters" %}</a></li>
-					<li><a href="/public/images/archive/category/stars/"{% if '/images/archive/category/stars/' in request.path %} class="selected"{% endif %}>{% trans "Stars" %}</a></li>
-					<li><a href="/public/images/archive/category/surveytelescopes/"{% if '/images/archive/category/surveytelescopes/' in request.path %} class="selected"{% endif %}>{% trans "Survey Telescopes" %}</a></li>
+					<li><a href="/images/viewall/">{% trans "View All" %}</a></li>
+					<li><a href="/images/archive/category/cosmology/"{% if '/images/archive/category/cosmology/' in request.path %} class="selected"{% endif %}>{% trans "Cosmology" %}</a></li>
+					<li><a href="/images/archive/category/exoplanets/"{% if '/images/archive/category/exoplanets/' in request.path %} class="selected"{% endif %}>{% trans "Exoplanets" %}</a></li>
+					<li><a href="/images/archive/category/galaxies/"{% if '/images/archive/category/galaxies/' in request.path %} class="selected"{% endif %}>{% trans "Galaxies" %}</a></li>
+					<li><a href="/images/archive/category/illustrations/"{% if '/images/archive/category/illustrations/' in request.path %} class="selected"{% endif %}>{% trans "Illustrations" %}</a></li>
+					<li><a href="/images/archive/category/jwst/"{% if '/images/archive/category/jwst/' in request.path %} class="selected"{% endif %}>{% trans "James Webb Space Telescope" %}</a></li>
+					<li><a href="/images/archive/category/mission/"{% if '/images/archive/category/mission/' in request.path %} class="selected"{% endif %}>{% trans "Launch/Servicing Missions" %}</a></li>
+					<li><a href="/images/archive/category/misc/"{% if '/images/archive/category/misc/' in request.path %} class="selected"{% endif %}>{% trans "Miscellaneous" %}</a></li>
+					<li><a href="/images/archive/category/nebulae/"{% if '/images/archive/category/nebulae/' in request.path %} class="selected"{% endif %}>{% trans "Nebulae" %}</a></li>
+					<li><a href="/images/archive/category/blackholes/"{% if '/images/archive/category/blackholes/' in request.path %} class="selected"{% endif %}>{% trans "Quasars and Black Holes" %}</a></li>
+					<li><a href="/images/archive/category/solarsystem/"{% if '/images/archive/category/solarsystem/' in request.path %} class="selected"{% endif %}>{% trans "Solar System" %}</a></li>
+					<li><a href="/images/archive/category/spacecraft/"{% if '/images/archive/category/spacecraft/' in request.path %} class="selected"{% endif %}>{% trans "Spacecraft" %}</a></li>
+					<li><a href="/images/archive/category/starclusters/"{% if '/images/archive/category/starclusters/' in request.path %} class="selected"{% endif %}>{% trans "Star Clusters" %}</a></li>
+					<li><a href="/images/archive/category/stars/"{% if '/images/archive/category/stars/' in request.path %} class="selected"{% endif %}>{% trans "Stars" %}</a></li>
 				</ul>
 			</div>
 			{% elif archive == 'video' %}
 			<div class="col-md-12 media-categories">
 				<ul>
-					<li><a href="/public/videos/">{% trans "View All" %}</a></li>
-					<li><a href="/public/videos/archive/category/abouteso/"{% if '/videos/archive/category/abouteso/' in request.path %} class="selected"{% endif %}>{% trans "About ESO" %}</a></li>
-					<li><a href="/public/videos/archive/category/alma/"{% if '/videos/archive/category/alma/' in request.path %} class="selected"{% endif %}>{% trans "ALMA" %}</a></li>
-					<li><a href="/public/videos/archive/category/apex/"{% if '/videos/archive/category/apex/' in request.path %} class="selected"{% endif %}>{% trans "APEX" %}</a></li>
-					<li><a href="/public/videos/archive/category/compilations/"{% if '/videos/archive/category/compilations/' in request.path %} class="selected"{% endif %}>{% trans "Compilations" %}</a></li>
-					<li><a href="/public/videos/archive/category/cosmology/"{% if '/videos/archive/category/cosmology/' in request.path %} class="selected"{% endif %}>{% trans "Cosmology" %}</a></li>
-					<li><a href="/public/videos/archive/category/e-elt/"{% if '/videos/archive/category/e-elt/' in request.path %} class="selected"{% endif %}>{% trans "E-ELT" %}</a></li>
-					<li><a href="/public/videos/archive/category/esocast/"{% if '/videos/archive/category/esocast/' in request.path %} class="selected"{% endif %}>{% trans "ESOcast" %}</a></li>
-					<li><a href="/public/videos/archive/category/events/"{% if '/videos/archive/category/events/' in request.path %} class="selected"{% endif %}>{% trans "Events" %}</a></li>
-					<li><a href="/public/videos/archive/category/exoplanets/"{% if '/videos/archive/category/exoplanets/' in request.path %} class="selected"{% endif %}>{% trans "Exoplanets" %}</a></li>
-					<li><a href="/public/videos/archive/category/featuremovies/"{% if '/videos/archive/category/featuremovies/' in request.path %} class="selected"{% endif %}>{% trans "Feature Movies" %}</a></li>
-					<li><a href="/public/videos/archive/category/fulldome/"{% if '/videos/archive/category/fulldome/' in request.path %} class="selected"{% endif %}>{% trans "Fulldome" %}</a></li>
-					<li><a href="/public/videos/archive/category/galaxies/"{% if '/videos/archive/category/galaxies/' in request.path %} class="selected"{% endif %}>{% trans "Galaxies" %}</a></li>
-					<li><a href="/public/videos/archive/category/galaxyclusters/"{% if '/videos/archive/category/galaxyclusters/' in request.path %} class="selected"{% endif %}>{% trans "Galaxy Clusters" %}</a></li>
-					<li><a href="/public/videos/archive/category/lasilla/"{% if '/videos/archive/category/lasilla/' in request.path %} class="selected"{% endif %}>{% trans "La Silla" %}</a></li>
-					<li><a href="/public/videos/archive/category/nebulae/"{% if '/videos/archive/category/nebulae/' in request.path %} class="selected"{% endif %}>{% trans "Nebulae" %}</a></li>
-					<li><a href="/public/videos/archive/category/paranal/"{% if '/videos/archive/category/paranal/' in request.path %} class="selected"{% endif %}>{% trans "Paranal" %}</a></li>
-					<li><a href="/public/videos/archive/category/premises/"{% if '/videos/archive/category/premises/' in request.path %} class="selected"{% endif %}>{% trans "Premises" %}</a></li>
-					<li><a href="/public/videos/archive/category/blackholes/"{% if '/videos/archive/category/blackholes/' in request.path %} class="selected"{% endif %}>{% trans "Quasars and Black Holes" %}</a></li>
-					<li><a href="/public/videos/archive/category/solarsystem/"{% if '/videos/archive/category/solarsystem/' in request.path %} class="selected"{% endif %}>{% trans "Solar System" %}</a></li>
-					<li><a href="/public/videos/archive/category/starclusters/"{% if '/videos/archive/category/starclusters/' in request.path %} class="selected"{% endif %}>{% trans "Star Clusters" %}</a></li>
-					<li><a href="/public/videos/archive/category/stars/"{% if '/videos/archive/category/stars/' in request.path %} class="selected"{% endif %}>{% trans "Stars" %}</a></li>
-					<li><a href="/public/videos/archive/category/vnr/"{% if '/videos/archive/category/vnr/' in request.path %} class="selected"{% endif %}>{% trans "Video News Releases" %}</a></li>
+					<li><a href="/videos/">{% trans "View All" %}</a></li>
+					<li><a href="/videos/archive/category/3d/"{% if '/videos/archive/category/3d/' in request.path %} class="selected"{% endif %}>{% trans "3D Animations" %}</a></li>
+					<li><a href="/videos/archive/category/cosmology/"{% if '/videos/archive/category/cosmology/' in request.path %} class="selected"{% endif %}>{% trans "Cosmology" %}</a></li>
+					<li><a href="/videos/archive/category/dome/"{% if '/videos/archive/category/dome/' in request.path %} class="selected"{% endif %}>{% trans "Dome Masters" %}</a></li>
+					<li><a href="/videos/archive/category/exoplanets/"{% if '/videos/archive/category/exoplanets/' in request.path %} class="selected"{% endif %}>{% trans "Exoplanets" %}</a></li>
+					<li><a href="/videos/archive/category/eyesontheskies/"{% if '/videos/archive/category/eyesontheskies/' in request.path %} class="selected"{% endif %}>{% trans "Eyes on the Skies DVD" %}</a></li>
+					<li><a href="/videos/archive/category/galaxies/"{% if '/videos/archive/category/galaxies/' in request.path %} class="selected"{% endif %}>{% trans "Galaxies" %}</a></li>
+					<li><a href="/videos/archive/category/hd/"{% if '/videos/archive/category/hd/' in request.path %} class="selected"{% endif %}>{% trans "HD Videos" %}</a></li>
+					<li><a href="/videos/archive/category/dvd/"{% if '/videos/archive/category/dvd/' in request.path %} class="selected"{% endif %}>{% trans "Hubble 15 Yeard DVD" %}</a></li>
+					<li><a href="/videos/archive/category/hubble/"{% if '/videos/archive/category/hubble/' in request.path %} class="selected"{% endif %}>{% trans "Hubble Images Videos" %}</a></li>
+					<li><a href="/videos/archive/category/hubblecast/"{% if '/videos/archive/category/hubblecast/' in request.path %} class="selected"{% endif %}>{% trans "Hubblecast" %}</a></li>
+					<li><a href="/videos/archive/category/jwst/"{% if '/videos/archive/category/jwst/' in request.path %} class="selected"{% endif %}>{% trans "James Webb Space Telescope" %}</a></li>
+					<li><a href="/videos/archive/category/misc/"{% if '/videos/archive/category/misc/' in request.path %} class="selected"{% endif %}>{% trans "Miscellaneous" %}</a></li>
+					<li><a href="/videos/archive/category/nebulae/"{% if '/videos/archive/category/nebulae/' in request.path %} class="selected"{% endif %}>{% trans "Nebulae" %}</a></li>
+					<li><a href="/videos/archive/category/blackholes/"{% if '/videos/archive/category/blackholes/' in request.path %} class="selected"{% endif %}>{% trans "Quasars and Black Holes" %}</a></li>
+					<li><a href="/videos/archive/category/solarsystem/"{% if '/videos/archive/category/solarsystem/' in request.path %} class="selected"{% endif %}>{% trans "Solar System" %}</a></li>
+					<li><a href="/videos/archive/category/spacecraft/"{% if '/videos/archive/category/spacecraft/' in request.path %} class="selected"{% endif %}>{% trans "Spacecraft" %}</a></li>
+					<li><a href="/videos/archive/category/starclusters/"{% if '/videos/archive/category/starclusters/' in request.path %} class="selected"{% endif %}>{% trans "Star Clusters" %}</a></li>
+					<li><a href="/videos/archive/category/stars/"{% if '/videos/archive/category/stars/' in request.path %} class="selected"{% endif %}>{% trans "Stars" %}</a></li>
 				</ul>
 			</div>
 			{% endif %}
