@@ -802,16 +802,12 @@ CELERYBEAT_SCHEDULE = {
 ##############
 TINYMCE_JS = "djangoplicity/js/tiny_mce_v3392/tiny_mce.js"
 TINYMCE_JQUERY_JS = "djangoplicity/js/tiny_mce_v3392/jquery.tinymce.js"
-JQUERY_JS = "djangoplicity/js/jquery-1.4.2.min.js"
-ZCLIPBOARD_JS = "djangoplicity/js/ZeroClipboard.js"
-JQUERY_UI_JS = "djangoplicity/js/jquery-ui-1.8.1.custom.min.js"
-JQUERY_UI_CSS = "djangoplicity/css/ui-lightness/jquery-ui-1.8.1.custom.css"
+JQUERY_JS = "jquery/jquery-1.11.1.min.js"
+JQUERY_UI_JS = "jquery-ui-1.11.1/jquery-ui.min.js"
+JQUERY_UI_CSS = "jquery-ui-1.11.1/jquery-ui.min.css"
 DJANGOPLICITY_ADMIN_CSS = "djangoplicity/css/admin.css"
 DJANGOPLICITY_ADMIN_JS = "djangoplicity/js/admin.js"
 SUBJECT_CATEGORY_CSS = "djangoplicity/css/widgets.css"
-SHADOWBOX_JS = "djangoplicity/shadowbox3/shadowbox.js"
-SHADOWBOX_CSS = "djangoplicity/shadowbox3/shadowbox.css"
-SWFOBJECT_JS = "djangoplicity/js/swfobject.js"
 
 REGEX_REDIRECTS = (
 #	( re.compile( '/hubbleshop/webshop/webshop\.php\?show=sales&section=(books|cdroms)' ), '/shop/category/\g<1>/' ),
@@ -844,34 +840,6 @@ REGEX_REDIRECTS = (
 )
 
 SITE_DOMAIN = "www.spacetelescope.org"
-
-##################
-# django-tinymce #
-##################
-TINYMCE_JS_URL = STATIC_URL + "tiny_mce/tiny_mce.js"
-TINYMCE_JS_ROOT = STATIC_ROOT + "tiny_mce"
-TINYMCE_DEFAULT_CONFIG = {
-	#"mode": "textareas",
-	"theme": "advanced",
-	"plugins": "style,layer,table,advimage,insertdatetime,searchreplace,contextmenu,paste,fullscreen,visualchars,nonbreaking",
-	"theme_advanced_buttons1": "fullscreen,code,cleanup,|,cut,copy,paste,pastetext,pasteword,|,search,replace,|,justifyleft,justifycenter,justifyright,justifyfull,|,styleselect,formatselect",
-	"theme_advanced_buttons2": ",bold,italic,underline,strikethrough,|,bullist,numlist,|,outdent,indent,|,undo,redo,|,link,unlink,anchor,image,media,charmap,|,forecolor,backcolor|,styleprops,|,nonbreaking",
-	"theme_advanced_buttons3": "tablecontrols,|,hr,removeformat,visualaid,|,sub,sup,|,insertdate,inserttime,|,insertlayer,moveforward,movebackward,absolute",
-	"theme_advanced_toolbar_location": "top",
-	"theme_advanced_toolbar_align": "left",
-	"theme_advanced_statusbar_location": "bottom",
-	"extended_valid_elements": "a[name|class|href|target|title|onclick],img[usemap|class|src|border=0|alt|title|hspace|vspace|width|height|align|onmouseover|onmouseout|name|style],hr[class|width|size|noshade],span[class|align|style],script[language|type|src],object[width|height|classid|codebase|data|type|id|class|style],param[name|value],embed[src|type|width|height|flashvars|wmode|style],iframe[src|width|height|frameborder|marginheight|marginwidth|align]",
-	#"editor_selector": "vRichTextAreaField",
-	"media_strict": False,
-	#//relative_urls: False,
-	#//remove_script_host: True,
-	#//urlconverter_callback: "url_converter"
-	"convert_urls": False,
-	"gecko_spellcheck": True,
-}
-TINYMCE_SPELLCHECKER = False
-TINYMCE_COMPRESSOR = False
-TINYMCE_FILEBROWSER = False
 
 
 ###########
