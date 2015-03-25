@@ -1,7 +1,6 @@
 {% extends "site-specific/shop/checkout.html" %}
 {% load i18n %}
 {% load djangoplicity_satchmo %}
-{% load djangoplicity_translation %}
 
 {% block site_title %}Checkout | {{ shop_name }}{% endblock%}
 
@@ -19,7 +18,7 @@ reviewed the complete order in step 3.{% endblock %}</p>
 {% endif %}
 
 {% url 'COPOSWEB_satchmo_checkout-step2' as COPOSWEB_satchmo_checkout_step2 %}
-<form class="form-horizontal" role="form" method="post" action="{{ COPOSWEB_satchmo_checkout_step2|url_for_lang:LANGUAGE_CODE }}">{% csrf_token %}
+<form class="form-horizontal" role="form" method="post" action="{{ COPOSWEB_satchmo_checkout_step2 }}">{% csrf_token %}
     {% block payment_table %}
 
 	{% if form.non_field_errors %}

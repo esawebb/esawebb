@@ -1,5 +1,4 @@
 {% extends "base.html" %}
-{% load djangoplicity_translation %}
 {% comment %}
 -------------------------------------------------------------------
 This is the base product detail page.
@@ -87,7 +86,7 @@ ProductVariations or CustomProducts, look for product/detail_xxx.html
 
 		{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
 		{% url 'satchmo_smart_add' as satchmo_smart_add %}
-		<form id="options" action="{{ satchmo_smart_add|url_for_lang:LANGUAGE_CODE }}" method="post">{% csrf_token %}
+		<form id="options" action="{{ satchmo_smart_add }}" method="post">{% csrf_token %}
 		{% trans "Quantity" %} <input type="text" size="5" name="quantity" id="quantity" value="1" class="priced" />
 		<input type="hidden" name="productname" id="productname" value="{{product.slug}}" />
 		<input type="submit" name="addcart" value="{% trans "Add to cart" %}" />

@@ -17,10 +17,9 @@
 <meta name="publisher" content="ESO" />
 <meta name="copyright" content="1999-2008 ESO" />
 
-{% load djangoplicity_translation %}
 {% spaceless %}
 {% for code, lang in LANGUAGES %}
-<link rel="alternate" href="{{ request.path|url_for_lang:code }}" hreflang="{% if code == "en" %}x-default{% else %}{{ code }}{% endif %}" />
+<link rel="alternate" href="{{ request.path }}" hreflang="{% if code == "en" %}x-default{% else %}{{ code }}{% endif %}" />
 {% endfor %}
 {% endspaceless %}
 

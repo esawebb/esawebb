@@ -1,6 +1,5 @@
 {% extends "base.html" %}
 {% load i18n %}
-{% load djangoplicity_translation %}
 
 {% block site_title %}Checkout | {{ shop_name }}{% endblock%}
 
@@ -26,7 +25,7 @@
 		<p>Fields marked with <span class="required">*</span> a required.</p>
 
 		{% url 'satchmo_checkout-step1' as satchmo_checkout_step1 %}
-		<form class="form-horizontal" role="form" method="post" action="{{ satchmo_checkout_step1|url_for_lang:LANGUAGE_CODE }}">{% csrf_token %}
+		<form class="form-horizontal" role="form" method="post" action="{{ satchmo_checkout_step1 }}">{% csrf_token %}
 
 			{% ifequal paymentmethod_ct 1 %}
 				{% comment %}If we only have one payment method, then the form renders it as a hidden field {% endcomment %}{{ form.paymentmethod }}

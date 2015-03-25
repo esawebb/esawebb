@@ -2,7 +2,6 @@
 {% load i18n %}
 {% load satchmo_currency %}
 {% load satchmo_order %}
-{% load djangoplicity_translation %}
 
 {% block body %}
 <div class="row page shop review">
@@ -45,7 +44,7 @@
 
 		<div class="pr_box">
 			{% url 'COPOSWEB_satchmo_checkout-step3' as COPOSWEB_satchmo_checkout_step3 %}
-			<form method="post" action="{{ COPOSWEB_satchmo_checkout_step3|url_for_lang:LANGUAGE_CODE }}" class="orderform">{% csrf_token %}
+			<form method="post" action="{{ COPOSWEB_satchmo_checkout_step3 }}" class="orderform">{% csrf_token %}
 			<input type="hidden" name="Process" value="True">
 			<div class="form-group">
 				<div class=" col-sm-12 text-center">
