@@ -83,8 +83,6 @@ GARCHING_INTERNAL_IPS = (
 
 SITE_ENVIRONMENT = local_settings.SITE_ENVIRONMENT
 DEBUG = local_settings.DEBUG
-DEBUG_SQL = local_settings.DEBUG_SQL
-DEBUG_PROFILER = local_settings.DEBUG_PROFILER
 DEBUG_TOOLBAR = local_settings.DEBUG_TOOLBAR
 TEMPLATE_DEBUG = local_settings.TEMPLATE_DEBUG
 SEND_BROKEN_LINK_EMAILS = local_settings.SEND_BROKEN_LINK_EMAILS
@@ -253,14 +251,6 @@ MIDDLEWARE_CLASSES = (
 	# HTTP or HTTPS.
 	'sslmiddleware.SSLRedirect',
 )
-
-if DEBUG_SQL:
-	# Show all SQL queries being executed as well execution time.
-	MIDDLEWARE_CLASSES += ('djangoplicity_ext.middleware.sqlmiddleware.SQLLogMiddleware',)
-
-if DEBUG_PROFILER:
-	# Enabled profiling of code. Add ?prof to URL to profile request.
-	MIDDLEWARE_CLASSES += ('djangoplicity_ext.middleware.profilemiddleware.ProfileMiddleware',)
 
 if DEBUG_TOOLBAR:
 	# Add debug toolbar to request
@@ -901,9 +891,9 @@ LOGGING = {
 			'level': 'DEBUG' if DEBUG else 'INFO',
 		},
 		'django.db.backends': {
-			'handlers': local_settings.LOGGING_HANDLER if DEBUG_SQL else ['null'],
+			'handlers': local_settings.LOGGING_HANDLER,
 			'propagate': False,
-			'level': 'DEBUG' if DEBUG_SQL else 'INFO',
+			'level': 'INFO',
 		},
 		'sslurllib': {
 			'handlers': ['null', ],
