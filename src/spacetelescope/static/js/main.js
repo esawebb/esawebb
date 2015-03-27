@@ -43,8 +43,7 @@ $(document).ready(function() {
 		// Set top content margin on pages with at least one level1
 		// submenu selected
 		if ($('.level1.current').length !== 0) {
-			$('#content').css('margin-top', '125px');
-			$('#eso-side-logo div.affix').css('top', '145px');
+			$('#content').css('margin-top', '144px');
 		}
 
 		// Set initial menu height
