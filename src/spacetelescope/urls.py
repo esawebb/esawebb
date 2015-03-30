@@ -117,9 +117,9 @@ urlpatterns += patterns( '',
 	( r'^login/$', 'django.contrib.auth.views.login', { 'template_name': 'login.html', 'SSL': True } ),
 	( r'^logout/$', 'django.contrib.auth.views.logout', { 'template_name': 'logout.html', 'SSL': True } ),
 	( r'^password_reset/$', 'django.contrib.auth.views.password_reset', { 'SSL': True, 'email_template_name': 'registration/password_reset_email.txt' } ),
-	( r'^password_reset/done/$', 'django.contrib.auth.views.password_reset_done', { 'SSL': True } ),
-	( r'^reset/(?P<uidb36>[0-9A-Za-z]+)-(?P<token>.+)/$', 'django.contrib.auth.views.password_reset_confirm', { 'SSL': True } ),
-	( r'^reset/done/$', 'django.contrib.auth.views.password_reset_complete', { 'SSL': True } ),
+	( r'^password_reset/done/$', 'django.contrib.auth.views.password_reset_done', { 'SSL': True }, 'password_reset_done' ),
+	( r'^reset/(?P<uidb36>[0-9A-Za-z]+)-(?P<token>.+)/$', 'django.contrib.auth.views.password_reset_confirm', { 'SSL': True }, 'django.contrib.auth.views.password_reset_confirm' ),
+	( r'^reset/done/$', 'django.contrib.auth.views.password_reset_complete', { 'SSL': True }, 'password_reset_complete' ),
 
 	# Shop
 	url( r'^shop/terms/', RedirectView.as_view(url='/shop/terms_conditions/'), name='shop_terms' ),
