@@ -306,38 +306,29 @@ $(document).ready(function(){
 	});
 });
 
-// // Prepare Top100 dedicated carousel
-// $(document).ready(function(){
-	// $('#top100-carousel').slick({
-		// infinite: true,
-		// lazyLoad: 'ondemand',
-		// prevArrow: '<button type="button" class="slide-prev"><span class="fa fa-angle-left"></span</button>',
-		// nextArrow: '<button type="button" class="slide-next"><span class="fa fa-angle-right"></span></button>'
-	// });
-// });
+// Prepare Top100 dedicated carousel
+$(document).ready(function(){
+	$('#top100-carousel').slick({
+		infinite: true,
+		lazyLoad: 'ondemand',
+		prevArrow: '<button type="button" class="slide-prev"><span class="fa fa-angle-left"></span</button>',
+		nextArrow: '<button type="button" class="slide-next"><span class="fa fa-angle-right"></span></button>'
+	});
+});
 
 
-// function top100Fullscreen() {
-	// var elem = document.getElementById('top100-carousel-wrapper');
-	// if (elem.requestFullscreen) {
-		// elem.requestFullscreen();
-	// } else if (elem.msRequestFullscreen) {
-		// elem.msRequestFullscreen();
-	// } else if (elem.mozRequestFullScreen) {
-		// elem.mozRequestFullScreen();
-	// } else if (elem.webkitRequestFullscreen) {
-		// elem.webkitRequestFullscreen();
-	// }
-// }
-
-
-// // Show/Hide ESO logo
-// $(document).scroll(function() {
-	// if ($(document).scrollTop() > 180) {
-		// $('#frontpage-side-logo').css('display', 'block');
-	// } else
-		// $('#frontpage-side-logo').css('display', 'none');
-// });
+function top100Fullscreen() {
+	var elem = document.getElementById('top100-carousel-wrapper');
+	if (elem.requestFullscreen) {
+		elem.requestFullscreen();
+	} else if (elem.msRequestFullscreen) {
+		elem.msRequestFullscreen();
+	} else if (elem.mozRequestFullScreen) {
+		elem.mozRequestFullScreen();
+	} else if (elem.webkitRequestFullscreen) {
+		elem.webkitRequestFullscreen();
+	}
+}
 
 
 // Prepare Pop-ups (previously shadowbox):
