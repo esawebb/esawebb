@@ -5350,13 +5350,8 @@ body {
     height: 118px;
     overflow: hidden;
     position: relative; }
-    .navbar-general-wrapper .navbar-general .title {
-      text-transform: uppercase;
-      font-size: 50px;
-      font-family: monospace;
-      font-weight: 200; }
-      .navbar-general-wrapper .navbar-general .title a {
-        color: #fff; }
+    .navbar-general-wrapper .navbar-general .sprites-title {
+      margin-top: 25px; }
     .navbar-general-wrapper .navbar-general .quicklinks {
       position: absolute;
       top: 20px;

@@ -1,5 +1,6 @@
-/* glue: 0.11.0 hash: cd026b38c8 */
-        .sprites-esa-logo,
+/* glue: 0.11.0 hash: 7e1b489a0a */
+        .sprites-title,
+.sprites-esa-logo,
 .sprites-logo_esocast,
 .sprites-youtube_42px_flat,
 .sprites-vimeo_42px_flat,
@@ -39,224 +40,231 @@
             background-repeat: no-repeat;
         }
         
-        .sprites-esa-logo {
+        .sprites-title {
             background-position: 0 0;
+            width: 382px;
+            height: 42px;
+        }
+        
+        .sprites-esa-logo {
+            background-position: 0 -42px;
             width: 100px;
             height: 37px;
         }
         
         .sprites-logo_esocast {
-            background-position: 0 -37px;
+            background-position: -100px -42px;
             width: 50px;
             height: 29px;
         }
         
         .sprites-youtube_42px_flat {
-            background-position: -100px 0;
+            background-position: 0 -79px;
             width: 44px;
             height: 44px;
         }
         
         .sprites-vimeo_42px_flat {
-            background-position: 0 -66px;
+            background-position: -44px -79px;
             width: 44px;
             height: 44px;
         }
         
         .sprites-twitter_42px_flat {
-            background-position: -44px -66px;
+            background-position: -88px -79px;
             width: 44px;
             height: 44px;
         }
         
         .sprites-scribd_42px_flat {
-            background-position: -88px -66px;
+            background-position: -132px -79px;
             width: 44px;
             height: 44px;
         }
         
         .sprites-pinterest_42px_flat {
-            background-position: -144px 0;
+            background-position: -176px -79px;
             width: 44px;
             height: 44px;
         }
         
         .sprites-livestream_42px_flat {
-            background-position: -144px -44px;
+            background-position: -220px -79px;
             width: 44px;
             height: 44px;
         }
         
         .sprites-linkedin_42px_flat {
-            background-position: 0 -110px;
+            background-position: -264px -79px;
             width: 44px;
             height: 44px;
         }
         
         .sprites-issu_42px_flat {
-            background-position: -44px -110px;
+            background-position: -308px -79px;
             width: 44px;
             height: 44px;
         }
         
         .sprites-googleplus_42px_flat {
-            background-position: -88px -110px;
+            background-position: 0 -123px;
             width: 44px;
             height: 44px;
         }
         
         .sprites-flickr_42px_flat {
-            background-position: -132px -110px;
+            background-position: -44px -123px;
             width: 44px;
             height: 44px;
         }
         
         .sprites-facebook_42px_flat {
-            background-position: -188px 0;
+            background-position: -88px -123px;
             width: 44px;
             height: 44px;
         }
         
         .sprites-apple_42px_flat {
-            background-position: -188px -44px;
+            background-position: -132px -123px;
             width: 44px;
             height: 44px;
         }
         
         .sprites-magnet {
-            background-position: -188px -88px;
+            background-position: -150px -42px;
             width: 27px;
             height: 27px;
         }
         
         .sprites-icon_zoom {
-            background-position: -188px -115px;
+            background-position: -177px -42px;
             width: 27px;
             height: 26px;
         }
         
         .sprites-icon_zip {
-            background-position: -50px -37px;
+            background-position: -204px -42px;
             width: 27px;
             height: 26px;
         }
         
         .sprites-icon_slides {
-            background-position: 0 -154px;
+            background-position: -231px -42px;
             width: 27px;
             height: 26px;
         }
         
         .sprites-icon_shop {
-            background-position: -27px -154px;
+            background-position: -258px -42px;
             width: 27px;
             height: 26px;
         }
         
         .sprites-icon_ppt {
-            background-position: -54px -154px;
+            background-position: -285px -42px;
             width: 27px;
             height: 26px;
         }
         
         .sprites-icon_phot {
-            background-position: -81px -154px;
+            background-position: -312px -42px;
             width: 27px;
             height: 26px;
         }
         
         .sprites-icon_pdf {
-            background-position: -108px -154px;
+            background-position: -339px -42px;
             width: 27px;
             height: 26px;
         }
         
         .sprites-icon_movie {
-            background-position: -135px -154px;
+            background-position: -352px -79px;
             width: 27px;
             height: 26px;
         }
         
         .sprites-icon_magnet {
-            background-position: 0 -180px;
+            background-position: -176px -123px;
             width: 27px;
             height: 27px;
         }
         
         .sprites-icon_doc {
-            background-position: -162px -154px;
+            background-position: -203px -123px;
             width: 27px;
             height: 26px;
         }
         
         .sprites-icon_audio {
-            background-position: -189px -154px;
+            background-position: -230px -123px;
             width: 27px;
             height: 26px;
         }
         
         .sprites-icon_word {
-            background-position: -144px -88px;
+            background-position: -257px -123px;
             width: 22px;
             height: 22px;
         }
         
         .sprites-icon_wallpaper {
-            background-position: -166px -88px;
+            background-position: -279px -123px;
             width: 22px;
             height: 22px;
         }
         
         .sprites-icon_txt {
-            background-position: -100px -44px;
+            background-position: -301px -123px;
             width: 22px;
             height: 22px;
         }
         
         .sprites-icon_qt {
-            background-position: -122px -44px;
+            background-position: -323px -123px;
             width: 22px;
             height: 22px;
         }
         
         .sprites-icon_pal {
-            background-position: -77px -37px;
+            background-position: -345px -123px;
             width: 22px;
             height: 22px;
         }
         
         .sprites-icon_mpeg {
-            background-position: -27px -180px;
+            background-position: 0 -167px;
             width: 22px;
             height: 22px;
         }
         
         .sprites-icon_images {
-            background-position: -49px -180px;
+            background-position: -22px -167px;
             width: 22px;
             height: 22px;
         }
         
         .sprites-icon_flv {
-            background-position: -71px -180px;
+            background-position: -44px -167px;
             width: 22px;
             height: 22px;
         }
         
         .sprites-icon_film {
-            background-position: -93px -180px;
+            background-position: -66px -167px;
             width: 22px;
             height: 22px;
         }
         
         .sprites-rssicon {
-            background-position: -115px -180px;
+            background-position: -352px -105px;
             width: 18px;
             height: 18px;
         }
         
         @media screen and (-webkit-min-device-pixel-ratio: 1.0), screen and (min--moz-device-pixel-ratio: 1.0), screen and (-o-min-device-pixel-ratio: 100/100), screen and (min-device-pixel-ratio: 1.0), screen and (min-resolution: 1.0dppx) {
-            .sprites-esa-logo,
+            .sprites-title,
+    .sprites-esa-logo,
     .sprites-logo_esocast,
     .sprites-youtube_42px_flat,
     .sprites-vimeo_42px_flat,
@@ -293,9 +301,9 @@
     .sprites-icon_film,
     .sprites-rssicon {
                 background-image: url('../sprites/sprites.png');
-                -webkit-background-size: 232px 207px;
-                -moz-background-size: 232px 207px;
-                background-size: 232px 207px;
+                -webkit-background-size: 382px 189px;
+                -moz-background-size: 382px 189px;
+                background-size: 382px 189px;
             }
         }
         

@@ -216,15 +216,8 @@ body {
 		overflow: hidden;
 		position: relative;
 
-		.title {
-			text-transform: uppercase;
-			font-size: 50px;
-			font-family: monospace;
-			font-weight: 200;
-
-			a {
-				color: #fff;
-			}
+		.sprites-title {
+			margin-top: 25px;
 		}
 
 		.quicklinks {
