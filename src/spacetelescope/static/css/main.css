@@ -5226,7 +5226,7 @@ body {
 
 @media (min-width: 1025px) {
   #content {
-    margin-top: 118px; } }
+    margin-top: 119px; } }
 #content .slick-slider {
   margin-bottom: 0; }
 
@@ -5973,7 +5973,7 @@ body {
     font-size: 20px;
     text-align: center; }
   .frontpage-section #social-links .icons {
-    padding: 0 40px 5px; }
+    padding: 40px; }
     .frontpage-section #social-links .icons div {
       display: inline-block; }
       .frontpage-section #social-links .icons div:hover {
