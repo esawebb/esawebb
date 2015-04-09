@@ -194,7 +194,6 @@ body {
 
 // General navbar (with flags, etc.)
 .navbar-general-wrapper {
-	position: fixed;
 	top: 0;
 	left: 0;
 	right: 0;
@@ -205,6 +204,10 @@ body {
 	border-bottom: 1px solid #fff;
 	box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
 
+	@media (min-width: $mobile-breakpoint) {
+		position: fixed;
+	}
+
 	.navbar-general {
 		background-image: url('../images/banner.jpg');
 		max-width: $content-width;
@@ -212,12 +215,19 @@ body {
 		margin-right: auto;
 		padding-left: $grid-gutter-width / 2;
 		padding-right: $grid-gutter-width / 2;
-		height: 118px;
 		overflow: hidden;
 		position: relative;
 
+		@media (min-width: $mobile-breakpoint) {
+			height: 118px;
+		}
+
 		.sprites-title {
 			margin-top: 25px;
+
+			@media (max-width: $mobile-breakpoint) {
+			margin-top: 10px;
+			}
 		}
 
 		.quicklinks {
@@ -225,6 +235,10 @@ body {
 			top: 20px;
 			right: 120px;
 			text-transform: uppercase;
+
+			@media (max-width: $mobile-breakpoint) {
+				display: none;
+			}
 
 			a {
 				display: inline-block;
@@ -236,7 +250,9 @@ body {
 		.toplogo {
 			position: absolute;
 			right: 0;
-			top: 20px;
+			@media (min-width: $mobile-breakpoint) {
+				top: 20px;
+			}
 		}
 	}
 }
