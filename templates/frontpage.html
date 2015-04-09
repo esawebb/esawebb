@@ -71,6 +71,19 @@
 
 <div class="row frontpage-section">
 	{% if hubblecasts %}
+	<script type="text/javascript">
+		{% comment %}
+		Create array of slides/IDs so that jwplayer can be activated
+		on slide changes
+		{% endcomment %}
+		var hubblecasts_slides = [
+		{% spaceless %}
+		{% for hubblecast in hubblecasts %}
+			"{{ hubblecast.id }}",
+		{% endfor %}
+		{% endspaceless %}
+		];
+	</script>
 	<div class="col-md-6">
 		<div id="hubblecast-carousel-wrapper">
 			<div class="section-header">
@@ -81,15 +94,19 @@
 				</div>
 			</div>
 			<div id="hubblecast-carousel">
-				{% embedvideo_subs hubblecasts.0 'medium_podcast,h264' 'hd_and_apple,hd720p_screen,dome_preview' '' hubblecasts.0.videosubtitle_set.all 0 %}
-				<a href="{{ hubblecasts.0.get_absolute_url }}">
-				<div class="hubblecast-description">
-						<div class="date">{{ hubblecasts.0.release_date|datetime:"DATE" }} — {{ hubblecasts.0.id }}</div>
-						<div class="title">{{ hubblecasts.0.title }}</div>
-				</div>
-				</a>
+				{% for hubblecast in hubblecasts %}
+				<div class="slide">
+					{% embedvideo_subs hubblecast 'medium_podcast,h264' 'hd_and_apple,hd720p_screen,dome_preview' '' hubblecast.videosubtitle_set.all 0 %}
+					<a href="{{ hubblecast.get_absolute_url }}">
+					<div class="hubblecast-description">
+							<div class="date">{{ hubblecast.release_date|datetime:"DATE" }} — {{ hubblecast.id }}</div>
+							<div class="title">{{ hubblecast.title }}</div>
+					</div>
+					</a>
+				</div> <!-- slide -->
+				{% endfor %}
 			</div> <!-- hubblecast-carousel -->
-	</div>
+		</div>
 	</div>
 	{% endif %}
 	{% if potws %}
@@ -220,8 +237,31 @@ $(document).ready(function(){
 	$(annTitleSelector).height(maxAnnHeight);
 
 	// Setup hubblecasts video
-	{% if hubblecasts.0 %}
+	{% if hubblecasts %}
 		setupVideoPlayer('{{ hubblecasts.0.id }}');
+
+		// Activate next hubblecast on slide change
+		$('#hubblecast-carousel').on('beforeChange', function(event, slick, currentSlide, nextSlide){
+			// Pause all running video players
+			for (i = 0 ; ; i++) {
+				if (jwplayer(i).pause) {
+					// If true then such a video player exists
+					jwplayer(i).pause(true);
+				}
+				else break;
+			}
+
+			var video_id = hubblecasts_slides[nextSlide];
+			// If we have a video id, and if the slide is not the first one
+			// the we set it up
+			if (video_id && nextSlide != 0) {
+				setupVideoPlayer(video_id);
+				// We only need to setup the video player once, so we set the
+				// video id to null if the slide is loaded again
+				hubblecasts_slides[nextSlide] = null;
+			}
+		});
+
 	{% endif %}
 });                                                                             
             

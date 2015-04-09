@@ -5941,6 +5941,10 @@ body {
   margin-top: 20px; }
 .frontpage-section #hubblecast-carousel-wrapper {
   border: 1px solid gainsboro; }
+  .frontpage-section #hubblecast-carousel-wrapper #hubblecast-carousel.slick-initialized .slide {
+    visibility: visible; }
+  .frontpage-section #hubblecast-carousel-wrapper #hubblecast-carousel .slide {
+    visibility: hidden; }
   @media (min-width: 992px) {
     .frontpage-section #hubblecast-carousel-wrapper #hubblecast-carousel {
       max-height: 313px; } }

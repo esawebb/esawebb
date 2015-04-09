@@ -350,6 +350,15 @@
 		border: 1px solid $border-grey;
 
 		#hubblecast-carousel {
+
+			&.slick-initialized .slide {
+				visibility: visible;
+			}
+
+			.slide {
+				visibility: hidden;
+			}
+
 			// The jwplayer somehow adds a few pixels, so we cap the max-height
 			// when displayed in two columns
 			@media (min-width: 992px) {
