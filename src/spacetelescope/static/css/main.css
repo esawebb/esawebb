@@ -5344,6 +5344,7 @@ body {
       position: fixed; } }
   .navbar-general-wrapper .navbar-general {
     background-image: url("../images/banner.jpg");
+    background-repeat: no-repeat;
     max-width: 1160px;
     margin-left: auto;
     margin-right: auto;
