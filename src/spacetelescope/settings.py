@@ -1079,7 +1079,7 @@ PIPELINE_CSS = {
 	'extras': {
 		'source_filenames': (
 			'jquery-ui-1.11.1/jquery-ui.min.css',
-			'slick/slick/slick.css',
+			'slick-1.5.0/slick/slick.css',
 			'justified-gallery/css/justifiedGallery.min.css',
 			'magnific-popup/magnific-popup.css',
 		),
@@ -1094,7 +1094,7 @@ PIPELINE_JS = {
 			'jquery-ui-1.11.1/jquery-ui.min.js',
 			'bootstrap/bootstrap-3.1.1-dist/js/bootstrap.min.js',
 			'js/jquery.menu-aim.js',
-			'slick/slick/slick.min.js',
+			'slick-1.5.0/slick/slick.min.js',
 			'djangoplicity/jwplayer/jwplayer.js',
 			'djangoplicity/js/jquery.beforeafter-1.4.js',
 			'djangoplicity/zoomify/js/ZoomifyImageViewerExpress-min.js',
