@@ -1162,6 +1162,7 @@ MEDIA_CONTENT_SERVERS = {
 			'dome_preview',
 		),
 		url='http://cdn.spacetelescope.org/',
+		url_bigfiles='http://cdn2.spacetelescope.org/',
 		remote_dir='/www/',
 		host='push-19.cdn77.com',
 		username='user_v220pif3',
