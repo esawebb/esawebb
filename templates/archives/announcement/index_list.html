@@ -9,23 +9,21 @@
 <div class="row news-list">
 	{% for ann in row %}
 	<div class="col-md-3 col-sm-6 col-xs-12">
-		<div class="news-wrapper">
-			{% if ann.main_visual and ann.main_visual.resource_thumb350x %}
-			<div class="news-image">
-				<a href="{{ ann.get_absolute_url }}">
-				<img class="img-responsive" src="{{ ann.main_visual.resource_thumb350x.url }}">
-				</a>
-			</div>
-			{% endif %}
-			<div class="news-description">
-				<a href="{{ ann.get_absolute_url }}">
+		<a href="{{ ann.get_absolute_url }}">
+			<div class="news-wrapper">
+				{% if ann.main_visual and ann.main_visual.resource_thumb350x %}
+				<div class="news-image">
+					<img class="img-responsive" src="{{ ann.main_visual.resource_thumb350x.url }}">
+				</div>
+				{% endif %}
+				<div class="news-description">
 					<div class="news-id">{{ ann.id }} — {% trans "Announcement" %}</div>
 					<div class="news-title">{{ ann.title }}</div>
-				</a>
-				<div class="news-teaser"><strong>{{ ann.release_date|datetime:"DATE" }}</strong>: {{ ann.description|safe|striptags|truncatewords:150 }}</div>
-			</div>
-			<div class="news-readmore"><a href="{{ ann.get_absolute_url }}">{% trans "Read more" %}</a></div>
-		</div> <!-- news-wrapper -->
+					<div class="news-teaser"><strong>{{ ann.release_date|datetime:"DATE" }}</strong>: {{ ann.description|safe|striptags|truncatewords:150 }}</div>
+				</div>
+				<div class="news-readmore">{% trans "Read more" %}</div>
+			</div> <!-- news-wrapper -->
+		</a>
 	</div>
 	{% endfor %}
 </div>
