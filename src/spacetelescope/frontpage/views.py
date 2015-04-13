@@ -23,7 +23,7 @@ class FrontpageView(TemplateView):
 	def get_context_data(self, **kwargs):
 		context = super(FrontpageView, self).get_context_data(**kwargs)
 
-		context['announcements'] = Announcement.get_latest_announcement(5, only_featured=True)
+		context['announcements'] = Announcement.get_latest_announcement(20, only_featured=True)
 		context['highlights'] = Highlight.objects.filter(published=True)
 		context['hubblecasts'] = VideoOptions.Queries.category.queryset(Video, VideoOptions, self.request, stringparam='hubblecast')[0].order_by('-release_date',)[:10]
 		context['potws'] = PictureOfTheWeekOptions.Queries.default.queryset(PictureOfTheWeek, PictureOfTheWeekOptions, self.request)[0][:10]

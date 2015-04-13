@@ -42,7 +42,7 @@
 <div class="row no-page shop">
 	<div class="col-md-9">
 		{% if category.description %}
-			<p class="product_category_description">{{ category.description }}</p>
+			<p class="product_category_description">{{ category.description|safe }}</p>
 		{% endif %}
 		{% if category.get_active_children %}
 
