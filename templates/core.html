@@ -6,13 +6,9 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta name="google-site-verification" content="KTjYtxjG6PEMU6XMF7LY4nMnJ7MXxYaNzVY6SYTo1Qc" />
-	<meta property="og:type" content="website" />
-	<meta property="og:title" content="ESA/Hubble" />
 	<meta name="author" content="information@eso.org" />
 	{% spaceless %}
 	{% endspaceless %}
-	<!-- <meta property="og:image" content="http://supernova.eso.org" /> -->
-	<!-- <meta property="og:image:secure_url" content="https://supernova.eso.org" /> -->
 	<link href="http://www.spacetelescope.org/rss/feed.xml" rel="alternate" type="application/rss+xml" title="Hubble Space Telescope News">
 	<link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,600italic,400,600' rel='stylesheet' type='text/css'>
 
@@ -27,6 +23,8 @@
 		<script src="//oss.maxcdn.com/respond/1.4.2/respond.min.js"></SCRIpt>
 		<script src="//oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
 	<![endif]-->
+
+	{% include "archives/opengraph.html" %}
 	{% block extra_header %}
 	{% endblock %}
 </head>
