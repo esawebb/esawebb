@@ -185,6 +185,18 @@ h3.archivegrouptitle {
 	margin-bottom: $grid-gutter-width;
 
 	& > a {
+
+		.potw {
+			position: absolute;
+			top: 0;
+			right: 0;
+			padding: 10px;
+			font-size: 20px;
+			line-height: 20px;
+			color: $dark-box-border;
+			background-color: rgba(0, 0, 0, 0.6);
+		}
+
 		& > .title {
 			position: absolute;
 			display: block;
@@ -200,6 +212,13 @@ h3.archivegrouptitle {
 
 		&:hover {
 			border: 2px solid $hubble-blue;
+
+			.potw {
+				// -2px to compensate for a's border
+				top: -2px;
+				right: -2px;
+				color: $hubble-yellow;
+			}
 
 			.title {
 				opacity: 1;

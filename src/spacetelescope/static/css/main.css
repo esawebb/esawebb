@@ -6174,6 +6174,15 @@ h3.archivegrouptitle {
 
 .image-list {
   margin-bottom: 20px; }
+  .image-list > a .potw {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 10px;
+    font-size: 20px;
+    line-height: 20px;
+    color: #646464;
+    background-color: rgba(0, 0, 0, 0.6); }
   .image-list > a > .title {
     position: absolute;
     display: block;
@@ -6187,6 +6196,10 @@ h3.archivegrouptitle {
     background-color: rgba(0, 0, 0, 0.6); }
   .image-list > a:hover {
     border: 2px solid #3f9efa; }
+    .image-list > a:hover .potw {
+      top: -2px;
+      right: -2px;
+      color: #f1b401; }
     .image-list > a:hover .title {
       opacity: 1;
       filter: alpha(opacity=100);

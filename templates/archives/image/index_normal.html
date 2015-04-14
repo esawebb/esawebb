@@ -10,6 +10,11 @@
 {% for image in object_list %}
 	<a href="{{ image.get_absolute_url }}" class="item">
 		<img src="{{ image.resource_thumb300y.url }}" alt="{{ image.title }}" />
+		{% if image.pictureoftheweek_set.all %}
+			<div class="potw" data-toggle="tooltip" data-placement="left" title="Picture of the Week, {{ image.pictureoftheweek_set.all.0.release_date|date:"DATE_FORMAT" }}">
+				<span class="fa fa-star"></span>
+			</div>
+		{% endif %}
 		<div class="title">{{ image.title }}</div>
 	</a>
 {% endfor %}
