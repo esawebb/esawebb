@@ -602,6 +602,7 @@ ARCHIVES = (
 	('djangoplicity.products.models.TechnicalDocument', 'djangoplicity.products.options.TechnicalDocumentOptions'),
 	('djangoplicity.products.models.UserVideo', 'djangoplicity.products.options.UserVideoOptions'),
 	('djangoplicity.products.models.VirtualTour', 'djangoplicity.products.options.VirtualTourOptions'),
+	('djangoplicity.products.models.Model3d', 'djangoplicity.products.options.Model3dOptions'),
 	('djangoplicity.newsletters.models.Newsletter', 'djangoplicity.newsletters.options.NewsletterOptions'),
 )
 
