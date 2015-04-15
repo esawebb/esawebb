@@ -2,6 +2,7 @@
 
 {% load djangoplicity_datetime %}
 {% load media_video %}
+{% load pages %}
 {% load i18n %} 
 
 {% block extra_header %}
@@ -38,6 +39,8 @@
 </div> <!-- pr-carousel-wrapper -->
 
 <div class="container" id="body">
+
+{% embed_page_no_unpublished frontpage_main %}
 
 {% if announcements %}
 <div class="row announcements">
