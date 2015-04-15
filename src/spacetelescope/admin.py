@@ -16,7 +16,6 @@ import django.contrib.auth.admin
 import django.contrib.redirects.admin
 import django.contrib.sites.admin
 import djangoplicity.announcements.admin
-import djangoplicity.contrib.statistics.admin
 import djangoplicity.menus.admin
 import djangoplicity.pages.admin
 import djangoplicity.media.admin
