@@ -472,7 +472,7 @@ body {
 
 .alert-danger {
 	a {
-		color: #a94442;
+		color: $alert-danger-text;
 		text-decoration: underline;
 	}
 }
