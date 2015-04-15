@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+{% load i18n %}
+{% load compressed %}
+<html lang="{{ LANGUAGE_CODE }}">
+<head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb#">
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<base target="_top" />
+<meta name="robots" content="index,follow" />
+<meta name="author" content="information@eso.org" />
+<meta name="page-topic" content="Astronomy" />
+<meta name="page-type" content="Research Organisation" />
+<meta name="organisation" content="ESO, European Organisation for Astronomical Research in the Southern Hemisphere" />
+<meta name="Content-Language" content="en" />
+<meta name="Language" content="en" />
+<meta name="publisher" content="ESO" />
+<meta name="copyright" content="1999-2008 ESO" />
+
+{% spaceless %}
+{% for code, lang in LANGUAGES %}
+<link rel="alternate" href="{{ request.path }}" hreflang="{% if code == "en" %}x-default{% else %}{{ code }}{% endif %}" />
+{% endfor %}
+{% endspaceless %}
+
+<!-- <link rel="shortcut icon" href="http://www.eso.org/public/archives/favicon.ico" /> -->
+{% load djangoplicity_utils %}
+<title>{{page.title}} {{page.section.append_title}} | ESO{% if LANGUAGE_CODE != 'en' %} {{ LANGUAGE_CODE|code_to_local_country }}{% endif %}</title>
+
+
+{% load djangoplicity_utils %}
+
+<!--[if lt IE 9]>
+	{% compressed_js 'ie8compat' %}
+	<script src="//oss.maxcdn.com/respond/1.4.2/respond.min.js"></SCRIpt>
+	<script src="//oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+<![endif]-->
+
+{% include "archives/opengraph.html" %}
+
+{% if page.description %}
+	<meta name="description" content="{{page.description}}" />{% endif %}{% if page.keywords %}
+	<meta name="keywords" content="{{page.keywords}}" />{% endif %}
+
+</head>
+
+<body>
+
+{% if not page.is_online %}
+<div id="preview_text">
+<h3>PREVIEW</h3>
+<p>The following page is not public accessible. Reason:</p>
+{% if not page.published %}
+<p>Page is <strong>unpublished</strong>.</p>
+{% else %}
+<p>
+{% if page.start_publishing %}Page goes online {{ page.start_publishing|date }} at {{ page.start_publishing|date:"H:i" }}<br />{% endif %}
+{% if page.end_publishing %}<p>Page goes offline {{ page.end_publishing|date }} at {{ page.end_publishing|date:"H:i" }}{% endif %}
+</p>
+{% endif %}
+</div>
+{% endif %}
+
+{% load pages %}
+{% user_can_edit user page as can_edit_page %}
+{% if can_edit_page %}<div class="admin_bar"><div id="djnote">Djangoplicity Admin</div><div id="djlinks"><a href="{% url 'admin_site:pages_page_change' page.id %}">Edit</a></div></div>{% endif %}
+
+<div class='page_content'>
+{% if LANGUAGE_CODE != 'en' %}
+<div class="par parsys"><div class="title section">
+	<div style="float: right; margin: 10px 10px 0 0" class="sprites-flag_{{ LANGUAGE_CODE|code_to_country_code }}"></div>
+</div>
+{% endif %}
+{{ page.content }}
+</div>
+
+</body>
+</html>

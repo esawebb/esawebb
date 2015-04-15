@@ -1,0 +1,174 @@
+{% extends "base_feature.html" %}
+{% load djangoplicity_datetime %}
+{%block mainblock%}
+		<div class='grid_6 fp_news'>
+			<h1>
+				<a href="{% url 'announcements_defaultquery' %}">Announcements</a>
+				<a href="http://feeds.feedburner.com/hubble_announcements/" class=''><img src='{{MEDIA_URL}}images/rssicon.png' /></a> 
+			</h1>
+			
+			{% for object in announcements %}
+			<div class='entry'>
+				{% if object.main_visual.resource_newsmini %}<a href="{{object.get_absolute_url}}"><img src='{{ object.main_visual.resource_newsmini.url }}' /></a>
+				<div class='info withimg'>
+				{% else %}
+				<div class='info extra'>
+				{% endif %}
+					<div class='date'>{{ object.release_date|datetime:"DATE_LONG"}}</div>
+					<div class='title'><a href="{{object.get_absolute_url}}">{{ object.title }}</a></div>
+				</div>
+			</div>
+			<div class="clear"></div>
+			{% endfor %}
+
+		</div>
+		<div class='grid_6 fp_news'>
+			<h1>
+				<a href="{% url 'videos_query_category' "hubblecast" %}">Hubblecast</a>
+				<a href="http://feeds.feedburner.com/hubblecast/" class=''><img src='{{MEDIA_URL}}images/rssicon.png' /></a> 
+				
+			</h1>
+			
+			{% for object in hubblecasts %}
+			<div class='entry'>
+				{% if object.resource_newsmini %}<a href="{{object.get_absolute_url}}"><img src='{{ object.resource_newsmini.url }}' /></a>
+				<div class='info withimg'>
+				{% else %}
+				<div class='info extra'>
+				{% endif %}
+					<div class='date'>{{ object.release_date|datetime:"DATE_LONG"}}</div>
+					<div class='title'><a href="{{object.get_absolute_url}}">{{ object.title }}</a></div>
+				</div>
+				
+			</div>
+			<div class="clear"></div>
+			{% endfor %}
+						
+		</div>
+		<div class='grid_4 '>
+			<div class='leftbord2 xtrapad'>
+				{% load pages %}{% embed_page spacetelescope.frontpage_rightcol %}
+				<div class='potd_box'>
+				<h1 class='thin'>Archive</h1><h1>Picture of the Day</h1>
+				<a href="{{potd.get_absolute_url}}"><img src='{% if potd.resource_potwmedium %}{{potd.resource_potwmedium.url}}{% else %}{{potd.resource_wallpaperthumbs.url}}{% endif %}' /></a>
+				<div class='title'><a href="{{potd.get_absolute_url}}">{{potd.title}}</a></div>
+				</div>
+				<div class="potd_separator"></div>
+				<div class='potd_box'>
+				<h1 class='thin'>Archive</h1><h1>Video of the Day</h1>
+				<a href="{{votd.get_absolute_url}}"><img src='{% if votd.resource_potwmedium %}{{votd.resource_potwmedium.url}}{% else %}{{votd.resource_thumb.url}}{% endif %}' /></a>
+				<div class='title'><a href="{{votd.get_absolute_url}}">{{votd.title}}</a></div>
+				</div>
+			</div>
+		</div>
+	
+		<div class='grid_6 fp_news'>
+		<div class='fpviewall'>
+		<a href="{% url 'announcements_defaultquery' %}">View all announcements</a>
+		</div>
+		</div>
+		<div class='grid_6 fp_news'>
+		<div class='fpviewall'>
+		<a href="{% url 'videos_query_category' "hubblecast" %}">View all Hubblecast episodes</a>
+		</div>
+		</div>
+		
+		<div class='clear'></div>
+		
+		
+				
+		<div class='social_icons'>
+			<div class='grid_2 sp follow small'>
+			Follow Spacetelescope on
+			</div>
+			
+			<div class='grid_2'>
+				<a href="http://www.facebook.com/HubbleESA" target='_blank' id='fb'>
+					<img src='{{MEDIA_URL}}images/social/bw/fb.png'></img>
+				</a>
+			</div>
+			<div class='grid_2 yo'>
+				<a href="http://www.youtube.com/user/HubbleESA" target='_blank' id='tw'>
+					<img src='{{MEDIA_URL}}images/social/bw/youtube.png'></img>
+				</a>
+			</div>
+			<div class='grid_2 yo'>
+				<a href="http://twitter.com/hubble_space" target='_blank' id='yt'>
+					<img src='{{MEDIA_URL}}images/social/bw/twitter.png'></img>
+				</a>
+			</div>
+			<div class='grid_2 yo'>
+				<a href="http://itunes.apple.com/de/podcast/hubblecast-hd/id258935617" target='_blank' id='it'>
+					<img src='{{MEDIA_URL}}images/social/bw/itunes.png'></img>
+				</a>
+			</div>
+			<div class='grid_2 yo'>
+				<a href="http://www.dailymotion.com/spacetelescope_org" target='_blank' id='dm'>
+					<img src='{{MEDIA_URL}}images/social/bw/dailymotion.png'></img>
+				</a>
+			</div>
+			<div class='grid_2 yo'>
+				<a href="http://www.vimeo.com/hubbleesa" target='_blank' id='vi'>
+					<img src='{{MEDIA_URL}}images/social/bw/vimeo.png'></img>
+				</a>
+			</div>
+			<div class='grid_2 yo'>
+				<a href="http://www.flickr.com/photos/hubble_esa" target='_blank' id='fl'>
+					<img src='{{MEDIA_URL}}images/social/bw/flickr.png'></img>
+				</a>
+			</div>
+		</div>
+		
+		<div class='fpicon_area'>
+			<div class='fpicon grid_2'>
+			<a href="/Hubble25/">
+			<img src='{{MEDIA_URL}}images/frontpageicons/hst_25th_anniversary.png' />
+			</a>
+			</div>
+
+			<div class='fpicon grid_2'>
+			<a href="/Hubble25/odetohubble/">
+			<img src='{{MEDIA_URL}}images/frontpageicons/hst_odehubble.jpg' />
+			</a>
+			</div>
+
+			<div class='fpicon grid_2'>
+			<a href="/newsletters/">
+			<img src='{{MEDIA_URL}}images/frontpageicons/newsletters_icon.jpg' />
+			</a>
+			</div>
+
+			<div class='fpicon grid_2'>
+			<a href="/videos/archive/category/hubblecast/">
+			<img src='{{MEDIA_URL}}images/frontpageicons/hubblecast.jpg' />
+			</a>
+			</div>
+
+			<div class='fpicon grid_2'>
+			<a href="http://itunes.apple.com/en/app/hubble-top-100/id426922803">
+			<img src='{{MEDIA_URL}}images/frontpageicons/ipadtop100.jpg' />
+			</a>
+			</div>
+
+			<div class='fpicon grid_2'>
+			<a href="/images/archive/top100/">
+			<img src='{{MEDIA_URL}}images/frontpageicons/top100.jpg' />
+			</a>
+			</div>
+
+			<div class='fpicon grid_2'>
+			<a href="/shop/">
+			<img src='{{MEDIA_URL}}images/frontpageicons/hubbleshop.jpg' />
+			</a>
+			</div>
+			
+			<div class='fpicon grid_2'>
+			<a href="http://www.portaltotheuniverse.org">
+			<img src='{{MEDIA_URL}}images/frontpageicons/pttu.jpg' />
+			</a>
+			</div>
+		</div>
+	</div>
+
+{%endblock%}
+

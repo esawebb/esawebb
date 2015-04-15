@@ -1,0 +1,15 @@
+{% load menus %}
+{% load i18n %}
+{% for entry in submenu %}
+<li class="{% if entry.children|length %}submenu{% endif %}{% if entry.leaf_selected or entry.selected %} current{% if entry.leaf_selected %} current-leaf{% endif %}{% endif %}"><a href="{{ entry.link|default:"#" }}"{% if entry.on_click %} target="_blank"{% endif %}>{% trans entry.title|safe %}
+	{% if entry.children|length %}<span class="desktop-children topmenu-arrow fa fa-angle-right"></span> {% endif %}</a>
+	{% if entry.children|length %}
+	<span class="mobile-children">
+		<span class="fa fa-angle-down"></span>
+	</span>
+	<ul id="submenu-aim-{{ entry.id }}" class="submenu-aim sublevel{% if entry.leaf_selected or entry.selected %} selected{% endif %}{% for child in entry.children %}{% if child.selected or child.leaf_selected %} current{% if child.leaf_selected %} current-leaf{% endif %}{% endif %}{% endfor %}">
+		{% render_submenu entry.children main_children %}
+	</ul>
+	{% endif %}
+</li>
+{% endfor %}

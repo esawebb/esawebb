@@ -1,0 +1,65 @@
+{% spaceless %}
+{% load staticfiles %}
+{% if sd_resource or hd_resource %}
+{% with config="config_"|add:video_id %}
+<div id="videoplayer-{{ video_id }}">
+
+<script type="text/javascript">
+
+function fix_protocol( link ) {
+	protocol = document.location.protocol;
+	link_protocol = link.substr( 0, 5);
+	if ( link_protocol == "http:" && protocol == "https:" ) {
+		return "https:" + link.substr( 5 );
+	}
+	return link
+}
+
+var {{ config }} = {
+	width: '100%',
+	aspectratio: '16:9',
+   	skin: 'glow',
+   	primary: 'html5',
+	html5player: '{% static "djangoplicity/jwplayer/jwplayer.html5.js" %}',
+	flashplayer: '{% static "djangoplicity/jwplayer/jwplayer.flash.swf" %}',
+   	autostart: false,
+   	ga: {
+		idstring: "{{ GA_ID }}"
+   	}
+};
+
+{% if social %}
+{{ config }}.sharing = {
+	link: fix_protocol("{{SITE_URL}}{{video.get_absolute_url}}")
+};
+{% endif %}
+
+{% if videoframe %}
+{{ config }}.image = fix_protocol("{{ videoframe }}");
+{% endif %}
+
+{{ config }}.sources = [{
+    file: fix_protocol("{% if sd_resource %}{{sd_resource}}{% else %}{{ hd_resource }}{% endif %}"),
+    label: 'SD',
+	"default": true
+}];
+
+{% if hd_resource and sd_resource %}
+	{{ config }}.sources.push({
+        file: fix_protocol("{{ hd_resource }}"),
+        label: 'HD'
+    });
+{% endif %}
+
+{{ config }}.tracks = []
+{% for sub in subs %}
+{{ config }}.tracks.push({file: fix_protocol("{{SITE_URL}}{{sub.resource_srt.url}}"), label: "{{ sub }}"});
+{% endfor %}
+
+{{ extra|safe }}
+
+</script>
+</div>
+{% endwith %}
+{% endif %}
+{% endspaceless %}

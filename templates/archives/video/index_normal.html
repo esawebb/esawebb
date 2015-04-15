@@ -1,0 +1,45 @@
+{% load i18n %}{% load djangoplicity_utils %}{% load media_video %}
+{% if not object_list %}
+	<div align="center">{% trans "No entries were found."%}</div>
+{% else %}
+{% include "archives/search_results.html" %}
+
+{% spaceless %}
+
+{% for list in object_list|split_list:columns %}
+<div class="row">
+	{% block index_row %}
+	{% for video in list %}
+		{% if columns == "4" %}
+		<div class="col-xs-12 col-md-6 col-lg-3">
+		{% else %}
+		<div class="col-md-6 col-lg-4">
+		{% endif %}
+			<div class="video-thumbnail">
+				{% if video.videosubtitle_set.all %}
+					{% embedvideo_subs video "medium_podcast,h264" "hd_and_apple,hd720p_screen,dome_preview" "medium_podcast,h264" video.videosubtitle_set.all %}
+				{% else %}
+					{% embedvideo video "medium_podcast,h264" "hd_and_apple,hd720p_screen,dome_preview" "medium_podcast,h264" %}
+				{% endif%}
+				<div class="img-wrapper">
+					<span class="fa fa-play"></span>
+					<img src="{{ video.resource_videoframe.url }}" class="img-responsive" alt="{{ video.title }}">
+				</div>
+				<div data-toggle="tooltip" data-placement="top" title="Info&nbsp;and&nbsp;downloads" class="caption">
+					<a href="{{ video.get_absolute_url }}">
+						<span class="title">{{ video.title }}</span>
+						<span class="fa fa-download download-icon"></span>
+					</a>
+				</div>
+			</div>
+		</div>
+	{% endfor %}
+	{% endblock index_row %}
+</div>
+{% endfor %}
+
+{% endspaceless %}
+{% paginator paginator page_obj paginator_url paginator_prefix paginator_params %}
+{% statusbar paginator page_obj browsers searchable search_url search_str  %}
+{% endif %}
+{% include 'archives/extra_footer.html' %}

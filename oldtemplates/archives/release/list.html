@@ -1,0 +1,32 @@
+{% extends "base_onecolumn.html" %}
+
+{% block extra_header %}{{block.super}}{% for furl,title in feed_urls %}<link href='{{furl}}' rel="alternate" type="application/rss+xml" title='{{title}}' />{%endfor%}{%endblock%}
+
+{% block site_title %}{% if archive_title %}{{archive_title}}{% else %}{{ archive|capfirst }} Archive{%endif%} | {{block.super}}{% endblock %}
+
+{% load menus %}
+{# block breadcrumb %}{{ block.super}}{% endblock #}
+
+{% block content %}
+<div class='archive_list_heading'>
+<div class='archive_list_title'>
+<h1>{% if archive_title %}{{ archive_title }}{% else %}{{ archive|capfirst }} Archive{% endif %}{% if listview_feed_url %} <a href="{{ listview_feed_url }}"><img src="{{MEDIA_URL}}images/rssicon.png" /></a>{% endif %}</h1>
+</div>
+<div class='archive_list_search'>{% if searchable %}
+
+<form action="{{ search_url }}" method="GET">{% csrf_token %}
+<input id="id_archivesearch" type="text" value="{%if search_specific %}Search {{search_specific|capfirst}}...{%else%}{{search_str|default:"Search..."}}{%endif%}" name="search" class="archivesearch" onblur="searchbox_blur(this,'{%if search_specific %}Search {{search_specific|capfirst}}...{%else%}{{search_str|default:"Search..."}}{%endif%}');" onfocus="searchbox_focus(this,'{%if search_specific %}Search {{search_specific|capfirst}}...{%else%}{{search_str|default:"Search..."}}{%endif%}');" />
+<input class="archivesearch_submit" type="submit" value="Go" />
+</form>
+{% endif %}
+</div>
+<div class='clear'></div>
+{% load pages %}{% embed_page spacetelescope.image_archive_top %}
+{% if crosslinks %}
+<div class="seealso">Also see Hubble press releases from <a href="http://hubblesite.org/newscenter/">NASA</a>, and news from our partner institutions <a href="http://www.eso.org/public/news/">ESO</a> and the <a href="http://www.iau.org/news/">IAU</a>.</div>
+<div class='clear'></div>
+{%endif%}
+</div>
+{% include index_template %}
+{% endblock %}
+{% include 'archives/extra_footer.html' %}

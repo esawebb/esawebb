@@ -1,8 +1,18 @@
-{% extends "base_onecolumn.html" %}
-{% block content %}
-<h1>Site Map</h1>
-{% load menus %}
-{% render_menu top_right_menu sitemap %}
-{% render_menu main_menu sitemap %}
-{% render_menu footer_menu sitemap %}
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block body %}
+<DIV class="row page">
+	<div class="col-md-12">
+		<div class="page-content one-column">
+			<h1>{% trans "Site Map" %}</h1>
+
+			{% load menus %}
+			{% init_menu 'Main Menu' as main_menu %}
+			<ul id="sitemap">
+				{% render_menu main_menu sitemap %}
+			</ul>
+		</div>
+	</div>
+</div>
 {% endblock %}

@@ -1,0 +1,49 @@
+{% load i18n %}
+{% load djangoplicity_datetime %}
+{% include 'archives/embargo_notice.html' %}
+<h3 class="pr_typeid">{{ object.id }} &mdash; {% trans "Announcement" %}</h3>
+<h1 class="pr_title">{{ object.title }}</h1>
+{% if object.subtitle %}<h3>{{ object.subtitle }}</h3>{% endif %}
+<p class="date">{{ object.release_date|datetime:"DATE" }}</p>
+
+{% spaceless %}
+{% if main_visual %}
+	{% if main_visual.resource_newsfeature %}		
+		<div class="archive-image popup">
+		{% if main_visual.resource_medium_podcast %}
+			{% load media_video %}
+			{% embedvideo_subs main_visual 'medium_podcast,h264' 'hd_and_apple,hd720p_screen,dome_preview' '' main_visual.videosubtitle_set.all %}
+		{% elif main_visual.resource_newsfeature %}
+			<a class="popup" href="{{ main_visual.resource_screen.url }}" title="{{ main_visual.title }}">
+				<img class="img-responsive" src="{{ main_visual.resource_newsfeature.url }}" class="pr_news_feature_img" style="padding:0;" />
+				{% if images %}
+					{% for im in images %}
+						{% ifnotequal main_visual im %}<a class="popup" href="{{ im.resource_screen.url }}" title="{{ im.title }}" class="hidden"></a>{% endifnotequal %}
+					{% endfor %}
+				{% endif %}
+			</a>
+		{% endif %}
+		</div>
+	{% elif main_visual.resource_news %} 
+		<div class="archive-image popup">
+			<a class="popup" href="{{ main_visual.resource_screen.url }}" title="{{ main_visual.title }}">
+				<div class="image-container">
+					<img class="img-responsive" src="{{ main_visual.resource_news.url }}" class="img-responsive">
+				</div>
+			</a>
+		</div>
+	{% endif %}
+{% endif %}
+
+{% endspaceless %}
+
+<p>{{ object.description|safe }}</p>
+{% if object.links %}
+<h3>{% trans "Links" %}</h3>
+<p>{{ object.links|safe }}</p>
+{% endif %}
+{% if object.contacts %}
+<h3>{% trans "Contacts" %}</h3>
+<p>{{ object.contacts|safe }}</p>
+{% endif %}
+{% include 'archives/announcement/extra_footer.html' %}

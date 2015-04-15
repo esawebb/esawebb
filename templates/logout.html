@@ -1,5 +1,6 @@
-{% extends "base_twocolumn.html" %}
+{% extends "base_onecolumn.html" %}
 
 {% block content %}
-{% load pages %}{% embed_page spacetelescope.logout %}
+{% load pages %}{% embed_page eso.logout %}
+	<div class="alert alert-success" role="alert">You have been successfully logged out.</div>
 {% endblock %}

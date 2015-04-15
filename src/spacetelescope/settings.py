@@ -83,8 +83,6 @@ GARCHING_INTERNAL_IPS = (
 
 SITE_ENVIRONMENT = local_settings.SITE_ENVIRONMENT
 DEBUG = local_settings.DEBUG
-DEBUG_SQL = local_settings.DEBUG_SQL
-DEBUG_PROFILER = local_settings.DEBUG_PROFILER
 DEBUG_TOOLBAR = local_settings.DEBUG_TOOLBAR
 TEMPLATE_DEBUG = local_settings.TEMPLATE_DEBUG
 SEND_BROKEN_LINK_EMAILS = local_settings.SEND_BROKEN_LINK_EMAILS
@@ -94,18 +92,7 @@ MANAGERS = ADMINS
 
 SERVE_STATIC_MEDIA = local_settings.SERVE_STATIC_MEDIA
 
-DEBUG_TOOLBAR_PANELS = (
-	'debug_toolbar.panels.version.VersionDebugPanel',
-	'debug_toolbar.panels.timer.TimerDebugPanel',
-	#'debug_toolbar.panels.settings_vars.SettingsVarsDebugPanel',
-	'debug_toolbar.panels.headers.HeaderDebugPanel',
-	'debug_toolbar.panels.request_vars.RequestVarsDebugPanel',
-	'debug_toolbar.panels.template.TemplateDebugPanel',
-	'debug_toolbar.panels.sql.SQLDebugPanel',
-	#'debug_toolbar.panels.signals.SignalDebugPanel',
-	'debug_toolbar.panels.cache.CacheDebugPanel',
-	'debug_toolbar.panels.logger.LoggingPanel',
-)
+DEBUG_TOOLBAR_PANELS = local_settings.DEBUG_TOOLBAR_PANELS
 
 ##################
 # DATABASE SETUP #
@@ -180,6 +167,8 @@ MEDIA_URL = local_settings.MEDIA_URL
 ADMIN_MEDIA_PREFIX = local_settings.ADMIN_MEDIA_PREFIX
 DJANGOPLICITY_MEDIA_URL = local_settings.DJANGOPLICITY_MEDIA_URL
 DJANGOPLICITY_MEDIA_ROOT = local_settings.DJANGOPLICITY_MEDIA_ROOT
+
+MIDENTIFY_PATH = local_settings.MIDENTIFY_PATH
 
 # Staticfiles app
 STATICFILES_DIRS = [
@@ -262,18 +251,6 @@ MIDDLEWARE_CLASSES = (
 	# HTTP or HTTPS.
 	'sslmiddleware.SSLRedirect',
 )
-
-if DEBUG:
-	# Add label to all HTML pages displaying the environment
-	MIDDLEWARE_CLASSES += ('djangoplicity.utils.middleware.SiteEnvironmentMiddleware',)
-
-if DEBUG_SQL:
-	# Show all SQL queries being executed as well execution time.
-	MIDDLEWARE_CLASSES += ('djangoplicity_ext.middleware.sqlmiddleware.SQLLogMiddleware',)
-
-if DEBUG_PROFILER:
-	# Enabled profiling of code. Add ?prof to URL to profile request.
-	MIDDLEWARE_CLASSES += ('djangoplicity_ext.middleware.profilemiddleware.ProfileMiddleware',)
 
 if DEBUG_TOOLBAR:
 	# Add debug toolbar to request
@@ -395,6 +372,7 @@ INSTALLED_APPS += (
 	#'djangoplicity.kiosk.engine',
 	#'djangoplicity.kiosk.slides',
 	'spacetelescope',
+	'spacetelescope.frontpage',
 	'mptt',
 	'django_extensions',
 	'django_assets',
@@ -420,6 +398,7 @@ INSTALLED_APPS += (
 	'captcha',
 	'gunicorn',
 	'django_ace',
+	'rest_framework',
 	'pipeline',
 )
 
@@ -618,12 +597,12 @@ ARCHIVES = (
 	('djangoplicity.products.models.ElectronicPoster', 'djangoplicity.products.options.ElectronicPosterOptions'),
 	('djangoplicity.products.models.Presentation', 'djangoplicity.products.options.PresentationOptions'),
 	('djangoplicity.products.models.PressKit', 'djangoplicity.products.options.PressKitOptions'),
-	('djangoplicity.products.models.SlideShow', 'djangoplicity.products.options.SlideShowOptions'),
 	('djangoplicity.products.models.ElectronicCard', 'djangoplicity.products.options.ElectronicCardOptions'),
 	('djangoplicity.products.models.Sticker', 'djangoplicity.products.options.StickerOptions'),
 	('djangoplicity.products.models.TechnicalDocument', 'djangoplicity.products.options.TechnicalDocumentOptions'),
 	('djangoplicity.products.models.UserVideo', 'djangoplicity.products.options.UserVideoOptions'),
 	('djangoplicity.products.models.VirtualTour', 'djangoplicity.products.options.VirtualTourOptions'),
+	('djangoplicity.products.models.Model3d', 'djangoplicity.products.options.Model3dOptions'),
 	('djangoplicity.newsletters.models.Newsletter', 'djangoplicity.newsletters.options.NewsletterOptions'),
 )
 
@@ -912,9 +891,9 @@ LOGGING = {
 			'level': 'DEBUG' if DEBUG else 'INFO',
 		},
 		'django.db.backends': {
-			'handlers': local_settings.LOGGING_HANDLER if DEBUG_SQL else ['null'],
+			'handlers': local_settings.LOGGING_HANDLER,
 			'propagate': False,
-			'level': 'DEBUG' if DEBUG_SQL else 'INFO',
+			'level': 'INFO',
 		},
 		'sslurllib': {
 			'handlers': ['null', ],
@@ -1091,24 +1070,20 @@ STATICFILES_STORAGE = 'pipeline.storage.PipelineCachedStorage'
 PIPELINE_CSS = {
 	'main': {
 		'source_filenames': (
-			'css/reset.css',
-			'css/base_grid.css',
-			'css/screen.css',
-			'djangoplicity/shadowbox/shadowbox.css',
+			'font-awesome/css/font-awesome.min.css',
+			'sprites/sprites.css',
+			'css/main.css',
 		),
 		'output_filename': 'css/main.css',
-		'extra_context': {
-			'media': 'screen',
-		},
 	},
-	'print': {
+	'extras': {
 		'source_filenames': (
-			'css/print.css"',
+			'jquery-ui-1.11.1/jquery-ui.min.css',
+			'slick-1.5.0/slick/slick.css',
+			'justified-gallery/css/justifiedGallery.min.css',
+			'magnific-popup/magnific-popup.css',
 		),
-		'output_filename': 'css/print.css',
-		'extra_context': {
-			'media': 'print',
-		},
+		'output_filename': 'css/extras.css',
 	},
 }
 
@@ -1117,15 +1092,29 @@ PIPELINE_JS = {
 		'source_filenames': (
 			'jquery/jquery-1.11.1.min.js',
 			'jquery-ui-1.11.1/jquery-ui.min.js',
-			'js/jquery.cycle.min.js',
-			'js/jquery.jclock-1.2.0.js',
-			'shadowbox-3.0.3/shadowbox.js',
-			'shadowbox-3.0.3/shadowbox_conf.js',
+			'bootstrap/bootstrap-3.1.1-dist/js/bootstrap.min.js',
+			'js/jquery.menu-aim.js',
+			'slick-1.5.0/slick/slick.min.js',
+			'djangoplicity/jwplayer/jwplayer.js',
+			'djangoplicity/js/jquery.beforeafter-1.4.js',
 			'djangoplicity/zoomify/js/ZoomifyImageViewerExpress-min.js',
+			'js/masonry.pkgd.min.js',
+			'justified-gallery/js/jquery.justifiedGallery.min.js',
+			'magnific-popup/jquery.magnific-popup.min.js',
 			'djangoplicity/js/widgets.js',
-			'js/site.js',
+			'djangoplicity/js/pages.js',
+			'js/picturefill.min.js',
+			'js/enquire/enquire.min.js',
+			'js/main.js',
 		),
 		'output_filename': 'js/main.js',
+	},
+	'ie8compat': {
+		'source_filenames': (
+			'js/ie8compat/matchMedia/matchMedia.js',
+			'js/ie8compat/matchMedia/matchMedia.addListener.js',
+		),
+		'output_filename': 'js/ie8compat.js',
 	},
 }
 PIPELINE_CSS_COMPRESSOR = False

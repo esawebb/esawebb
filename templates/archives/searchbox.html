@@ -1,0 +1,46 @@
+{% load i18n %}{% if searchable %}
+{% load staticfiles %}
+{% spaceless %}
+<div class="archive-search{% if archive_search_position = "outside" %} outside{% endif %}">
+
+	{% if archive == 'image' or archive == 'video' %}
+		<a href="{% if archive == 'image' %}{% url 'images_search' %}{% else %}{% url 'videos_search' %}{% endif %}" class="advanced-search" data-container="body" data-toggle="tooltip" data-placement="left" title="Advanced&nbsp;Search">
+			<span class="fa fa-plus"></span>	
+		</a>
+	{% endif %}
+
+	<form class="form-inline" role="form" action="{{ search_url }}" method="GET">{% csrf_token %}
+
+	{% comment %}
+	If search_str_verbose is set then the result comes from an advanced search in
+	which case the search_str cannot be used in the search box as it is meant for
+	the advanced search page, for example:
+		?adv=&instrument=17
+	instead of:
+		?vlt+orion
+	{% endcomment %}
+
+	<div class="form-group">
+		<div class="input-group">
+			<input id="id_archivesearch" type="text" value="{% if search_str and not search_str_verbose %}{{search_str}}{% endif %}" placeholder="{% trans "Search" %}{% if archive_title %} {% trans archive_title %}{% endif %}..." name="search" class="form-control input-sm" />
+			<span class="input-group-btn">
+				<button class="btn btn-default btn-sm" type="submit"><span class="fa fa-search"></span></button>
+			</span>
+		</div>
+	</div>
+
+	</form>
+	{% if archive_search_position = "outside" %}
+		{% if archive == 'image' %}
+			<span class="creative">
+				<a href="/public/copyright/" data-toggle="tooltip" data-placement="bottom" title="Free&nbsp;Creative&nbsp;Commons&nbsp;images"><img src="{% static "images/cc.svg" %}" alt="Free Creative Commons images"></a>
+			</span>
+		{% elif archive == 'video' %}
+			<span class="creative">
+				<a href="/public/copyright/" data-toggle="tooltip" data-placement="bottom" title="Free&nbsp;Creative&nbsp;Commons&nbsp;videos"><img src="{% static "images/cc.svg" %}" alt="Free Creative Commons videos"></a>
+			</span>
+		{% endif %}
+	{% endif %}
+</div>
+{% endspaceless %}
+{% endif %}

@@ -1,46 +1,32 @@
-{% extends "base_twocolumn.html" %}{% load media_video %}
+{% extends "base_twocolumn.html" %}{% load pages %}
 
 {% block site_title %}{{object.title}} | {{block.super}}{% endblock %}
 
 {% load menus %}
-{% block breadcrumb %}{{ block.super}}{% breadcrumb_append object.title object.get_absolute_url %}{% endblock %}
-
-{% block twocol_feature %}
-<style>
-.c75l {
-min-width: 640px;
-}
-
-.subcolumns{
-min-width: 860px;
-}
-</style>
-<h1 style="min-width:640px;">{{ object.title }}</h1>
-{% include 'archives/embargo_notice.html' %}
-{%if object.videosubtitle_set.all %}
-{% embedvideo_subs object "medium_flash,medium_podcast,h264" "hd_and_apple,hd720p_screen,dome_preview" "medium_podcast,h264" object.videosubtitle_set.all %}
-{%else %}
-{% embedvideo object "medium_flash,medium_podcast,h264" "hd_and_apple,hd720p_screen,dome_preview" "medium_podcast,h264" %}
-{%endif%}
-{% endblock %}
 
 {% block content %}
-{% if object.headline %}<p>{{ object.headline }}</p>{% endif %}
-<p>{{ object.description|safe }}</p>
-<p><strong>Credit:</strong><div class="credit"><p>{{ object.credit|safe }}</p></div></p>
-{% include 'archives/extra_footer.html' %}
+{% include description_template  %}
 {% endblock %}
-
 
 {% block rightcolumn %}
 {% include "archives/searchbox.html" %}
-{% include "archives/facebookbox.html" %}
 {% include admin_template %}
 {% include info_template %}
-<hr />
+{% include "archives/image/object_observation.html" %}
+<hr>
 {% include "images/embedded_list.html" %}
 {% include "videos/embedded_list.html" %}
 {% include resources_template %}
+{% include "audiotracks/embedded_list.html" %}
+{% include "broadcastaudiotracks/embedded_list.html" %}
 {% include "subtitles/embedded_list.html" %}
+{{ right_column_page }}
 {% include "archives/crosslinks.html" %}
+
+{% endblock %}
+
+{% block extra_scripts %}
+<script type="text/javascript">
+	setupVideoPlayer('{{ object.id }}');
+</script>
 {% endblock %}
