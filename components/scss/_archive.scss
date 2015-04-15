@@ -180,6 +180,26 @@ h3.archivegrouptitle {
 	}
 }
 
+.media-sortby {
+	@extend .media-categories;
+	float: right;
+	text-align: right;
+	text-transform: none;
+
+	ul {
+		float: right;
+
+		&[title]:before {
+			content: attr(title); // make the title attribute visible
+			// display: block;
+			margin-right: 3px;
+		}
+
+		li {
+			margin: 4px 4px 5px 0;
+		}
+	}
+}
 
 .image-list {
 	margin-bottom: $grid-gutter-width;

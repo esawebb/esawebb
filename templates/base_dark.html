@@ -30,7 +30,7 @@ We don't display the children pages widget in the dark pages
 				<h1>{% if archive_title %}{% trans archive_title %}{% else %}{{ archive|capfirst }} {% trans "Archive" %}{% endif %}{% if listview_feed_url %} <a href="{{ listview_feed_url }}" class="listviewrsslink"><span class="fa fa-rss"></span></a>{% endif %}</h1>
 			</div>
 			{% if archive == 'image' %}
-			<div class="col-md-12 media-categories">
+			<div class="col-md-11 media-categories">
 				<ul>
 					<li><a href="/images/viewall/">{% trans "View All" %}</a></li>
 					<li><a href="/images/archive/category/cosmology/"{% if '/images/archive/category/cosmology/' in request.path %} class="selected"{% endif %}>{% trans "Cosmology" %}</a></li>
@@ -49,7 +49,7 @@ We don't display the children pages widget in the dark pages
 				</ul>
 			</div>
 			{% elif archive == 'video' %}
-			<div class="col-md-12 media-categories">
+			<div class="col-md-11 media-categories">
 				<ul>
 					<li><a href="/videos/">{% trans "View All" %}</a></li>
 					<li><a href="/videos/archive/category/3d/"{% if '/videos/archive/category/3d/' in request.path %} class="selected"{% endif %}>{% trans "3D Animations" %}</a></li>
@@ -73,6 +73,12 @@ We don't display the children pages widget in the dark pages
 				</ul>
 			</div>
 			{% endif %}
+			<div class="col-md-1 media-sortby">
+				<ul title="{% trans 'Sort by:' %}">
+					<li><a href="{{ request.path }}"{% if not request.GET.sort %} class="selected"{% endif %}>{% trans "Ranking" %}</a></li>
+					<li><a href="{{ request.path }}?sort=-release_date"{% if request.GET.sort == '-release_date' %} class="selected"{% endif %}>{% trans "Date" %}</a></li>
+				</ul>
+			</div>
 		</div>
 	</div>
 
