@@ -72,6 +72,9 @@ class DisableInternalCDN(object):
 					response.content = response.content.replace(
 						'http://cdn.spacetelescope.org/archives/videos',
 						'http://www.spacetelescope.org/static/archives/videos'
+					).replace(
+						'http://cdn2.spacetelescope.org/archives/videos',
+						'http://www.spacetelescope.org/static/archives/videos'
 					)
 
 		return response
