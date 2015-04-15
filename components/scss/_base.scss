@@ -469,3 +469,10 @@ body {
 	// Used to display e.g. sprite flags inline
 	display: inline-block;
 }
+
+.alert-danger {
+	a {
+		color: #a94442;
+		text-decoration: underline;
+	}
+}
