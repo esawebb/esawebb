@@ -344,7 +344,6 @@ INSTALLED_APPS += (
 	'djangoplicity.archives',
 	'djangoplicity.archives.contrib.satchmo.freeorder',
 	'djangoplicity.archives.contrib.security',
-	'djangoplicity.archives.contrib.inventory_control',
 	'djangoplicity.announcements',
 	'djangoplicity.science',
 	'djangoplicity.releases',
