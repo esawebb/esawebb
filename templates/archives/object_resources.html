@@ -1,0 +1,30 @@
+{% load i18n %}{% for resources in resources_groups %}
+{% if resources.downloads %}
+<div{% if resources.name = "Ultra HD" %} style="background-color: #ffe8e8"{% endif %}>
+{% if resources.name %}<h3  class="archivegrouptitle" >{% trans resources.name %}{% if resources.name = "Ultra HD" %} <a style="font-size: 14px" href="/public/videoformats/">(info)</a>{% endif %}</h3>{% endif %}
+{% for thumbnail, link in resources.thumbnails %}
+{% if link %}
+<div class="archive_download_thumbnail"><a href="{{link}}" rel="shadowbox"><img src="{{thumbnail}}" /></div>
+{% else %}
+<div class="archive_download_thumbnail"><img src="{{thumbnail}}" /></div>
+{% endif %}
+{%endfor%}
+{% for r in resources.downloads %}
+<div class="archive_download">
+<span class="archive_dl_icon"><img src="{{ MEDIA_URL}}{{ICON_PATH}}icon_{{ r.icon }}.png" /></span>
+<span class="archive_dl_text"><a href="{{ r.url }}"{{r.extra_attrs}}>{% trans r.title %}</a></span>
+{% if r.size %}<span class="archive_dl_size"><div>
+	{% if r.size > 104857600 %}
+		<span style="color:red">{{r.size|filesizeformat}}</span>
+		<a class="download-info" href="#" data-toggle="popover" data-html="true" data-trigger="focus" data-placement="bottom" data-content="As no network or browser is 100% stable, we <em>strongly</em> recommend using a download manager (like <a href='http://www.freedownloadmanager.org/download.htm'>Free Download Manager</a> or the command line tool <a href='http://aria2.sourceforge.net/'>aria2</a>).">
+			<i class="fa fa-question-circle"></i>
+		</a>
+	{% else %}
+		{{r.size|filesizeformat}}
+	{% endif %}
+</div></span>{% endif %}</div>
+{% endfor %}
+{% if not forloop.last %}<hr class="esohr" />{% endif %}
+</div>
+{% endif %}
+{% endfor %}

@@ -94,8 +94,12 @@
 		font-size: 20px;
 	}
 	
-	.archive_dl_size div {
+	.archive_dl_size > div {
 		padding-left: 30px;
+
+		.download-info {
+			padding-left: 5px;
+		}
 	}
 }
 
