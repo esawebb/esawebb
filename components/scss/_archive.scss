@@ -99,6 +99,11 @@
 
 		.download-info {
 			margin-left: 5px;
+			cursor: pointer;
+
+			&:focus {
+				outline: none;
+			}
 		}
 	}
 }
