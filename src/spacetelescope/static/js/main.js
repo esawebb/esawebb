@@ -479,8 +479,9 @@ function setWebcamTimestamp(selector, timestampPath) {
 // });
 
 
-// Load tooltips if any
+// Load tooltips and popover if any
 $("[data-toggle='tooltip']").tooltip();
+$("[data-toggle='popover']").popover();
 
 
 $(".image-list-300").justifiedGallery({
