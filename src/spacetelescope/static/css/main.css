@@ -6122,7 +6122,7 @@ body {
   .archive_download .archive_dl_size > div {
     padding-left: 30px; }
     .archive_download .archive_dl_size > div .download-info {
-      padding-left: 5px; }
+      margin-left: 5px; }
 
 .embedded-list img {
   margin-bottom: 5px; }
