@@ -87,12 +87,16 @@ body {
 	#dark-header {
 		@extend #body;
 
-		.media-categories ul li a {
-			border: 1px solid $dark-box-border;
+		.media-categories, .media-sortby {
 			color: #ccc;
+			
+			ul li a {
+				border: 1px solid $dark-box-border;
+				color: #ccc;
 
-			&:hover, &.selected {
-				border: 1px solid $hubble-blue;
+				&:hover, &.selected {
+					border: 1px solid $hubble-blue;
+				}
 			}
 		}
 	}
