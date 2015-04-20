@@ -43,7 +43,7 @@ DEPLOYMENT_TAG = "spacetelescope.org_int"
 DEPLOYMENT_NOTIFICATION = {
 	"subject": "[DEPLOY] %(DEPLOYMENT_TAG)s by %(local_user)s",
 	"from": "esoepo-monitoring@eso.org",
-	"to": ["mandre@eso.org"],
+	"to": ["esoepo-monitoring@eso.org"],
 }
 PYTHON = "python2.7"
 
