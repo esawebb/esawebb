@@ -50,8 +50,6 @@
 {% endfor %}
 {% endif %}
 
-<p><a href="/public/outreach/social/">{% trans "Connect with ESO on social media" %}</a></p>
-
 {% if object.is_translation %}{% blocktrans with object.source.id as source_id %}This is a translation of ESO Press Release {{ source_id }}.{% endblocktrans %}{% endif %}
 
 {% include 'archives/release/extra_footer.html' %}
