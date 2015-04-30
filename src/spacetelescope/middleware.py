@@ -66,7 +66,7 @@ class DisableInternalCDN(object):
 
 		if response.status_code == 200 and not response.streaming:
 			content_type = response.get('Content-Type', '')
-			if 'text/html' in content_type:
+			if 'text/' in content_type:
 				internal_ips = IPSet([IPNetwork(i) for i in internal_ips])
 				if ip in internal_ips:
 					response.content = response.content.replace(
