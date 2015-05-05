@@ -1185,7 +1185,8 @@ MEDIA_CONTENT_SERVERS = {
 		password='5nkOk3mgr8MDw2d4SZw3',
 		api_login='lars@eso.org',
 		api_password='054FBaC792mdXA3QkpngOhvWcRqGZJV1',
-		cdn_id='29445',
+		cdn_id='33541',
+		cdn_id_bigfiles='31465',
 	),
 }
 
