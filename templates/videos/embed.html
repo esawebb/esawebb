@@ -61,5 +61,9 @@ var {{ config }} = {
 </script>
 </div>
 {% endwith %}
+{% else %}
+	{% if videoframe %}
+		<div class="archive-image archive-image-dark popup"><img class="img-responsive" src="{{ videoframe }}" border="0" alt="{{ video }}"></a></div>
+	{% endif %}
 {% endif %}
 {% endspaceless %}
