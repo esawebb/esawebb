@@ -1140,6 +1140,8 @@ MEDIA_CONTENT_SERVERS = {
 		name='CDN77',
 		formats={
 			'djangoplicity.media.models.images.Image': (
+				'large',
+				'publicationjpg',
 				'screen',
 				'wallpaper1',
 				'wallpaper2',
