@@ -35,7 +35,7 @@ FACEBOOK_APP_ID = "144508505618279"
 
 # Nginx will add the X-Forwarded-Proto header if the original connection
 # was made with HTTPS
-SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', )
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 #####################
 # CONFIG GENERATION #
