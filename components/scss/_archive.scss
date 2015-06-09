@@ -59,10 +59,10 @@
 	td {
 		padding: 2px;
 		vertical-align: top;
+		word-wrap: break-word;
 
 		&.title {
 			font-weight: bold;
-			word-wrap: break-word;
 		}
 	}
 

@@ -6099,10 +6099,10 @@ body {
     font-size: 20px; }
   .object-info td {
     padding: 2px;
-    vertical-align: top; }
+    vertical-align: top;
+    word-wrap: break-word; }
     .object-info td.title {
-      font-weight: bold;
-      word-wrap: break-word; }
+      font-weight: bold; }
   .object-info table {
     table-layout: fixed;
     width: 100%; }
