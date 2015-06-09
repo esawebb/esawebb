@@ -79,16 +79,16 @@ DATABASES = copy_setting(DATABASES)
 # CACHE  #
 ##########
 CACHES = {
-	# 'default' : {
-		# 'BACKEND' : 'django.core.cache.backends.memcached.MemcachedCache',
-		# 'KEY_PREFIX' : 'eso',
-		# 'LOCATION' : [
-			# '127.0.0.1:11211',
-		# ],
-		# 'TIMEOUT' : 86400
-	# },
+	'notdefault' : {
+		'BACKEND' : 'django.core.cache.backends.memcached.MemcachedCache',
+		'KEY_PREFIX' : 'eso',
+		'LOCATION' : [
+			'127.0.0.1:11211',
+		],
+		'TIMEOUT' : 86400
+	},
 	'default': {
-	'BACKEND': 'django.core.cache.backends.dummy.DummyCache',
+		'BACKEND': 'django.core.cache.backends.dummy.DummyCache',
 	}
 }
 
