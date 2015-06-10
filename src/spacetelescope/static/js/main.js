@@ -355,60 +355,6 @@ $(document).ready(function(){
 	});
 });
 
-
-function setupVideoPlayer(video_id) {
-	jwplayer.key="EAjAk7x879BjeiN54i9pMZjIrVJMCTtZFFMcmY2yiTI=";
-
-
-
-	// Replace '-' by '_' in video_id if any:
-	video_id = video_id.replace(/-/g, '_', 'g');
-
-	var config = window['config_' + video_id];                             
-
-	// Check if we have a playlist defined:
-	if (typeof playlist !== 'undefined') {
-		config.playlist = playlist;
-
-		if (typeof listbar !== 'undefined') {
-			config.listbar = listbar;
-		} else {
-			config.listbar = {
-				position: "right",
-				size: 240
-			};
-		}
-	}
-
-	jwplayer('videoplayer-' + video_id).setup( config );       
-}
-
-
-// Configure video players
-$(document).ready(function(){
-	jwplayer.key="EAjAk7x879BjeiN54i9pMZjIrVJMCTtZFFMcmY2yiTI=";
-
-	$('.video-thumbnail').each(function(){
-		var parent = $(this);
-		$(this).find('.fa-play').click(function() {
-			var id = parent.children().first().attr('id').replace('videoplayer-', '');
-			var config = window['config_' + id];
-			jwplayer('videoplayer-' + id).setup( config );
-			parent.addClass('playing');
-			jwplayer('videoplayer-' + id).play();
-		});
-	});
-
-	// Check if some videos have been embedded with embedvideos_from_id
-	// if (typeof djp_videos !== 'undefined') {
-		// $.each(djp_videos, function(index, video_id) {
-			// console.log(video_id);
-			// setupVideoPlayer(video_id);
-		// });
-	// }
-});
-
-
 // Show/hide main search box
 $('#searchbox-button').click(function(){
 	$('.languages-dropdown').removeClass('active');

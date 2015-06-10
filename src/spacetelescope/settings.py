@@ -1101,6 +1101,7 @@ PIPELINE_JS = {
 			'magnific-popup/jquery.magnific-popup.min.js',
 			'djangoplicity/js/widgets.js',
 			'djangoplicity/js/pages.js',
+			'djangoplicity/js/djp-jwplayer.js',
 			'js/picturefill.min.js',
 			'js/enquire/enquire.min.js',
 			'js/main.js',
