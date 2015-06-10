@@ -479,3 +479,9 @@ $(window).load(function() {
 		});
 	}
 });
+
+
+// Set default settings for jwplayer:
+jwplayer_ga = {idstring: 'UA-2368492-6'};
+jwplayer_html5player = '/static/app/djangoplicity/jwplayer/jwplayer.html5.js';
+jwplayer_flashplayer = '/static/app/djangoplicity/jwplayer/jwplayer.flash.swf';
