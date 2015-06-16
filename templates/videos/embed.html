@@ -7,11 +7,15 @@
 <script type="text/javascript">
 
 function fix_protocol( link ) {
-//	protocol = document.location.protocol;
-//	link_protocol = link.substr( 0, 5);
-//	if ( link_protocol == "http:" && protocol == "https:" ) {
-//		return "https:" + link.substr( 5 );
-//	}
+	protocol = document.location.protocol;
+	link_protocol = link.substr( 0, 5);
+	console.log(link.substr(7, 3));
+	if ( link_protocol == "http:" && protocol == "https:" ) {
+		if (link.substr(7, 3) != 'cdn') {
+			// Only fix non-cdn resources
+			return "https:" + link.substr( 5 );
+		}
+	}
 	return link
 }
 
