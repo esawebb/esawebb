@@ -29,50 +29,18 @@ We don't display the children pages widget in the dark pages
 			<div class="col-md-12">
 				<h1>{% if archive_title %}{% trans archive_title %}{% else %}{{ archive|capfirst }} {% trans "Archive" %}{% endif %}{% if listview_feed_url %} <a href="{{ listview_feed_url }}" class="listviewrsslink"><span class="fa fa-rss"></span></a>{% endif %}</h1>
 			</div>
-			{% if archive == 'image' %}
+			{% if web_categories %}
 			<div class="col-md-11 media-categories">
 				<ul>
-					<li><a href="/images/viewall/?{{ request.GET.urlencode }}">{% trans "View All" %}</a></li>
-					<li><a href="/images/archive/category/cosmology/?{{ request.GET.urlencode }}"{% if '/images/archive/category/cosmology/' in request.path %} class="selected"{% endif %}>{% trans "Cosmology" %}</a></li>
-					<li><a href="/images/archive/category/exoplanets/?{{ request.GET.urlencode }}"{% if '/images/archive/category/exoplanets/' in request.path %} class="selected"{% endif %}>{% trans "Exoplanets" %}</a></li>
-					<li><a href="/images/archive/category/galaxies/?{{ request.GET.urlencode }}"{% if '/images/archive/category/galaxies/' in request.path %} class="selected"{% endif %}>{% trans "Galaxies" %}</a></li>
-					<li><a href="/images/archive/category/illustrations/?{{ request.GET.urlencode }}"{% if '/images/archive/category/illustrations/' in request.path %} class="selected"{% endif %}>{% trans "Illustrations" %}</a></li>
-					<li><a href="/images/archive/category/jwst/?{{ request.GET.urlencode }}"{% if '/images/archive/category/jwst/' in request.path %} class="selected"{% endif %}>{% trans "James Webb Space Telescope" %}</a></li>
-					<li><a href="/images/archive/category/mission/?{{ request.GET.urlencode }}"{% if '/images/archive/category/mission/' in request.path %} class="selected"{% endif %}>{% trans "Launch/Servicing Missions" %}</a></li>
-					<li><a href="/images/archive/category/misc/?{{ request.GET.urlencode }}"{% if '/images/archive/category/misc/' in request.path %} class="selected"{% endif %}>{% trans "Miscellaneous" %}</a></li>
-					<li><a href="/images/archive/category/nebulae/?{{ request.GET.urlencode }}"{% if '/images/archive/category/nebulae/' in request.path %} class="selected"{% endif %}>{% trans "Nebulae" %}</a></li>
-					<li><a href="/images/archive/category/blackholes/?{{ request.GET.urlencode }}"{% if '/images/archive/category/blackholes/' in request.path %} class="selected"{% endif %}>{% trans "Quasars and Black Holes" %}</a></li>
-					<li><a href="/images/archive/category/solarsystem/?{{ request.GET.urlencode }}"{% if '/images/archive/category/solarsystem/' in request.path %} class="selected"{% endif %}>{% trans "Solar System" %}</a></li>
-					<li><a href="/images/archive/category/spacecraft/?{{ request.GET.urlencode }}"{% if '/images/archive/category/spacecraft/' in request.path %} class="selected"{% endif %}>{% trans "Spacecraft" %}</a></li>
-					<li><a href="/images/archive/category/starclusters/?{{ request.GET.urlencode }}"{% if '/images/archive/category/starclusters/' in request.path %} class="selected"{% endif %}>{% trans "Star Clusters" %}</a></li>
-					<li><a href="/images/archive/category/stars/?{{ request.GET.urlencode }}"{% if '/images/archive/category/stars/' in request.path %} class="selected"{% endif %}>{% trans "Stars" %}</a></li>
-				</ul>
-			</div>
-			{% elif archive == 'video' %}
-			<div class="col-md-11 media-categories">
-				<ul>
-					<li><a href="/videos/?{{ request.GET.urlencode }}">{% trans "View All" %}</a></li>
-					<li><a href="/videos/archive/category/3d/?{{ request.GET.urlencode }}"{% if '/videos/archive/category/3d/' in request.path %} class="selected"{% endif %}>{% trans "3D Animations" %}</a></li>
-					<li><a href="/videos/archive/category/cosmology/?{{ request.GET.urlencode }}"{% if '/videos/archive/category/cosmology/' in request.path %} class="selected"{% endif %}>{% trans "Cosmology" %}</a></li>
-					<li><a href="/videos/archive/category/dome/?{{ request.GET.urlencode }}"{% if '/videos/archive/category/dome/' in request.path %} class="selected"{% endif %}>{% trans "Dome Masters" %}</a></li>
-					<li><a href="/videos/archive/category/exoplanets/?{{ request.GET.urlencode }}"{% if '/videos/archive/category/exoplanets/' in request.path %} class="selected"{% endif %}>{% trans "Exoplanets" %}</a></li>
-					<li><a href="/videos/archive/category/eyesontheskies/?{{ request.GET.urlencode }}"{% if '/videos/archive/category/eyesontheskies/' in request.path %} class="selected"{% endif %}>{% trans "Eyes on the Skies DVD" %}</a></li>
-					<li><a href="/videos/archive/category/galaxies/?{{ request.GET.urlencode }}"{% if '/videos/archive/category/galaxies/' in request.path %} class="selected"{% endif %}>{% trans "Galaxies" %}</a></li>
-					<li><a href="/videos/archive/category/hd/?{{ request.GET.urlencode }}"{% if '/videos/archive/category/hd/' in request.path %} class="selected"{% endif %}>{% trans "HD Videos" %}</a></li>
-					<li><a href="/videos/archive/category/dvd/?{{ request.GET.urlencode }}"{% if '/videos/archive/category/dvd/' in request.path %} class="selected"{% endif %}>{% trans "Hubble 15 Year DVD" %}</a></li>
-					<li><a href="/videos/archive/category/hubble/?{{ request.GET.urlencode }}"{% if '/videos/archive/category/hubble/' in request.path %} class="selected"{% endif %}>{% trans "Hubble Images Videos" %}</a></li>
-					<li><a href="/videos/archive/category/hubblecast/?{{ request.GET.urlencode }}"{% if '/videos/archive/category/hubblecast/' in request.path %} class="selected"{% endif %}>{% trans "Hubblecast" %}</a></li>
-					<li><a href="/videos/archive/category/jwst/?{{ request.GET.urlencode }}"{% if '/videos/archive/category/jwst/' in request.path %} class="selected"{% endif %}>{% trans "James Webb Space Telescope" %}</a></li>
-					<li><a href="/videos/archive/category/misc/?{{ request.GET.urlencode }}"{% if '/videos/archive/category/misc/' in request.path %} class="selected"{% endif %}>{% trans "Miscellaneous" %}</a></li>
-					<li><a href="/videos/archive/category/nebulae/?{{ request.GET.urlencode }}"{% if '/videos/archive/category/nebulae/' in request.path %} class="selected"{% endif %}>{% trans "Nebulae" %}</a></li>
-					<li><a href="/videos/archive/category/blackholes/?{{ request.GET.urlencode }}"{% if '/videos/archive/category/blackholes/' in request.path %} class="selected"{% endif %}>{% trans "Quasars and Black Holes" %}</a></li>
-					<li><a href="/videos/archive/category/solarsystem/?{{ request.GET.urlencode }}"{% if '/videos/archive/category/solarsystem/' in request.path %} class="selected"{% endif %}>{% trans "Solar System" %}</a></li>
-					<li><a href="/videos/archive/category/spacecraft/?{{ request.GET.urlencode }}"{% if '/videos/archive/category/spacecraft/' in request.path %} class="selected"{% endif %}>{% trans "Spacecraft" %}</a></li>
-					<li><a href="/videos/archive/category/starclusters/?{{ request.GET.urlencode }}"{% if '/videos/archive/category/starclusters/' in request.path %} class="selected"{% endif %}>{% trans "Star Clusters" %}</a></li>
-					<li><a href="/videos/archive/category/stars/?{{ request.GET.urlencode }}"{% if '/videos/archive/category/stars/' in request.path %} class="selected"{% endif %}>{% trans "Stars" %}</a></li>
+					{% if archive == 'image' %}<li><a href="{{ search_url }}viewall/?{{ request.GET.urlencode }}">{% trans "View All" %}</a></li>{% endif %}
+					{% if archive == 'video' %}<li><a href="{{ search_url }}?{{ request.GET.urlencode }}">{% trans "View All" %}</a></li>{% endif %}
+					{% for category in web_categories %}
+					<li><a href="{{ search_url }}archive/category/{{ category.url }}/?{{ request.GET.urlencode }}"{% if category.selected %} class="selected"{% endif %}>{% trans category.name %}</a></li>
+					{% endfor %}
 				</ul>
 			</div>
 			{% endif %}
+
 			<div class="col-md-1 media-sortby">
 				<ul title="{% trans 'Sort by:' %}">
 					<li><a href="{{ request.path }}"{% if not request.GET.sort %} class="selected"{% endif %}>{% trans "Ranking" %}</a></li>
