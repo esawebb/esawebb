@@ -695,7 +695,6 @@ PHOTOSHOP_ROOT = local_settings.PHOTOSHOP_ROOT
 # one djangoplicity installation this setting can just be set to
 # none (which means the default broker for celery is used).
 PHOTOSHOP_BROKER = local_settings.PHOTOSHOP_BROKER
-NEWSFEATURE_FORMAT = 'newsfeature_hst'
 
 ##########
 # CELERY #
