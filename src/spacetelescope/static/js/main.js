@@ -432,14 +432,13 @@ $("[data-toggle='popover']").popover();
 
 $(".image-list-300").justifiedGallery({
 		rowHeight: 300,
+	    maxRowHeight: 500,
 		margins: 8,
 		captions: false,
-		sizeRangeSuffixes: {'lt100':'',
-		'lt240':'',
-		'lt320':'',
-		'lt500':'',
-		'lt640':'',
-		'lt1024':''}
+		sizeRangeSuffixes: {
+			500: '',
+			640: '_l'
+		}
 });
 
 $(".image-list-200").justifiedGallery({
