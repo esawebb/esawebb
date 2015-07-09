@@ -27,7 +27,7 @@ SITE_ENVIRONMENT = 'production'
 # DEPLOYMENT #
 ##############
 MANAGEMENT_NODES = ["aweb41"]
-BROKERS = ["aweb26"]
+BROKERS = ["aweb24"]
 WORKERS = ["aweb41", "aweb42"]
 WORKERS_BEAT_HOST = "aweb41"
 WORKERS_CAM_HOST = "aweb42"
@@ -73,12 +73,12 @@ EMAIL_SUBJECT_PREFIX = '[SPACETELESCOPE]'
 # PHOTOSHOP CELERYWORKER #
 ##########################
 PHOTOSHOP_ROOT = "/home/web/A/import"
-PHOTOSHOP_BROKER['HOST'] = "aweb26.hq.eso.org"
+PHOTOSHOP_BROKER['HOST'] = "aweb24.hq.eso.org"
 
 ##########
 # CELERY #
 ##########
-BROKER_URL = 'amqp://spacetelescope:letoveumtold@aweb26.hq.eso.org:5672/spacetelescope_vhost'
+BROKER_URL = 'amqp://spacetelescope:letoveumtold@aweb24.hq.eso.org:5672/spacetelescope_vhost'
 
 ########
 # SHOP #
