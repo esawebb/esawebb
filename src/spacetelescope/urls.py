@@ -50,6 +50,7 @@ urlpatterns += patterns( '',
 	( r'^admin/system/', include(adminlogs_site.urls), { 'SSL': True, 'extra_context': { 'ADMINLOGS_SITE': True }  } ),
 	( r'^admin/', include(admin_site.urls), { 'SSL': True, 'extra_context': { 'ADMIN_SITE': True }  } ),
 	( r'^admin/import/', include('djangoplicity.archives.importer.urls'), { 'SSL': True } ),
+	( r'^admin/', include('djangoplicity.metadata.wtmlimport.urls'), { 'SSL': True, 'extra_context': { 'ADMIN_SITE': True }  } ),
 
 	# Djangoplicity pages API
 	( r'^public/djangoplicity/admin/pages/', include('djangoplicity.pages.urls'), { 'SSLAllow': True } ),
