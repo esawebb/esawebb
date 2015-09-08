@@ -53,6 +53,8 @@ PYTHON = "python2.7"
 DATABASES = copy_setting(DATABASES)
 DATABASES['default']['HOST'] = "hqdb1i.hq.eso.org"
 DATABASES['default']['PASSWORD'] = "fivjeylvoked"
+DATABASES['psql']['HOST'] = 'hqdb1i.hq.eso.org'
+DATABASES['psql']['PASSWORD'] = 'fivjeylvoked'
 
 ##########
 # CACHE  #

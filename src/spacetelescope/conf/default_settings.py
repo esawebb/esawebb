@@ -101,7 +101,14 @@ DATABASES = {
         'TEST_COLLATION': 'utf8_general_ci',
         'TEST_MIRROR': None,
         'TEST_NAME': None,  # "test_" + DATABASE_NAME
-    }
+    },
+	'psql': {
+		'ENGINE': 'django.db.backends.postgresql_psycopg2',
+		'NAME': 'spacetelescope',
+		'USER': 'spacetelescope',
+		'PASSWORD': '',
+		'HOST': 'localhost',
+	}
 }
 
 if 'migrate' in sys.argv or 'syncdb' in sys.argv:

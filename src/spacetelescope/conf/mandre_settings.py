@@ -63,12 +63,7 @@ MEDIA_ROOT = "/media/ecfwebstore/ecfwebvol0/diskwa/webdocs/hubble/docs/static/"
 # DATABASE SETUP #
 ##################
 DATABASES = copy_setting(DATABASES)
-#DATABASES['default']['HOST'] = "mysql1i.hq.eso.org"
-#DATABASES['default']['PASSWORD'] = "fivjeylvoked"
-
-#DATABASES['default']['USER'] = "spacetelescope"
-#DATABASES['default']['HOST'] = "mysql1.hq.eso.org"
-#DATABASES['default']['PASSWORD'] = "letoveumtold"
+DATABASES['psql']['PASSWORD'] = 'Dastigfov8'
 
 ###############
 # MEDIA SETUP #
@@ -79,13 +74,13 @@ DATABASES = copy_setting(DATABASES)
 # CACHE  #
 ##########
 CACHES = {
-	'notdefault' : {
-		'BACKEND' : 'django.core.cache.backends.memcached.MemcachedCache',
-		'KEY_PREFIX' : 'eso',
-		'LOCATION' : [
+	'notdefault': {
+		'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
+		'KEY_PREFIX': 'eso',
+		'LOCATION': [
 			'127.0.0.1:11211',
 		],
-		'TIMEOUT' : 86400
+		'TIMEOUT': 86400
 	},
 	'default': {
 		'BACKEND': 'django.core.cache.backends.dummy.DummyCache',
