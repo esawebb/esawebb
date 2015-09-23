@@ -589,6 +589,7 @@ ARCHIVES = (
 	('djangoplicity.products.models.OnlineArtAuthor', 'djangoplicity.products.options.OnlineArtAuthorOptions'),
 	('djangoplicity.products.models.PaperModel', 'djangoplicity.products.options.PaperModelOptions'),
 	('djangoplicity.products.models.PlanetariumShow', 'djangoplicity.products.options.PlanetariumShowOptions'),
+	('djangoplicity.products.models.Donation', 'djangoplicity.products.options.DonationOptions'),
 	('djangoplicity.products.models.PostCard', 'djangoplicity.products.options.PostCardOptions'),
 	('djangoplicity.products.models.PrintedPoster', 'djangoplicity.products.options.PrintedPosterOptions'),
 	('djangoplicity.products.models.ConferencePoster', 'djangoplicity.products.options.ConferencePosterOptions'),
@@ -777,10 +778,10 @@ CELERYBEAT_SCHEDULE = {
 		'task': 'mailinglists.clean_tokens',
 		'schedule': crontab(minute=5, hour=5),
 	},
-#	'update-vote-counts': {
-#		'task': 'imgvote.count_votes',
-#		'schedule': timedelta(seconds=300),
-#	},
+	'check-content-server-resources': {
+		'task': 'djangoplicity.contentserver.tasks.check_content_server_resources',
+		'schedule': crontab(minute=0, hour=4),
+	},
 }
 
 ##############
