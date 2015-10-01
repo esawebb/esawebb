@@ -29,7 +29,7 @@ DJANGOPLICITY_ROOT = local_settings.DJANGOPLICITY_ROOT
 LOG_DIR = local_settings.LOG_DIR
 TMP_DIR = local_settings.TMP_DIR
 ENABLE_SSL = local_settings.ENABLE_SSL
-ALLOW_SSL = local_settings.ENABLE_SSL
+ALLOW_SSL = local_settings.ALLOW_SSL
 GA_ID = "UA-2368492-6"
 FACEBOOK_APP_ID = "144508505618279"
 
