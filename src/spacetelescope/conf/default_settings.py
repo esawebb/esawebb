@@ -25,6 +25,7 @@ BUILDOUT_CONFIG = "buildout.cfg"
 LOG_DIR = "%s/logs" % ROOT
 TMP_DIR = "%s/tmp" % ROOT
 ENABLE_SSL = False
+ALLOW_SSL = True
 SECURE_PROXY_SSL_HEADER = None
 CSRF_COOKIE_SECURE = False
 SESSION_COOKIE_SECURE = False

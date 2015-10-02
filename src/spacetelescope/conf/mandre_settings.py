@@ -62,8 +62,30 @@ MEDIA_ROOT = "/media/ecfwebstore/ecfwebvol0/diskwa/webdocs/hubble/docs/static/"
 ##################
 # DATABASE SETUP #
 ##################
-DATABASES = copy_setting(DATABASES)
-DATABASES['psql']['PASSWORD'] = 'Dastigfov8'
+DATABASES = {
+    'mysql': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'spacetelescope',
+        'USER': 'root',
+        'PASSWORD': '',
+        'HOST': 'localhost',
+        'PORT': '3306',
+        'OPTIONS': {
+			'connect_timeout': 15,
+		} if 'test' not in sys.argv else {},
+        'TEST_CHARSET': 'utf8',
+        'TEST_COLLATION': 'utf8_general_ci',
+        'TEST_MIRROR': None,
+        'TEST_NAME': None,  # "test_" + DATABASE_NAME
+	},
+	'default': {
+		'ENGINE': 'django.db.backends.postgresql_psycopg2',
+		'NAME': 'spacetelescope',
+		'USER': 'mandre',
+		'PASSWORD': 'Hirshaj3',
+		'HOST': 'localhost',
+	}
+}
 
 ###############
 # MEDIA SETUP #
