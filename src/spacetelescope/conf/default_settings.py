@@ -86,24 +86,8 @@ LOGGING_HANDLER = ['file', 'mail_admins']
 ##################
 # DATABASE SETUP #
 ##################
-SOUTH_TESTS_MIGRATE = False
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'spacetelescope',
-        'USER': 'root',
-        'PASSWORD': '',
-        'HOST': 'localhost',
-        'PORT': '3306',
-        'OPTIONS': {
-			'connect_timeout': 15,
-		} if 'test' not in sys.argv else {},
-        'TEST_CHARSET': 'utf8',
-        'TEST_COLLATION': 'utf8_general_ci',
-        'TEST_MIRROR': None,
-        'TEST_NAME': None,  # "test_" + DATABASE_NAME
-    },
-	'psql': {
+	'default': {
 		'ENGINE': 'django.db.backends.postgresql_psycopg2',
 		'NAME': 'spacetelescope',
 		'USER': 'spacetelescope',
@@ -111,9 +95,6 @@ DATABASES = {
 		'HOST': 'localhost',
 	}
 }
-
-if 'migrate' in sys.argv or 'syncdb' in sys.argv:
-	DATABASES['default']['OPTIONS']['init_command'] = 'SET storage_engine=MyISAM'
 
 if 'test' in sys.argv:
 	DATABASES['default']['ENGINE'] = 'django.db.backends.sqlite3'
