@@ -49,7 +49,7 @@ DATABASES = copy_setting(DATABASES)
 DATABASES['default']['HOST'] = "hqdb1.hq.eso.org"
 DATABASES['default']['PASSWORD'] = "letoveumtold"
 DATABASES['psql']['HOST'] = 'hqdb1.hq.eso.org'
-DATABASES['psql']['PASSWORD'] = 'fivjeylvoked'
+DATABASES['psql']['PASSWORD'] = 'letoveumtold'
 
 ##########
 # CACHE  #
