@@ -920,7 +920,6 @@ rl_config.TTFSearchPath.append( PRJBASE + "/fonts/" )
 ####################
 DATABASE_STORAGE_ENGINE = "MyISAM"
 
-SOUTH_TESTS_MIGRATE = local_settings.SOUTH_TESTS_MIGRATE
 SOUTH_MIGRATION_MODULES = {
 	'redirects': 'ignore',  # We are using django.redirects and not djangoplicity.redirects where the migration is stored.
 }

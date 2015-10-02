@@ -98,7 +98,6 @@ DATABASES = {
 
 if 'test' in sys.argv:
 	DATABASES['default']['ENGINE'] = 'django.db.backends.sqlite3'
-	SOUTH_TESTS_MIGRATE = False
 
 
 ###############
