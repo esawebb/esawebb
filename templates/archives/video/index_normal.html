@@ -9,6 +9,43 @@
 {% for list in object_list|split_list:columns %}
 <div class="row">
 	{% block index_row %}
+
+	<div id="popup-youtube" class="mfp-hide popup-youtube-content">
+		<div class="youtube-wrapper">
+			<div id="youtube-player"></div>
+		</div>
+		<div class="popup-caption">
+			<a href="">
+				<div class="row">
+					<div class="col-md-9">
+						<span class="title"></span>
+					</div>
+					<div class="col-md-3">
+						<span class="download-info">{% trans "Info and downloads" %}</span>
+						<span class="fa fa-download download-icon"></span>
+					</div>
+				</div>
+			</a>
+		</div>
+	</div>
+
+	<div id="popup-jwplayer" class="mfp-hide popup-jwplayer-content">
+		<div id="videoplayer"></div>
+		<div class="popup-caption">
+			<a href="">
+				<div class="row">
+					<div class="col-md-9 col-sm-12">
+						<span class="title"></span>
+					</div>
+					<div class="col-md-3 col-sm-12">
+						<span class="download-info">{% trans "Info and downloads" %}</span>
+						<span class="fa fa-download download-icon"></span>
+					</div>
+				</div>
+			</a>
+		</div>
+	</div>
+
 	{% for video in list %}
 		{% if columns == "4" %}
 		<div class="col-xs-12 col-md-6 col-lg-3">
@@ -16,14 +53,24 @@
 		<div class="col-md-6 col-lg-4">
 		{% endif %}
 			<div class="video-thumbnail">
-				{% if video.videosubtitle_set.all %}
-					{% embedvideo_subs video "medium_podcast,h264" "hd_and_apple,hd720p_screen,dome_preview" "medium_podcast,h264" video.videosubtitle_set.all %}
-				{% else %}
-					{% embedvideo video "medium_podcast,h264" "hd_and_apple,hd720p_screen,dome_preview" "medium_podcast,h264" %}
-				{% endif%}
 				<div class="img-wrapper">
-					<span class="fa fa-play"></span>
-					<img src="{{ video.resource_videoframe.url }}" class="img-responsive" alt="{{ video.title }}">
+				{% if video.youtube_video_id and video.use_youtube %}
+					<a class="popup-youtube" href="#popup-youtube" data-youtube-id="{{ video.youtube_video_id }}" data-title="{{ video.title }}" data-url="{{ video.get_absolute_url }}">
+				{% else %}
+					<a class="popup-jwplayer" href="#popup-jwplayer" data-video-id="{{ video.pk }}" data-title="{{ video.title }}" data-url="{{ video.get_absolute_url }}">
+				{% endif %}
+						<span class="fa fa-play"></span>
+						<img src="{{ video.resource_videoframe.url }}" class="img-responsive" alt="{{ video.title }}">
+					</a>
+				{% if video.youtube_video_id and video.use_youtube %}
+				{% else %}
+					{% if video.videosubtitle_set.all %}
+						{% embedvideo_subs video "medium_podcast,h264" "hd_and_apple,hd720p_screen,dome_preview" "medium_podcast,h264" video.videosubtitle_set.all %}
+					{% else %}
+						{% embedvideo video "medium_podcast,h264" "hd_and_apple,hd720p_screen,dome_preview" "medium_podcast,h264" %}
+					{% endif%}
+				{% endif %}
+					</a>
 				</div>
 				<div data-toggle="tooltip" data-placement="top" title="Info&nbsp;and&nbsp;downloads" class="caption">
 					<a href="{{ video.get_absolute_url }}">

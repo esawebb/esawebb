@@ -17,6 +17,7 @@
 {% include "images/embedded_list.html" %}
 {% include "videos/embedded_list.html" %}
 {% include resources_template %}
+{% include "scripts/embedded_list.html" %}
 {% include "audiotracks/embedded_list.html" %}
 {% include "broadcastaudiotracks/embedded_list.html" %}
 {% include "subtitles/embedded_list.html" %}
@@ -27,6 +28,33 @@
 
 {% block extra_scripts %}
 <script type="text/javascript">
+{% if object.youtube_video_id and object.use_youtube %}
+var tag = document.createElement('script');
+
+tag.src = "https://www.youtube.com/iframe_api";
+var firstScriptTag = document.getElementsByTagName('script')[0];
+firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+var player;
+function onYouTubeIframeAPIReady() {
+	player = new YT.Player('youtube-player', {
+		height: '387',
+		width: '688',
+		videoId: '{{ object.youtube_video_id }}',
+		playerVars: {
+			'modestbranding': 1,
+			'hl': '{{ LANGUAGE_CODE }}'
+		},
+		events: {
+			'onReady': onPlayerReady,
+		}
+	});
+	function onPlayerReady(event) {
+		// event.target.setPlaybackQuality('large');
+	}
+}
+{% else %}
 	setupVideoPlayer('{{ object.id }}');
+{% endif %}
 </script>
 {% endblock %}

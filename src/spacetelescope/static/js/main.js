@@ -353,6 +353,29 @@ $(document).ready(function(){
 			mainClass: 'mfp-fade'
 		});
 	});
+
+	$('.popup-youtube').each(function() {
+		$(this).magnificPopup({
+			type: 'inline',
+			closeBtnInside: false,
+			mainClass: 'mfp-fade',
+			preloader: false
+		});
+	});
+
+	$('.popup-jwplayer').each(function() {
+		$(this).magnificPopup({
+			type: 'inline',
+			closeBtnInside: false,
+			mainClass: 'mfp-fade',
+			callbacks: {
+				close: function() {
+					console.log('Will remove');
+					jwplayer('videoplayer').remove();
+				}
+			}
+		});
+	});
 });
 
 // Show/hide main search box
