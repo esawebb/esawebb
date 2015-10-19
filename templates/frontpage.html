@@ -74,19 +74,6 @@
 
 <div class="row frontpage-section">
 	{% if hubblecasts %}
-	<script type="text/javascript">
-		{% comment %}
-		Create array of slides/IDs so that jwplayer can be activated
-		on slide changes
-		{% endcomment %}
-		var hubblecasts_slides = [
-		{% spaceless %}
-		{% for hubblecast in hubblecasts %}
-			"{{ hubblecast.id }}",
-		{% endfor %}
-		{% endspaceless %}
-		];
-	</script>
 	<div class="col-md-6">
 		<div id="hubblecast-carousel-wrapper">
 			<div class="section-header">
@@ -97,17 +84,21 @@
 				</div>
 			</div>
 			<div id="hubblecast-carousel">
-				{% for hubblecast in hubblecasts %}
 				<div class="slide">
-					{% embedvideo_subs hubblecast 'medium_podcast,h264' 'hd_and_apple,hd720p_screen,dome_preview' '' hubblecast.videosubtitle_set.all 0 %}
-					<a href="{{ hubblecast.get_absolute_url }}">
-					<div class="hubblecast-description">
-							<div class="date">{{ hubblecast.release_date|datetime:"DATE" }} — {{ hubblecast.id }}</div>
-							<div class="title">{{ hubblecast.title }}</div>
+					{% if hubblecasts.0.youtube_video_id and hubblecasts.0.use_youtube %}
+						<div class="youtube-wrapper">
+							<div id="youtube-player"></div>
+						</div>
+					{% else %}
+						{% embedvideo_subs hubblecasts.0 'medium_podcast,h264' 'hd_and_apple,hd720p_screen,dome_preview' '' hubblecasts.0.videosubtitle_set.all 0 %}
+					{% endif %}
+					<a href="{{ hubblecasts.0.get_absolute_url }}">
+						<div class="hubblecast-description{% if not hubblecasts.0.youtube_video_id or not hubblecasts.0.use_youtube %} hubblecast-description-jwplayer{% endif %}">
+							<div class="date">{{ hubblecasts.0.release_date|datetime:"DATE" }} — {{ hubblecasts.0.id }}</div>
+							<div class="title">{{ hubblecasts.0.title }}</div>
 					</div>
 					</a>
-				</div> <!-- slide -->
-				{% endfor %}
+				</div>
 			</div> <!-- hubblecast-carousel -->
 		</div>
 	</div>
@@ -221,6 +212,39 @@
 {% block extra_scripts %}
 <script type="text/javascript">
 
+// Load YouTube or JwPlayer
+{% if hubblecasts.0 %}
+	{% if hubblecasts.0.youtube_video_id and hubblecasts.0.use_youtube %}
+		var tag = document.createElement('script');
+
+		tag.src = "https://www.youtube.com/iframe_api";
+		var firstScriptTag = document.getElementsByTagName('script')[0];
+		firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+		var player;
+		function onYouTubeIframeAPIReady() {
+			player = new YT.Player('youtube-player', {
+				height: '263',
+				width: '468',
+				videoId: '{{ hubblecasts.0.youtube_video_id }}',
+				playerVars: {
+					'modestbranding': 1,
+					'hl': '{{ LANGUAGE_CODE }}'
+				},
+				events: {
+					'onReady': onPlayerReady,
+				}
+			});
+			function onPlayerReady(event) {
+				// event.target.setPlaybackQuality('large');
+			}
+		}
+	{% else %}
+		setupVideoPlayer('{{ hubblecasts.0.id }}');
+	{% endif %}
+{% endif %}
+
+
 $(document).ready(function(){                                                   
 	{% comment %}
 	Set hover target on pr-description, this cannot be done fully in CSS         
@@ -239,33 +263,6 @@ $(document).ready(function(){
 	}).get());
 	$(annTitleSelector).height(maxAnnHeight);
 
-	// Setup hubblecasts video
-	{% if hubblecasts %}
-		setupVideoPlayer('{{ hubblecasts.0.id }}');
-
-		// Activate next hubblecast on slide change
-		$('#hubblecast-carousel').on('beforeChange', function(event, slick, currentSlide, nextSlide){
-			// Pause all running video players
-			for (i = 0 ; ; i++) {
-				if (jwplayer(i).pause) {
-					// If true then such a video player exists
-					jwplayer(i).pause(true);
-				}
-				else break;
-			}
-
-			var video_id = hubblecasts_slides[nextSlide];
-			// If we have a video id, and if the slide is not the first one
-			// the we set it up
-			if (video_id && nextSlide != 0) {
-				setupVideoPlayer(video_id);
-				// We only need to setup the video player once, so we set the
-				// video id to null if the slide is loaded again
-				hubblecasts_slides[nextSlide] = null;
-			}
-		});
-
-	{% endif %}
 });                                                                             
             
 </script>

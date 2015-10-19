@@ -270,18 +270,6 @@ $(document).ready(function(){
 });
 
 
-// Prepare Hubblecast carousel
-$(document).ready(function(){
-	$('#hubblecast-carousel').slick({
-		infinite: false,
-		lazyLoad: 'progressive',
-		prevArrow: '<button type="button" class="frontpage-slide-prev"><span class="fa fa-angle-left"></span</button>',
-		nextArrow: '<button type="button" class="frontpage-slide-next"><span class="fa fa-angle-right"></span></button>',
-		appendArrows: '#hubblecast-carousel-wrapper .section-navigation'
-	});
-});
-
-
 // Prepare Highlights carousel
 $(document).ready(function(){
 	$('#highlight-carousel').slick({

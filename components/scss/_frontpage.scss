@@ -355,16 +355,6 @@
 				visibility: visible;
 			}
 
-			.slide {
-				visibility: hidden;
-			}
-
-			// The jwplayer somehow adds a few pixels, so we cap the max-height
-			// when displayed in two columns
-			@media (min-width: 992px) {
-				max-height: 313px;
-			}
-
 			.slide-prev {
 				@extend .slide-prev;
 			}
@@ -386,10 +376,14 @@
 
 			.hubblecast-description {
 				@extend .frontpage-description;
+				white-space: nowrap;
+			}
+
+			.hubblecast-description-jwplayer {
 				// The jwplayer somehow adds a few pixels, so we move the description
 				// up by a few pixles
 				@media (min-width: 992px) {
-					margin-top: -6px;
+					margin-top: -4px;
 				}
 			}
 		}
