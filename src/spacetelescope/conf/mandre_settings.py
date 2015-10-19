@@ -63,7 +63,7 @@ MEDIA_ROOT = "/media/ecfwebstore/ecfwebvol0/diskwa/webdocs/hubble/docs/static/"
 # DATABASE SETUP #
 ##################
 DATABASES = copy_setting(DATABASES)
-DATABASES['default']['PASSWORD'] = "mandre"
+DATABASES['default']['USER'] = "mandre"
 DATABASES['default']['PASSWORD'] = "Hirshaj3"
 
 ###############
