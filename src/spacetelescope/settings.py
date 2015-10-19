@@ -1198,3 +1198,6 @@ MEDIA_CONTENT_SERVERS_CHOICES = (
 )
 
 DEFAULT_MEDIA_CONTENT_SERVER = 'CDN77'
+
+YOUTUBE_TOKEN = '%s/youtube_oauth2_token.json' % TMP_DIR
+YOUTUBE_DEFAULT_TAGS = ['Hubble', 'Hubble Space Telecope', 'Telescope', 'Space', 'Observatory', 'ESA']
