@@ -15,24 +15,22 @@ from djangoplicity.contrib.admin.discover import autoregister
 import django.contrib.auth.admin
 import django.contrib.redirects.admin
 import django.contrib.sites.admin
+import djangoplicity.actions.admin
 import djangoplicity.announcements.admin
-import djangoplicity.menus.admin
-import djangoplicity.pages.admin
+import djangoplicity.archives.contrib.satchmo.freeorder.admin
+import djangoplicity.crawler.admin
+import djangoplicity.customsearch.admin
+import djangoplicity.imgvote.admin
+import djangoplicity.mailinglists.admin
 import djangoplicity.media.admin
+import djangoplicity.menus.admin
+import djangoplicity.metadata.admin
+import djangoplicity.newsletters.admin
+import djangoplicity.pages.admin
 import djangoplicity.products.admin
 import djangoplicity.releases.admin
-import djangoplicity.metadata.admin
-import djangoplicity.archives.contrib.satchmo.freeorder.admin
-#import djangoplicity.events.admin
-import djangoplicity.mailinglists.admin
-import djangoplicity.newsletters.admin
-#import djangoplicity.contacts.admin
-import djangoplicity.customsearch.admin
-#import djangoplicity.eventcalendar.admin
-import djangoplicity.actions.admin
-import djangoplicity.imgvote.admin
+import djangoplicity.reports.admin
 import djangoplicity.science.admin
-import djangoplicity.crawler.admin
 import spacetelescope.frontpage.admin
 
 # Register each applications admin interfaces with
@@ -67,6 +65,8 @@ autoregister( adminlogs_site, djangoplicity.actions.admin )
 #
 # Applications that does not support above method.
 #
+djangoplicity.reports.admin.advanced_register_with_admin(admin_site)
+
 adminlogs_site.register(django.contrib.redirects.models.Redirect,
                         django.contrib.redirects.admin.RedirectAdmin)
 

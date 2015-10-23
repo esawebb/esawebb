@@ -336,7 +336,7 @@ INSTALLED_APPS += (
 	'django.contrib.humanize',
 	'django.contrib.sitemaps',
 	'djangoplicity.menus',
-	#'djangoplicity.reports',
+	'djangoplicity.reports',
 	#'djangoplicity.massmailer',
 	#'djangoplicity.news',
 	'djangoplicity.pages',

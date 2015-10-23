@@ -51,6 +51,7 @@ urlpatterns += patterns( '',
 	( r'^admin/', include(admin_site.urls), { 'SSL': True, 'extra_context': { 'ADMIN_SITE': True }  } ),
 	( r'^admin/import/', include('djangoplicity.archives.importer.urls'), { 'SSL': True } ),
 	( r'^admin/', include('djangoplicity.metadata.wtmlimport.urls'), { 'SSL': True, 'extra_context': { 'ADMIN_SITE': True }  } ),
+	( r'^public/djangoplicity/admin/reportsdetails/', include( 'djangoplicity.reports.urls' ), { 'SSL': True } ),
 
 	# Djangoplicity pages API
 	( r'^public/djangoplicity/admin/pages/', include('djangoplicity.pages.urls'), { 'SSLAllow': True } ),
