@@ -9,16 +9,17 @@
 #
 
 """
-Creation of LDAP/ADS users. 
+Creation of LDAP/ADS users.
 """
 
 from django.db.models.signals import post_save
 from django.contrib.auth.models import User
 from django_auth_ldap.backend import LDAPBackend
 
+
 def user_create_handler( sender=None, instance=None, created=None, raw=False, **kwargs ):
 	"""
-	When creating a user via the admin. Populate the user from ldap if possible and set 
+	When creating a user via the admin. Populate the user from ldap if possible and set
 	an unusuable password.
 	"""
 	if created and not raw:

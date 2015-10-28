@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load satchmo_currency %}
+{% load satchmo_order %}
+
+{% block body %}
+<div class="row page shop review">
+	<div class="col-md-12">
+		<h1>{% trans "Checkout" %}</h1>
+		<h2>Step 3 of 3: Review order</h2>
+
+		{% block error_processing %}
+		{% if errors %}
+			<div class="alert alert-danger" role="alert">
+				<h3 class="error">{% block errorheader %}An error was returned while trying to process your card{% endblock %}</h3>
+				<p>Reason: {{ errors }}</p>
+				<p>Please go back to <a href="../">Step 2 of 3: Enter credit card information</a> and correct the error given below.</p>
+			</div>
+		{% else %}
+			<p>Please validate the following information, then submit press "Place order". {% if not order.paid_in_full %} Your credit card will be charged immediately after you 
+			have placed the order.{% endif %}</p>
+		{% endif %}
+		{% endblock %}
+
+		{% block order_details %}
+			{% order_details order default_view_tax %}
+		{% endblock %}
+
+		{% block payment_display %}
+		{% if order.balance != 0 %}
+		<div class="pr_box">
+		<h3>{% trans "Payment" %}</h3>
+		{% with order.credit_card.credit_type as credit_card_type %}
+		{% with order.credit_card.display_cc as credit_card_number %}
+		{% with order.balance|currency as order_total %}
+		{% blocktrans %}Your {{ credit_card_type }} card ending in {{ credit_card_number }} will be charged <strong>{{ order_total }}</strong>.{% endblocktrans %}
+		{% endwith %}
+		{% endwith %}
+		{% endwith %}
+		{% endif %}
+		{% endblock %}
+		</div>
+		{% block payment_form %}
+
+		<div class="pr_box">
+			{% url 'COPOSWEB_satchmo_checkout-step3' as COPOSWEB_satchmo_checkout_step3 %}
+			<form method="post" action="{{ COPOSWEB_satchmo_checkout_step3 }}" class="orderform">{% csrf_token %}
+			<input type="hidden" name="Process" value="True">
+			<div class="form-group">
+				<div class=" col-sm-12 text-center">
+					<button type="submit" class="btn btn-default">{% trans "Place order" %}</button>
+				</div>
+			</div>
+			</form>
+		</div>
+		{% endblock %}
+	</div>
+</div>
+
+{% endblock %}

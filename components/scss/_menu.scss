@@ -1,0 +1,318 @@
+// Main menu navbar
+@media (min-width: $mobile-breakpoint) {
+	.main-menu {
+		max-width: $content-width;
+		margin-left: auto;
+		margin-right: auto;
+		height: $main-menu-height;
+		position: absolute;
+		bottom: 0;
+
+		.mobile-menu {
+			display: none;
+		}
+
+		.level0 {
+			padding: 0;
+			margin: 0;
+			float: left;
+
+			> li {
+				display: table-cell;
+				position: relative;
+
+				&.current, &.current:hover {
+					> a {
+						background-color: #fff;
+						color: $text-color;
+
+						.level0-children-arrows {
+							display: block;
+						}
+					}
+
+					&.current-leaf {
+					}
+				}
+
+				
+				> a {
+					color: #fff;
+					line-height: $main-menu-height;
+					padding: 0 6px;
+					font-size: $main-menu-font-size;
+					font-weight: 600;
+					text-transform: uppercase;
+
+					@media (min-width: $screen-md-min) {
+						padding: 0 10px;
+					}
+
+					@media (min-width: $screen-lg-min) {
+						padding: 0 12px;
+					}
+
+					.level0-children-arrows {
+						position: absolute;
+						bottom: 0;
+						left: 0;
+						width: 100%;
+						text-align: center;
+						font-size: 18px;
+						display: none;
+					}
+				}
+
+				&:hover > a {
+					background-color: $hubble-menu-separator-color;
+					color: $text-color;
+
+					.level0-children-arrows {
+						display: block;
+					}
+				}
+
+				&.current .level1-wrapper {
+					box-shadow: 0 0-$top-menu-border-width $hubble-blue, 0 1px 4px rgba(0, 0, 0, 0.2);
+
+					.level1 {
+						@include transition(max-height 0.3s); 
+						max-height: 0;
+
+						&.current {
+							max-height: 25px;
+						}
+					}
+				}
+
+				&.hover:not(.current) .level1-wrapper {
+					box-shadow: 0 0-$top-menu-border-width $hubble-menu-separator-color, 0 1px 4px rgba(0, 0, 0, 0.2);
+				}
+
+				&.hover.hover-notransition .level1-wrapper {
+					div, ul, li {
+						@include transition(none); 
+					}
+				}
+			}
+		}
+
+		.mobile-children {
+			display: none;
+		}
+
+		ul {
+			padding: 15px 0;
+			@include transition(padding 0.3s); 
+		}
+
+		li {
+			list-style: none;
+			white-space: nowrap;
+			overflow: hidden;
+			max-height: 25px;
+			@include transition(max-height 0.3s); 
+
+			a {
+				color: black;
+				text-decoration: none;
+				display: block;
+				width: 100%;
+
+				.topmenu-arrow {
+					color: $gray;
+					font-size: 18px;
+					line-height: 25px;
+					@include transition(line-height 0.3s); 
+					position: absolute;
+					right: 10px;
+				}
+			}
+
+			.level1-wrapper {
+				display: none;
+				overflow: hidden;
+				position: fixed;
+				left: 0;
+				right: 0;
+				background-color: $hubble-menu-bg;
+				z-index: 1;
+
+			}
+
+			.level1 {
+				max-width: $content-width;
+				margin-left: auto;
+				margin-right: auto;
+
+				> ul {
+					position: relative;
+					display: inline-block;
+					border-right: 1px solid $hubble-menu-separator-color;
+					min-width: 150px;
+
+					&.current-leaf {
+						background-color: #fff;
+					}
+				}
+
+				li {
+					a {
+						// 36px padding is to accomodate for the children menu 
+						// arrow (30px padding left + 6px arrow + 10px padding right)
+						padding: 0 46px 0 12px; 
+						line-height: 25px;
+					}
+
+					&.hover, &.current.hover {
+						background-color: #ccc;
+					}
+
+					&.current {
+						background-color: #fff;
+
+						&.current-leaf {
+							background-color: $hubble-blue;
+
+							> a {
+								color: #fff;
+
+								.topmenu-arrow {
+									color: #fff;
+								}
+							}
+						}
+
+						> .sublevel:not(.hover) {
+							display: block;
+						}
+					}
+				}
+			}
+
+			&.current:not(.hover) {
+				// Default display as "breadcrumb"
+				.level1-wrapper {
+					display: block;
+					@include transition(max-height 0.3s); 
+
+					ul {
+						padding: 0;
+						@include transition(padding 0.3s); 
+					}
+
+					li:not(.current) {
+						max-height: 0;
+						@include transition(max-height 0.3s); 
+
+						.topmenu-arrow {
+							display: none;
+						}
+					}
+				}
+			}
+
+			&.hover {
+				.level1-wrapper {
+					display: block;
+					z-index: 2;
+				}
+			}
+
+			.sublevel {
+				position: absolute;
+				background-color: $hubble-menu-bg;
+				display: none;
+				left: 100%;
+				top: 0;
+				height: 100%;
+				min-width: 150px;
+				border-right: 1px solid $hubble-menu-separator-color;
+				margin-left: 1px;  // To compensate for border;
+
+				&.current-leaf {
+					background-color: #fff;
+				}
+			}
+		}
+	}
+}
+
+@media (max-width: $mobile-breakpoint - 1) {
+	.main-menu {
+		.menu-trigger {
+			color: #fff;
+			float: left;
+			border: 0;
+			background-color: transparent;
+			outline: 0;
+			padding: $grid-gutter-width / 2;
+		}
+
+		.desktop-children {
+			display: none;
+		}
+
+		.mobile-children {
+			float: right;
+			display: inline-block;
+			padding: 5px $grid-gutter-width;
+			cursor: pointer;
+		}
+
+		ul {
+			background-color: $hubble-menu-bg;
+			padding: 0;
+			margin: 0;
+			max-height: 0;
+			@include transition(max-height 0.3s); 
+			overflow: hidden;
+
+			&.open-menu {
+				max-height: 3000px;
+			}
+		}
+
+		li {
+			list-style: none;
+			border-top: 1px solid $hubble-menu-separator-color;
+
+			a {
+				padding: 5px 0 5px $grid-gutter-width;
+				display: inline-block;
+			}
+
+			&.current {
+				background-color: #fff;
+
+				&.current-leaf {
+					background-color: $hubble-blue;
+
+					> a {
+						color: #fff;
+					}
+				}
+			}
+		}
+
+		.level0 {
+			.level0-children-arrows {
+				display: none
+			}
+		}
+
+		.level1 > ul, .sublevel {
+			padding-left: $grid-gutter-width;
+		}
+
+		.sublevel {
+			display: block;
+		}
+	}
+}
+
+@media print {
+	.navbar-general-wrapper {
+		display: none;
+	}
+}

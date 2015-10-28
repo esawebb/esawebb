@@ -29,6 +29,7 @@ DJANGOPLICITY_ROOT = local_settings.DJANGOPLICITY_ROOT
 LOG_DIR = local_settings.LOG_DIR
 TMP_DIR = local_settings.TMP_DIR
 ENABLE_SSL = local_settings.ENABLE_SSL
+ALLOW_SSL = local_settings.ALLOW_SSL
 GA_ID = "UA-2368492-6"
 FACEBOOK_APP_ID = "144508505618279"
 
@@ -83,8 +84,6 @@ GARCHING_INTERNAL_IPS = (
 
 SITE_ENVIRONMENT = local_settings.SITE_ENVIRONMENT
 DEBUG = local_settings.DEBUG
-DEBUG_SQL = local_settings.DEBUG_SQL
-DEBUG_PROFILER = local_settings.DEBUG_PROFILER
 DEBUG_TOOLBAR = local_settings.DEBUG_TOOLBAR
 TEMPLATE_DEBUG = local_settings.TEMPLATE_DEBUG
 SEND_BROKEN_LINK_EMAILS = local_settings.SEND_BROKEN_LINK_EMAILS
@@ -94,18 +93,7 @@ MANAGERS = ADMINS
 
 SERVE_STATIC_MEDIA = local_settings.SERVE_STATIC_MEDIA
 
-DEBUG_TOOLBAR_PANELS = (
-	'debug_toolbar.panels.version.VersionDebugPanel',
-	'debug_toolbar.panels.timer.TimerDebugPanel',
-	#'debug_toolbar.panels.settings_vars.SettingsVarsDebugPanel',
-	'debug_toolbar.panels.headers.HeaderDebugPanel',
-	'debug_toolbar.panels.request_vars.RequestVarsDebugPanel',
-	'debug_toolbar.panels.template.TemplateDebugPanel',
-	'debug_toolbar.panels.sql.SQLDebugPanel',
-	#'debug_toolbar.panels.signals.SignalDebugPanel',
-	'debug_toolbar.panels.cache.CacheDebugPanel',
-	'debug_toolbar.panels.logger.LoggingPanel',
-)
+DEBUG_TOOLBAR_PANELS = local_settings.DEBUG_TOOLBAR_PANELS
 
 ##################
 # DATABASE SETUP #
@@ -180,6 +168,8 @@ MEDIA_URL = local_settings.MEDIA_URL
 ADMIN_MEDIA_PREFIX = local_settings.ADMIN_MEDIA_PREFIX
 DJANGOPLICITY_MEDIA_URL = local_settings.DJANGOPLICITY_MEDIA_URL
 DJANGOPLICITY_MEDIA_ROOT = local_settings.DJANGOPLICITY_MEDIA_ROOT
+
+MIDENTIFY_PATH = local_settings.MIDENTIFY_PATH
 
 # Staticfiles app
 STATICFILES_DIRS = [
@@ -262,18 +252,6 @@ MIDDLEWARE_CLASSES = (
 	# HTTP or HTTPS.
 	'sslmiddleware.SSLRedirect',
 )
-
-if DEBUG:
-	# Add label to all HTML pages displaying the environment
-	MIDDLEWARE_CLASSES += ('djangoplicity.utils.middleware.SiteEnvironmentMiddleware',)
-
-if DEBUG_SQL:
-	# Show all SQL queries being executed as well execution time.
-	MIDDLEWARE_CLASSES += ('djangoplicity_ext.middleware.sqlmiddleware.SQLLogMiddleware',)
-
-if DEBUG_PROFILER:
-	# Enabled profiling of code. Add ?prof to URL to profile request.
-	MIDDLEWARE_CLASSES += ('djangoplicity_ext.middleware.profilemiddleware.ProfileMiddleware',)
 
 if DEBUG_TOOLBAR:
 	# Add debug toolbar to request
@@ -358,7 +336,7 @@ INSTALLED_APPS += (
 	'django.contrib.humanize',
 	'django.contrib.sitemaps',
 	'djangoplicity.menus',
-	#'djangoplicity.reports',
+	'djangoplicity.reports',
 	#'djangoplicity.massmailer',
 	#'djangoplicity.news',
 	'djangoplicity.pages',
@@ -367,15 +345,12 @@ INSTALLED_APPS += (
 	'djangoplicity.archives',
 	'djangoplicity.archives.contrib.satchmo.freeorder',
 	'djangoplicity.archives.contrib.security',
-	'djangoplicity.archives.contrib.inventory_control',
 	'djangoplicity.announcements',
 	'djangoplicity.science',
 	'djangoplicity.releases',
 	'djangoplicity.products',
-	'djangoplicity.search',
 	'djangoplicity.metadata',
 	'djangoplicity.cache',
-	'djangoplicity.inventory',
 	'djangoplicity.adminhistory',
 	'djangoplicity.utils',
 	'djangoplicity.celery',
@@ -395,6 +370,7 @@ INSTALLED_APPS += (
 	#'djangoplicity.kiosk.engine',
 	#'djangoplicity.kiosk.slides',
 	'spacetelescope',
+	'spacetelescope.frontpage',
 	'mptt',
 	'django_extensions',
 	'django_assets',
@@ -416,11 +392,11 @@ INSTALLED_APPS += (
 	'app_plugins',
 	'shipping.modules.tieredweight',
 	'django_config_gen',
-	'tinymce',
 	'djangoplicity.imgvote',
 	'captcha',
 	'gunicorn',
 	'django_ace',
+	'rest_framework',
 	'pipeline',
 )
 
@@ -613,22 +589,23 @@ ARCHIVES = (
 	('djangoplicity.products.models.OnlineArtAuthor', 'djangoplicity.products.options.OnlineArtAuthorOptions'),
 	('djangoplicity.products.models.PaperModel', 'djangoplicity.products.options.PaperModelOptions'),
 	('djangoplicity.products.models.PlanetariumShow', 'djangoplicity.products.options.PlanetariumShowOptions'),
+	('djangoplicity.products.models.Donation', 'djangoplicity.products.options.DonationOptions'),
 	('djangoplicity.products.models.PostCard', 'djangoplicity.products.options.PostCardOptions'),
 	('djangoplicity.products.models.PrintedPoster', 'djangoplicity.products.options.PrintedPosterOptions'),
 	('djangoplicity.products.models.ConferencePoster', 'djangoplicity.products.options.ConferencePosterOptions'),
 	('djangoplicity.products.models.ElectronicPoster', 'djangoplicity.products.options.ElectronicPosterOptions'),
 	('djangoplicity.products.models.Presentation', 'djangoplicity.products.options.PresentationOptions'),
 	('djangoplicity.products.models.PressKit', 'djangoplicity.products.options.PressKitOptions'),
-	('djangoplicity.products.models.SlideShow', 'djangoplicity.products.options.SlideShowOptions'),
 	('djangoplicity.products.models.ElectronicCard', 'djangoplicity.products.options.ElectronicCardOptions'),
 	('djangoplicity.products.models.Sticker', 'djangoplicity.products.options.StickerOptions'),
 	('djangoplicity.products.models.TechnicalDocument', 'djangoplicity.products.options.TechnicalDocumentOptions'),
 	('djangoplicity.products.models.UserVideo', 'djangoplicity.products.options.UserVideoOptions'),
 	('djangoplicity.products.models.VirtualTour', 'djangoplicity.products.options.VirtualTourOptions'),
+	('djangoplicity.products.models.Model3d', 'djangoplicity.products.options.Model3dOptions'),
 	('djangoplicity.newsletters.models.Newsletter', 'djangoplicity.newsletters.options.NewsletterOptions'),
 )
 
-ARCHIVE_EMBARGO_LOGIN = ('hst', 'vxiofpia')
+ARCHIVE_EMBARGO_LOGIN = ('hst', 'shtenvix')
 ARCHIVE_EMAIL_SENDER = "ESA/Hubble Information Centre <hubble@eso.org>"
 
 ARCHIVE_URL_QUERY_PREFIX = 'archive'
@@ -719,7 +696,6 @@ PHOTOSHOP_ROOT = local_settings.PHOTOSHOP_ROOT
 # one djangoplicity installation this setting can just be set to
 # none (which means the default broker for celery is used).
 PHOTOSHOP_BROKER = local_settings.PHOTOSHOP_BROKER
-NEWSFEATURE_FORMAT = 'newsfeature_hst'
 
 ##########
 # CELERY #
@@ -802,10 +778,10 @@ CELERYBEAT_SCHEDULE = {
 		'task': 'mailinglists.clean_tokens',
 		'schedule': crontab(minute=5, hour=5),
 	},
-#	'update-vote-counts': {
-#		'task': 'imgvote.count_votes',
-#		'schedule': timedelta(seconds=300),
-#	},
+	'check-content-server-resources': {
+		'task': 'djangoplicity.contentserver.tasks.check_content_server_resources',
+		'schedule': crontab(minute=0, hour=4),
+	},
 }
 
 ##############
@@ -813,16 +789,12 @@ CELERYBEAT_SCHEDULE = {
 ##############
 TINYMCE_JS = "djangoplicity/js/tiny_mce_v3392/tiny_mce.js"
 TINYMCE_JQUERY_JS = "djangoplicity/js/tiny_mce_v3392/jquery.tinymce.js"
-JQUERY_JS = "djangoplicity/js/jquery-1.4.2.min.js"
-ZCLIPBOARD_JS = "djangoplicity/js/ZeroClipboard.js"
-JQUERY_UI_JS = "djangoplicity/js/jquery-ui-1.8.1.custom.min.js"
-JQUERY_UI_CSS = "djangoplicity/css/ui-lightness/jquery-ui-1.8.1.custom.css"
+JQUERY_JS = "jquery/jquery-1.11.1.min.js"
+JQUERY_UI_JS = "jquery-ui-1.11.1/jquery-ui.min.js"
+JQUERY_UI_CSS = "jquery-ui-1.11.1/jquery-ui.min.css"
 DJANGOPLICITY_ADMIN_CSS = "djangoplicity/css/admin.css"
 DJANGOPLICITY_ADMIN_JS = "djangoplicity/js/admin.js"
 SUBJECT_CATEGORY_CSS = "djangoplicity/css/widgets.css"
-SHADOWBOX_JS = "djangoplicity/shadowbox3/shadowbox.js"
-SHADOWBOX_CSS = "djangoplicity/shadowbox3/shadowbox.css"
-SWFOBJECT_JS = "djangoplicity/js/swfobject.js"
 
 REGEX_REDIRECTS = (
 #	( re.compile( '/hubbleshop/webshop/webshop\.php\?show=sales&section=(books|cdroms)' ), '/shop/category/\g<1>/' ),
@@ -855,34 +827,6 @@ REGEX_REDIRECTS = (
 )
 
 SITE_DOMAIN = "www.spacetelescope.org"
-
-##################
-# django-tinymce #
-##################
-TINYMCE_JS_URL = STATIC_URL + "tiny_mce/tiny_mce.js"
-TINYMCE_JS_ROOT = STATIC_ROOT + "tiny_mce"
-TINYMCE_DEFAULT_CONFIG = {
-	#"mode": "textareas",
-	"theme": "advanced",
-	"plugins": "style,layer,table,advimage,insertdatetime,searchreplace,contextmenu,paste,fullscreen,visualchars,nonbreaking",
-	"theme_advanced_buttons1": "fullscreen,code,cleanup,|,cut,copy,paste,pastetext,pasteword,|,search,replace,|,justifyleft,justifycenter,justifyright,justifyfull,|,styleselect,formatselect",
-	"theme_advanced_buttons2": ",bold,italic,underline,strikethrough,|,bullist,numlist,|,outdent,indent,|,undo,redo,|,link,unlink,anchor,image,media,charmap,|,forecolor,backcolor|,styleprops,|,nonbreaking",
-	"theme_advanced_buttons3": "tablecontrols,|,hr,removeformat,visualaid,|,sub,sup,|,insertdate,inserttime,|,insertlayer,moveforward,movebackward,absolute",
-	"theme_advanced_toolbar_location": "top",
-	"theme_advanced_toolbar_align": "left",
-	"theme_advanced_statusbar_location": "bottom",
-	"extended_valid_elements": "a[name|class|href|target|title|onclick],img[usemap|class|src|border=0|alt|title|hspace|vspace|width|height|align|onmouseover|onmouseout|name|style],hr[class|width|size|noshade],span[class|align|style],script[language|type|src],object[width|height|classid|codebase|data|type|id|class|style],param[name|value],embed[src|type|width|height|flashvars|wmode|style],iframe[src|width|height|frameborder|marginheight|marginwidth|align]",
-	#"editor_selector": "vRichTextAreaField",
-	"media_strict": False,
-	#//relative_urls: False,
-	#//remove_script_host: True,
-	#//urlconverter_callback: "url_converter"
-	"convert_urls": False,
-	"gecko_spellcheck": True,
-}
-TINYMCE_SPELLCHECKER = False
-TINYMCE_COMPRESSOR = False
-TINYMCE_FILEBROWSER = False
 
 
 ###########
@@ -945,9 +889,9 @@ LOGGING = {
 			'level': 'DEBUG' if DEBUG else 'INFO',
 		},
 		'django.db.backends': {
-			'handlers': local_settings.LOGGING_HANDLER if DEBUG_SQL else ['null'],
+			'handlers': local_settings.LOGGING_HANDLER,
 			'propagate': False,
-			'level': 'DEBUG' if DEBUG_SQL else 'INFO',
+			'level': 'INFO',
 		},
 		'sslurllib': {
 			'handlers': ['null', ],
@@ -976,7 +920,6 @@ rl_config.TTFSearchPath.append( PRJBASE + "/fonts/" )
 ####################
 DATABASE_STORAGE_ENGINE = "MyISAM"
 
-SOUTH_TESTS_MIGRATE = local_settings.SOUTH_TESTS_MIGRATE
 SOUTH_MIGRATION_MODULES = {
 	'redirects': 'ignore',  # We are using django.redirects and not djangoplicity.redirects where the migration is stored.
 }
@@ -1124,40 +1067,52 @@ STATICFILES_STORAGE = 'pipeline.storage.PipelineCachedStorage'
 PIPELINE_CSS = {
 	'main': {
 		'source_filenames': (
-			'css/reset.css',
-			'css/base_grid.css',
-			'css/screen.css',
-			'djangoplicity/shadowbox/shadowbox.css',
+			'font-awesome/css/font-awesome.min.css',
+			'sprites/sprites.css',
+			'css/main.css',
 		),
 		'output_filename': 'css/main.css',
-		'extra_context': {
-			'media': 'screen',
-		},
 	},
-	'print': {
+	'extras': {
 		'source_filenames': (
-			'css/print.css"',
+			'jquery-ui-1.11.1/jquery-ui.min.css',
+			'slick-1.5.0/slick/slick.css',
+			'justified-gallery/css/justifiedGallery.min.css',
+			'magnific-popup/magnific-popup.css',
 		),
-		'output_filename': 'css/print.css',
-		'extra_context': {
-			'media': 'print',
-		},
+		'output_filename': 'css/extras.css',
 	},
 }
 
 PIPELINE_JS = {
 	'main': {
 		'source_filenames': (
-			'djangoplicity/js/jquery-1.4.2.min.js',
-			'djangoplicity/js/jquery.cycle.min.js',
-			'djangoplicity/js/jquery.jclock-1.2.0.js',
-			'djangoplicity/shadowbox/shadowbox.js',
-			'djangoplicity/js/shadowbox_conf.js',
+			'jquery/jquery-1.11.1.min.js',
+			'jquery-ui-1.11.1/jquery-ui.min.js',
+			'bootstrap/bootstrap-3.1.1-dist/js/bootstrap.min.js',
+			'js/jquery.menu-aim.js',
+			'slick-1.5.0/slick/slick.min.js',
+			'djangoplicity/jwplayer/jwplayer.js',
+			'djangoplicity/js/jquery.beforeafter-1.4.js',
 			'djangoplicity/zoomify/js/ZoomifyImageViewerExpress-min.js',
+			'js/masonry.pkgd.min.js',
+			'justified-gallery/js/jquery.justifiedGallery.min.js',
+			'magnific-popup/jquery.magnific-popup.min.js',
 			'djangoplicity/js/widgets.js',
-			'js/site.js',
+			'djangoplicity/js/pages.js',
+			'djangoplicity/js/djp-jwplayer.js',
+			'js/picturefill.min.js',
+			'js/enquire/enquire.min.js',
+			'js/main.js',
 		),
 		'output_filename': 'js/main.js',
+	},
+	'ie8compat': {
+		'source_filenames': (
+			'js/ie8compat/matchMedia/matchMedia.js',
+			'js/ie8compat/matchMedia/matchMedia.addListener.js',
+		),
+		'output_filename': 'js/ie8compat.js',
 	},
 }
 PIPELINE_CSS_COMPRESSOR = False
@@ -1183,35 +1138,57 @@ from djangoplicity.contentserver import CDN77ContentServer
 MEDIA_CONTENT_SERVERS = {
 	'CDN77': CDN77ContentServer(
 		name='CDN77',
-		formats=(
-			'dome_2kmaster',
-			'small_flash',
-			'medium_podcast',
-			'medium_mpeg1',
-			'medium_flash',
-			'large_qt',
-			'broadcast_sd',
-			'hd_and_apple',
-			'hd_broadcast_720p50',
-			'hd_1080p25_screen',
-			'hd_1080p25_broadcast',
-			'ultra_hd',
-			'ultra_hd_h265',
-			'ultra_hd_broadcast',
-			'dome_8kmaster',
-			'dome_4kmaster',
-			'dome_2kmaster',
-			'dome_mov',
-			'dome_preview',
-		),
+		formats={
+			'djangoplicity.media.models.images.Image': (
+				'large',
+				'publicationjpg',
+				'screen',
+				'wallpaper1',
+				'wallpaper2',
+				'wallpaper3',
+				'wallpaper4',
+				'wallpaper5',
+				'thumb300y',
+				'thumb350x',
+				'newsfeature',
+				'news',
+				'banner1920',
+				'screen640',
+				'zoomable',
+			),
+			'djangoplicity.media.models.videos.Video': (
+				'videoframe',
+				'dome_2kmaster',
+				'small_flash',
+				'medium_podcast',
+				'medium_mpeg1',
+				'medium_flash',
+				'large_qt',
+				'broadcast_sd',
+				'hd_and_apple',
+				'hd_broadcast_720p50',
+				'hd_1080p25_screen',
+				'hd_1080p25_broadcast',
+				'ultra_hd',
+				'ultra_hd_h265',
+				'ultra_hd_broadcast',
+				'dome_8kmaster',
+				'dome_4kmaster',
+				'dome_2kmaster',
+				'dome_mov',
+				'dome_preview',
+			),
+		},
 		url='http://cdn.spacetelescope.org/',
+		url_bigfiles='http://cdn2.spacetelescope.org/',
 		remote_dir='/www/',
 		host='push-19.cdn77.com',
 		username='user_v220pif3',
 		password='5nkOk3mgr8MDw2d4SZw3',
 		api_login='lars@eso.org',
 		api_password='054FBaC792mdXA3QkpngOhvWcRqGZJV1',
-		cdn_id='29445',
+		cdn_id='33541',
+		cdn_id_bigfiles='31465',
 	),
 }
 
@@ -1221,3 +1198,6 @@ MEDIA_CONTENT_SERVERS_CHOICES = (
 )
 
 DEFAULT_MEDIA_CONTENT_SERVER = 'CDN77'
+
+YOUTUBE_TOKEN = '%s/youtube_oauth2_token.json' % TMP_DIR
+YOUTUBE_DEFAULT_TAGS = ['Hubble', 'Hubble Space Telecope', 'Telescope', 'Space', 'Observatory', 'ESA']

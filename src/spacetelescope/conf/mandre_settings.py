@@ -33,10 +33,8 @@ CSRF_MIDDLEWARE_SECRET = "g6ymvx$i1sv4k*g+nwfnx*3a1g&)^i6r9n6g4=f_$x^u(kwt8s"
 ##############
 DEPLOYMENT_EXISTING_CHECKOUT = "/scratch/scr/hubble/src/"
 DEBUG = True
-TEMPLATE_DEBUG = False
-DEBUG_SQL = False
-DEBUG_PROFILER = False
-DEBUG_TOOLBAR = False
+TEMPLATE_DEBUG = True
+DEBUG_TOOLBAR = True
 DEBUG_TOOLBAR_CONFIG = {
 	'INTERCEPT_REDIRECTS': False,
 }
@@ -48,7 +46,7 @@ DEBUG_TOOLBAR_PANELS = [
 	'debug_toolbar.panels.request.RequestPanel',
 	'debug_toolbar.panels.sql.SQLPanel',
 #	'debug_toolbar.panels.staticfiles.StaticFilesPanel',
-#	'debug_toolbar.panels.templates.TemplatesPanel',
+	'debug_toolbar.panels.templates.TemplatesPanel',
 	'debug_toolbar.panels.cache.CachePanel',
 	'debug_toolbar.panels.signals.SignalsPanel',
 	'debug_toolbar.panels.logging.LoggingPanel',
@@ -65,12 +63,8 @@ MEDIA_ROOT = "/media/ecfwebstore/ecfwebvol0/diskwa/webdocs/hubble/docs/static/"
 # DATABASE SETUP #
 ##################
 DATABASES = copy_setting(DATABASES)
-#DATABASES['default']['HOST'] = "mysql1i.hq.eso.org"
-#DATABASES['default']['PASSWORD'] = "fivjeylvoked"
-
-#DATABASES['default']['USER'] = "spacetelescope"
-#DATABASES['default']['HOST'] = "mysql1.hq.eso.org"
-#DATABASES['default']['PASSWORD'] = "letoveumtold"
+DATABASES['default']['USER'] = "mandre"
+DATABASES['default']['PASSWORD'] = "Hirshaj3"
 
 ###############
 # MEDIA SETUP #
@@ -81,16 +75,16 @@ DATABASES = copy_setting(DATABASES)
 # CACHE  #
 ##########
 CACHES = {
-	# 'default' : {
-		# 'BACKEND' : 'django.core.cache.backends.memcached.MemcachedCache',
-		# 'KEY_PREFIX' : 'eso',
-		# 'LOCATION' : [
-			# '127.0.0.1:11211',
-		# ],
-		# 'TIMEOUT' : 86400
-	# },
+	'notdefault': {
+		'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
+		'KEY_PREFIX': 'eso',
+		'LOCATION': [
+			'127.0.0.1:11211',
+		],
+		'TIMEOUT': 86400
+	},
 	'default': {
-	'BACKEND': 'django.core.cache.backends.dummy.DummyCache',
+		'BACKEND': 'django.core.cache.backends.dummy.DummyCache',
 	}
 }
 

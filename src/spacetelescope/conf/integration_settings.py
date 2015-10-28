@@ -8,7 +8,7 @@
 #   Luis Clara Gomes <lcgomes@eso.org>
 #
 
-from deployment_settings import *
+from spacetelescope.conf.deployment_settings import *
 from djangoplicity.settings import copy_setting
 
 #############################
@@ -35,15 +35,15 @@ DEBUG = False
 ##############
 MANAGEMENT_NODES = ["aweb33"]
 BROKERS = ["aweb36"]
-WORKERS = ["aweb33","aweb34"]
+WORKERS = ["aweb33", "aweb34"]
 WORKERS_BEAT_HOST = "aweb33"
 WORKERS_CAM_HOST = "aweb34"
-WEBSERVER_NODES = ["%s3i" % SHORT_NAME,"%s4i" % SHORT_NAME ]
+WEBSERVER_NODES = ["%s3i" % SHORT_NAME, "%s4i" % SHORT_NAME ]
 DEPLOYMENT_TAG = "spacetelescope.org_int"
 DEPLOYMENT_NOTIFICATION = {
-	"subject" : "[DEPLOY] %(DEPLOYMENT_TAG)s by %(local_user)s",
-	"from" : "esoepo-monitoring@eso.org",
-	"to" : ["mandre@eso.org"],
+	"subject": "[DEPLOY] %(DEPLOYMENT_TAG)s by %(local_user)s",
+	"from": "esoepo-monitoring@eso.org",
+	"to": ["esoepo-monitoring@eso.org"],
 }
 PYTHON = "python2.7"
 
@@ -58,14 +58,14 @@ DATABASES['default']['PASSWORD'] = "fivjeylvoked"
 # CACHE  #
 ##########
 CACHES = {
-	'default' : {
-		'BACKEND' : 'django.core.cache.backends.memcached.MemcachedCache',
-		'KEY_PREFIX' : SHORT_NAME,
-		'LOCATION' : [
-			'%(short_name)s3i:11211' % { 'short_name' : SHORT_NAME},
-			'%(short_name)s4i:11211' % { 'short_name' : SHORT_NAME},
+	'default': {
+		'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
+		'KEY_PREFIX': SHORT_NAME,
+		'LOCATION': [
+			'%(short_name)s3i:11211' % { 'short_name': SHORT_NAME},
+			'%(short_name)s4i:11211' % { 'short_name': SHORT_NAME},
 		],
-		'TIMEOUT' : 86400
+		'TIMEOUT': 86400
 	}
 }
 
@@ -74,13 +74,13 @@ CACHES = {
 #########
 EMAIL_SUBJECT_PREFIX = '[SPACETELESCOPE-INTEGRATION]'
 
-##########################	
+##########################
 # PHOTOSHOP CELERYWORKER #
 ##########################
 PHOTOSHOP_ROOT = "/home/web/A/importi"
 PHOTOSHOP_BROKER['HOST'] = "aweb36.hq.eso.org"
 
-##########	
+##########
 # CELERY #
 ##########
 BROKER_URL = 'amqp://spacetelescope:letoveumtold@aweb36.hq.eso.org:5672/spacetelescope_vhost'

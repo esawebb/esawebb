@@ -1,0 +1,97 @@
+{% extends "base_onecolumn.html" %}
+{% load media_video %}
+
+{% block extra_header %}{{block.super}}{% for furl,title in feed_urls %}<link href='{{furl}}' rel="alternate" type="application/rss+xml" title='{{title}}' />{%endfor%}{%endblock%}
+
+{% block site_title %}{% if archive_title %}{{archive_title}}{% else %}{{ archive|capfirst }} Archive{%endif%} | {{block.super}}{% endblock %}
+
+{% load menus %}
+{# block breadcrumb %}{{ block.super}}{% endblock #}
+
+{% block content %}
+{% if object_list and page_obj.start_index == 1  %}
+<div class="featured_category_box">
+{%if object.videosubtitle_set.all %}
+{% embedvideo_subs object_list.0 "medium_flash,medium_podcast,h264" "hd_and_apple,hd720p_screen" "medium_podcast,h264" object.videosubtitle_set.all %}
+{%else %}
+{% embedvideo object_list.0 "medium_flash,medium_podcast,h264" "hd_and_apple,hd720p_screen" "medium_podcast,h264" %}
+{%endif%}
+<h1>{{object_list.0.title}}</h1>
+<p>{{object_list.0.headline}}</p> <div align="right"><a href="{{object_list.0.get_absolute_url}}">More information and download options</a></div>
+</div>
+{% endif %}
+
+<div class='archive_list_heading'>
+<div class='archive_list_title'>
+<h2>Latest Episodes{% if listview_feed_url %} <a href="{{ listview_feed_url }}"><img src="{{MEDIA_URL}}images/rssicon.png" /></a>{% endif %}</h2>
+</div>
+<div class='archive_list_search'>{% if searchable %}
+
+<form action="{{ search_url }}" method="GET">{% csrf_token %}
+<input id="id_archivesearch" type="text" value="{%if search_specific %}Search {{search_specific|capfirst}}...{%else%}{{search_str|default:"Search..."}}{%endif%}" name="search" class="archivesearch" onblur="searchbox_blur(this,'{%if search_specific %}Search {{search_specific|capfirst}}...{%else%}{{search_str|default:"Search..."}}{%endif%}');" onfocus="searchbox_focus(this,'{%if search_specific %}Search {{search_specific|capfirst}}...{%else%}{{search_str|default:"Search..."}}{%endif%}');" />
+<input class="archivesearch_submit" type="submit" value="Go" />
+</form>
+</div>
+
+
+<div class='clear'></div>
+{% endif %}
+</div>
+
+{% load djangoplicity_utils %}
+<div class="rightdivider">
+{% load pages %}{% embed_page spacetelescope.hubblecast_sidebar %}
+</div>
+
+
+{% if not object_list %}
+	<div align="center">No entries were found.</div>
+{% else %}
+{% include "archives/search_results.html" %}
+
+
+<div class="leftdivider">
+
+<table class="archive_normal" width="">
+{% comment %}
+	On the first page we only display the thumnails starting from index 1
+	since we have the latest podcast as main page item
+{% endcomment %}
+{% if page_obj.start_index == 1  %}
+{% for list in object_list|slice:"1:"|split_list:"3" %}
+
+<tr>{% for item in list %}
+<td class="imagerow {%if forloop.first%} alpha{%endif%}{%if forloop.last%} omega{%endif%}" ><a href="{{ item.get_absolute_url }}"><img src="{{ item.resource_thumb.url }}" width="122" alt="{{item.title}}" /></a></td>{% endfor %}
+</tr>
+<tr>{% for item in list %}
+<td class="titlerow {%if forloop.first%} alpha{%endif%}{%if forloop.last%} omega{%endif%}">{{item.title}}</td>{% endfor %}
+</tr>
+
+
+<tr><td colspan='4' class='breaker'></td></tr>
+{% endfor %}
+{% else %}
+{% for list in object_list|split_list:"3" %}
+
+<tr>{% for item in list %}
+<td class="imagerow {%if forloop.first%} alpha{%endif%}{%if forloop.last%} omega{%endif%}" ><a href="{{ item.get_absolute_url }}"><img src="{{ item.resource_thumb.url }}" width="122" alt="{{item.title}}" /></a></td>{% endfor %}
+</tr>
+<tr>{% for item in list %}
+<td class="titlerow {%if forloop.first%} alpha{%endif%}{%if forloop.last%} omega{%endif%}">{{item.title}}</td>{% endfor %}
+</tr>
+
+
+<tr><td colspan='4' class='breaker'></td></tr>
+{% endfor %}
+{% endif %}
+<tr><td colspan='4' class='breaker'></td></tr>
+</table>
+{% paginator paginator page_obj paginator_url paginator_prefix %}
+{% statusbar paginator page_obj browsers searchable %}
+</div>
+
+{% endif %}
+
+{% endblock %}
+
+{% include 'archives/extra_footer.html' %}

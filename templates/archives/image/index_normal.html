@@ -1,23 +1,27 @@
-{% load djangoplicity_utils %}
+{% load i18n %}{% load djangoplicity_utils %}
 {% if not object_list %}
-	<div align="center">No entries were found.</div>
+	<div align="center">{% trans "No images were found." %}</div>
 {% else %}
 {% include "archives/search_results.html" %}
-<table class="archive_normal" width="100%">
-{% for list in object_list|split_list:"4" %}
 
-<tr>{% for item in list %}
-<td class="imagerow  {%if forloop.first%} alpha{%endif%}{%if forloop.last%} omega{%endif%}" ><a href="{{ item.get_absolute_url }}"><img src="{{ item.resource_thumbs.url }}" width="122" alt="{{item.title}}" /></a></td>{% endfor %}
-</tr>
-<tr>{% for item in list %}
-<td class="titlerow  {%if forloop.first%} alpha{%endif%}{%if forloop.last%} omega{%endif%}">{{item.title}}</td>{% endfor %}
-</tr>
-<tr><td colspan='4' class='breaker'></td></tr>
+{% spaceless %}
+
+<div class="image-list image-list-300">
+{% for image in object_list %}
+	<a href="{{ image.get_absolute_url }}" class="item">
+		<img src="{{ image.resource_thumb300y.url }}" alt="{{ image.title }}" />
+		{% if image.pictureoftheweek_set.all %}
+			<div class="potw" data-toggle="tooltip" data-placement="left" title="Picture of the Week, {{ image.pictureoftheweek_set.all.0.release_date|date:"DATE_FORMAT" }}">
+				<span class="fa fa-star"></span>
+			</div>
+		{% endif %}
+		<div class="title">{{ image.title }}</div>
+	</a>
 {% endfor %}
+</div>
 
-</table>
+{% endspaceless %}
 {% paginator paginator page_obj paginator_url paginator_prefix paginator_params %}
 {% statusbar paginator page_obj browsers searchable search_url search_str  %}
 {% endif %}
 {% include 'archives/extra_footer.html' %}
-

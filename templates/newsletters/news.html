@@ -38,8 +38,6 @@
 {% endblock %}
 
 {% block sidebar %}
-	<a href="http://www.spacetelescope.org/Hubble25/odetohubble/"><img width="170px" src="http://www.spacetelescope.org/static/nl/nl_odehubble.jpg" /></a>
-	<hr style="{{hr_style}}">
 	{% if data.potws %}
 	{% if enable_sharing %}<br /><hr style="{{hr_style}}"><br />{% endif %}
 	{% with potws=data.potws feed_url="http://feeds.feedburner.com/hubble_potw/" %}

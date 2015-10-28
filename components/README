@@ -1,0 +1,12 @@
+This directory is meant to store static files that need to be processed such
+as original images to convert to sprites, SCSS files that will be converted
+to CSS, etc.
+
+# To generate main CSS file:
+sass --watch  components/scss/main.scss:src/eso/static/css/main.css
+
+# To generate events_embed CSS file:
+sass --watch  components/scss/events_embed.scss:src/eso/static/css/events_embed.css
+
+# To generate CSS sprites:
+bin/glue components/sprites src/eso/static/sprites --url=../sprites/ --recursive --padding=1 --namespace=

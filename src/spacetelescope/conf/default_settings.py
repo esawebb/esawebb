@@ -25,6 +25,7 @@ BUILDOUT_CONFIG = "buildout.cfg"
 LOG_DIR = "%s/logs" % ROOT
 TMP_DIR = "%s/tmp" % ROOT
 ENABLE_SSL = False
+ALLOW_SSL = True
 SECURE_PROXY_SSL_HEADER = None
 CSRF_COOKIE_SECURE = False
 SESSION_COOKIE_SECURE = False
@@ -72,14 +73,12 @@ SUPERVISORTCTL_PROCESS = 'gunicorn-' + SHORT_NAME
 ###################
 SITE_ENVIRONMENT = 'local'
 DEBUG = True
-DEBUG_SQL = False
-DEBUG_PROFILER = False
 DEBUG_TOOLBAR = False
 TEMPLATE_DEBUG = False
 SEND_BROKEN_LINK_EMAILS = False
 
 ADMINS = (
-	('EPO Monitoring','esoepo-monitoring@eso.org'),
+	('EPO Monitoring', 'esoepo-monitoring@eso.org'),
 )
 
 LOGGING_HANDLER = ['file', 'mail_admins']
@@ -87,31 +86,18 @@ LOGGING_HANDLER = ['file', 'mail_admins']
 ##################
 # DATABASE SETUP #
 ##################
-SOUTH_TESTS_MIGRATE = False
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'spacetelescope',
-        'USER' : 'root',
-        'PASSWORD' : '',
-        'HOST' : 'localhost',
-        'PORT' : '3306',
-        'OPTIONS' : {
-			'connect_timeout' : 15,
-		} if 'test' not in sys.argv else {},
-        'TEST_CHARSET' : 'utf8',
-        'TEST_COLLATION' : 'utf8_general_ci',
-        'TEST_MIRROR' : None,
-        'TEST_NAME' : None, # "test_" + DATABASE_NAME
-    }
+	'default': {
+		'ENGINE': 'django.db.backends.postgresql_psycopg2',
+		'NAME': 'spacetelescope',
+		'USER': 'spacetelescope',
+		'PASSWORD': '',
+		'HOST': 'localhost',
+	}
 }
-
-if ('migrate' in sys.argv or 'syncdb' in sys.argv):
-	DATABASES['default']['OPTIONS']['init_command'] = 'SET storage_engine=MyISAM'
 
 if 'test' in sys.argv:
 	DATABASES['default']['ENGINE'] = 'django.db.backends.sqlite3'
-	SOUTH_TESTS_MIGRATE = False
 
 
 ###############
@@ -126,6 +112,22 @@ DJANGOPLICITY_MEDIA_URL = "/static/app/djangoplicity/"
 DJANGOPLICITY_MEDIA_ROOT = "%s/static" % DJANGOPLICITY_ROOT
 ADMIN_MEDIA_PREFIX = "/static/app/admin/"
 
+MIDENTIFY_PATH = '/usr/bin/midentify'
+
+DEBUG_TOOLBAR_PANELS = [
+#	'debug_toolbar.panels.versions.VersionsPanel',
+#	'debug_toolbar.panels.timer.TimerPanel',
+#	'debug_toolbar.panels.settings.SettingsPanel',
+#	'debug_toolbar.panels.headers.HeadersPanel',
+#	'debug_toolbar.panels.request.RequestPanel',
+#	'debug_toolbar.panels.sql.SQLPanel',
+#	'debug_toolbar.panels.staticfiles.StaticFilesPanel',
+#	'debug_toolbar.panels.templates.TemplatesPanel',
+#	'debug_toolbar.panels.cache.CachePanel',
+#	'debug_toolbar.panels.signals.SignalsPanel',
+#	'debug_toolbar.panels.logging.LoggingPanel',
+#	'debug_toolbar.panels.redirects.RedirectsPanel',
+]
 
 # Make this unique, and don't share it with anybody.
 SECRET_KEY = "sadfpn870742kfasbvancp837rcnp3w8orypbw83ycnspo8r7"
@@ -150,9 +152,9 @@ REDIRECT_MIDDLEWARE_URI = 'http://www.spacetelescope.org'
 ############
 # SESSIONS #
 ############
-SESSION_ENGINE='django.contrib.sessions.backends.db'
-SESSION_COOKIE_AGE=86400
-SESSION_COOKIE_DOMAIN=None
+SESSION_ENGINE = 'django.contrib.sessions.backends.db'
+SESSION_COOKIE_AGE = 86400
+SESSION_COOKIE_DOMAIN = None
 
 ################
 # FILE UPLOADS #
@@ -190,12 +192,12 @@ MP4BOX_PATH = '/Applications/Osmo4.app/Contents/MacOS/MP4Box'
 ##########################
 PHOTOSHOP_ROOT = None
 PHOTOSHOP_BROKER = {
-	'HOST' : 'localhost',
-	'PORT' : 5672,
-	'USER' : 'photoshop',
-	'PASSWORD' : 'U?y&f9p5{4',
-	'VHOST' : 'photoshop_vhost',
-	'USE_SSL' : False,
+	'HOST': 'localhost',
+	'PORT': 5672,
+	'USER': 'photoshop',
+	'PASSWORD': 'U?y&f9p5{4',
+	'VHOST': 'photoshop_vhost',
+	'USE_SSL': False,
 }
 
 
@@ -205,7 +207,7 @@ PHOTOSHOP_BROKER = {
 BROKER_USE_SSL = False
 BROKER_URL = 'amqp://spacetelescope:letoveumtold@localhost:5672/spacetelescope_vhost'
 
-CELERY_ALWAYS_EAGER=False
+CELERY_ALWAYS_EAGER = False
 
 #################
 # DJANGO ASSETS #

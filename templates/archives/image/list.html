@@ -1,32 +1,24 @@
-{% extends "base_onecolumn.html" %}
+{% extends "base_onecolumn_dark.html" %}
+{% load i18n %}
 
-{% block extra_header %}{{block.super}}{% for furl,title in feed_urls %}<link href='{{furl}}' rel="alternate" type="application/rss+xml" title='{{title}}' />{%endfor%}{%endblock%}
+{% block extra_header %}{{ block.super }}{% for furl,title in feed_urls %}<link href='{{ furl }}' rel="alternate" type="application/rss+xml" title='{{ title }}' />{% endfor %}{% if archive_title %}
+	<meta property="og:title" content="{{ archive_title }}" />{% endif %}{% if archive_opengraph_image %}
+	<meta property="og:image" content="{{ archive_opengraph_image }}" />{% endif %}{% if archive_description %}
+	<meta property="og:description" content="{{ archive_description }}" />
+	<meta name="description" content="{{ archive_description }}" />{% endif %}
+{%endblock%}
 
-{% block site_title %}{% if archive_title %}{{archive_title}}{% else %}{{ archive|capfirst }} Archive{%endif%} | {{block.super}}{% endblock %}
+{% block site_title %}{% if archive_title %}{{ archive_title }}{% else %}{{ archive|capfirst }} Archive{% endif %} | {{ block.super }}{% endblock %}
 
-{% load menus %}
-{# block breadcrumb %}{{ block.super}}{% endblock #}
+{% block archive_search %}
+{% with archive_search_position="outside" %}
+	{% include "archives/searchbox.html" %}
+{% endwith %}
+{% endblock %}
 
 {% block content %}
-<div class='archive_list_heading'>
-<div class='archive_list_title'>
-<h1>{% if archive_title %}{{ archive_title }}{% else %}{{ archive|capfirst }} Archive{% endif %}{% if listview_feed_url %} <a href="{{ listview_feed_url }}"><img src="{{MEDIA_URL}}images/rssicon.png" /></a>{% endif %}</h1>
-</div>
-<div class='archive_list_search'>{% if searchable %}
 
-<form action="{{ search_url }}" method="GET">{% csrf_token %}
-<input id="id_archivesearch" type="text" value="{%if search_specific %}Search {{search_specific|capfirst}}...{%else%}{{search_str|default:"Search..."}}{%endif%}" name="search" class="archivesearch" onblur="searchbox_blur(this,'{%if search_specific %}Search {{search_specific|capfirst}}...{%else%}{{search_str|default:"Search..."}}{%endif%}');" onfocus="searchbox_focus(this,'{%if search_specific %}Search {{search_specific|capfirst}}...{%else%}{{search_str|default:"Search..."}}{%endif%}');" />
-<input class="archivesearch_submit" type="submit" value="Go" />
-</form>
-{% endif %}
-</div>
-<div class='clear'></div>
-{% load pages %}{% embed_page spacetelescope.image_archive_top %}
-{% if crosslinks %}
-<div class="seealso">Also see Hubble images from <a href="http://hubblesite.org/newscenter/archive/browse/image/">NASA</a>, and images from our partner institutions <a href="http://www.eso.org/public/images/">ESO</a> and the <a href="http://www.iau.org/public_press/images/">IAU</a>.</div>
-<div class='clear'></div>
-{%endif%}
-</div>
 {% include index_template %}
 {% endblock %}
+
 {% include 'archives/extra_footer.html' %}

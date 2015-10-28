@@ -1,0 +1,59 @@
+{% extends "core.html" %}
+
+{% load menus %}
+{% load i18n %}
+
+
+{% block children %}
+{% comment %}
+We don't display the children pages widget in the dark pages
+{% endcomment %}
+{% endblock %}
+
+{% block content_area %}
+
+<div id="dark">
+{% if request.NO_TRANSLATION %}
+	<div class="notranslation-alert alert alert-info alert-dismissible" role="alert">
+		<button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+		<strong>{% trans "Sorry!" %}</strong> {% trans "This page is not yet available in your preferred language, so we're displaying the original version instead." %}
+	</div>
+{% endif %}
+
+	<div class="container" id="dark-header">
+		<div class="row no-page">
+			<div class="col-md-12">
+				{% block archive_search %}
+				{% endblock %}
+			</div>
+			<div class="col-md-12">
+				<h1>{% if archive_title %}{% trans archive_title %}{% else %}{{ archive|capfirst }} {% trans "Archive" %}{% endif %}{% if listview_feed_url %} <a href="{{ listview_feed_url }}" class="listviewrsslink"><span class="fa fa-rss"></span></a>{% endif %}</h1>
+			</div>
+			{% if web_categories %}
+			<div class="col-md-11 media-categories">
+				<ul>
+					{% if archive == 'image' %}<li><a href="{{ search_url }}viewall/?{{ params_nosearch }}">{% trans "View All" %}</a></li>{% endif %}
+					{% if archive == 'video' %}<li><a href="{{ search_url }}?{{ params_nosearch }}">{% trans "View All" %}</a></li>{% endif %}
+					{% for category in web_categories %}
+					<li><a href="{{ search_url }}archive/category/{{ category.url }}/?{{ params_nosearch }}"{% if category.selected %} class="selected"{% endif %}>{% trans category.name %}</a></li>
+					{% endfor %}
+				</ul>
+			</div>
+			{% endif %}
+
+			<div class="col-md-1 media-sortby">
+				<ul title="{% trans 'Sort by:' %}">
+					<li><a href="{{ request.path }}?{{params_nosort}}"{% if not request.GET.sort %} class="selected"{% endif %}>{% trans "Ranking" %}</a></li>
+					<li><a href="{{ request.path }}?{{params_nosort}}sort=-release_date"{% if request.GET.sort == '-release_date' %} class="selected"{% endif %}>{% trans "Date" %}</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+
+	<div class="container-fluid" id="dark-body">
+	{% block body %}
+	{% endblock %}
+	</div>
+
+</div> <!-- #dark -->
+{% endblock %}

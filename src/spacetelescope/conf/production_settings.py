@@ -8,7 +8,7 @@
 #   Luis Clara Gomes <lcgomes@eso.org>
 #
 
-from deployment_settings import *
+from spacetelescope.conf.deployment_settings import *
 from djangoplicity.settings import copy_setting
 
 #############################
@@ -27,7 +27,7 @@ SITE_ENVIRONMENT = 'production'
 # DEPLOYMENT #
 ##############
 MANAGEMENT_NODES = ["aweb41"]
-BROKERS = ["aweb26"]
+BROKERS = ["aweb24"]
 WORKERS = ["aweb41", "aweb42"]
 WORKERS_BEAT_HOST = "aweb41"
 WORKERS_CAM_HOST = "aweb42"
@@ -35,9 +35,9 @@ WEBSERVER_NODES = ["%s3" % SHORT_NAME, "%s4" % SHORT_NAME ]
 DEPLOYMENT_TAG = "spacetelescope.org_prod"
 DEPLOYMENT_REVISION = "spacetelescope.org_int"
 DEPLOYMENT_NOTIFICATION = {
-	"subject" : "[DEPLOY] %(DEPLOYMENT_TAG)s by %(local_user)s",
-	"from" : "esoepo-monitoring@eso.org",
-	"to" : ["webmaster@eso.org", "esoepo-monitoring@eso.org"],
+	"subject": "[DEPLOY] %(DEPLOYMENT_TAG)s by %(local_user)s",
+	"from": "esoepo-monitoring@eso.org",
+	"to": ["webmaster@eso.org", "esoepo-monitoring@eso.org"],
 }
 ALLOW_DATABASE_OVERWRITE = False
 
@@ -53,14 +53,14 @@ DATABASES['default']['PASSWORD'] = "letoveumtold"
 # CACHE  #
 ##########
 CACHES = {
-	'default' : {
-		'BACKEND' : 'django.core.cache.backends.memcached.MemcachedCache',
-		'KEY_PREFIX' : SHORT_NAME,
-		'LOCATION' : [
-			'%(short_name)s3:11211' % { 'short_name' : SHORT_NAME},
-			'%(short_name)s4:11211' % { 'short_name' : SHORT_NAME},
+	'default': {
+		'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
+		'KEY_PREFIX': SHORT_NAME,
+		'LOCATION': [
+			'%(short_name)s3:11211' % { 'short_name': SHORT_NAME},
+			'%(short_name)s4:11211' % { 'short_name': SHORT_NAME},
 		],
-		'TIMEOUT' : 86400
+		'TIMEOUT': 86400
 	}
 }
 
@@ -69,16 +69,16 @@ CACHES = {
 #########
 EMAIL_SUBJECT_PREFIX = '[SPACETELESCOPE]'
 
-##########################	
+##########################
 # PHOTOSHOP CELERYWORKER #
 ##########################
 PHOTOSHOP_ROOT = "/home/web/A/import"
-PHOTOSHOP_BROKER['HOST'] = "aweb26.hq.eso.org"
+PHOTOSHOP_BROKER['HOST'] = "aweb24.hq.eso.org"
 
-##########	
+##########
 # CELERY #
 ##########
-BROKER_URL = 'amqp://spacetelescope:letoveumtold@aweb26.hq.eso.org:5672/spacetelescope_vhost'
+BROKER_URL = 'amqp://spacetelescope:letoveumtold@aweb24.hq.eso.org:5672/spacetelescope_vhost'
 
 ########
 # SHOP #
