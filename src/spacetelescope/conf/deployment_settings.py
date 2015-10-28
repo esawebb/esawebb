@@ -37,8 +37,6 @@ WEBSERVERS = (
 	('aweb41', '%s3' % SHORT_NAME, '134.171.75.212', 'prod' ),
 	('aweb42', '%s4' % SHORT_NAME, '134.171.75.213', 'prod' ),
 )
-CONFIG_GEN_TEMPLATES_DIR = "%s/conf/templates/" % PRJBASE
-CONFIG_GEN_GENERATED_DIR = "%s/conf/" % ROOT  # was: "%s/conf/" % TMP_DIR
 
 ##############
 # DEPLOYMENT #
