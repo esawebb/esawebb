@@ -904,15 +904,6 @@ LOGGING = {
 	},
 }
 
-####################
-# MIGRATIONS #
-####################
-
-MIGRATION_MODULES = {
-	'redirects': 'ignore',  # We are using django.redirects and not djangoplicity.redirects where the migration is stored.
-}
-
-
 # ======================================================================
 # SITE SPECIFIC SECTIONS
 # ======================================================================
@@ -1038,6 +1029,9 @@ SHOP_PICKUP_LOCATIONS = ({
 		'delivery': _("Karl-Schwarzschild-Str. 2, 85748 Garching, GERMANY"),
 	},
 )
+
+RECAPTCHA_PUBLIC_KEY = '6LfXJOkSAAAAAE1-HoZR7_iA6D2tT0hGspsqG5mW'
+RECAPTCHA_PRIVATE_KEY = '6LfXJOkSAAAAAMETeG2zL8idVr9tW3F0Ndb12GK3'
 
 #
 # Pipeline configuration (CSS/JS packing)
