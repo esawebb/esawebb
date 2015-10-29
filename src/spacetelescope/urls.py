@@ -132,9 +132,6 @@ urlpatterns += patterns( '',
 	#( r'^public/djangoplicity/events/', include('djangoplicity.events.urls'), { 'model': Event, 'options': EventOptions } ),
 	( r'^facebook/', include('djangoplicity.iframe.urls'), { 'SSLAllow': True }  ),
 
-	# Image votes
-	( r'^projects/hiddentreasures/vote/', include('djangoplicity.imgvote.urls'), ),
-
 	# Main view
 	( r'^$', cache_page(60 * 5)(FrontpageView.as_view()) ),
  )

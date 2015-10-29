@@ -40,6 +40,7 @@ SHORT_NAME = local_settings.SHORT_NAME
 WEBSERVERS = local_settings.WEBSERVERS
 SSL_ASSETS_PREFIX = local_settings.SSL_ASSETS_PREFIX
 
+
 ###################
 # ERROR REPORTING #
 ###################
@@ -370,7 +371,6 @@ INSTALLED_APPS += (
 	'spacetelescope.frontpage',
 	'mptt',
 	'django_extensions',
-	'django_assets',
 	# Satchmo
 	#'registration',
 	'sorl.thumbnail',
@@ -388,8 +388,6 @@ INSTALLED_APPS += (
 	'tax.modules.no',
 	'app_plugins',
 	'shipping.modules.tieredweight',
-	'django_config_gen',
-	'djangoplicity.imgvote',
 	'captcha',
 	'gunicorn',
 	'django_ace',
@@ -906,18 +904,11 @@ LOGGING = {
 	},
 }
 
-###################
-# REPORTLAB FONTS #
-###################
-from reportlab import rl_config
-rl_config.TTFSearchPath.append( PRJBASE + "/fonts/" )
-
 ####################
-# SOUTH MIGRATIONS #
+# MIGRATIONS #
 ####################
-DATABASE_STORAGE_ENGINE = "MyISAM"
 
-SOUTH_MIGRATION_MODULES = {
+MIGRATION_MODULES = {
 	'redirects': 'ignore',  # We are using django.redirects and not djangoplicity.redirects where the migration is stored.
 }
 
@@ -1047,10 +1038,6 @@ SHOP_PICKUP_LOCATIONS = ({
 		'delivery': _("Karl-Schwarzschild-Str. 2, 85748 Garching, GERMANY"),
 	},
 )
-
-RECAPTCHA_PUBLIC_KEY = '6LfXJOkSAAAAAE1-HoZR7_iA6D2tT0hGspsqG5mW'
-RECAPTCHA_PRIVATE_KEY = '6LfXJOkSAAAAAMETeG2zL8idVr9tW3F0Ndb12GK3'
-IMGVOTE_EMAIL_FROM = 'no-reply@spacetelescope.org'
 
 #
 # Pipeline configuration (CSS/JS packing)
