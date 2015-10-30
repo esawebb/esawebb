@@ -13,13 +13,13 @@
 	<link href='//fonts.googleapis.com/css?family=Open+Sans:400italic,600italic,400,600' rel='stylesheet' type='text/css'>
 
 	<title>{% block site_title %}ESA/Hubble{% endblock %}</title>
-{% load compressed %}
-{% compressed_css 'main' %}
+{% load pipeline %}
+{% stylesheet 'main' %}
 	<!--[if IE]><link rel="shortcut icon" href="/static/favicon.ico"><![endif]-->
 	<link rel="icon" href="/static/favicon.ico">
 
 	<!--[if lte IE 9]>
-		{% compressed_js 'ie8compat' %}
+		{% javascript 'ie8compat' %}
 		<script src="//oss.maxcdn.com/respond/1.4.2/respond.min.js"></SCRIpt>
 		<script src="//oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
 	<![endif]-->
@@ -65,10 +65,10 @@
 	</div>
 </div>
 
-{% compressed_css 'extras' %}
+{% stylesheet 'extras' %}
 
 <script type="text/javascript">var MEDIA_URL = "{{MEDIA_URL}}"</script>
-{% compressed_js 'main' %}
+{% javascript 'main' %}
 {% block extra_scripts %}
 {% endblock %}
 
