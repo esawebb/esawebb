@@ -1106,6 +1106,12 @@ PIPELINE_MIMETYPES = (
 	(b'text/x-scss', '.scss')
 )
 
+STATICFILES_FINDERS = (
+	'django.contrib.staticfiles.finders.FileSystemFinder',
+	'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+	'pipeline.finders.PipelineFinder',
+)
+
 # Required since Django 1.5:
 ALLOWED_HOSTS = ['.spacetelescope.org', '.eso.org']
 
