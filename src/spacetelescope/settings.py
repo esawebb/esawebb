@@ -39,8 +39,6 @@ FACEBOOK_APP_ID = "144508505618279"
 SHORT_NAME = local_settings.SHORT_NAME
 WEBSERVERS = local_settings.WEBSERVERS
 SSL_ASSETS_PREFIX = local_settings.SSL_ASSETS_PREFIX
-CONFIG_GEN_TEMPLATES_DIR = local_settings.CONFIG_GEN_TEMPLATES_DIR
-CONFIG_GEN_GENERATED_DIR = local_settings.CONFIG_GEN_GENERATED_DIR
 
 
 ###################
@@ -373,7 +371,6 @@ INSTALLED_APPS += (
 	'spacetelescope.frontpage',
 	'mptt',
 	'django_extensions',
-	'django_assets',
 	# Satchmo
 	#'registration',
 	'sorl.thumbnail',
@@ -391,8 +388,6 @@ INSTALLED_APPS += (
 	'tax.modules.no',
 	'app_plugins',
 	'shipping.modules.tieredweight',
-	'django_config_gen',
-	'djangoplicity.imgvote',
 	'captcha',
 	'gunicorn',
 	'django_ace',
@@ -647,7 +642,7 @@ DEFAULT_CONTACT_CITY = u"Garching bei M√ºnchen"
 DEFAULT_CONTACT_STATE_PROVINCE = ""
 DEFAULT_CONTACT_POSTAL_CODE = u"D-85748"
 DEFAULT_CONTACT_COUNTRY = u"Germany"
-DEFAULT_RIGHTS = "Creative Commons Attribution 3.0 Unported license"
+DEFAULT_RIGHTS = "Creative Commons Attribution 4.0 International License"
 DEFAULT_PUBLISHER = u"ESA/Hubble"
 DEFAULT_PUBLISHER_ID = u"esahubble"
 
@@ -909,22 +904,6 @@ LOGGING = {
 	},
 }
 
-###################
-# REPORTLAB FONTS #
-###################
-from reportlab import rl_config
-rl_config.TTFSearchPath.append( PRJBASE + "/fonts/" )
-
-####################
-# SOUTH MIGRATIONS #
-####################
-DATABASE_STORAGE_ENGINE = "MyISAM"
-
-SOUTH_MIGRATION_MODULES = {
-	'redirects': 'ignore',  # We are using django.redirects and not djangoplicity.redirects where the migration is stored.
-}
-
-
 # ======================================================================
 # SITE SPECIFIC SECTIONS
 # ======================================================================
@@ -1053,7 +1032,6 @@ SHOP_PICKUP_LOCATIONS = ({
 
 RECAPTCHA_PUBLIC_KEY = '6LfXJOkSAAAAAE1-HoZR7_iA6D2tT0hGspsqG5mW'
 RECAPTCHA_PRIVATE_KEY = '6LfXJOkSAAAAAMETeG2zL8idVr9tW3F0Ndb12GK3'
-IMGVOTE_EMAIL_FROM = 'no-reply@spacetelescope.org'
 
 #
 # Pipeline configuration (CSS/JS packing)
@@ -1126,6 +1104,12 @@ PIPELINE_MIMETYPES = (
 	(b'text/javascript', '.js'),
 	(b'text/x-sass', '.sass'),
 	(b'text/x-scss', '.scss')
+)
+
+STATICFILES_FINDERS = (
+	'django.contrib.staticfiles.finders.FileSystemFinder',
+	'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+	'pipeline.finders.PipelineFinder',
 )
 
 # Required since Django 1.5:

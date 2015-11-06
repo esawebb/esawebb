@@ -10,6 +10,7 @@ syntax: regexp
 ^celeryev\.pid$
 .DS_Store$
 ^.sass-cache/
+^static/
 
 syntax: glob
 *.pyc

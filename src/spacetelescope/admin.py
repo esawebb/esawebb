@@ -20,7 +20,6 @@ import djangoplicity.announcements.admin
 import djangoplicity.archives.contrib.satchmo.freeorder.admin
 import djangoplicity.crawler.admin
 import djangoplicity.customsearch.admin
-import djangoplicity.imgvote.admin
 import djangoplicity.mailinglists.admin
 import djangoplicity.media.admin
 import djangoplicity.menus.admin
@@ -84,5 +83,3 @@ from djangoplicity.archives.contrib.satchmo.admin import satchmo_admin
 adminshop_site = satchmo_admin( adminshop_site )
 
 autoregister( adminshop_site, djangoplicity.archives.contrib.satchmo.freeorder.admin )
-
-autoregister( admin_site, djangoplicity.imgvote.admin )
