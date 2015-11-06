@@ -32,10 +32,10 @@ We don't display the children pages widget in the dark pages
 			{% if web_categories %}
 			<div class="col-md-11 media-categories">
 				<ul>
-					{% if archive == 'image' %}<li><a href="{{ search_url }}viewall/?{{ params_nosearch }}">{% trans "View All" %}</a></li>{% endif %}
-					{% if archive == 'video' %}<li><a href="{{ search_url }}?{{ params_nosearch }}">{% trans "View All" %}</a></li>{% endif %}
+					{% if archive == 'image' %}<li><a href="{% url 'images_defaultquery' %}viewall/{% if params_nosearch %}?{{ params_nosearch }}{% endif %}">{% trans "View All" %}</a></li>{% endif %}
+					{% if archive == 'video' %}<li><a href="{% url 'videos_defaultquery' %}{% if params_nosearch %}?{{ params_nosearch }}{% endif %}">{% trans "View All" %}</a></li>{% endif %}
 					{% for category in web_categories %}
-					<li><a href="{{ search_url }}archive/category/{{ category.url }}/?{{ params_nosearch }}"{% if category.selected %} class="selected"{% endif %}>{% trans category.name %}</a></li>
+						<li><a href="{{ category.get_absolute_url}}{% if params_nosearch %}?{{ params_nosearch }}{% endif %}"{% if category.selected %} class="selected"{% endif %}>{% trans category.name %}</a></li>
 					{% endfor %}
 				</ul>
 			</div>
@@ -44,7 +44,7 @@ We don't display the children pages widget in the dark pages
 			<div class="col-md-1 media-sortby">
 				<ul title="{% trans 'Sort by:' %}">
 					<li><a href="{{ request.path }}?{{params_nosort}}"{% if not request.GET.sort %} class="selected"{% endif %}>{% trans "Ranking" %}</a></li>
-					<li><a href="{{ request.path }}?{{params_nosort}}sort=-release_date"{% if request.GET.sort == '-release_date' %} class="selected"{% endif %}>{% trans "Date" %}</a></li>
+					<li><a href="{{ request.path }}?{{params_nosort}}&sort=-release_date"{% if request.GET.sort == '-release_date' %} class="selected"{% endif %}>{% trans "Date" %}</a></li>
 				</ul>
 			</div>
 		</div>
