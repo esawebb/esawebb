@@ -91,6 +91,7 @@ DATABASES = {
 		'USER': 'spacetelescope',
 		'PASSWORD': '',
 		'HOST': 'localhost',
+		'CONN_MAX_AGE': 0,
 	}
 }
 

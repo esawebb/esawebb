@@ -79,6 +79,7 @@ DEBUG = False
 ##################
 DATABASES = copy_setting(DATABASES)
 DATABASES['default']['USER'] = "spacetelescope"
+DATABASES['default']['CONN_MAX_AGE'] = 600
 
 ###############
 # MEDIA SETUP #
