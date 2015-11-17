@@ -301,9 +301,6 @@ MIDDLEWARE_CLASSES += (
 
 	# Middleware to bypass CDN when client is from Garching Intranet
 	'spacetelescope.middleware.DisableInternalCDN',
-
-	# Djangoplicity static pages
-	'djangoplicity.pages.middleware.PageFallbackMiddleware',  # Response
 )
 
 if ENABLE_REDIRECT_MIDDLEWARE:
