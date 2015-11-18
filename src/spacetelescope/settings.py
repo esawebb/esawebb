@@ -1080,9 +1080,6 @@ PIPELINE_JS = {
 			'js/enquire/enquire.min.js',
 			'js/hubble.js',
 		),
-		'extra_context': {
-			'async': True,
-		},
 		'output_filename': 'js/main.js',
 	},
 	'ie8compat': {
