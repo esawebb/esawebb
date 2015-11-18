@@ -1044,7 +1044,7 @@ PIPELINE_CSS = {
 		'source_filenames': (
 			'font-awesome/css/font-awesome.min.css',
 			'sprites/sprites.css',
-			'css/main.css',
+			'css/hubble.css',
 		),
 		'output_filename': 'css/main.css',
 	},
@@ -1078,8 +1078,11 @@ PIPELINE_JS = {
 			'djangoplicity/js/djp-jwplayer.js',
 			'js/picturefill.min.js',
 			'js/enquire/enquire.min.js',
-			'js/main.js',
+			'js/hubble.js',
 		),
+		'extra_context': {
+			'async': True,
+		},
 		'output_filename': 'js/main.js',
 	},
 	'ie8compat': {
