@@ -136,7 +136,7 @@ urlpatterns += patterns( '',
 	( r'^$', cache_page(60 * 5)(FrontpageView.as_view()) ),
 
 	# Static pages
-	url(r'^(?P<url>.*/)', 'djangoplicity.pages.views.view_page')
+	url(r'^(?P<url>.*/)$', 'djangoplicity.pages.views.view_page')
  )
 
 #handler404 = 'spacetelescope.views.page_not_found'
