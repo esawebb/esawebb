@@ -2,7 +2,6 @@
 {% load djangoplicity_datetime %}
 {% load release_links %}
 {% include 'archives/embargo_notice.html' %}
-{% spaceless %}
 {% if object.disclaimer %}
 	<div class="disclaimer">{{ object.disclaimer|safe }}</div>
 {% endif %}
@@ -66,4 +65,3 @@
 {% endif %}
 
 {% include 'archives/release/extra_footer.html' %}
-{% endspaceless %}
