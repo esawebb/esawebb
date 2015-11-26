@@ -1,4 +1,4 @@
-{% load i18n %} 
+{% load i18n %}
 {% load djangoplicity_datetime %}
 {% load release_links %}
 {% include 'archives/embargo_notice.html' %}
@@ -21,7 +21,24 @@
 
 {% with main_image.releaseimage_set.all.0.zoomable as zoomable %}
 <div class="archive-image popup">
-{% if main_image %}{% if main_image.resource_newsfeature %}
+{% if main_video %}
+	{% if main_video.youtube_video_id and main_video.use_youtube %}
+		<div class="youtube-wrapper">
+			<div id="youtube-player"></div>
+		</div>
+	{% elif main_video.resource_newsfeature %}
+		<div class="archive-image popup">
+		{% if main_video.resource_medium_podcast %}
+			{% load media_video %}
+			{% if main_video.videosubtitle_set.all %}
+				{% embedvideo_subs main_video "medium_podcast,h264" "hd_and_apple,hd720p_screen,dome_preview" "medium_podcast,h264" main_video.videosubtitle_set.all %}
+			{% else %}
+				{% embedvideo main_video "medium_podcast,h264" "hd_and_apple,hd720p_screen,dome_preview" "medium_podcast,h264" %}
+			{% endif%}
+		{% endif %}
+		</div>
+	{% endif %}
+{% elif main_image %}{% if main_image.resource_newsfeature %}
 	<a class="popup" href="{% if zoomable %}{{ main_image.get_absolute_url }}zoomable/{% else %}{{ main_image.resource_screen.url }}{% endif %}" title="{{ main_image.title }}">
 		<div class="image-container">
 			<img class="img-responsive" src="{{ main_image.resource_newsfeature.url }}" class="pr_news_feature_img img-responsive" style="padding:0;" />

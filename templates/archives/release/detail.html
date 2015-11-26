@@ -30,3 +30,36 @@
 {% include "archives/crosslinks.html" %}
 
 {% endblock %}
+
+{% block extra_scripts %}
+<script type="text/javascript">
+{% if main_video and main_video.youtube_video_id and main_video.use_youtube %}
+var tag = document.createElement('script');
+
+tag.src = "https://www.youtube.com/iframe_api";
+var firstScriptTag = document.getElementsByTagName('script')[0];
+firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+var player;
+function onYouTubeIframeAPIReady() {
+	player = new YT.Player('youtube-player', {
+		height: '387',
+		width: '688',
+		videoId: '{{ main_video.youtube_video_id }}',
+		playerVars: {
+			'modestbranding': 1,
+			'hl': '{{ LANGUAGE_CODE }}'
+		},
+		events: {
+			'onReady': onPlayerReady,
+		}
+	});
+	function onPlayerReady(event) {
+		// event.target.setPlaybackQuality('large');
+	}
+}
+{% elif main_video and main_video.resource_medium_podcast %}
+	setupVideoPlayer('{{ main_video.id }}');
+{% endif %}
+</script>
+{% endblock %}
