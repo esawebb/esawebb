@@ -319,7 +319,7 @@ if USE_I18N:
 INSTALLED_APPS += (
 	'django.contrib.staticfiles',
 	'django.contrib.sites',
-	'django.contrib.postgres',
+#	'django.contrib.postgres',
 	'satchmo_store.shop',
 	'django.contrib.auth',
 	'django.contrib.contenttypes',
