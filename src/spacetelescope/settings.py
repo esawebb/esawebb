@@ -361,6 +361,7 @@ INSTALLED_APPS += (
 	#'djangoplicity.eventcalendar',
 	'djangoplicity.actions',
 	'djangoplicity.crawler',
+	'djangoplicity.cutter',
 	#'djangoplicity.mailer',
 	#'djangoplicity.scrum',
 	#'djangoplicity.kiosk.engine',
