@@ -679,18 +679,6 @@ FEED_SETTINGS_MODULE = 'spacetelescope.feed_settings'
 REPORTS_DEFAULT_FORMATTER = 'html'
 REPORT_REGISTER_FORMATTERS = True
 
-##########################
-# PHOTOSHOP CELERYWORKER #
-##########################
-PHOTOSHOP_ROOT = local_settings.PHOTOSHOP_ROOT
-
-# For several djangoplicity installations to share a common
-# photoshop server, they must direct tasks to a common broker/vhost.
-# If the photoshop server is only to generate image derivatives for
-# one djangoplicity installation this setting can just be set to
-# none (which means the default broker for celery is used).
-PHOTOSHOP_BROKER = local_settings.PHOTOSHOP_BROKER
-
 ##########
 # CELERY #
 ##########
@@ -709,15 +697,8 @@ CELERY_QUEUES = {
 	"celery": {
 		"exchange": "celery",
 		"exchange_type": "direct",
-		"binding_key": "celery"},
-	"photoshop": {
-		"exchange": "photoshop",
-		"exchange_type": "direct",
-		"binding_key": "photoshop"},
-}
-# Directs all image generation tasks to the "photoshop" queue
-CELERY_ROUTES = {
-	"media.image_derivatives": { "queue": "photoshop" }
+		"binding_key": "celery",
+	},
 }
 
 CELERY_TIMEZONE = TIME_ZONE
@@ -1022,12 +1003,11 @@ ORDER_PREFIX = local_settings.ORDER_PREFIX
 LIVE = local_settings.LIVE
 SHOP_PICKUP_LOCATIONS = ({
 	'id': 'PUP1',
-		'name': 'ESO HQ',
-		'desc': _( "Self-pickup/ESO HQ in Munich, Germany" ),
-		'method': _("Pickup (9-17 CET/CEST) at ESO HQ Reception,"),
-		'delivery': _("Karl-Schwarzschild-Str. 2, 85748 Garching, GERMANY"),
-	},
-)
+	'name': 'ESO HQ',
+	'desc': _( "Self-pickup/ESO HQ in Munich, Germany" ),
+	'method': _("Pickup (9-17 CET/CEST) at ESO HQ Reception,"),
+	'delivery': _("Karl-Schwarzschild-Str. 2, 85748 Garching, GERMANY"),
+},)
 
 RECAPTCHA_PUBLIC_KEY = '6LfXJOkSAAAAAE1-HoZR7_iA6D2tT0hGspsqG5mW'
 RECAPTCHA_PRIVATE_KEY = '6LfXJOkSAAAAAMETeG2zL8idVr9tW3F0Ndb12GK3'

@@ -186,20 +186,6 @@ ARCHIVE_AUTO_RESOURCE_DELETION = False
 ARCHIVE_IMPORT_ROOT = "%s/import" % ROOT
 MP4BOX_PATH = '/Applications/Osmo4.app/Contents/MacOS/MP4Box'
 
-##########################
-# PHOTOSHOP CELERYWORKER #
-##########################
-PHOTOSHOP_ROOT = None
-PHOTOSHOP_BROKER = {
-	'HOST': 'localhost',
-	'PORT': 5672,
-	'USER': 'photoshop',
-	'PASSWORD': 'U?y&f9p5{4',
-	'VHOST': 'photoshop_vhost',
-	'USE_SSL': False,
-}
-
-
 ##########
 # CELERY #
 ##########

@@ -74,12 +74,6 @@ CACHES = {
 #########
 EMAIL_SUBJECT_PREFIX = '[SPACETELESCOPE-INTEGRATION]'
 
-##########################
-# PHOTOSHOP CELERYWORKER #
-##########################
-PHOTOSHOP_ROOT = "/home/web/A/importi"
-PHOTOSHOP_BROKER['HOST'] = "aweb36.hq.eso.org"
-
 ##########
 # CELERY #
 ##########
