@@ -142,12 +142,6 @@ CACHES = {
     }
 }
 
-###############################
-# MIDDLEWARE AND APPLICATIONS #
-###############################
-ENABLE_REDIRECT_MIDDLEWARE = False
-REDIRECT_MIDDLEWARE_URI = 'http://www.spacetelescope.org'
-
 ############
 # SESSIONS #
 ############

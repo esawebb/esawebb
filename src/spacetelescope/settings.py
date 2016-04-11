@@ -9,12 +9,15 @@
 #
 
 from __future__ import absolute_import
-
-from djangoplicity.settings import import_settings
-
-from celery.schedules import crontab
 import os
 import re
+
+from celery.schedules import crontab
+from django.utils.translation import ugettext_noop
+
+import djangoplicity.crosslinks
+from djangoplicity.contentserver import CDN77ContentServer
+from djangoplicity.settings import import_settings
 
 local_settings = import_settings('spacetelescope')
 LOCAL_SETTINGS_MODULE = local_settings.LOCAL_SETTINGS_MODULE
@@ -83,7 +86,6 @@ GARCHING_INTERNAL_IPS = (
 SITE_ENVIRONMENT = local_settings.SITE_ENVIRONMENT
 DEBUG = local_settings.DEBUG
 DEBUG_TOOLBAR = local_settings.DEBUG_TOOLBAR
-TEMPLATE_DEBUG = local_settings.TEMPLATE_DEBUG
 SEND_BROKEN_LINK_EMAILS = local_settings.SEND_BROKEN_LINK_EMAILS
 
 ADMINS = local_settings.ADMINS
@@ -115,11 +117,9 @@ TIME_ZONE = 'Europe/Berlin'
 
 # Language code for this installation. All choices can be found here:
 # http://www.w3.org/TR/REC-html40/struct/dirlang.html#langcodes
-gettext_noop = lambda s: s
-_ = gettext_noop
 
 LANGUAGES = (
-	( 'en', gettext_noop( 'English' ) ),
+	( 'en', ugettext_noop( 'English' ) ),
 )
 
 LANGUAGE_CODE = 'en'
@@ -136,14 +136,14 @@ USE_L10N = True
 #LOCALE_PATHS = ( DJANGOPLICITY_ROOT + "/locale", PRJBASE + "/locale", )
 
 # Default date and time formats (con be overridden by locale)
-DATE_FORMAT = gettext_noop('j F Y')
-DATE_LONG_FORMAT = gettext_noop('j F Y')
-DATETIME_FORMAT = gettext_noop('M j, Y, H:i T')
-DATETIME_LONG_FORMAT = gettext_noop('M j, Y y, H:i T')
-MONTH_DAY_FORMAT = gettext_noop('F j')
-TIME_FORMAT = gettext_noop('H:i T')
-YEAR_MONTH_FORMAT = gettext_noop('F Y')
-WIDGET_FORMAT = gettext_noop("j/m/Y")
+DATE_FORMAT = ugettext_noop('j F Y')
+DATE_LONG_FORMAT = ugettext_noop('j F Y')
+DATETIME_FORMAT = ugettext_noop('M j, Y, H:i T')
+DATETIME_LONG_FORMAT = ugettext_noop('M j, Y y, H:i T')
+MONTH_DAY_FORMAT = ugettext_noop('F j')
+TIME_FORMAT = ugettext_noop('H:i T')
+YEAR_MONTH_FORMAT = ugettext_noop('F Y')
+WIDGET_FORMAT = ugettext_noop("j/m/Y")
 
 ###############
 # MEDIA SETUP #
@@ -189,7 +189,7 @@ CACHE_MIDDLEWARE_SECONDS = 600
 CACHE_MIDDLEWARE_KEY_PREFIX = SHORT_NAME
 CACHE_MIDDLEWARE_ANONYMOUS_ONLY = True
 
-### keyedcached settings:
+# keyedcached settings:
 CACHE_TIMEOUT = CACHE_MIDDLEWARE_SECONDS if CACHES['default']['BACKEND'] != 'django.core.cache.backends.dummy.DummyCache' else 0  # prevents stupid error from keyecache
 CACHE_PREFIX = SHORT_NAME
 
@@ -198,35 +198,36 @@ USE_ETAGS = True
 #############
 # TEMPLATES #
 #############
-# List of callables that know how to import templates from various sources.
-TEMPLATE_LOADERS = (
-	'django.template.loaders.filesystem.Loader',
-	'django.template.loaders.app_directories.Loader',
-)
-
-TEMPLATE_CONTEXT_PROCESSORS = (
-	'django.core.context_processors.request',
-	'django.contrib.auth.context_processors.auth',
-	'django.contrib.messages.context_processors.messages',
-	'django.core.context_processors.i18n',
-	'django.core.context_processors.media',
-	'django.core.context_processors.static',
-	'djangoplicity.utils.context_processors.site_environment',
-	'djangoplicity.utils.context_processors.project_environment',
-	'djangoplicity.utils.context_processors.google_analytics_id',
-	'djangoplicity.utils.context_processors.djangoplicity_environment',
-	'djangoplicity.archives.context_processors.internal_request',
-)
+TEMPLATES = [
+	{
+		'BACKEND': 'django.template.backends.django.DjangoTemplates',
+		'DIRS': [
+			PRJBASE + '/templates',
+			DJANGOPLICITY_ROOT + '/templates',
+		],
+		'APP_DIRS': True,
+		'OPTIONS': {
+			'debug': local_settings.TEMPLATE_DEBUG,
+			'context_processors': [
+				'django.contrib.auth.context_processors.auth',
+				'django.template.context_processors.debug',
+				'django.template.context_processors.i18n',
+				'django.template.context_processors.media',
+				'django.template.context_processors.static',
+				'django.template.context_processors.tz',
+				'django.template.context_processors.request',
+				'django.contrib.messages.context_processors.messages',
+				'djangoplicity.utils.context_processors.project_environment',
+				'djangoplicity.utils.context_processors.google_analytics_id',
+				'djangoplicity.utils.context_processors.djangoplicity_environment',
+				'djangoplicity.archives.context_processors.internal_request',
+				'satchmo_store.shop.context_processors.settings',
+			],
+		},
+	},
+]
 
 ROOT_URLCONF = 'spacetelescope.urls'
-
-TEMPLATE_DIRS = (
-	# Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
-	# Always use forward slashes, even on Windows.
-	# Don't forget to use absolute paths, not relative paths.
-	PRJBASE + '/templates',
-	DJANGOPLICITY_ROOT + '/templates',
-)
 
 ###############################
 # MIDDLEWARE AND APPLICATIONS #
@@ -256,9 +257,6 @@ if DEBUG_TOOLBAR:
 	MIDDLEWARE_CLASSES += (
 		'debug_toolbar.middleware.DebugToolbarMiddleware',
 	)
-
-ENABLE_REDIRECT_MIDDLEWARE = local_settings.ENABLE_REDIRECT_MIDDLEWARE
-REDIRECT_MIDDLEWARE_URI = local_settings.REDIRECT_MIDDLEWARE_URI
 
 
 MIDDLEWARE_CLASSES += (
@@ -302,11 +300,6 @@ MIDDLEWARE_CLASSES += (
 	# Middleware to bypass CDN when client is from Garching Intranet
 	'spacetelescope.middleware.DisableInternalCDN',
 )
-
-if ENABLE_REDIRECT_MIDDLEWARE:
-	MIDDLEWARE_CLASSES += (
-		'djangoplicity.contrib.redirects.middleware.SinkRedirectMiddleware',
-		)
 
 INSTALLED_APPS = ()
 
@@ -656,7 +649,6 @@ ARCHIVE_WORKFLOWS = {
 
 VIDEO_RENAME_NOTIFY = ['hzodet@eso.org', 'mkornmes@eso.org']
 
-import djangoplicity.crosslinks
 ARCHIVE_CROSSLINKS = djangoplicity.crosslinks.crosslinks_for_domain('spacetelescope.org')
 
 ##########
@@ -704,7 +696,7 @@ CELERY_QUEUES = {
 CELERY_TIMEZONE = TIME_ZONE
 CELERY_ENABLE_UTC = False
 
-## Broker settings.
+# Broker settings.
 BROKER_USE_SSL = local_settings.BROKER_USE_SSL
 BROKER_URL = local_settings.BROKER_URL
 
@@ -915,8 +907,6 @@ MIDDLEWARE_CLASSES += (
 					#"satchmo_store.shop.SSLMiddleware.SSLRedirect",
 					)
 
-TEMPLATE_CONTEXT_PROCESSORS += ( 'satchmo_store.shop.context_processors.settings', )
-
 AUTHENTICATION_BACKENDS += ( 'satchmo_store.accounts.email-auth.EmailBackend', )
 
 SATCHMO_SETTINGS = {
@@ -1004,9 +994,9 @@ LIVE = local_settings.LIVE
 SHOP_PICKUP_LOCATIONS = ({
 	'id': 'PUP1',
 	'name': 'ESO HQ',
-	'desc': _( "Self-pickup/ESO HQ in Munich, Germany" ),
-	'method': _("Pickup (9-17 CET/CEST) at ESO HQ Reception,"),
-	'delivery': _("Karl-Schwarzschild-Str. 2, 85748 Garching, GERMANY"),
+	'desc': ugettext_noop( "Self-pickup/ESO HQ in Munich, Germany" ),
+	'method': ugettext_noop("Pickup (9-17 CET/CEST) at ESO HQ Reception,"),
+	'delivery': ugettext_noop("Karl-Schwarzschild-Str. 2, 85748 Garching, GERMANY"),
 },)
 
 RECAPTCHA_PUBLIC_KEY = '6LfXJOkSAAAAAE1-HoZR7_iA6D2tT0hGspsqG5mW'
@@ -1021,69 +1011,61 @@ STATICFILES_STORAGE = 'pipeline.storage.PipelineCachedStorage'
 # We split the CSS into main and extras to load the more important first
 # and the rest in the end. This also solves a problem with IE9 which stops
 # loading CSS rules if there are "too many"
-PIPELINE_CSS = {
-	'main': {
-		'source_filenames': (
-			'font-awesome/css/font-awesome.min.css',
-			'sprites/sprites.css',
-			'css/hubble.css',
-		),
-		'output_filename': 'css/main.css',
+PIPELINE = {
+	'STYLESHEETS': {
+		'main': {
+			'source_filenames': (
+				'font-awesome/css/font-awesome.min.css',
+				'sprites/sprites.css',
+				'css/hubble.css',
+			),
+			'output_filename': 'css/main.css',
+		},
+		'extras': {
+			'source_filenames': (
+				'jquery-ui-1.11.1/jquery-ui.min.css',
+				'slick-1.5.0/slick/slick.css',
+				'justified-gallery/css/justifiedGallery.min.css',
+				'magnific-popup/magnific-popup.css',
+			),
+			'output_filename': 'css/extras.css',
+		},
 	},
-	'extras': {
-		'source_filenames': (
-			'jquery-ui-1.11.1/jquery-ui.min.css',
-			'slick-1.5.0/slick/slick.css',
-			'justified-gallery/css/justifiedGallery.min.css',
-			'magnific-popup/magnific-popup.css',
-		),
-		'output_filename': 'css/extras.css',
+	'JAVASCRIPT': {
+		'main': {
+			'source_filenames': (
+				'jquery/jquery-1.11.1.min.js',
+				'jquery-ui-1.11.1/jquery-ui.min.js',
+				'bootstrap/bootstrap-3.1.1-dist/js/bootstrap.min.js',
+				'js/jquery.menu-aim.js',
+				'slick-1.5.0/slick/slick.min.js',
+				'djangoplicity/jwplayer/jwplayer.js',
+				'djangoplicity/js/jquery.beforeafter-1.4.js',
+				'djangoplicity/zoomify/js/ZoomifyImageViewerExpress-min.js',
+				'js/masonry.pkgd.min.js',
+				'justified-gallery/js/jquery.justifiedGallery.min.js',
+				'magnific-popup/jquery.magnific-popup.min.js',
+				'djangoplicity/js/widgets.js',
+				'djangoplicity/js/pages.js',
+				'djangoplicity/js/djp-jwplayer.js',
+				'js/picturefill.min.js',
+				'js/enquire/enquire.min.js',
+				'js/hubble.js',
+			),
+			'output_filename': 'js/main.js',
+		},
+		'ie8compat': {
+			'source_filenames': (
+				'js/ie8compat/matchMedia/matchMedia.js',
+				'js/ie8compat/matchMedia/matchMedia.addListener.js',
+			),
+			'output_filename': 'js/ie8compat.js',
+		},
 	},
+	'CSS_COMPRESSOR': False,
+	'JS_COMPRESSOR': False,
+	'DISABLE_WRAPPER': True,
 }
-
-PIPELINE_JS = {
-	'main': {
-		'source_filenames': (
-			'jquery/jquery-1.11.1.min.js',
-			'jquery-ui-1.11.1/jquery-ui.min.js',
-			'bootstrap/bootstrap-3.1.1-dist/js/bootstrap.min.js',
-			'js/jquery.menu-aim.js',
-			'slick-1.5.0/slick/slick.min.js',
-			'djangoplicity/jwplayer/jwplayer.js',
-			'djangoplicity/js/jquery.beforeafter-1.4.js',
-			'djangoplicity/zoomify/js/ZoomifyImageViewerExpress-min.js',
-			'js/masonry.pkgd.min.js',
-			'justified-gallery/js/jquery.justifiedGallery.min.js',
-			'magnific-popup/jquery.magnific-popup.min.js',
-			'djangoplicity/js/widgets.js',
-			'djangoplicity/js/pages.js',
-			'djangoplicity/js/djp-jwplayer.js',
-			'js/picturefill.min.js',
-			'js/enquire/enquire.min.js',
-			'js/hubble.js',
-		),
-		'output_filename': 'js/main.js',
-	},
-	'ie8compat': {
-		'source_filenames': (
-			'js/ie8compat/matchMedia/matchMedia.js',
-			'js/ie8compat/matchMedia/matchMedia.addListener.js',
-		),
-		'output_filename': 'js/ie8compat.js',
-	},
-}
-PIPELINE_CSS_COMPRESSOR = False
-PIPELINE_JS_COMPRESSOR = False
-PIPELINE_DISABLE_WRAPPER = True
-
-# IE8 doesn't support application/javascript so we override the default:
-PIPELINE_MIMETYPES = (
-	(b'text/coffeescript', '.coffee'),
-	(b'text/less', '.less'),
-	(b'text/javascript', '.js'),
-	(b'text/x-sass', '.sass'),
-	(b'text/x-scss', '.scss')
-)
 
 STATICFILES_FINDERS = (
 	'django.contrib.staticfiles.finders.FileSystemFinder',
@@ -1097,7 +1079,6 @@ ALLOWED_HOSTS = ['.spacetelescope.org', '.eso.org']
 # Required since Django 1.6:
 TEST_RUNNER = 'django.test.runner.DiscoverRunner'
 
-from djangoplicity.contentserver import CDN77ContentServer
 MEDIA_CONTENT_SERVERS = {
 	'CDN77': CDN77ContentServer(
 		name='CDN77',
