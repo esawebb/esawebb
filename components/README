@@ -3,7 +3,7 @@ as original images to convert to sprites, SCSS files that will be converted
 to CSS, etc.
 
 # To generate main CSS file:
-sass --watch  components/scss/main.scss:src/eso/static/css/main.css
+sass --watch  components/scss/hubble.scss:src/eso/static/css/hubble.css
 
 # To generate events_embed CSS file:
 sass --watch  components/scss/events_embed.scss:src/eso/static/css/events_embed.css

@@ -91,6 +91,7 @@ DATABASES = {
 		'USER': 'spacetelescope',
 		'PASSWORD': '',
 		'HOST': 'localhost',
+		'CONN_MAX_AGE': 0,
 	}
 }
 
@@ -141,12 +142,6 @@ CACHES = {
     }
 }
 
-###############################
-# MIDDLEWARE AND APPLICATIONS #
-###############################
-ENABLE_REDIRECT_MIDDLEWARE = False
-REDIRECT_MIDDLEWARE_URI = 'http://www.spacetelescope.org'
-
 ############
 # SESSIONS #
 ############
@@ -184,20 +179,6 @@ GEOIP_LIBRARY_PATH = "%s/virtualenv/lib/libGeoIP.dylib" % ROOT
 ARCHIVE_AUTO_RESOURCE_DELETION = False
 ARCHIVE_IMPORT_ROOT = "%s/import" % ROOT
 MP4BOX_PATH = '/Applications/Osmo4.app/Contents/MacOS/MP4Box'
-
-##########################
-# PHOTOSHOP CELERYWORKER #
-##########################
-PHOTOSHOP_ROOT = None
-PHOTOSHOP_BROKER = {
-	'HOST': 'localhost',
-	'PORT': 5672,
-	'USER': 'photoshop',
-	'PASSWORD': 'U?y&f9p5{4',
-	'VHOST': 'photoshop_vhost',
-	'USE_SSL': False,
-}
-
 
 ##########
 # CELERY #
