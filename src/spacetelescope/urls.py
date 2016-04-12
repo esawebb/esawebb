@@ -37,7 +37,7 @@ urlpatterns = []
 
 if not settings.DEBUG:
 	urlpatterns += [
-		( r'^%s(?P<path>.*)' % settings.MEDIA_URL[1:], djangoplicity.archives.contrib.security.views.serve_static_file, { 'SSLAllow': True } ),
+		url( r'^%s(?P<path>.*)' % settings.MEDIA_URL[1:], djangoplicity.archives.contrib.security.views.serve_static_file, { 'SSLAllow': True } ),
 	]
 
 urlpatterns += [
