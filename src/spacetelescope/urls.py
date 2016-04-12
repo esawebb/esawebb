@@ -21,6 +21,7 @@ from djangoplicity.media.models import Image, Video, PictureOfTheWeek, ImageComp
 from djangoplicity.media.options import ImageOptions, VideoOptions, PictureOfTheWeekOptions, ImageComparisonOptions
 from djangoplicity.newsletters.models import Newsletter
 from djangoplicity.newsletters.options import NewsletterOptions
+from djangoplicity.pages.views import view_page
 from djangoplicity.products.models import *
 from djangoplicity.products.options import *
 from djangoplicity.releases.models import Release
@@ -139,7 +140,7 @@ urlpatterns += [
 	url( r'^$', cache_page(60 * 5)(FrontpageView.as_view()) ),
 
 	# Static pages
-	url(r'^(?P<url>.*/)$', djangoplicity.pages.views.view_page)
+	url(r'^(?P<url>.*/)$', view_page)
 ]
 
 #handler404 = 'spacetelescope.views.page_not_found'
