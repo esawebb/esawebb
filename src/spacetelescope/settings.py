@@ -234,9 +234,6 @@ ROOT_URLCONF = 'spacetelescope.urls'
 # MIDDLEWARE AND APPLICATIONS #
 ###############################
 MIDDLEWARE_CLASSES = (
-	# Middleware hack to do some initialization when django is started. Middleware is removed immediately afterwards.
-	'djangoplicity.startup.StartupMiddleware',
-
 	# Compresses content for browsers that understand gzip compression (all modern browsers).
 	'django.middleware.gzip.GZipMiddleware',  # Response
 
@@ -802,7 +799,7 @@ SITE_DOMAIN = "www.spacetelescope.org"
 ###########
 LOGGING = {
 	'version': 1,
-	'disable_existing_loggers': True,
+	'disable_existing_loggers': False,
 	'formatters': {
 		'verbose': {
 			'format': '%(levelname)s %(asctime)s %(module)s %(process)d %(thread)d %(message)s'

@@ -44,14 +44,14 @@ DEBUG_TOOLBAR_PANELS = [
 	'debug_toolbar.panels.request.RequestPanel',
 	'debug_toolbar.panels.sql.SQLPanel',
 #	'debug_toolbar.panels.staticfiles.StaticFilesPanel',
-	'debug_toolbar.panels.templates.TemplatesPanel',
+#	'debug_toolbar.panels.templates.TemplatesPanel',
 	'debug_toolbar.panels.cache.CachePanel',
 	'debug_toolbar.panels.signals.SignalsPanel',
 	'debug_toolbar.panels.logging.LoggingPanel',
 	'debug_toolbar.panels.redirects.RedirectsPanel',
 ]
 
-MEDIA_ROOT = "/media/ecfwebstore/ecfwebvol0/diskwa/webdocs/hubble/docs/static/"
+MEDIA_ROOT = "/media/epodweb/hubble/docs/static/"
 #MEDIA_ROOT = "/tmp/archives/"
 #DJANGOPLICITY_MEDIA_ROOT = "/Volumes/webdocs/hubble/docs/static/djangoplicity"
 

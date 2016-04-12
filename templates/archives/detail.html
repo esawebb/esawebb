@@ -12,9 +12,9 @@
 {% include "archives/searchbox.html" %}
 {% include admin_template %}
 {% include info_template %}
-{% if archive = 'internal announcement' %}                  
+{% if archive == 'internal announcement' %}
 {% include "archives/internalannouncement/tags_list.html" %}
-{% endif %}                                                 
+{% endif %}
 {% include "images/embedded_list.html" %}
 {% include "videos/embedded_list.html" %}
 {% include "archives/imagecomparison/embedded_list.html" %}

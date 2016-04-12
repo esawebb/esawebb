@@ -97,7 +97,7 @@ ProductVariations or CustomProducts, look for product/detail_xxx.html
 		{% if object and object.get_absolute_url %}<br /><a href="{{ object.get_absolute_url }}">View in Archive</a>{% endif %}
 		{% if object.free %}
 		<hr />
-		<div class="freelink"><div><a href="{% url 'free_order_form' %}"><img src="{{MEDIA_URL}}/educators.png" alt="Educators" width="90" /></a></div><div class="freelinktext"><a href="{% url 'free_order_form' %}">Available for free for educators and media</a></div></div><div class='clear'></div> 
+		<div class="freelink"><div><a href="{% url 'free_order_form' %}"><img src="{{MEDIA_URL}}/educators.png" alt="Educators" width="90" /></a></div><div class="freelinktext"><a href="{% url 'free_order_form' %}">Available for free for educators and media</a></div></div><div class='clear'></div>
 		{% endif %}
 		<hr />
 		<div class="bulkpricing">
@@ -114,7 +114,7 @@ ProductVariations or CustomProducts, look for product/detail_xxx.html
 		{% if object.language %}<tr valign="top"><td><strong>Language</strong></td><td>{{ object.get_language_display }}</td></tr>{% endif %}
 
 		</table>
-		{% if project_environment = 'eso.org' and product.category.all.0.name != 'Donations' %}<p style="text-align:left;padding:6px"><span><strong>More details about this product:</strong></span><br />See the <a href="/public/archives/brochures/pdf/brochure_0040.pdf">ESO Shop Catalogue</a>.</p>{% endif %}
+		{% if project_environment == 'eso.org' and product.category.all.0.name != 'Donations' %}<p style="text-align:left;padding:6px"><span><strong>More details about this product:</strong></span><br />See the <a href="/public/archives/brochures/pdf/brochure_0040.pdf">ESO Shop Catalogue</a>.</p>{% endif %}
 		</div>
 		{% endarchiveitem %}
 		{% if product.get_qty_price_list|length > 1 %}

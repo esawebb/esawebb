@@ -63,7 +63,7 @@
 					{{ form.newsletter }} {{ form.newsletter.label_tag}}
 				</div>
 			</div>
-			
+
 			<div class="form-group{% if form.first_name.errors %} has-error has-feedback{% endif %}">
 				<label class="col-sm-2" for="{{ form.first_name.id_for_label }}">{% trans form.first_name.label %}</label>
 				<div class="col-sm-10">
@@ -273,7 +273,7 @@
 						<select class="form-control" name="{{ form.ship_country.html_name }}" id="{{ form.ship_country.id_for_label }}">
 							<option value=""></option>
 						{% for x,y in form.ship_country.field.choices %}
-							<option value="{{ x }}"{% if form.ship_country.value = x %} selected="selected"{%endif %}>{{ y }}</option>
+							<option value="{{ x }}"{% if form.ship_country.value == x %} selected="selected"{%endif %}>{{ y }}</option>
 						{% endfor %}
 						</select>
 						{% endcomment %}

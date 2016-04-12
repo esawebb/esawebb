@@ -1,11 +1,11 @@
 {% load i18n %}{% if searchable %}
 {% load staticfiles %}
 {% spaceless %}
-<div class="archive-search{% if archive_search_position = "outside" %} outside{% endif %}">
+<div class="archive-search{% if archive_search_position == "outside" %} outside{% endif %}">
 
 	{% if archive == 'image' or archive == 'video' %}
 		<a href="{% if archive == 'image' %}{% url 'images_search' %}{% else %}{% url 'videos_search' %}{% endif %}" class="advanced-search" data-container="body" data-toggle="tooltip" data-placement="left" title="Advanced&nbsp;Search">
-			<span class="fa fa-plus"></span>	
+			<span class="fa fa-plus"></span>
 		</a>
 	{% endif %}
 
@@ -30,7 +30,7 @@
 	</div>
 
 	</form>
-	{% if archive_search_position = "outside" %}
+	{% if archive_search_position == "outside" %}
 		{% if archive == 'image' %}
 			<span class="creative">
 				<a href="/public/copyright/" data-toggle="tooltip" data-placement="bottom" title="Free&nbsp;Creative&nbsp;Commons&nbsp;images"><img src="{% static "images/cc.svg" %}" alt="Free Creative Commons images"></a>
