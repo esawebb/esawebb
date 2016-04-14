@@ -95,6 +95,11 @@ SERVE_STATIC_MEDIA = local_settings.SERVE_STATIC_MEDIA
 
 DEBUG_TOOLBAR_PANELS = local_settings.DEBUG_TOOLBAR_PANELS
 
+# Make this unique, and don't share it with anybody.
+SECRET_KEY = local_settings.SECRET_KEY
+CSRF_MIDDLEWARE_SECRET = local_settings.CSRF_MIDDLEWARE_SECRET
+
+
 ##################
 # DATABASE SETUP #
 ##################
@@ -177,10 +182,6 @@ STATICFILES_DIRS = [
 STATIC_ROOT = local_settings.STATIC_ROOT
 STATIC_URL = local_settings.STATIC_URL
 
-# Make this unique, and don't share it with anybody.
-SECRET_KEY = local_settings.SECRET_KEY
-CSRF_MIDDLEWARE_SECRET = local_settings.CSRF_MIDDLEWARE_SECRET
-
 ##########
 # CACHE  #
 ##########
@@ -233,9 +234,6 @@ ROOT_URLCONF = 'spacetelescope.urls'
 # MIDDLEWARE AND APPLICATIONS #
 ###############################
 MIDDLEWARE_CLASSES = (
-	# Middleware hack to do some initialization when django is started. Middleware is removed immediately afterwards.
-	'djangoplicity.startup.StartupMiddleware',
-
 	# Compresses content for browsers that understand gzip compression (all modern browsers).
 	'django.middleware.gzip.GZipMiddleware',  # Response
 
@@ -801,7 +799,7 @@ SITE_DOMAIN = "www.spacetelescope.org"
 ###########
 LOGGING = {
 	'version': 1,
-	'disable_existing_loggers': True,
+	'disable_existing_loggers': False,
 	'formatters': {
 		'verbose': {
 			'format': '%(levelname)s %(asctime)s %(module)s %(process)d %(thread)d %(message)s'
@@ -818,7 +816,7 @@ LOGGING = {
 	'handlers': {
 		'null': {
 			'level': 'DEBUG',
-			'class': 'django.utils.log.NullHandler',
+			'class': 'logging.NullHandler',
 		},
 		'console': {
 			'level': 'DEBUG',
@@ -849,6 +847,10 @@ LOGGING = {
 		'django.request': {
 			'handlers': ['mail_admins'],
 			'level': 'ERROR',
+			'propagate': False,
+		},
+		'django.template': {
+			'handlers': ['null'],
 			'propagate': False,
 		},
 		'djangoplicity': {
