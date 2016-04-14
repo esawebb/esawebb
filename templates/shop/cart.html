@@ -26,7 +26,7 @@
 		{% else %}
 
 			<div class="checkout">
-				<form class="form-inline" action="{% url 'satchmo_checkout-step1' %}" method="get">{% csrf_token %}
+				<form class="form-inline" action="{% url 'satchmo_checkout-step1' %}" method="get">
 					<button type="submit" class="btn btn-default">{% trans 'Checkout' %}</button>
 				</form>
 			</div>
@@ -67,7 +67,7 @@
 						{% if sale %}
 							<td align="center">{{ cartitem.product.unit_price|currency|sp2nbsp }}</td>
 							<td align="center">{{ cartitem.product|discount_price:sale|currency|sp2nbsp }}</td>
-						{% else %}	
+						{% else %}
 							<td align="center">{{ cartitem.unit_price|currency|sp2nbsp }}</td>
 						{% endif %}
 						<td align="center">{{ cartitem|discount_line_total:sale|currency|sp2nbsp }}</td>
@@ -85,9 +85,9 @@
 			{% if sale %}
 			{% include "product/some_discount_eligible.html" %}
 			{% endif %}
-			
+
 			<div class="checkout">
-				<form class="form-inline" action="{% url 'satchmo_checkout-step1' %}" method="get">{% csrf_token %}
+				<form class="form-inline" action="{% url 'satchmo_checkout-step1' %}" method="get">
 					<button type="submit" class="btn btn-default">{% trans 'Checkout' %}</button>
 				</form>
 			</div>
