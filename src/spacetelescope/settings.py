@@ -361,6 +361,7 @@ INSTALLED_APPS += (
 	'spacetelescope.frontpage',
 	'mptt',
 	'django_extensions',
+	'django_mailman',
 	# Satchmo
 	#'registration',
 	'sorl.thumbnail',
