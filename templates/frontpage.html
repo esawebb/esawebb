@@ -3,7 +3,7 @@
 {% load djangoplicity_datetime %}
 {% load media_video %}
 {% load pages %}
-{% load i18n %} 
+{% load i18n %}
 
 {% block extra_header %}
 	<meta property="og:title" content="ESA/Hubble Space Telescope" />
@@ -223,7 +223,8 @@
 				videoId: '{{ hubblecasts.0.youtube_video_id }}',
 				playerVars: {
 					'modestbranding': 1,
-					'hl': '{{ LANGUAGE_CODE }}'
+					'hl': '{{ LANGUAGE_CODE }}',
+					'rel': 0
 				},
 				events: {
 					'onReady': onPlayerReady,
@@ -236,7 +237,7 @@
 	{% endif %}
 {% endif %}
 
-$(document).ready(function(){                                                   
+$(document).ready(function(){
 	{% if hubblecasts.0 %}
 		{% if hubblecasts.0.youtube_video_id and hubblecasts.0.use_youtube %}
 			var tag = document.createElement('script');
@@ -250,12 +251,12 @@ $(document).ready(function(){
 	{% endif %}
 
 	{% comment %}
-	Set hover target on pr-description, this cannot be done fully in CSS         
-	as the image is outside the pr-description and cannot be "attached"          
-	by the standard hover                                                        
+	Set hover target on pr-description, this cannot be done fully in CSS
+	as the image is outside the pr-description and cannot be "attached"
+	by the standard hover
 	{% endcomment %}
     $('.pr-description').hover(function() {
-		$(this).parents('.pr-content').prev('img').toggleClass('hover');	
+		$(this).parents('.pr-content').prev('img').toggleClass('hover');
 	});
 
 	// Set the announcements titles to the same heights:
@@ -266,8 +267,8 @@ $(document).ready(function(){
 	}).get());
 	$(annTitleSelector).height(maxAnnHeight);
 
-});                                                                             
-            
+});
+
 </script>
 {% endblock %}
 
