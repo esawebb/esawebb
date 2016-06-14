@@ -9,7 +9,7 @@
 <div class="image-list image-list-150">
 {% for image in object_list %}
 	<a href="{{ image.get_absolute_url }}" class="item">
-		<img src="{{ image.resource_thumb300y.url }}" alt="{{ image.title }}" />
+		<img src="{{ image.resource_thumb150y.url }}" alt="{{ image.title }}" />
 		<div class="title">{{ image.title }}</div>
 	</a>
 {% endfor %}
