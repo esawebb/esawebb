@@ -1060,6 +1060,7 @@ PIPELINE = {
 				'djangoplicity/js/djp-jwplayer.js',
 				'js/picturefill.min.js',
 				'js/enquire/enquire.min.js',
+				'js/sorttable.js',
 				'js/hubble.js',
 			),
 			'output_filename': 'js/main.js',
