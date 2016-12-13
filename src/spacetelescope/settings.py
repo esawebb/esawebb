@@ -985,7 +985,7 @@ LIVESETTINGS_OPTIONS = {
 				u'REQUIRED_BILLING_DATA': u'["email", "first_name", "last_name", "phone", "street1", "city", "postal_code", "country"]',
 				u'ENFORCE_STATE': u'False',
 				u'SHOW_SITE': u'False',
-				u'LOGO_URI': u'http://www.spacetelescope.org/static/archives/logos/screen/eso_colour.jpg',
+				u'LOGO_URI': u'http://hubble3.hq.eso.org/static/archives/logos/screen/eso_colour.jpg',  # FIXME This should point to www.spacetelescope.org but is currently broken until the ACE is decomissioned
 			},
 			u'PAYMENT_COPOSWEB': {
 				u'USER_TEST': u'testeso',
