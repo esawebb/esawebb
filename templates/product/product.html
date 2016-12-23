@@ -16,6 +16,7 @@ ProductVariations or CustomProducts, look for product/detail_xxx.html
 {% load satchmo_cart %}
 {% load normalize_decimal %}
 {% load menus %}
+{% load djangoplicity_datetime %}
 
 {% block extra_header %}
 {% if product.meta %}
@@ -32,6 +33,15 @@ ProductVariations or CustomProducts, look for product/detail_xxx.html
 {% block body %}
 <div class="row page shop">
 	<div class="col-md-9">
+		{% current_month as month %}
+		{% if month != 12 %}
+			<div class="alert alert-danger" role="alert">
+				The Hubbleshop is currently undergoing maintenance. We are sorry to inform you
+				that you cannot place orders during this time. We will resume full
+				functionality on Tuesday, 10 January 2017.<br>
+				Thank you for your understanding!"
+			</div>
+		{% endif %}
 		{% block productdetail %}
 		{% archiveitem product as object %}
 		<h1>{{ shop_name }}: {% if object %}{{ object.title }}{%else%}{{ product.name }}{% endif %}</h1>

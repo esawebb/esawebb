@@ -9,12 +9,22 @@
 {% load normalize_decimal %}
 {% load djangoplicity_satchmo %}
 {% load djangoplicity_text_utils %}
+{% load djangoplicity_datetime %}
 
 {% block site_title %} Shopping Cart | {{ shop_name }}{% endblock %}
 
 {% block body %}
 <div class="row page shop shopping-cart">
 	<div class="col-md-12">
+		{% current_month as month %}
+		{% if month != 12 %}
+			<div class="alert alert-danger" role="alert">
+				The Hubbleshop is currently undergoing maintenance. We are sorry to inform you
+				that you cannot place orders during this time. We will resume full
+				functionality on Tuesday, 10 January 2017.<br>
+				Thank you for your understanding!"
+			</div>
+		{% endif %}
 		<h1>Shopping Cart</h1>
 
 		{% if error_message %}

@@ -6,6 +6,7 @@
 {% load satchmo_util satchmo_discounts %}
 {% load menus %}
 {% load pages %}
+{% load djangoplicity_datetime %}
 
 {% load djangoplicity_utils djangoplicity_satchmo %}
 
@@ -22,6 +23,15 @@
 
 <div class="row no-page shop">
 	<div class="col-md-12">
+		{% current_month as month %}
+		{% if month != 12 %}
+			<div class="alert alert-danger" role="alert">
+				The Hubbleshop is currently undergoing maintenance. We are sorry to inform you
+				that you cannot place orders during this time. We will resume full
+				functionality on Tuesday, 10 January 2017.<br>
+				Thank you for your understanding!"
+			</div>
+		{% endif %}
 		<h1>{{ shop_name }}:{% for parent in category.parents %} {{ parent.translated_name }} &raquo;{% endfor %} {{ category.translated_name }}</h1>
 
 		{% if categories %}
