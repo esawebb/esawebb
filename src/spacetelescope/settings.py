@@ -67,6 +67,7 @@ class internal_ips( list ):
 					is_internal = True
 		return is_internal
 
+
 INTERNAL_IPS = internal_ips( [
 	'127.0.0.1',
 	'134.171.',
@@ -373,7 +374,7 @@ INSTALLED_APPS += (
 	'product.modules.configurable',
 	'shipping',
 	'payment',
-	'djangoplicity.coposweb',
+	'djangoplicity.concardis',
 	'l10n',
 	'tax',
 	'tax.modules.no',
@@ -956,7 +957,7 @@ LIVESETTINGS_OPTIONS = {
 				u'MINIMUM_ORDER': u'2.99',
 				#u'ORDER_EMAIL_EXTRA': u'distribution@spacetelescope.org',
 				u'ORDER_EMAIL_OWNER': u'True',
-				u'MODULES': u'["PAYMENT_COPOSWEB"]'
+				u'MODULES': u'["PAYMENT_CONCARDIS"]'
 			},
 			u'PAYMENT_DUMMY': {
 				u'CREDITCHOICES': u'["Visa", "Mastercard", "Discover", "American Express"]'
@@ -987,11 +988,10 @@ LIVESETTINGS_OPTIONS = {
 				u'SHOW_SITE': u'False',
 				u'LOGO_URI': u'http://hubble3.hq.eso.org/static/archives/logos/screen/eso_colour.jpg',  # FIXME This should point to www.spacetelescope.org but is currently broken until the ACE is decomissioned
 			},
-			u'PAYMENT_COPOSWEB': {
-				u'USER_TEST': u'testeso',
-				u'PASSWORD_TEST': u'Kw6&gHKi',
-				u'LIVE_CONFIG_FILE': local_settings.COPOSWEB_CONFIG_INI,
-				u'CAPTURE': u'True',
+			u'PAYMENT_CONCARDIS': {
+				u'PSPID': u'40F06654' if local_settings.LIVE else u'esoepod',
+				u'SHA_IN_PASSPHRASE': u'0;dl18;asdL_k21as87ma',
+				u'SHA_OUT_PASSPHRASE': u'!7-zl;j31njky;aslerl',
 				u'LIVE': u'True' if local_settings.LIVE else u'False',
 				u'EXTRA_LOGGING': u'True',
 			},
