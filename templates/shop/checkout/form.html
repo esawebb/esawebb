@@ -1,5 +1,4 @@
 {% extends "base.html" %}
-{% load djangoplicity_datetime %}
 {% load i18n %}
 
 {% block site_title %}Checkout | {{ shop_name }}{% endblock%}
@@ -9,15 +8,6 @@
 	<div class="col-md-12">
 
 		{% if not DJANGOPLICITY.SHOP_LIVE %}<div class="alert alert-danger" role="alert">Shop in test mode</div>{% endif %}
-		{% current_month as month %}
-		{% if month != 12 %}
-			<div class="alert alert-danger" role="alert">
-				The Hubbleshop is currently undergoing maintenance. We are sorry to inform you
-				that you cannot place orders during this time. We will resume full
-				functionality on Tuesday, 10 January 2017.<br>
-				Thank you for your understanding!"
-			</div>
-		{% else %}
 
 		<h1>{% trans "Checkout" %}</h1>
 		<h2>Step 1 of 3: Enter billing{% if cart.is_shippable %}/shipping{% endif %} information</h2>
@@ -339,7 +329,6 @@
 			</div>
 
 		</form>
-		{% endif %}
 	</div>
 </div>
 {% endblock %}
