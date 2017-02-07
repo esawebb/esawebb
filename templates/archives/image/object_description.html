@@ -4,7 +4,23 @@
 {% include 'archives/embargo_notice.html' %}
 <h1>{{ object.title }}</h1>
 
-{% if object.resource_medium %}
+{% if object.resource_screen and object.resource_publicationjpg and object.fov_x == 360 and object.fov_y == 180 %}
+	<script src="//storage.googleapis.com/vrview/2.0/build/vrview.min.js"></script>
+	<div id="vrview"></div>
+
+	<script>
+	window.addEventListener('load', onVrViewLoad)
+	function onVrViewLoad() {
+		var vrView = new VRView.Player('#vrview', {
+			preview: '{{ object.resource_screen.url }}',
+			image: '{{ object.resource_publicationjpg.url }}',
+			width: '100%',
+			height: '400px'
+		});
+	}
+	</script>
+
+{% elif object.resource_medium %}
 <div class="archive-image archive-image-dark{% if not object.zoomable %} popup{% endif %}">
 	{% if object.resource_screen %}
 	<a class="popup" href="{% if object.zoomable %}{{ object.get_absolute_url }}zoomable/{% else %}{{ object.resource_screen.url }}{% endif %}" title="{{object.title|safe}}"/>
