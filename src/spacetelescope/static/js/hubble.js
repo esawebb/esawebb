@@ -67,7 +67,7 @@ $(document).ready(function() {
 				var height = level1Current.children('ul').css('height');
 				level1Current.css('max-height', height);
 			}
-			
+
 		}, hoverDelay);
 
 		setMenuHeight('selected', 'li.current-leaf ul');
@@ -113,7 +113,7 @@ $(document).ready(function() {
 		var $row = $(row),
 			$submenu = $row.children('.sublevel'),
 			$parent_menu = $row.parents('ul.submenu-aim');
-			
+
 
 		$parent_menu.find('.current .sublevel').addClass('hover');
 		$parent_menu.addClass('current-hover');
@@ -160,7 +160,7 @@ $(document).ready(function() {
 		}
 	});
 
-	enquire.register("screen and (min-width: 1025px)", {
+	enquire.register('screen and (min-width: 1025px)', {
 		match: activateMenu,
 		unmatch: deactivateMenu
 	}, true);
@@ -191,7 +191,7 @@ function setMenuHeight(selector, leafSelector) {
 
 	$('.main-menu ul.' + selector).css('height', 25 * maxChildren + 30);
 	if ($('.level0 > li.current.hover .level1').length) {
-		$('.level0 > li.current.hover .level1').css('max-height', 25 * maxChildren + 30); 
+		$('.level0 > li.current.hover .level1').css('max-height', 25 * maxChildren + 30);
 	}
 }
 
@@ -437,11 +437,20 @@ function setWebcamTimestamp(selector, timestampPath) {
 
 
 // Load tooltips and popover if any
-$("[data-toggle='tooltip']").tooltip();
-$("[data-toggle='popover']").popover();
+$('[data-toggle="tooltip"]').tooltip();
+$('[data-toggle="popover"]').popover();
 
+// Close popover when click outside
+$('body').on('click', function (e) {
+    $('[data-toggle=popover]').each(function () {
+			// hide any open popovers when the anywhere else in the body is clicked
+			if (!$(this).is(e.target) && $(this).has(e.target).length === 0 && $('.popover').has(e.target).length === 0)
+				$(this).popover('hide');
+        }
+    );
+});
 
-$(".image-list-300").justifiedGallery({
+$('.image-list-300').justifiedGallery({
 		rowHeight: 300,
 	    maxRowHeight: 500,
 		margins: 8,
@@ -452,7 +461,7 @@ $(".image-list-300").justifiedGallery({
 		}
 });
 
-$(".image-list-200").justifiedGallery({
+$('.image-list-200').justifiedGallery({
 		rowHeight: 200,
 		margins: 8,
 		captions: false,
@@ -464,7 +473,7 @@ $(".image-list-200").justifiedGallery({
 		'lt1024':''}
 });
 
-$(".image-list-150").justifiedGallery({
+$('.image-list-150').justifiedGallery({
 		rowHeight: 150,
 		margins: 8,
 		captions: false,
@@ -482,7 +491,7 @@ $(window).load(function() {
 	if ($('.archive-list').length) {
 		$('.archive-list').each(function() {
 			var msnry = new Masonry(this, {
-				itemSelector: '.item', 
+				itemSelector: '.item',
 				columnWidth: '.item',
 				transitionDuration: 0
 			});

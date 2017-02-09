@@ -6796,4 +6796,7 @@ a.anchor {
 .mfp-ready .popup-caption, .mfp-ready #popup-youtube {
   display: block; }
 
+.popover {
+  max-width: 700px; }
+
 /*# sourceMappingURL=hubble.css.map */

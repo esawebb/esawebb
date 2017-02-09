@@ -93,7 +93,7 @@
 	h3 {
 		font-size: 20px;
 	}
-	
+
 	.archive_dl_size > div {
 		padding-left: 30px;
 
@@ -252,7 +252,7 @@ h3.archivegrouptitle {
 			.title {
 				opacity: 1;
 				filter: alpha(opacity=100);
-				@include transition(opacity 0.2s); 
+				@include transition(opacity 0.2s);
 			}
 		}
 	}
@@ -294,7 +294,7 @@ h3.archivegrouptitle {
 			&:hover {
 				.news-description {
 					@include transform(translateY(-80px));
-					@include transition(transform 0.2s); 
+					@include transition(transform 0.2s);
 				}
 
 				.news-image img {
@@ -312,14 +312,14 @@ h3.archivegrouptitle {
 
 	.news-image {
 		background-color: $hubble-blue;
-		@include transition(opacity 0.2s); 
+		@include transition(opacity 0.2s);
 	}
 
 	.news-description {
 		background-color: #fff;
 		padding: 10px;
 		padding-bottom: 0;
-		@include transition(transform 0.2s); 
+		@include transition(transform 0.2s);
 	}
 
 	.news-title {
@@ -401,13 +401,13 @@ a.thumbnail {
 	&:hover {
 		.caption {
 			background-color: $hubble-blue;
-			@include transition(background-color 0.2s); 
-			@include transition(background-image 0.2s); 
+			@include transition(background-color 0.2s);
+			@include transition(background-image 0.2s);
 
-			a { 
+			a {
 				span {
 					color: #fff;
-					@include transition(color 0.2s); 
+					@include transition(color 0.2s);
 				}
 
 				.download-icon {
@@ -610,7 +610,7 @@ a.thumbnail {
 			@media (min-width: $mobile-breakpoint) {
 				.top100-description .top100-text {
 					max-height: 100px;
-					@include transition(max-height 0.2s); 
+					@include transition(max-height 0.2s);
 				}
 			}
 		}
@@ -692,7 +692,7 @@ a.thumbnail {
 				max-height: 0;
 				text-align: left;
 
-				@include transition(max-height 0.2s); 
+				@include transition(max-height 0.2s);
 
 				@media (max-width: $mobile-breakpoint) {
 					display: none;
@@ -1042,4 +1042,8 @@ a.anchor {
 	.popup-caption, #popup-youtube {
 		display: block;
 	}
+}
+
+.popover {
+	max-width: 700px;
 }
