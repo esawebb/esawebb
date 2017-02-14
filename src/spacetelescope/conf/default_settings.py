@@ -179,6 +179,7 @@ GEOIP_LIBRARY_PATH = "%s/virtualenv/lib/libGeoIP.dylib" % ROOT
 ARCHIVE_AUTO_RESOURCE_DELETION = False
 ARCHIVE_IMPORT_ROOT = "%s/import" % ROOT
 MP4BOX_PATH = '/Applications/Osmo4.app/Contents/MacOS/MP4Box'
+MP4FRAGMENT_PATH = '/usr/bin/mp4fragment'
 
 ##########
 # CELERY #
