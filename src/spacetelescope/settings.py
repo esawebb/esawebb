@@ -1036,7 +1036,7 @@ PIPELINE = {
 			'source_filenames': (
 				'jquery-ui-1.11.1/jquery-ui.min.css',
 				'slick-1.5.0/slick/slick.css',
-				'justified-gallery/css/justifiedGallery.min.css',
+				'justified/css/jquery.justified.css',
 				'magnific-popup/magnific-popup.css',
 			),
 			'output_filename': 'css/extras.css',
@@ -1054,7 +1054,7 @@ PIPELINE = {
 				'djangoplicity/js/jquery.beforeafter-1.4.js',
 				'djangoplicity/zoomify/js/ZoomifyImageViewerExpress-min.js',
 				'js/masonry.pkgd.min.js',
-				'justified-gallery/js/jquery.justifiedGallery.min.js',
+				'justified/js/jquery.justified.min.js',
 				'magnific-popup/jquery.magnific-popup.min.js',
 				'djangoplicity/js/widgets.js',
 				'djangoplicity/js/pages.js',

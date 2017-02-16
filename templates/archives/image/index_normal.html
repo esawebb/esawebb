@@ -6,18 +6,23 @@
 
 {% spaceless %}
 
+<script>
+var images = [
+	{% for image in object_list %}
+	{
+		id: '{{ image.pk }}',
+		title: '{{ image.title }}',
+		width: {{ image.width }},
+		height: {{ image.height }},
+		src: '{{ image.resource_thumb300y.url }}',
+		url: '{{ image.get_absolute_url }}',
+		potw: '{% if image.pictureoftheweek_set.all %}{{ image.pictureoftheweek_set.all.0.release_date|date:"DATE_FORMAT" }}{% endif %}'
+	},
+	{% endfor %}
+];
+</script>
+
 <div class="image-list image-list-300">
-{% for image in object_list %}
-	<a href="{{ image.get_absolute_url }}" class="item">
-		<img src="{{ image.resource_thumb300y.url }}" alt="{{ image.title }}" />
-		{% if image.pictureoftheweek_set.all %}
-			<div class="potw" data-toggle="tooltip" data-placement="left" title="Picture of the Week, {{ image.pictureoftheweek_set.all.0.release_date|date:"DATE_FORMAT" }}">
-				<span class="fa fa-star"></span>
-			</div>
-		{% endif %}
-		<div class="title">{{ image.title }}</div>
-	</a>
-{% endfor %}
 </div>
 
 {% endspaceless %}

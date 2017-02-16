@@ -435,54 +435,83 @@ function setWebcamTimestamp(selector, timestampPath) {
 	// }
 // });
 
+function getJustifiedConfiguration(rowHeight, maxRowHeight, margin) {
+	return {
+		images : images,
+		rowHeight: rowHeight,
+		maxRowHeight: maxRowHeight,
+		imageContainer: 'item',
+		thumbnailPath: function(photo, width, height) {
+			var purl = photo.src;
+			if (height > 1000 || width > 900) {
+				purl = purl.replace('/thumb300y/', '/screen/');
+			} else if (height > 400) {
+				purl = purl.replace('/thumb300y/', '/thumb700x/');
+			}
+			return purl;
+		},
+		getSize: function(photo) {
+			return {width: photo.width, height: photo.height};
+		},
+		template: function(data) {
+			var potw = '';
+			if (data.potw) {
+				potw = '<div class="potw" data-toggle="tooltip" data-placement="left" title="Picture of the Week, ' + data.potw + '">' +
+					'<span class="fa fa-star"></span>' +
+				'</div>';
+			}
+			// FIXME: the potw tooltip doesn't work because of the
+			// "hover:after" div added in CSS to show the blue box-shadow
+
+			return '<a href="' + data.url + '" class="item" style="height:' + data.displayHeight + 'px;margin-right:' + data.marginRight + 'px;">' +
+				'<img class="image-thumb" style="width:' + data.displayWidth + 'px;height:' + data.displayHeight + 'px;" src="' + data.src + '" alt="' + data.title + '" />' +
+				'<div class="title">' + data.title + '</div>' + potw +
+			'</a>';
+		},
+		margin: margin
+	};
+}
+
+function setupJustified(selector, width, height, margin) {
+	var window_width;
+	function run() {
+		$(selector).empty().justifiedImages(
+			getJustifiedConfiguration(width, height, margin)
+		);
+		window_width = $(window).width();
+	}
+
+	if ($(selector).length) {
+		run();
+
+		$(window).resize(function() {
+			// Re-justify if the window widht has changed
+			if ($(window).width() != window_width) {
+				run();
+			}
+		});
+	}
+}
+
+setupJustified('.image-list-300', 400, 600, 8);
+setupJustified('.image-list-200', 200, 500, 8);
+setupJustified('.image-list-150', 150, 600, 8);
+
 
 // Load tooltips and popover if any
 $('[data-toggle="tooltip"]').tooltip();
+
+// Load popover if any
 $('[data-toggle="popover"]').popover();
 
 // Close popover when click outside
 $('body').on('click', function (e) {
     $('[data-toggle=popover]').each(function () {
-			// hide any open popovers when the anywhere else in the body is clicked
-			if (!$(this).is(e.target) && $(this).has(e.target).length === 0 && $('.popover').has(e.target).length === 0)
-				$(this).popover('hide');
+        // hide any open popovers when the anywhere else in the body is clicked
+        if (!$(this).is(e.target) && $(this).has(e.target).length === 0 && $('.popover').has(e.target).length === 0) {
+            $(this).popover('hide');
         }
-    );
-});
-
-$('.image-list-300').justifiedGallery({
-		rowHeight: 300,
-	    maxRowHeight: 500,
-		margins: 8,
-		captions: false,
-		sizeRangeSuffixes: {
-			500: '',
-			640: '_l'
-		}
-});
-
-$('.image-list-200').justifiedGallery({
-		rowHeight: 200,
-		margins: 8,
-		captions: false,
-		sizeRangeSuffixes: {'lt100':'',
-		'lt240':'',
-		'lt320':'',
-		'lt500':'',
-		'lt640':'',
-		'lt1024':''}
-});
-
-$('.image-list-150').justifiedGallery({
-		rowHeight: 150,
-		margins: 8,
-		captions: false,
-		sizeRangeSuffixes: {'lt100':'',
-		'lt240':'',
-		'lt320':'',
-		'lt500':'',
-		'lt640':'',
-		'lt1024':''}
+    });
 });
 
 
