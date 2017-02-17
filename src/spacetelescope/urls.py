@@ -31,7 +31,7 @@ from djangoplicity.science.options import ScienceAnnouncementOptions
 from django.views.generic.base import RedirectView
 
 from spacetelescope.admin import admin_site, adminlogs_site, adminshop_site
-from spacetelescope.frontpage.views import FrontpageView
+from spacetelescope.frontpage.views import FrontpageView, d2d
 
 urlpatterns = []
 
@@ -138,6 +138,8 @@ urlpatterns += [
 
 	# Main view
 	url( r'^$', cache_page(60 * 5)(FrontpageView.as_view()) ),
+
+	url( r'^d2d/$', d2d ),
 
 	# Static pages
 	url(r'^(?P<url>.*/)$', view_page)
