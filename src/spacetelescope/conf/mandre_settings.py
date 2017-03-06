@@ -52,7 +52,7 @@ DEBUG_TOOLBAR_PANELS = [
 ]
 
 MEDIA_ROOT = "/media/epodweb/hubble/docs/static/"
-#MEDIA_ROOT = "/tmp/archives/"
+#MEDIA_ROOT = "/tmp/"
 #DJANGOPLICITY_MEDIA_ROOT = "/Volumes/webdocs/hubble/docs/static/djangoplicity"
 
 #ARCHIVE_IMPORT_ROOT = "/Volumes/webdocs/hubble/import/"

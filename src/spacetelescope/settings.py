@@ -749,6 +749,10 @@ CELERYBEAT_SCHEDULE = {
 		'task': 'djangoplicity.contentserver.tasks.check_content_server_resources',
 		'schedule': crontab(minute=0, hour=4),
 	},
+	'cdn77-purge-prefetch': {
+		'task': 'djangoplicity.contentserver.cdn77_tasks.purge_prefetch',
+		'schedule': crontab(minute='*/10'),  # Every 10 minutes
+	},
 }
 
 ##############
