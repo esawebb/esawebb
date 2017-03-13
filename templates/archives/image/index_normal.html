@@ -8,7 +8,7 @@
 
 <script>
 var images = [
-	{% for image in object_list %}
+	{% for image in object_list %}{% if image.width and image.height %}
 	{
 		id: '{{ image.pk }}',
 		title: '{{ image.title }}',
@@ -18,7 +18,7 @@ var images = [
 		url: '{{ image.get_absolute_url }}',
 		potw: '{% if image.pictureoftheweek_set.all %}{{ image.pictureoftheweek_set.all.0.release_date|date:"DATE_FORMAT" }}{% endif %}'
 	},
-	{% endfor %}
+	{% endif %}{% endfor %}
 ];
 </script>
 

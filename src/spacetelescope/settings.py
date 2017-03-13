@@ -295,9 +295,7 @@ MIDDLEWARE_CLASSES += (
 
 	# Module for URL redirection based on regular expressions
 	'djangoplicity.utils.middleware.RegexRedirectMiddleware',  # Response
-
-	# Middleware to bypass CDN when client is from Garching Intranet
-	'spacetelescope.middleware.DisableInternalCDN',
+	# 'spacetelescope.middleware.DisableInternalCDN',
 )
 
 INSTALLED_APPS = ()
