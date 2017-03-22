@@ -4,6 +4,14 @@
 {% else %}
 {% include "archives/search_results.html" %}
 
+{% if object_list %}
+{% with nl_type=object_list.0.type %}
+{% if nl_type.subscribe_text %}
+<p>{{ nl_type.subscribe_text|safe }}</p>
+{% endif %}
+{% endwith %}
+{% endif %}
+
 <div class="archive-list clearfix">
 {% for item in object_list %}
 	<div class="item">
