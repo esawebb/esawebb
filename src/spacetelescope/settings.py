@@ -883,6 +883,10 @@ LOGGING = {
 			'handlers': ['null'],
 			'propagate': False,
 		},
+		'iterchoices': {
+			'handlers': ['null'],
+			'propagate': False,
+		},
 		'requests': {
 			'handlers': local_settings.LOGGING_HANDLER,
 			'level': 'WARNING',  # requests is too verbose by default
