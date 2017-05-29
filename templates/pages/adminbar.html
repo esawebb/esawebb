@@ -8,7 +8,9 @@
 				<div class="panel-body">
 					<div class="btn-group-vertical center-block" role="group" aria-label="Page edit buttons">
 						<a class="btn btn-primary btn-sm" href="{{ admin_edit }}" role="button">Edit</a>
+						{% if page.live_edit %}
 						<button id="edit-button" class="btn btn-primary btn-sm" onclick="livePageEdit()">Live edit</button>
+						{% endif %}
 						<button id="save-button" data-loading-text="Saving..." class="btn btn-danger btn-sm" style="display: none" onclick="livePageSave()">Save page</button>
 					</div>
 				</div>
