@@ -1,6 +1,5 @@
 {% load i18n %}
 {% load djangoplicity_images %}
-{% spaceless %}
 {% include 'archives/embargo_notice.html' %}
 <h1>{{ object.title }}</h1>
 
@@ -42,4 +41,3 @@
 <p>{{ object.description|safe }}</p>
 <strong>{% trans "Credit" %}:</strong><div class="credit">{{ object.credit|safe }}</div>
 {% include 'archives/image/extra_footer.html' %}
-{% endspaceless %}
