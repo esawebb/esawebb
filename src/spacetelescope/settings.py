@@ -730,11 +730,11 @@ CELERYBEAT_SCHEDULE = {
 	},
 	'mailchimp-install-hooks': {
 		'task': 'mailinglists.webhooks',
-		'schedule': crontab(minute=20, hour=11),
+		'schedule': crontab(minute=20, hour=12),
 	},
 	'mailchimp-clean-tokens': {
 		'task': 'mailinglists.clean_tokens',
-		'schedule': crontab(minute=30, hour=11),
+		'schedule': crontab(minute=40, hour=12),
 	},
 	'check-content-server-resources': {
 		'task': 'djangoplicity.contentserver.tasks.check_content_server_resources',
