@@ -522,13 +522,6 @@ ASSETS_UPDATER = "timestamp"
 #ASSETS_AUTO_CREATE
 #ASSETS_EXPIRE = 'filename'
 
-######################
-# COMMENTS FRAMEWORK #
-######################
-AKISMET_API_KEY = ''
-COMMENTS_HIDE_REMOVED = False
-PROFANITIES_LIST = ( 'asshat', 'asshead', 'asshole', 'cunt', 'fuck', 'gook', 'nigger', 'shit', )
-
 ###########
 # ARCHIVE #
 ###########
