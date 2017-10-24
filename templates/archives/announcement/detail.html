@@ -17,3 +17,37 @@
 {% include "videos/embedded_list.html" %}
 {% include resources_template %}
 {% endblock %}
+
+{% block extra_scripts %}
+<script type="text/javascript">
+{% if main_visual.youtube_video_id and main_visual.use_youtube %}
+var tag = document.createElement('script');
+
+tag.src = "https://www.youtube.com/iframe_api";
+var firstScriptTag = document.getElementsByTagName('script')[0];
+firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+var player;
+function onYouTubeIframeAPIReady() {
+	player = new YT.Player('youtube-player', {
+		height: '387',
+		width: '688',
+		videoId: '{{ main_visual.youtube_video_id }}',
+		playerVars: {
+			'modestbranding': 1,
+			'hl': '{{ LANGUAGE_CODE }}',
+			'rel': 0
+		},
+		events: {
+			'onReady': onPlayerReady,
+		}
+	});
+	function onPlayerReady(event) {
+		// event.target.setPlaybackQuality('large');
+	}
+}
+{% elif main_visual.resource_medium_podcast %}
+	setupVideoPlayer('{{ main_visual.id }}');
+{% endif %}
+</script>
+{% endblock %}
