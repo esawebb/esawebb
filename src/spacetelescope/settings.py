@@ -1038,7 +1038,7 @@ PIPELINE = {
 		},
 		'extras': {
 			'source_filenames': (
-				'jquery-ui-1.11.1/jquery-ui.min.css',
+				'jquery-ui-1.12.1/jquery-ui.min.css',
 				'slick-1.5.0/slick/slick.css',
 				'justified/css/jquery.justified.css',
 				'magnific-popup/magnific-popup.css',
@@ -1050,7 +1050,7 @@ PIPELINE = {
 		'main': {
 			'source_filenames': (
 				'jquery/jquery-1.11.1.min.js',
-				'jquery-ui-1.11.1/jquery-ui.min.js',
+				'jquery-ui-1.12.1/jquery-ui.min.js',
 				'bootstrap/bootstrap-3.1.1-dist/js/bootstrap.min.js',
 				'js/jquery.menu-aim.js',
 				'slick-1.5.0/slick/slick.min.js',
