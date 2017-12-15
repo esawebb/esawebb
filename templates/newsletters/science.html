@@ -1,30 +1,30 @@
 {% extends "newsletters/base_science.html" %}
 {% load release_links djangoplicity_datetime %}
 
-{% block html_title %}ESA/Hubble Science Newsletter{% endblock %}
+{% block html_title %}HST/Hubble/JWST Science Newsletter{% endblock %}
 
 {% block header %}
 	{% with width="700" height="300" color="#9ca3a9" logo_width="140" logo_url=base_url|add:MEDIA_URL|add:"esa_nl_logo.png" %}
 		{% block header_content %}
 			{% if editorial_subject %}
-			{% with text_color="#fff" header_title="ESA/Hubble Science Newsletter" header_subtitle=data.announcement.release_date|date%}
+			{% with text_color="#fff" header_title="HST/Hubble/JWST Science Newsletter" header_subtitle=data.announcement.release_date|date%}
 				{% with release_date=data.announcement.release_date link_url=base_url|add:data.announcement.get_absolute_url pretitle="Editorial" embargo="" title=editorial_subject subtitle=data.announcement.subtitle main_image=data.announcement.main_visual titlesize="small" %}
 				{% include "newsletters/includes/header.html" %}
 				{% endwith %}
 				{% endwith %}
 			{% else %}{% if data.main_image %}
-				{% with text_color="#fff" header_title="ESA/Hubble Science Newsletter" header_subtitle=data.announcement.release_date|date release_date=data.announcement.release_date link_url=base_url|add:data.main_image.get_absolute_url pretitle="ESA/Hubble" embargo="" subtitle="" main_image=data.main_image titlesize="small" %}
+				{% with text_color="#fff" header_title="HST/Hubble/JWST Science Newsletter" header_subtitle=data.announcement.release_date|date release_date=data.announcement.release_date link_url=base_url|add:data.main_image.get_absolute_url pretitle="ESA/Hubble" embargo="" subtitle="" main_image=data.main_image titlesize="small" %}
 				{% include "newsletters/includes/header.html" %}
 				{% endwith %}
 			{% else %}
 				{% if data.announcement %}
-				{% with text_color="#fff" header_title="ESA/Hubble Science Newsletter" header_subtitle=data.announcement.release_date|date %}
+				{% with text_color="#fff" header_title="HST/Hubble/JWST Science Newsletter" header_subtitle=data.announcement.release_date|date %}
 				{% with release_date=data.announcement.release_date link_url=base_url|add:data.announcement.get_absolute_url pretitle="ESA/Hubble "|add:data.announcement.id embargo="" title=data.announcement.title subtitle=data.announcement.subtitle main_image=data.announcement.main_visual titlesize="small" %}
 				{% include "newsletters/includes/header.html" %}
 				{% endwith %}
 				{% endwith %}
 			{% else %}
-				{% with text_color="#fff" header_title="ESA/Hubble Science Newsletter" header_subtitle=release_date|date %}
+				{% with text_color="#fff" header_title="HST/Hubble/JWST Science Newsletter" header_subtitle=release_date|date %}
 				{% include "newsletters/includes/header.html" %}
 				{% endwith %}
 			{% endif %}
@@ -56,7 +56,7 @@
 {% endblock %}
 
 {% block footer %}
-{% with org="ESA/Hubble" potw_feed_url="http://feeds.feedburner.com/hubble_potw/" reason="you subscribed to the ESA/Hubble Science Newsletter." footer_potws=data.footer_potws footer_note='' unsubscribe_link='' preferences_link='' browser_link=base_url|add:"/newsletters/science/html/"|add:newsletter_id|add:"/" address="ESA/Hubble c/o ESO, Karl-Schwarzschild-Str 2, D-85748 Garching bei M&uuml;nchen, Germany" %}
+{% with org="ESA/Hubble" potw_feed_url="http://feeds.feedburner.com/hubble_potw/" reason="you subscribed to the HST/Hubble/JWST Science Newsletter" footer_potws=data.footer_potws footer_note='' unsubscribe_link='' preferences_link='' browser_link=base_url|add:"/newsletters/science/html/"|add:newsletter_id|add:"/" address="ESA/Hubble c/o ESO, Karl-Schwarzschild-Str 2, D-85748 Garching bei M&uuml;nchen, Germany" %}
 		{% include "newsletters/includes/science-footer.html" with width="693" %}
 	{% endwith %}
 {% endblock %}
