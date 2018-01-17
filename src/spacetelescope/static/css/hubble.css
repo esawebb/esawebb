@@ -6609,6 +6609,8 @@ a.thumbnail {
 
 #body #before_after_container img, #dark #dark-header #before_after_container img, #dark #dark-body #before_after_container img {
   max-width: 100%; }
+#body #before_after_container img[alt="handle"], #dark #dark-header #before_after_container img[alt="handle"], #dark #dark-body #before_after_container img[alt="handle"] {
+  max-width: initial; }
 
 .mfp-fade.mfp-bg {
   /* overlay at start */

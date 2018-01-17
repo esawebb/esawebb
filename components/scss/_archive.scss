@@ -727,6 +727,10 @@ a.thumbnail {
 		img {
 			max-width: 100%;
 		}
+
+		img[alt="handle"] {
+			max-width: initial;
+		}
 	}
 }
 

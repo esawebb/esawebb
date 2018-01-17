@@ -388,7 +388,7 @@ $(window).load(function() {
 	    introDelay : 1000,
 	    introDuration : 500,
 	    showFullLinks : false,
-	    imagePath : '/public/archives/app/media/beforeafter/',
+	    imagePath : '/static/app/media/beforeafter/',
 	    enableKeyboard : true
 	});
 });
