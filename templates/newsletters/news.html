@@ -31,13 +31,15 @@
 
 	{% if data.announcements %}
 	<br /><hr style="{{hr_style}}"><br />
-	{% with objects=data.announcements org="ESA/Hubble" title="Announcements" feed_url="http://feeds.feedburner.com/hubble_annoucements" urlpattern="announcements_defaultquery" %}
+	{% with objects=data.announcements org="ESA/Hubble" title="Announcements" feed_url="https://feeds.feedburner.com/hubble_annoucements" urlpattern="announcements_defaultquery" %}
 		{% include "newsletters/includes/archiveobjects.html" %}
 	{% endwith %}
 	{% endif %}
 {% endblock %}
 
 {% block sidebar %}
+	<a href="https://supernova.eso.org/programme/detail/es1051/"><img width="170px" src="https://www.spacetelescope.org/static/ads/opis-ad.jpg" /></a>
+	<hr style="{{hr_style}}">
 	{% if data.potws %}
 	{% if enable_sharing %}<br /><hr style="{{hr_style}}"><br />{% endif %}
 	{% with potws=data.potws feed_url="http://feeds.feedburner.com/hubble_potw/" %}
