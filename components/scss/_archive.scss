@@ -93,7 +93,7 @@
 	h3 {
 		font-size: 20px;
 	}
-	
+
 	.archive_dl_size > div {
 		padding-left: 30px;
 
@@ -212,47 +212,66 @@ h3.archivegrouptitle {
 
 .image-list {
 	margin-bottom: $grid-gutter-width;
+	padding: 0 8px;
 
-	& > a {
+	.picrow {
+		margin-left: -10px;
+		margin-right: -10px;
 
-		.potw {
-			position: absolute;
-			top: 0;
-			right: 0;
-			padding: 10px;
-			font-size: 20px;
-			line-height: 20px;
-			color: $dark-box-border;
-			background-color: rgba(0, 0, 0, 0.6);
+		.item {
+			float: left;
+			position: relative;
+			overflow: hidden;
 		}
 
-		& > .title {
-			position: absolute;
-			display: block;
-			opacity: 0;
-			font-size: 18px;
-			padding: 15px;
-			left: 0;
-			right: 0;
-			bottom: 0;
-			color: #fff;
-			background-color: rgba(0, 0, 0, 0.6);
-		}
-
-		&:hover {
-			border: 2px solid $hubble-blue;
-
+		& > a {
 			.potw {
-				// -2px to compensate for a's border
-				top: -2px;
-				right: -2px;
-				color: $hubble-yellow;
+				position: absolute;
+				top: 0;
+				right: 0;
+				padding: 10px;
+				font-size: 20px;
+				line-height: 20px;
+				color: $dark-box-border;
+				background-color: rgba(0, 0, 0, 0.6);
+				width: 40px;
+				height: 40px;
 			}
 
-			.title {
-				opacity: 1;
-				filter: alpha(opacity=100);
-				@include transition(opacity 0.2s); 
+			& > .title {
+				position: absolute;
+				display: block;
+				opacity: 0;
+				font-size: 18px;
+				padding: 15px;
+				left: 0;
+				right: 0;
+				bottom: 0;
+				color: #fff;
+				background-color: rgba(0, 0, 0, 0.6);
+			}
+
+			&:hover:after {
+				content: '';
+				display: block;
+				position: absolute;
+				top: 0;
+				width: 100%;
+				height: 100%;
+				box-shadow: inset 0 0 0 2px $hubble-blue;
+			}
+
+			&:hover {
+
+				.potw {
+					color: $hubble-yellow;
+				}
+
+				.title {
+					opacity: 1;
+					filter: alpha(opacity=100);
+					@include transition(opacity 0.2s);
+				}
 			}
 		}
 	}
@@ -294,7 +313,7 @@ h3.archivegrouptitle {
 			&:hover {
 				.news-description {
 					@include transform(translateY(-80px));
-					@include transition(transform 0.2s); 
+					@include transition(transform 0.2s);
 				}
 
 				.news-image img {
@@ -312,14 +331,14 @@ h3.archivegrouptitle {
 
 	.news-image {
 		background-color: $hubble-blue;
-		@include transition(opacity 0.2s); 
+		@include transition(opacity 0.2s);
 	}
 
 	.news-description {
 		background-color: #fff;
 		padding: 10px;
 		padding-bottom: 0;
-		@include transition(transform 0.2s); 
+		@include transition(transform 0.2s);
 	}
 
 	.news-title {
@@ -401,13 +420,13 @@ a.thumbnail {
 	&:hover {
 		.caption {
 			background-color: $hubble-blue;
-			@include transition(background-color 0.2s); 
-			@include transition(background-image 0.2s); 
+			@include transition(background-color 0.2s);
+			@include transition(background-image 0.2s);
 
-			a { 
+			a {
 				span {
 					color: #fff;
-					@include transition(color 0.2s); 
+					@include transition(color 0.2s);
 				}
 
 				.download-icon {
@@ -610,7 +629,7 @@ a.thumbnail {
 			@media (min-width: $mobile-breakpoint) {
 				.top100-description .top100-text {
 					max-height: 100px;
-					@include transition(max-height 0.2s); 
+					@include transition(max-height 0.2s);
 				}
 			}
 		}
@@ -692,7 +711,7 @@ a.thumbnail {
 				max-height: 0;
 				text-align: left;
 
-				@include transition(max-height 0.2s); 
+				@include transition(max-height 0.2s);
 
 				@media (max-width: $mobile-breakpoint) {
 					display: none;
@@ -707,6 +726,10 @@ a.thumbnail {
 
 		img {
 			max-width: 100%;
+		}
+
+		img[alt="handle"] {
+			max-width: initial;
 		}
 	}
 }
@@ -1042,4 +1065,8 @@ a.anchor {
 	.popup-caption, #popup-youtube {
 		display: block;
 	}
+}
+
+.popover {
+	max-width: 700px;
 }

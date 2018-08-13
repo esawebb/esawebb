@@ -56,7 +56,8 @@
 				videoId: '{{ object_list.0.youtube_video_id }}',
 				playerVars: {
 					'modestbranding': 1,
-					'hl': '{{ LANGUAGE_CODE }}'
+					'hl': '{{ LANGUAGE_CODE }}',
+					'rel': 0
 				},
 				events: {
 					'onReady': onPlayerReady,

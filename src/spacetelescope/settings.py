@@ -67,6 +67,7 @@ class internal_ips( list ):
 					is_internal = True
 		return is_internal
 
+
 INTERNAL_IPS = internal_ips( [
 	'127.0.0.1',
 	'134.171.',
@@ -294,9 +295,7 @@ MIDDLEWARE_CLASSES += (
 
 	# Module for URL redirection based on regular expressions
 	'djangoplicity.utils.middleware.RegexRedirectMiddleware',  # Response
-
-	# Middleware to bypass CDN when client is from Garching Intranet
-	'spacetelescope.middleware.DisableInternalCDN',
+	# 'spacetelescope.middleware.DisableInternalCDN',
 )
 
 INSTALLED_APPS = ()
@@ -361,6 +360,7 @@ INSTALLED_APPS += (
 	'spacetelescope.frontpage',
 	'mptt',
 	'django_extensions',
+	'django_mailman',
 	# Satchmo
 	#'registration',
 	'sorl.thumbnail',
@@ -372,7 +372,7 @@ INSTALLED_APPS += (
 	'product.modules.configurable',
 	'shipping',
 	'payment',
-	'djangoplicity.coposweb',
+	'djangoplicity.concardis',
 	'l10n',
 	'tax',
 	'tax.modules.no',
@@ -522,13 +522,6 @@ ASSETS_UPDATER = "timestamp"
 #ASSETS_AUTO_CREATE
 #ASSETS_EXPIRE = 'filename'
 
-######################
-# COMMENTS FRAMEWORK #
-######################
-AKISMET_API_KEY = ''
-COMMENTS_HIDE_REMOVED = False
-PROFANITIES_LIST = ( 'asshat', 'asshead', 'asshole', 'cunt', 'fuck', 'gook', 'nigger', 'shit', )
-
 ###########
 # ARCHIVE #
 ###########
@@ -598,7 +591,6 @@ ARCHIVE_URL_DETAIL_PREFIX = ''
 ARCHIVE_URL_FEED_PREFIX = 'feed'
 ARCHIVE_URL_SEARCH_PREFIX = 'search'
 ARCHIVE_PAGINATOR_PREFIX = 'page'
-ARCHIVE_ICON_PATH = 'icons/'
 ARCHIVE_ROOT = 'archives/'
 
 ENABLE_ADVANCED_SEARCH = True
@@ -628,7 +620,7 @@ RELEASE_LINK_PREFIX = "heic"
 DEFAULT_CREATOR = u"ESA/Hubble"
 DEFAULT_CREATOR_URL = "http://www.spacetelescope.org"
 DEFAULT_CONTACT_ADDRESS = u"Karl-Schwarzschild-Strasse 2"
-DEFAULT_CONTACT_CITY = u"Garching bei M√ºnchen"
+DEFAULT_CONTACT_CITY = u"Garching bei München"
 DEFAULT_CONTACT_STATE_PROVINCE = ""
 DEFAULT_CONTACT_POSTAL_CODE = u"D-85748"
 DEFAULT_CONTACT_COUNTRY = u"Germany"
@@ -640,6 +632,7 @@ DEFAULT_CREDIT = u"NASA &amp; ESA"
 
 ARCHIVE_IMPORT_ROOT = local_settings.ARCHIVE_IMPORT_ROOT
 MP4BOX_PATH = local_settings.MP4BOX_PATH
+MP4FRAGMENT_PATH = local_settings.MP4FRAGMENT_PATH
 
 ARCHIVE_WORKFLOWS = {
 	'media.video.rename': ('spacetelescope.workflows.media', 'video_rename'),
@@ -747,6 +740,15 @@ CELERYBEAT_SCHEDULE = {
 		'task': 'djangoplicity.contentserver.tasks.check_content_server_resources',
 		'schedule': crontab(minute=0, hour=4),
 	},
+	'check-content-server-resources-all': {
+		'task': 'djangoplicity.contentserver.tasks.check_content_server_resources',
+		'schedule': crontab(minute=0, hour=10, day_of_week='sun'),
+		'kwargs': {'last': 15000},  # Large enough to check all resources
+	},
+	'cdn77-purge-prefetch': {
+		'task': 'djangoplicity.contentserver.cdn77_tasks.purge_prefetch',
+		'schedule': crontab(minute='*/10'),  # Every 10 minutes
+	},
 }
 
 ##############
@@ -755,8 +757,8 @@ CELERYBEAT_SCHEDULE = {
 TINYMCE_JS = "djangoplicity/js/tiny_mce_v3392/tiny_mce.js"
 TINYMCE_JQUERY_JS = "djangoplicity/js/tiny_mce_v3392/jquery.tinymce.js"
 JQUERY_JS = "jquery/jquery-1.11.1.min.js"
-JQUERY_UI_JS = "jquery-ui-1.11.1/jquery-ui.min.js"
-JQUERY_UI_CSS = "jquery-ui-1.11.1/jquery-ui.min.css"
+JQUERY_UI_JS = "jquery-ui-1.12.1/jquery-ui.min.js"
+JQUERY_UI_CSS = "jquery-ui-1.12.1/jquery-ui.min.css"
 DJANGOPLICITY_ADMIN_CSS = "djangoplicity/css/admin.css"
 DJANGOPLICITY_ADMIN_JS = "djangoplicity/js/admin.js"
 SUBJECT_CATEGORY_CSS = "djangoplicity/css/widgets.css"
@@ -849,6 +851,10 @@ LOGGING = {
 			'level': 'ERROR',
 			'propagate': False,
 		},
+		'django.security.DisallowedHost': {
+			'handlers': ['null'],
+			'propagate': False,
+		},
 		'django.template': {
 			'handlers': ['null'],
 			'propagate': False,
@@ -874,6 +880,14 @@ LOGGING = {
 		'pycountry.db': {
 			'handlers': ['null'],
 			'propagate': False,
+		},
+		'iterchoices': {
+			'handlers': ['null'],
+			'propagate': False,
+		},
+		'requests': {
+			'handlers': local_settings.LOGGING_HANDLER,
+			'level': 'WARNING',  # requests is too verbose by default
 		},
 	},
 }
@@ -948,7 +962,7 @@ LIVESETTINGS_OPTIONS = {
 				u'MINIMUM_ORDER': u'2.99',
 				#u'ORDER_EMAIL_EXTRA': u'distribution@spacetelescope.org',
 				u'ORDER_EMAIL_OWNER': u'True',
-				u'MODULES': u'["PAYMENT_COPOSWEB"]'
+				u'MODULES': u'["PAYMENT_CONCARDIS"]'
 			},
 			u'PAYMENT_DUMMY': {
 				u'CREDITCHOICES': u'["Visa", "Mastercard", "Discover", "American Express"]'
@@ -977,13 +991,12 @@ LIVESETTINGS_OPTIONS = {
 				u'REQUIRED_BILLING_DATA': u'["email", "first_name", "last_name", "phone", "street1", "city", "postal_code", "country"]',
 				u'ENFORCE_STATE': u'False',
 				u'SHOW_SITE': u'False',
-				u'LOGO_URI': u'http://www.spacetelescope.org/static/archives/logos/screen/eso_colour.jpg',
+				u'LOGO_URI': u'http://hubble3.hq.eso.org/static/archives/logos/screen/eso_colour.jpg',  # FIXME This should point to www.spacetelescope.org but is currently broken until the ACE is decomissioned
 			},
-			u'PAYMENT_COPOSWEB': {
-				u'USER_TEST': u'testeso',
-				u'PASSWORD_TEST': u'Kw6&gHKi',
-				u'LIVE_CONFIG_FILE': local_settings.COPOSWEB_CONFIG_INI,
-				u'CAPTURE': u'True',
+			u'PAYMENT_CONCARDIS': {
+				u'PSPID': u'40F06654' if local_settings.LIVE else u'esoepod',
+				u'SHA_IN_PASSPHRASE': u'0;dl18;asdL_k21as87ma',
+				u'SHA_OUT_PASSPHRASE': u'!7-zl;j31njky;aslerl',
 				u'LIVE': u'True' if local_settings.LIVE else u'False',
 				u'EXTRA_LOGGING': u'True',
 			},
@@ -1001,8 +1014,8 @@ SHOP_PICKUP_LOCATIONS = ({
 	'delivery': ugettext_noop("Karl-Schwarzschild-Str. 2, 85748 Garching, GERMANY"),
 },)
 
-RECAPTCHA_PUBLIC_KEY = '6LfXJOkSAAAAAE1-HoZR7_iA6D2tT0hGspsqG5mW'
-RECAPTCHA_PRIVATE_KEY = '6LfXJOkSAAAAAMETeG2zL8idVr9tW3F0Ndb12GK3'
+RECAPTCHA_PUBLIC_KEY = '6LcUjdQSAAAAAHWYDCgHT40vC0NLzUPcmwVDh9yU'
+RECAPTCHA_PRIVATE_KEY = '6LcUjdQSAAAAAPHRoDu56rlNylGTtKvHgfJFTGcE'
 
 #
 # Pipeline configuration (CSS/JS packing)
@@ -1025,9 +1038,9 @@ PIPELINE = {
 		},
 		'extras': {
 			'source_filenames': (
-				'jquery-ui-1.11.1/jquery-ui.min.css',
+				'jquery-ui-1.12.1/jquery-ui.min.css',
 				'slick-1.5.0/slick/slick.css',
-				'justified-gallery/css/justifiedGallery.min.css',
+				'justified/css/jquery.justified.css',
 				'magnific-popup/magnific-popup.css',
 			),
 			'output_filename': 'css/extras.css',
@@ -1037,7 +1050,7 @@ PIPELINE = {
 		'main': {
 			'source_filenames': (
 				'jquery/jquery-1.11.1.min.js',
-				'jquery-ui-1.11.1/jquery-ui.min.js',
+				'jquery-ui-1.12.1/jquery-ui.min.js',
 				'bootstrap/bootstrap-3.1.1-dist/js/bootstrap.min.js',
 				'js/jquery.menu-aim.js',
 				'slick-1.5.0/slick/slick.min.js',
@@ -1045,13 +1058,14 @@ PIPELINE = {
 				'djangoplicity/js/jquery.beforeafter-1.4.js',
 				'djangoplicity/zoomify/js/ZoomifyImageViewerExpress-min.js',
 				'js/masonry.pkgd.min.js',
-				'justified-gallery/js/jquery.justifiedGallery.min.js',
+				'justified/js/jquery.justified.min.js',
 				'magnific-popup/jquery.magnific-popup.min.js',
 				'djangoplicity/js/widgets.js',
 				'djangoplicity/js/pages.js',
 				'djangoplicity/js/djp-jwplayer.js',
 				'js/picturefill.min.js',
 				'js/enquire/enquire.min.js',
+				'js/sorttable.js',
 				'js/hubble.js',
 			),
 			'output_filename': 'js/main.js',
@@ -1094,8 +1108,10 @@ MEDIA_CONTENT_SERVERS = {
 				'wallpaper3',
 				'wallpaper4',
 				'wallpaper5',
+				'thumb150y',
 				'thumb300y',
 				'thumb350x',
+				'thumb700x',
 				'newsfeature',
 				'news',
 				'banner1920',
@@ -1123,10 +1139,13 @@ MEDIA_CONTENT_SERVERS = {
 				'dome_2kmaster',
 				'dome_mov',
 				'dome_preview',
+				'cylindrical_4kmaster',
+				'cylindrical_8kmaster',
+				'cylindrical_16kmaster',
 			),
 		},
-		url='http://cdn.spacetelescope.org/',
-		url_bigfiles='http://cdn2.spacetelescope.org/',
+		url='https://cdn.spacetelescope.org/',
+		url_bigfiles='https://cdn2.spacetelescope.org/',
 		remote_dir='/www/',
 		host='push-19.cdn77.com',
 		username='user_v220pif3',
@@ -1146,4 +1165,4 @@ MEDIA_CONTENT_SERVERS_CHOICES = (
 DEFAULT_MEDIA_CONTENT_SERVER = 'CDN77'
 
 YOUTUBE_TOKEN = '%s/youtube_oauth2_token.json' % TMP_DIR
-YOUTUBE_DEFAULT_TAGS = ['Hubble', 'Hubble Space Telecope', 'Telescope', 'Space', 'Observatory', 'ESA']
+YOUTUBE_DEFAULT_TAGS = ['Hubble', 'Hubble Space Telescope', 'Telescope', 'Space', 'Observatory', 'ESA']

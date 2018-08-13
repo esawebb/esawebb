@@ -108,7 +108,6 @@ ProductVariations or CustomProducts, look for product/detail_xxx.html
 		</tr>
 		{% if object.isbn %}<tr valign="top"><td><strong>ISBN</strong></td><td>{{ object.isbn}}</td></tr>{% endif %}
 		{% if object.size %}<tr valign="top"><td><strong>Dimensions</strong></td><td>{{ object.size }}</td></tr>{% endif %}
-		{% if object.weight %}<tr valign="top"><td><strong>Weight</strong></td><td>{{ object.weight }} g</td></tr>{% endif %}
 		{% if object.pages %}<tr valign="top"><td><strong>Pages</strong></td><td>{{ object.pages}}</td></tr>{% endif %}
 		{% if object.cover %}<tr valign="top"><td><strong>Cover</strong></td><td>{{ object.cover}}</td></tr>{% endif %}
 		{% if object.language %}<tr valign="top"><td><strong>Language</strong></td><td>{{ object.get_language_display }}</td></tr>{% endif %}

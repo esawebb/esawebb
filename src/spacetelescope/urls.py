@@ -10,9 +10,11 @@
 
 import django.views
 import django.views.defaults
+
 from django.conf import settings
 from django.conf.urls import include, url
 from django.views.decorators.cache import cache_page
+from django.views.generic.base import RedirectView
 
 import djangoplicity.views
 from djangoplicity.announcements.models import Announcement, WebUpdate
@@ -28,10 +30,9 @@ from djangoplicity.releases.models import Release
 from djangoplicity.releases.options import ReleaseOptions
 from djangoplicity.science.models import ScienceAnnouncement
 from djangoplicity.science.options import ScienceAnnouncementOptions
-from django.views.generic.base import RedirectView
 
 from spacetelescope.admin import admin_site, adminlogs_site, adminshop_site
-from spacetelescope.frontpage.views import FrontpageView
+from spacetelescope.frontpage.views import FrontpageView, d2d
 
 urlpatterns = []
 
@@ -39,6 +40,12 @@ if not settings.DEBUG:
 	urlpatterns += [
 		url( r'^%s(?P<path>.*)' % settings.MEDIA_URL[1:], djangoplicity.archives.contrib.security.views.serve_static_file, { 'SSLAllow': True } ),
 	]
+
+if settings.DEBUG_TOOLBAR:
+	import debug_toolbar
+	urlpatterns += [
+        url(r'^__debug__/', include(debug_toolbar.urls)),
+    ]
 
 urlpatterns += [
 
@@ -120,7 +127,7 @@ urlpatterns += [
 	# User authentication
 	url( r'^login/$', django.contrib.auth.views.login, { 'template_name': 'login.html', 'SSL': True } ),
 	url( r'^logout/$', django.contrib.auth.views.logout, { 'template_name': 'logout.html', 'SSL': True } ),
-	url( r'^password_reset/$', django.contrib.auth.views.password_reset, { 'SSL': True, 'email_template_name': 'registration/password_reset_email.txt' } ),
+	url( r'^password_reset/$', django.contrib.auth.views.password_reset, { 'SSL': True, 'email_template_name': 'registration/password_reset_email.txt' }, name='password_reset' ),
 	url( r'^password_reset/done/$', django.contrib.auth.views.password_reset_done, { 'SSL': True }, 'password_reset_done' ),
 	url( r'^reset/(?P<uidb36>[0-9A-Za-z]+)-(?P<token>.+)/$', django.contrib.auth.views.password_reset_confirm, { 'SSL': True }, 'django.contrib.auth.views.password_reset_confirm' ),
 	url( r'^reset/done/$', django.contrib.auth.views.password_reset_complete, { 'SSL': True }, 'password_reset_complete' ),
@@ -138,6 +145,8 @@ urlpatterns += [
 
 	# Main view
 	url( r'^$', cache_page(60 * 5)(FrontpageView.as_view()) ),
+
+	url( r'^d2d/$', d2d ),
 
 	# Static pages
 	url(r'^(?P<url>.*/)$', view_page)

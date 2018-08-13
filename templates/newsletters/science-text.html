@@ -1,10 +1,8 @@
 {% load i18n %}
 {% load djangoplicity_text_utils %}
-ESA/Hubble Science Newsletter
+ESA/Hubble/JWST Science Newsletter
 ======================
 {% if editorial %}
-Editorial
----------
 {% if editorial_subject %}
 *{{ editorial_subject }}*
 {% endif %}
@@ -22,7 +20,7 @@ Science Announcements
 
 
 How to advertise your Hubble results:
-http://www.spacetelescope.org/forscientists/announcements/sci13001/
+https://www.spacetelescope.org/forscientists/announcements/sci16008/
 
 {% endfor %}{% endif %}
 {% with email="hubble@eso.org" %}{% include "newsletters/includes/text/footer.txt" %}{% endwith %}

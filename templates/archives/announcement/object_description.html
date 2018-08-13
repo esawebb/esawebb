@@ -6,13 +6,20 @@
 {% if object.subtitle %}<h3>{{ object.subtitle }}</h3>{% endif %}
 <p class="date">{{ object.release_date|datetime:"DATE" }}</p>
 
-{% spaceless %}
 {% if main_visual %}
-	{% if main_visual.resource_newsfeature %}		
+	{% if main_visual.youtube_video_id and main_visual.use_youtube %}
+		<div class="youtube-wrapper">
+			<div id="youtube-player"></div>
+		</div>
+	{% elif main_visual.resource_newsfeature %}
 		<div class="archive-image popup">
 		{% if main_visual.resource_medium_podcast %}
 			{% load media_video %}
-			{% embedvideo_subs main_visual 'medium_podcast,h264' 'hd_and_apple,hd720p_screen,dome_preview' '' main_visual.videosubtitle_set.all %}
+			{% if main_visual.videosubtitle_set.all %}
+				{% embedvideo_subs main_visual "medium_podcast,h264" "hd_and_apple,hd720p_screen,dome_preview" "medium_podcast,h264" main_visual.videosubtitle_set.all %}
+			{% else %}
+				{% embedvideo main_visual "medium_podcast,h264" "hd_and_apple,hd720p_screen,dome_preview" "medium_podcast,h264" %}
+			{% endif%}
 		{% elif main_visual.resource_newsfeature %}
 			<a class="popup" href="{{ main_visual.resource_screen.url }}" title="{{ main_visual.title }}">
 				<img class="img-responsive" src="{{ main_visual.resource_newsfeature.url }}" class="pr_news_feature_img" style="padding:0;" />
@@ -24,18 +31,17 @@
 			</a>
 		{% endif %}
 		</div>
-	{% elif main_visual.resource_news %} 
+	{% elif main_visual.resource_news %}
 		<div class="archive-image popup">
 			<a class="popup" href="{{ main_visual.resource_screen.url }}" title="{{ main_visual.title }}">
 				<div class="image-container">
-					<img class="img-responsive" src="{{ main_visual.resource_news.url }}" class="img-responsive">
+					<img src="{{ main_visual.resource_news.url }}" class="img-responsive">
 				</div>
 			</a>
 		</div>
 	{% endif %}
 {% endif %}
 
-{% endspaceless %}
 
 <p>{{ object.description|safe }}</p>
 {% if object.links %}
@@ -46,4 +52,4 @@
 <h3>{% trans "Contacts" %}</h3>
 <p>{{ object.contacts|safe }}</p>
 {% endif %}
-{% include 'archives/announcement/extra_footer.html' %}
+{% include 'archives/extra_footer.html' %}

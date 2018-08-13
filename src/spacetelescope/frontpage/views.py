@@ -7,7 +7,11 @@
 #   Lars Holm Nielsen <lnielsen@eso.org>
 #   Luis Clara Gomes <lcgomes@eso.org>
 
+from collections import OrderedDict
+
+from django.http import JsonResponse
 from django.views.generic.base import TemplateView
+
 from djangoplicity.announcements.models import Announcement
 from djangoplicity.media.models import Image, Video, PictureOfTheWeek
 from djangoplicity.media.options import ImageOptions, VideoOptions, PictureOfTheWeekOptions
@@ -31,3 +35,39 @@ class FrontpageView(TemplateView):
 		context['top100'] = ImageOptions.Queries.top100.queryset(Image, ImageOptions, self.request)[0][:20]
 
 		return context
+
+
+def d2d(request):
+	'''
+	Generic "Data provide" D2D feed
+	'''
+	return JsonResponse(OrderedDict([
+		('Creator', 'ESA/Hubble'),
+		('URL', 'https://www.spacetelescope.org'),
+		('Contact', OrderedDict([
+			('Name', 'Lars Lindberg Christensen'),
+			('Email', 'lars@eso.org'),
+			('Telephone', '+498932006761'),
+			('Address', 'Karl-Schwarzschild-Strasse 2'),
+			('City', 'Garching bei München'),
+			('StateProvince', 'Bavaria'),
+			('PostalCode', '85748'),
+			('Country', 'Germany'),
+		])),
+		('Logo', 'https://www.spacetelescope.org/static/archives/logos/medium/esa_screen_blue.jpg'),
+		('Feeds', [
+			{
+				'Name': 'ESA/Hubble Images',
+				'Description': 'ESA/Hubble Images',
+				'URL': 'https://www.spacetelescope.org/images/d2d/',
+				'Type': 'Images',
+			},
+			{
+				'Name': 'ESA/Hubble Videos',
+				'Description': 'ESA/Hubble Videos',
+				'URL': 'https://www.spacetelescope.org/videos/d2d/',
+				'Type': 'Videos',
+			},
+		]
+		),
+	]))

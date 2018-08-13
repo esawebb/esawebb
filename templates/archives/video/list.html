@@ -37,7 +37,8 @@ function onYouTubeIframeAPIReady() {
 		width: '688',
 		playerVars: {
 			'modestbranding': 1,
-			'hl': '{{ LANGUAGE_CODE }}'
+			'hl': '{{ LANGUAGE_CODE }}',
+			'rel': 0
 		},
 		events: {
 			'onReady': onPlayerReady,
