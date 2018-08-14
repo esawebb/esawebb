@@ -72,7 +72,7 @@ EMAIL_SUBJECT_PREFIX = '[SPACETELESCOPE]'
 ##########
 # CELERY #
 ##########
-BROKER_URL = 'amqp://spacetelescope:letoveumtold@aweb24.hq.eso.org:5672/spacetelescope_vhost'
+CELERY_BROKER_URL = 'amqp://spacetelescope:letoveumtold@aweb24.hq.eso.org:5672/spacetelescope_vhost'
 
 ########
 # SHOP #

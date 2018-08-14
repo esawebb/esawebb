@@ -24,7 +24,6 @@ WEBSERVERS = ()
 SSL_ASSETS_PREFIX = "www.spacetelescope.org"
 
 SECRET_KEY = "g6ymvx$i1sv4k*g+nwfnx*3a1g&)^i6r9n6g4=f_$x^u(kwt8s"
-CSRF_MIDDLEWARE_SECRET = "g6ymvx$i1sv4k*g+nwfnx*3a1g&)^i6r9n6g4=f_$x^u(kwt8s"
 
 ##############
 # DEPLOYMENT #
@@ -94,9 +93,9 @@ LOGGING_HANDLER = ['console']
 ##########
 # CELERY #
 ##########
-BROKER_URL = 'amqp://spacetelescope:letoveumtold@localhost:5672/spacetelescope_vhost'
+CELERY_BROKER_URL = 'amqp://spacetelescope:letoveumtold@localhost:5672/spacetelescope_vhost'
 
-CELERY_ALWAYS_EAGER = False
+CELERY_TASK_ALWAYS_EAGER = False
 
 #########
 # EMAIL #

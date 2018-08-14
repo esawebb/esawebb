@@ -130,7 +130,6 @@ DEBUG_TOOLBAR_PANELS = [
 
 # Make this unique, and don't share it with anybody.
 SECRET_KEY = "sadfpn870742kfasbvancp837rcnp3w8orypbw83ycnspo8r7"
-CSRF_MIDDLEWARE_SECRET = "sadfpn870742kfasbvancp837rcnp3w8orypbw83ycnspo8r7"
 
 ##########
 # CACHE  #
@@ -184,10 +183,10 @@ MP4FRAGMENT_PATH = '/usr/bin/mp4fragment'
 ##########
 # CELERY #
 ##########
-BROKER_USE_SSL = False
-BROKER_URL = 'amqp://spacetelescope:letoveumtold@localhost:5672/spacetelescope_vhost'
+CELERY_BROKER_USE_SSL = False
+CELERY_BROKER_URL = 'amqp://spacetelescope:letoveumtold@localhost:5672/spacetelescope_vhost'
 
-CELERY_ALWAYS_EAGER = False
+CELERY_TASK_ALWAYS_EAGER = False
 
 #################
 # DJANGO ASSETS #

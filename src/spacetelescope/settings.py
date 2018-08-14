@@ -98,7 +98,6 @@ DEBUG_TOOLBAR_PANELS = local_settings.DEBUG_TOOLBAR_PANELS
 
 # Make this unique, and don't share it with anybody.
 SECRET_KEY = local_settings.SECRET_KEY
-CSRF_MIDDLEWARE_SECRET = local_settings.CSRF_MIDDLEWARE_SECRET
 
 
 ##################
@@ -234,7 +233,7 @@ ROOT_URLCONF = 'spacetelescope.urls'
 ###############################
 # MIDDLEWARE AND APPLICATIONS #
 ###############################
-MIDDLEWARE_CLASSES = (
+MIDDLEWARE = (
 	# Compresses content for browsers that understand gzip compression (all modern browsers).
 	'django.middleware.gzip.GZipMiddleware',  # Response
 
@@ -244,21 +243,17 @@ MIDDLEWARE_CLASSES = (
 	'django.middleware.http.ConditionalGetMiddleware',
 
 	# The CsrfMiddleware class provides easy-to-use protection against Cross Site Request Forgeries.
-	#'django.contrib.csrf.middleware.CsrfMiddleware',
-
-	# Based on 'SSL' and 'SSLAllow' boolean URL paramters it will redirect to
-	# HTTP or HTTPS.
-	'sslmiddleware.SSLRedirect',
+	'django.middleware.csrf.CsrfViewMiddleware',
 )
 
 if DEBUG_TOOLBAR:
 	# Add debug toolbar to request
-	MIDDLEWARE_CLASSES += (
+	MIDDLEWARE += (
 		'debug_toolbar.middleware.DebugToolbarMiddleware',
 	)
 
 
-MIDDLEWARE_CLASSES += (
+MIDDLEWARE += (
 	# Enables session support
 	'django.contrib.sessions.middleware.SessionMiddleware',  # Request/Response (db)
 
@@ -272,12 +267,12 @@ MIDDLEWARE_CLASSES += (
 )
 
 if USE_I18N:
-	MIDDLEWARE_CLASSES += (
+	MIDDLEWARE += (
 		# Sets local for request based on URL prefix.
 		'djangoplicity.translation.middleware.LocaleMiddleware',  # Request/Response
 	)
 
-MIDDLEWARE_CLASSES += (
+MIDDLEWARE += (
 	# - Forbids access to user agents in the DISALLOWED_USER_AGENTS setting
 	# - Performs URL rewriting based on the APPEND_SLASH and PREPEND_WWW settings.
 	# - Handles ETags based on the USE_ETAGS setting.
@@ -289,13 +284,12 @@ MIDDLEWARE_CLASSES += (
 )
 
 
-MIDDLEWARE_CLASSES += (
+MIDDLEWARE += (
 	# Module for URL redirection.
 	'django.contrib.redirects.middleware.RedirectFallbackMiddleware',  # Response
 
 	# Module for URL redirection based on regular expressions
 	'djangoplicity.utils.middleware.RegexRedirectMiddleware',  # Response
-	# 'spacetelescope.middleware.DisableInternalCDN',
 )
 
 INSTALLED_APPS = ()
@@ -350,7 +344,6 @@ INSTALLED_APPS += (
 	'djangoplicity.simplearchives',
 	#'djangoplicity.eventcalendar',
 	'djangoplicity.actions',
-	'djangoplicity.crawler',
 	'djangoplicity.cutter',
 	#'djangoplicity.mailer',
 	#'djangoplicity.scrum',
@@ -383,6 +376,7 @@ INSTALLED_APPS += (
 	'django_ace',
 	'rest_framework',
 	'pipeline',
+	'tinymce',
 )
 
 
@@ -672,11 +666,11 @@ CELERY_IMPORTS = [
 ]
 
 # Message routing
-CELERY_DEFAULT_QUEUE = "celery"
-CELERY_DEFAULT_EXCHANGE = "celery"
-CELERY_DEFAULT_EXCHANGE_TYPE = "direct"
-CELERY_DEFAULT_ROUTING_KEY = "celery"
-CELERY_QUEUES = {
+CELERY_TASK_DEFAULT_QUEUE = "celery"
+CELERY_TASK_DEFAULT_EXCHANGE = "celery"
+CELERY_TASK_DEFAULT_EXCHANGE_TYPE = "direct"
+CELERY_TASK_DEFAULT_ROUTING_KEY = "celery"
+CELERY_TASK_QUEUES = {
 	"celery": {
 		"exchange": "celery",
 		"exchange_type": "direct",
@@ -688,38 +682,38 @@ CELERY_TIMEZONE = TIME_ZONE
 CELERY_ENABLE_UTC = False
 
 # Broker settings.
-BROKER_USE_SSL = local_settings.BROKER_USE_SSL
-BROKER_URL = local_settings.BROKER_URL
+CELERY_BROKER_USE_SSL = local_settings.CELERY_BROKER_USE_SSL
+CELERY_BROKER_URL = local_settings.CELERY_BROKER_URL
 
 # Task result backend
 CELERY_RESULT_BACKEND = "amqp"
 
 # AMQP backend settings
 CELERY_RESULT_SERIALIZER = "json"
-CELERY_TASK_RESULT_EXPIRES = 3600
+CELERY_RESULT_EXPIRES = 3600
 
 # Task execution
 CELERY_TASK_SERIALIZER = 'json'
-CELERY_IGNORE_RESULT = False
-CELERY_DISABLE_RATE_LIMITS = True
+CELERY_TASK_IGNORE_RESULT = False
+CELERY_WORKER_DISABLE_RATE_LIMITS = True
 
 # Error email
 CELERY_SEND_TASK_ERROR_EMAILS = True
 
 # Events
-CELERY_SEND_EVENTS = True
+CELERY_WORKER_SEND_TASK_EVENTS = True
 
 # Logging
-CELERYD_HIJACK_ROOT_LOGGER = False
+CELERY_WORKER_HIJACK_ROOT_LOGGER = False
 
-CELERY_ALWAYS_EAGER = local_settings.CELERY_ALWAYS_EAGER
+CELERY_TASK_ALWAYS_EAGER = local_settings.CELERY_TASK_ALWAYS_EAGER
 
 # File to save revoked tasks across workers restart
-CELERYD_STATE_DB = "%s/tmp/celery_states" % ROOT
-CELERYBEAT_SCHEDULE_FILENAME = '%s/tmp/celerybeat_schedule' % ROOT
+CELERY_WORKER_STATE_DB = "%s/tmp/celery_states" % ROOT
+CELERY_BEAT_SCHEDULE_FILENAME = '%s/tmp/celerybeat_schedule' % ROOT
 
 # Define Celery periodic tasks
-CELERYBEAT_SCHEDULE = {
+CELERY_BEAT_SCHEDULE = {
 	'mailchimp-abuse-report': {
 		'task': 'newsletters.abuse_reports',
 		'schedule': crontab(minute=0, hour=8, day_of_week='fri'),
@@ -754,8 +748,6 @@ CELERYBEAT_SCHEDULE = {
 ##############
 # JavaScript #
 ##############
-TINYMCE_JS = "djangoplicity/js/tiny_mce_v3392/tiny_mce.js"
-TINYMCE_JQUERY_JS = "djangoplicity/js/tiny_mce_v3392/jquery.tinymce.js"
 JQUERY_JS = "jquery/jquery-1.11.1.min.js"
 JQUERY_UI_JS = "jquery-ui-1.12.1/jquery-ui.min.js"
 JQUERY_UI_CSS = "jquery-ui-1.12.1/jquery-ui.min.css"
@@ -918,10 +910,10 @@ SHOP_CONF = {
 DIRNAME = os.path.abspath( os.path.dirname( __file__ ) )
 LOCAL_DEV = True
 
-MIDDLEWARE_CLASSES += (
-					"threaded_multihost.middleware.ThreadLocalMiddleware",
-					#"satchmo_store.shop.SSLMiddleware.SSLRedirect",
-					)
+MIDDLEWARE += (
+	"threaded_multihost.middleware.ThreadLocalMiddleware",
+	#"satchmo_store.shop.SSLMiddleware.SSLRedirect",
+)
 
 AUTHENTICATION_BACKENDS += ( 'satchmo_store.accounts.email-auth.EmailBackend', )
 
@@ -1090,7 +1082,11 @@ STATICFILES_FINDERS = (
 )
 
 # Required since Django 1.5:
-ALLOWED_HOSTS = ['.spacetelescope.org', '.eso.org']
+ALLOWED_HOSTS = [
+	'localhost',
+	'.spacetelescope.org',
+	'.eso.org',
+]
 
 # Required since Django 1.6:
 TEST_RUNNER = 'django.test.runner.DiscoverRunner'
@@ -1166,3 +1162,28 @@ DEFAULT_MEDIA_CONTENT_SERVER = 'CDN77'
 
 YOUTUBE_TOKEN = '%s/youtube_oauth2_token.json' % TMP_DIR
 YOUTUBE_DEFAULT_TAGS = ['Hubble', 'Hubble Space Telescope', 'Telescope', 'Space', 'Observatory', 'ESA']
+
+TINYMCE_DEFAULT_CONFIG = {
+	'height': 360,
+	'width': 1120,
+	'cleanup_on_startup': True,
+	'custom_undo_redo_levels': 20,
+	'selector': 'textarea',
+	'theme': 'modern',
+	'plugins': '''
+        textcolor save link image media preview codesample table
+        code lists fullscreen  insertdatetime  nonbreaking contextmenu
+        directionality searchreplace wordcount visualblocks visualchars
+        code fullscreen autolink lists  charmap print  hr anchor pagebreak
+    ''',
+	'toolbar1': '''
+        fullscreen code | cut copy | searchreplace | alignleft aligncenter alignright alignjustify | formatselect forecolor backcolor |superscript subscript |
+     ''',
+	'toolbar2': '''
+        bold italic underline strikethrough | bullist numlist table hr | indent outdent | undo redo | link unlink anchor image media charmap | nonbreaking |
+    ''',
+	'contextmenu': 'formats | link image',
+	'menubar': False,
+	'statusbar': True,
+	'entity_encoding': 'raw'
+}

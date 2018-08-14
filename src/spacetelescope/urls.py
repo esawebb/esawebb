@@ -38,7 +38,7 @@ urlpatterns = []
 
 if not settings.DEBUG:
 	urlpatterns += [
-		url( r'^%s(?P<path>.*)' % settings.MEDIA_URL[1:], djangoplicity.archives.contrib.security.views.serve_static_file, { 'SSLAllow': True } ),
+		url( r'^%s(?P<path>.*)' % settings.MEDIA_URL[1:], djangoplicity.archives.contrib.security.views.serve_static_file),
 	]
 
 if settings.DEBUG_TOOLBAR:
@@ -50,25 +50,24 @@ if settings.DEBUG_TOOLBAR:
 urlpatterns += [
 
 	# Djangoplicity Adminstration
-	url( r'^admin/cache/', include( 'djangoplicity.cache.urls', namespace="admincache_site", app_name="cache" ), { 'SSL': True } ),
-	url( r'^admin/history/', include( 'djangoplicity.adminhistory.urls', namespace="adminhistory_site", app_name="history" ), { 'SSL': True } ),
-	url( r'^admin/doc/', include( 'django.contrib.admindocs.urls' ), { 'SSL': True } ),
-	url( r'^admin/menus/', include( 'djangoplicity.menus.urls' ), { 'SSL': True } ),
-	url( r'^admin(.*)({{\s?MEDIA_URL\s?}})(?P<path>.*)', djangoplicity.views.adm_translate_static_media_path, { 'SSL': True } ),
-#	url( r'^admin/shop/shop/order/(?P<order_id>[0-9]+)/csv/', 'djangoplicity.coposweb.views.order_csv_file', { 'SSL': True } ),
-	url( r'^admin/shop/', include( 'djangoplicity.archives.contrib.satchmo.urls_admin' ), { 'SSL': True } ),
-	url( r'^admin/shop/', include(adminshop_site.urls), { 'SSL': True, 'extra_context': { 'ADMINSHOP_SITE': True } } ),
-	url( r'^admin/system/', include(adminlogs_site.urls), { 'SSL': True, 'extra_context': { 'ADMINLOGS_SITE': True }  } ),
-	url( r'^admin/', include(admin_site.urls), { 'SSL': True, 'extra_context': { 'ADMIN_SITE': True }  } ),
-	url( r'^admin/import/', include('djangoplicity.archives.importer.urls'), { 'SSL': True } ),
-	url( r'^admin/', include('djangoplicity.metadata.wtmlimport.urls'), { 'SSL': True, 'extra_context': { 'ADMIN_SITE': True }  } ),
-	url( r'^public/djangoplicity/admin/reportsdetails/', include( 'djangoplicity.reports.urls' ), { 'SSL': True } ),
+	url( r'^admin/cache/', include( 'djangoplicity.cache.urls', namespace="admincache_site", app_name="cache" )),
+	url( r'^admin/history/', include( 'djangoplicity.adminhistory.urls', namespace="adminhistory_site", app_name="history" )),
+	url( r'^admin/doc/', include( 'django.contrib.admindocs.urls' )),
+	url( r'^admin/menus/', include( 'djangoplicity.menus.urls' )),
+	url( r'^admin/shop/', include( 'djangoplicity.archives.contrib.satchmo.urls_admin' ) ),
+	url( r'^admin/shop/', include(adminshop_site.urls), { 'extra_context': { 'ADMINSHOP_SITE': True } } ),
+	url( r'^admin/system/', include(adminlogs_site.urls), { 'extra_context': { 'ADMINLOGS_SITE': True }  } ),
+	url( r'^admin/', include(admin_site.urls), { 'extra_context': { 'ADMIN_SITE': True }  } ),
+	url( r'^admin/import/', include('djangoplicity.archives.importer.urls') ),
+	url( r'^admin/', include('djangoplicity.metadata.wtmlimport.urls'), { 'extra_context': { 'ADMIN_SITE': True }  } ),
+	url( r'^public/djangoplicity/admin/reportsdetails/', include( 'djangoplicity.reports.urls' ) ),
+	url(r'^tinymce/', include('tinymce.urls')),
 
 	# Djangoplicity pages API
-	url( r'^public/djangoplicity/admin/pages/', include('djangoplicity.pages.urls'), { 'SSLAllow': True } ),
+	url( r'^public/djangoplicity/admin/pages/', include('djangoplicity.pages.urls') ),
 
 	# Server alive check (used for load balancers - called every 5 secs )
-	url( r'^alive-check.dat$', djangoplicity.views.alive_check, { 'SSLAllow': True } ),
+	url( r'^alive-check.dat$', djangoplicity.views.alive_check ),
 	url( r'^sitemap/', djangoplicity.menus.views.sitemap ),
 
 	# Media Archive
@@ -125,12 +124,12 @@ urlpatterns += [
 	url( r'^rss/hubblecasthd_amp.xml$', RedirectView.as_view(url='http://feeds.feedburner.com/hubblecast/') ),
 
 	# User authentication
-	url( r'^login/$', django.contrib.auth.views.login, { 'template_name': 'login.html', 'SSL': True } ),
-	url( r'^logout/$', django.contrib.auth.views.logout, { 'template_name': 'logout.html', 'SSL': True } ),
-	url( r'^password_reset/$', django.contrib.auth.views.password_reset, { 'SSL': True, 'email_template_name': 'registration/password_reset_email.txt' }, name='password_reset' ),
-	url( r'^password_reset/done/$', django.contrib.auth.views.password_reset_done, { 'SSL': True }, 'password_reset_done' ),
-	url( r'^reset/(?P<uidb36>[0-9A-Za-z]+)-(?P<token>.+)/$', django.contrib.auth.views.password_reset_confirm, { 'SSL': True }, 'django.contrib.auth.views.password_reset_confirm' ),
-	url( r'^reset/done/$', django.contrib.auth.views.password_reset_complete, { 'SSL': True }, 'password_reset_complete' ),
+	url( r'^login/$', django.contrib.auth.views.login, { 'template_name': 'login.html' } ),
+	url( r'^logout/$', django.contrib.auth.views.logout, { 'template_name': 'logout.html' } ),
+	url( r'^password_reset/$', django.contrib.auth.views.password_reset, { 'email_template_name': 'registration/password_reset_email.txt' }, name='password_reset' ),
+	url( r'^password_reset/done/$', django.contrib.auth.views.password_reset_done, 'password_reset_done' ),
+	url( r'^reset/(?P<uidb36>[0-9A-Za-z]+)-(?P<token>.+)/$', django.contrib.auth.views.password_reset_confirm, 'django.contrib.auth.views.password_reset_confirm' ),
+	url( r'^reset/done/$', django.contrib.auth.views.password_reset_complete, 'password_reset_complete' ),
 
 	# Shop
 	url( r'^shop/terms/', RedirectView.as_view(url='/shop/terms_conditions/'), name='shop_terms' ),
@@ -138,10 +137,10 @@ urlpatterns += [
 	url( r'^shop/bulkorders/', RedirectView.as_view(url='/shop/bulk_orders/'), name='shop_bulkorders' ),
 	url( r'^shop/freeorder/', include( 'djangoplicity.archives.contrib.satchmo.freeorder.urls' ) ),
 	url( r'^shop/', include( 'djangoplicity.archives.contrib.satchmo.urls' ) ),
-	url( r'^newsletters/', include( 'djangoplicity.mailinglists.urls', namespace='djangoplicity_mailinglists', app_name='djangoplicity_mailinglists' ), { 'SSLAllow': True } ),
+	url( r'^newsletters/', include( 'djangoplicity.mailinglists.urls', namespace='djangoplicity_mailinglists', app_name='djangoplicity_mailinglists' ) ),
 	url( r'^newsletters/', include( 'djangoplicity.newsletters.urls'), { 'model': Newsletter, 'options': NewsletterOptions, } ),
 	#( r'^public/djangoplicity/events/', include('djangoplicity.events.urls'), { 'model': Event, 'options': EventOptions } ),
-	url( r'^facebook/', include('djangoplicity.iframe.urls'), { 'SSLAllow': True }  ),
+	url( r'^facebook/', include('djangoplicity.iframe.urls')  ),
 
 	# Main view
 	url( r'^$', cache_page(60 * 5)(FrontpageView.as_view()) ),
