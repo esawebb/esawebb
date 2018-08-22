@@ -912,7 +912,7 @@ LOCAL_DEV = True
 
 MIDDLEWARE += (
 	"threaded_multihost.middleware.ThreadLocalMiddleware",
-	#"satchmo_store.shop.SSLMiddleware.SSLRedirect",
+	"satchmo_store.shop.SSLMiddleware.SSLRedirect",
 )
 
 AUTHENTICATION_BACKENDS += ( 'satchmo_store.accounts.email-auth.EmailBackend', )

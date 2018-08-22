@@ -26,7 +26,7 @@
 		{% else %}
 
 			<div class="checkout">
-				<form class="form-inline" action="{% url 'satchmo_checkout-step1' %}" method="get">
+				<form class="form-inline" action="{% url 'satchmo_checkout-step1' %}" method="get">{% csrf_token %}
 					<button type="submit" class="btn btn-default">{% trans 'Checkout' %}</button>
 				</form>
 			</div>
@@ -52,7 +52,7 @@
 						</td>
 						<td class="quantity">
 							{% url 'satchmo_cart_set_qty' as satchmo_cart_set_qty %}
-							<form role="form" id="form-{{ cartitem.id }}" action="{{ satchmo_cart_set_qty }}" method="post">
+							<form role="form" id="form-{{ cartitem.id }}" action="{{ satchmo_cart_set_qty }}" method="post">{% csrf_token %}
 								<input type="hidden" name="cartitem" value="{{ cartitem.id }}" />
 								<input type="text" class="form-control" name="quantity" id="id_quantity" value="{{ cartitem.quantity|normalize_decimal }}" />
 								<button type="submit" class="btn btn-default" id="id_update_submit">{% trans 'Update' %}</button>
@@ -87,7 +87,7 @@
 			{% endif %}
 
 			<div class="checkout">
-				<form class="form-inline" action="{% url 'satchmo_checkout-step1' %}" method="get">
+				<form class="form-inline" action="{% url 'satchmo_checkout-step1' %}" method="get">{% csrf_token %}
 					<button type="submit" class="btn btn-default">{% trans 'Checkout' %}</button>
 				</form>
 			</div>
