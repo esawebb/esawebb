@@ -192,7 +192,7 @@ CACHE_MIDDLEWARE_ANONYMOUS_ONLY = True
 
 # keyedcached settings:
 CACHE_TIMEOUT = CACHE_MIDDLEWARE_SECONDS if CACHES['default']['BACKEND'] != 'django.core.cache.backends.dummy.DummyCache' else 0  # prevents stupid error from keyecache
-CACHE_PREFIX = SHORT_NAME
+KEY_PREFIX = SHORT_NAME
 
 USE_ETAGS = True
 
@@ -874,6 +874,10 @@ LOGGING = {
 			'propagate': False,
 		},
 		'iterchoices': {
+			'handlers': ['null'],
+			'propagate': False,
+		},
+		'tinymce': {
 			'handlers': ['null'],
 			'propagate': False,
 		},
