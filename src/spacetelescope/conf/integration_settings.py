@@ -22,8 +22,6 @@ ROOT_RELOCATE = "/data/www/hubbled"
 BUILD_ROOT = "/data/www/%sd" % SHORT_NAME
 BUILDOUT_CONFIG = "conf/integration.cfg"
 
-LOG_DIR = "/data/logs/%sd" % SHORT_NAME
-
 ###################
 # ERROR REPORTING #
 ###################

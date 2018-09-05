@@ -16,7 +16,6 @@ from djangoplicity.settings import copy_setting
 #############################
 BUILD_ROOT = "/data/www/%s" % SHORT_NAME
 BUILDOUT_CONFIG = "conf/production.cfg"
-LOG_DIR = "/data/logs/%s" % SHORT_NAME
 
 ###################
 # ERROR REPORTING #

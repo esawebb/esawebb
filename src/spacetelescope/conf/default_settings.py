@@ -13,7 +13,7 @@ import sys
 #############################
 # ENVIRONMENT CONFIGURATION #
 #############################
-ROOT = '%%ROOT%%'  # "/Users/%s/dev/spacetelescope" % getpass.getuser() if platform.system() == 'Darwin' else "/scratch/src/hubble"
+ROOT = '/app'
 PRJBASE = "%s/src/spacetelescope" % ROOT
 DJANGOPLICITY_ROOT = "%s/src/djangoplicity" % ROOT
 
