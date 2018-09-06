@@ -48,7 +48,10 @@ CACHES = {
 	'default': {
 		'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
 		'KEY_PREFIX': SHORT_NAME,
-		'LOCATION': '127.0.0.1:11211',
+		'LOCATION': [
+			'aweb33.hq.eso.org:11214',
+			'aweb34.hq.eso.org:11214',
+		],
 		'TIMEOUT': 86400
 	}
 }
