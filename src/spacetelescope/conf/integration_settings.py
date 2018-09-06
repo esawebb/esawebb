@@ -48,10 +48,7 @@ CACHES = {
 	'default': {
 		'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
 		'KEY_PREFIX': SHORT_NAME,
-		'LOCATION': [
-			'%(short_name)s3i:11211' % { 'short_name': SHORT_NAME},
-			'%(short_name)s4i:11211' % { 'short_name': SHORT_NAME},
-		],
+		'LOCATION': '127.0.0.1:11211',
 		'TIMEOUT': 86400
 	}
 }
