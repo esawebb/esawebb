@@ -14,17 +14,13 @@ from djangoplicity.settings import copy_setting
 #############################
 # ENVIRONMENT CONFIGURATION #
 #############################
-ROOT_RELOCATE = "/data/www/hubble"
-BUILD_ROOT = "/data/www/%s" % SHORT_NAME
 PRJBASE = "%s/src/spacetelescope" % ROOT
 DJANGOPLICITY_ROOT = "%s/src/djangoplicity" % ROOT
 
-BUILD_ROOT = ROOT
-BUILD_PRJBASE = PRJBASE
-BUILD_DJANGOPLICITY_ROOT = DJANGOPLICITY_ROOT
-
 ENABLE_SSL = True
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+
+LOGGING_HANDLER = ['file']
 
 #####################
 # CONFIG GENERATION #

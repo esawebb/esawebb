@@ -11,12 +11,6 @@
 from spacetelescope.conf.deployment_settings import *
 from djangoplicity.settings import copy_setting
 
-#############################
-# ENVIRONMENT CONFIGURATION #
-#############################
-BUILD_ROOT = "/data/www/%s" % SHORT_NAME
-BUILDOUT_CONFIG = "conf/production.cfg"
-
 ###################
 # ERROR REPORTING #
 ###################

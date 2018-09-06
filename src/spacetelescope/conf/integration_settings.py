@@ -11,17 +11,6 @@
 from spacetelescope.conf.deployment_settings import *
 from djangoplicity.settings import copy_setting
 
-#############################
-# ENVIRONMENT CONFIGURATION #
-#############################
-ROOT_RELOCATE = "/data/www/hubbled"
-
-#############################
-# ENVIRONMENT CONFIGURATION #
-#############################
-BUILD_ROOT = "/data/www/%sd" % SHORT_NAME
-BUILDOUT_CONFIG = "conf/integration.cfg"
-
 ###################
 # ERROR REPORTING #
 ###################

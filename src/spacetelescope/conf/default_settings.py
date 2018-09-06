@@ -17,11 +17,6 @@ ROOT = '/app'
 PRJBASE = "%s/src/spacetelescope" % ROOT
 DJANGOPLICITY_ROOT = "%s/src/djangoplicity" % ROOT
 
-BUILD_ROOT = ROOT
-BUILD_PRJBASE = PRJBASE
-BUILD_DJANGOPLICITY_ROOT = DJANGOPLICITY_ROOT
-BUILDOUT_CONFIG = "buildout.cfg"
-
 LOG_DIR = "%s/logs" % ROOT
 TMP_DIR = "%s/tmp" % ROOT
 ENABLE_SSL = False
@@ -79,7 +74,7 @@ ADMINS = (
 	('EPO Monitoring', 'esoepo-monitoring@eso.org'),
 )
 
-LOGGING_HANDLER = ['file', 'mail_admins']
+LOGGING_HANDLER = ['console']
 
 ##################
 # DATABASE SETUP #
