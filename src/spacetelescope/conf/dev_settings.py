@@ -45,12 +45,6 @@ DEBUG_TOOLBAR_PANELS = [
 	'debug_toolbar.panels.redirects.RedirectsPanel',
 ]
 
-MEDIA_ROOT = "/media/epodweb/hubble/docs/static/"
-#MEDIA_ROOT = "/tmp/"
-#DJANGOPLICITY_MEDIA_ROOT = "/Volumes/webdocs/hubble/docs/static/djangoplicity"
-
-#ARCHIVE_IMPORT_ROOT = "/Volumes/webdocs/hubble/import/"
-
 ##################
 # DATABASE SETUP #
 ##################
@@ -59,10 +53,6 @@ DATABASES['default']['USER'] = 'postgres'
 DATABASES['default']['NAME'] = 'postgres'
 DATABASES['default']['HOST'] = 'db'
 
-###############
-# MEDIA SETUP #
-###############
-#MEDIA_ROOT = "/Volumes/webdocs/hubble/docs/static"
 
 ##########
 # CACHE  #

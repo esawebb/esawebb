@@ -79,8 +79,6 @@ DATABASES['default']['CONN_MAX_AGE'] = 600
 # MEDIA SETUP #
 ###############
 SERVE_STATIC_MEDIA = False
-MEDIA_ROOT = "%s/docs/static/" % ROOT
-STATIC_ROOT = "%s/docs/static/app/" % ROOT
 DJANGOPLICITY_MEDIA_ROOT = "%s/static" % DJANGOPLICITY_ROOT
 SECRET_KEY = "g6ymvx$i1sv4k*g+nwfnx*3a1g&)^i6r9n6g4=f_$x^u(kwt8s"
 

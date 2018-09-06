@@ -98,10 +98,10 @@ if 'test' in sys.argv:
 # MEDIA SETUP #
 ###############
 SERVE_STATIC_MEDIA = True
-MEDIA_ROOT = "%s/static/" % PRJBASE
+MEDIA_ROOT = "%s/docs/static/" % ROOT
 MEDIA_URL = "/static/"
-STATIC_ROOT = "%s/static/app/" % PRJBASE
-STATIC_URL = "/static/app/"
+STATIC_ROOT = "%s/static/djp/" % ROOT
+STATIC_URL = "/static/djp/"
 DJANGOPLICITY_MEDIA_URL = "/static/app/djangoplicity/"
 DJANGOPLICITY_MEDIA_ROOT = "%s/static" % DJANGOPLICITY_ROOT
 ADMIN_MEDIA_PREFIX = "/static/app/admin/"
