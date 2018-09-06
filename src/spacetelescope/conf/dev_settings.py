@@ -55,8 +55,9 @@ MEDIA_ROOT = "/media/epodweb/hubble/docs/static/"
 # DATABASE SETUP #
 ##################
 DATABASES = copy_setting(DATABASES)
-DATABASES['default']['USER'] = "mandre"
-DATABASES['default']['PASSWORD'] = "Hirshaj3"
+DATABASES['default']['USER'] = 'postgres'
+DATABASES['default']['NAME'] = 'postgres'
+DATABASES['default']['HOST'] = 'db'
 
 ###############
 # MEDIA SETUP #
@@ -83,9 +84,7 @@ CACHES = {
 ##########
 # CELERY #
 ##########
-CELERY_BROKER_URL = 'amqp://spacetelescope:letoveumtold@localhost:5672/spacetelescope_vhost'
-
-CELERY_TASK_ALWAYS_EAGER = False
+CELERY_BROKER_URL = 'amqp://guest:guest@broker:5672/'
 
 #########
 # EMAIL #
