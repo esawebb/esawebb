@@ -67,6 +67,7 @@ SUPERVISORTCTL_PROCESS = 'gunicorn-' + SHORT_NAME
 SITE_ENVIRONMENT = 'local'
 DEBUG = True
 DEBUG_TOOLBAR = False
+DEBUG_TOOLBAR_CONFIG = {}
 TEMPLATE_DEBUG = False
 SEND_BROKEN_LINK_EMAILS = False
 
@@ -131,9 +132,11 @@ SECRET_KEY = "sadfpn870742kfasbvancp837rcnp3w8orypbw83ycnspo8r7"
 ##########
 CACHES = {
 	'default': {
-        'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
-        'LOCATION': SHORT_NAME,
-    }
+		'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
+		'KEY_PREFIX': SHORT_NAME,
+		'LOCATION': '127.0.0.1:11211',
+		'TIMEOUT': 86400
+	}
 }
 
 ############

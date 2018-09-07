@@ -41,21 +41,6 @@ DATABASES = copy_setting(DATABASES)
 DATABASES['default']['HOST'] = "hqdb1i.hq.eso.org"
 DATABASES['default']['PASSWORD'] = "fivjeylvoked"
 
-##########
-# CACHE  #
-##########
-CACHES = {
-	'default': {
-		'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
-		'KEY_PREFIX': SHORT_NAME,
-		'LOCATION': [
-			'aweb33.hq.eso.org:11214',
-			'aweb34.hq.eso.org:11214',
-		],
-		'TIMEOUT': 86400
-	}
-}
-
 #########
 # EMAIL #
 #########
