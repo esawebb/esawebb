@@ -11,38 +11,33 @@
 from __future__ import absolute_import
 import os
 import re
+import sys
 
+# pylint: disable=no-name-in-module
 from celery.schedules import crontab
 from django.utils.translation import ugettext_noop
 
 import djangoplicity.crosslinks
 from djangoplicity.contentserver import CDN77ContentServer
-from djangoplicity.settings import import_settings
-
-local_settings = import_settings('spacetelescope')
-LOCAL_SETTINGS_MODULE = local_settings.LOCAL_SETTINGS_MODULE
 
 #############################
 # ENVIRONMENT CONFIGURATION #
 #############################
-ROOT = local_settings.ROOT
-PRJBASE = local_settings.PRJBASE
+SHORT_NAME = 'hubble'
+ROOT = '/app'
+PRJBASE = "%s/src/spacetelescope" % ROOT
 PRJNAME = 'spacetelescope.org'
-DJANGOPLICITY_ROOT = local_settings.DJANGOPLICITY_ROOT
-LOG_DIR = local_settings.LOG_DIR
-TMP_DIR = local_settings.TMP_DIR
-ENABLE_SSL = local_settings.ENABLE_SSL
-ALLOW_SSL = local_settings.ALLOW_SSL
+DJANGOPLICITY_ROOT = "%s/src/djangoplicity" % ROOT
+LOG_DIR = "%s/logs" % ROOT
+TMP_DIR = "%s/tmp" % ROOT
+ENABLE_SSL = False
+ALLOW_SSL = True
 GA_ID = "UA-2368492-6"
 FACEBOOK_APP_ID = "144508505618279"
-SECURE_PROXY_SSL_HEADER = local_settings.SECURE_PROXY_SSL_HEADER
+SECURE_PROXY_SSL_HEADER = None
 
-#####################
-# CONFIG GENERATION #
-#####################
-SHORT_NAME = local_settings.SHORT_NAME
-WEBSERVERS = local_settings.WEBSERVERS
-SSL_ASSETS_PREFIX = local_settings.SSL_ASSETS_PREFIX
+CSRF_COOKIE_SECURE = False
+SESSION_COOKIE_SECURE = False
 
 
 ###################
@@ -85,27 +80,43 @@ GARCHING_INTERNAL_IPS = (
     '127.0.0.1',
 )
 
-SITE_ENVIRONMENT = local_settings.SITE_ENVIRONMENT
-DEBUG = local_settings.DEBUG
-DEBUG_TOOLBAR = local_settings.DEBUG_TOOLBAR
-DEBUG_TOOLBAR_CONFIG = local_settings.DEBUG_TOOLBAR_CONFIG
-SEND_BROKEN_LINK_EMAILS = local_settings.SEND_BROKEN_LINK_EMAILS
+SITE_ENVIRONMENT = 'local'
+DEBUG = os.getenv('DJANGO_LOG_LEVEL', 'INFO') == 'DEBUG'
+DEBUG_TOOLBAR = DEBUG
+DEBUG_TOOLBAR_CONFIG = {}
+TEMPLATE_DEBUG = DEBUG
+SEND_BROKEN_LINK_EMAILS = False
 
-ADMINS = local_settings.ADMINS
+ADMINS = (
+    ('EPO Monitoring', 'esoepo-monitoring@eso.org'),
+)
 MANAGERS = ADMINS
 
-SERVE_STATIC_MEDIA = local_settings.SERVE_STATIC_MEDIA
+SERVE_STATIC_MEDIA = True
 
-DEBUG_TOOLBAR_PANELS = local_settings.DEBUG_TOOLBAR_PANELS
+DEBUG_TOOLBAR_PANELS = []
 
 # Make this unique, and don't share it with anybody.
-SECRET_KEY = local_settings.SECRET_KEY
+SECRET_KEY = "sadfpn870742kfasbvancp837rcnp3w8orypbw83ycnspo8r7"
 
 
 ##################
 # DATABASE SETUP #
 ##################
-DATABASES = local_settings.DATABASES
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'spacetelescope',
+        'USER': 'spacetelescope',
+        'PASSWORD': '',
+        'HOST': 'localhost',
+        'CONN_MAX_AGE': 0,
+    }
+}
+
+if 'test' in sys.argv:
+    DATABASES['default']['ENGINE'] = 'django.db.backends.sqlite3'
+
 
 FIXTURE_DIRS = (
     PRJBASE + '/fixtures',
@@ -155,39 +166,38 @@ WIDGET_FORMAT = ugettext_noop("j/m/Y")
 ###############
 # MEDIA SETUP #
 ###############
-# Absolute path to the directory that holds media.
-# Example: "/home/media/media.lawrence.com/"
-MEDIA_ROOT = local_settings.MEDIA_ROOT
-
-
-# URL that handles the media served from MEDIA_ROOT. Make sure to use a
-# trailing slash if there is a path component (optional in other cases).
-# Examples: "http://media.lawrence.com", "http://example.com/media/"
-MEDIA_URL = local_settings.MEDIA_URL
-
+MEDIA_ROOT = "%s/docs/static/" % ROOT
+MEDIA_URL = "/static/"
 
 # URL prefix for admin media -- CSS, JavaScript and images. Make sure to use a
 # trailing slash.
 # Examples: "http://foo.com/media/", "/media/".
 # ADMIN_MEDIA_PREFIX is necessary due to satchmo current version. TODO: remove when Satchmo is upgraded
-ADMIN_MEDIA_PREFIX = local_settings.ADMIN_MEDIA_PREFIX
-DJANGOPLICITY_MEDIA_URL = local_settings.DJANGOPLICITY_MEDIA_URL
-DJANGOPLICITY_MEDIA_ROOT = local_settings.DJANGOPLICITY_MEDIA_ROOT
+ADMIN_MEDIA_PREFIX = "/static/app/admin/"
+DJANGOPLICITY_MEDIA_URL = "/static/app/djangoplicity/"
+DJANGOPLICITY_MEDIA_ROOT = "%s/static" % DJANGOPLICITY_ROOT
 
-MIDENTIFY_PATH = local_settings.MIDENTIFY_PATH
+MIDENTIFY_PATH = '/usr/bin/midentify'
 
 # Staticfiles app
 STATICFILES_DIRS = [
     ( 'djangoplicity', DJANGOPLICITY_MEDIA_ROOT ),
 ]
 
-STATIC_ROOT = local_settings.STATIC_ROOT
-STATIC_URL = local_settings.STATIC_URL
+STATIC_ROOT = "%s/static/djp/" % ROOT
+STATIC_URL = "/static/djp/"
 
 ##########
 # CACHE  #
 ##########
-CACHES = local_settings.CACHES
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
+        'KEY_PREFIX': SHORT_NAME,
+        'LOCATION': '127.0.0.1:11211',
+        'TIMEOUT': 86400
+    }
+}
 CACHE_MIDDLEWARE_SECONDS = 600
 CACHE_MIDDLEWARE_KEY_PREFIX = SHORT_NAME
 CACHE_MIDDLEWARE_ANONYMOUS_ONLY = True
@@ -210,7 +220,7 @@ TEMPLATES = [
         ],
         'APP_DIRS': True,
         'OPTIONS': {
-            'debug': local_settings.TEMPLATE_DEBUG,
+            'debug': False,
             'context_processors': [
                 'django.contrib.auth.context_processors.auth',
                 'django.template.context_processors.debug',
@@ -390,45 +400,34 @@ if DEBUG_TOOLBAR:
 ############
 # SESSIONS #
 ############
-SESSION_ENGINE = local_settings.SESSION_ENGINE
-SESSION_COOKIE_AGE = local_settings.SESSION_COOKIE_AGE
-SESSION_COOKIE_DOMAIN = local_settings.SESSION_COOKIE_DOMAIN
-#TODO: remove when python 2.7 is installed on productino
-SESSION_COOKIE_HTTPONLY = False
+SESSION_ENGINE = 'django.contrib.sessions.backends.db'
+SESSION_COOKIE_AGE = 86400
+SESSION_COOKIE_DOMAIN = None
 
 
 ################
 # FILE UPLOADS #
 ################
-FILE_UPLOAD_TEMP_DIR = local_settings.FILE_UPLOAD_TEMP_DIR
+FILE_UPLOAD_TEMP_DIR = TMP_DIR
 FILE_UPLOAD_PERMISSIONS = 0666
-#FILE_UPLOAD_MAX_MEMORY_SIZE = 2621440 <-- default
 
-#########
-# EMAIL #
-#########
-SERVER_EMAIL = local_settings.SERVER_EMAIL
-DEFAULT_FROM_EMAIL = local_settings.DEFAULT_FROM_EMAIL
-EMAIL_HOST = local_settings.EMAIL_HOST
-EMAIL_HOST_PASSWORD = local_settings.EMAIL_HOST_PASSWORD
-EMAIL_HOST_USER = local_settings.EMAIL_HOST_USER
-EMAIL_PORT = local_settings.EMAIL_PORT
-EMAIL_USE_TLS = local_settings.EMAIL_USE_TLS
-EMAIL_SUBJECT_PREFIX = local_settings.EMAIL_SUBJECT_PREFIX
+SERVER_EMAIL = 'nobody@eso.org'
+DEFAULT_FROM_EMAIL = 'nobody@eso.org'
+EMAIL_HOST_PASSWORD = ''
+EMAIL_HOST_USER = ''
+EMAIL_HOST = 'localhost'
+EMAIL_PORT = '1025'
+EMAIL_USE_TLS = False
+EMAIL_SUBJECT_PREFIX = '[SPACETELESCOPE-LOCAL]'
 
 ##################
 # AUTHENTICATION #
 ##################
 
-if local_settings.DISABLE_LDAP:
-    AUTHENTICATION_BACKENDS = (
-        'django.contrib.auth.backends.ModelBackend',
-    )
-else:
-    AUTHENTICATION_BACKENDS = (
-        'django_auth_ldap.backend.LDAPBackend',
-        'django.contrib.auth.backends.ModelBackend',
-    )
+AUTHENTICATION_BACKENDS = (
+    'django_auth_ldap.backend.LDAPBackend',
+    'django.contrib.auth.backends.ModelBackend',
+)
 #AUTH_PROFILE_MODULE = ''
 LOGIN_URL = '/login/'
 LOGOUT_URL = '/logout/'
@@ -437,44 +436,43 @@ LOGIN_REDIRECT_URL = '/'
 #############
 # LDAP AUTH #
 #############
-if not local_settings.DISABLE_LDAP:  # Ensure that module is not loaded if disabled
-    import ldap
-    from django_auth_ldap.config import LDAPSearch, ActiveDirectoryGroupType
+import ldap
+from django_auth_ldap.config import LDAPSearch, ActiveDirectoryGroupType
 
-    AUTH_LDAP_SERVER_URI = "ldaps://ldap.ads.eso.org:636/ads.eso.org"
+AUTH_LDAP_SERVER_URI = "ldaps://ldap.ads.eso.org:636/ads.eso.org"
 
-    AUTH_LDAP_GLOBAL_OPTIONS = {
-        ldap.OPT_REFERRALS: 0,
-        ldap.OPT_PROTOCOL_VERSION: 3,
-        ldap.OPT_X_TLS_REQUIRE_CERT: ldap.OPT_X_TLS_NEVER
-    }
+AUTH_LDAP_GLOBAL_OPTIONS = {
+    ldap.OPT_REFERRALS: 0,
+    ldap.OPT_PROTOCOL_VERSION: 3,
+    ldap.OPT_X_TLS_REQUIRE_CERT: ldap.OPT_X_TLS_NEVER
+}
 
-    AUTH_LDAP_BIND_DN = "xskioskldap"
-    AUTH_LDAP_BIND_PASSWORD = "LDAP1420"
-    AUTH_LDAP_USER_SEARCH = LDAPSearch( "DC=ads,DC=eso,DC=org",
-        ldap.SCOPE_SUBTREE, "(&(objectCategory=user)(objectClass=person)(sAMAccountName=%(user)s)(!(userAccountControl:1.2.840.113556.1.4.803:=2)))" )
+AUTH_LDAP_BIND_DN = "xskioskldap"
+AUTH_LDAP_BIND_PASSWORD = "LDAP1420"
+AUTH_LDAP_USER_SEARCH = LDAPSearch( "DC=ads,DC=eso,DC=org",
+    ldap.SCOPE_SUBTREE, "(&(objectCategory=user)(objectClass=person)(sAMAccountName=%(user)s)(!(userAccountControl:1.2.840.113556.1.4.803:=2)))" )
 
-    AUTH_LDAP_USER_ATTR_MAP = {
-        "first_name": "givenName",
-        "last_name": "sn",
-        "email": "mail"
-    }
+AUTH_LDAP_USER_ATTR_MAP = {
+    "first_name": "givenName",
+    "last_name": "sn",
+    "email": "mail"
+}
 
-    AUTH_LDAP_GROUP_TYPE = ActiveDirectoryGroupType()
-    AUTH_LDAP_GROUP_SEARCH = LDAPSearch(
-        "dc=ads,dc=eso,dc=org",
-        ldap.SCOPE_SUBTREE, "(objectClass=group)"
-    )
+AUTH_LDAP_GROUP_TYPE = ActiveDirectoryGroupType()
+AUTH_LDAP_GROUP_SEARCH = LDAPSearch(
+    "dc=ads,dc=eso,dc=org",
+    ldap.SCOPE_SUBTREE, "(objectClass=group)"
+)
 
-    # Defaults:
-    # - ePOD staff will get active/staff account - but no permissions.
-    # - All ESO staff will get an inactive account on login - this account has to manually be activated.
-    AUTH_LDAP_ALWAYS_UPDATE_USER = False  # Prevent user from being updated every time a user logs in.
+# Defaults:
+# - ePOD staff will get active/staff account - but no permissions.
+# - All ESO staff will get an inactive account on login - this account has to manually be activated.
+AUTH_LDAP_ALWAYS_UPDATE_USER = False  # Prevent user from being updated every time a user logs in.
 
-    AUTH_LDAP_USER_FLAGS_BY_GROUP = {
-        "is_active": "CN=SA-PAD-EPR,OU=Garching,OU=Shared Acess Groups,OU=Groups,DC=ads,DC=eso,DC=org",
-        "is_staff": "CN=SA-PAD-EPR,OU=Garching,OU=Shared Acess Groups,OU=Groups,DC=ads,DC=eso,DC=org",
-    }
+AUTH_LDAP_USER_FLAGS_BY_GROUP = {
+    "is_active": "CN=SA-PAD-EPR,OU=Garching,OU=Shared Acess Groups,OU=Groups,DC=ads,DC=eso,DC=org",
+    "is_staff": "CN=SA-PAD-EPR,OU=Garching,OU=Shared Acess Groups,OU=Groups,DC=ads,DC=eso,DC=org",
+}
 
 ############
 # AUTH_TKT #
@@ -487,12 +485,6 @@ AUTH_TKT_HTACCESS = '.esoacc'
 # AUTH_TKT_TIMEOUT_URL = ''
 # AUTH_TKT_FILEPERMS =
 
-
-#########
-# GEOIP #
-#########
-GEOIP_PATH = local_settings.GEOIP_PATH
-GEOIP_LIBRARY_PATH = local_settings.GEOIP_LIBRARY_PATH
 
 #########
 # PAGES #
@@ -513,7 +505,7 @@ BREADCRUMB_SEPARATOR = '&raquo;'
 #################
 # DJANGO ASSETS #
 #################
-ASSETS_DEBUG = local_settings.ASSETS_DEBUG
+ASSETS_DEBUG = True
 ASSETS_UPDATER = "timestamp"
 #ASSETS_AUTO_CREATE
 #ASSETS_EXPIRE = 'filename'
@@ -592,7 +584,7 @@ ARCHIVE_ROOT = 'archives/'
 ENABLE_ADVANCED_SEARCH = True
 ADV_SEARCH_START_YEAR = 1998
 
-ARCHIVE_AUTO_RESOURCE_DELETION = local_settings.ARCHIVE_AUTO_RESOURCE_DELETION
+ARCHIVE_AUTO_RESOURCE_DELETION = False
 RELEASE_ARCHIVE_ROOT = 'archives/releases/'
 IMAGES_ARCHIVE_ROOT = 'archives/images/'
 IMAGECOMPARISON_ARCHIVE_ROOT = 'archives/imagecomparisons/'
@@ -626,9 +618,9 @@ DEFAULT_PUBLISHER_ID = u"esahubble"
 
 DEFAULT_CREDIT = u"NASA &amp; ESA"
 
-ARCHIVE_IMPORT_ROOT = local_settings.ARCHIVE_IMPORT_ROOT
-MP4BOX_PATH = local_settings.MP4BOX_PATH
-MP4FRAGMENT_PATH = local_settings.MP4FRAGMENT_PATH
+ARCHIVE_IMPORT_ROOT = "%s/import" % ROOT
+MP4BOX_PATH = '/Applications/Osmo4.app/Contents/MacOS/MP4Box'
+MP4FRAGMENT_PATH = '/usr/bin/mp4fragment'
 
 ARCHIVE_WORKFLOWS = {
     'media.video.rename': ('spacetelescope.workflows.media', 'video_rename'),
@@ -641,8 +633,13 @@ ARCHIVE_CROSSLINKS = djangoplicity.crosslinks.crosslinks_for_domain('spacetelesc
 ##########
 # SOCIAL #
 ##########
-SOCIAL_FACEBOOK_TOKEN = local_settings.SOCIAL_FACEBOOK_TOKEN
-SOCIAL_TWITTER_TUPLE = local_settings.SOCIAL_TWITTER_TUPLE
+SOCIAL_FACEBOOK_TOKEN = "187807957898842|a7f1fed4a89e26492133c6e4-100001473653251|141347899254844|K4lqzDRBPyAVFa7msmusumliPwI"
+SOCIAL_TWITTER_TUPLE = (
+    "226991078-bHYf0sHAUEs1v6fjnxy8F0KjTLtSLnqTpyKx2Bqh",
+    "oiRDpzBIZUmQ1m8xxrw16aiYBAMjBx9vEi4ddgLOjzc",
+    "uS6hO2sV6tDKIOeVjhnFnQ",
+    "MEYTOS97VvlHX7K1rwHPEqVpTSqZ71HtvoK4sVuYk",
+)
 
 
 SOCIAL_FACEBOOK_WALL = 'http://www.facebook.com/hubbleESA?sk=wall'
@@ -684,8 +681,8 @@ CELERY_TIMEZONE = TIME_ZONE
 CELERY_ENABLE_UTC = False
 
 # Broker settings.
-CELERY_BROKER_USE_SSL = local_settings.CELERY_BROKER_USE_SSL
-CELERY_BROKER_URL = local_settings.CELERY_BROKER_URL
+CELERY_BROKER_USE_SSL = False
+CELERY_BROKER_URL = 'amqp://spacetelescope:letoveumtold@localhost:5672/spacetelescope_vhost'
 
 # Task result backend
 CELERY_RESULT_BACKEND = "amqp"
@@ -708,7 +705,7 @@ CELERY_WORKER_SEND_TASK_EVENTS = True
 # Logging
 CELERY_WORKER_HIJACK_ROOT_LOGGER = False
 
-CELERY_TASK_ALWAYS_EAGER = local_settings.CELERY_TASK_ALWAYS_EAGER
+CELERY_TASK_ALWAYS_EAGER = False
 
 # File to save revoked tasks across workers restart
 CELERY_WORKER_STATE_DB = "%s/tmp/celery_states" % ROOT
@@ -836,7 +833,7 @@ LOGGING = {
     },
     'loggers': {
         'django': {
-            'handlers': local_settings.LOGGING_HANDLER,
+            'handlers': ['console'] if DEBUG else ['file'],
             'propagate': True,
             'level': 'DEBUG' if DEBUG else 'INFO',
         },
@@ -854,11 +851,11 @@ LOGGING = {
             'propagate': False,
         },
         'djangoplicity': {
-            'handlers': local_settings.LOGGING_HANDLER,
+            'handlers': ['console'] if DEBUG else ['file'],
             'level': 'DEBUG' if DEBUG else 'INFO',
         },
         'django.db.backends': {
-            'handlers': local_settings.LOGGING_HANDLER,
+            'handlers': ['console'] if DEBUG else ['file'],
             'propagate': False,
             'level': 'INFO',
         },
@@ -867,7 +864,7 @@ LOGGING = {
             'propagate': False,
         },
         'django_auth_ldap': {
-            'handlers': local_settings.LOGGING_HANDLER,
+            'handlers': ['console'] if DEBUG else ['file'],
             'propagate': True,
             'level': 'DEBUG' if DEBUG else 'INFO',
         },
@@ -884,7 +881,7 @@ LOGGING = {
             'propagate': False,
         },
         'requests': {
-            'handlers': local_settings.LOGGING_HANDLER,
+            'handlers': ['console'] if DEBUG else ['file'],
             'level': 'WARNING',  # requests is too verbose by default
         },
     },
@@ -992,18 +989,18 @@ LIVESETTINGS_OPTIONS = {
                 u'LOGO_URI': u'http://hubble3.hq.eso.org/static/archives/logos/screen/eso_colour.jpg',  # FIXME This should point to www.spacetelescope.org but is currently broken until the ACE is decomissioned
             },
             u'PAYMENT_CONCARDIS': {
-                u'PSPID': u'40F06654' if local_settings.LIVE else u'esoepod',
+                u'PSPID': u'esoepod',
                 u'SHA_IN_PASSPHRASE': u'0;dl18;asdL_k21as87ma',
                 u'SHA_OUT_PASSPHRASE': u'!7-zl;j31njky;aslerl',
-                u'LIVE': u'True' if local_settings.LIVE else u'False',
+                u'LIVE': u'False',
                 u'EXTRA_LOGGING': u'True',
             },
         }
     }
 }
 
-ORDER_PREFIX = local_settings.ORDER_PREFIX
-LIVE = local_settings.LIVE
+ORDER_PREFIX = 'hbl'
+LIVE = False
 SHOP_PICKUP_LOCATIONS = ({
     'id': 'PUP1',
     'name': 'ESO HQ',
