@@ -14,19 +14,13 @@ from djangoplicity.settings import copy_setting
 #############################
 # ENVIRONMENT CONFIGURATION #
 #############################
-ROOT_RELOCATE = "/data/www/hubble"
-BUILD_ROOT = "/data/www/%s" % SHORT_NAME
 PRJBASE = "%s/src/spacetelescope" % ROOT
 DJANGOPLICITY_ROOT = "%s/src/djangoplicity" % ROOT
 
-BUILD_ROOT = ROOT
-BUILD_PRJBASE = PRJBASE
-BUILD_DJANGOPLICITY_ROOT = DJANGOPLICITY_ROOT
-
-LOG_DIR = "%s/logs" % ROOT
-TMP_DIR = "%s/tmp" % ROOT
 ENABLE_SSL = True
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+
+LOGGING_HANDLER = ['file']
 
 #####################
 # CONFIG GENERATION #
@@ -85,8 +79,6 @@ DATABASES['default']['CONN_MAX_AGE'] = 600
 # MEDIA SETUP #
 ###############
 SERVE_STATIC_MEDIA = False
-MEDIA_ROOT = "%s/docs/static/" % ROOT
-STATIC_ROOT = "%s/docs/static/app/" % ROOT
 DJANGOPLICITY_MEDIA_ROOT = "%s/static" % DJANGOPLICITY_ROOT
 SECRET_KEY = "g6ymvx$i1sv4k*g+nwfnx*3a1g&)^i6r9n6g4=f_$x^u(kwt8s"
 

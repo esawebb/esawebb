@@ -11,19 +11,6 @@
 from spacetelescope.conf.deployment_settings import *
 from djangoplicity.settings import copy_setting
 
-#############################
-# ENVIRONMENT CONFIGURATION #
-#############################
-ROOT_RELOCATE = "/data/www/hubbled"
-
-#############################
-# ENVIRONMENT CONFIGURATION #
-#############################
-BUILD_ROOT = "/data/www/%sd" % SHORT_NAME
-BUILDOUT_CONFIG = "conf/integration.cfg"
-
-LOG_DIR = "/data/logs/%sd" % SHORT_NAME
-
 ###################
 # ERROR REPORTING #
 ###################
@@ -53,21 +40,6 @@ PYTHON = "python2.7"
 DATABASES = copy_setting(DATABASES)
 DATABASES['default']['HOST'] = "hqdb1i.hq.eso.org"
 DATABASES['default']['PASSWORD'] = "fivjeylvoked"
-
-##########
-# CACHE  #
-##########
-CACHES = {
-	'default': {
-		'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
-		'KEY_PREFIX': SHORT_NAME,
-		'LOCATION': [
-			'%(short_name)s3i:11211' % { 'short_name': SHORT_NAME},
-			'%(short_name)s4i:11211' % { 'short_name': SHORT_NAME},
-		],
-		'TIMEOUT': 86400
-	}
-}
 
 #########
 # EMAIL #

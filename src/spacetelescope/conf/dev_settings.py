@@ -11,11 +11,6 @@
 from spacetelescope.conf.default_settings import *
 from djangoplicity.settings import copy_setting
 
-ROOT_RELOCATE = "/scratch/src/hubble"
-ADMINS = (
-	('Mathias Andre', 'mandre@eso.org'),
-)
-
 #####################
 # CONFIG GENERATION #
 #####################
@@ -28,12 +23,20 @@ SECRET_KEY = "g6ymvx$i1sv4k*g+nwfnx*3a1g&)^i6r9n6g4=f_$x^u(kwt8s"
 ##############
 # DEPLOYMENT #
 ##############
+def show_toolbar(request):
+	'''
+	The default callback checks if the IP is internal, but docker's IP
+	addresses are not in INTERNAL_IPS, so we force the display in dev mode
+	'''
+	return True
+
 DEPLOYMENT_EXISTING_CHECKOUT = "/scratch/scr/hubble/src/"
 DEBUG = True
 TEMPLATE_DEBUG = True
 DEBUG_TOOLBAR = True
 DEBUG_TOOLBAR_CONFIG = {
 	'INTERCEPT_REDIRECTS': False,
+	'SHOW_TOOLBAR_CALLBACK': show_toolbar,
 }
 DEBUG_TOOLBAR_PANELS = [
 	'debug_toolbar.panels.versions.VersionsPanel',
@@ -50,23 +53,14 @@ DEBUG_TOOLBAR_PANELS = [
 	'debug_toolbar.panels.redirects.RedirectsPanel',
 ]
 
-MEDIA_ROOT = "/media/epodweb/hubble/docs/static/"
-#MEDIA_ROOT = "/tmp/"
-#DJANGOPLICITY_MEDIA_ROOT = "/Volumes/webdocs/hubble/docs/static/djangoplicity"
-
-#ARCHIVE_IMPORT_ROOT = "/Volumes/webdocs/hubble/import/"
-
 ##################
 # DATABASE SETUP #
 ##################
 DATABASES = copy_setting(DATABASES)
-DATABASES['default']['USER'] = "mandre"
-DATABASES['default']['PASSWORD'] = "Hirshaj3"
+DATABASES['default']['USER'] = 'postgres'
+DATABASES['default']['NAME'] = 'postgres'
+DATABASES['default']['HOST'] = 'db'
 
-###############
-# MEDIA SETUP #
-###############
-#MEDIA_ROOT = "/Volumes/webdocs/hubble/docs/static"
 
 ##########
 # CACHE  #
@@ -85,17 +79,10 @@ CACHES = {
 	}
 }
 
-###########
-# LOGGING #
-###########
-LOGGING_HANDLER = ['console']
-
 ##########
 # CELERY #
 ##########
-CELERY_BROKER_URL = 'amqp://spacetelescope:letoveumtold@localhost:5672/spacetelescope_vhost'
-
-CELERY_TASK_ALWAYS_EAGER = False
+CELERY_BROKER_URL = 'amqp://guest:guest@broker:5672/'
 
 #########
 # EMAIL #

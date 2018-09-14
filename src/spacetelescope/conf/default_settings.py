@@ -13,14 +13,9 @@ import sys
 #############################
 # ENVIRONMENT CONFIGURATION #
 #############################
-ROOT = '%%ROOT%%'  # "/Users/%s/dev/spacetelescope" % getpass.getuser() if platform.system() == 'Darwin' else "/scratch/src/hubble"
+ROOT = '/app'
 PRJBASE = "%s/src/spacetelescope" % ROOT
 DJANGOPLICITY_ROOT = "%s/src/djangoplicity" % ROOT
-
-BUILD_ROOT = ROOT
-BUILD_PRJBASE = PRJBASE
-BUILD_DJANGOPLICITY_ROOT = DJANGOPLICITY_ROOT
-BUILDOUT_CONFIG = "buildout.cfg"
 
 LOG_DIR = "%s/logs" % ROOT
 TMP_DIR = "%s/tmp" % ROOT
@@ -72,6 +67,7 @@ SUPERVISORTCTL_PROCESS = 'gunicorn-' + SHORT_NAME
 SITE_ENVIRONMENT = 'local'
 DEBUG = True
 DEBUG_TOOLBAR = False
+DEBUG_TOOLBAR_CONFIG = {}
 TEMPLATE_DEBUG = False
 SEND_BROKEN_LINK_EMAILS = False
 
@@ -79,7 +75,7 @@ ADMINS = (
 	('EPO Monitoring', 'esoepo-monitoring@eso.org'),
 )
 
-LOGGING_HANDLER = ['file', 'mail_admins']
+LOGGING_HANDLER = ['console']
 
 ##################
 # DATABASE SETUP #
@@ -103,10 +99,10 @@ if 'test' in sys.argv:
 # MEDIA SETUP #
 ###############
 SERVE_STATIC_MEDIA = True
-MEDIA_ROOT = "%s/static/" % PRJBASE
+MEDIA_ROOT = "%s/docs/static/" % ROOT
 MEDIA_URL = "/static/"
-STATIC_ROOT = "%s/static/app/" % PRJBASE
-STATIC_URL = "/static/app/"
+STATIC_ROOT = "%s/static/djp/" % ROOT
+STATIC_URL = "/static/djp/"
 DJANGOPLICITY_MEDIA_URL = "/static/app/djangoplicity/"
 DJANGOPLICITY_MEDIA_ROOT = "%s/static" % DJANGOPLICITY_ROOT
 ADMIN_MEDIA_PREFIX = "/static/app/admin/"
@@ -136,9 +132,11 @@ SECRET_KEY = "sadfpn870742kfasbvancp837rcnp3w8orypbw83ycnspo8r7"
 ##########
 CACHES = {
 	'default': {
-        'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
-        'LOCATION': SHORT_NAME,
-    }
+		'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
+		'KEY_PREFIX': SHORT_NAME,
+		'LOCATION': '127.0.0.1:11211',
+		'TIMEOUT': 86400
+	}
 }
 
 ############
