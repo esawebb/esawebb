@@ -1,31 +1,31 @@
 {% load i18n %}{% load djangoplicity_utils %}{% load djangoplicity_datetime %}
 {% include "archives/announcement/extra_header.html" %}
 {% if not object_list %}
-	<div align="center">{% trans "No announcements were found." %}</div>
+    <div align="center">{% trans "No announcements were found." %}</div>
 {% else %}
 {% include "archives/search_results.html" %}
 
 {% for row in object_list|split_list:4 %}
 <div class="row news-list">
-	{% for ann in row %}
-	<div class="col-md-3 col-sm-6 col-xs-12">
-		<a href="{{ ann.get_absolute_url }}">
-			<div class="news-wrapper">
-				{% if ann.main_visual and ann.main_visual.resource_thumb350x %}
-				<div class="news-image">
-					<img class="img-responsive" src="{{ ann.main_visual.resource_thumb350x.url }}">
-				</div>
-				{% endif %}
-				<div class="news-description">
-					<div class="news-id">{{ ann.id }} — {% trans "Announcement" %}</div>
-					<div class="news-title">{{ ann.title }}</div>
-					<div class="news-teaser"><strong>{{ ann.release_date|datetime:"DATE" }}</strong>: {{ ann.description|safe|striptags|truncatewords:150 }}</div>
-				</div>
-				<div class="news-readmore">{% trans "Read more" %}</div>
-			</div> <!-- news-wrapper -->
-		</a>
-	</div>
-	{% endfor %}
+    {% for ann in row %}
+    <div class="col-md-3 col-sm-6 col-xs-12">
+        <a href="{{ ann.get_absolute_url }}">
+            <div class="news-wrapper">
+                {% if ann.main_visual and ann.main_visual.resource_thumb350x %}
+                <div class="news-image">
+                    <img class="img-responsive" src="{{ ann.main_visual.resource_thumb350x.url }}">
+                </div>
+                {% endif %}
+                <div class="news-description">
+                    <div class="news-id">{{ ann.id }} — {% trans "Announcement" %}</div>
+                    <div class="news-title">{{ ann.title }}</div>
+                    <div class="news-teaser"><strong>{{ ann.release_date|datetime:"DATE" }}</strong>: {{ ann.description|safe|striptags|truncatewords:150 }}</div>
+                </div>
+                <div class="news-readmore">{% trans "Read more" %}</div>
+            </div> <!-- news-wrapper -->
+        </a>
+    </div>
+    {% endfor %}
 </div>
 {% endfor %}
 {% paginator paginator page_obj paginator_url paginator_prefix paginator_params %}

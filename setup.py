@@ -11,13 +11,13 @@
 from setuptools import setup, find_packages
 
 setup(
-	name = 'spacetelescope',
-	packages = find_packages('src'),
-	package_dir = { '': 'src' },
-	include_package_data = True,
+    name = 'spacetelescope',
+    packages = find_packages('src'),
+    package_dir = { '': 'src' },
+    include_package_data = True,
     install_requires = [
-		'setuptools',
-		'netaddr',
-	],
-	zip_safe = False,
+        'setuptools',
+        'netaddr',
+    ],
+    zip_safe = False,
 )

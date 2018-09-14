@@ -1,47 +1,47 @@
 {% load i18n %}{% load djangoplicity_utils %}{% load djangoplicity_datetime %}
 {% include "archives/release/extra_header.html" %}
 {% if not object_list %}
-	<div align="center">{% trans "No press releases were found." %}</div>
+    <div align="center">{% trans "No press releases were found." %}</div>
 {% else %}
 {% include "archives/search_results.html" %}
 
 {% for row in object_list|split_list:4 %}
 <div class="row news-list">
-	{% for potw in row %}
-	<div class="col-md-3 col-sm-6 col-xs-12">
-		<a href="{{ potw.get_absolute_url }}">
-			<div class="news-wrapper">
-				<div class="news-image">
-					{% if potw.image %}
-						<img class="img-responsive" src="{{ potw.image.resource_thumb350x.url }}">
-					{% elif potw.video %}
-						<img class="img-responsive" src="{{ potw.video.resource_thumb350x.url }}">
-					{% elif potw.comparison %}
-						<img class="img-responsive" src="{{ potw.comparison.resource_thumb350x.url }}">
-					{% endif %}
-				</div>
-				<div class="news-description">
-					<div class="news-id">{{ potw.id }} — {% trans "Picture of the Week" %}</div>
-					{% if potw.image %}
-						<div class="news-title">{{ potw.image.title }}</div>
-					{% elif potw.video %}
-						<div class="news-title">{{ potw.video.title }}</div>
-					{% elif potw.comparison %}
-						<div class="news-title">{{ potw.comparison.title }}</div>
-					{% endif %}
-					{% if potw.image %}
-						<div class="news-teaser"><strong>{{ potw.release_date|datetime:"DATE" }}</strong>: {{ potw.image.description|safe|striptags|truncatewords:150 }}</div>
-					{% elif potw.video %}
-						<div class="news-teaser"><strong>{{ potw.release_date|datetime:"DATE" }}</strong>: {{ potw.video.description|safe|striptags|truncatewords:150 }}</div>
-					{% elif potw.comparison %}
-						<div class="news-teaser"><strong>{{ potw.release_date|datetime:"DATE" }}</strong>: {{ potw.comparison.description|safe|striptags|truncatewords:150 }}</div>
-					{% endif %}
-				</div>
-				<div class="news-readmore">{% trans "Read more" %}</div>
-			</div> <!-- news-wrapper -->
-		</a>
-	</div>
-	{% endfor %}
+    {% for potw in row %}
+    <div class="col-md-3 col-sm-6 col-xs-12">
+        <a href="{{ potw.get_absolute_url }}">
+            <div class="news-wrapper">
+                <div class="news-image">
+                    {% if potw.image %}
+                        <img class="img-responsive" src="{{ potw.image.resource_thumb350x.url }}">
+                    {% elif potw.video %}
+                        <img class="img-responsive" src="{{ potw.video.resource_thumb350x.url }}">
+                    {% elif potw.comparison %}
+                        <img class="img-responsive" src="{{ potw.comparison.resource_thumb350x.url }}">
+                    {% endif %}
+                </div>
+                <div class="news-description">
+                    <div class="news-id">{{ potw.id }} — {% trans "Picture of the Week" %}</div>
+                    {% if potw.image %}
+                        <div class="news-title">{{ potw.image.title }}</div>
+                    {% elif potw.video %}
+                        <div class="news-title">{{ potw.video.title }}</div>
+                    {% elif potw.comparison %}
+                        <div class="news-title">{{ potw.comparison.title }}</div>
+                    {% endif %}
+                    {% if potw.image %}
+                        <div class="news-teaser"><strong>{{ potw.release_date|datetime:"DATE" }}</strong>: {{ potw.image.description|safe|striptags|truncatewords:150 }}</div>
+                    {% elif potw.video %}
+                        <div class="news-teaser"><strong>{{ potw.release_date|datetime:"DATE" }}</strong>: {{ potw.video.description|safe|striptags|truncatewords:150 }}</div>
+                    {% elif potw.comparison %}
+                        <div class="news-teaser"><strong>{{ potw.release_date|datetime:"DATE" }}</strong>: {{ potw.comparison.description|safe|striptags|truncatewords:150 }}</div>
+                    {% endif %}
+                </div>
+                <div class="news-readmore">{% trans "Read more" %}</div>
+            </div> <!-- news-wrapper -->
+        </a>
+    </div>
+    {% endfor %}
 </div>
 {% endfor %}
 {% paginator paginator page_obj paginator_url paginator_prefix paginator_params %}

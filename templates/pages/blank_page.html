@@ -31,16 +31,16 @@
 {% load djangoplicity_utils %}
 
 <!--[if lt IE 9]>
-	{% javascript 'ie8compat' %}
-	<script src="//oss.maxcdn.com/respond/1.4.2/respond.min.js"></SCRIpt>
-	<script src="//oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    {% javascript 'ie8compat' %}
+    <script src="//oss.maxcdn.com/respond/1.4.2/respond.min.js"></SCRIpt>
+    <script src="//oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
 <![endif]-->
 
 {% include "archives/opengraph.html" %}
 
 {% if page.description %}
-	<meta name="description" content="{{page.description}}" />{% endif %}{% if page.keywords %}
-	<meta name="keywords" content="{{page.keywords}}" />{% endif %}
+    <meta name="description" content="{{page.description}}" />{% endif %}{% if page.keywords %}
+    <meta name="keywords" content="{{page.keywords}}" />{% endif %}
 
 </head>
 
@@ -68,7 +68,7 @@
 <div class='page_content'>
 {% if LANGUAGE_CODE != 'en' %}
 <div class="par parsys"><div class="title section">
-	<div style="float: right; margin: 10px 10px 0 0" class="sprites-flag_{{ LANGUAGE_CODE|code_to_country_code }}"></div>
+    <div style="float: right; margin: 10px 10px 0 0" class="sprites-flag_{{ LANGUAGE_CODE|code_to_country_code }}"></div>
 </div>
 {% endif %}
 {{ page.content }}

@@ -2,28 +2,28 @@
 
 var playlist = [
 {% for title, description, image, sdfile, hdfile, subs in playlist %}
-	{
-		title: '{{ title }}',
-		description: '{{ description }}',
-		image: '{{ image }}',
-		sources: [
-			{
-				file: '{{ sdfile }}',
-				label: 'SD'
-			},
-			{
-				file: '{{ hdfile }}',
-				label: 'HD'
-			}
-		],
-		{% if subs %}
-		tracks: [
-		{% for sub in subs %}
-			{file: fix_protocol("{{SITE_URL}}{{sub.resource_srt.url}}"), label: "{{ sub }}"},
-		{% endfor%}
-		]
-		{% endif %}
-	},
+    {
+        title: '{{ title }}',
+        description: '{{ description }}',
+        image: '{{ image }}',
+        sources: [
+            {
+                file: '{{ sdfile }}',
+                label: 'SD'
+            },
+            {
+                file: '{{ hdfile }}',
+                label: 'HD'
+            }
+        ],
+        {% if subs %}
+        tracks: [
+        {% for sub in subs %}
+            {file: fix_protocol("{{SITE_URL}}{{sub.resource_srt.url}}"), label: "{{ sub }}"},
+        {% endfor%}
+        ]
+        {% endif %}
+    },
 {% endfor %}
 ];
 

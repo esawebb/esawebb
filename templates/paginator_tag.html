@@ -3,36 +3,36 @@
 {% if paginator and page_obj %}
 {% spaceless %}
 <div class="row statusbar">
-	<div class="col-md-3">
-		{% blocktrans with page_obj.start_index as start_index and page_obj.end_index as end_index and paginator.count as count %}Showing {{ start_index }} to {{ end_index }} of {{ count }}{% endblocktrans %}
-	</div>
-	<div class="col-md-6">
-		<div class="text-center">
-			<ul class="pagination">
-			{% for page_num in adj_range %}
-				{% ifequal page_num 0 %}
-					<li><a href="#">...</a></li>
-				{% else %}
-					<li{% ifequal page_obj.number page_num %} class="active"{% endifequal %}><a href="{{ paginator_url }}{{paginator_prefix}}/{{ page_num }}/{% if paginator_params %}?{{paginator_params}}{% endif %}">{{ page_num }}</a></li>
-				{% endifequal %}
-			{% endfor %}
-			</ul>
-		</div>
-	</div>
-	<div class="col-md-3 prev-next">
-		{% if paginator and page_obj and page_obj.has_previous %}
-			<a href="{{ paginator_url }}{{paginator_prefix}}/{{ page_obj.previous_page_number }}/{% if paginator_params %}?{{paginator_params}}{% endif %}">{% trans "Previous" %}</a>
-		{% endif %}
-		{% if paginator and page_obj and page_obj.has_next %}
-			<a href="{{ paginator_url }}{{paginator_prefix}}/{{ page_obj.next_page_number }}/{% if paginator_params %}?{{paginator_params}}{% endif %}">{% trans "Next" %}</a>
-		{% endif %}
-	</div>
+    <div class="col-md-3">
+        {% blocktrans with page_obj.start_index as start_index and page_obj.end_index as end_index and paginator.count as count %}Showing {{ start_index }} to {{ end_index }} of {{ count }}{% endblocktrans %}
+    </div>
+    <div class="col-md-6">
+        <div class="text-center">
+            <ul class="pagination">
+            {% for page_num in adj_range %}
+                {% ifequal page_num 0 %}
+                    <li><a href="#">...</a></li>
+                {% else %}
+                    <li{% ifequal page_obj.number page_num %} class="active"{% endifequal %}><a href="{{ paginator_url }}{{paginator_prefix}}/{{ page_num }}/{% if paginator_params %}?{{paginator_params}}{% endif %}">{{ page_num }}</a></li>
+                {% endifequal %}
+            {% endfor %}
+            </ul>
+        </div>
+    </div>
+    <div class="col-md-3 prev-next">
+        {% if paginator and page_obj and page_obj.has_previous %}
+            <a href="{{ paginator_url }}{{paginator_prefix}}/{{ page_obj.previous_page_number }}/{% if paginator_params %}?{{paginator_params}}{% endif %}">{% trans "Previous" %}</a>
+        {% endif %}
+        {% if paginator and page_obj and page_obj.has_next %}
+            <a href="{{ paginator_url }}{{paginator_prefix}}/{{ page_obj.next_page_number }}/{% if paginator_params %}?{{paginator_params}}{% endif %}">{% trans "Next" %}</a>
+        {% endif %}
+    </div>
 </div>
 
 <div class="row">
-	<div class="col-md-12">
-		{% for browser in browsers %}<a href="{{ browser.url }}{% if browser.params %}?{{ browser.params }}{% endif %}">{% trans browser.name %}</a>{% if not forloop.last %}<br />{% endif %}{% endfor %}
-	</div>
+    <div class="col-md-12">
+        {% for browser in browsers %}<a href="{{ browser.url }}{% if browser.params %}?{{ browser.params }}{% endif %}">{% trans browser.name %}</a>{% if not forloop.last %}<br />{% endif %}{% endfor %}
+    </div>
 </div>
 {% endspaceless %}
 {% endif %}

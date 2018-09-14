@@ -26,10 +26,10 @@ LOGGING_HANDLER = ['file']
 # CONFIG GENERATION #
 #####################
 WEBSERVERS = (
-	('aweb33', '%s3i' % SHORT_NAME, '134.171.74.208', 'int' ),
-	('aweb34', '%s4i' % SHORT_NAME, '134.171.74.209', 'int' ),
-	('aweb41', '%s3' % SHORT_NAME, '134.171.75.212', 'prod' ),
-	('aweb42', '%s4' % SHORT_NAME, '134.171.75.213', 'prod' ),
+    ('aweb33', '%s3i' % SHORT_NAME, '134.171.74.208', 'int' ),
+    ('aweb34', '%s4i' % SHORT_NAME, '134.171.74.209', 'int' ),
+    ('aweb41', '%s3' % SHORT_NAME, '134.171.75.212', 'prod' ),
+    ('aweb42', '%s4' % SHORT_NAME, '134.171.75.213', 'prod' ),
 )
 
 ##############
@@ -47,19 +47,19 @@ SUDO_USER = 'web'
 DEPLOYMENT_DEVELOP = False
 
 DEPLOYMENT_PERMS = [
-	{'path': '%(ROOT)s/docs/static/css/', 'user': None, 'group': 'epodadm', 'perms': 'g+ws,o=rx' },
-	{'path': '%(ROOT)s/docs/static/js/', 'user': None, 'group': 'epodadm', 'perms': 'g+ws,o=rx' },
-	{'path': '%(TMP_DIR)s/', 'user': None, 'group': 'epodadm', 'perms': 'g+ws,o=rwx' },
-	{'path': '%(ROOT)s/import', 'user': None, 'group': 'epodadm', 'perms': 'g+ws,o=rx' },
-	{'path': '%(ROOT)s/import/*', 'user': None, 'group': 'epodadm', 'perms': 'g+ws,o=rx' },
-	# o+w needded to allow video encoder to write files to the directories.
-	{'path': '%(ROOT)s/import/**/*', 'user': None, 'group': '-R epodadm', 'perms': '-R g+ws,o=rwx' },
-	{'path': '%(ROOT)s/etc/**/*', 'user': None, 'group': None, 'perms': '-R 664' },
+    {'path': '%(ROOT)s/docs/static/css/', 'user': None, 'group': 'epodadm', 'perms': 'g+ws,o=rx' },
+    {'path': '%(ROOT)s/docs/static/js/', 'user': None, 'group': 'epodadm', 'perms': 'g+ws,o=rx' },
+    {'path': '%(TMP_DIR)s/', 'user': None, 'group': 'epodadm', 'perms': 'g+ws,o=rwx' },
+    {'path': '%(ROOT)s/import', 'user': None, 'group': 'epodadm', 'perms': 'g+ws,o=rx' },
+    {'path': '%(ROOT)s/import/*', 'user': None, 'group': 'epodadm', 'perms': 'g+ws,o=rx' },
+    # o+w needded to allow video encoder to write files to the directories.
+    {'path': '%(ROOT)s/import/**/*', 'user': None, 'group': '-R epodadm', 'perms': '-R g+ws,o=rwx' },
+    {'path': '%(ROOT)s/etc/**/*', 'user': None, 'group': None, 'perms': '-R 664' },
 ]
 
 DEPLOYMENT_SYNC = [
-	('%(BUILD_PRJBASE)s/static/', '%(BUILD_ROOT)s/docs/static/'),
-	('%(BUILD_DJANGOPLICITY_ROOT)s/static/', '%(BUILD_ROOT)s/docs/static/djangoplicity/'),
+    ('%(BUILD_PRJBASE)s/static/', '%(BUILD_ROOT)s/docs/static/'),
+    ('%(BUILD_DJANGOPLICITY_ROOT)s/static/', '%(BUILD_ROOT)s/docs/static/djangoplicity/'),
 ]
 
 

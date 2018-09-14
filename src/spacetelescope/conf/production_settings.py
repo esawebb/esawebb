@@ -28,9 +28,9 @@ WEBSERVER_NODES = ["%s3" % SHORT_NAME, "%s4" % SHORT_NAME ]
 DEPLOYMENT_TAG = "spacetelescope.org_prod"
 DEPLOYMENT_REVISION = "spacetelescope.org_int"
 DEPLOYMENT_NOTIFICATION = {
-	"subject": "[DEPLOY] %(DEPLOYMENT_TAG)s by %(local_user)s",
-	"from": "esoepo-monitoring@eso.org",
-	"to": ["webmaster@eso.org", "esoepo-monitoring@eso.org"],
+    "subject": "[DEPLOY] %(DEPLOYMENT_TAG)s by %(local_user)s",
+    "from": "esoepo-monitoring@eso.org",
+    "to": ["webmaster@eso.org", "esoepo-monitoring@eso.org"],
 }
 ALLOW_DATABASE_OVERWRITE = False
 
@@ -65,6 +65,6 @@ LIVE = True
 ##########
 SOCIAL_FACEBOOK_TOKEN = "144508505618279|5ff52306023505ab445993a2.1-1210975348|12383118425|U_oKxUW-oTKzWHksV5b7I5YCry8"
 SOCIAL_TWITTER_TUPLE = ("138725262-pvMvidxE9nB3JYlLkR7aBExaSUkm9TFlzawX8wq7",
-						"bClNsjLM33fXqtseS0NeXCMwnsggeS9Gi2z3kGl0c",
-						"elGtKvRIq8qVCihslKWRQ",
-						"syd83XYDRGEDwr0LaZufxs7t7h766L9UM0foxkH0")
+                        "bClNsjLM33fXqtseS0NeXCMwnsggeS9Gi2z3kGl0c",
+                        "elGtKvRIq8qVCihslKWRQ",
+                        "syd83XYDRGEDwr0LaZufxs7t7h766L9UM0foxkH0")
