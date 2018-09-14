@@ -15,7 +15,12 @@ import sys
 
 # pylint: disable=no-name-in-module
 from celery.schedules import crontab
-from django.utils.translation import ugettext_noop
+from django.utils.translation import ugettext
+
+# We can't use ugettext from django.utils.translation as it will itself
+# load the settings resulting in a ImproperlyConfigured error
+ugettext = lambda s: s
+
 
 import djangoplicity.crosslinks
 from djangoplicity.contentserver import CDN77ContentServer
@@ -30,11 +35,9 @@ PRJNAME = 'spacetelescope.org'
 DJANGOPLICITY_ROOT = "%s/src/djangoplicity" % ROOT
 LOG_DIR = "%s/logs" % ROOT
 TMP_DIR = "%s/tmp" % ROOT
-ENABLE_SSL = False
-ALLOW_SSL = True
 GA_ID = "UA-2368492-6"
 FACEBOOK_APP_ID = "144508505618279"
-SECURE_PROXY_SSL_HEADER = None
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 CSRF_COOKIE_SECURE = False
 SESSION_COOKIE_SECURE = False
@@ -84,7 +87,6 @@ SITE_ENVIRONMENT = 'local'
 DEBUG = os.getenv('DJANGO_LOG_LEVEL', 'INFO') == 'DEBUG'
 DEBUG_TOOLBAR = DEBUG
 DEBUG_TOOLBAR_CONFIG = {}
-TEMPLATE_DEBUG = DEBUG
 SEND_BROKEN_LINK_EMAILS = False
 
 ADMINS = (
@@ -92,12 +94,12 @@ ADMINS = (
 )
 MANAGERS = ADMINS
 
-SERVE_STATIC_MEDIA = True
+SERVE_STATIC_MEDIA = False
 
 DEBUG_TOOLBAR_PANELS = []
 
 # Make this unique, and don't share it with anybody.
-SECRET_KEY = "sadfpn870742kfasbvancp837rcnp3w8orypbw83ycnspo8r7"
+SECRET_KEY = "g6ymvx$i1sv4k*g+nwfnx*3a1g&)^i6r9n6g4=f_$x^u(kwt8s"
 
 
 ##################
@@ -110,7 +112,7 @@ DATABASES = {
         'USER': 'spacetelescope',
         'PASSWORD': '',
         'HOST': 'localhost',
-        'CONN_MAX_AGE': 0,
+        'CONN_MAX_AGE': 600,
     }
 }
 
@@ -137,7 +139,7 @@ TIME_ZONE = 'Europe/Berlin'
 # http://www.w3.org/TR/REC-html40/struct/dirlang.html#langcodes
 
 LANGUAGES = (
-    ( 'en', ugettext_noop( 'English' ) ),
+    ( 'en', ugettext( 'English' ) ),
 )
 
 LANGUAGE_CODE = 'en'
@@ -154,14 +156,14 @@ USE_L10N = True
 #LOCALE_PATHS = ( DJANGOPLICITY_ROOT + "/locale", PRJBASE + "/locale", )
 
 # Default date and time formats (con be overridden by locale)
-DATE_FORMAT = ugettext_noop('j F Y')
-DATE_LONG_FORMAT = ugettext_noop('j F Y')
-DATETIME_FORMAT = ugettext_noop('M j, Y, H:i T')
-DATETIME_LONG_FORMAT = ugettext_noop('M j, Y y, H:i T')
-MONTH_DAY_FORMAT = ugettext_noop('F j')
-TIME_FORMAT = ugettext_noop('H:i T')
-YEAR_MONTH_FORMAT = ugettext_noop('F Y')
-WIDGET_FORMAT = ugettext_noop("j/m/Y")
+DATE_FORMAT = ugettext('j F Y')
+DATE_LONG_FORMAT = ugettext('j F Y')
+DATETIME_FORMAT = ugettext('M j, Y, H:i T')
+DATETIME_LONG_FORMAT = ugettext('M j, Y y, H:i T')
+MONTH_DAY_FORMAT = ugettext('F j')
+TIME_FORMAT = ugettext('H:i T')
+YEAR_MONTH_FORMAT = ugettext('F Y')
+WIDGET_FORMAT = ugettext("j/m/Y")
 
 ###############
 # MEDIA SETUP #
@@ -400,7 +402,7 @@ if DEBUG_TOOLBAR:
 ############
 # SESSIONS #
 ############
-SESSION_ENGINE = 'django.contrib.sessions.backends.db'
+SESSION_ENGINE = 'django.contrib.sessions.backends.cached_db'
 SESSION_COOKIE_AGE = 86400
 SESSION_COOKIE_DOMAIN = None
 
@@ -505,7 +507,7 @@ BREADCRUMB_SEPARATOR = '&raquo;'
 #################
 # DJANGO ASSETS #
 #################
-ASSETS_DEBUG = True
+ASSETS_DEBUG = DEBUG
 ASSETS_UPDATER = "timestamp"
 #ASSETS_AUTO_CREATE
 #ASSETS_EXPIRE = 'filename'
@@ -618,9 +620,8 @@ DEFAULT_PUBLISHER_ID = u"esahubble"
 
 DEFAULT_CREDIT = u"NASA &amp; ESA"
 
-ARCHIVE_IMPORT_ROOT = "%s/import" % ROOT
-MP4BOX_PATH = '/Applications/Osmo4.app/Contents/MacOS/MP4Box'
-MP4FRAGMENT_PATH = '/usr/bin/mp4fragment'
+MP4BOX_PATH = '/usr/bin/MP4Box'
+MP4FRAGMENT_PATH = '/opt/bin/mp4fragment'
 
 ARCHIVE_WORKFLOWS = {
     'media.video.rename': ('spacetelescope.workflows.media', 'video_rename'),
@@ -1004,9 +1005,9 @@ LIVE = False
 SHOP_PICKUP_LOCATIONS = ({
     'id': 'PUP1',
     'name': 'ESO HQ',
-    'desc': ugettext_noop( "Self-pickup/ESO HQ in Munich, Germany" ),
-    'method': ugettext_noop("Pickup (9-17 CET/CEST) at ESO HQ Reception,"),
-    'delivery': ugettext_noop("Karl-Schwarzschild-Str. 2, 85748 Garching, GERMANY"),
+    'desc': ugettext( "Self-pickup/ESO HQ in Munich, Germany" ),
+    'method': ugettext("Pickup (9-17 CET/CEST) at ESO HQ Reception,"),
+    'delivery': ugettext("Karl-Schwarzschild-Str. 2, 85748 Garching, GERMANY"),
 },)
 
 RECAPTCHA_PUBLIC_KEY = '6LcUjdQSAAAAAHWYDCgHT40vC0NLzUPcmwVDh9yU'

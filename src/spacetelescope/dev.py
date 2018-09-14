@@ -2,6 +2,11 @@ from spacetelescope.settings import *
 
 SECRET_KEY = "g6ymvx$i1sv4k*g+nwfnx*3a1g&)^i6r9n6g4=f_$x^u(kwt8s"
 
+SESSION_ENGINE = 'django.contrib.sessions.backends.db'
+
+SECURE_PROXY_SSL_HEADER = None
+
+
 def show_toolbar(request):
     '''
     The default callback checks if the IP is internal, but docker's IP
@@ -35,6 +40,7 @@ DEBUG_TOOLBAR_PANELS = [
 DATABASES['default']['USER'] = 'postgres'
 DATABASES['default']['NAME'] = 'postgres'
 DATABASES['default']['HOST'] = 'db'
+DATABASES['default']['CONN_MAX_AGE'] = 0
 
 ##########
 # CACHE  #
@@ -57,6 +63,10 @@ CACHES = {
 # CELERY #
 ##########
 CELERY_BROKER_URL = 'amqp://guest:guest@broker:5672/'
+
+
+SERVE_STATIC_MEDIA = True
+
 
 #########
 # EMAIL #
