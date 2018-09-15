@@ -15,7 +15,6 @@ import sys
 
 # pylint: disable=no-name-in-module
 from celery.schedules import crontab
-from django.utils.translation import ugettext
 
 # We can't use ugettext from django.utils.translation as it will itself
 # load the settings resulting in a ImproperlyConfigured error
@@ -87,7 +86,7 @@ SITE_ENVIRONMENT = 'local'
 DEBUG = os.getenv('DJANGO_LOG_LEVEL', 'INFO') == 'DEBUG'
 DEBUG_TOOLBAR = DEBUG
 DEBUG_TOOLBAR_CONFIG = {}
-SEND_BROKEN_LINK_EMAILS = False
+DEBUG_TOOLBAR_PANELS = []
 
 ADMINS = (
     ('EPO Monitoring', 'esoepo-monitoring@eso.org'),
@@ -95,8 +94,6 @@ ADMINS = (
 MANAGERS = ADMINS
 
 SERVE_STATIC_MEDIA = False
-
-DEBUG_TOOLBAR_PANELS = []
 
 # Make this unique, and don't share it with anybody.
 SECRET_KEY = "g6ymvx$i1sv4k*g+nwfnx*3a1g&)^i6r9n6g4=f_$x^u(kwt8s"
@@ -222,7 +219,7 @@ TEMPLATES = [
         ],
         'APP_DIRS': True,
         'OPTIONS': {
-            'debug': False,
+            'debug': DEBUG,
             'context_processors': [
                 'django.contrib.auth.context_processors.auth',
                 'django.template.context_processors.debug',
@@ -509,8 +506,6 @@ BREADCRUMB_SEPARATOR = '&raquo;'
 #################
 ASSETS_DEBUG = DEBUG
 ASSETS_UPDATER = "timestamp"
-#ASSETS_AUTO_CREATE
-#ASSETS_EXPIRE = 'filename'
 
 ###########
 # ARCHIVE #
