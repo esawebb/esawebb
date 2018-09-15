@@ -28,3 +28,5 @@ SOCIAL_TWITTER_TUPLE = (
     "elGtKvRIq8qVCihslKWRQ",
     "syd83XYDRGEDwr0LaZufxs7t7h766L9UM0foxkH0",
 )
+
+YOUTUBE_CLIENT_SECRET = '%s/etc/youtube_client_secret_prod.json' % PRJBASE
