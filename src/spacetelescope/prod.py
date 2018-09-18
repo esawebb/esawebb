@@ -1,8 +1,11 @@
+import copy
+
 from spacetelescope.settings import *
 
 SITE_ENVIRONMENT = 'production'
 
 
+DATABASES = copy.deepcopy(DATABASES)
 DATABASES['default']['HOST'] = "hqdb1.hq.eso.org"
 DATABASES['default']['PASSWORD'] = "letoveumtold"
 
@@ -15,6 +18,7 @@ ARCHIVE_AUTO_RESOURCE_DELETION = True
 
 
 # Shop:
+LIVESETTINGS_OPTIONS = copy.deepcopy(LIVESETTINGS_OPTIONS)
 LIVESETTINGS_OPTIONS[1]['SETTINGS']['PAYMENT_CONCARDIS']['PSPID'] = u'40F06654'
 LIVESETTINGS_OPTIONS[1]['SETTINGS']['PAYMENT_CONCARDIS']['LIVE'] = u'True'
 LIVE = 'True'

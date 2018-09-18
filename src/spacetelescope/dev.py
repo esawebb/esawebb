@@ -1,3 +1,5 @@
+import copy
+
 from spacetelescope.settings import *
 
 SECRET_KEY = "g6ymvx$i1sv4k*g+nwfnx*3a1g&)^i6r9n6g4=f_$x^u(kwt8s"
@@ -35,6 +37,7 @@ DEBUG_TOOLBAR_PANELS = [
 ##################
 # DATABASE SETUP #
 ##################
+DATABASES = copy.deepcopy(DATABASES)
 DATABASES['default']['USER'] = 'postgres'
 DATABASES['default']['NAME'] = 'postgres'
 DATABASES['default']['HOST'] = 'db'
