@@ -19,7 +19,7 @@ LIVESETTINGS_OPTIONS[1]['SETTINGS']['PAYMENT_CONCARDIS']['LIVE'] = u'True'
 LIVE = 'True'
 ORDER_PREFIX = "hb"
 
-BROKER_URL = 'amqp://spacetelescope:letoveumtold@aweb24.hq.eso.org:5672/spacetelescope_vhost'
+CELERY_BROKER_URL = 'amqp://spacetelescope:letoveumtold@aweb24.hq.eso.org:5672/spacetelescope_vhost'
 
 SOCIAL_FACEBOOK_TOKEN = "144508505618279|5ff52306023505ab445993a2.1-1210975348|12383118425|U_oKxUW-oTKzWHksV5b7I5YCry8"
 SOCIAL_TWITTER_TUPLE = (
