@@ -2,8 +2,6 @@ import copy
 
 from spacetelescope.settings import *
 
-SITE_ENVIRONMENT = 'integration'
-
 DATABASES = copy.deepcopy(DATABASES)
 DATABASES['default']['HOST'] = "hqdb1i.hq.eso.org"
 DATABASES['default']['PASSWORD'] = "fivjeylvoked"
