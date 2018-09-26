@@ -11,7 +11,6 @@
 from __future__ import absolute_import
 import os
 import re
-import sys
 
 # pylint: disable=no-name-in-module
 from celery.schedules import crontab
@@ -29,6 +28,7 @@ from djangoplicity.contentserver import CDN77ContentServer
 #############################
 SHORT_NAME = 'hubble'
 ROOT = '/app'
+ARCHIVE_IMPORT_ROOT = '%s/import' % ROOT
 PRJBASE = "%s/src/spacetelescope" % ROOT
 PRJNAME = 'spacetelescope.org'
 DJANGOPLICITY_ROOT = "%s/src/djangoplicity" % ROOT
@@ -112,10 +112,6 @@ DATABASES = {
         'CONN_MAX_AGE': 600,
     }
 }
-
-if 'test' in sys.argv:
-    DATABASES['default']['ENGINE'] = 'django.db.backends.sqlite3'
-
 
 FIXTURE_DIRS = (
     PRJBASE + '/fixtures',
@@ -737,6 +733,10 @@ CELERY_BEAT_SCHEDULE = {
     'cdn77-purge-prefetch': {
         'task': 'djangoplicity.contentserver.cdn77_tasks.purge_prefetch',
         'schedule': crontab(minute='*/10'),  # Every 10 minutes
+    },
+    'clearsessions': {
+        'task': 'djangoplicity.celery.tasks.clearsessions',
+        'schedule': crontab(minute=0, hour=3),
     },
 }
 
