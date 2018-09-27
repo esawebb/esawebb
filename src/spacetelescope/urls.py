@@ -127,9 +127,9 @@ urlpatterns += [
     url( r'^login/$', django.contrib.auth.views.login, { 'template_name': 'login.html' } ),
     url( r'^logout/$', django.contrib.auth.views.logout, { 'template_name': 'logout.html' } ),
     url( r'^password_reset/$', django.contrib.auth.views.password_reset, { 'email_template_name': 'registration/password_reset_email.txt' }, name='password_reset' ),
-    url( r'^password_reset/done/$', django.contrib.auth.views.password_reset_done, 'password_reset_done' ),
-    url( r'^reset/(?P<uidb36>[0-9A-Za-z]+)-(?P<token>.+)/$', django.contrib.auth.views.password_reset_confirm, 'django.contrib.auth.views.password_reset_confirm' ),
-    url( r'^reset/done/$', django.contrib.auth.views.password_reset_complete, 'password_reset_complete' ),
+    url( r'^password_reset/done/$', django.contrib.auth.views.password_reset_done, name='password_reset_done' ),
+    url( r'^reset/(?P<uidb36>[0-9A-Za-z]+)-(?P<token>.+)/$', django.contrib.auth.views.password_reset_confirm, name='django.contrib.auth.views.password_reset_confirm' ),
+    url( r'^reset/done/$', django.contrib.auth.views.password_reset_complete, name='password_reset_complete' ),
 
     # Shop
     url( r'^shop/terms/', RedirectView.as_view(url='/shop/terms_conditions/'), name='shop_terms' ),
