@@ -104,7 +104,7 @@ SECRET_KEY = "g6ymvx$i1sv4k*g+nwfnx*3a1g&)^i6r9n6g4=f_$x^u(kwt8s"
 ##################
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'spacetelescope',
         'USER': 'spacetelescope',
         'PASSWORD': '',
@@ -684,12 +684,8 @@ CELERY_RESULT_SERIALIZER = "json"
 CELERY_RESULT_EXPIRES = 3600
 
 # Task execution
-CELERY_TASK_SERIALIZER = 'json'
-CELERY_TASK_IGNORE_RESULT = False
+CELERY_TASK_IGNORE_RESULT = True
 CELERY_WORKER_DISABLE_RATE_LIMITS = True
-
-# Error email
-CELERY_SEND_TASK_ERROR_EMAILS = True
 
 # Events
 CELERY_WORKER_SEND_TASK_EVENTS = True
