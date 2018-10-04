@@ -70,7 +70,7 @@
                         <a href="{{ product.get_absolute_url }}" class="thumbnail">
                             <img src="{% if item.resource_thumb350x %}{{ item.resource_thumb350x.url }}{% else %}{{ item.resource_medium.url }}{% endif %}" class="img-responsive" alt="{{ item.title }}">
                             <div class="caption">
-                                <p class="price">Price:&nbsp;{{ item.price|currency }}{% if item.free %}<img src="{{ MEDIA_URL }}/educators-small.png" alt="Educators" width="60" /> {% endif %}</p>
+                                <p class="price">Price:&nbsp;{{ product.unit_price|currency }}{% if item.free %}<img src="{{ MEDIA_URL }}/educators-small.png" alt="Educators" width="60" /> {% endif %}</p>
                                 <p>{% if item %}{{ item.title }}{% else %}{{ product.name }}{% endif %}</p>
                             </div>
                         </a>
