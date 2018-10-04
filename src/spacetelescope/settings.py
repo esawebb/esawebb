@@ -297,6 +297,8 @@ MIDDLEWARE += (
 
     # Module for URL redirection based on regular expressions
     'djangoplicity.utils.middleware.RegexRedirectMiddleware',  # Response
+
+    'djangoplicity.archives.contrib.satchmo.middleware.SatchmoSSLRedirectOverride',
 )
 
 INSTALLED_APPS = ()
@@ -907,7 +909,6 @@ LOCAL_DEV = True
 
 MIDDLEWARE += (
     "threaded_multihost.middleware.ThreadLocalMiddleware",
-    "satchmo_store.shop.SSLMiddleware.SSLRedirect",
 )
 
 AUTHENTICATION_BACKENDS += ( 'satchmo_store.accounts.email-auth.EmailBackend', )
