@@ -82,7 +82,7 @@ GARCHING_INTERNAL_IPS = (
     '127.0.0.1',
 )
 
-SITE_ENVIRONMENT = os.getenv('DJANGO_SETTINGS_MODULE').split('.')[1] or 'dev'
+SITE_ENVIRONMENT = os.getenv('ENVIRONMENT')
 DEBUG = SITE_ENVIRONMENT == 'dev'
 DEBUG_TOOLBAR = DEBUG
 DEBUG_TOOLBAR_CONFIG = {}
@@ -1182,5 +1182,6 @@ TINYMCE_DEFAULT_CONFIG = {
     'contextmenu': 'formats | link image',
     'menubar': False,
     'statusbar': True,
-    'entity_encoding': 'raw'
+    'entity_encoding': 'raw',
+    'convert_urls': False,
 }

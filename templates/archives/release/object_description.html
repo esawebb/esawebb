@@ -45,7 +45,7 @@
         </div>
     </a>
 {% endif %}{% endif %}
-{% if images %}{% for im in images %}{% ifnotequal main_image im %}<a class="popup" href="{{ im.resource_screen.url }}" title="{{ im.title }}" class="hidden"></a>{% endifnotequal %}{% endfor %}{% endif %}
+{% if images %}{% for im in images %}{% if main_image != im %}<a class="popup" href="{{ im.resource_screen.url }}" title="{{ im.title }}" class="hidden"></a>{% endif %}{% endfor %}{% endif %}
 </div>
 {% endwith %}
 <p></p>

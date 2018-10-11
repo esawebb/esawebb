@@ -25,7 +25,7 @@
                 <img class="img-responsive" src="{{ main_visual.resource_newsfeature.url }}" class="pr_news_feature_img" style="padding:0;" />
                 {% if images %}
                     {% for im in images %}
-                        {% ifnotequal main_visual im %}<a class="popup" href="{{ im.resource_screen.url }}" title="{{ im.title }}" class="hidden"></a>{% endifnotequal %}
+                        {% if main_visual != im %}<a class="popup" href="{{ im.resource_screen.url }}" title="{{ im.title }}" class="hidden"></a>{% endif %}
                     {% endfor %}
                 {% endif %}
             </a>

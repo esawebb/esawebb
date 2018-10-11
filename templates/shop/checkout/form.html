@@ -27,13 +27,13 @@
         {% url 'satchmo_checkout-step1' as satchmo_checkout_step1 %}
         <form class="form-horizontal" role="form" method="post" action="{{ satchmo_checkout_step1 }}">{% csrf_token %}
 
-            {% ifequal paymentmethod_ct 1 %}
+            {% if paymentmethod_ct == 1 %}
                 {% comment %}If we only have one payment method, then the form renders it as a hidden field {% endcomment %}{{ form.paymentmethod }}
             {% else %}
                 <h4>{% trans "How do you want to pay?" %}</h4>
                 <label for="id_paymentmethod">{% trans "Payment method" %}</label><div id="payment">{{ form.paymentmethod }}</div>
             {% if form.paymentmethod.errors %}<tr><td>&nbsp;</td><td class="error">*** {{ form.paymentmethod.errors|join:", " }}</td></tr>{% endif %}
-            {% endifequal %}
+            {% endif %}
 
             <h2>{% trans "Basic Information" %}</h2>
             <div class="form-group{% if form.email.errors %} has-error has-feedback{% endif %}">

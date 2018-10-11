@@ -18,6 +18,12 @@ def show_toolbar(request):
 DEBUG_TOOLBAR_CONFIG = {
     'INTERCEPT_REDIRECTS': False,
     'SHOW_TOOLBAR_CALLBACK': show_toolbar,
+    'SKIP_TEMPLATE_PREFIXES': (
+        'django/forms/widgets/',
+        'admin/widgets/',
+        'menus/',
+        'pipeline/',
+    ),
 }
 DEBUG_TOOLBAR_PANELS = [
     'debug_toolbar.panels.versions.VersionsPanel',
