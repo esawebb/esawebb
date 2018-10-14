@@ -732,6 +732,10 @@ CELERY_BEAT_SCHEDULE = {
         'task': 'djangoplicity.contentserver.cdn77_tasks.purge_prefetch',
         'schedule': crontab(minute='*/10'),  # Every 10 minutes
     },
+    'shop-subscribers': {
+        'task': 'djangoplicity.archives.contrib.satchmo.tasks.shop_subscribers',
+        'schedule': crontab(minute=0, hour=9, day_of_week='sun'),
+    },
     'clearsessions': {
         'task': 'djangoplicity.celery.tasks.clearsessions',
         'schedule': crontab(minute=0, hour=3),
@@ -1185,3 +1189,5 @@ TINYMCE_DEFAULT_CONFIG = {
     'entity_encoding': 'raw',
     'convert_urls': False,
 }
+
+NEWSLETTER_SUBSCRIBERS_URL = 'https://us2.admin.mailchimp.com/lists/members/import/setup?id=518373&type=CutPaste'
