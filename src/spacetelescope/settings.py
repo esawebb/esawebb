@@ -983,7 +983,7 @@ LIVESETTINGS_OPTIONS = {
                 u'REQUIRED_BILLING_DATA': u'["email", "first_name", "last_name", "phone", "street1", "city", "postal_code", "country"]',
                 u'ENFORCE_STATE': u'False',
                 u'SHOW_SITE': u'False',
-                u'LOGO_URI': u'http://hubble3.hq.eso.org/static/archives/logos/screen/eso_colour.jpg',  # FIXME This should point to www.spacetelescope.org but is currently broken until the ACE is decomissioned
+                u'LOGO_URI': u'https://www.spacetelescope.org/static/archives/logos/screen/eso_colour.jpg',
             },
             u'PAYMENT_CONCARDIS': {
                 u'PSPID': u'esoepod',
@@ -1178,7 +1178,7 @@ TINYMCE_DEFAULT_CONFIG = {
         code fullscreen autolink lists  charmap print  hr anchor pagebreak
     ''',
     'toolbar1': '''
-        fullscreen code | cut copy | searchreplace | alignleft aligncenter alignright alignjustify | formatselect forecolor backcolor |superscript subscript |
+        fullscreen code | cut copy | searchreplace | alignleft aligncenter alignright alignjustify | formatselect forecolor backcolor | superscript subscript |
      ''',
     'toolbar2': '''
         bold italic underline strikethrough | bullist numlist table hr | indent outdent | undo redo | link unlink anchor image media charmap | nonbreaking |
