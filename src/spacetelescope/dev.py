@@ -55,9 +55,9 @@ DATABASES['default']['CONN_MAX_AGE'] = 0
 CACHES = {
     'notdefault': {
         'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
-        'KEY_PREFIX': 'eso',
+        'KEY_PREFIX': 'hubble',
         'LOCATION': [
-            '127.0.0.1:11211',
+            'cache:11211',
         ],
         'TIMEOUT': 86400
     },
