@@ -259,6 +259,12 @@ if DEBUG_TOOLBAR:
         'debug_toolbar.middleware.DebugToolbarMiddleware',
     )
 
+if DEBUG:
+    # Add debug toolbar to request
+    MIDDLEWARE += (
+        'djangoplicity.utils.middleware.ProfileMiddleware',
+    )
+
 
 MIDDLEWARE += (
     # Enables session support
