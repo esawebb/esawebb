@@ -34,6 +34,7 @@ PRJNAME = 'spacetelescope.org'
 DJANGOPLICITY_ROOT = "%s/src/djangoplicity" % ROOT
 LOG_DIR = "%s/logs" % ROOT
 TMP_DIR = "%s/tmp" % ROOT
+SHARED_DIR = "%s/shared" % ROOT
 GA_ID = "UA-2368492-6"
 FACEBOOK_APP_ID = "144508505618279"
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
@@ -1166,7 +1167,7 @@ MEDIA_CONTENT_SERVERS_CHOICES = (
 
 DEFAULT_MEDIA_CONTENT_SERVER = 'CDN77'
 
-YOUTUBE_TOKEN = '%s/youtube_oauth2_token.json' % TMP_DIR
+YOUTUBE_TOKEN = '%s/youtube_oauth2_token.json' % SHARED_DIR
 YOUTUBE_DEFAULT_TAGS = ['Hubble', 'Hubble Space Telescope', 'Telescope', 'Space', 'Observatory', 'ESA']
 YOUTUBE_CLIENT_SECRET = '%s/etc/youtube_client_secret.json' % PRJBASE
 
