@@ -3,19 +3,19 @@
 <div class="object-info">
 {% for info in info_groups %}
 {% if info.links or info.metadata %}
-	{% if info.name %}<h3>{% trans info.name %}</h3>{% endif %}
-	<div>
-	{% for link in info.links %}
-		{% if link.url %}<a href="{{ link.url }}">{% trans link.title %}</a><br /> {% endif %}
-	{% endfor %}
-	{% if info.metadata %}
-		<table>
-		{% for metadata in info.metadata %}
-			{% if metadata.field_value %}<tr><td class="title">{{ metadata.field_name|capfirst }}:</td><td>{{ metadata.field_value }}</td></tr>{% endif %}
-		{% endfor %}
-		</table>
-	{% endif %}
-	</div>
+    {% if info.name %}<h3>{% trans info.name %}</h3>{% endif %}
+    <div>
+    {% for link in info.links %}
+        {% if link.url %}<a href="{{ link.url }}">{% trans link.title %}</a><br /> {% endif %}
+    {% endfor %}
+    {% if info.metadata %}
+        <table>
+        {% for metadata in info.metadata %}
+            {% if metadata.field_value %}<tr><td class="title">{{ metadata.field_name|capfirst }}:</td><td>{{ metadata.field_value }}</td></tr>{% endif %}
+        {% endfor %}
+        </table>
+    {% endif %}
+    </div>
 {% endif %}
 {% if not forloop.last %}{% if info.name or info.links or info.metadata %}<hr>{% endif %}{% endif %}
 {% endfor %}

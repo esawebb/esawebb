@@ -11,23 +11,23 @@ from django.db import models
 
 
 class Highlight(models.Model):
-	"""
-	Ads for frontpage
-	"""
-	name = models.SlugField()
-	title = models.CharField(max_length=255, blank=True)
-	description = models.TextField(blank=True)
-	image = models.CharField(max_length=255, blank=True)
-	link = models.CharField(max_length=255, blank=True)
-	order = models.PositiveSmallIntegerField()
-	published = models.BooleanField(default=False)
+    """
+    Ads for frontpage
+    """
+    name = models.SlugField()
+    title = models.CharField(max_length=255, blank=True)
+    description = models.TextField(blank=True)
+    image = models.CharField(max_length=255, blank=True)
+    link = models.CharField(max_length=255, blank=True)
+    order = models.PositiveSmallIntegerField()
+    published = models.BooleanField(default=False)
 
-	def __unicode__(self):
-		return self.name
+    def __unicode__(self):
+        return self.name
 
-	class Translation:
-		fields = ['title', 'description', 'image', 'link']
-		excludes = []
+    class Translation:
+        fields = ['title', 'description', 'image', 'link']
+        excludes = []
 
-	class Meta:
-		ordering = ['order']
+    class Meta:
+        ordering = ['order']

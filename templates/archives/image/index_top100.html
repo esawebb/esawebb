@@ -1,33 +1,33 @@
 {% load djangoplicity_utils i18n %}
 {% if not object_list %}
-	<div align="center">{% trans "No images were found." %}</div>
+    <div align="center">{% trans "No images were found." %}</div>
 {% else %}
 {% include "archives/search_results.html" %}
 
 <div id="top100-carousel-wrapper">
-	<div id="top100-carousel">
-		{% for image in object_list %}
-		<div class="slide">
-			<div class="img-wrapper">
-				<img draggable="false" data-lazy="{{ image.resource_wallpaper2.url }}">
-				<button class="fullscreen" onclick="top100Fullscreen()">{% trans "Fullscreen" %}
-					<span class="fa fa-arrows-alt"></span>
-				</button>
-				<div class="top100-description">
-					<a href="{{ image.get_absolute_url }}">
-						<div class="top100-title">
-							<span class="number">{{ forloop.counter }}.</span>
-							{{ image.title|safe }}
-						</div>
-						<div class="top100-text">
-							{{ image.description|safe|striptags|linebreaksbr|truncatewords:100 }}
-						</div>
-					</a>
-				</div>
-			</div>
-		</div> <!-- slide -->
-		{% endfor %}
-	</div> <!-- top100-carousel -->
+    <div id="top100-carousel">
+        {% for image in object_list %}
+        <div class="slide">
+            <div class="img-wrapper">
+                <img draggable="false" data-lazy="{{ image.resource_wallpaper2.url }}">
+                <button class="fullscreen" onclick="top100Fullscreen()">{% trans "Fullscreen" %}
+                    <span class="fa fa-arrows-alt"></span>
+                </button>
+                <div class="top100-description">
+                    <a href="{{ image.get_absolute_url }}">
+                        <div class="top100-title">
+                            <span class="number">{{ forloop.counter }}.</span>
+                            {{ image.title|safe }}
+                        </div>
+                        <div class="top100-text">
+                            {{ image.description|safe|striptags|linebreaksbr|truncatewords:100 }}
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div> <!-- slide -->
+        {% endfor %}
+    </div> <!-- top100-carousel -->
 </div> <!-- top100-carousel-wrapper -->
 
 {% endif %}

@@ -42,25 +42,25 @@ firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
 var player;
 function onYouTubeIframeAPIReady() {
-	player = new YT.Player('youtube-player', {
-		height: '387',
-		width: '688',
-		videoId: '{{ main_video.youtube_video_id }}',
-		playerVars: {
-			'modestbranding': 1,
-			'hl': '{{ LANGUAGE_CODE }}',
-			'rel': 0
-		},
-		events: {
-			'onReady': onPlayerReady,
-		}
-	});
-	function onPlayerReady(event) {
-		// event.target.setPlaybackQuality('large');
-	}
+    player = new YT.Player('youtube-player', {
+        height: '387',
+        width: '688',
+        videoId: '{{ main_video.youtube_video_id }}',
+        playerVars: {
+            'modestbranding': 1,
+            'hl': '{{ LANGUAGE_CODE }}',
+            'rel': 0
+        },
+        events: {
+            'onReady': onPlayerReady,
+        }
+    });
+    function onPlayerReady(event) {
+        // event.target.setPlaybackQuality('large');
+    }
 }
 {% elif main_video and main_video.resource_medium_podcast %}
-	setupVideoPlayer('{{ main_video.id }}');
+    setupVideoPlayer('{{ main_video.id }}');
 {% endif %}
 </script>
 {% endblock %}

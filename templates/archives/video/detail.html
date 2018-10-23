@@ -37,25 +37,25 @@ firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
 var player;
 function onYouTubeIframeAPIReady() {
-	player = new YT.Player('youtube-player', {
-		height: '387',
-		width: '688',
-		videoId: '{{ object.youtube_video_id }}',
-		playerVars: {
-			'modestbranding': 1,
-			'hl': '{{ LANGUAGE_CODE }}',
-			'rel': 0
-		},
-		events: {
-			'onReady': onPlayerReady,
-		}
-	});
-	function onPlayerReady(event) {
-		// event.target.setPlaybackQuality('large');
-	}
+    player = new YT.Player('youtube-player', {
+        height: '387',
+        width: '688',
+        videoId: '{{ object.youtube_video_id }}',
+        playerVars: {
+            'modestbranding': 1,
+            'hl': '{{ LANGUAGE_CODE }}',
+            'rel': 0
+        },
+        events: {
+            'onReady': onPlayerReady,
+        }
+    });
+    function onPlayerReady(event) {
+        // event.target.setPlaybackQuality('large');
+    }
 }
 {% else %}
-	setupVideoPlayer('{{ object.id }}');
+    setupVideoPlayer('{{ object.id }}');
 {% endif %}
 </script>
 {% endblock %}

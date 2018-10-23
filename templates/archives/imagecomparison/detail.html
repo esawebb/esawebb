@@ -17,41 +17,41 @@ javascript file at the bottom of the main template
 
 <h1>{{ object.title }}</h1>
 <div class="archive-image">
-	<div id="before_after_container">
-		<div><img id="img1" src="{{object.image_before.resource_screen.url}}" alt="{{ object.image_before.title }}" /></div>
-		<div><img id="img2" src="{{object.image_after.resource_screen.url}}" alt="{{ object.image_after.title }}" /></div>
-	</div>
-	<div class="enlarge">{% trans "Drag green handle to reveal images" %}</div>
+    <div id="before_after_container">
+        <div><img id="img1" src="{{object.image_before.resource_screen.url}}" alt="{{ object.image_before.title }}" /></div>
+        <div><img id="img2" src="{{object.image_after.resource_screen.url}}" alt="{{ object.image_after.title }}" /></div>
+    </div>
+    <div class="enlarge">{% trans "Drag green handle to reveal images" %}</div>
 </div>
 
 <div class="row">
-	<div class="col-md-9 left-column">
-		<p>{{ object.description|safe }}</p>
-		<h3>{% trans "Credit" %}</h3><p>{{ object.credit|safe }}</p>
-		{% include 'archives/extra_footer.html' %}
-	</div>
-	<div class="col-md-3 right-column">
-		{% include admin_template %}
-		{% include info_template %}
-		
-		{% load i18n %}
-		<h3 class="archivegrouptitle">{% trans "Images" %}</h3>
-		{% with i=image_before %}
-		<div class="embedded-list-image">
-			<a href="{{ i.get_absolute_url }}"><img class="img-responsive" src="{{ i.resource_news.url }}" alt="{{ i.title }}" /></a>
-			<div><a href="{{ i.get_absolute_url }}">{% trans  "PR Image" %} {% if i.override_id %}{{ i.override_id }}{% else %}{{ i.source.id|default:i.id }}{% endif %}</a></div>
-			<div>{{ i.title }} {% if not i.in_original_language %}<span class="langnote"><br />{% trans "in English only" %}</span>{% endif %}</div>
-		</div>
-		{% endwith %}
-		
-		{% with i=image_after %}
-		<div class="embedded-list-image">
-			<a href="{{ i.get_absolute_url }}"><img class="img-responsive" src="{{ i.resource_news.url }}" alt="{{ i.title }}" /></a>
-			<div><a href="{{ i.get_absolute_url }}">{% trans  "PR Image" %} {% if i.override_id %}{{ i.override_id }}{% else %}{{ i.source.id|default:i.id }}{% endif %}</a></div>
-			<div>{{ i.title }} {% if not i.in_original_language %}<span class="langnote"><br />{% trans "in English only" %}</span>{% endif %}</div>
-		</div>
-		{% endwith %}
-	</div>
+    <div class="col-md-9 left-column">
+        <p>{{ object.description|safe }}</p>
+        <h3>{% trans "Credit" %}</h3><p>{{ object.credit|safe }}</p>
+        {% include 'archives/extra_footer.html' %}
+    </div>
+    <div class="col-md-3 right-column">
+        {% include admin_template %}
+        {% include info_template %}
+        
+        {% load i18n %}
+        <h3 class="archivegrouptitle">{% trans "Images" %}</h3>
+        {% with i=image_before %}
+        <div class="embedded-list-image">
+            <a href="{{ i.get_absolute_url }}"><img class="img-responsive" src="{{ i.resource_news.url }}" alt="{{ i.title }}" /></a>
+            <div><a href="{{ i.get_absolute_url }}">{% trans  "PR Image" %} {% if i.override_id %}{{ i.override_id }}{% else %}{{ i.source.id|default:i.id }}{% endif %}</a></div>
+            <div>{{ i.title }} {% if not i.in_original_language %}<span class="langnote"><br />{% trans "in English only" %}</span>{% endif %}</div>
+        </div>
+        {% endwith %}
+        
+        {% with i=image_after %}
+        <div class="embedded-list-image">
+            <a href="{{ i.get_absolute_url }}"><img class="img-responsive" src="{{ i.resource_news.url }}" alt="{{ i.title }}" /></a>
+            <div><a href="{{ i.get_absolute_url }}">{% trans  "PR Image" %} {% if i.override_id %}{{ i.override_id }}{% else %}{{ i.source.id|default:i.id }}{% endif %}</a></div>
+            <div>{{ i.title }} {% if not i.in_original_language %}<span class="langnote"><br />{% trans "in English only" %}</span>{% endif %}</div>
+        </div>
+        {% endwith %}
+    </div>
 </div>
 
 

@@ -5,21 +5,21 @@
 
 {% if object.sketchfab_id %}
 <div class="archive-image">
-	<iframe width="100%" height="480" src="https://sketchfab.com/models/{{ object.sketchfab_id }}/embed" frameborder="0" allowfullscreen mozallowfullscreen="true" webkitallowfullscreen="true" onmousewheel=""></iframe>
+    <iframe width="100%" height="480" src="https://sketchfab.com/models/{{ object.sketchfab_id }}/embed" frameborder="0" allowfullscreen mozallowfullscreen="true" webkitallowfullscreen="true" onmousewheel=""></iframe>
 </div>
 {% elif object.resource_medium %}
 <div class="archive-image popup">
-	{% if object.resource_screen %}
-		<a class="popup" href="{{ object.resource_screen.url }}" title="{{ object }}" />
-			<div class="image-container">
-				<img class="img-responsive" src="{{ object.resource_screen.url }}" border="0" alt="{{ object }}" />
-			</div>
-		</a>
-	{% else %}
-		<div class="image-container">
-			<img class="img-responsive" src="{{ object.resource_medium.url }}" width="320" border="0" alt="{{ object }}" />
-		</div>
-	{% endif %}
+    {% if object.resource_screen %}
+        <a class="popup" href="{{ object.resource_screen.url }}" title="{{ object }}" />
+            <div class="image-container">
+                <img class="img-responsive" src="{{ object.resource_screen.url }}" border="0" alt="{{ object }}" />
+            </div>
+        </a>
+    {% else %}
+        <div class="image-container">
+            <img class="img-responsive" src="{{ object.resource_medium.url }}" width="320" border="0" alt="{{ object }}" />
+        </div>
+    {% endif %}
 </div>
 {% endif %}
 <p>{{ object.description|safe }}</p>
@@ -30,7 +30,7 @@ to buy a single month, we don't want people to think that the whole calendar
 is not available for sale
 {% endcomment %}
 {% if not object.sale and archive|title|lower != "calendar" %}
-	<p>This {{archive|title|lower}} is not available for sale.</p>
+    <p>This {{archive|title|lower}} is not available for sale.</p>
 {% endif %}
 
 {% include 'archives/extra_description.html' %}

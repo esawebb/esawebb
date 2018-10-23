@@ -35,46 +35,46 @@ from netaddr import IPSet, IPNetwork
 
 
 class DisableInternalCDN(object):
-	'''
-	The CDN for resources is set in
-	djangoplicity.archives.resources.ResourceManager which doesn't have access
-	to the session, so it's not possible to disable the CDN in the Intranet.
-	Moreover we actually want to use the CDN from Chile, so we only check if
-	the client IP is in the Garching's ranges
-	This Middleware is a bit of a hack and replaces URLs pointing to the CDN
-	by local URLs
-	'''
-	def process_response(self, request, response):
-		try:
-			internal_ips = settings.GARCHING_INTERNAL_IPS
-		except AttributeError:
-			return response
+    '''
+    The CDN for resources is set in
+    djangoplicity.archives.resources.ResourceManager which doesn't have access
+    to the session, so it's not possible to disable the CDN in the Intranet.
+    Moreover we actually want to use the CDN from Chile, so we only check if
+    the client IP is in the Garching's ranges
+    This Middleware is a bit of a hack and replaces URLs pointing to the CDN
+    by local URLs
+    '''
+    def process_response(self, request, response):
+        try:
+            internal_ips = settings.GARCHING_INTERNAL_IPS
+        except AttributeError:
+            return response
 
-		if 'external' in request.GET:
-			# We simulate an external request, no changes
-			return response
+        if 'external' in request.GET:
+            # We simulate an external request, no changes
+            return response
 
-		# If we use NGINX as proxy REMOTE_ADDR will be 127.0.0.1
-		# so we use HTTP_X_REAL_IP if available, otherwise we default
-		# to REMOTE_ADDR
-		if 'HTTP_X_REAL_IP' in request.META:
-			key = 'HTTP_X_REAL_IP'
-		else:
-			key = 'REMOTE_ADDR'
+        # If we use NGINX as proxy REMOTE_ADDR will be 127.0.0.1
+        # so we use HTTP_X_REAL_IP if available, otherwise we default
+        # to REMOTE_ADDR
+        if 'HTTP_X_REAL_IP' in request.META:
+            key = 'HTTP_X_REAL_IP'
+        else:
+            key = 'REMOTE_ADDR'
 
-		ip = request.META[key]
+        ip = request.META[key]
 
-		if response.status_code == 200 and not response.streaming:
-			content_type = response.get('Content-Type', '')
-			if 'text/' in content_type:
-				internal_ips = IPSet([IPNetwork(i) for i in internal_ips])
-				if ip in internal_ips:
-					response.content = response.content.replace(
-						'//cdn.spacetelescope.org/archives/',
-						'//www.spacetelescope.org/static/archives/'
-					).replace(
-						'//cdn2.spacetelescope.org/archives/',
-						'//www.spacetelescope.org/static/archives/'
-					)
+        if response.status_code == 200 and not response.streaming:
+            content_type = response.get('Content-Type', '')
+            if 'text/' in content_type:
+                internal_ips = IPSet([IPNetwork(i) for i in internal_ips])
+                if ip in internal_ips:
+                    response.content = response.content.replace(
+                        '//cdn.spacetelescope.org/archives/',
+                        '//www.spacetelescope.org/static/archives/'
+                    ).replace(
+                        '//cdn2.spacetelescope.org/archives/',
+                        '//www.spacetelescope.org/static/archives/'
+                    )
 
-		return response
+        return response
