@@ -2,6 +2,18 @@ import copy
 
 from spacetelescope.settings import *
 
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
+        'KEY_PREFIX': SHORT_NAME,
+        'LOCATION': [
+            'aweb48.hq.eso.org:11211',
+            'aweb49.hq.eso.org:11211',
+        ],
+        'TIMEOUT': 86400
+    }
+}
+
 DATABASES = copy.deepcopy(DATABASES)
 DATABASES['default']['HOST'] = "hqdb1.hq.eso.org"
 DATABASES['default']['PASSWORD'] = "letoveumtold"
