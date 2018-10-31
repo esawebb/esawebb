@@ -1020,7 +1020,7 @@ RECAPTCHA_PRIVATE_KEY = '6LcUjdQSAAAAAPHRoDu56rlNylGTtKvHgfJFTGcE'
 # Pipeline configuration (CSS/JS packing)
 #
 
-STATICFILES_STORAGE = 'pipeline.storage.PipelineCachedStorage'
+STATICFILES_STORAGE = 'djangoplicity.utils.storage.PipelineManifestStorage'
 
 # We split the CSS into main and extras to load the more important first
 # and the rest in the end. This also solves a problem with IE9 which stops
@@ -1055,7 +1055,6 @@ PIPELINE = {
                 'slick-1.5.0/slick/slick.min.js',
                 'djangoplicity/jwplayer/jwplayer.js',
                 'djangoplicity/js/jquery.beforeafter-1.4.js',
-                'djangoplicity/zoomify/js/ZoomifyImageViewerExpress-min.js',
                 'js/masonry.pkgd.min.js',
                 'justified/js/jquery.justified.min.js',
                 'magnific-popup/jquery.magnific-popup.min.js',
@@ -1076,9 +1075,15 @@ PIPELINE = {
             ),
             'output_filename': 'js/ie8compat.js',
         },
+        'openseadragon': {
+            'source_filenames': (
+                'djangoplicity/openseadragon/openseadragon.min.js',
+            ),
+            'output_filename': 'js/openseadragon.js',
+        },
     },
-    'CSS_COMPRESSOR': False,
-    'JS_COMPRESSOR': False,
+    'CSS_COMPRESSOR': 'pipeline.compressors.cssmin.CSSMinCompressor',
+    'JS_COMPRESSOR': 'pipeline.compressors.uglifyjs.UglifyJSCompressor',
     'DISABLE_WRAPPER': True,
 }
 
