@@ -17,3 +17,14 @@ CELERY_BROKER_URL = 'amqp://spacetelescope:letoveumtold@aweb36.hq.eso.org:5672/s
 
 # Shop:
 ORDER_PREFIX = "hbi"
+
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
+        'KEY_PREFIX': 'nova',
+        'LOCATION': [
+            'aweb34:11211',
+        ],
+        'TIMEOUT': 86400
+    },
+}
