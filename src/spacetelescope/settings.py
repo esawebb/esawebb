@@ -339,6 +339,7 @@ INSTALLED_APPS += (
     'djangoplicity.media',
     #'djangoplicity.contrib.redirects',
     'djangoplicity.archives',
+    'djangoplicity.archives.contrib.satchmo',
     'djangoplicity.archives.contrib.satchmo.freeorder',
     'djangoplicity.archives.contrib.security',
     'djangoplicity.announcements',
