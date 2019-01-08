@@ -38,8 +38,6 @@
 {% endblock %}
 
 {% block sidebar %}
-    <a href="https://www.spacetelescope.org/projects/ourplaceinspace/"><img width="170px" src="https://www.spacetelescope.org/static/ads/opis-ad.jpg" /></a>
-    <hr style="{{hr_style}}">
     {% if data.potws %}
     {% if enable_sharing %}<br /><hr style="{{hr_style}}"><br />{% endif %}
     {% with potws=data.potws feed_url="http://feeds.feedburner.com/hubble_potw/" %}
