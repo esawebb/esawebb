@@ -711,6 +711,10 @@ CELERY_BEAT_SCHEDULE_FILENAME = '%s/tmp/celerybeat_schedule' % ROOT
 
 # Define Celery periodic tasks
 CELERY_BEAT_SCHEDULE = {
+    'update_static_files_protection_cache': {
+        'task': 'djangoplicity.archives.contrib.security.tasks.update_static_files_protection_cache',
+        'schedule': crontab(minute='*/5'),  # Every 5 minutes
+    },
     'mailchimp-abuse-report': {
         'task': 'newsletters.abuse_reports',
         'schedule': crontab(minute=0, hour=8, day_of_week='fri'),
@@ -1203,4 +1207,4 @@ TINYMCE_DEFAULT_CONFIG = {
     'convert_urls': False,
 }
 
-NEWSLETTER_SUBSCRIBERS_URL = 'https://us2.admin.mailchimp.com/lists/members/import/setup?id=518373&type=CutPaste'
+NEWSLETTER_SUBSCRIBERS_URL = 'https://us2.admin.mailchimp.com/lists/members/import/setup?id=518393&type=CutPaste'
