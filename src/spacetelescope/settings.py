@@ -1157,6 +1157,7 @@ MEDIA_CONTENT_SERVERS = {
                 'cylindrical_4kmaster',
                 'cylindrical_8kmaster',
                 'cylindrical_16kmaster',
+                'news',
             ),
         },
         url='https://cdn.spacetelescope.org/',
