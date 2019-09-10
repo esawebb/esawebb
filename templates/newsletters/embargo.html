@@ -35,11 +35,11 @@
 
 {% block content %}
     {% if data.release.release_date < now %}
-        {% with embargo="" release=data.release signature_date=data.release.release_date signature="ESA/Hubble Information Centre<br />The ESO Education and Public Outreach Department" %}
+        {% with embargo="" release=data.release signature_date=data.release.release_date signature="ESA/Hubble Information Centre" %}
             {% include "newsletters/includes/press_release.html" %}
         {% endwith %}
     {% else %}
-        {% with embargo="yes" release=data.release signature_date=data.release.embargo_date signature="ESA/Hubble Information Centre<br />The ESO Education and Public Outreach Department" %}
+        {% with embargo="yes" release=data.release signature_date=data.release.embargo_date signature="ESA/Hubble Information Centre" %}
             {% include "newsletters/includes/press_release.html" %}
         {% endwith %}
     {% endif %}

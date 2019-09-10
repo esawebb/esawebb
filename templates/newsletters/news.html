@@ -20,7 +20,7 @@
 {% endblock %}
 
 {% block content %}
-    {% with embargo="" release=data.release signature_date=data.release.release_date signature="ESA/Hubble Information Centre<br />The ESO Education and Public Outreach Department" %}
+    {% with embargo="" release=data.release signature_date=data.release.release_date signature="ESA/Hubble Information Centre" %}
         {% include "newsletters/includes/press_release.html" %}
     {% endwith %}
 

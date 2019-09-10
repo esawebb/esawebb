@@ -1,4 +1,4 @@
-{% load djangoplicity_text_utils release_links djangoplicity_datetime %}{% with announcements=data.announcements potws=data.potws newon=data.newonhubble org="ESA/Hubble" embargo="yes" reason="you subscribed to ESO & ESA/Hubble Media Newsletter" email="hubble@eso.org" %}{% with signature_date=data.release.embargo_date signature1="ESA/Hubble Information Centre" signature2="The ESO Education and Public Outreach Department" %}{% include "newsletters/includes/text/press_release.txt" %}{% endwith %}
+{% load djangoplicity_text_utils release_links djangoplicity_datetime %}{% with announcements=data.announcements potws=data.potws newon=data.newonhubble org="ESA/Hubble" embargo="yes" reason="you subscribed to ESO & ESA/Hubble Media Newsletter" email="hubble@eso.org" %}{% with signature_date=data.release.embargo_date signature1="ESA/Hubble Information Centre" %}{% include "newsletters/includes/text/press_release.txt" %}{% endwith %}
 {% if data.announcements or data.newonhubble or data.potws %}
 *************************************************************************
 
