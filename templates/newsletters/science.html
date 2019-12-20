@@ -6,30 +6,35 @@
 {% block header %}
     {% with width="700" height="300" color="#9ca3a9" logo_width="140" logo_url=base_url|add:MEDIA_URL|add:"esa_nl_logo.png" %}
         {% block header_content %}
-            {% if editorial_subject %}
-            {% with text_color="#fff" header_title="ESA/Hubble/JWST Science Newsletter" header_subtitle=data.announcement.release_date|date%}
-                {% with release_date=data.announcement.release_date link_url=base_url|add:data.announcement.get_absolute_url pretitle="Editorial" embargo="" title=editorial_subject subtitle=data.announcement.subtitle main_image=data.announcement.main_visual titlesize="small" %}
-                {% include "newsletters/includes/header.html" %}
+
+            {% if data.main_image %}
+                {% with text_color="#fff" header_title="ESA/Hubble/JWST Science Newsletter" header_subtitle=data.announcement.release_date|date release_date=data.announcement.release_date link_url=base_url|add:data.main_image.get_absolute_url embargo="" main_image=data.main_image titlesize="small" %}
+                    {% if editorial_subject %}
+                        {% with pretitle="Editorial" title=editorial_subject subtitle="" %}
+                            {% include "newsletters/includes/header.html" %}
+                        {% endwith %}
+                    {% else %}
+                        {% with pretitle="ESA/Hubble" title=data.announcement.title subtitle=data.announcement.subtitle %}
+                            {% include "newsletters/includes/header.html" %}
+                        {% endwith %}
+                    {% endif %}
                 {% endwith %}
-                {% endwith %}
-            {% else %}{% if data.main_image %}
-                {% with text_color="#fff" header_title="ESA/Hubble/JWST Science Newsletter" header_subtitle=data.announcement.release_date|date release_date=data.announcement.release_date link_url=base_url|add:data.main_image.get_absolute_url pretitle="ESA/Hubble" embargo="" subtitle="" main_image=data.main_image titlesize="small" %}
-                {% include "newsletters/includes/header.html" %}
-                {% endwith %}
-            {% else %}
-                {% if data.announcement %}
-                {% with text_color="#fff" header_title="ESA/Hubble/JWST Science Newsletter" header_subtitle=data.announcement.release_date|date %}
-                {% with release_date=data.announcement.release_date link_url=base_url|add:data.announcement.get_absolute_url pretitle="ESA/Hubble "|add:data.announcement.id embargo="" title=data.announcement.title subtitle=data.announcement.subtitle main_image=data.announcement.main_visual titlesize="small" %}
-                {% include "newsletters/includes/header.html" %}
-                {% endwith %}
+            {% elif data.announcement %}
+                {% with text_color="#fff" header_title="ESA/Hubble/JWST Science Newsletter" header_subtitle=data.announcement.release_date|date release_date=data.announcement.release_date link_url=base_url|add:data.announcement.get_absolute_url pretitle="ESA/Hubble "|add:data.announcement.id embargo="" title=data.announcement.title subtitle=data.announcement.subtitle main_image=data.announcement.main_visual titlesize="small" %}
+                    {% include "newsletters/includes/header.html" %}
                 {% endwith %}
             {% else %}
                 {% with text_color="#fff" header_title="ESA/Hubble/JWST Science Newsletter" header_subtitle=release_date|date %}
-                {% include "newsletters/includes/header.html" %}
+                    {% if editorial_subject %}
+                        {% with pretitle="Editorial" title=editorial_subject subtitle="" %}
+                            {% include "newsletters/includes/header.html" %}
+                        {% endwith %}
+                    {% else %}
+                        {% include "newsletters/includes/header.html" %}
+                    {% endif %}
                 {% endwith %}
             {% endif %}
-            {% endif %}
-            {% endif %}
+
         {% endblock %}
     {% endwith %}
 {% endblock %}
