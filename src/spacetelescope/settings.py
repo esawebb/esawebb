@@ -370,10 +370,10 @@ INSTALLED_APPS += (
     'mptt',
     'django_extensions',
     'django_mailman',
-    # Satchmo
     #'registration',
     'sorl.thumbnail',
     'keyedcache',
+    # Satchmo
     'livesettings',
     'satchmo_utils',
     'satchmo_store.contact',
@@ -443,7 +443,7 @@ LOGIN_REDIRECT_URL = '/'
 import ldap
 from django_auth_ldap.config import LDAPSearch, ActiveDirectoryGroupType
 
-AUTH_LDAP_SERVER_URI = "ldaps://ldap.ads.eso.org:636/ads.eso.org"
+AUTH_LDAP_SERVER_URI = ""
 
 AUTH_LDAP_GLOBAL_OPTIONS = {
     ldap.OPT_REFERRALS: 0,
@@ -451,8 +451,8 @@ AUTH_LDAP_GLOBAL_OPTIONS = {
     ldap.OPT_X_TLS_REQUIRE_CERT: ldap.OPT_X_TLS_NEVER
 }
 
-AUTH_LDAP_BIND_DN = "xskioskldap"
-AUTH_LDAP_BIND_PASSWORD = "LDAP1420"
+AUTH_LDAP_BIND_DN = ""
+AUTH_LDAP_BIND_PASSWORD = ""
 AUTH_LDAP_USER_SEARCH = LDAPSearch( "DC=ads,DC=eso,DC=org",
     ldap.SCOPE_SUBTREE, "(&(objectCategory=user)(objectClass=person)(sAMAccountName=%(user)s)(!(userAccountControl:1.2.840.113556.1.4.803:=2)))" )
 
@@ -634,12 +634,12 @@ ARCHIVE_CROSSLINKS = djangoplicity.crosslinks.crosslinks_for_domain('spacetelesc
 ##########
 # SOCIAL #
 ##########
-SOCIAL_FACEBOOK_TOKEN = "187807957898842|a7f1fed4a89e26492133c6e4-100001473653251|141347899254844|K4lqzDRBPyAVFa7msmusumliPwI"
+SOCIAL_FACEBOOK_TOKEN = ""
 SOCIAL_TWITTER_TUPLE = (
-    "226991078-bHYf0sHAUEs1v6fjnxy8F0KjTLtSLnqTpyKx2Bqh",
-    "oiRDpzBIZUmQ1m8xxrw16aiYBAMjBx9vEi4ddgLOjzc",
-    "uS6hO2sV6tDKIOeVjhnFnQ",
-    "MEYTOS97VvlHX7K1rwHPEqVpTSqZ71HtvoK4sVuYk",
+    "",
+    "",
+    "",
+    "",
 )
 
 
@@ -683,7 +683,7 @@ CELERY_ENABLE_UTC = False
 
 # Broker settings.
 CELERY_BROKER_USE_SSL = False
-CELERY_BROKER_URL = 'amqp://spacetelescope:letoveumtold@localhost:5672/spacetelescope_vhost'
+CELERY_BROKER_URL = ''
 
 # Task result backend
 CELERY_RESULT_BACKEND = "amqp"
@@ -1000,9 +1000,9 @@ LIVESETTINGS_OPTIONS = {
                 u'LOGO_URI': u'https://www.spacetelescope.org/static/archives/logos/screen/eso_colour.jpg',
             },
             u'PAYMENT_CONCARDIS': {
-                u'PSPID': u'esoepod',
-                u'SHA_IN_PASSPHRASE': u'0;dl18;asdL_k21as87ma',
-                u'SHA_OUT_PASSPHRASE': u'!7-zl;j31njky;aslerl',
+                u'PSPID': u'',
+                u'SHA_IN_PASSPHRASE': u'',
+                u'SHA_OUT_PASSPHRASE': u'',
                 u'LIVE': u'False',
                 u'EXTRA_LOGGING': u'True',
             },
@@ -1020,8 +1020,8 @@ SHOP_PICKUP_LOCATIONS = ({
     'delivery': ugettext("Karl-Schwarzschild-Str. 2, 85748 Garching, GERMANY"),
 },)
 
-RECAPTCHA_PUBLIC_KEY = '6LcUjdQSAAAAAHWYDCgHT40vC0NLzUPcmwVDh9yU'
-RECAPTCHA_PRIVATE_KEY = '6LcUjdQSAAAAAPHRoDu56rlNylGTtKvHgfJFTGcE'
+RECAPTCHA_PUBLIC_KEY = ''
+RECAPTCHA_PRIVATE_KEY = ''
 
 #
 # Pipeline configuration (CSS/JS packing)
@@ -1162,11 +1162,11 @@ MEDIA_CONTENT_SERVERS = {
         url='https://cdn.spacetelescope.org/',
         url_bigfiles='https://cdn2.spacetelescope.org/',
         remote_dir='/www/',
-        host='push-19.cdn77.com',
-        username='user_v220pif3',
-        password='5nkOk3mgr8MDw2d4SZw3',
+        host='m',
+        username='',
+        password='',
         api_login='salmagro@eso.org',
-        api_password='054FBaC792mdXA3QkpngOhvWcRqGZJV1',
+        api_password='',
         cdn_id='33541',
         cdn_id_bigfiles='31465',
     ),

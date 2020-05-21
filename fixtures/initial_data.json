@@ -1,41 +1,5 @@
 [
     {
-        "pk": 2, 
-        "model": "auth.user", 
-        "fields": {
-            "username": "lnielsen", 
-            "first_name": "Lars Holm", 
-            "last_name": "Nielsen", 
-            "is_active": 1, 
-            "is_superuser": 1, 
-            "is_staff": 1, 
-            "last_login": "2007-12-07 16:21:19", 
-            "groups": [], 
-            "user_permissions": [], 
-            "password": "sha1$4f58a$fbcf14a62065e4da41194fc6901e087cda78c63e", 
-            "email": "lnielsen@eso.org", 
-            "date_joined": "2007-12-07 16:21:19"
-        }
-    },
-    {
-        "pk": 3, 
-        "model": "auth.user", 
-        "fields": {
-            "username": "lcgomes", 
-            "first_name": "Luis", 
-            "last_name": "Gomes", 
-            "is_active": 1, 
-            "is_superuser": 1, 
-            "is_staff": 1, 
-            "last_login": "2007-12-07 16:21:53", 
-            "groups": [], 
-            "user_permissions": [], 
-            "password": "sha1$dc46b$551a59e246de02a813ed679be22e2dd643bedcef", 
-            "email": "lcgomes@eso.org", 
-            "date_joined": "2007-12-07 16:21:53"
-        }
-    },
-    {
         "pk": 1, 
         "model": "sites.site", 
         "fields": {

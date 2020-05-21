@@ -3,8 +3,8 @@ import copy
 from spacetelescope.settings import *
 
 DATABASES = copy.deepcopy(DATABASES)
-DATABASES['default']['HOST'] = "hqdb1i.hq.eso.org"
-DATABASES['default']['PASSWORD'] = "fivjeylvoked"
+DATABASES['default']['HOST'] = ""
+DATABASES['default']['PASSWORD'] = ""
 
 
 EMAIL_HOST = 'smtphost.hq.eso.org'
@@ -12,7 +12,7 @@ EMAIL_PORT = '25'
 EMAIL_SUBJECT_PREFIX = '[SPACETELESCOPE-INTEGRATION]'
 
 
-CELERY_BROKER_URL = 'amqp://spacetelescope:letoveumtold@aweb36.hq.eso.org:5672/spacetelescope_vhost'
+CELERY_BROKER_URL = ''
 
 
 # Shop:
@@ -23,7 +23,7 @@ CACHES = {
         'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
         'KEY_PREFIX': 'nova',
         'LOCATION': [
-            'aweb34:11211',
+            '',
         ],
         'TIMEOUT': 86400
     },
