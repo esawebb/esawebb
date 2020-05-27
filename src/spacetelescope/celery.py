@@ -12,6 +12,10 @@ import sys
 from celery import Celery
 
 from django.conf import settings
+import os
+
+environment = os.environ.get('ENVIRONMENT', 'dev')
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "spacetelescope.settings.{}".format(environment))
 
 app = Celery('spacetelescope')
 

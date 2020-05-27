@@ -1,6 +1,6 @@
 import copy
 
-from spacetelescope.settings import *
+from .common import *
 
 DATABASES = copy.deepcopy(DATABASES)
 DATABASES['default']['HOST'] = ""

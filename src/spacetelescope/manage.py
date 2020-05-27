@@ -3,7 +3,8 @@ import os
 import sys
 
 if __name__ == "__main__":
-    os.environ.setdefault("DJANGO_SETTINGS_MODULE", "spacetelescope.settings")
+    environment = os.environ.get('ENVIRONMENT', 'dev')
+    os.environ.setdefault("DJANGO_SETTINGS_MODULE", "spacetelescope.settings.{}".format(environment))
 
     from django.core.management import execute_from_command_line
 

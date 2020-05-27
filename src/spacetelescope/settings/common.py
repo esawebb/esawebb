@@ -1,3 +1,4 @@
+
 # -*- coding: utf-8 -*-
 #
 # spacetelescope.org
@@ -82,7 +83,7 @@ GARCHING_INTERNAL_IPS = (
     '127.0.0.1',
 )
 
-SITE_ENVIRONMENT = os.getenv('ENVIRONMENT')
+SITE_ENVIRONMENT = os.environ.get('ENVIRONMENT', 'dev')
 DEBUG = SITE_ENVIRONMENT == 'dev'
 DEBUG_TOOLBAR = DEBUG
 DEBUG_TOOLBAR_CONFIG = {}
@@ -240,7 +241,7 @@ ROOT_URLCONF = 'spacetelescope.urls'
 ###############################
 # MIDDLEWARE AND APPLICATIONS #
 ###############################
-MIDDLEWARE = (
+MIDDLEWARE = [
     # Compresses content for browsers that understand gzip compression (all modern browsers).
     'django.middleware.gzip.GZipMiddleware',  # Response
 
@@ -251,22 +252,22 @@ MIDDLEWARE = (
 
     # The CsrfMiddleware class provides easy-to-use protection against Cross Site Request Forgeries.
     'django.middleware.csrf.CsrfViewMiddleware',
-)
+]
 
 if DEBUG_TOOLBAR:
     # Add debug toolbar to request
-    MIDDLEWARE += (
+    MIDDLEWARE += [
         'debug_toolbar.middleware.DebugToolbarMiddleware',
-    )
+    ]
 
 if DEBUG:
     # Add debug toolbar to request
-    MIDDLEWARE += (
+    MIDDLEWARE += [
         'djangoplicity.utils.middleware.ProfileMiddleware',
-    )
+    ]
 
 
-MIDDLEWARE += (
+MIDDLEWARE += [
     # Enables session support
     'django.contrib.sessions.middleware.SessionMiddleware',  # Request/Response (db)
 
@@ -276,28 +277,23 @@ MIDDLEWARE += (
 
     # enables Messaging middleware
     'django.contrib.messages.middleware.MessageMiddleware',
-
-)
+]
 
 if USE_I18N:
-    MIDDLEWARE += (
+    MIDDLEWARE += [
         # Sets local for request based on URL prefix.
         'djangoplicity.translation.middleware.LocaleMiddleware',  # Request/Response
-    )
+    ]
 
-MIDDLEWARE += (
+MIDDLEWARE += [
     # - Forbids access to user agents in the DISALLOWED_USER_AGENTS setting
     # - Performs URL rewriting based on the APPEND_SLASH and PREPEND_WWW settings.
     # - Handles ETags based on the USE_ETAGS setting.
     'django.middleware.common.CommonMiddleware',  # Request/Response
 
-
     # Sets a boolean session variable INTERNAL_REQUEST if request.META['REMOTE_ADDR'] is in INTERNAL_IPS
     'djangoplicity.archives.middleware.InternalRequestMiddleware',  # Request
-)
 
-
-MIDDLEWARE += (
     # Module for URL redirection.
     'django.contrib.redirects.middleware.RedirectFallbackMiddleware',  # Response
 
@@ -305,17 +301,9 @@ MIDDLEWARE += (
     'djangoplicity.utils.middleware.RegexRedirectMiddleware',  # Response
 
     'djangoplicity.archives.contrib.satchmo.middleware.SatchmoSSLRedirectOverride',
-)
+]
 
-INSTALLED_APPS = ()
-
-if USE_I18N:
-    INSTALLED_APPS += (
-        'djangoplicity.translation',
-        'rosetta',
-    )
-
-INSTALLED_APPS += (
+DJANGO_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.sites',
     'django.contrib.postgres',
@@ -330,6 +318,9 @@ INSTALLED_APPS += (
     'django.contrib.messages',
     'django.contrib.humanize',
     'django.contrib.sitemaps',
+]
+
+DJANGOPLICITY_APPS = [
     'djangoplicity.menus',
     'djangoplicity.reports',
     #'djangoplicity.massmailer',
@@ -365,12 +356,13 @@ INSTALLED_APPS += (
     #'djangoplicity.scrum',
     #'djangoplicity.kiosk.engine',
     #'djangoplicity.kiosk.slides',
-    'spacetelescope',
-    'spacetelescope.frontpage',
+]
+
+THIRD_PARTY_APPS = [
     'mptt',
     'django_extensions',
     'django_mailman',
-    #'registration',
+    # 'registration',
     'sorl.thumbnail',
     'keyedcache',
     # Satchmo
@@ -393,13 +385,26 @@ INSTALLED_APPS += (
     'rest_framework',
     'pipeline',
     'tinymce',
-)
+]
+
+SPACETELESCOPE_APPS = [
+    'spacetelescope',
+    'spacetelescope.frontpage',
+]
+
+INSTALLED_APPS = DJANGO_APPS + DJANGOPLICITY_APPS + SPACETELESCOPE_APPS + THIRD_PARTY_APPS
+
+if USE_I18N:
+    INSTALLED_APPS += [
+        'djangoplicity.translation',
+        'rosetta',
+    ]
 
 
 if DEBUG_TOOLBAR:
-    INSTALLED_APPS += (
+    INSTALLED_APPS += [
         'debug_toolbar',
-    )
+    ]
 
 ############
 # SESSIONS #
@@ -925,9 +930,9 @@ SHOP_CONF = {
 DIRNAME = os.path.abspath( os.path.dirname( __file__ ) )
 LOCAL_DEV = True
 
-MIDDLEWARE += (
+MIDDLEWARE += [
     "threaded_multihost.middleware.ThreadLocalMiddleware",
-)
+]
 
 AUTHENTICATION_BACKENDS += ( 'satchmo_store.accounts.email-auth.EmailBackend', )
 
