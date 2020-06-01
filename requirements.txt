@@ -1,0 +1,43 @@
+Django==1.11.21
+
+# Authenticates against an LDAP service
+django-auth-ldap==1.7.0
+
+# Configure settings via an admin interface
+# django-livesettings==1.4.17
+
+# Manage caching in Django apps
+# django-keyedcache==1.5.3
+
+# Enable easy multi-site awareness in Django apps.
+# django-threaded-multihost==1.4-2
+
+# Asset packaging library for Django
+django-pipeline==1.6.14
+
+django-debug-toolbar==1.11
+
+# Asynchronous Task Queue
+celery==4.3.0
+
+# Celery Monitoring
+flower==0.9.3
+
+# Python WSGI HTTP Server
+gunicorn==19.9.0
+
+# Thumbnails for Django
+sorl-thumbnail==12.5.0
+
+# Python library to read/write Excel 2010 files
+openpyxl==2.6.4
+
+# Python 2.7 support dropped since version 7: https://pillow.readthedocs.io/en/latest/installation.html#notes
+Pillow==6.2.1
+
+zipp==1.2.0
+
+Pygments==2.5.2
+
+# PostgreSQL python client
+psycopg2-binary==2.7.7

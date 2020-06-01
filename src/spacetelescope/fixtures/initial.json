@@ -1,0 +1,45 @@
+[
+  {
+    "model": "pages.section",
+    "pk": 1,
+    "fields": {
+      "name": "Default",
+      "template": "pages/page_onecolumn.html",
+      "append_title": "| ESA/Hubble"
+    }
+  },
+  {
+    "model": "pages.EmbeddedPageKey",
+    "pk": 1,
+    "fields": {
+      "title": "Frontpage Main",
+      "page_key": "frontpage_main",
+      "description": "Embedded page for the frontpage, displayed below the carousel",
+      "last_modified": "2020-04-01T0:00:00"
+    }
+  },
+  {
+    "pk": 1,
+    "model": "menus.menu",
+    "fields": {
+      "max_depth": 0,
+      "expansion_depth": 0,
+      "name": "Main Menu",
+      "hide_menu_root": 1
+    }
+  },
+  {
+    "pk": 1,
+    "model": "metadata.CategoryType",
+    "fields": {
+      "name": "Images"
+    }
+  },
+  {
+    "pk": 2,
+    "model": "metadata.CategoryType",
+    "fields": {
+      "name": "Videos"
+    }
+  }
+]

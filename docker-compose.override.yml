@@ -1,0 +1,44 @@
+version: "3.4"
+
+x-common: &common
+  build: .
+  environment:
+    ENVIRONMENT: "dev"
+    URLS_BASEPATH: "public"
+  volumes:
+    - ./src/spacetelescope:/home/hubbleadm/spacetelescope
+    - ./local:/home/hubbleadm/local
+
+services:
+  web:
+    <<: *common
+    depends_on: 
+      - cache
+    command: ["./scripts/command-dev.sh"]
+    ports:
+      - "8000:8000"
+
+  celery: *common
+
+  flower:
+    <<: *common
+    ports:
+      - "5555:5555"
+
+  beat: *common
+
+  cache:
+    image: memcached:latest
+    container_name: hubble-cache
+    environment:
+      MEMCACHED_CACHE_SIZE: 1024
+    hostname: cache
+    
+
+  db:
+    environment:
+      POSTGRES_DB: hubble
+      POSTGRES_USER: hubble
+      POSTGRES_PASSWORD: hubble
+    ports:
+      - "50000:5432"

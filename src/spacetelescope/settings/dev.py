@@ -44,11 +44,16 @@ DEBUG_TOOLBAR_PANELS = [
 ##################
 # DATABASE SETUP #
 ##################
-DATABASES = copy.deepcopy(DATABASES)
-DATABASES['default']['USER'] = 'postgres'
-DATABASES['default']['NAME'] = 'postgres'
-DATABASES['default']['HOST'] = 'db'
-DATABASES['default']['CONN_MAX_AGE'] = 0
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'hubble',
+        'USER': 'hubble',
+        'PASSWORD': 'hubble',
+        'HOST': 'hubble-db',
+        'PORT': 5432,
+    }
+}
 
 ##########
 # CACHE  #

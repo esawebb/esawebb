@@ -1,0 +1,91 @@
+version: "3.4"
+
+services:
+  web:
+    build: .
+    container_name: hubble
+    restart: always
+    environment:
+      BEAT: ${BEAT:-OFF}
+      SERVER: ${SERVER:-dev}
+    depends_on:
+      - db
+    volumes: 
+      - media:/home/hubbleadm/media
+      - import:/home/hubbleadm/import
+
+  celery:
+    build: .
+    container_name: hubble-celery
+    restart: always
+    # TODO: -B flat embeds celery beat inside the worker, not recommended for production, rather start celery beat in its own process
+    command:
+      [
+        "celery",
+        "-B",
+        "--app=spacetelescope",
+        "--concurrency=8",
+        "--hostname=worker1@%h",
+        "--loglevel=INFO",
+        "--queues=celery",
+        "worker",
+      ]
+    depends_on:
+      - web
+      - broker
+    volumes:
+      - media:/home/hubbleadm/media
+      - import:/home/hubbleadm/import
+
+  broker:
+    image: rabbitmq:3.8.3
+    container_name: hubble-broker
+    restart: always
+    hostname: broker
+
+  flower:
+    build: .
+    container_name: hubble-flower
+    # TODO: Change url prefix to /admin/tasks when having nginx proxy
+    command:
+      [
+        "celery",
+        "--app=spacetelescope",
+        "--concurrency=8",
+        "--db=/home/hubbleadm/tmp/flowerdb",
+        "--persistent",
+        "--port=5555",
+        "--url_prefix=admin/tasks",
+        "flower",
+      ]
+    depends_on:
+      - broker
+      - web
+
+  beat:
+    build: .
+    container_name: hubble-beat
+    command:
+      [
+        "celery",
+        "--app=spacetelescope",
+        "--loglevel=INFO",
+        "--pidfile=/home/hubbleadm/tmp/beat.pid",
+        "--schedule=/home/hubbleadm/celerybeat-schedule",
+        "beat",
+      ]
+    depends_on:
+      - broker
+      - web
+
+  db:
+    image: postgres:10.5
+    container_name: hubble-db
+    restart: always
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+volumes:
+  pgdata:
+  media:
+  import:
