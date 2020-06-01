@@ -1,0 +1,5 @@
+# git+https://github.com/djangoplicity/djangoplicity-actions.git@master
+# git+https://github.com/djangoplicity/djangoplicity-customsearch.git@master
+# git+https://github.com/djangoplicity/djangoplicity-newsletters.git@master
+git+ssh://git@gitlab.com/altix-bitpointer/djangoplicity-git.git@develop
+# git+ssh://git@gitlab.com/altix-bitpointer/satchmo-git.git@master

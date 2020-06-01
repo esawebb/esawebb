@@ -3,3 +3,4 @@
 *.swo
 .idea/
 temp/
+.ssh/gitlab_key
