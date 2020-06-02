@@ -81,5 +81,5 @@ RUN mkdir -p static \
 
 COPY --chown=hubbleadm scripts/ scripts/
 
-COPY --chown=hubbleadm src/spacetelescope/manage.py manage.py
-COPY --chown=hubbleadm src/spacetelescope spacetelescope/
+COPY --chown=hubbleadm manage.py manage.py
+COPY --chown=hubbleadm spacetelescope/ spacetelescope/
