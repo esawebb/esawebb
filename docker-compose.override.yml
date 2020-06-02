@@ -6,7 +6,7 @@ x-common: &common
     ENVIRONMENT: "dev"
     URLS_BASEPATH: "public"
   volumes:
-    - ./src/spacetelescope:/home/hubbleadm/spacetelescope
+    - ./spacetelescope:/home/hubbleadm/spacetelescope
     - ./local:/home/hubbleadm/local
 
 services:
