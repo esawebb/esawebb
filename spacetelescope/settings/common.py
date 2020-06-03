@@ -346,7 +346,7 @@ DJANGOPLICITY_APPS = [
     ### 'djangoplicity.newsletters',
     'djangoplicity.iframe',
     #'djangoplicity.contacts',
-    ### 'djangoplicity.customsearch',
+    'djangoplicity.customsearch',
     'djangoplicity.admincomments',
     'djangoplicity.simplearchives',
     #'djangoplicity.eventcalendar',
