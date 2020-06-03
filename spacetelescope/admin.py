@@ -18,7 +18,7 @@ import django.contrib.sites.admin
 ### import djangoplicity.actions.admin
 import djangoplicity.announcements.admin
 ### import djangoplicity.archives.contrib.satchmo.freeorder.admin
-### import djangoplicity.customsearch.admin
+import djangoplicity.customsearch.admin
 ### import djangoplicity.mailinglists.admin
 import djangoplicity.media.admin
 import djangoplicity.menus.admin
@@ -50,7 +50,7 @@ autoregister( admin_site, djangoplicity.metadata.admin )
 ### autoregister( admin_site, djangoplicity.mailinglists.admin )
 ### autoregister( admin_site, djangoplicity.newsletters.admin )
 #autoregister( admin_site, djangoplicity.contacts.admin )
-### autoregister( admin_site, djangoplicity.customsearch.admin )
+autoregister( admin_site, djangoplicity.customsearch.admin )
 #autoregister( admin_site, djangoplicity.eventcalendar.admin )
 autoregister( admin_site, djangoplicity.science.admin )
 autoregister( admin_site, spacetelescope.frontpage.admin )
