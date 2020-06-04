@@ -1,5 +1,8 @@
 version: "3.4"
 
+# DEV CONFIG: 'docker-compose up' reads it automatically along with the docker-compose.yml file
+# See: https://docs.docker.com/compose/extends/
+
 x-common: &common
   build: .
   environment:

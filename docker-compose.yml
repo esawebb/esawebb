@@ -1,5 +1,8 @@
 version: "3.4"
 
+# BASE CONFIG: applies to all environments, does not work alone
+# See: https://docs.docker.com/compose/extends/
+
 services:
   web:
     build: .
