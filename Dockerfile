@@ -32,7 +32,7 @@ RUN chmod 600 $BUILDER_HOME/.ssh/id_rsa
 
 # Cache layer with private requirements
 COPY private-requirements.txt .
-RUN pip install --user -r private-requirements.txt
+RUN pip install --user -r private-requirements.txt --find-links https://www.djangoplicity.org/repository/packages/
 
 # Install third party dependencies and create layer cache of them
 COPY requirements.txt .
