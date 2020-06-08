@@ -1,4 +1,4 @@
-# git+https://github.com/djangoplicity/djangoplicity-actions.git@master
+git+https://github.com/djangoplicity/djangoplicity-actions.git@develop
 git+https://github.com/djangoplicity/djangoplicity-customsearch.git@develop
 # git+https://github.com/djangoplicity/djangoplicity-newsletters.git@master
 git+ssh://git@gitlab.com/altix-bitpointer/djangoplicity-git.git@develop

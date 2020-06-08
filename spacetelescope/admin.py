@@ -15,7 +15,7 @@ from djangoplicity.contrib.admin.discover import autoregister
 import django.contrib.auth.admin
 import django.contrib.redirects.admin
 import django.contrib.sites.admin
-### import djangoplicity.actions.admin
+import djangoplicity.actions.admin
 import djangoplicity.announcements.admin
 ### import djangoplicity.archives.contrib.satchmo.freeorder.admin
 import djangoplicity.customsearch.admin
@@ -55,8 +55,7 @@ autoregister( admin_site, djangoplicity.customsearch.admin )
 autoregister( admin_site, djangoplicity.science.admin )
 autoregister( admin_site, spacetelescope.frontpage.admin )
 
-
-### autoregister( adminlogs_site, djangoplicity.actions.admin )
+autoregister( adminlogs_site, djangoplicity.actions.admin )
 
 
 #
