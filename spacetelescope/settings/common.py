@@ -350,7 +350,7 @@ DJANGOPLICITY_APPS = [
     'djangoplicity.admincomments',
     'djangoplicity.simplearchives',
     #'djangoplicity.eventcalendar',
-    ### 'djangoplicity.actions',
+    'djangoplicity.actions',
     'djangoplicity.cutter',
     #'djangoplicity.mailer',
     #'djangoplicity.scrum',
