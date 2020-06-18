@@ -1,0 +1,17 @@
+include:
+  - template: 'Workflows/MergeRequest-Pipelines.gitlab-ci.yml'
+
+stages:
+  - test
+
+test_2.7:
+  stage: test
+  image: python:2.7-slim-buster
+  script:
+    - apt-get update -y
+    - apt-get install -y gcc git libldap2-dev libsasl2-dev libssl-dev python-dev
+    - python -m pip install --upgrade pip
+    - pip install --user -r requirements.txt
+    - pip install --user -r private-requirements.txt --find-links https://www.djangoplicity.org/repository/packages/
+    - mkdir -p static media/archives/images media/archives/videos logs tmp import
+    - python manage.py test
