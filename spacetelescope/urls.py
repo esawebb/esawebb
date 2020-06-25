@@ -21,8 +21,8 @@ from djangoplicity.announcements.models import Announcement, WebUpdate
 from djangoplicity.announcements.options import AnnouncementOptions, WebUpdateOptions
 from djangoplicity.media.models import Image, Video, PictureOfTheWeek, ImageComparison
 from djangoplicity.media.options import ImageOptions, VideoOptions, PictureOfTheWeekOptions, ImageComparisonOptions
-### from djangoplicity.newsletters.models import Newsletter
-### from djangoplicity.newsletters.options import NewsletterOptions
+from djangoplicity.newsletters.models import Newsletter
+from djangoplicity.newsletters.options import NewsletterOptions
 from djangoplicity.pages.views import view_page
 ### from djangoplicity.products.models import *
 ### from djangoplicity.products.options import *
