@@ -56,11 +56,6 @@ DATABASES = {
     }
 }
 
-# TODO: Remove and start using postgres when testing the full environment
-if 'test' in sys.argv and 'loaddata' not in sys.argv or 'PIPELINES' in os.environ:
-    DATABASES['default']['ENGINE'] = 'django.db.backends.sqlite3'
-
-
 ##########
 # CACHE  #
 ##########
