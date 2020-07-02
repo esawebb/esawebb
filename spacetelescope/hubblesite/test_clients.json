@@ -1,0 +1,25 @@
+{
+	"clients":[
+		{
+			"Identifier": "Uno",
+			"first name": "Pepito",
+			"last name": "Sanchez",
+			"age": "32",
+			"Image Format":"client"
+		},		
+		{
+			"Identifier": "Uno",
+			"first name": "Juan",
+			"last name": "Lalinde",
+			"age": "40",
+			"Image Format":"client"
+		},
+		{
+			"Identifier": "Dos",
+			"first name": "Ingry",
+			"last name": "Romero",
+			"age": "21",
+			"Image Format":"client"
+		}
+	]
+}

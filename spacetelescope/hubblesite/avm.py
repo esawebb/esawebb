@@ -46,7 +46,7 @@ def load_json(json_file):
 
 def remove_duplicates(data):
     '''
-    reomve duplicates, prefere jpeg entries
+    remove duplicates, prefere jpeg entries
     in the jsondata are often more than one entries for each ID, one with tiff, one with jpeg
     take all the jpeg versions and add all other image IDs that do not have a jpeg version
     '''
