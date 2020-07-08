@@ -38,6 +38,10 @@ RUN pip install --user -r private-requirements.txt --find-links https://www.djan
 COPY requirements.txt .
 RUN pip install --user -r requirements.txt
 
+# Install test dependencies and create layer cache of them
+COPY test-requirements.txt .
+RUN pip install --user -r test-requirements.txt
+
 ######################################
 # RUNNER IMAGE: For running the code #
 ######################################
@@ -81,5 +85,6 @@ RUN mkdir -p static \
 
 COPY --chown=hubbleadm scripts/ scripts/
 
+COPY --chown=hubbleadm .coveragerc .
 COPY --chown=hubbleadm manage.py manage.py
 COPY --chown=hubbleadm spacetelescope/ spacetelescope/

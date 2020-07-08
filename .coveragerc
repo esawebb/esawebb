@@ -1,0 +1,10 @@
+[run]
+omit = 
+    */migrations/*
+    */.local/*
+    *htmlcov/*
+    *build-cache/*
+    *dummy_rails/*
+
+plugins =
+    django_coverage_plugin

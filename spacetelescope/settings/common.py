@@ -252,6 +252,13 @@ MIDDLEWARE = [
 
     # The CsrfMiddleware class provides easy-to-use protection against Cross Site Request Forgeries.
     'django.middleware.csrf.CsrfViewMiddleware',
+
+    # Enables session support
+    'django.contrib.sessions.middleware.SessionMiddleware',  # Request/Response (db)
+
+    # Adds the user attribute, representing the currently-logged-in user, to every incoming
+    # HttpRequest object.
+    'django.contrib.auth.middleware.AuthenticationMiddleware',  # Request
 ]
 
 if DEBUG_TOOLBAR:
@@ -268,13 +275,6 @@ if DEBUG:
 
 
 MIDDLEWARE += [
-    # Enables session support
-    'django.contrib.sessions.middleware.SessionMiddleware',  # Request/Response (db)
-
-    # Adds the user attribute, representing the currently-logged-in user, to every incoming
-    # HttpRequest object.
-    'django.contrib.auth.middleware.AuthenticationMiddleware',  # Request
-
     # enables Messaging middleware
     'django.contrib.messages.middleware.MessageMiddleware',
 ]
