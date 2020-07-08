@@ -1,13 +1,18 @@
-from django.test import TestCase
+from django.contrib.auth.models import AnonymousUser
+from django.test import TestCase, Client
 
 
-# TODO: remove and add real tests
 class TestInitial(TestCase):
-    def test_of_tests1(self):
-        self.assertEquals(1, 1)
+    def setUp(self):
+        self.user = AnonymousUser()
+        self.client = Client()
 
-    def test_of_tests2(self):
-        self.assertEquals(2, 6 / 3)
-
-    def test_of_tests3(self):
-        self.assertEquals(3, 4 * 2 - 5)
+    def test_frontpage_with_client(self):
+        """"
+        In order to use django.test.Client we need to ensure the Authentication and Session
+        middlewares to be loaded previous to the djangoplicity middleware, because the latter
+        requires access to request.user which is added by AuthenticationMiddleware which,
+        in turn requires SessionMiddleware
+        """
+        response = self.client.get('/')
+        self.assertContains(response, '<div id="pr-carousel">', status_code=200, html=True)

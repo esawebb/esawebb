@@ -10,6 +10,7 @@ x-common: &common
     URLS_BASEPATH: "public"
   volumes:
     - ./spacetelescope:/home/hubbleadm/spacetelescope
+    - ./htmlcov:/home/hubbleadm/htmlcov
     - ./local:/home/hubbleadm/local
 
 services:

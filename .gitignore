@@ -4,3 +4,13 @@
 .idea/
 temp/
 .ssh/gitlab_key
+
+# coverage related files/folders
+htmlcov/*
+.coverage
+.coverage.*
+coverage.xml
+*.cover
+
+# keep htmlcov for reports
+!htmlcov/.keep

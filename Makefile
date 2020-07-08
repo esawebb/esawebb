@@ -17,7 +17,15 @@ demofixture:
 	docker exec -it hubble ./manage.py loaddata demo
 
 test:
-	docker exec -it hubble ./manage.py test
+	docker exec -it hubble coverage run --source='.' manage.py test
+
+test-and-report: test cov-report
+
+cov-report:
+	docker exec -it hubble coverage report -m
+
+cov-report-html:
+	docker exec -it hubble coverage html
 
 statics:
 	docker exec -it hubble ./manage.py collectstatic --noinput
