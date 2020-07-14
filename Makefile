@@ -16,8 +16,11 @@ initialfixture:
 demofixture:
 	docker exec -it hubble ./manage.py loaddata demo
 
+missingmigrations:
+	docker exec -it hubble ./manage.py makemigrations payment app_plugins django_mailman tieredweight
+
 test:
-	docker exec -it hubble coverage run --source='.' manage.py test
+	docker exec -it hubble coverage run manage.py test --no-input
 
 test-and-report: test cov-report
 

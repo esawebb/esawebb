@@ -36,7 +36,7 @@ RUN pip install --user -r private-requirements.txt --find-links https://www.djan
 
 # Install third party dependencies and create layer cache of them
 COPY requirements.txt .
-RUN pip install --user -r requirements.txt
+RUN pip install --user -r requirements.txt --find-links https://www.djangoplicity.org/repository/packages/
 
 # Install test dependencies and create layer cache of them
 COPY test-requirements.txt .

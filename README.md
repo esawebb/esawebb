@@ -35,6 +35,10 @@ it is necessary to configure a **SSH Key** to allow the Dockerfile to be able to
 
 At this point the Docker build command would be able to use the private key in order to download the dependencies.
 
+#### Gitlab CI extra config
+In order to clone the private repositories in the pipelines, the `SSH_PRIVATE_KEY` variable must be specified in the 
+gitlab `CI/CD => Variables` section. The content of this variable must be the same of the private key.
+
 ### Running the project
 
 All the configuration to start the project is present in the docker-compose files and Dockerfile,
