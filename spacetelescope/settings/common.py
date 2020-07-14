@@ -175,11 +175,6 @@ DJANGOPLICITY_MEDIA_ROOT = "%s/static" % DJANGOPLICITY_ROOT
 
 MIDENTIFY_PATH = '/usr/bin/midentify'
 
-# Staticfiles app
-STATICFILES_DIRS = [
-    ( 'djangoplicity', DJANGOPLICITY_MEDIA_ROOT ),
-]
-
 STATIC_ROOT = "%s/static/djp/" % ROOT
 STATIC_URL = "/static/djp/"
 
@@ -321,6 +316,7 @@ DJANGO_APPS = [
 ]
 
 DJANGOPLICITY_APPS = [
+    'djangoplicity',
     'djangoplicity.menus',
     'djangoplicity.reports',
     #'djangoplicity.massmailer',
