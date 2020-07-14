@@ -1,8 +1,6 @@
 {% extends "admin/base_site_base.html" %}
 
-{% comment "TODO: Uncomment when satchmo is available" %}
-    {% load satchmo_util %}
-{% endcomment %}
+{% load satchmo_util %}
 {% load i18n %}
 
 {% block branding %}<h1 id="site-name">{% trans 'Spacetelescope Djangoplicity administration' %}</h1>{% endblock %}
@@ -20,6 +18,4 @@ div.tabular .vCurrencyField { width: 70%; }
 </style>
 {% endblock %}
 
-{% comment "TODO: Uncomment when satchmo is available" %}
 {% block extra_admin_links %}| <a href="{% url 'adminshop_site:index' %}">Shop admin</a>{% endblock %}
-{% endcomment %}

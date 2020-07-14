@@ -24,6 +24,14 @@ stages:
 
 .before_script_template: &before_script_definition
   - mkdir -pv static media/archives/images media/archives/videos logs tmp import $APT_CACHE_DIR $PIP_CACHE_DIR
+  - ln -s /root/.local .local
+  - apt-get update -y
+  - mkdir -pv /root/.ssh
+  - chmod 600 /root/.ssh
+  - cp .ssh/known_hosts /root/.ssh/known_hosts
+  - 'which ssh-agent || ( apt-get install openssh-client -y )'
+  - eval $(ssh-agent -s)
+  - echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add -
 
 ########################################
 # Test and generate coverage reports
@@ -43,15 +51,14 @@ test:py27-django111:
   before_script: *before_script_definition
   script:
     - export PATH=/root/.local/bin:$PATH
-    - ln -s /root/.local .local
-    - apt-get update -y
     - apt-get -o dir::cache::archives="$APT_CACHE_DIR" install -y gcc git libldap2-dev libsasl2-dev libssl-dev python-dev uglifyjs
     - python -m pip install --upgrade pip
     - pip install --user -r requirements.txt
     - pip install --user -r test-requirements.txt
     - pip --no-cache-dir install --user -r private-requirements.txt
     - python manage.py collectstatic --noinput
-    - coverage run --source='.' manage.py test
+    - python manage.py makemigrations payment app_plugins django_mailman tieredweight
+    - coverage run manage.py test
     - coverage report
     - coverage html
   coverage: '/TOTAL.+ ([0-9]{1,3}%)/'

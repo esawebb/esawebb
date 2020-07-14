@@ -1,10 +1,15 @@
 [run]
+source = .
+
 omit = 
     */migrations/*
     */.local/*
-    *htmlcov/*
-    *build-cache/*
-    *dummy_rails/*
+    */htmlcov/*
+    */build-cache/*
+    */dummy_rails/*
+    */test.py
+    */tests.py
+    */static/djp/*
 
 plugins =
     django_coverage_plugin

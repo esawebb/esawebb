@@ -230,7 +230,7 @@ TEMPLATES = [
                 'djangoplicity.utils.context_processors.google_analytics_id',
                 'djangoplicity.utils.context_processors.djangoplicity_environment',
                 'djangoplicity.archives.context_processors.internal_request',
-                ### 'satchmo_store.shop.context_processors.settings',
+                'satchmo_store.shop.context_processors.settings',
             ],
         },
     },
@@ -300,14 +300,14 @@ MIDDLEWARE += [
     # Module for URL redirection based on regular expressions
     'djangoplicity.utils.middleware.RegexRedirectMiddleware',  # Response
 
-    ### 'djangoplicity.archives.contrib.satchmo.middleware.SatchmoSSLRedirectOverride',
+    'djangoplicity.archives.contrib.satchmo.middleware.SatchmoSSLRedirectOverride',
 ]
 
 DJANGO_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.sites',
     'django.contrib.postgres',
-    ### 'satchmo_store.shop',
+    'satchmo_store.shop',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.redirects',
@@ -329,13 +329,13 @@ DJANGOPLICITY_APPS = [
     'djangoplicity.media',
     #'djangoplicity.contrib.redirects',
     'djangoplicity.archives',
-    ### 'djangoplicity.archives.contrib.satchmo',
-    ### 'djangoplicity.archives.contrib.satchmo.freeorder',
+    'djangoplicity.archives.contrib.satchmo',
+    'djangoplicity.archives.contrib.satchmo.freeorder',
     'djangoplicity.archives.contrib.security',
     'djangoplicity.announcements',
     'djangoplicity.science',
     'djangoplicity.releases',
-    ### 'djangoplicity.products',
+    'djangoplicity.products',
     'djangoplicity.metadata',
     'djangoplicity.cache',
     'djangoplicity.adminhistory',
@@ -360,25 +360,25 @@ DJANGOPLICITY_APPS = [
 
 THIRD_PARTY_APPS = [
     'mptt',
-    ### 'django_extensions',
+    'django_extensions',
     'django_mailman',
     # 'registration',
     'sorl.thumbnail',
-    ### 'keyedcache',
+    'keyedcache',
     ### Satchmo
-    ### 'livesettings',
-    ### 'satchmo_utils',
-    ### 'satchmo_store.contact',
-    ### 'product',
-    ### 'product.modules.configurable',
-    ### 'shipping',
-    ### 'payment',
-    ### 'djangoplicity.concardis',
-    ### 'l10n',
-    ### 'tax',
-    ### 'tax.modules.no',
-    ### 'app_plugins',
-    ### 'shipping.modules.tieredweight',
+    'livesettings',
+    'satchmo_utils',
+    'satchmo_store.contact',
+    'product',
+    'product.modules.configurable',
+    'shipping',
+    'payment',
+    'djangoplicity.concardis',
+    'l10n',
+    'tax',
+    'tax.modules.no',
+    'app_plugins',
+    'shipping.modules.tieredweight',
     'captcha',
     'gunicorn',
     'django_ace',
@@ -931,10 +931,10 @@ DIRNAME = os.path.abspath( os.path.dirname( __file__ ) )
 LOCAL_DEV = True
 
 MIDDLEWARE += [
-    ### "threaded_multihost.middleware.ThreadLocalMiddleware",
+    "threaded_multihost.middleware.ThreadLocalMiddleware",
 ]
 
-# AUTHENTICATION_BACKENDS += ( 'satchmo_store.accounts.email-auth.EmailBackend', )
+AUTHENTICATION_BACKENDS += ( 'satchmo_store.accounts.email-auth.EmailBackend', )
 
 SATCHMO_SETTINGS = {
     'SHOP_BASE': '/shop',
