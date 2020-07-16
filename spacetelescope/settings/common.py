@@ -114,11 +114,6 @@ DATABASES = {
     }
 }
 
-FIXTURE_DIRS = (
-    ## PRJBASE + '/fixtures',
-    DJANGOPLICITY_ROOT + '/fixtures',
-)
-
 ########################
 # INTERNATIONALIZAION  #
 ########################
