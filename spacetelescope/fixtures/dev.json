@@ -1,0 +1,403 @@
+[
+  {
+    "model": "sites.site",
+    "pk": 1,
+    "fields": {
+      "domain": "development.hubble.com",
+      "name": "development.hubble.com"
+    }
+  },
+  {
+    "pk": 1,
+    "model": "metadata.categorytype",
+    "fields": {
+      "name": "Images"
+    }
+  },
+  {
+    "pk": 2,
+    "model": "metadata.categorytype",
+    "fields": {
+      "name": "Videos"
+    }
+  },
+  {
+    "pk": 27,
+    "model": "metadata.category",
+    "fields": {
+      "url": "cosmo",
+      "type": 1,
+      "name": "Cosmology"
+    }
+  },
+  {
+    "pk": 25,
+    "model": "metadata.category",
+    "fields": {
+      "url": "galax",
+      "type": 1,
+      "name": "Galaxies"
+    }
+  },
+  {
+    "pk": 30,
+    "model": "metadata.category",
+    "fields": {
+      "url": "illustration",
+      "type": 1,
+      "name": "Illustrations"
+    }
+  },
+  {
+    "pk": 28,
+    "model": "metadata.category",
+    "fields": {
+      "url": "jwst",
+      "type": 1,
+      "name": "JWST"
+    }
+  },
+  {
+    "pk": 29,
+    "model": "metadata.category",
+    "fields": {
+      "url": "misc",
+      "type": 1,
+      "name": "Miscellaneous"
+    }
+  },
+  {
+    "pk": 32,
+    "model": "metadata.category",
+    "fields": {
+      "url": "mission",
+      "type": 1,
+      "name": "Mission"
+    }
+  },
+  {
+    "pk": 24,
+    "model": "metadata.category",
+    "fields": {
+      "url": "nebulae",
+      "type": 1,
+      "name": "Nebulae"
+    }
+  },
+  {
+    "pk": 26,
+    "model": "metadata.category",
+    "fields": {
+      "url": "quasar",
+      "type": 1,
+      "name": "Quasars/AGN/Black Holes"
+    }
+  },
+  {
+    "pk": 21,
+    "model": "metadata.category",
+    "fields": {
+      "url": "solarsystem",
+      "type": 1,
+      "name": "Solar System"
+    }
+  },
+  {
+    "pk": 31,
+    "model": "metadata.category",
+    "fields": {
+      "url": "spacecraft",
+      "type": 1,
+      "name": "Spacecraft"
+    }
+  },
+  {
+    "pk": 22,
+    "model": "metadata.category",
+    "fields": {
+      "url": "star",
+      "type": 1,
+      "name": "Stars"
+    }
+  },
+  {
+    "pk": 23,
+    "model": "metadata.category",
+    "fields": {
+      "url": "starcluster",
+      "type": 1,
+      "name": "Star Clusters"
+    }
+  },
+  {
+    "pk": 2,
+    "model": "metadata.category",
+    "fields": {
+      "url": "3d",
+      "type": 2,
+      "name": "3D Animations"
+    }
+  },
+  {
+    "pk": 5,
+    "model": "metadata.category",
+    "fields": {
+      "url": "clusters",
+      "type": 2,
+      "name": "Star Clusters"
+    }
+  },
+  {
+    "pk": 9,
+    "model": "metadata.category",
+    "fields": {
+      "url": "cosmology",
+      "type": 2,
+      "name": "Cosmology"
+    }
+  },
+  {
+    "pk": 14,
+    "model": "metadata.category",
+    "fields": {
+      "url": "dome",
+      "type": 2,
+      "name": "Dome"
+    }
+  },
+  {
+    "pk": 15,
+    "model": "metadata.category",
+    "fields": {
+      "url": "dvd",
+      "type": 2,
+      "name": "Hubble DVD"
+    }
+  },
+  {
+    "pk": 10,
+    "model": "metadata.category",
+    "fields": {
+      "url": "extrasolar",
+      "type": 2,
+      "name": "Extrasolar Planets"
+    }
+  },
+  {
+    "pk": 20,
+    "model": "metadata.category",
+    "fields": {
+      "url": "eyesontheskies",
+      "type": 2,
+      "name": "Eyes on the Skies DVD"
+    }
+  },
+  {
+    "pk": 7,
+    "model": "metadata.category",
+    "fields": {
+      "url": "galaxies",
+      "type": 2,
+      "name": "Galaxies"
+    }
+  },
+  {
+    "pk": 16,
+    "model": "metadata.category",
+    "fields": {
+      "url": "hd",
+      "type": 2,
+      "name": "HD"
+    }
+  },
+  {
+    "pk": 1,
+    "model": "metadata.category",
+    "fields": {
+      "url": "hubble",
+      "type": 2,
+      "name": "Hubble Images"
+    }
+  },
+  {
+    "pk": 19,
+    "model": "metadata.category",
+    "fields": {
+      "url": "hubblecast",
+      "type": 2,
+      "name": "Hubblecast"
+    }
+  },
+  {
+    "pk": 11,
+    "model": "metadata.category",
+    "fields": {
+      "url": "jwst",
+      "type": 2,
+      "name": "JWST"
+    }
+  },
+  {
+    "pk": 13,
+    "model": "metadata.category",
+    "fields": {
+      "url": "misc",
+      "type": 2,
+      "name": "Miscellaneous"
+    }
+  },
+  {
+    "pk": 6,
+    "model": "metadata.category",
+    "fields": {
+      "url": "nebulae",
+      "type": 2,
+      "name": "Nebulae"
+    }
+  },
+  {
+    "pk": 8,
+    "model": "metadata.category",
+    "fields": {
+      "url": "quasars",
+      "type": 2,
+      "name": "Quasars"
+    }
+  },
+  {
+    "pk": 3,
+    "model": "metadata.category",
+    "fields": {
+      "url": "solarsystem",
+      "type": 2,
+      "name": "Solar System"
+    }
+  },
+  {
+    "pk": 12,
+    "model": "metadata.category",
+    "fields": {
+      "url": "spacecraft",
+      "type": 2,
+      "name": "Spacecraft"
+    }
+  },
+  {
+    "pk": 4,
+    "model": "metadata.category",
+    "fields": {
+      "url": "stars",
+      "type": 2,
+      "name": "Stars"
+    }
+  },
+  {
+    "pk": 18,
+    "model": "metadata.category",
+    "fields": {
+      "url": "stereoscopic",
+      "type": 2,
+      "name": "Stereoscopic"
+    }
+  },
+  {
+    "pk": 17,
+    "model": "metadata.category",
+    "fields": {
+      "url": "vnr",
+      "type": 2,
+      "name": "Video News Releases"
+    }
+  },
+  {
+    "model": "product.category",
+    "pk": 1000,
+    "fields": {
+      "site": 1,
+      "name": "Dev category",
+      "slug": "dev-cat"
+    }
+  },
+  {
+    "model": "product.product",
+    "pk": 1000,
+    "fields": {
+      "site": 1,
+      "name": "Dev product",
+      "featured": true,
+      "slug": "dev-product",
+      "sku": "dev-product",
+      "items_in_stock": 1000,
+      "category": [1000]
+    }
+  },
+  {
+    "model": "product.price",
+    "pk": 1000,
+    "fields": {
+      "product": 1000,
+      "price": 50.00,
+      "quantity": 1
+    }
+  },
+  {
+    "pk": 1000,
+    "model": "l10n.country",
+    "fields": {
+      "iso2_code": "DV",
+      "name": "DEV COUNTRY",
+      "printable_name": "Dev country",
+      "iso3_code": "DEV",
+      "continent": "EU"
+    }
+  },
+  {
+    "model": "contact.contactrole",
+    "fields": {
+      "key": "Customer",
+      "name": "Customer"
+    }
+  },
+  {
+    "model": "shop.config",
+    "fields": {
+      "site": 1,
+      "city": "Dev city",
+      "sales_country": 1000,
+      "phone": "",
+      "street1": "Dev Street",
+      "street2": "",
+      "store_name": "Hubble Dev Shop",
+      "state": "",
+      "postal_code": "85748",
+      "store_description": "This is a fake store used for testing",
+      "country": 1000,
+      "store_email": "dev@shop.com",
+      "in_country_only": 0,
+      "shipping_countries": [1000]
+    }
+  },
+  {
+    "model": "science.scienceannouncement",
+    "pk": "1000",
+    "fields": {
+      "lang": "en",
+      "source": null,
+      "translation_ready": false,
+      "title": "Dev science announcement",
+      "subtitle": "",
+      "description": "<p>Maunakea Observatories issued an open letter intended to share their perspectives about the situation on Maunakea with the broader astronomy community.</p>\r\n<p><a href=\"https://maunakeaobservatories.org/aloha-to-scientific-colleagues/\">Read on Maunakea Observatories website</a></p>",
+      "contacts": "",
+      "links": "",
+      "featured": true,
+      "release_date": "2019-07-22T06:00:00",
+      "embargo_date": null,
+      "published": true,
+      "last_modified": "2020-03-31T22:30:57.937",
+      "created": "2020-03-31T22:30:57.937",
+      "release_task_id": "0f346155-3861-4c23-b9e9-b70cd4df8517",
+      "embargo_task_id": null,
+      "checksums": null
+    }
+  }
+]

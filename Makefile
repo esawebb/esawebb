@@ -19,16 +19,25 @@ demofixture:
 missingmigrations:
 	docker exec -it hubble ./manage.py makemigrations payment app_plugins django_mailman tieredweight
 
+fasttest:
+	docker exec -it hubble coverage run --rcfile=.coveragerc-parallel manage.py test --no-input --keepdb --parallel --failfast
+
 test:
 	docker exec -it hubble coverage run manage.py test --no-input
 
 test-and-report: test cov-report
 
+fast-and-report: fasttest cov-combine-report
+
 cov-report:
-	docker exec -it hubble coverage report -m
+	docker exec -it hubble coverage report
 
 cov-report-html:
 	docker exec -it hubble coverage html
+
+cov-combine-report:
+	docker exec -it hubble coverage combine
+	docker exec -it hubble coverage report
 
 statics:
 	docker exec -it hubble ./manage.py collectstatic --noinput

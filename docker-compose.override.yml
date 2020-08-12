@@ -14,6 +14,8 @@ x-common: &common
     - ./local:/home/hubbleadm/local
     - ./htmlcov:/home/hubbleadm/htmlcov
     - ./.coveragerc:/home/hubbleadm/.coveragerc
+    - ./local-test-utils/sitecustomize.py:/home/hubbleadm/sitecustomize.py
+    - ./.coveragerc-parallel:/home/hubbleadm/.coveragerc-parallel
 
 services:
   web:

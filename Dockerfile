@@ -81,7 +81,8 @@ RUN mkdir -p static \
     media/archives/videos \ 
     logs \
     tmp \
-    import
+    import \
+    shared
 
 COPY --chown=hubbleadm scripts/ scripts/
 

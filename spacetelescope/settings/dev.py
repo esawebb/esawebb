@@ -9,6 +9,7 @@ SECURE_PROXY_SSL_HEADER = None
 
 ALLOWED_HOSTS = ['*']
 
+
 def show_toolbar(request):
     '''
     The default callback checks if the IP is internal, but docker's IP
