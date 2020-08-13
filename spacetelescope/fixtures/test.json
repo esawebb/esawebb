@@ -203,15 +203,6 @@
     }
   },
   {
-    "model": "releases.releaseimage",
-    "pk": "10000",
-    "fields": {
-      "release_id": "10000",
-      "archive_item": "10000",
-      "main_visual": true
-    }
-  },
-  {
     "model": "announcements.announcement",
     "pk": "10000",
     "fields": {
