@@ -122,6 +122,8 @@ class TestMedia(TestCase):
         self.assertContains(response, self.video.title)
 
 
+from django.test import tag
+@tag('shop')
 class TestShop(TestCase):
     fixtures = ['test']
 
@@ -132,22 +134,22 @@ class TestShop(TestCase):
         self.category = Category.objects.first()
         self.product = Product.objects.first()
 
-    def test_shop_index(self):
+    def test_index(self):
         response = self.client.get('/shop/')
         self.assertContains(response, self.shop.store_name)
 
-    def test_shop_freeorder(self):
+    def test_freeorder(self):
         response = self.client.get('/shop/freeorder/')
         self.assertContains(response, 'Full Name')
         self.assertContains(response, 'Email Address')
         self.assertContains(response, 'Country of delivery')
         self.assertContains(response, 'Justification')
 
-    def test_shop_category_detail(self):
+    def test_category_detail(self):
         response = self.client.get('/shop/category/%s/' % self.category.slug)
         self.assertContains(response, self.category.name)
 
-    def test_shop_product_process(self):
+    def test_product_process(self):
         # Add some products to cart, in order to render the cart_box template in the product detail
         response = self.client.post('/shop/add/', {
             'quantity': 3,
@@ -167,7 +169,49 @@ class TestShop(TestCase):
         response = self.client.get('/shop/checkout/')
         self.assertContains(response, 'Step 1 of 3')
 
-        # TODO: review /shop/checkout/payment/ and /shop/checkout/payment/confirm/
+        # Submit form in order to proceed to payment
+        response = self.client.post(
+            '/shop/checkout/',
+            {
+                'paymentmethod': 'CONCARDIS',
+                'email': 'test@mail.com',
+                'city': 'Neverland',
+                'first_name': 'Sheldon',
+                'last_name': 'Cooper',
+                'phone': '69300012',
+                'addressee': 'Amy Farrah Fowler',
+                'street1': 'In the middle of Nowhere',
+                'street2': 'Maybe you should look behing you',
+                'state': 'Bermuda',
+                'postal_code': '23836',
+                'country': 10000,
+                'copy_address': 'on',
+            },
+            follow=True
+        )
+        self.check_redirection_to(response, '/shop/checkout/payment/')
+
+        # Submit form in order to proceed to confirmation
+        response = self.client.post(
+            '/shop/checkout/payment/',
+            {
+                'shipping': 'PUP1'
+            },
+            follow=True
+        )
+        self.check_redirection_to(response, '/shop/checkout/payment/confirm/')
+
+        # We can't check concardis, but we can assume the order was placed successfully
+        response = self.client.get('/shop/checkout/success/')
+        self.assertContains(response, 'Order successfully completed')
+
+    def check_redirection_to(self, response, to):
+        redirects_number = len(response.redirect_chain)
+        last_url, status_code = response.redirect_chain[-1] if redirects_number > 0 else (None, None)
+
+        self.assertGreater(redirects_number, 0)
+        self.assertEqual(status_code, 302)
+        self.assertEqual(last_url, to)
 
 
 class TestColumnTemplates(TestCase):

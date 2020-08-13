@@ -88,3 +88,11 @@ SERVE_STATIC_MEDIA = True
 #########
 #EMAIL_HOST = 'smtphost.hq.eso.org'
 #EMAIL_PORT = '25'
+
+
+##################
+# CATPCHA #
+##################
+# This keys are provided by google for testing purposes
+RECAPTCHA_PUBLIC_KEY = '6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI'
+RECAPTCHA_PRIVATE_KEY = '6LeIxAcTAAAAAGG-vFI1TnRWxMZNFuojJ4WifJWe'
