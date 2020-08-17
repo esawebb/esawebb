@@ -17,28 +17,6 @@ In your terminal run the command:
 git clone https://gitlab.com/esahubble/esahubble.git
 ````
 
-### Setup your SSH key
-
-This project have some private repositories as dependencies, then, while those repositories are private
-it is necessary to configure a **SSH Key** to allow the Dockerfile to be able to download those dependencies:
-
-1. Create your own SSH Key: https://gitlab.com/help/ssh/README#rsa-ssh-keys
-> **IMPORTANT**: Do not generate the SSH key with a passphrase because the build command does not allow user input.
-2. Paste your newly generated public key here: https://gitlab.com/profile/keys.
-
-3. Assign a _title_ and an _expiration date_ (not required), then save.
-4. Go to the subfolder `.ssh/` present in this project, paste your _private key_ and rename the file as `gitlab_key`
-
-> **REMEMBER:** You must have access to the private repositories for the private key to work
-
-> By default the `.ssh/gitlab_key` file is ignored by .gitignore, keep it like that, the key is private for each developer
-
-At this point the Docker build command would be able to use the private key in order to download the dependencies.
-
-#### Gitlab CI extra config
-In order to clone the private repositories in the pipelines, the `SSH_PRIVATE_KEY` variable must be specified in the 
-gitlab `CI/CD => Variables` section. The content of this variable must be the same of the private key.
-
 ### Running the project
 
 All the configuration to start the project is present in the docker-compose files and Dockerfile,

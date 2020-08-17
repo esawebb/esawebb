@@ -3,7 +3,6 @@
 *.swo
 .idea/
 temp/
-.ssh/gitlab_key
 
 # coverage related files/folders
 htmlcov/*
