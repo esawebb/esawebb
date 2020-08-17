@@ -21,15 +21,6 @@ ENV BUILDER_HOME=/home/hubblebuilder
 WORKDIR $BUILDER_HOME
 USER hubblebuilder
 
-# Setup ssh configuration so that we can download the private repositories from Gitlab
-# known_hosts have the correct SSH fingerprints for Gitlab, that way the ssh client allows the connection
-# See: https://docs.gitlab.com/ee/user/gitlab_com/index.html#ssh-known_hosts-entries
-COPY --chown=hubblebuilder .ssh/known_hosts $BUILDER_HOME/.ssh/known_hosts
-# Use the gitlab_key (private ssh key generated from Gitlab) as the main IdentityFile for ssh (id_rsa)
-COPY --chown=hubblebuilder .ssh/gitlab_key $BUILDER_HOME/.ssh/id_rsa
-# Set required permissions to the IdentityFile
-RUN chmod 600 $BUILDER_HOME/.ssh/id_rsa
-
 # Cache layer with private requirements
 COPY private-requirements.txt .
 RUN pip install --user -r private-requirements.txt --find-links https://www.djangoplicity.org/repository/packages/

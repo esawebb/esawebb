@@ -27,12 +27,6 @@ stages:
   - mkdir -pv $REQUIRED_FOLDERS $APT_CACHE_DIR $PIP_CACHE_DIR
   - ln -s /root/.local .local
   - apt-get update -y
-  - mkdir -pv /root/.ssh
-  - chmod 600 /root/.ssh
-  - cp .ssh/known_hosts /root/.ssh/known_hosts
-  - 'which ssh-agent || ( apt-get install openssh-client -y )'
-  - eval $(ssh-agent -s)
-  - echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add -
 
 ########################################
 # Test and generate coverage reports
