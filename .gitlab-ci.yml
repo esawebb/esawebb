@@ -4,9 +4,10 @@
 ###############################################################
 workflow:
   rules:
+    - if: $CI_MERGE_REQUEST_TITLE =~ /^WIP:/i || $CI_MERGE_REQUEST_TITLE =~ /^Draft:/i
+      when: never
     - if: $CI_MERGE_REQUEST_IID
-    - if: $CI_COMMIT_BRANCH == 'master'
-    - if: $CI_COMMIT_BRANCH == 'develop'
+    - if: $CI_COMMIT_BRANCH == 'master' || $CI_COMMIT_BRANCH == 'develop'
 
 stages:
   - test
@@ -21,7 +22,7 @@ stages:
   APT_CACHE_DIR: '$CI_PROJECT_DIR/build-cache/apt'
   PIP_CACHE_DIR: '$CI_PROJECT_DIR/build-cache/pip'
   PIP_FIND_LINKS: 'https://www.djangoplicity.org/repository/packages/'
-  REQUIRED_FOLDERS: 'static media/archives/images media/archives/videos logs tmp import shared'
+  REQUIRED_FOLDERS: 'static docs/static logs tmp import shared'
 
 .before_script_template: &before_script_definition
   - mkdir -pv $REQUIRED_FOLDERS $APT_CACHE_DIR $PIP_CACHE_DIR
@@ -61,7 +62,9 @@ test:py27-django111:
     when: on_success
     paths:
       - htmlcov
-    expire_in: 5 days
+    # As only develop will be available currently in gitlab pages, we can access other reports from pipeline artifacts
+    # section for 1000 years
+    expire_in: 1000 yrs
 
 ##############################################
 # Upload coverage reports to pages section
@@ -81,3 +84,6 @@ pages:
     paths:
       - public/${CI_COMMIT_REF_SLUG}
     expire_in: 1000 yrs
+  # Temporal workaround to avoid gitlab pages content to be overwritten
+  rules:
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH

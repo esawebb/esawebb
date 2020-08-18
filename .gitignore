@@ -13,3 +13,6 @@ coverage.xml
 
 # keep htmlcov for reports
 !htmlcov/.keep
+
+# volume for development statics
+docs/
