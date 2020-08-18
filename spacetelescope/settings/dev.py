@@ -86,9 +86,7 @@ SERVE_STATIC_MEDIA = True
 #########
 # EMAIL #
 #########
-#EMAIL_HOST = 'smtphost.hq.eso.org'
-#EMAIL_PORT = '25'
-
+EMAIL_BACKEND = 'django.core.mail.backends.locmem.EmailBackend'
 
 ##################
 # CATPCHA #

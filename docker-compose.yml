@@ -58,7 +58,6 @@ services:
         "--db=/home/hubbleadm/tmp/flowerdb",
         "--persistent",
         "--port=5555",
-        "--url_prefix=admin/tasks",
         "flower",
       ]
     depends_on:

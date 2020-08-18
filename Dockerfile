@@ -68,8 +68,7 @@ ENV PATH=$USER_HOME/.local/bin:$PATH
 # ENV DJANGO_SETTINGS_MODULE spacetelescope.settings
 
 RUN mkdir -p static \
-    media/archives/images \
-    media/archives/videos \ 
+    docs/static/ \
     logs \
     tmp \
     import \
