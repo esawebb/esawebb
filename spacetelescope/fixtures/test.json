@@ -184,8 +184,8 @@
       "links": "",
       "disclaimer": "",
       "meltwater_keywords": "",
-      "kids_title": "",
-      "kids_description": "",
+      "kids_title": "Hubble Celebrates its 30th Anniversary with a Tapestry of Blazing Starbirth",
+      "kids_description": "Kid description",
       "kids_image": null,
       "release_date": "2020-02-27T16:00:00",
       "embargo_date": null,
@@ -200,6 +200,39 @@
       "facility": [],
       "instruments": [],
       "publications": []
+    }
+  },
+  {
+    "model": "releases.releasevideo",
+    "pk": "10000",
+    "fields": {
+      "release_id": "10000",
+      "archive_item": "10000",
+      "main_visual": true
+    }
+  },
+  {
+    "model": "releases.releasecontact",
+    "pk": 10000,
+    "fields": {
+        "name": "Daniel",
+        "email": "daniel@daniel.net",
+        "telephone": "3204413231",
+        "cellular": "3204413231",
+        "affiliation": "ES",
+        "address": "",
+        "city": "Villavicencio",
+        "state_province": "",
+        "postal_code": "",
+        "country": "Colombia",
+        "release": "10000"
+    }
+  },
+  {
+    "model": "releases.releasetranslationcontact",
+    "pk": 10000,
+    "fields": {
+        "release": "10000"
     }
   },
   {
@@ -224,6 +257,15 @@
       "release_task_id": "72d0e85d-9a7e-4877-90e5-6dd4ef7fb662",
       "embargo_task_id": null,
       "checksums": null
+    }
+  },
+  {
+    "model": "announcements.announcementvideo",
+    "pk": "10000",
+    "fields": {
+      "announcement_id": "10000",
+      "archive_item": "10000",
+      "main_visual": true
     }
   },
   {

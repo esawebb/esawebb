@@ -1,8 +1,10 @@
-from django.test import TestCase, Client
+from django.test import TestCase, Client, tag
 from django.urls import reverse
+from djangoplicity.announcements.models import Announcement
 
 from djangoplicity.media.models import Video
 from djangoplicity.products.models import Book
+from djangoplicity.releases.models import Release
 from djangoplicity.science.models import ScienceAnnouncement
 
 from product.models import Product, Category
@@ -29,10 +31,6 @@ class TestViewAsAdminUser(TestCase):
 
         self.assertEqual(last_url, index_url)
         self.assertEqual(status_code, 302)
-
-    def test_news(self):
-        response = self.client.get('/news/')
-        self.assertEqual(response.status_code, 200)
 
 
 class TestViewsAsStandardUser(TestCase):
@@ -61,17 +59,23 @@ class TestViewsAsStandardUser(TestCase):
         self.assertContains(response, 'Access Denied', status_code=403)
 
 
+@tag('announcements')
 class TestAnnouncements(TestCase):
     fixtures = ['test']
 
     def setUp(self):
         self.client = Client()
+        self.announcement = Announcement.objects.first()
         self.science_announcement = ScienceAnnouncement.objects.first()
 
     def test_announcements(self):
         response = self.client.get('/announcements/')
         self.assertContains(response, '<h1>Announcements <a href="http://feeds.feedburner.com/hubble_announcements/" class="listviewrsslink"><span class="fa fa-rss"></span></a></h1>')
         self.assertContains(response, '<a href="/copyright/">Usage of ESA/Hubble Images and Videos</a>')
+
+    def test_announcements_detail(self):
+        response = self.client.get('/announcements/%s/' % self.announcement.pk)
+        self.assertContains(response, self.announcement.title)
 
     def test_announcements_webupdates(self):
         response = self.client.get('/announcements/webupdates/')
@@ -122,7 +126,6 @@ class TestMedia(TestCase):
         self.assertContains(response, self.video.title)
 
 
-from django.test import tag
 @tag('shop')
 class TestShop(TestCase):
     fixtures = ['test']
@@ -270,3 +273,24 @@ class TestGeneralPurpose(TestCase):
         response_post = self.client.post("/password_reset/", data={"email": "test@email.com"})
         self.assertEqual(response_post.status_code, 302)
         self.assertEqual(response_post["Location"], "/password_reset/done/")
+
+
+@tag('releases')
+class TestReleases(TestCase):
+    fixtures = ['test']
+
+    def setUp(self):
+        self.client = Client()
+        self.release = Release.objects.first()
+
+    def test_news(self):
+        response = self.client.get('/news/')
+        self.assertContains(response, 'Press Releases')
+
+    def test_release_detail(self):
+        response = self.client.get('/news/{}/'.format(self.release.pk))
+        self.assertContains(response, self.release.title)
+
+    def test_release_kids(self):
+        response = self.client.get('/news/{}/kids/'.format(self.release.pk))
+        self.assertContains(response, self.release.kids_title)
