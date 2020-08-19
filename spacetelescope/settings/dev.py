@@ -79,6 +79,14 @@ CACHES = {
 ##########
 CELERY_BROKER_URL = 'amqp://guest:guest@broker:5672/'
 
+# Avoid infinite wait times and retries
+CELERY_BROKER_TRANSPORT_OPTIONS = {
+    'max_retries': 3,
+    'interval_start': 0,
+    'interval_step': 0.2,
+    'interval_max': 0.2,
+}
+
 
 SERVE_STATIC_MEDIA = True
 

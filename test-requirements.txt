@@ -3,3 +3,6 @@ django_coverage_plugin==1.8.0
 
 # Used for get traceback when using parallel tests
 tblib==1.7.0
+
+sqlparse
+sqlalchemy
