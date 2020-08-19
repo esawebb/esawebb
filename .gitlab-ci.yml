@@ -23,6 +23,8 @@ stages:
   PIP_CACHE_DIR: '$CI_PROJECT_DIR/build-cache/pip'
   PIP_FIND_LINKS: 'https://www.djangoplicity.org/repository/packages/'
   REQUIRED_FOLDERS: 'static docs/static logs tmp import shared'
+  REQUIRED_APT_DEPS: 'gcc git libldap2-dev libsasl2-dev libssl-dev python-dev cssmin node-uglify'
+  DJANGO_SETTINGS_MODULE: 'spacetelescope.settings.test'
 
 .before_script_template: &before_script_definition
   - mkdir -pv $REQUIRED_FOLDERS $APT_CACHE_DIR $PIP_CACHE_DIR
@@ -47,7 +49,7 @@ test:py27-django111:
   before_script: *before_script_definition
   script:
     - export PATH=/root/.local/bin:$PATH
-    - apt-get -o dir::cache::archives="$APT_CACHE_DIR" install -y gcc git libldap2-dev libsasl2-dev libssl-dev python-dev uglifyjs
+    - apt-get -o dir::cache::archives="$APT_CACHE_DIR" install -y $REQUIRED_APT_DEPS
     - python -m pip install --upgrade pip
     - pip install --user -r requirements.txt
     - pip install --user -r test-requirements.txt
