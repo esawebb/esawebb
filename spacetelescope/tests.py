@@ -294,3 +294,19 @@ class TestReleases(TestCase):
     def test_release_kids(self):
         response = self.client.get('/news/{}/kids/'.format(self.release.pk))
         self.assertContains(response, self.release.kids_title)
+
+
+@tag('products')
+class TestProducts(TestCase):
+    fixtures = ['test', 'test/products']
+
+    def setUp(self):
+        self.client = Client()
+
+    def test_postcards(self):
+        response = self.client.get('/products/postcards/')
+        self.assertContains(response, 'Postcards')
+
+    def test_merchandise(self):
+        response = self.client.get('/products/merchandise/')
+        self.assertContains(response, 'Merchandise')
