@@ -1,8 +1,10 @@
+from django.contrib.auth.models import User
 from django.test import TestCase, Client, tag
 from django.urls import reverse
 from djangoplicity.announcements.models import Announcement
 
 from djangoplicity.media.models import Video
+from djangoplicity.newsletters.models import Newsletter, NewsletterType
 from djangoplicity.products.models import Book
 from djangoplicity.releases.models import Release
 from djangoplicity.science.models import ScienceAnnouncement
@@ -235,6 +237,53 @@ class TestColumnTemplates(TestCase):
         response_offline = self.client.get('/test-not-online/')
 
         self.assertEqual(response_offline.status_code, 200)
+
+
+@tag('newsletters')
+class TestNewsletters(TestCase):
+    fixtures = ['test', 'test/newsletters']
+
+    def setUp(self):
+        self.client = Client()
+        self.client.force_login(User.objects.filter(is_staff=True).first())
+
+        self.newsletter_types = NewsletterType.objects.all()
+        self.newsletter = Newsletter.objects.filter(published=True, send__isnull=False).first()
+
+    def test_newsletter_generation(self):
+        for newsletter_type in self.newsletter_types:
+            response = self.client.post(
+                '/admin/newsletters/newsletter/new/',
+                {
+                    'type': newsletter_type.pk,
+                    'start_date_0': '01/01/2000',
+                    'start_date_1': '00:00:00',
+                    'end_date_0': '31/12/2020',
+                    'end_date_1': '23:59:59',
+                    '_generate': 'Generate'
+                },
+                follow=True
+            )
+
+            self.assertGreater(len(response.redirect_chain), 0)
+
+            last_url, status_code = response.redirect_chain[-1]
+
+            self.assertEqual(status_code, 302)
+            self.assertRegexpMatches(last_url, r'/admin/newsletters/newsletter/[0-9]+/change/')
+
+    def test_newsletter_list(self):
+        url = '/newsletters/{}/'.format(self.newsletter.type.slug)
+
+        response = self.client.get('{}{}'.format(url, '?search=this+does+not+exists'))
+        self.assertContains(response, 'No entries were found')
+
+        response = self.client.get(url)
+        self.assertContains(response, self.newsletter.type.name)
+
+    def test_newsletter_detail(self):
+        response = self.client.get('/newsletters/{}/html/{}/'.format(self.newsletter.type.slug, self.newsletter.pk))
+        self.assertContains(response, self.newsletter.subject)
 
 
 class TestGeneralPurpose(TestCase):

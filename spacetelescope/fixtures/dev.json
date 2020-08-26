@@ -3,8 +3,8 @@
     "model": "sites.site",
     "pk": 1,
     "fields": {
-      "domain": "development.hubble.com",
-      "name": "development.hubble.com"
+      "domain": "localhost:8000",
+      "name": "Localhost"
     }
   },
   {
