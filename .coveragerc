@@ -10,6 +10,8 @@ omit =
     */test.py
     */tests.py
     */static/djp/*
+    spacetelescope/templates/pages/page_noborder.html
+    spacetelescope/templates/pages/blank_page.html
 
 plugins =
     django_coverage_plugin
