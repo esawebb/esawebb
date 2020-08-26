@@ -258,8 +258,9 @@ class TestShop(TestCase):
         self.assertEqual(last_url, to)
 
 
-class TestColumnTemplates(TestCase):
-    fixtures = ['test']
+@tag('pages')
+class TestPageTemplate(TestCase):
+    fixtures = ['test', 'test/pages']
 
     def setUp(self):
         self.client = Client()
@@ -276,6 +277,11 @@ class TestColumnTemplates(TestCase):
         response_offline = self.client.get('/test-not-online/')
 
         self.assertEqual(response_offline.status_code, 200)
+
+    def test_onecolumn_coming_soon(self):
+        self.client.login(username='test_admin', password='admin')
+        response_online = self.client.get('/test-online-coming-soon/')
+        self.assertEqual(response_online.status_code, 200)
 
 
 @tag('newsletters')
