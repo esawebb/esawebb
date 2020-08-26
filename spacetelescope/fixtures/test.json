@@ -265,6 +265,15 @@
     "fields": {
       "announcement_id": "10000",
       "archive_item": "10000",
+      "main_visual": false
+    }
+  },
+  {
+    "model": "announcements.announcementimage",
+    "pk": "10000",
+    "fields": {
+      "announcement_id": "10000",
+      "archive_item": "10000",
       "main_visual": true
     }
   },
