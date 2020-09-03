@@ -11,9 +11,14 @@ omit =
     */dummy_rails/*
     */test.py
     */tests.py
-    */static/djp/*
+    */static/*
+    spacetelescope/wsgi.py
+    spacetelescope/settings/prod.py
+    spacetelescope/settings/staging.py
     spacetelescope/templates/pages/page_noborder.html
     spacetelescope/templates/pages/blank_page.html
+    spacetelescope/templates/shop/checkout/coposweb/confirm.html
+    spacetelescope/templates/shop/checkout/coposweb/pay_ship.html
 
 plugins =
     django_coverage_plugin
