@@ -371,11 +371,14 @@ class TestGeneralPurpose(TestCase):
 
 @tag('releases')
 class TestReleases(TestCase):
-    fixtures = ['test']
+    fixtures = ['test', 'test/releases']
 
     def setUp(self):
         self.client = Client()
-        self.release = Release.objects.first()
+        self.release = Release.objects.get(pk=10000)
+        self.release_staging = Release.objects.get(pk=10001)
+        self.release_unpublished = Release.objects.get(pk=10002)
+        self.release_embargoed = Release.objects.get(pk=10003)
 
     def test_news(self):
         response = self.client.get('/news/')
@@ -384,6 +387,21 @@ class TestReleases(TestCase):
     def test_release_detail(self):
         response = self.client.get('/news/{}/'.format(self.release.pk))
         self.assertContains(response, self.release.title)
+
+    def test_release_embargoed(self):
+        self.client.login(username='test_admin', password='admin')
+        response = self.client.get('/news/{}/'.format(self.release_embargoed.pk))
+        self.assertContains(response, self.release_embargoed.title)
+
+    def test_release_staging(self):
+        self.client.login(username='test_admin', password='admin')
+        response = self.client.get('/news/{}/'.format(self.release_staging.pk))
+        self.assertContains(response, self.release_staging.title)
+
+    def test_release_unpublished(self):
+        self.client.login(username='test_admin', password='admin')
+        response = self.client.get('/news/{}/'.format(self.release_unpublished.pk))
+        self.assertContains(response, self.release_unpublished.title)
 
     def test_release_kids(self):
         response = self.client.get('/news/{}/kids/'.format(self.release.pk))
