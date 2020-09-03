@@ -96,6 +96,7 @@ class TestAnnouncements(TestCase):
         self.assertContains(response, self.science_announcement.title)
 
 
+@tag('media')
 class TestMedia(TestCase):
     fixtures = ['test']
 
