@@ -132,6 +132,10 @@ class TestMedia(TestCase):
         response = self.client.get('/videos/{}/'.format(self.video.id))
         self.assertContains(response, self.video.title)
 
+    def test_video_hubblecast(self):
+        response = self.client.get('/videos/archive/category/hubblecast/')
+        self.assertContains(response, 'All Hubblecasts')
+
 
 @tag('shop')
 class TestShop(TestCase):
