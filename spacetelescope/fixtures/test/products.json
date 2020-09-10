@@ -1,5 +1,28 @@
 [
   {
+    "model": "products.kidsdrawing",
+    "pk": "test-kids-draw",
+    "fields": {
+      "title": "Test title",
+      "description": "<p>Test description</p>",
+      "priority": 20,
+      "credit": "<p>NASA &amp; ESA</p>",
+      "name": "jhon doe",
+      "city": "Villavicencio",
+      "country": "Colombia",
+      "age": 23,
+      "release_date": "2020-08-31T18:21:00.136",
+      "embargo_date": null,
+      "published": true,
+      "last_modified": "2020-08-31T18:21:00.136",
+      "created": "2020-08-31T18:20:50.714",
+      "release_task_id": null,
+      "embargo_task_id": null,
+      "checksums": null,
+      "archive_category": []
+    }
+  },
+  {
     "model": "products.postcard",
     "pk": "10000",
     "fields": {

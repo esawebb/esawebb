@@ -424,6 +424,14 @@ class TestProducts(TestCase):
     def setUp(self):
         self.client = Client()
 
+    def test_arts(self):
+        response = self.client.get('/products/art/')
+        self.assertEqual(response.status_code, 200)
+
+    def test_kidsdrawing(self):
+        response = self.client.get('/kidsandteachers/drawings/')
+        self.assertEqual(response.status_code, 200)
+
     def test_postcards(self):
         response = self.client.get('/products/postcards/')
         self.assertContains(response, 'Postcards')
