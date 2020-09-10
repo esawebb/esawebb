@@ -120,6 +120,10 @@ class TestMedia(TestCase):
         response = self.client.get('/images/comparisons/')
         self.assertContains(response, '<h1>Image Comparisons</h1>')
 
+    def test_image_top(self):
+        response = self.client.get('/images/archive/top100/')
+        self.assertContains(response, 'Top 100 Images')
+
     def test_videos_list(self):
         response = self.client.get('/videos/')
         self.assertContains(response, '<a href="/copyright/">Usage of ESA/Hubble Images and Videos</a>')
