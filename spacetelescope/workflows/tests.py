@@ -1,3 +1,4 @@
+from __future__ import absolute_import
 # Djangoplicity
 # Copyright 2007-2008 ESA/Hubble
 #
@@ -7,7 +8,7 @@
 #
 import unittest
 from django.core import mail
-from media import video_rename
+from .media import video_rename
 from django.test import TestCase
 
 class EmailTest(TestCase):

@@ -39,7 +39,8 @@ def load_json(json_file):
         fp = open(json_file,'r')
         json_data = json.load(fp)
         fp.close()
-    except IOError, (errno, strerror):
+    except IOError as xxx_todo_changeme:
+        (errno, strerror) = xxx_todo_changeme.args
         logger.error("I/O error(%s): %s" % (errno, strerror))
         logger.error("Problem opening file %s, returning None" % json_file )   
     return json_data

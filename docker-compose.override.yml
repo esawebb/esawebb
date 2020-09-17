@@ -17,6 +17,8 @@ x-common: &common
     - ./local-test-utils/sitecustomize.py:/home/hubbleadm/sitecustomize.py
     - ./.coveragerc-parallel:/home/hubbleadm/.coveragerc-parallel
     - ./docs/static:/home/hubbleadm/docs/static
+    - ./setup.py:/home/hubbleadm/setup.py
+    - ./scripts:/home/hubbleadm/scripts
 
 services:
   web:

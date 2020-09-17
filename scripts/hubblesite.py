@@ -1,3 +1,4 @@
+from __future__ import print_function
 #
 # -*- coding: utf-8 -*-
 #
@@ -94,17 +95,17 @@ def get_release_date(link):
                 tz = eastern
                 if Z == 'EDT': is_dts = True
             else:
-                print 'unsupported timezone:', Z
-                print 'assuming UTC'
+                print('unsupported timezone:', Z)
+                print('assuming UTC')
           
             aware = tz.localize(naive, is_dts)
             release_date = tz.normalize(aware)
             release_date = release_date.astimezone(utc)  
         except:
-            print "no datetime information found"
+            print("no datetime information found")
             pass
     except:
-        print link, ' could not be read'
+        print(link, ' could not be read')
         pass
     
     return release_date # in UTC
@@ -171,12 +172,12 @@ if __name__ == '__main__':
              r'http://hubblesite.org/newscenter/archive/releases/1990/06/image/a/']
 
     for t in tests:
-        print t
-        print get_release_date(t).strftime('%Y-%B-%d %I:%M %p %Z')   
+        print(t)
+        print(get_release_date(t).strftime('%Y-%B-%d %I:%M %p %Z'))   
           
     exit()
     
-    print "list_links:"
+    print("list_links:")
     release = r'''http://hubblesite.org/newscenter/archive/releases/2005/37'''
    # release = r'''http://hubblesite.org/newscenter/archive/releases/2008/16/image/ce/'''
     images = release_images(release)
@@ -184,10 +185,10 @@ if __name__ == '__main__':
 
     links = list_links(images)
 
-    print images
+    print(images)
     c = 0
     if links: 
         for link in links: 
             c = c + 1
-            print c, '   ', link
+            print(c, '   ', link)
       
