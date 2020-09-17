@@ -1,3 +1,4 @@
+from __future__ import print_function
 #
 # -*- coding: utf-8 -*-#
 # eso.org
@@ -64,7 +65,7 @@ def change_datetime(obj):
                 obj.save()
                 success = True
             except:
-                print obj.id,' save failed!'
+                print(obj.id,' save failed!')
                 pass
     return success
 
@@ -86,7 +87,7 @@ def process_objects(objs):
             # process all objects with 2011-03-03 18:00:00 - 19:00:00
             if dt >= finddate1 and dt <= finddate2:
                 if change_datetime(obj): count = count + 1
-                print obj.id, 'old: ', dt, '\t new: ', obj.release_date ,'\t\t reason: 20110303'
+                print(obj.id, 'old: ', dt, '\t new: ', obj.release_date ,'\t\t reason: 20110303')
             # process all objects where opoYY YY does not match the year of the release_date 
             else:
                 #only care about opo... and heic...
@@ -97,7 +98,7 @@ def process_objects(objs):
                     #print obj.id, YY, dt.strftime('%y'), dt
                     if YY != dt.strftime('%y'):
                         if change_datetime(obj): count = count + 1
-                        print obj.id, 'old: ', dt, '\t new: ', obj.release_date ,'\t\t reason: ', YY,' != ', dt.strftime('%y')
+                        print(obj.id, 'old: ', dt, '\t new: ', obj.release_date ,'\t\t reason: ', YY,' != ', dt.strftime('%y'))
         else:
             pass
             #print obj.id, ' no release_date'
@@ -121,10 +122,10 @@ if __name__ == '__main__':
     test =  '''<h2 class="release-number"><strong>News Release Number:</strong> STScI-2006-25</h2>'''
     pattern = re.compile('''h2 class="release-number".*?:.*?>\s*(.*?)<.*?h2''')    
     
-    print 'videos' 
-    print process_objects(Video.objects.all()), ' videos have a new release_date'
-    print 'images'
-    print process_objects(Image.objects.all()), ' images have a new release_date'
+    print('videos') 
+    print(process_objects(Video.objects.all()), ' videos have a new release_date')
+    print('images')
+    print(process_objects(Image.objects.all()), ' images have a new release_date')
 
 
         

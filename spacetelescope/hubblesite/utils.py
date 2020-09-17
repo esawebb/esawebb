@@ -1,3 +1,4 @@
+from __future__ import print_function
 #
 # -*- coding: utf-8 -*-
 #
@@ -41,7 +42,7 @@ def get_url_content( url ):
         text = conn.read()
         redirect = conn.geturl() 
         conn.close()
-    except urllib2.URLError, e:
+    except urllib2.URLError as e:
         text = None
         redirect = None
         
@@ -241,5 +242,5 @@ if __name__ == '__main__':
              'http://hubblesite.org/newscenter/archive/releases/2011/08/']
 
     for t in tests:
-        print image_url_info(t)
+        print(image_url_info(t))
         #print get_release_date(t).strftime('%Y-%B-%d %I:%M %p %Z')
