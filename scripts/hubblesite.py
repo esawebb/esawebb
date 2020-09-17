@@ -12,8 +12,11 @@ from __future__ import print_function
 # Mantis 12079 helper to find information on hubblesite.org 
 #*************************************************************************************************************
 
+from future import standard_library
+standard_library.install_aliases()
+from builtins import str
 import re
-import urllib2 
+import urllib.request, urllib.error, urllib.parse 
 
 from datetime import datetime, tzinfo
 import pytz
@@ -27,7 +30,7 @@ def get_redirect(link):
     #returns link from urllib2.urlopen() or if this is not possilbe None is returned
     redirect = ''
     try:
-        remote   = urllib2.urlopen(link) 
+        remote   = urllib.request.urlopen(link) 
         redirect = remote.geturl()
     except:
         redirect = None            
@@ -59,7 +62,7 @@ def get_release_date(link):
     
     # read the website
     try:
-        site = urllib2.urlopen(link)
+        site = urllib.request.urlopen(link)
         text = site.read()
         # remove all line breaks and double whitespace
         text = remove_void(text)
@@ -138,7 +141,7 @@ def list_links(url_images):   # [^>]
     '''
     newlinks = None
     try:
-        site = urllib2.urlopen(url_images)
+        site = urllib.request.urlopen(url_images)
         text = site.read()
         
         # remove all linebreaks and double whitespace

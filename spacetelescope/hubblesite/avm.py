@@ -19,6 +19,8 @@
 #***********************************************************************************************************************
 
 
+from builtins import str
+from builtins import object
 from datetime import datetime
 import pytz
 from djangoplicity.utils.templatetags.djangoplicity_datetime import timezone
@@ -308,7 +310,7 @@ class jsonmapper(object):
         returns an avmdict using the values of the jsondict
         '''   
         avmdata = {}
-        for key in self.mapping.keys():
+        for key in list(self.mapping.keys()):
             json_fieldname = self.mapping[key]['fieldname']
             value = None
             try:

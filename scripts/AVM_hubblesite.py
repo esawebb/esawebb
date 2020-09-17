@@ -18,11 +18,14 @@ from __future__ import print_function
 
 #*************************************************************************************************************
 
+from future import standard_library
+standard_library.install_aliases()
+from builtins import str
 from djangoplicity.utils import optionparser
 from djangoplicity.media.models import Image
 
 import re
-import urllib2
+import urllib.request, urllib.error, urllib.parse
 
 import logging, sys
 import socket
@@ -36,7 +39,7 @@ def store_JSON(path_json, dict):
     '''
     f = open(path_json,'w')
     
-    ids = dict.keys()
+    ids = list(dict.keys())
     ids.sort()
     i = 1
     f.write('{\n')
@@ -139,7 +142,7 @@ if __name__ == '__main__':
         count = count + 1
         #if count > 30: break
         try:
-            remote   = urllib2.urlopen(image.long_caption_link)
+            remote   = urllib.request.urlopen(image.long_caption_link)
         except:
             remote  = 'timeout?'
         #hubblesite = remote.readlines()
@@ -160,8 +163,8 @@ if __name__ == '__main__':
             #Check if hubblesite thumb can be found
             thumberror = ''
             try:
-                urllib2.urlopen(hubblesite_thumb) #,data = '', timeout=5
-            except urllib2.URLError as e:
+                urllib.request.urlopen(hubblesite_thumb) #,data = '', timeout=5
+            except urllib.error.URLError as e:
                 hubblesite_thumb = 'ERROR' + str(e.code) + ' ' + hubblesite_thumb               
                 thumberror = 'Thumb not found (' + str(e.code) + ') at ' + hubblesite_thumb
             
