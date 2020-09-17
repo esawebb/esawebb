@@ -36,29 +36,6 @@
     }
   },
   {
-    "model": "products.book",
-    "pk": "10000",
-    "fields": {
-      "priority": 50,
-      "title": "test book",
-      "price": 140.00,
-      "created": "2020-07-17",
-      "last_modified": "2020-07-17"
-    }
-  },
-  {
-    "model": "products.book",
-    "pk": "10001",
-    "fields": {
-      "priority": 50,
-      "title": "test book",
-      "published": true,
-      "price": 140.00,
-      "created": "2020-07-17",
-      "last_modified": "2020-07-17"
-    }
-  },
-  {
     "model": "metadata.categorytype",
     "pk": 10000,
     "fields": {
@@ -125,37 +102,6 @@
       "published": true,
       "created": "2020-07-17",
       "last_modified": "2020-07-17"
-    }
-  },
-  {
-    "model": "product.category",
-    "pk": 10000,
-    "fields": {
-      "site": 1,
-      "name": "Test category",
-      "slug": "test-cat"
-    }
-  },
-  {
-    "model": "product.product",
-    "pk": 10000,
-    "fields": {
-      "site": 1,
-      "name": "Test product",
-      "featured": true,
-      "slug": "test-product",
-      "sku": "test-product",
-      "items_in_stock": 1000,
-      "category": [10000]
-    }
-  },
-  {
-    "model": "product.price",
-    "pk": 10000,
-    "fields": {
-      "product": 10000,
-      "price": 50.00,
-      "quantity": 1
     }
   },
   {
@@ -349,43 +295,6 @@
     "fields": {
       "url": "/test-not-online/",
       "page": "10001"
-    }
-  },
-  {
-    "pk": 10000,
-    "model": "l10n.country",
-    "fields": {
-      "iso2_code": "TT",
-      "name": "TEST COUNTRY",
-      "printable_name": "Test country",
-      "iso3_code": "TST",
-      "continent": "EU"
-    }
-  },
-  {
-    "model": "contact.contactrole",
-    "fields": {
-      "key": "Customer",
-      "name": "Customer"
-    }
-  },
-  {
-    "model": "shop.config",
-    "fields": {
-      "site": 1,
-      "city": "Test city",
-      "sales_country": 10000,
-      "phone": "",
-      "street1": "Test Street",
-      "street2": "",
-      "store_name": "Hubble Test Shop",
-      "state": "",
-      "postal_code": "85748",
-      "store_description": "This is a fake store used for testing",
-      "country": 10000,
-      "store_email": "test@shop.com",
-      "in_country_only": 0,
-      "shipping_countries": [10000]
     }
   },
   {

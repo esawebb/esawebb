@@ -1,33 +1,3 @@
 [
-  {
-    "model": "products.postcard",
-    "pk": "10000",
-    "fields": {
-      "sale": true,
-      "price": "20.00",
-      "product": 10000,
-      "job": "",
-      "jsp": null,
-      "account_no": "",
-      "free": false,
-      "shippable": true,
-      "title": "Test postcard",
-      "description": "",
-      "priority": 20,
-      "credit": "<p>NASA &amp; ESA</p>",
-      "width": "",
-      "height": "",
-      "depth": "",
-      "weight": "500",
-      "release_date": "2020-08-20T06:15:24.173",
-      "embargo_date": null,
-      "published": true,
-      "last_modified": "2020-08-20T06:45:46.768",
-      "created": "2020-08-20T03:07:20.685",
-      "release_task_id": null,
-      "embargo_task_id": null,
-      "checksums": null,
-      "archive_category": []
-    }
-  }
+
 ]

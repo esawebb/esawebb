@@ -15,9 +15,9 @@ from djangoplicity.contrib.admin.discover import autoregister
 import django.contrib.auth.admin
 import django.contrib.redirects.admin
 import django.contrib.sites.admin
-import djangoplicity.actions.admin
+# import djangoplicity.actions.admin
 import djangoplicity.announcements.admin
-import djangoplicity.archives.contrib.satchmo.freeorder.admin
+# import djangoplicity.archives.contrib.satchmo.freeorder.admin
 import djangoplicity.customsearch.admin
 import djangoplicity.mailinglists.admin
 import djangoplicity.media.admin
@@ -25,7 +25,7 @@ import djangoplicity.menus.admin
 import djangoplicity.metadata.admin
 import djangoplicity.newsletters.admin
 import djangoplicity.pages.admin
-import djangoplicity.products.admin
+# import djangoplicity.products.admin
 import djangoplicity.releases.admin
 import djangoplicity.reports.admin
 import djangoplicity.science.admin
@@ -45,7 +45,7 @@ autoregister( admin_site, djangoplicity.pages.admin )
 autoregister( admin_site, djangoplicity.media.admin )
 autoregister( admin_site, djangoplicity.releases.admin )
 autoregister( admin_site, djangoplicity.metadata.admin )
-autoregister( admin_site, djangoplicity.products.admin )
+# autoregister( admin_site, djangoplicity.products.admin )
 #autoregister( admin_site, djangoplicity.events.admin )
 autoregister( admin_site, djangoplicity.mailinglists.admin )
 autoregister( admin_site, djangoplicity.newsletters.admin )
@@ -76,7 +76,7 @@ admin_site.register(django.contrib.auth.models.Group,
                     django.contrib.auth.admin.GroupAdmin)
 
 
-from djangoplicity.archives.contrib.satchmo.admin import satchmo_admin
-adminshop_site = satchmo_admin( adminshop_site )
+# from djangoplicity.archives.contrib.satchmo.admin import satchmo_admin
+# adminshop_site = satchmo_admin( adminshop_site )
 
-autoregister( adminshop_site, djangoplicity.archives.contrib.satchmo.freeorder.admin )
+# autoregister( adminshop_site, djangoplicity.archives.contrib.satchmo.freeorder.admin )
