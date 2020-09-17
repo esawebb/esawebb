@@ -16,6 +16,9 @@ from __future__ import print_function
 # 2011 Apr 18
 #*************************************************************************************************************
 
+from builtins import chr
+from builtins import str
+from builtins import range
 import pprint
 
 from djangoplicity.media.models import Image
@@ -49,7 +52,7 @@ def analyse_taxonomy(generate_code = False ):
             X_Tags[sc.avm_code()] = [name, number + 1]
             # print X_Tags[sc.avm_code()] 
       
-    keys = X_Tags.keys()
+    keys = list(X_Tags.keys())
     keys.sort()
     if generate_code:
         for key in keys:
@@ -266,7 +269,7 @@ if __name__ == '__main__':
     sys.stdout = codecs.getwriter('UTF-8')(sys.stdout)
     
     #little unicode test
-    star = unichr(9734)
+    star = chr(9734)
     print(star)
     
     changed_images = set()

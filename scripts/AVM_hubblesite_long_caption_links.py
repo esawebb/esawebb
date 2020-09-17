@@ -12,12 +12,15 @@ from __future__ import print_function
 # Mantis 12079 retrieves long_caption_links for images related to a NASA Press Release 
 #*************************************************************************************************************
 
+from future import standard_library
+standard_library.install_aliases()
+from builtins import str
 from djangoplicity.utils import optionparser
 from djangoplicity.media.models import Image
 from djangoplicity.releases.models import Release
 
 import re
-import urllib2
+import urllib.request, urllib.error, urllib.parse
 
 import logging, sys
 import socket
@@ -100,8 +103,8 @@ def check_reachability(url):
     result = True
     
     try:
-        urllib2.urlopen(url) #,data = '', timeout=5
-    except urllib2.URLError as e:
+        urllib.request.urlopen(url) #,data = '', timeout=5
+    except urllib.error.URLError as e:
         result = str(e.code) 
     return result
 
@@ -116,7 +119,7 @@ def get_long_caption_link(url, iterator, check_reachability_flag = True):
     '''
     long_c = None
     try:
-        remote   = urllib2.urlopen(url)
+        remote   = urllib.request.urlopen(url)
     except:
         remote  = 'timeout?'
     for line in remote:
@@ -178,7 +181,7 @@ def analyse(images):
             dict[prefix] = ldict
     list.sort()
     print(list)
-    for d in dict.keys():
+    for d in list(dict.keys()):
         print(d, dict[d])
     print(linkdict)
 

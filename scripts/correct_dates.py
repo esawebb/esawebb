@@ -24,12 +24,14 @@ from __future__ import print_function
 #*************************************************************************************************************
 
 
+from future import standard_library
+standard_library.install_aliases()
 from djangoplicity.utils import optionparser
 from djangoplicity.media.models import Image
 from djangoplicity.media.models import Video
 
 import re
-import urllib2
+import urllib.request, urllib.error, urllib.parse
 
 import logging, sys
 import socket
