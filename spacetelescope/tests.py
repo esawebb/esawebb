@@ -96,6 +96,7 @@ class TestAnnouncements(TestCase):
         self.assertContains(response, self.science_announcement.title)
 
 
+@tag('media')
 class TestMedia(TestCase):
     fixtures = ['test']
 
@@ -119,6 +120,10 @@ class TestMedia(TestCase):
         response = self.client.get('/images/comparisons/')
         self.assertContains(response, '<h1>Image Comparisons</h1>')
 
+    def test_image_top(self):
+        response = self.client.get('/images/archive/top100/')
+        self.assertContains(response, 'Top 100 Images')
+
     def test_videos_list(self):
         response = self.client.get('/videos/')
         self.assertContains(response, '<a href="/copyright/">Usage of ESA/Hubble Images and Videos</a>')
@@ -126,6 +131,10 @@ class TestMedia(TestCase):
     def test_videos_detail(self):
         response = self.client.get('/videos/{}/'.format(self.video.id))
         self.assertContains(response, self.video.title)
+
+    def test_video_hubblecast(self):
+        response = self.client.get('/videos/archive/category/hubblecast/')
+        self.assertContains(response, 'All Hubblecasts')
 
 
 # @tag('shop')
@@ -414,6 +423,14 @@ class TestReleases(TestCase):
 #
 #     def setUp(self):
 #         self.client = Client()
+#
+#     def test_arts(self):
+#         response = self.client.get('/products/art/')
+#         self.assertEqual(response.status_code, 200)
+#
+#     def test_kidsdrawing(self):
+#         response = self.client.get('/kidsandteachers/drawings/')
+#         self.assertEqual(response.status_code, 200)
 #
 #     def test_postcards(self):
 #         response = self.client.get('/products/postcards/')
