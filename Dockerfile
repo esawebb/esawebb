@@ -1,7 +1,7 @@
 #############################################
 # BUILDER IMAGE: Only for building the code #
 #############################################
-FROM python:2.7-slim-buster AS builder
+FROM python:3.8 AS builder
 # Follow Dockerfile RUN best practices (Keep packages organized alphabetically):
 # See: https://docs.docker.com/develop/develop-images/dockerfile_best-practices/#run
 # - gcc, libsasl2-dev, libsasl2-dev, libssl-dev and python-dev are required by django-auth-ldap
@@ -12,7 +12,7 @@ RUN apt-get update && apt-get install -y \
     libldap2-dev \
     libsasl2-dev \
     libssl-dev \
-    python-dev
+    python3-dev
 
 
 # Create user for building and installing pip packages inside its home for security purposes
@@ -38,7 +38,7 @@ RUN pip install --user -r test-requirements.txt
 ######################################
 
 # FROM djangoplicity/base:initial
-FROM python:2.7-slim-buster
+FROM python:3.8-slim-buster
 
 # Install here only runtime required packages
 # - cssmin and node-uglify are the processors used by django pipeline
