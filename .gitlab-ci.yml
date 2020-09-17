@@ -89,7 +89,7 @@ test:py38-django111:
     - name: postgres:10.5
       alias: hubble-db
   stage: test
-  image: python:3.8-slim-buster
+  image: python:3.8
   before_script: *before_script_definition
   script:
     - *build_script_definition
