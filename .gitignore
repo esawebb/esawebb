@@ -3,6 +3,7 @@
 *.swo
 .idea/
 temp/
+local/
 
 # coverage related files/folders
 htmlcov/*
