@@ -10,25 +10,18 @@ x-common: &common
     URLS_BASEPATH: "public"
   restart: "no"
   volumes:
-    - ./spacetelescope:/home/hubbleadm/spacetelescope
     - ./local:/home/hubbleadm/local
-    - ./htmlcov:/home/hubbleadm/htmlcov
     - ./docs/static:/home/hubbleadm/docs/static
-    - ./test-utils:/home/hubbleadm/test-utils
-    - ./test-utils/sitecustomize.py:/home/hubbleadm/sitecustomize.py
-    - ./.coveragerc:/home/hubbleadm/.coveragerc
-    - ./.coveragerc-parallel:/home/hubbleadm/.coveragerc-parallel
-    - ./setup.py:/home/hubbleadm/setup.py
     - ./scripts:/home/hubbleadm/scripts
 
 services:
   web:
     <<: *common
-    depends_on: 
+    depends_on:
       - cache
-    command: ["./scripts/command-dev.sh"]
+    command: ["./scripts/command-devserver.sh"]
     ports:
-      - "8000:8000"
+      - "80:8000"
 
   broker:
     restart: "no"
@@ -55,5 +48,5 @@ services:
       POSTGRES_DB: hubble
       POSTGRES_USER: hubble
       POSTGRES_PASSWORD: hubble
-    ports:
-      - "50000:5432"
+    expose:
+      - "5432"
