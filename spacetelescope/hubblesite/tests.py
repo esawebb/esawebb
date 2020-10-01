@@ -8,10 +8,11 @@ import os
 
 from avm import jsonmapper, remove_duplicates, load_json
 from utils import *
-from django.test import TestCase
+from django.test import TestCase, tag
 import pytz
 
 
+@tag('avm')
 class TestAVM(TestCase):
     def setUp(self):
         self.test_jm = jsonmapper({
@@ -122,6 +123,7 @@ class TestAVM(TestCase):
         self.assertEqual(len(contact_name), 2)
 
 
+@tag('avm', 'avm_utils')
 class UtilsTest(TestCase):
     def test_get_url_content(self):
         url = 'http://hubblesite.org/newscenter/archive/releases/2005/37/image/'
@@ -135,7 +137,7 @@ class UtilsTest(TestCase):
         filtered_text = remove_void(dirty_text)
 
         self.assertEqual(filtered_text, text)
-    
+
     def test_remove_duplicates(self):
         json_data = load_json(os.path.join(os.path.dirname(__file__), 'test_clients.json'))
         clients = json_data.get('clients') if json_data is not None and 'clients' in json_data else []

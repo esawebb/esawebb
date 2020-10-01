@@ -1,0 +1,75 @@
+[
+  {
+    "model": "metadata.categorytype",
+    "pk": 10000,
+    "fields": {
+      "name": "Videos"
+    }
+  },
+  {
+    "model": "metadata.category",
+    "pk": 10000,
+    "fields": {
+      "url": "hubblecast",
+      "type": 10000,
+      "name": "Hubblecast"
+    }
+  },
+  {
+    "model": "metadata.categorytype",
+    "pk": 10001,
+    "fields": {
+      "name": "Images"
+    }
+  },
+  {
+    "model": "metadata.category",
+    "pk": 10001,
+    "fields": {
+      "url": "hubbleimg",
+      "type": 10001,
+      "name": "Hubbleimg"
+    }
+  },
+  {
+    "model": "media.video",
+    "pk": "10000",
+    "fields": {
+      "priority": 50,
+      "title": "test video",
+      "web_category": [
+        10000
+      ],
+      "published": true,
+      "youtube_video_id": "abcABC-z",
+      "use_youtube": true,
+      "created": "2020-07-17",
+      "last_modified": "2020-07-17"
+    }
+  },
+  {
+    "model": "media.image",
+    "pk": "10000",
+    "fields": {
+      "priority": 50,
+      "title": "test image",
+      "web_category": [
+        10001
+      ],
+      "published": true,
+      "featured": true,
+      "created": "2020-07-17",
+      "last_modified": "2020-07-17"
+    }
+  },
+  {
+    "model": "media.pictureoftheweek",
+    "pk": "10000",
+    "fields": {
+      "image": "10000",
+      "published": true,
+      "created": "2020-07-17",
+      "last_modified": "2020-07-17"
+    }
+  }
+]

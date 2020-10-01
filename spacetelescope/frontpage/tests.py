@@ -1,17 +1,13 @@
 # Djangoplicity
 # Copyright 2007-2008 ESA/Hubble
 #
-import json
-from django.test import TestCase, Client
+from django.test import TestCase, Client, tag
 from djangoplicity.media.models import Video
 
 
-def load_json(response):
-    return json.loads(response.content)
-
-
+@tag('frontpage')
 class TestFrontPageApp(TestCase):
-    fixtures = ['test']
+    fixtures = ['test/pages', 'test/media', 'test/announcements', 'test/releases', 'test/highlights']
 
     def setUp(self):
         self.client = Client()
@@ -30,14 +26,3 @@ class TestFrontPageApp(TestCase):
         response = self.client.get('/')
 
         self.assertNotContains(response, youtube_only_html, html=True)
-
-    def test_d2d_view(self):
-        response = self.client.get('/d2d/')
-
-        json_response = load_json(response)
-
-        self.assertIn('Creator', json_response)
-        self.assertIn('URL', json_response)
-
-        self.assertEqual('ESA/Hubble', json_response.get('Creator'))
-        self.assertEqual('https://www.spacetelescope.org', json_response.get('URL'))

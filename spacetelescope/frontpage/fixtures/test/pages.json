@@ -1,27 +1,5 @@
 [
   {
-    "model": "frontpage.Highlight",
-    "pk": 10000,
-    "fields": {
-      "name": "/page42/",
-      "title": "PageForTesting",
-      "description": "This is a Page for testing",
-      "image": "ThisIsAnImageURL",
-      "link": "https://example.com",
-      "order": 1,
-      "published": true
-    }
-  },
-  {
-    "model": "pages.section",
-    "pk": 10000,
-    "fields": {
-      "name": "Default",
-      "template": "pages/page_onecolumn.html",
-      "append_title": "| SPACETELESCOPE"
-    }
-  },
-  {
     "model": "pages.page",
     "pk": "frontpage_main",
     "fields": {

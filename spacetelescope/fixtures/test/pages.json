@@ -1,5 +1,13 @@
 [
-
+  {
+    "model": "pages.section",
+    "pk": 10000,
+    "fields": {
+      "name": "Default",
+      "template": "pages/page_onecolumn.html",
+      "append_title": "| SPACETELESCOPE"
+    }
+  },
   {
     "model": "pages.page",
     "pk": "10000",
@@ -59,6 +67,22 @@
     }
   },
   {
+    "model": "pages.url",
+    "pk": 10000,
+    "fields": {
+      "url": "/test-online/",
+      "page": "10000"
+    }
+  },
+  {
+    "model": "pages.url",
+    "pk": 10001,
+    "fields": {
+      "url": "/test-not-online/",
+      "page": "10001"
+    }
+  },
+  {
     "model": "pages.page",
     "pk": "10002",
     "fields": {
@@ -89,23 +113,7 @@
   },
   {
     "model": "pages.url",
-    "pk": 10000,
-    "fields": {
-      "url": "/test-online/",
-      "page": "10000"
-    }
-  },
-  {
-    "model": "pages.url",
-    "pk": 10001,
-    "fields": {
-      "url": "/test-not-online/",
-      "page": "10001"
-    }
-  },
-  {
-    "model": "pages.url",
-    "pk": 10007,
+    "pk": 10002,
     "fields": {
       "url": "/test-online-coming-soon/",
       "page": "10002"
