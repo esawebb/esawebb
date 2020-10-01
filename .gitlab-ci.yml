@@ -28,6 +28,7 @@ stages:
 
 .before_script_template: &before_script_definition
   - echo $REQUIRED_FOLDERS $APT_CACHE_DIR $PIP_CACHE_DIR | xargs mkdir -pv
+  - /bin/cp -rf test-utils/media/* docs/static
   - ln -s /root/.local .local
   - apt-get update -y
 

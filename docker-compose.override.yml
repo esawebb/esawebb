@@ -13,10 +13,11 @@ x-common: &common
     - ./spacetelescope:/home/hubbleadm/spacetelescope
     - ./local:/home/hubbleadm/local
     - ./htmlcov:/home/hubbleadm/htmlcov
-    - ./.coveragerc:/home/hubbleadm/.coveragerc
-    - ./local-test-utils/sitecustomize.py:/home/hubbleadm/sitecustomize.py
-    - ./.coveragerc-parallel:/home/hubbleadm/.coveragerc-parallel
     - ./docs/static:/home/hubbleadm/docs/static
+    - ./test-utils:/home/hubbleadm/test-utils
+    - ./test-utils/sitecustomize.py:/home/hubbleadm/sitecustomize.py
+    - ./.coveragerc:/home/hubbleadm/.coveragerc
+    - ./.coveragerc-parallel:/home/hubbleadm/.coveragerc-parallel
     - ./setup.py:/home/hubbleadm/setup.py
     - ./scripts:/home/hubbleadm/scripts
 

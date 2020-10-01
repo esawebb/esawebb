@@ -172,23 +172,6 @@
   },
   {
     "model": "newsletters.newsletterdatasource",
-    "pk": 10001,
-    "fields": {
-      "type": 10000,
-      "list": true,
-      "name": "footer_potws",
-      "title": "Pictures of the Week Footer",
-      "content_type": [
-        "media",
-        "pictureoftheweek"
-      ],
-      "ordering": 10000,
-      "limit": ":5",
-      "selectors": []
-    }
-  },
-  {
-    "model": "newsletters.newsletterdatasource",
     "pk": 10002,
     "fields": {
       "type": 10000,

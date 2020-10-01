@@ -11,6 +11,7 @@ omit =
     */dummy_rails/*
     */test.py
     */tests.py
+    */tests/*
     */static/*
     spacetelescope/wsgi.py
     spacetelescope/settings/prod.py

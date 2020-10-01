@@ -1,0 +1,15 @@
+[
+  {
+    "model": "frontpage.Highlight",
+    "pk": 10000,
+    "fields": {
+      "name": "/page42/",
+      "title": "PageForTesting",
+      "description": "This is a Page for testing",
+      "image": "ThisIsAnImageURL",
+      "link": "https://example.com",
+      "order": 1,
+      "published": true
+    }
+  }
+]
