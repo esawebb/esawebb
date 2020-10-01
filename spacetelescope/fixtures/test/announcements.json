@@ -24,12 +24,45 @@
     }
   },
   {
+    "model": "announcements.announcement",
+    "pk": "10001",
+    "fields": {
+      "lang": "en",
+      "source": null,
+      "translation_ready": false,
+      "title": "Video as main visual",
+      "subtitle": "",
+      "description": "This announcement has a main visual with an existent image that provides extra coverage",
+      "contacts": "",
+      "links": "",
+      "featured": true,
+      "announcement_type": null,
+      "release_date": "2020-03-25T18:00:13",
+      "embargo_date": null,
+      "published": true,
+      "last_modified": "2020-04-01T00:06:51.714",
+      "created": "2020-03-25T17:59:18.073",
+      "release_task_id": "72d0e85d-9a7e-4877-90e5-6dd4ef7fb662",
+      "embargo_task_id": null,
+      "checksums": null
+    }
+  },
+  {
     "model": "announcements.announcementvideo",
     "pk": "10000",
     "fields": {
-      "announcement_id": "10000",
+      "announcement": "10000",
       "archive_item": "10000",
       "main_visual": false
+    }
+  },
+  {
+    "model": "announcements.announcementvideo",
+    "pk": "10001",
+    "fields": {
+      "announcement": "10001",
+      "archive_item": "10000",
+      "main_visual": true
     }
   },
   {
@@ -60,6 +93,30 @@
       "last_modified": "2020-03-31T22:30:57.937",
       "created": "2020-03-31T22:30:57.937",
       "release_task_id": "0f346155-3861-4c23-b9e9-b70cd4df8517",
+      "embargo_task_id": null,
+      "checksums": null
+    }
+  },
+  {
+    "model": "announcements.webupdatetype",
+    "pk": 10000,
+    "fields": {
+      "name": "Regular WebUpdate"
+    }
+  },
+  {
+    "model": "announcements.webupdate",
+    "pk": "10000",
+    "fields": {
+      "title": "Testing WebUpdate",
+      "link": "https://spacetelescope.org",
+      "description": "<p>A testing WebUpdate.</p>",
+      "type": 10000,
+      "release_date": "2020-03-01T23:55:44",
+      "published": true,
+      "last_modified": "2020-09-30T23:57:05.579",
+      "created": "2020-09-30T23:57:05.579",
+      "release_task_id": null,
       "embargo_task_id": null,
       "checksums": null
     }
