@@ -6,8 +6,8 @@
 #   Luis Clara Gomes <lcgomes@eso.org>
 import os
 
-from avm import jsonmapper, remove_duplicates, load_json
-from utils import *
+from spacetelescope.hubblesite.avm import jsonmapper, remove_duplicates, load_json
+from spacetelescope.hubblesite.utils import *
 from django.test import TestCase, tag
 import pytz
 

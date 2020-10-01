@@ -1,5 +1,3 @@
-import re
-
 from django.test import TestCase, tag, Client
 from djangoplicity.announcements.models import Announcement, WebUpdate
 from djangoplicity.science.models import ScienceAnnouncement
@@ -19,10 +17,10 @@ class TestAnnouncements(TestCase):
 
     def test_announcements(self):
         response = self.client.get('/announcements/')
-        regexp = utils.get_pagination_regex(self.announcements_number, 'announcements')
+        pagination_found = utils.eval_pagination_regex(response, self.announcements_number, 'announcements')
 
         self.assertContains(response, 'Announcements')
-        self.assertTrue(bool(re.search(regexp, response.content)))
+        self.assertTrue(pagination_found)
 
     def test_announcements_detail(self):
         response = self.client.get('/announcements/{}/'.format(self.announcement.pk))
@@ -43,10 +41,10 @@ class TestScienceAnnouncements(TestCase):
 
     def test_forscientists(self):
         response = self.client.get('/forscientists/announcements/')
-        regexp = utils.get_pagination_regex(self.science_announcements_number, 'announcements')
+        pagination_found = utils.eval_pagination_regex(response, self.science_announcements_number, 'announcements')
 
         self.assertContains(response, 'Announcements')
-        self.assertTrue(bool(re.search(regexp, response.content)))
+        self.assertTrue(pagination_found)
 
     def test_forscientists_detail(self):
         response = self.client.get('/forscientists/announcements/{}/'.format(self.science_announcement.pk))
@@ -63,7 +61,7 @@ class TestWebUpdates(TestCase):
 
     def test_announcements_webupdates(self):
         response = self.client.get('/announcements/webupdates/')
-        regexp = utils.get_pagination_regex(self.web_updates_number, 'web updates')
+        pagination_found = utils.eval_pagination_regex(response, self.web_updates_number, 'web updates')
 
         self.assertContains(response, 'Web Updates')
-        self.assertTrue(bool(re.search(regexp, response.content)))
+        self.assertTrue(pagination_found)

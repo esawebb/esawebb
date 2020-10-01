@@ -1,4 +1,5 @@
 import json
+import re
 
 from django.contrib.auth.models import User
 from django.test import Client
@@ -36,11 +37,12 @@ def get_staff_client():
     return _get_logged_client('test_admin')
 
 
-def get_pagination_regex(entries_count, no_results_name='entries'):
+def eval_pagination_regex(response, entries_count, no_results_name='entries'):
     """
     Common regex used to test list views for some models
     """
-    return '(Showing 1 to [0-9]+ of {})|(No {} were found.)'.format(entries_count, no_results_name)
+    regex = r'(Showing 1 to [0-9]+ of {})|(No {} were found.)'.format(entries_count, no_results_name)
+    return bool(re.search(regex, response.content.decode('utf-8')))
 
 
 def check_redirection_to(testcase, response, to, final_status=302):

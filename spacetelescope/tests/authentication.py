@@ -39,7 +39,7 @@ class TestAuthentication(TestCase):
         response_get = self.anonymous_client.get('/password_reset/')
         self.assertContains(
             response_get,
-            'Forgotten your password? Enter your e-mail address below, and we\'ll e-mail instructions for setting a new one.'
+            'Forgotten your password?'
         )
 
         response_post = self.client.post('/password_reset/', data={"email": 'test@email.com'}, follow=True)

@@ -1,5 +1,3 @@
-import re
-
 from django.test import TestCase, Client, tag
 from djangoplicity.media.models import Video, Image, PictureOfTheWeek, ImageComparison
 
@@ -18,24 +16,24 @@ class TestImage(TestCase):
 
     def test_images(self):
         response = self.client.get('/images/')
-        regexp = utils.get_pagination_regex(self.images_number, 'images')
+        pagination_found = utils.eval_pagination_regex(response, self.images_number, 'images')
 
         self.assertContains(response, 'Images')
-        self.assertTrue(bool(re.search(regexp, response.content)))
+        self.assertTrue(pagination_found)
 
     def test_images_potw(self):
         response = self.client.get('/images/potw/')
-        regexp = utils.get_pagination_regex(self.potw_number, 'press releases')
+        pagination_found = utils.eval_pagination_regex(response, self.potw_number, 'press releases')
 
         self.assertContains(response, 'Picture of the Week')
-        self.assertTrue(bool(re.search(regexp, response.content)))
+        self.assertTrue(pagination_found)
 
     def test_image_comparisons(self):
         response = self.client.get('/images/comparisons/')
-        regexp = utils.get_pagination_regex(self.image_comparisons_number, 'entries')
+        pagination_found = utils.eval_pagination_regex(response, self.image_comparisons_number, 'entries')
 
         self.assertContains(response, 'Image Comparisons')
-        self.assertTrue(bool(re.search(regexp, response.content)))
+        self.assertTrue(pagination_found)
 
     def test_images_top100(self):
         response = self.client.get('/images/archive/top100/')
@@ -53,10 +51,10 @@ class TestVideo(TestCase):
 
     def test_videos_list(self):
         response = self.client.get('/videos/')
-        regexp = utils.get_pagination_regex(self.videos_number, 'entries')
+        pagination_found = utils.eval_pagination_regex(response, self.videos_number, 'entries')
 
         self.assertContains(response, 'Videos')
-        self.assertTrue(bool(re.search(regexp, response.content)))
+        self.assertTrue(pagination_found)
 
     def test_videos_detail(self):
         response = self.client.get('/videos/{}/'.format(self.video.id))
@@ -64,7 +62,7 @@ class TestVideo(TestCase):
 
     def test_video_hubblecast(self):
         response = self.client.get('/videos/archive/category/hubblecast/')
-        regexp = utils.get_pagination_regex(self.videos_number, 'entries')
+        pagination_found = utils.eval_pagination_regex(response, self.videos_number, 'entries')
 
         self.assertContains(response, 'All Hubblecasts')
-        self.assertTrue(bool(re.search(regexp, response.content)))
+        self.assertTrue(pagination_found)
