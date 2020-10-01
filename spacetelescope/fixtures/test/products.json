@@ -1,3 +1,79 @@
 [
-
+  {
+    "model": "products.book",
+    "pk": "10000",
+    "fields": {
+      "priority": 50,
+      "title": "test book",
+      "price": 140.00,
+      "created": "2020-07-17",
+      "last_modified": "2020-07-17"
+    }
+  },
+  {
+    "model": "products.book",
+    "pk": "10001",
+    "fields": {
+      "priority": 50,
+      "title": "test book",
+      "published": true,
+      "price": 140.00,
+      "created": "2020-07-17",
+      "last_modified": "2020-07-17"
+    }
+  },
+  {
+    "model": "products.kidsdrawing",
+    "pk": "test-kids-draw",
+    "fields": {
+      "title": "Test title",
+      "description": "<p>Test description</p>",
+      "priority": 20,
+      "credit": "<p>NASA &amp; ESA</p>",
+      "name": "jhon doe",
+      "city": "Villavicencio",
+      "country": "Colombia",
+      "age": 23,
+      "release_date": "2020-08-31T18:21:00.136",
+      "embargo_date": null,
+      "published": true,
+      "last_modified": "2020-08-31T18:21:00.136",
+      "created": "2020-08-31T18:20:50.714",
+      "release_task_id": null,
+      "embargo_task_id": null,
+      "checksums": null,
+      "archive_category": []
+    }
+  },
+  {
+    "model": "products.postcard",
+    "pk": "10000",
+    "fields": {
+      "sale": true,
+      "price": "20.00",
+      "product": 10000,
+      "job": "",
+      "jsp": null,
+      "account_no": "",
+      "free": false,
+      "shippable": true,
+      "title": "Test postcard",
+      "description": "",
+      "priority": 20,
+      "credit": "<p>NASA &amp; ESA</p>",
+      "width": "",
+      "height": "",
+      "depth": "",
+      "weight": "500",
+      "release_date": "2020-08-20T06:15:24.173",
+      "embargo_date": null,
+      "published": true,
+      "last_modified": "2020-08-20T06:45:46.768",
+      "created": "2020-08-20T03:07:20.685",
+      "release_task_id": null,
+      "embargo_task_id": null,
+      "checksums": null,
+      "archive_category": []
+    }
+  }
 ]

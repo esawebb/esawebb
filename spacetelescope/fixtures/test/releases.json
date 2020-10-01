@@ -1,5 +1,49 @@
 [
   {
+    "model": "releases.releasetype",
+    "pk": 10000,
+    "fields": {
+      "name": "Science Release"
+    }
+  },
+  {
+    "model": "releases.release",
+    "pk": "10000",
+    "fields": {
+      "lang": "en",
+      "source": null,
+      "translation_ready": false,
+      "old_ids": "",
+      "release_type": 10000,
+      "title": "Hubble Celebrates its 30th Anniversary with a Tapestry of Blazing Starbirth",
+      "subtitle": "Hubble Space Telescope’s iconic images and scientific breakthroughs have redefined our view of the Universe. To commemorate three decades of scientific discoveries.",
+      "release_city": "",
+      "headline": "Astronomers using the international Gemini Observatory, on Hawaii\u2019s Maunakea, have imaged a very small object in orbit around the Earth, thought to be only a few meters across. According to Grigori Fedorets, the lead astronomer for the observations, the object could be a rare natural rocky object, or it could be something humans put into space decades ago \u2014 essentially space debris. \u201cEither way this is a very compelling object and needs more data to determine what it is,\u201d said Fedorets.",
+      "description": "<p>The newly discovered orbiting object has been assigned the provisional designation 2020 CD3 by the International Astronomical Union\u2019s\u00a0<a href=\"https://www.minorplanetcenter.net/\">Minor Planet Center</a>. If it is natural in origin, such as an asteroid, then it is only the second known rocky satellite of the Earth ever discovered in space other than the Moon. The other body, discovered in 2006, has since been ejected out of Earth orbit. 2020 CD3 was discovered on the night of 15 February 2020 by Kacper Wierzchos and Teddy Pruyne at the\u00a0<a href=\"https://catalina.lpl.arizona.edu/\">Catalina Sky Survey</a>\u00a0operating out of the University of Arizona\u2019s\u00a0<a href=\"https://www.lpl.arizona.edu/\">Lunar and Planetary Laboratory</a>\u00a0in Tucson, Arizona.</p>\r\n<p>The image, obtained on 24 February 2020, shows simply a tiny pinpoint of light against trailing stars.\u00a0<em>\u201cThe stars are trailing because this object is moving relative to the background stars and the 8-meter Gemini North telescope was tracking on this object,\u201d</em>\u00a0said Fedorets, adding that it is challenging to follow moving objects like this with a big telescope like Gemini. John Blakeslee, Head of Science at the international Gemini Observatory comments,\u00a0<em>\u201cObtaining the images was a scramble for the Gemini team because the object is quickly becoming fainter as it moves away from Earth. It is expected to be ejected from Earth\u2019s orbit altogether in April.\u201d</em></p>\r\n<p>Fedorets, an astronomer at<a href=\"https://www.qub.ac.uk/\">\u00a0Queen\u2019s University Belfast</a>, and his team are \u201cpulling out all of the stops\u201d to obtain more data on the object to determine its nature.\u00a0<em>\u201cAdditional observations to refine its position will help us determine this mystery object\u2019s orbit and its possible origin,\u201d</em>\u00a0said Fedorets, adding that its reflectivity is also an important characteristic, as rocky bodies tend to have relatively low reflectivity compared to things like spent rocket boosters.</p>\r\n<p>The\u00a0<a href=\"http://www.gemini.edu/\">international Gemini Observatory</a>\u00a0is a program of the\u00a0<a href=\"https://www.nsf.gov/\">NSF\u2019s</a>\u00a0National Optical-Infrared Astronomy Research Laboratory (<a href=\"https://nationalastro.org/\">OIR Lab</a>). Another of OIR Lab\u2019s Programs, the\u00a0<a href=\"https://www.lsst.org/\">Vera C. Rubin Observatory</a>\u00a0(once it begins science operations), will conduct a continuous very deep survey of the sky looking for objects like this and other rapidly changing phenomena in the sky.\u00a0<em>\u201cWe expect to find a population of these objects once the Rubin Observatory is operational,\u201d</em>\u00a0said Fedorets.\u00a0<em>\u201cStay tuned!\u201d</em></p>",
+      "notes": "",
+      "more_information": "<p><a href=\"https://nationalastro.org/\">NSF\u2019s National Optical-Infrared Astronomy Research Laboratory</a>, the US center for ground-based optical-infrared astronomy, operates the international\u00a0<a href=\"https://nationalastro.org/programs/gemini-observatory/\">Gemini Observatory</a>\u00a0(a facility of\u00a0<a href=\"http://ast.noao.edu/csdc/usngo\">NSF</a>,\u00a0<a href=\"http://www.nrc-cnrc.gc.ca/eng/solutions/facilities/gemini.html\">NRC\u2013Canada</a>,\u00a0<a href=\"http://www.conicyt.cl/astronomia/oficina-gemini-chile/\">CONICYT\u2013Chile</a>,\u00a0<a href=\"http://lnapadrao.lna.br/gemini\">MCTI\u2013Brazil</a>,\u00a0<a href=\"http://www.geminiargentina.mincyt.gob.ar/\">MCTIP\u2013Argentina</a>, and\u00a0<a href=\"http://kgmt.kasi.re.kr/kgmtscience\">KASI\u2013Republic of Korea</a>), Kitt Peak National Observatory (<a href=\"https://nationalastro.org/programs/kitt-peak-national-observatory/\">KPNO</a>), Cerro Tololo Inter-American Observatory (<a href=\"https://nationalastro.org/programs/ctio/\">CTIO</a>), the Community Science and Data Center (<a href=\"https://nationalastro.org/programs/csdc/\">CSDC</a>), and the\u00a0<a href=\"https://nationalastro.org/programs/vera-c-rubin-observatory/\">Vera C. Rubin Observatory</a>. It is managed by the Association of Universities for Research in Astronomy (<a href=\"https://www.aura-astronomy.org/\">AURA</a>) under a cooperative agreement with\u00a0<a href=\"https://www.nsf.gov/\">NSF</a>\u00a0and is headquartered in Tucson, Arizona. The astronomical community is honored to have the opportunity to conduct astronomical research on Iolkam Du\u2019ag (Kitt Peak) in Arizona, on Maunakea in Hawai\u2019i, and on Cerro Tololo and Cerro Pach\u00f3n in Chile. We recognize and acknowledge the very significant cultural role and reverence that these sites have to the Tohono O\u2019odham Nation, to the Native Hawaiian community, and to the local communities in Chile, respectively.</p>",
+      "links": "",
+      "disclaimer": "Test disclaimer",
+      "meltwater_keywords": "",
+      "kids_title": "Hubble Celebrates its 30th Anniversary with a Tapestry of Blazing Starbirth",
+      "kids_description": "Kid description",
+      "kids_image": null,
+      "release_date": "2020-02-27T16:00:00",
+      "embargo_date": null,
+      "published": true,
+      "last_modified": "2020-03-31T21:46:28.813",
+      "created": "2020-03-31T21:13:40.368",
+      "release_task_id": "4d22a4b1-9976-4d9b-ba3d-63b0c0d54ba2",
+      "embargo_task_id": null,
+      "checksums": null,
+      "subject_category": [],
+      "subject_name": [],
+      "facility": [],
+      "instruments": [],
+      "publications": []
+    }
+  },
+  {
     "model": "releases.release",
     "pk": "10001",
     "fields": {
@@ -18,8 +62,8 @@
       "links": "<p>[1] NEID takes its name from the Tohono O\u2019odham word meaning \u201cto see.\u201d NEID is also a nested acronym for NN-EXPLORE Exoplanet Investigations with Doppler spectroscopy. The Name NEID was selected after consultation with the Tohono O\u2019odham Nation.</p>\r\n<p>[2] Approximately 0.7 miles/hour.</p>",
       "disclaimer": "",
       "meltwater_keywords": "",
-      "kids_title": "",
-      "kids_description": "",
+      "kids_title": "Hubble Celebrates its 30th Anniversary with a Tapestry of Blazing Starbirth",
+      "kids_description": "Kid description",
       "kids_image": null,
       "release_date": "2020-01-08T16:00:00",
       "embargo_date": "2021-08-31T01:46:04",
@@ -55,8 +99,8 @@
       "links": "<p>[1] NEID takes its name from the Tohono O\u2019odham word meaning \u201cto see.\u201d NEID is also a nested acronym for NN-EXPLORE Exoplanet Investigations with Doppler spectroscopy. The Name NEID was selected after consultation with the Tohono O\u2019odham Nation.</p>\r\n<p>[2] Approximately 0.7 miles/hour.</p>",
       "disclaimer": "",
       "meltwater_keywords": "",
-      "kids_title": "",
-      "kids_description": "",
+      "kids_title": "Hubble Celebrates its 30th Anniversary with a Tapestry of Blazing Starbirth",
+      "kids_description": "Kid description",
       "kids_image": null,
       "release_date": "2020-01-08T16:00:00",
       "embargo_date": null,
@@ -92,8 +136,8 @@
       "links": "<p>[1] NEID takes its name from the Tohono O\u2019odham word meaning \u201cto see.\u201d NEID is also a nested acronym for NN-EXPLORE Exoplanet Investigations with Doppler spectroscopy. The Name NEID was selected after consultation with the Tohono O\u2019odham Nation.</p>\r\n<p>[2] Approximately 0.7 miles/hour.</p>",
       "disclaimer": "",
       "meltwater_keywords": "",
-      "kids_title": "",
-      "kids_description": "",
+      "kids_title": "Hubble Celebrates its 30th Anniversary with a Tapestry of Blazing Starbirth",
+      "kids_description": "Kid description",
       "kids_image": null,
       "release_date": "2021-10-10T16:00:00",
       "embargo_date": "2020-08-08T16:00:00",
@@ -108,6 +152,39 @@
       "facility": [],
       "instruments": [],
       "publications": []
+    }
+  },
+  {
+    "model": "releases.releasevideo",
+    "pk": "10000",
+    "fields": {
+      "release_id": "10000",
+      "archive_item": "10000",
+      "main_visual": true
+    }
+  },
+  {
+    "model": "releases.releasecontact",
+    "pk": 10000,
+    "fields": {
+      "name": "Jhon Doe",
+      "email": "jhon@doe.net",
+      "telephone": "1234567890",
+      "cellular": "1234567890",
+      "affiliation": "ES",
+      "address": "",
+      "city": "Sainan",
+      "state_province": "",
+      "postal_code": "",
+      "country": "Nowhere",
+      "release": "10000"
+    }
+  },
+  {
+    "model": "releases.releasetranslationcontact",
+    "pk": 10000,
+    "fields": {
+      "release": "10000"
     }
   }
 ]
