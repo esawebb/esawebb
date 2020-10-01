@@ -1,5 +1,28 @@
 [
   {
+    "model": "products.book",
+    "pk": "10000",
+    "fields": {
+      "priority": 50,
+      "title": "test book",
+      "price": 140.00,
+      "created": "2020-07-17",
+      "last_modified": "2020-07-17"
+    }
+  },
+  {
+    "model": "products.book",
+    "pk": "10001",
+    "fields": {
+      "priority": 50,
+      "title": "test book",
+      "published": true,
+      "price": 140.00,
+      "created": "2020-07-17",
+      "last_modified": "2020-07-17"
+    }
+  },
+  {
     "model": "products.kidsdrawing",
     "pk": "test-kids-draw",
     "fields": {
