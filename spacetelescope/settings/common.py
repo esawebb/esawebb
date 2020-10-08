@@ -858,6 +858,9 @@ LOGGING = {
             'handlers': ['null'],
             'propagate': False,
         },
+        'django.utils.autoreload': {
+            'level': 'INFO',
+        },
         'djangoplicity': {
             'handlers': ['console'] if DEBUG else ['file'],
             'level': 'DEBUG' if DEBUG else 'INFO',
