@@ -24,8 +24,14 @@ from djangoplicity.media.options import ImageOptions, VideoOptions, PictureOfThe
 from djangoplicity.newsletters.models import Newsletter
 from djangoplicity.newsletters.options import NewsletterOptions
 from djangoplicity.pages.views import view_page
-# from djangoplicity.products.models import *
-# from djangoplicity.products.options import *
+from djangoplicity.products2.models import Calendar, Logo, Exhibition, Sticker, PostCard, \
+    PrintedPoster, ConferencePoster, Merchandise, Presentation, Model3d, \
+    OnlineArtAuthor, Application, Media, OnlineArt
+
+from djangoplicity.products2.options import CalendarOptions, LogoOptions, ExhibitionOptions, \
+    StickerOptions, PostCardOptions, PrintedPosterOptions, ConferencePosterOptions, \
+    MerchandiseOptions, PresentationOptions, Model3dOptions, OnlineArtAuthorOptions, \
+    ApplicationOptions, MediaOptions, OnlineArtOptions
 from djangoplicity.releases.models import Release
 from djangoplicity.releases.options import ReleaseOptions
 from djangoplicity.science.models import ScienceAnnouncement
@@ -93,27 +99,24 @@ urlpatterns += [
     # url( r'^about/further_information/stecfnewsletters/', include('djangoplicity.products.urls.stecfnewsletters'), { 'model': STECFNewsletter, 'options': STECFNewsletterOptions } ),
     # url( r'^about/further_information/bulletins/', include('djangoplicity.products.urls.bulletins'), { 'model': Bulletin, 'options': BulletinOptions } ),
     # url( r'^about/further_information/techdocs/', include('djangoplicity.products.urls.techdocs'), { 'model': TechnicalDocument, 'options': TechnicalDocumentOptions } ),
-    # url( r'^products/calendars/', include('djangoplicity.products.urls.calendars'), { 'model': Calendar, 'options': CalendarOptions } ),
-    # url( r'^products/applications/', include('djangoplicity.products.urls.applications'), { 'model': Application, 'options': ApplicationOptions } ),
-    # url( r'^products/art/', include('djangoplicity.products.urls.art'), { 'model': OnlineArt, 'options': OnlineArtOptions } ),
-    # url( r'^products/artists/', include('djangoplicity.products.urls.artists'), { 'model': OnlineArtAuthor, 'options': OnlineArtAuthorOptions } ),
-    # url( r'^products/logos/', include('djangoplicity.products.urls.logos'), { 'model': Logo, 'options': LogoOptions } ),
-    # url( r'^products/exhibitions/', include('djangoplicity.products.urls.exhibitions'), { 'model': Exhibition, 'options': ExhibitionOptions } ),
-    # url( r'^products/stickers/', include('djangoplicity.products.urls.stickers'), { 'model': Sticker, 'options': StickerOptions } ),
-    # url( r'^products/postcards/', include('djangoplicity.products.urls.postcards'), { 'model': PostCard, 'options': PostCardOptions } ),
-    # url( r'^products/print_posters/', include('djangoplicity.products.urls.print_posters'), { 'model': PrintedPoster, 'options': PrintedPosterOptions } ),
-    # url( r'^products/conf_posters/', include('djangoplicity.products.urls.conf_posters'), { 'model': ConferencePoster, 'options': ConferencePosterOptions } ),
-    # url( r'^products/elec_posters/', include('djangoplicity.products.urls.elec_posters'), { 'model': ElectronicPoster, 'options': ElectronicPosterOptions } ),
-    # url( r'^products/apparel/', include('djangoplicity.products.urls.apparels'), { 'model': Apparel, 'options': ApparelOptions } ),
-    # url( r'^products/merchandise/', include('djangoplicity.products.urls.merchandise'), { 'model': Merchandise, 'options': MerchandiseOptions } ),
-    # url( r'^products/media/', include('djangoplicity.products.urls.media'), { 'model': Media, 'options': MediaOptions } ),
-    # url( r'^products/imaxfilms/', include('djangoplicity.products.urls.imaxfilms'), { 'model': IMAXFilm, 'options': IMAXFilmOptions } ),
-    # url( r'^products/presentations/', include('djangoplicity.products.urls.presentations'), { 'model': Presentation, 'options': PresentationOptions } ),
-    # url( r'^products/models3d/', include('djangoplicity.products.urls.models3d'), { 'model': Model3d, 'options': Model3dOptions, 'translate': False } ),
-    # url( r'^kidsandteachers/education/', include('djangoplicity.products.urls.education'), { 'model': EducationalMaterial, 'options': EducationalMaterialOptions } ),
-    # url( r'^kidsandteachers/drawings/', include('djangoplicity.products.urls.drawings'), { 'model': KidsDrawing, 'options': KidsDrawingOptions } ),
-    # url( r'^press/kits/', include('djangoplicity.products.urls.presskits'), { 'model': PressKit, 'options': PressKitOptions } ),
-    
+
+    # Products
+    url( r'^products/models3d/', include('djangoplicity.products2.urls.models3d'), { 'model': Model3d, 'options': Model3dOptions, 'translate': True } ),
+    url( r'^products/calendars/', include('djangoplicity.products2.urls.calendars'), { 'model': Calendar, 'options': CalendarOptions, 'translate': True  } ),
+    url( r'^products/applications/', include('djangoplicity.products2.urls.applications'), { 'model': Application, 'options': ApplicationOptions } ),
+    url( r'^products/conf-posters/', include('djangoplicity.products2.urls.conf_posters'), { 'model': ConferencePoster, 'options': ConferencePosterOptions, 'translate': True  } ),
+    url( r'^products/exhibitions/', include('djangoplicity.products2.urls.exhibitions'), { 'model': Exhibition, 'options': ExhibitionOptions, 'translate': True  } ),
+    url( r'^products/logos/', include('djangoplicity.products2.urls.logos'), { 'model': Logo, 'options': LogoOptions, 'translate': True  } ),
+    url( r'^products/merchandise/', include('djangoplicity.products2.urls.merchandise'), { 'model': Merchandise, 'options': MerchandiseOptions, 'translate': True  } ),
+    url( r'^products/postcards/', include('djangoplicity.products2.urls.postcards'), { 'model': PostCard, 'options': PostCardOptions, 'translate': True  } ),
+    url( r'^products/presentations/', include('djangoplicity.products2.urls.presentations'), { 'model': Presentation, 'options': PresentationOptions, 'translate': True  } ),
+    url( r'^products/print-posters/', include('djangoplicity.products2.urls.print_posters'), { 'model': PrintedPoster, 'options': PrintedPosterOptions, 'translate': True  } ),
+    url( r'^products/media/', include('djangoplicity.products2.urls.media'), { 'model': Media, 'options': MediaOptions } ),
+    url( r'^products/stickers/', include('djangoplicity.products2.urls.stickers'), { 'model': Sticker, 'options': StickerOptions, 'translate': True  } ),
+    url( r'^products/art/', include('djangoplicity.products2.urls.art'), { 'model': OnlineArt, 'options': OnlineArtOptions } ),
+    # Virtual tours
+    url( r'^products/artists/', include('djangoplicity.products2.urls.artists'), { 'model': OnlineArtAuthor, 'options': OnlineArtAuthorOptions, 'translate': True  } ),
+
     url( r'^forscientists/announcements/', include('djangoplicity.science.urls'), { 'model': ScienceAnnouncement, 'options': ScienceAnnouncementOptions } ),
 
     # url( r'^projects/fits_liberator/fitsimages/', include('djangoplicity.products.urls.fitsimages'), { 'model': FITSImage, 'options': FITSImageOptions } ),
