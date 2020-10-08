@@ -17,3 +17,6 @@ coverage.xml
 
 # volume for development statics
 docs/
+
+config/nginx-auth/*
+!config/nginx-auth/.keep

@@ -15,13 +15,27 @@ x-common: &common
     - ./scripts:/home/hubbleadm/scripts
 
 services:
+  nginx:
+    image: nginx:1.17
+    container_name: hubble-nginx
+    restart: always
+    depends_on:
+      - web
+    volumes:
+      # Read only config volume
+      - ./config/nginx-dev:/etc/nginx/conf.d:ro
+      - ./config/nginx-common/snippets:/etc/nginx/snippets:ro
+      - ./config/nginx-auth:/etc/nginx/auth
+    ports:
+      - "80:80"
+
   web:
     <<: *common
     depends_on:
       - cache
     command: ["./scripts/command-devserver.sh"]
-    ports:
-      - "80:8000"
+    expose:
+      - "8000"
 
   broker:
     restart: "no"
