@@ -25,11 +25,21 @@ import djangoplicity.menus.admin
 import djangoplicity.metadata.admin
 import djangoplicity.newsletters.admin
 import djangoplicity.pages.admin
-# import djangoplicity.products.admin
 import djangoplicity.releases.admin
 import djangoplicity.reports.admin
 import djangoplicity.science.admin
 import spacetelescope.frontpage.admin
+# Products imports
+from djangoplicity.contrib.admin import DjangoplicityModelAdmin
+from djangoplicity.products2.admin import register_if_installed, ExhibitionGroupAdmin, OnlineArtAuthorAdmin, \
+    ConferenceAdmin
+from djangoplicity.products2.base.models import ArchiveCategory
+from djangoplicity.products2.models import Model3d, Calendar, Application, Logo, Exhibition, \
+    Sticker, PostCard, PrintedPoster, ConferencePoster, Merchandise, Media, Presentation, OnlineArt, \
+    ExhibitionGroup, OnlineArtAuthor, ConferenceItem, Conference
+from djangoplicity.products2.options import Model3dOptions, CalendarOptions, ApplicationOptions, LogoOptions, \
+    ExhibitionOptions, StickerOptions, PostCardOptions, PrintedPosterOptions, ConferencePosterOptions, \
+    MerchandiseOptions, MediaOptions, PresentationOptions, OnlineArtOptions, ConferenceItemOptions
 
 # Register each applications admin interfaces with
 # an admin site.
@@ -45,7 +55,6 @@ autoregister( admin_site, djangoplicity.pages.admin )
 autoregister( admin_site, djangoplicity.media.admin )
 autoregister( admin_site, djangoplicity.releases.admin )
 autoregister( admin_site, djangoplicity.metadata.admin )
-# autoregister( admin_site, djangoplicity.products.admin )
 #autoregister( admin_site, djangoplicity.events.admin )
 autoregister( admin_site, djangoplicity.mailinglists.admin )
 autoregister( admin_site, djangoplicity.newsletters.admin )
@@ -80,3 +89,32 @@ admin_site.register(django.contrib.auth.models.Group,
 # adminshop_site = satchmo_admin( adminshop_site )
 
 # autoregister( adminshop_site, djangoplicity.archives.contrib.satchmo.freeorder.admin )
+
+# Products 2 admin register
+
+def register_products_with_admin( admin_site ):
+    register_if_installed( admin_site, Model3d, Model3dOptions )
+    register_if_installed( admin_site, Calendar, CalendarOptions, name='Calendar' )
+    register_if_installed( admin_site, Application, ApplicationOptions )
+    register_if_installed( admin_site, Logo, LogoOptions )
+    register_if_installed( admin_site, Exhibition, ExhibitionOptions, extra={ 'list_display': ['group', 'group_order'], 'list_editable': ['group', 'group_order'], } )
+    register_if_installed( admin_site, Sticker, StickerOptions )
+    register_if_installed( admin_site, PostCard, PostCardOptions )
+    register_if_installed( admin_site, PrintedPoster, PrintedPosterOptions )
+    register_if_installed( admin_site, ConferencePoster, ConferencePosterOptions )
+    register_if_installed( admin_site, Merchandise, MerchandiseOptions )
+    register_if_installed( admin_site, Media, MediaOptions )
+    register_if_installed( admin_site, Presentation, PresentationOptions )
+    register_if_installed( admin_site, OnlineArt, OnlineArtOptions, name='Artist' )
+
+    class ArchiveCategoryAdmin(DjangoplicityModelAdmin):
+       list_display = ('fullname',)
+
+       change_list_template = 'admin/products/change_list_archivecategory.html'
+
+    admin_site.register(ArchiveCategory, ArchiveCategoryAdmin)
+
+# Register with default admin site
+admin_site.register( ExhibitionGroup, ExhibitionGroupAdmin )  # Special
+admin_site.register( OnlineArtAuthor, OnlineArtAuthorAdmin )  # Special
+register_products_with_admin( admin_site )
