@@ -56,8 +56,8 @@ if settings.DEBUG_TOOLBAR:
 urlpatterns += [
 
     # Djangoplicity Adminstration
-    url( r'^admin/cache/', include( 'djangoplicity.cache.urls', namespace="admincache_site", app_name="cache" )),
-    url( r'^admin/history/', include( 'djangoplicity.adminhistory.urls', namespace="adminhistory_site", app_name="history" )),
+    url( r'^admin/cache/', include( ('djangoplicity.cache.urls', "cache"), namespace="admincache_site" )),
+    url( r'^admin/history/', include( ('djangoplicity.adminhistory.urls', "history"), namespace="adminhistory_site" )),
     url( r'^admin/doc/', include( 'django.contrib.admindocs.urls' )),
     # url( r'^admin/shop/', include( 'djangoplicity.archives.contrib.satchmo.urls_admin' ) ),
     # url( r'^admin/shop/', include(adminshop_site.urls), { 'extra_context': { 'ADMINSHOP_SITE': True } } ),
@@ -141,7 +141,7 @@ urlpatterns += [
     # url( r'^shop/bulkorders/', RedirectView.as_view(url='/shop/bulk_orders/'), name='shop_bulkorders' ),
     # url( r'^shop/freeorder/', include( 'djangoplicity.archives.contrib.satchmo.freeorder.urls' ) ),
     # url( r'^shop/', include( 'djangoplicity.archives.contrib.satchmo.urls' ) ),
-    url( r'^newsletters/', include( 'djangoplicity.mailinglists.urls', namespace='djangoplicity_mailinglists', app_name='djangoplicity_mailinglists' ) ),
+    url( r'^newsletters/', include( ('djangoplicity.mailinglists.urls', 'djangoplicity_mailinglists'), namespace='djangoplicity_mailinglists' ) ),
     url( r'^newsletters/', include( 'djangoplicity.newsletters.urls'), { 'model': Newsletter, 'options': NewsletterOptions, } ),
     #( r'^public/djangoplicity/events/', include('djangoplicity.events.urls'), { 'model': Event, 'options': EventOptions } ),
     url( r'^facebook/', include('djangoplicity.iframe.urls')  ),
