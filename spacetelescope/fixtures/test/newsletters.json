@@ -97,6 +97,69 @@
     }
   },
   {
+    "model": "newsletters.newslettertype",
+    "pk": 10004,
+    "fields": {
+      "name": "ESA/Hubble Embargo release",
+      "slug": "test-embargo-release",
+      "default_from_name": "Newsletter test",
+      "default_from_email": "test@email.org",
+      "subject_template": "ESA/Hubble Embargo release",
+      "text_template": "{% extends \"newsletters/embargo-text.html\" %}",
+      "html_template": "{% extends \"newsletters/embargo.html\" %}",
+      "archive": false,
+      "local_archive": false,
+      "internal_archive": false,
+      "sharing": false,
+      "subscribe_text": "",
+      "mailers": [
+        10000
+      ]
+    }
+  },
+  {
+    "model": "newsletters.newslettertype",
+    "pk": 10005,
+    "fields": {
+      "name": "ESA/Hubble Embargo announcement",
+      "slug": "test-embargo-announcement",
+      "default_from_name": "Newsletter test",
+      "default_from_email": "test@email.org",
+      "subject_template": "ESA/Hubble Embargo announcement",
+      "text_template": "{% extends \"newsletters/embargo-announcement-text.html\" %}",
+      "html_template": "{% extends \"newsletters/embargo-announcement.html\" %}",
+      "archive": false,
+      "local_archive": false,
+      "internal_archive": false,
+      "sharing": false,
+      "subscribe_text": "",
+      "mailers": [
+        10000
+      ]
+    }
+  },
+  {
+    "model": "newsletters.newslettertype",
+    "pk": 10006,
+    "fields": {
+      "name": "ESA/Hubble Plan newsletter test",
+      "slug": "test-plain",
+      "default_from_name": "Newsletter test",
+      "default_from_email": "test@email.org",
+      "subject_template": "",
+      "text_template": "{% extends \"newsletters/plain-newsletter-text.html\" %}",
+      "html_template": "{% extends \"newsletters/plain-newsletter.html\" %}",
+      "archive": true,
+      "local_archive": false,
+      "internal_archive": false,
+      "sharing": true,
+      "subscribe_text": "",
+      "mailers": [
+        10000
+      ]
+    }
+  },
+  {
     "model": "newsletters.datasourceselector",
     "pk": 10000,
     "fields": {
@@ -334,6 +397,142 @@
       "content_type": [
         "releases",
         "release"
+      ],
+      "ordering": 10000,
+      "limit": "",
+      "selectors": []
+    }
+  },
+  {
+    "model": "newsletters.newsletterdatasource",
+    "pk": 10012,
+    "fields": {
+      "type": 10004,
+      "list": true,
+      "name": "announcements",
+      "title": "Announcements",
+      "content_type": [
+        "announcements",
+        "announcement"
+      ],
+      "ordering": 10000,
+      "limit": "",
+      "selectors": []
+    }
+  },
+  {
+    "model": "newsletters.newsletterdatasource",
+    "pk": 10013,
+    "fields": {
+      "type": 10004,
+      "list": false,
+      "name": "release",
+      "title": "Press Release",
+      "content_type": [
+        "releases",
+        "release"
+      ],
+      "ordering": 10000,
+      "limit": "0:1",
+      "selectors": []
+    }
+  },
+  {
+    "model": "newsletters.newsletterdatasource",
+    "pk": 10014,
+    "fields": {
+      "type": 10004,
+      "list": true,
+      "name": "newonhubble",
+      "title": "New webupdates",
+      "content_type": [
+        "announcements",
+        "webupdate"
+      ],
+      "ordering": 10000,
+      "limit": "",
+      "selectors": []
+    }
+  },
+  {
+    "model": "newsletters.newsletterdatasource",
+    "pk": 10015,
+    "fields": {
+      "type": 10004,
+      "list": true,
+      "name": "potws",
+      "title": "Pictures of the Week",
+      "content_type": [
+        "media",
+        "pictureoftheweek"
+      ],
+      "ordering": 10000,
+      "limit": "",
+      "selectors": []
+    }
+  },
+  {
+    "model": "newsletters.newsletterdatasource",
+    "pk": 10016,
+    "fields": {
+      "type": 10005,
+      "list": true,
+      "name": "announcements",
+      "title": "Announcements",
+      "content_type": [
+        "announcements",
+        "announcement"
+      ],
+      "ordering": 10000,
+      "limit": "",
+      "selectors": []
+    }
+  },
+  {
+    "model": "newsletters.newsletterdatasource",
+    "pk": 10017,
+    "fields": {
+      "type": 10005,
+      "list": false,
+      "name": "release",
+      "title": "Press Release",
+      "content_type": [
+        "releases",
+        "release"
+      ],
+      "ordering": 10000,
+      "limit": "0:1",
+      "selectors": []
+    }
+  },
+  {
+    "model": "newsletters.newsletterdatasource",
+    "pk": 10018,
+    "fields": {
+      "type": 10005,
+      "list": true,
+      "name": "newonhubble",
+      "title": "New highlights",
+      "content_type": [
+        "announcements",
+        "webupdate"
+      ],
+      "ordering": 10000,
+      "limit": "",
+      "selectors": []
+    }
+  },
+  {
+    "model": "newsletters.newsletterdatasource",
+    "pk": 10019,
+    "fields": {
+      "type": 10005,
+      "list": true,
+      "name": "potws",
+      "title": "Pictures of the Week",
+      "content_type": [
+        "media",
+        "pictureoftheweek"
       ],
       "ordering": 10000,
       "limit": "",
