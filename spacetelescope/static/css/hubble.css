@@ -6083,6 +6083,10 @@ body {
 .middle-section #newsletter-carousel-wrapper img {
   width: 100%; }
 
+.middle-section .social-links {
+  height: calc(100% - 1rem);
+  margin-top: 1rem; }
+
 .archive-search {
   margin-bottom: 20px; }
   .archive-search form {
