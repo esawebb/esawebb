@@ -1,5 +1,8 @@
 // These rules are placehoders extended in other selectors:
 
+$medium-dark: #292929;
+$default-section-height: 307px;
+
 .frontpage-title {
 	text-transform: uppercase;
 	font-size: 16px;
@@ -22,6 +25,10 @@
 
 	.section-title {
 		@extend .frontpage-title;
+
+    &.blue-title {
+      color: $hubble-blue;
+    }
 	}
 
 	.section-navigation {
@@ -482,11 +489,15 @@
 		}
 	}
 
-	#social-links {
-		background-color: #292929;
+	.social-links {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+		background-color: $medium-dark;
 
 		@media (min-width: $screen-md-min) {
-			height: 307px;
+			height: $default-section-height;
 		}
 
 		.title {
@@ -498,17 +509,25 @@
 		}
 
 		.icons {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      width: 80%;
 			padding: 40px;
 
-			div {
-				display: inline-block;
+      a {
+        margin: 2px;
 
-				&:hover {
-					background-color: $hubble-blue;
-					opacity: 0.3;
-					filter: alpha(opacity=30);
-				}
-			}
+        div {
+          display: inline-block;
+
+          &:hover {
+            background-color: $hubble-blue;
+            opacity: 0.3;
+            filter: alpha(opacity=30);
+          }
+        }
+      }
 		}
 	}
 
@@ -517,7 +536,7 @@
 		border: 1px solid $border-grey;
 
 		@media (min-width: $screen-md-min) {
-			height: 307px;
+			height: $default-section-height;
 			overflow: hidden;
 		}
 
@@ -648,4 +667,36 @@
 		color: $text-color;
 		min-height: 56px
 	}
+}
+
+.susbcribe-to-hubble {
+  .row {
+    margin-top: 0;
+
+    #newsletters-link, #subscribe-link {
+      text-align: center;
+      line-height: $default-section-height;
+      background-color: $medium-dark;
+
+      img {
+        display: inline-block;
+        height: auto;
+        max-width: 100%;
+        padding: 2rem 0;
+      }
+    }
+  }
+}
+
+.middle-section {
+  @media (min-width: 992px) {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  #newsletter-carousel-wrapper {
+    img {
+      width: 100%;
+    }
+  }
 }

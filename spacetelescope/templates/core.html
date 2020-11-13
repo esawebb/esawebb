@@ -1,4 +1,6 @@
 {% load i18n %}
+{% load static %}
+
 <!DOCTYPE HTML>
 <html lang="{{ LANGUAGE_CODE }}">
 <head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb#">
@@ -15,8 +17,9 @@
     <title>TEST SITE: {% block site_title %}ESA/Hubble{% endblock %}</title>
 {% load pipeline %}
 {% stylesheet 'main' %}
-    <!--[if IE]><link rel="shortcut icon" href="/static/favicon.ico"><![endif]-->
-    <link rel="icon" href="/static/favicon.ico">
+    <!-- TODO: Verify why favicon in root static folder is not being loaded by collectstatics -->
+    <!--[if IE]><link rel="shortcut icon" href="{% static 'images/favicon.ico' %}"><![endif]-->
+    <link rel="icon" href="{% static 'images/favicon.ico' %}">
 
     <!--[if lte IE 9]>
         {% javascript 'ie8compat' %}
@@ -33,7 +36,9 @@
 
 <nav class="navbar-general-wrapper" role="navigation">
     <div class="navbar-general">
-        <a href="/"><div class="sprites-title"></div></a>
+        <a class="navbar-general__logo" href="/">
+            <img src="{% static 'images/logo.png' %}" alt="ESA/Hubble logo" width="80" height="80">
+        </a>
         <div class="quicklinks">
             <a href="/contact">Contact</a>
             <a href="/subscribe/">Subscribe to Hubble News</a>
