@@ -4,6 +4,7 @@
 {% load media_video %}
 {% load pages %}
 {% load i18n %}
+{% load static %}
 
 {% block extra_header %}
     <meta property="og:title" content="ESA/Hubble Space Telescope" />
@@ -13,6 +14,7 @@
 {% endblock %}
 
 {% block content_area %}
+
 <div id="pr-carousel-wrapper">
     <div id="pr-carousel">
         {% for release in releases %}
@@ -48,7 +50,7 @@
         <div id="ann-carousel-wrapper">
             <div class="section-header">
                 <div class="section-title">
-                    <a href="{% url 'announcements_defaultquery' %}">{% trans 'Announcements' %}</a>
+                    <a href="{% url 'announcements_defaultquery' %}">{% trans 'What\'s New' %}</a>
                 </div>
                 <div class="section-navigation">
                 </div>
@@ -72,10 +74,34 @@
 </div> <!-- announcements -->
 {% endif %}
 
-<div class="row frontpage-section">
-    {% if hubblecasts %}
-    <div class="col-md-6">
-        <div id="hubblecast-carousel-wrapper">
+<div class="row frontpage-section middle-section">
+    <div class="col-md-8">
+        {% if potws %}
+        <div id="potw-carousel-wrapper" style="margin-top: 1rem;">
+            <div class="section-header">
+                <div class="section-title">
+                    <a href="{% url 'potw_defaultquery' %}">{% trans "Picture of the Week" %}</a>
+                </div>
+                <div class="section-navigation">
+                </div>
+            </div>
+            <div id="potw-carousel">
+                {% for potw in potws %}
+                <div class="slide">
+                    <a href="{{ potw.get_absolute_url }}">
+                        <img draggable="false" data-lazy="{{ potw.visual.resource_screen640.url }}" class="img-responsive" alt="{{ potw.visual.title }}">
+                        <div class="potw-description">
+                            <div class="date">{{ potw.release_date|datetime:"DATE" }} — {{ potw.id }}</div>
+                            <div class="title">{{ potw.visual.title }}</div>
+                        </div>
+                    </a>
+                </div> <!-- slide -->
+                {% endfor %}
+            </div> <!-- potw-carousel -->
+        </div>
+        {% endif %}
+        {% if hubblecasts %}
+        <div id="hubblecast-carousel-wrapper" style="margin-top: 1rem;">
             <div class="section-header">
                 <div class="section-title">
                     <a href="{% url 'videos_query_category' 'hubblecast' %}">{% trans "Hubblecast" %}</a>
@@ -101,68 +127,23 @@
                 </div>
             </div> <!-- hubblecast-carousel -->
         </div>
-    </div>
-    {% endif %}
-    {% if potws %}
-    <div class="col-md-6">
-        <div id="potw-carousel-wrapper">
+        {% endif %}
+        <div id="newsletter-carousel-wrapper" style="margin-top: 1rem;">
             <div class="section-header">
                 <div class="section-title">
-                    <a href="{% url 'potw_defaultquery' %}">{% trans "Picture of the Week" %}</a>
-                </div>
-                <div class="section-navigation">
+                    <a href="#">{% trans "ESA/Hubble Newsletter" %}</a>
                 </div>
             </div>
-            <div id="potw-carousel">
-                {% for potw in potws %}
-                <div class="slide">
-                    <a href="{{ potw.get_absolute_url }}">
-                        <img draggable="false" data-lazy="{{ potw.visual.resource_screen640.url }}" class="img-responsive" alt="{{ potw.visual.title }}">
-                        <div class="potw-description">
-                            <div class="date">{{ potw.release_date|datetime:"DATE" }} — {{ potw.id }}</div>
-                            <div class="title">{{ potw.visual.title }}</div>
-                        </div>
-                    </a>
-                </div> <!-- slide -->
-                {% endfor %}
-            </div> <!-- potw-carousel -->
-        </div>
-    </div>
-    {% endif %}
-    {% if highlights %}
-    <div class="col-md-6 highlights">
-        <div id="highlight-carousel-wrapper">
-            <div class="section-header">
-                <div class="section-title">
-                    {% trans "Highlights" %}
-                </div>
-                <div class="section-navigation">
-                </div>
+            <div>
+                <img src="{% static 'frontpage/newsletters.jpg' %}" alt="Take a look to our newsletters">
             </div>
-            <div id="highlight-carousel">
-            {% for highlight in highlights %}
-                {% if highlight.image %}
-                <div class="slide">
-                    {% if highlight.link %}<a href="{{ highlight.link}}">{% endif %}
-                        <img draggable="false" data-lazy="{{ highlight.image }}" class="img-responsive" alt="{% if highlight.title %}{{ highlight.title }}{% else %}Highlights{% endif %}">
-                    {% if highlight.link %}</a>{% endif %}
-                </div> <!-- slide -->
-                {% endif %}
-            {% endfor %}
-            </div> <!-- highlight-carousel -->
         </div>
     </div>
-    {% endif %}
-    <div class="col-md-3">
-        <div id="hubbleshop-link">
-            <a href="/shop/">
-                <img src="/static/images/hubbleshop.png" class="img-responsive" alt="Hubble Shop">
-            </a>
-        </div>
-    </div>
-    <div class="col-md-3">
-        <div id="social-links">
-            <div class="title">{% trans "Find us on" %}</div>
+    <div class="col-md-4">
+        <div class="social-links" style="margin-top: 1rem; height: 99%;">
+            <div class="title">
+                {% trans "Find us on" %}
+            </div>
             <div class="icons">
                 <a href="http://www.facebook.com/HubbleESA"><div class="sprites-facebook_42px_flat"></div></a>
                 <a href="http://twitter.com/hubble_space"><div class="sprites-twitter_42px_flat"></div></a>
@@ -205,6 +186,44 @@
     </div>
 </div>
 {% endif %}
+
+<div class="frontpage-section susbcribe-to-hubble">
+    <!-- TODO: Check images and update styles (currently inline) -->
+    <div class="section-header">
+        <div class="section-title blue-title">
+            {% trans "Subscribe to Hubble" %}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4">
+            <div id="newsletters-link">
+                <a href="/newsletters">
+                    <img src="{% static 'frontpage/newsletters.jpg' %}" alt="Take a look to our newsletters">
+                </a>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div id="subscribe-link">
+                <a href="/subscribe">
+                    <img src="{% static 'frontpage/subscribe.jpg' %}" alt="Subscribe to Hubble news">
+                </a>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="social-links">
+                <div class="icons">
+                    <a href="http://www.facebook.com/HubbleESA"><div class="sprites-facebook_42px_flat"></div></a>
+                    <a href="http://twitter.com/hubble_space"><div class="sprites-twitter_42px_flat"></div></a>
+                    <a href="http://www.youtube.com/user/HubbleESA"><div class="sprites-youtube_42px_flat"></div></a>
+                    <a href="http://itunes.apple.com/de/podcast/hubblecast-hd/id258935617 "><div class="sprites-apple_42px_flat"></div></a>
+                    <a href="http://www.vimeo.com/hubbleesa"><div class="sprites-vimeo_42px_flat"></div></a>
+                    <a href="http://www.flickr.com/photos/hubble_esa "><div class="sprites-flickr_42px_flat"></div></a>
+                    <a href="https://www.instagram.com/hubbleesa/"><div class="sprites-instagram"></div></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 </div> <!-- #body -->
 
