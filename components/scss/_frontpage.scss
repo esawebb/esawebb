@@ -695,13 +695,20 @@ $default-section-height: 307px;
   }
 
   #newsletter-carousel-wrapper {
+    border: 1px solid $border-grey;
+
     img {
       width: 100%;
     }
   }
 
-  .social-links {
+  #social-carousel-wrapper {
+    border: 1px solid $border-grey;
     height: calc(100% - 1rem);
-    margin-top: 1rem;
+
+  }
+
+  .social-links {
+    height: calc(100% - 4rem);
   }
 }

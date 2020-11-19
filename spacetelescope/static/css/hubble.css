@@ -6090,12 +6090,17 @@ body {
     display: flex;
     flex-wrap: wrap; } }
 
-.middle-section #newsletter-carousel-wrapper img {
-  width: 100%; }
+.middle-section #newsletter-carousel-wrapper {
+  border: 1px solid #dcdcdc; }
+  .middle-section #newsletter-carousel-wrapper img {
+    width: 100%; }
+
+.middle-section #social-carousel-wrapper {
+  border: 1px solid #dcdcdc;
+  height: calc(100% - 1rem); }
 
 .middle-section .social-links {
-  height: calc(100% - 1rem);
-  margin-top: 1rem; }
+  height: calc(96.8% - 1rem); }
 
 .archive-search {
   margin-bottom: 20px; }
