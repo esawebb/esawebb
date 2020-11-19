@@ -1,4 +1,4 @@
-Django==1.11.21
+Django==2.2.16
 
 # Authenticates against an LDAP service
 django-auth-ldap==1.7.0
