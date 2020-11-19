@@ -230,6 +230,14 @@ body {
     &__logo {
       img {
         margin-top: 5px;
+        width: 70px;
+        height: 70px;
+
+        @media (min-width: $mobile-breakpoint) {
+          margin-top: 10px;
+          width: 100px;
+          height: 100px;
+        }
       }
     }
 
@@ -265,6 +273,12 @@ body {
 				top: 20px;
 			}
 		}
+
+    .main-menu {
+      @media (min-width: $mobile-breakpoint) {
+        margin-left: 100px;
+      }
+    }
 	}
 }
 
