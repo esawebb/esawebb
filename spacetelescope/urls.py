@@ -61,8 +61,8 @@ urlpatterns += [
     url( r'^admin/doc/', include( 'django.contrib.admindocs.urls' )),
     # url( r'^admin/shop/', include( 'djangoplicity.archives.contrib.satchmo.urls_admin' ) ),
     # url( r'^admin/shop/', include(adminshop_site.urls), { 'extra_context': { 'ADMINSHOP_SITE': True } } ),
-    url( r'^admin/system/', include(adminlogs_site.urls), { 'extra_context': { 'ADMINLOGS_SITE': True }  } ),
-    url( r'^admin/', include(admin_site.urls), { 'extra_context': { 'ADMIN_SITE': True }  } ),
+    url( r'^admin/system/', adminlogs_site.urls, { 'extra_context': { 'ADMINLOGS_SITE': True }  } ),
+    url( r'^admin/', admin_site.urls, { 'extra_context': { 'ADMIN_SITE': True }  } ),
     url( r'^admin/import/', include('djangoplicity.archives.importer.urls') ),
     url( r'^admin/', include('djangoplicity.metadata.wtmlimport.urls'), { 'extra_context': { 'ADMIN_SITE': True }  } ),
     url( r'^public/djangoplicity/admin/reportsdetails/', include( 'djangoplicity.reports.urls' ) ),
@@ -128,12 +128,12 @@ urlpatterns += [
     url( r'^rss/hubblecasthd_amp.xml$', RedirectView.as_view(url='http://feeds.feedburner.com/hubblecast/') ),
 
     # User authentication
-    url( r'^login/$', django.contrib.auth.views.login, { 'template_name': 'login.html' } ),
-    url( r'^logout/$', django.contrib.auth.views.logout, { 'template_name': 'logout.html' } ),
-    url( r'^password_reset/$', django.contrib.auth.views.password_reset, { 'email_template_name': 'registration/password_reset_email.txt' }, name='password_reset' ),
-    url( r'^password_reset/done/$', django.contrib.auth.views.password_reset_done, name='password_reset_done' ),
-    url( r'^reset/(?P<uidb36>[0-9A-Za-z]+)-(?P<token>.+)/$', django.contrib.auth.views.password_reset_confirm, name='django.contrib.auth.views.password_reset_confirm' ),
-    url( r'^reset/done/$', django.contrib.auth.views.password_reset_complete, name='password_reset_complete' ),
+    url( r'^login/$', django.contrib.auth.views.LoginView.as_view(template_name='login.html') ),
+    url( r'^logout/$', django.contrib.auth.views.LogoutView.as_view(template_name='logout.html') ),
+    url( r'^password_reset/$', django.contrib.auth.views.PasswordResetView.as_view(email_template_name='registration/password_reset_email.txt'), name='password_reset' ),
+    url( r'^password_reset/done/$', django.contrib.auth.views.PasswordResetDoneView.as_view(), name='password_reset_done' ),
+    url( r'^reset/(?P<uidb36>[0-9A-Za-z]+)-(?P<token>.+)/$', django.contrib.auth.views.PasswordResetConfirmView.as_view(), name='django.contrib.auth.views.password_reset_confirm' ),
+    url( r'^reset/done/$', django.contrib.auth.views.PasswordResetCompleteView.as_view(), name='password_reset_complete' ),
 
     # Shop
     # url( r'^shop/terms/', RedirectView.as_view(url='/shop/terms_conditions/'), name='shop_terms' ),

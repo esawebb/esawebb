@@ -18,7 +18,7 @@ class TestFrontPageApp(TestCase):
         # first hubblecast with use_youtube = True
         response = self.client.get('/')
 
-        self.assertContains(response, 'Announcements')
+        self.assertContains(response, "What's New")
         self.assertContains(response, youtube_only_html, html=True)
 
         # first hubblecast with use_youtube = False

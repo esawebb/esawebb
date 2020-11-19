@@ -11,7 +11,10 @@
     {% if info.metadata %}
         <table>
         {% for metadata in info.metadata %}
-            {% if metadata.field_value %}<tr><td class="title">{{ metadata.field_name|capfirst }}:</td><td>{{ metadata.field_value }}</td></tr>{% endif %}
+            {% if metadata.field_value %}
+                {% trans metadata.field_name as field_name %}
+                <tr><td class="title">{{ field_name|capfirst }}:</td><td>{{ metadata.field_value }}</td></tr>
+            {% endif %}
         {% endfor %}
         </table>
     {% endif %}
