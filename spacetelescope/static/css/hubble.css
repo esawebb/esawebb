@@ -5320,7 +5320,14 @@ body {
       .navbar-general-wrapper .navbar-general {
         height: 118px; } }
     .navbar-general-wrapper .navbar-general__logo img {
-      margin-top: 5px; }
+      margin-top: 5px;
+      width: 70px;
+      height: 70px; }
+      @media (min-width: 1025px) {
+        .navbar-general-wrapper .navbar-general__logo img {
+          margin-top: 10px;
+          width: 100px;
+          height: 100px; } }
     .navbar-general-wrapper .navbar-general .sprites-title {
       margin-top: 20px; }
       @media (max-width: 1025px) {
@@ -5344,6 +5351,9 @@ body {
       @media (min-width: 1025px) {
         .navbar-general-wrapper .navbar-general .toplogo {
           top: 20px; } }
+    @media (min-width: 1025px) {
+      .navbar-general-wrapper .navbar-general .main-menu {
+        margin-left: 100px; } }
 
 #sitemap ul {
   padding-left: 20px; }

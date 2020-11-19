@@ -47,3 +47,7 @@ makemessages:
 
 compilemessages:
 	docker exec -it hubble django-admin compilemessages
+
+sass:
+	node-sass ./components/scss/hubble.scss ./spacetelescope/static/css/hubble.css
+
