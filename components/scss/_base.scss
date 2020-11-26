@@ -1,3 +1,6 @@
+$logo-min-size: 70px;
+$logo-max-size: 100px;
+
 body {
 	position: relative;
 }
@@ -230,13 +233,13 @@ body {
     &__logo {
       img {
         margin-top: 5px;
-        width: 70px;
-        height: 70px;
+        width: $logo-min-size;
+        height: $logo-min-size;
 
         @media (min-width: $mobile-breakpoint) {
           margin-top: 10px;
-          width: 100px;
-          height: 100px;
+          width: $logo-max-size;
+          height: $logo-max-size;
         }
       }
     }
@@ -276,7 +279,7 @@ body {
 
     .main-menu {
       @media (min-width: $mobile-breakpoint) {
-        margin-left: 100px;
+        margin-left: calc(#{$logo-max-size} + 20px);
       }
     }
 	}
