@@ -14,11 +14,13 @@ class TestFrontPageApp(TestCase):
 
     def test_homepage(self):
         youtube_only_html = '<div class="youtube-wrapper"><div id="youtube-player"></div></div>'
+        homepage_sections = ['What\'s New', 'Social Media', 'Subscribe to Hubble']
 
         # first hubblecast with use_youtube = True
         response = self.client.get('/')
 
-        self.assertContains(response, 'Announcements')
+        for section in homepage_sections:
+            self.assertContains(response, section)
         self.assertContains(response, youtube_only_html, html=True)
 
         # first hubblecast with use_youtube = False
