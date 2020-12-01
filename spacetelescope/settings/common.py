@@ -671,8 +671,8 @@ CELERY_WORKER_HIJACK_ROOT_LOGGER = False
 CELERY_TASK_ALWAYS_EAGER = False
 
 # File to save revoked tasks across workers restart
-CELERY_WORKER_STATE_DB = "%s/tmp/celery_states" % ROOT
-CELERY_BEAT_SCHEDULE_FILENAME = '%s/tmp/celerybeat_schedule' % ROOT
+CELERY_WORKER_STATE_DB = os.path.join(TMP_DIR, 'celery_states')
+CELERY_BEAT_SCHEDULE_FILENAME = os.path.join(TMP_DIR, 'celerybeat_schedule')
 
 # Define Celery periodic tasks
 CELERY_BEAT_SCHEDULE = {

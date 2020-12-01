@@ -77,7 +77,7 @@ CACHES = {
 ##########
 # CELERY #
 ##########
-CELERY_BROKER_URL = 'amqp://guest:guest@broker:5672/'
+CELERY_BROKER_URL = 'amqp://hubble:hubble@broker:5672/'
 
 # Avoid infinite wait times and retries
 CELERY_BROKER_TRANSPORT_OPTIONS = {
