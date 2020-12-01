@@ -7,7 +7,6 @@ x-common: &common
   build: .
   environment:
     ENVIRONMENT: "dev"
-    URLS_BASEPATH: "public"
   restart: "no"
   volumes:
     - ./local:/home/hubbleadm/local
@@ -23,7 +22,7 @@ services:
       - web
     volumes:
       # Read only config volume
-      - ./config/nginx-dev:/etc/nginx/conf.d:ro
+      - ./config/nginx-dev-server:/etc/nginx/conf.d:ro
       - ./config/nginx-common/snippets:/etc/nginx/snippets:ro
       - ./config/nginx-auth:/etc/nginx/auth
     ports:
