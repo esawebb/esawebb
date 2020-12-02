@@ -670,6 +670,11 @@ $default-section-height: 307px;
 }
 
 .susbcribe-to-hubble {
+
+  #subscribe-carousel-wrapper {
+    border: 1px solid $border-grey;
+  }
+
   .row {
     margin-top: 0;
 

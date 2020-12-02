@@ -5353,7 +5353,7 @@ body {
           top: 20px; } }
     @media (min-width: 1025px) {
       .navbar-general-wrapper .navbar-general .main-menu {
-        margin-left: 100px; } }
+        margin-left: calc(100px + 20px); } }
 
 #sitemap ul {
   padding-left: 20px; }
@@ -6073,6 +6073,9 @@ body {
     color: #333333;
     min-height: 56px; }
 
+.susbcribe-to-hubble #subscribe-carousel-wrapper {
+  border: 1px solid #dcdcdc; }
+
 .susbcribe-to-hubble .row {
   margin-top: 0; }
   .susbcribe-to-hubble .row #newsletters-link, .susbcribe-to-hubble .row #subscribe-link {
@@ -6100,7 +6103,7 @@ body {
   height: calc(100% - 1rem); }
 
 .middle-section .social-links {
-  height: calc(96.8% - 1rem); }
+  height: calc(100% - 4rem); }
 
 .archive-search {
   margin-bottom: 20px; }
