@@ -9,20 +9,18 @@ x-common: &common
     ENVIRONMENT: "dev"
   restart: "no"
   volumes:
+    - media:/home/hubbleadm/media
+    - import:/home/hubbleadm/import
     - ./local:/home/hubbleadm/local
     - ./docs/static:/home/hubbleadm/docs/static
     - ./scripts:/home/hubbleadm/scripts
 
 services:
   nginx:
-    image: nginx:1.17
-    container_name: hubble-nginx
     restart: always
-    depends_on:
-      - web
     volumes:
       # Read only config volume
-      - ./config/nginx-dev-server:/etc/nginx/conf.d:ro
+      - ./config/nginx-devserver:/etc/nginx/conf.d:ro
       - ./config/nginx-common/snippets:/etc/nginx/snippets:ro
       - ./config/nginx-auth:/etc/nginx/auth
     ports:
@@ -31,6 +29,7 @@ services:
   web:
     <<: *common
     depends_on:
+      - db
       - cache
     command: ["./scripts/command-devserver.sh"]
     expose:
@@ -38,6 +37,9 @@ services:
 
   broker:
     restart: "no"
+    environment:
+      RABBITMQ_DEFAULT_USER: hubble
+      RABBITMQ_DEFAULT_PASS: hubble
 
   celery: *common
 
@@ -56,6 +58,8 @@ services:
     hostname: cache
 
   db:
+    image: postgres:10.5
+    container_name: hubble-db
     restart: "no"
     environment:
       POSTGRES_DB: hubble
@@ -63,3 +67,10 @@ services:
       POSTGRES_PASSWORD: hubble
     expose:
       - "5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+volumes:
+  pgdata:
+  media:
+  import:
