@@ -27,6 +27,8 @@ services:
       - db
     volumes:
       - statics:/home/noirlabadmin/static
+    expose:
+      - "8000"
 
   broker:
     image: rabbitmq:3.8.3

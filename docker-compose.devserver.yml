@@ -32,8 +32,6 @@ services:
       - db
       - cache
     command: ["./scripts/command-devserver.sh"]
-    expose:
-      - "8000"
 
   broker:
     restart: "no"
