@@ -154,11 +154,15 @@ TIME_FORMAT = ugettext('H:i T')
 YEAR_MONTH_FORMAT = ugettext('F Y')
 WIDGET_FORMAT = ugettext("j/m/Y")
 
-###############
-# MEDIA SETUP #
-###############
-MEDIA_ROOT = "%s/docs/static/" % ROOT
-MEDIA_URL = "/static/"
+# MEDIA
+MEDIA_ROOT = os.path.join(ROOT, 'media')
+MEDIA_URL = "/media/"
+
+# STATIC FILES (CSS, JavaScript, Images)
+# See: https://docs.djangoproject.com/en/1.11/howto/static-files/
+STATIC_ROOT = os.path.join(ROOT, 'static')
+STATIC_URL = '/static/'
+
 
 # URL prefix for admin media -- CSS, JavaScript and images. Make sure to use a
 # trailing slash.
@@ -170,8 +174,6 @@ DJANGOPLICITY_MEDIA_ROOT = "%s/static" % DJANGOPLICITY_ROOT
 
 MIDENTIFY_PATH = '/usr/bin/midentify'
 
-STATIC_ROOT = "%s/static/djp/" % ROOT
-STATIC_URL = "/static/djp/"
 
 ##########
 # CACHE  #
@@ -995,8 +997,16 @@ RECAPTCHA_PRIVATE_KEY = ''
 #
 # Pipeline configuration (CSS/JS packing)
 #
-
-STATICFILES_STORAGE = 'djangoplicity.utils.storage.PipelineManifestStorage'
+# Only config this for the docker web service, not flower, celery, etc, to avoid:
+# ValueError: Missing staticfiles manifest entry for
+# And because the web service is the only that collect statics before
+if os.environ.get('SERVICE_TYPE') == 'web':
+    STATICFILES_STORAGE = 'djangoplicity.utils.storage.PipelineManifestStorage'
+    STATICFILES_FINDERS = (
+        'django.contrib.staticfiles.finders.FileSystemFinder',
+        'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+        'pipeline.finders.PipelineFinder',
+    )
 
 # We split the CSS into main and extras to load the more important first
 # and the rest in the end. This also solves a problem with IE9 which stops
@@ -1062,12 +1072,6 @@ PIPELINE = {
     'JS_COMPRESSOR': 'pipeline.compressors.uglifyjs.UglifyJSCompressor',
     'DISABLE_WRAPPER': True,
 }
-
-STATICFILES_FINDERS = (
-    'django.contrib.staticfiles.finders.FileSystemFinder',
-    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
-    'pipeline.finders.PipelineFinder',
-)
 
 # Required since Django 1.5:
 ALLOWED_HOSTS = [
