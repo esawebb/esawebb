@@ -96,9 +96,6 @@ MANAGERS = ADMINS
 
 SERVE_STATIC_MEDIA = False
 
-# Make this unique, and don't share it with anybody.
-SECRET_KEY = "g6ymvx$i1sv4k*g+nwfnx*3a1g&)^i6r9n6g4=f_$x^u(kwt8s"
-
 
 ##################
 # DATABASE SETUP #
@@ -1072,13 +1069,6 @@ PIPELINE = {
     'JS_COMPRESSOR': 'pipeline.compressors.uglifyjs.UglifyJSCompressor',
     'DISABLE_WRAPPER': True,
 }
-
-# Required since Django 1.5:
-ALLOWED_HOSTS = [
-    'localhost',
-    '.spacetelescope.org',
-    '.eso.org',
-]
 
 # Required since Django 1.6:
 TEST_RUNNER = 'django.test.runner.DiscoverRunner'

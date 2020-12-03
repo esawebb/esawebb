@@ -3,6 +3,17 @@ from .partials.util import get_secret
 import copy
 import dj_database_url
 
+
+SECRET_KEY = get_secret('DJANGO_SECRET_KEY')
+
+ALLOWED_HOSTS = [
+    '.esahubble.org',
+    '.spacetelescope.org'
+]
+
+# Required to import a big number of images using the admin import form
+DATA_UPLOAD_MAX_NUMBER_FIELDS = 200000
+
 # CACHES = {
 #     'default': {
 #         'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
@@ -23,7 +34,7 @@ if get_secret('DATABASE_URL'):
 
 EMAIL_HOST = ''
 EMAIL_PORT = '25'
-EMAIL_SUBJECT_PREFIX = '[SPACETELESCOPE]'
+EMAIL_SUBJECT_PREFIX = '[ESA/HUBBLE]'
 
 ARCHIVE_AUTO_RESOURCE_DELETION = True
 
