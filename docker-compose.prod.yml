@@ -1,0 +1,47 @@
+version: "3.4"
+
+# PRODUCTION CONFIG: use it like this 'docker-compose -f docker-compose.yml -f docker-compose.prod.yml up'
+# See: https://docs.docker.com/compose/extends/
+
+x-common: &common
+  build: .
+  environment:
+    ENVIRONMENT: "prod"
+    # The following variables are taken directly from shell env variables (Keep them empty)
+    DJANGO_SECRET_KEY:
+    DATABASE_URL:
+    RABBITMQ_USER:
+    RABBITMQ_PASS:
+  # volumes:
+    # - /mnt/volume_sfo2_01/web/media:/home/noirlabadmin/media
+    # - /mnt/volume_sfo2_01/web/import:/home/noirlabadmin/import
+    # - /mnt/volume_sfo2_01/web/tmp:/home/noirlabadmin/tmp
+    # - ./config/youtube:/home/noirlabadmin/config/youtube
+
+services:
+  nginx:
+    volumes:
+      # Read only config volume
+      - ./config/nginx-prod:/etc/nginx/conf.d:ro
+      - ./config/nginx-common/snippets:/etc/nginx/snippets:ro
+      # - /mnt/volume_sfo2_01/web/media:/home/noirlabadmin/media:ro
+    ports:
+      - "80:80"
+
+  web:
+    <<: *common
+    command: ["./scripts/command-prod.sh"]
+
+  broker:
+    environment:
+      RABBITMQ_DEFAULT_USER: ${RABBITMQ_USER}
+      RABBITMQ_DEFAULT_PASS: ${RABBITMQ_PASS}
+
+  celery: *common
+
+  flower:
+    <<: *common
+    ports:
+      - "5555:5555" # TODO: better to use Nginx as a reverse proxy of this
+
+  beat: *common
