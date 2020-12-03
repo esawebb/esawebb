@@ -71,3 +71,117 @@ or
 ```
 make demofixture
 ```
+
+## Deployment and Production
+
+### Prerequisites
+
+The production environment requires certain configuration before deploying the docker containers, such as the database,
+the Nginx reverse proxy and the volumes.
+
+#### Storage Volume
+
+The system requires a big amount of storage size for the media archive, therefore the containers are configured to store
+them in a volume with enough size, currently the big volume should be located here:
+
+```
+/mnt/volume_fra1_01
+```
+
+And the subdirectory required by the project is:
+
+```
+/mnt/volume_fra1_01/web
+```
+
+**IMPORTANT:** The volume's subdirectory owner should be the same user as in the docker containers, currently `hubbleadm`,
+the GUI and UID should be `2000`, otherwise the containers won't have enough permissions to read/write to the volume,
+then the following commands may be needed:
+
+```
+sudo groupadd -g 2000 hubbleadm
+sudo useradd -u 2000 -g hubbleadm --create-home hubbleadm
+sudo mkdir /mnt/volume_fra1_01/web/
+sudo chown -R hubbleadm:hubbleadm /mnt/volume_fra1_01/web/
+```
+> This command: `sudo chown -R hubbleadm:hubbleadm /mnt/volume_fra1_01/web/` may be required after the containers startup again so that the permissions of the created volumes are set correctly
+
+#### Environment variables
+
+The system is configured using environment variables, you can either set them in the shell or in a file called `.env`
+located next to the `docker-compose.yml` file, the content of the `.env` file should look like this:
+
+```
+RABBITMQ_USER=my_user
+RABBITMQ_PASS=my_password
+```
+
+> **NOTE:** Shell environment variables have a higher priority than the `.env` file 
+
+The following is the list of environment variables that are required or optional before deploying the system:
+
+| Variable | Description | Required | Default |
+| :--- | :--- | :---: | :--- |
+| `DJANGO_SECRET_KEY` | Key used by Django for tokens like CSRF and cookies, it can be any secret key but it's recommended to generate it using https://djecrety.ir/ | **yes** | *None* |
+| `RABBITMQ_USER` | Custom username for the Rabbitmq broker | **yes** | *None* |
+| `RABBITMQ_PASS` | Custom password for the Rabbitmq broker | **yes** | *None* |
+
+#### Backing services
+
+As expected in a Twelve Factors App the following services needs to be configured using environment variables as well:
+
+| Service | Environment variable | Value | Example |
+| :--- | :---: | :--- | :--- |
+| Postgres Database | `DATABASE_URL` | `postgresql://<user>:<pass>@<host>:<port>/<dbname>` | `postgresql://admin:1234@hubble-db.com:5432/hubble?sslmode=require` |
+
+### Deployment
+
+When having all the prerequisites, clone the repository in the server, then deploy the containers with the command:
+```
+docker-compose -f docker-compose.yml -f docker-compose.prod.yml up -d --build
+```
+
+Or if `make` is installed:
+```
+make prod-up-build
+```
+
+That's it!. The system is available in the port `8000`, and can be proxied using `Nginx`
+
+#### Additional commands 
+
+In case of new updates pull the commits from the repository and run the same command of the previous step. 
+
+If the updates only changes the docker configuration just run:
+```
+docker-compose -f docker-compose.yml -f docker-compose.prod.yml up -d
+```
+or
+```
+make prod-up
+```
+
+To start the containers displaying the startup logs:
+```
+docker-compose -f docker-compose.yml -f docker-compose.prod.yml up
+```
+or
+```
+make prod-up-attached
+```
+> **NOTE:** The previous command attach the process to the terminal, 
+then pressing `Ctrl + C` is required to continue using it, but it also stops the containers
+
+#### Troubleshooting
+
+Most of the problems can be found while reading the docker logs of each container:
+```
+docker logs <container name>
+```
+
+Examples:
+```
+docker logs hubble
+docker logs hubble-celery
+docker logs hubble-broker
+```
