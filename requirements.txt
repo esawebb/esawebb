@@ -45,3 +45,6 @@ Pygments==2.5.2
 
 # PostgreSQL python client
 psycopg2-binary==2.8.5
+
+# For autoconfig database using DATABASE_URL env variable
+dj_database_url
