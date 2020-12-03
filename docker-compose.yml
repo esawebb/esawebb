@@ -23,10 +23,8 @@ services:
     restart: always
     environment:
       SERVICE_TYPE: "web"
-    depends_on:
-      - db
     volumes:
-      - statics:/home/noirlabadmin/static
+      - statics:/home/hubbleadm/static
     expose:
       - "8000"
 
