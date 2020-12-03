@@ -53,7 +53,17 @@ RUN apt-get update && apt-get install -y \
     mplayer \
     node-uglify
 
-RUN useradd --create-home hubbleadm
+RUN echo "Europe/Berlin" > /etc/timezone && \
+    rm /etc/localtime && \
+    ln -s /usr/share/zoneinfo/Europe/Berlin /etc/localtime && \
+    sed -i -e 's/# en_US.UTF-8 UTF-8/en_US.UTF-8 UTF-8/' /etc/locale.gen && \
+    locale-gen
+ENV LANG en_US.UTF-8
+ENV LC_ALL en_US.UTF-8
+
+RUN groupadd -g 2000 hubbleadm && \
+    useradd -u 2000 -g hubbleadm --create-home hubbleadm
+
 ENV USER_HOME=/home/hubbleadm
 WORKDIR $USER_HOME
 
