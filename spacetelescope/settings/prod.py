@@ -1,22 +1,25 @@
-import copy
-
 from .common import *
+from .partials.util import get_secret
+import copy
+import dj_database_url
 
-CACHES = {
-    'default': {
-        'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
-        'KEY_PREFIX': SHORT_NAME,
-        'LOCATION': [
-            '',
-            '',
-        ],
-        'TIMEOUT': 86400
+# CACHES = {
+#     'default': {
+#         'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
+#         'KEY_PREFIX': SHORT_NAME,
+#         'LOCATION': [
+#             '',
+#             '',
+#         ],
+#         'TIMEOUT': 86400
+#     }
+# }
+
+# DATABASE
+if get_secret('DATABASE_URL'):
+    DATABASES = {
+        'default': dj_database_url.config()
     }
-}
-
-DATABASES = copy.deepcopy(DATABASES)
-DATABASES['default']['HOST'] = ""
-DATABASES['default']['PASSWORD'] = ""
 
 EMAIL_HOST = ''
 EMAIL_PORT = '25'
@@ -31,7 +34,8 @@ LIVESETTINGS_OPTIONS[1]['SETTINGS']['PAYMENT_CONCARDIS']['LIVE'] = u'True'
 LIVE = 'True'
 ORDER_PREFIX = "hb"
 
-CELERY_BROKER_URL = ''
+# CELERY
+CELERY_BROKER_URL = 'amqp://{}:{}@broker:5672/'.format(get_secret('RABBITMQ_USER'), get_secret('RABBITMQ_PASS'))
 
 SOCIAL_FACEBOOK_TOKEN = ""
 SOCIAL_TWITTER_TUPLE = (
