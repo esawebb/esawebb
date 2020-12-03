@@ -12,11 +12,11 @@ x-common: &common
     DATABASE_URL:
     RABBITMQ_USER:
     RABBITMQ_PASS:
-  # volumes:
-    # - /mnt/volume_sfo2_01/web/media:/home/noirlabadmin/media
-    # - /mnt/volume_sfo2_01/web/import:/home/noirlabadmin/import
-    # - /mnt/volume_sfo2_01/web/tmp:/home/noirlabadmin/tmp
-    # - ./config/youtube:/home/noirlabadmin/config/youtube
+  volumes:
+    - /mnt/volume_fra1_01/web/media:/home/hubbleadm/media
+    - /mnt/volume_fra1_01/web/import:/home/hubbleadm/import
+    - /mnt/volume_fra1_01/web/tmp:/home/hubbleadm/tmp
+    # - ./config/youtube:/home/hubbleadm/config/youtube
 
 services:
   nginx:
@@ -24,7 +24,7 @@ services:
       # Read only config volume
       - ./config/nginx-prod:/etc/nginx/conf.d:ro
       - ./config/nginx-common/snippets:/etc/nginx/snippets:ro
-      # - /mnt/volume_sfo2_01/web/media:/home/noirlabadmin/media:ro
+      - /mnt/volume_fra1_01/web/media:/home/hubbleadm/media:ro
     ports:
       - "80:80"
 
