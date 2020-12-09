@@ -424,7 +424,7 @@ EMAIL_SUBJECT_PREFIX = '[SPACETELESCOPE-LOCAL]'
 ##################
 
 AUTHENTICATION_BACKENDS = (
-    'django_auth_ldap.backend.LDAPBackend',
+    # 'django_auth_ldap.backend.LDAPBackend',
     'django.contrib.auth.backends.ModelBackend',
 )
 #AUTH_PROFILE_MODULE = ''
@@ -435,6 +435,8 @@ LOGIN_REDIRECT_URL = '/'
 #############
 # LDAP AUTH #
 #############
+'''
+Disabled when migrated to esahubble.org
 import ldap
 from django_auth_ldap.config import LDAPSearch, ActiveDirectoryGroupType
 
@@ -483,7 +485,7 @@ AUTH_TKT_HTACCESS = '.esoacc'
 # AUTH_TKT_IGNOREIP = 'off'
 # AUTH_TKT_TIMEOUT_URL = ''
 # AUTH_TKT_FILEPERMS =
-
+'''
 
 #########
 # PAGES #
