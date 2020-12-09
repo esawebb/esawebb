@@ -769,6 +769,7 @@ SITE_DOMAIN = "www.spacetelescope.org"
 ###########
 # LOGGING #
 ###########
+'''
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
@@ -868,6 +869,7 @@ LOGGING = {
         },
     },
 }
+'''
 
 # ======================================================================
 # SITE SPECIFIC SECTIONS
