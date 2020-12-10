@@ -5328,6 +5328,10 @@ body {
           margin-top: 10px;
           width: 100px;
           height: 100px; } }
+    .navbar-general-wrapper .navbar-general__esa-logo img {
+      position: absolute;
+      top: 20px;
+      right: 0; }
     .navbar-general-wrapper .navbar-general .sprites-title {
       margin-top: 20px; }
       @media (max-width: 1025px) {
@@ -5821,7 +5825,7 @@ body {
       position: relative; }
       @media (min-width: 1025px) {
         #pr-carousel-wrapper #pr-carousel .slide {
-          height: 650px; } }
+          height: 600px; } }
       #pr-carousel-wrapper #pr-carousel .slide > a {
         display: block;
         height: 100%; }
