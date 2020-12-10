@@ -5328,6 +5328,10 @@ body {
           margin-top: 10px;
           width: 100px;
           height: 100px; } }
+    .navbar-general-wrapper .navbar-general__esa-logo img {
+      position: absolute;
+      top: 20px;
+      right: 0; }
     .navbar-general-wrapper .navbar-general .sprites-title {
       margin-top: 20px; }
       @media (max-width: 1025px) {
@@ -5353,7 +5357,7 @@ body {
           top: 20px; } }
     @media (min-width: 1025px) {
       .navbar-general-wrapper .navbar-general .main-menu {
-        margin-left: 100px; } }
+        margin-left: calc(100px + 20px); } }
 
 #sitemap ul {
   padding-left: 20px; }
@@ -5821,7 +5825,7 @@ body {
       position: relative; }
       @media (min-width: 1025px) {
         #pr-carousel-wrapper #pr-carousel .slide {
-          height: 650px; } }
+          height: 600px; } }
       #pr-carousel-wrapper #pr-carousel .slide > a {
         display: block;
         height: 100%; }
@@ -5999,7 +6003,7 @@ body {
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
-    width: 80%;
+    width: 90%;
     padding: 40px; }
     .frontpage-section .social-links .icons a {
       margin: 2px; }
@@ -6073,13 +6077,21 @@ body {
     color: #333333;
     min-height: 56px; }
 
-.susbcribe-to-hubble .row {
+.subscribe-to-hubble .border {
+  border: 1px solid #dcdcdc; }
+
+.subscribe-to-hubble .row {
   margin-top: 0; }
-  .susbcribe-to-hubble .row #newsletters-link, .susbcribe-to-hubble .row #subscribe-link {
+  .subscribe-to-hubble .row [class^="col-"]:not(:last-child) {
+    padding-right: 1rem; }
+    @media (max-width: 992px) {
+      .subscribe-to-hubble .row [class^="col-"]:not(:last-child) {
+        margin-bottom: 1rem; } }
+  .subscribe-to-hubble .row #newsletters-link, .subscribe-to-hubble .row #subscribe-link {
     text-align: center;
     line-height: 307px;
     background-color: #292929; }
-    .susbcribe-to-hubble .row #newsletters-link img, .susbcribe-to-hubble .row #subscribe-link img {
+    .subscribe-to-hubble .row #newsletters-link img, .subscribe-to-hubble .row #subscribe-link img {
       display: inline-block;
       height: auto;
       max-width: 100%;
@@ -6090,17 +6102,42 @@ body {
     display: flex;
     flex-wrap: wrap; } }
 
-.middle-section #newsletter-carousel-wrapper {
-  border: 1px solid #dcdcdc; }
-  .middle-section #newsletter-carousel-wrapper img {
-    width: 100%; }
-
-.middle-section #social-carousel-wrapper {
+.middle-section [id$="-carousel-wrapper"] {
   border: 1px solid #dcdcdc;
-  height: calc(100% - 1rem); }
+  margin-top: 1rem; }
 
-.middle-section .social-links {
-  height: calc(96.8% - 1rem); }
+.middle-section #newsletter-carousel-wrapper img {
+  width: 100%; }
+
+.middle-section #social-feeds-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: calc(100% - 1rem);
+  margin-top: 1rem; }
+  .middle-section #social-feeds-wrapper .social-feeds {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    overflow-x: auto; }
+    @media (min-width: 992px) {
+      .middle-section #social-feeds-wrapper .social-feeds {
+        flex-direction: column;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        overflow-x: visible; } }
+    .middle-section #social-feeds-wrapper .social-feeds .facebook-feeds, .middle-section #social-feeds-wrapper .social-feeds .twitter-feeds, .middle-section #social-feeds-wrapper .social-feeds .instagram-feeds {
+      height: calc(610px + 43px + 2px);
+      min-width: 304px;
+      text-align: center;
+      border: 1px solid #dcdcdc;
+      overflow-y: hidden; }
+      .middle-section #social-feeds-wrapper .social-feeds .facebook-feeds .section-header, .middle-section #social-feeds-wrapper .social-feeds .twitter-feeds .section-header, .middle-section #social-feeds-wrapper .social-feeds .instagram-feeds .section-header {
+        text-align: left;
+        border-bottom: 1px solid #dcdcdc; }
+      @media (max-width: 992px) {
+        .middle-section #social-feeds-wrapper .social-feeds .facebook-feeds:not(:last-child), .middle-section #social-feeds-wrapper .social-feeds .twitter-feeds:not(:last-child), .middle-section #social-feeds-wrapper .social-feeds .instagram-feeds:not(:last-child) {
+          margin-right: 10px; } }
 
 .archive-search {
   margin-bottom: 20px; }

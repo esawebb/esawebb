@@ -3,6 +3,10 @@
 $medium-dark: #292929;
 $default-section-height: 307px;
 
+$section-header-height: 43px;
+$social-feed-width: 304px;
+$social-feed-height: 610px;
+
 .frontpage-title {
 	text-transform: uppercase;
 	font-size: 16px;
@@ -62,7 +66,6 @@ $default-section-height: 307px;
 	span {
 		font-size: 20px;
 	}
-
 }
 
 .frontpage-slide-prev {
@@ -86,7 +89,6 @@ $default-section-height: 307px;
 }
 
 .frontpage-description {
-
 	&:hover {
 		background-color: $hubble-blue;
 		color: #fff;
@@ -344,7 +346,6 @@ $default-section-height: 307px;
 
 
 .frontpage-section {
-
 	.section-title {
 		@extend .frontpage-title;
 	}
@@ -357,7 +358,6 @@ $default-section-height: 307px;
 		border: 1px solid $border-grey;
 
 		#hubblecast-carousel {
-
 			&.slick-initialized .slide {
 				visibility: visible;
 			}
@@ -389,7 +389,7 @@ $default-section-height: 307px;
 			.hubblecast-description-jwplayer {
 				// The jwplayer somehow adds a few pixels, so we move the description
 				// up by a few pixles
-				@media (min-width: 992px) {
+				@media (min-width: $screen-md) {
 					margin-top: -4px;
 				}
 			}
@@ -400,7 +400,6 @@ $default-section-height: 307px;
 		border: 1px solid $border-grey;
 
 		#potw-carousel {
-
 			&:hover {
 				.potw-description {
 					@extend .frontpage-description-hover;
@@ -456,7 +455,6 @@ $default-section-height: 307px;
 		}
 
 		#highlight-carousel {
-
 			&.slick-initialized .slide {
 				visibility: visible;
 			}
@@ -512,7 +510,7 @@ $default-section-height: 307px;
       display: flex;
       justify-content: center;
       flex-wrap: wrap;
-      width: 80%;
+      width: 90%;
 			padding: 40px;
 
       a {
@@ -574,7 +572,6 @@ $default-section-height: 307px;
 		border: 1px solid $border-grey;
 
 		#top100-frontpage-carousel {
-
 			&:hover {
 				.top100-description {
 					@extend .frontpage-description-hover;
@@ -634,7 +631,6 @@ $default-section-height: 307px;
 	background-color: #fff;
 
 	&:hover {
-
 		.slogan-description {
 			background-color: $hubble-blue;
 			color: #fff;
@@ -669,9 +665,22 @@ $default-section-height: 307px;
 	}
 }
 
-.susbcribe-to-hubble {
+.subscribe-to-hubble {
+  .border {
+    border: 1px solid $border-grey;
+  }
+
   .row {
     margin-top: 0;
+
+    [class^="col-"]:not(:last-child) {
+      padding-right: 1rem;
+
+      @media (max-width: $screen-md) {
+        margin-bottom: 1rem;
+      }
+
+    }
 
     #newsletters-link, #subscribe-link {
       text-align: center;
@@ -689,26 +698,60 @@ $default-section-height: 307px;
 }
 
 .middle-section {
-  @media (min-width: 992px) {
+  @media (min-width: $screen-md) {
     display: flex;
     flex-wrap: wrap;
   }
 
-  #newsletter-carousel-wrapper {
+  [id$="-carousel-wrapper"] {
     border: 1px solid $border-grey;
+    margin-top: 1rem;
+  }
 
+  #newsletter-carousel-wrapper {
     img {
       width: 100%;
     }
   }
 
-  #social-carousel-wrapper {
-    border: 1px solid $border-grey;
+  #social-feeds-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     height: calc(100% - 1rem);
+    margin-top: 1rem;
 
-  }
+    .social-feeds {
+      display: flex;
+      align-items: center;
+      height: 100%;
+      overflow-x: auto;
 
-  .social-links {
-    height: calc(100% - 4rem);
+      @media (min-width: $screen-md) {
+        flex-direction: column;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        overflow-x: visible;
+      }
+
+      .facebook-feeds, .twitter-feeds, .instagram-feeds {
+        height: calc(#{$social-feed-height} + #{$section-header-height} + 2px);
+        min-width: $social-feed-width;
+        text-align: center;
+        border: 1px solid $border-grey;
+        overflow-y: hidden;
+
+        .section-header {
+          text-align: left;
+          border-bottom: 1px solid $border-grey;
+        }
+
+        @media (max-width: $screen-md) {
+          &:not(:last-child) {
+            margin-right: 10px;
+          }
+        }
+      }
+    }
   }
 }
