@@ -14,7 +14,7 @@
     <link href="http://www.spacetelescope.org/rss/feed.xml" rel="alternate" type="application/rss+xml" title="Hubble Space Telescope News">
     <link href='//fonts.googleapis.com/css?family=Open+Sans:400italic,600italic,400,600' rel='stylesheet' type='text/css'>
 
-    <title>TEST SITE: {% block site_title %}ESA/Hubble{% endblock %}</title>
+    <title>{% block site_title %}ESA/Hubble{% endblock %}</title>
 {% load pipeline %}
 {% stylesheet 'main' %}
     <!-- TODO: Verify why favicon in root static folder is not being loaded by collectstatics -->

@@ -3,7 +3,7 @@ from .partials.util import get_secret
 import copy
 import dj_database_url
 
-
+DEBUG = False
 SECRET_KEY = get_secret('DJANGO_SECRET_KEY')
 
 ALLOWED_HOSTS = [
