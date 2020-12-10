@@ -72,6 +72,17 @@ or
 make demofixture
 ```
 
+### Accessing Administration
+
+The django admin site of the public site can be accessed at `localhost:8000/admin`
+
+By default the development configuration creates a superuser with the following credentials:
+
+```
+Username: admin
+Password: admin
+```
+
 ## Deployment and Production
 
 ### Prerequisites
