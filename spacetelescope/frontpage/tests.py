@@ -14,7 +14,7 @@ class TestFrontPageApp(TestCase):
 
     def test_homepage(self):
         youtube_only_html = '<div class="youtube-wrapper"><div id="youtube-player"></div></div>'
-        homepage_sections = ['What\'s New', 'Social Media', 'Subscribe to Hubble']
+        homepage_sections = ['What\'s New', 'ESA/Hubble Facebook', 'Subscribe to Hubble News']
 
         # first hubblecast with use_youtube = True
         response = self.client.get('/')

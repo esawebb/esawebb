@@ -45,8 +45,8 @@
             <a href="/sitemap/">Site Map</a>
             <a href="/search/"><span class="fa fa-search"></span></a>
         </div>
-        <a href="http://www.esa.int">
-            <div class="sprites-esa-logo inlinesprite toplogo" title="ESA/Hubble"></div>
+        <a class="navbar-general__esa-logo" href="http://www.esa.int">
+            <img src="{% static 'images/esa-logo.png' %}" width="100px" alt="ESA logo">
         </a>
         {% load menus %}
         {% init_menu 'Main Menu' as main_menu %}
