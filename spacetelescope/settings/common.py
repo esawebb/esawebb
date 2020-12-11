@@ -575,7 +575,7 @@ VIDEOS_FORMATS_REMOVE = [
 RELEASE_LINK_PREFIX = "heic"
 
 DEFAULT_CREATOR = u"ESA/Hubble"
-DEFAULT_CREATOR_URL = "http://www.spacetelescope.org"
+DEFAULT_CREATOR_URL = "https://www.spacetelescope.org"
 DEFAULT_CONTACT_ADDRESS = u"Karl-Schwarzschild-Strasse 2"
 DEFAULT_CONTACT_CITY = u"Garching bei München"
 DEFAULT_CONTACT_STATE_PROVINCE = ""
