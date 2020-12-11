@@ -5357,7 +5357,7 @@ body {
           top: 20px; } }
     @media (min-width: 1025px) {
       .navbar-general-wrapper .navbar-general .main-menu {
-        margin-left: calc(100px + 20px); } }
+        margin-left: 120px; } }
 
 #sitemap ul {
   padding-left: 20px; }
@@ -6127,7 +6127,7 @@ body {
         justify-content: space-between;
         overflow-x: visible; } }
     .middle-section #social-feeds-wrapper .social-feeds .facebook-feeds, .middle-section #social-feeds-wrapper .social-feeds .twitter-feeds, .middle-section #social-feeds-wrapper .social-feeds .instagram-feeds {
-      height: calc(610px + 43px + 2px);
+      height: 655px;
       min-width: 304px;
       text-align: center;
       border: 1px solid #dcdcdc;

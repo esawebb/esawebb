@@ -735,7 +735,7 @@ $social-feed-height: 610px;
       }
 
       .facebook-feeds, .twitter-feeds, .instagram-feeds {
-        height: calc(#{$social-feed-height} + #{$section-header-height} + 2px);
+        height: $social-feed-height + $section-header-height + 2px;
         min-width: $social-feed-width;
         text-align: center;
         border: 1px solid $border-grey;
