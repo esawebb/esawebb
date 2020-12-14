@@ -45,13 +45,15 @@ FROM python:2.7-slim-buster
 # - ffmpeg and mplayer are required for videos processing
 # - imagemagick is used for process images and generate derivatives
 # - libldap-2.4-2 are runtime libraries for the OpenLDAP use by django-auth-ldap
+# - libexempi-dev is required by python-avm-library(libavm) and python-xmp-toolkit
 RUN apt-get update && apt-get install -y \
     cssmin \
     ffmpeg \
     imagemagick-6.q16 \
     libldap-2.4-2 \
     mplayer \
-    node-uglify
+    node-uglify \
+    libexempi-dev
 
 RUN useradd --create-home hubbleadm
 ENV USER_HOME=/home/hubbleadm
