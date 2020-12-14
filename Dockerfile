@@ -1,7 +1,7 @@
 #############################################
 # BUILDER IMAGE: Only for building the code #
 #############################################
-FROM python:3.8 AS builder
+FROM python:3.8-slim-buster AS builder
 # Follow Dockerfile RUN best practices (Keep packages organized alphabetically):
 # See: https://docs.docker.com/develop/develop-images/dockerfile_best-practices/#run
 # - gcc, libsasl2-dev, libsasl2-dev, libssl-dev and python-dev are required by django-auth-ldap
