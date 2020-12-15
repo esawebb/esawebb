@@ -50,4 +50,4 @@ psycopg2-binary==2.8.5
 dj_database_url
 
 # Improved Python shell
-ipython=7.19.0
+ipython==7.19.0
