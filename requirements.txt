@@ -48,3 +48,6 @@ psycopg2-binary==2.8.5
 
 # For autoconfig database using DATABASE_URL env variable
 dj_database_url
+
+# Improved Python shell
+ipython=7.19.0
