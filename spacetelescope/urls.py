@@ -24,11 +24,11 @@ from djangoplicity.media.options import ImageOptions, VideoOptions, PictureOfThe
 from djangoplicity.newsletters.models import Newsletter
 from djangoplicity.newsletters.options import NewsletterOptions
 from djangoplicity.pages.views import view_page
-from djangoplicity.products2.models import Calendar, Logo, Exhibition, Sticker, PostCard, \
+from djangoplicity.products2.models import Brochure, Calendar, Logo, Exhibition, Sticker, PostCard, \
     PrintedPoster, ConferencePoster, Merchandise, Presentation, Model3d, \
     OnlineArtAuthor, Application, Media, OnlineArt, PressKit
 
-from djangoplicity.products2.options import CalendarOptions, LogoOptions, ExhibitionOptions, \
+from djangoplicity.products2.options import BrochureOptions, CalendarOptions, LogoOptions, ExhibitionOptions, \
     StickerOptions, PostCardOptions, PrintedPosterOptions, ConferencePosterOptions, \
     MerchandiseOptions, PresentationOptions, Model3dOptions, OnlineArtAuthorOptions, \
     ApplicationOptions, MediaOptions, OnlineArtOptions, PressKitOptions
@@ -101,6 +101,7 @@ urlpatterns += [
     # url( r'^about/further_information/techdocs/', include('djangoplicity.products.urls.techdocs'), { 'model': TechnicalDocument, 'options': TechnicalDocumentOptions } ),
 
     # Products
+    url( r'^about/further_information/brochures/', include('djangoplicity.products2.urls.brochures'), {'model': Brochure, 'options': BrochureOptions} ),
     url( r'^products/models3d/', include('djangoplicity.products2.urls.models3d'), { 'model': Model3d, 'options': Model3dOptions, 'translate': True } ),
     url( r'^products/calendars/', include('djangoplicity.products2.urls.calendars'), { 'model': Calendar, 'options': CalendarOptions, 'translate': True  } ),
     url( r'^products/applications/', include('djangoplicity.products2.urls.applications'), { 'model': Application, 'options': ApplicationOptions } ),
