@@ -528,6 +528,7 @@ ARCHIVES = (
     ('djangoplicity.products2.models.Exhibition', 'djangoplicity.products2.options.ExhibitionOptions'),
     ('djangoplicity.products2.models.Sticker', 'djangoplicity.products2.options.StickerOptions'),
     ('djangoplicity.products2.models.PostCard', 'djangoplicity.products2.options.PostCardOptions'),
+    ('djangoplicity.products2.models.PressKit', 'djangoplicity.products2.options.PressKitOptions'),
     ('djangoplicity.products2.models.PrintedPoster', 'djangoplicity.products2.options.PrintedPosterOptions'),
     ('djangoplicity.products2.models.ConferencePoster', 'djangoplicity.products2.options.ConferencePosterOptions'),
     ('djangoplicity.products2.models.Merchandise', 'djangoplicity.products2.options.MerchandiseOptions'),

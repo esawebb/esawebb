@@ -26,12 +26,12 @@ from djangoplicity.newsletters.options import NewsletterOptions
 from djangoplicity.pages.views import view_page
 from djangoplicity.products2.models import Calendar, Logo, Exhibition, Sticker, PostCard, \
     PrintedPoster, ConferencePoster, Merchandise, Presentation, Model3d, \
-    OnlineArtAuthor, Application, Media, OnlineArt
+    OnlineArtAuthor, Application, Media, OnlineArt, PressKit
 
 from djangoplicity.products2.options import CalendarOptions, LogoOptions, ExhibitionOptions, \
     StickerOptions, PostCardOptions, PrintedPosterOptions, ConferencePosterOptions, \
     MerchandiseOptions, PresentationOptions, Model3dOptions, OnlineArtAuthorOptions, \
-    ApplicationOptions, MediaOptions, OnlineArtOptions
+    ApplicationOptions, MediaOptions, OnlineArtOptions, PressKitOptions
 from djangoplicity.releases.models import Release
 from djangoplicity.releases.options import ReleaseOptions
 from djangoplicity.science.models import ScienceAnnouncement
@@ -111,6 +111,8 @@ urlpatterns += [
     url( r'^products/postcards/', include('djangoplicity.products2.urls.postcards'), { 'model': PostCard, 'options': PostCardOptions, 'translate': True  } ),
     url( r'^products/presentations/', include('djangoplicity.products2.urls.presentations'), { 'model': Presentation, 'options': PresentationOptions, 'translate': True  } ),
     url( r'^products/print-posters/', include('djangoplicity.products2.urls.print_posters'), { 'model': PrintedPoster, 'options': PrintedPosterOptions, 'translate': True  } ),
+    url(r'^press/kits/', include('djangoplicity.products2.urls.presskits'), {'model': PressKit, 'options': PressKitOptions}),
+
     url( r'^products/media/', include('djangoplicity.products2.urls.media'), { 'model': Media, 'options': MediaOptions } ),
     url( r'^products/stickers/', include('djangoplicity.products2.urls.stickers'), { 'model': Sticker, 'options': StickerOptions, 'translate': True  } ),
     url( r'^products/art/', include('djangoplicity.products2.urls.art'), { 'model': OnlineArt, 'options': OnlineArtOptions } ),
