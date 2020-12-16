@@ -524,6 +524,7 @@ ARCHIVES = (
     ('djangoplicity.products2.models.Model3d', 'djangoplicity.products2.options.Model3dOptions'),
     ('djangoplicity.products2.models.Calendar', 'djangoplicity.products2.options.CalendarOptions'),
     ('djangoplicity.products2.models.Application', 'djangoplicity.products2.options.ApplicationOptions'),
+    ('djangoplicity.products2.models.Brochure', 'djangoplicity.products2.options.BrochureOptions'),
     ('djangoplicity.products2.models.Logo', 'djangoplicity.products2.options.LogoOptions'),
     ('djangoplicity.products2.models.Exhibition', 'djangoplicity.products2.options.ExhibitionOptions'),
     ('djangoplicity.products2.models.Sticker', 'djangoplicity.products2.options.StickerOptions'),
