@@ -153,12 +153,12 @@ WIDGET_FORMAT = ugettext("j/m/Y")
 
 # MEDIA
 MEDIA_ROOT = os.path.join(ROOT, 'media')
-MEDIA_URL = "/media/"
+MEDIA_URL = '/media/'
 
 # STATIC FILES (CSS, JavaScript, Images)
 # See: https://docs.djangoproject.com/en/1.11/howto/static-files/
 STATIC_ROOT = os.path.join(ROOT, 'static')
-STATIC_URL = '/static/'
+STATIC_URL = '/assets/'
 
 
 # URL prefix for admin media -- CSS, JavaScript and images. Make sure to use a
