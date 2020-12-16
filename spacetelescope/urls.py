@@ -112,7 +112,7 @@ urlpatterns += [
     url( r'^products/merchandise/', include('djangoplicity.products2.urls.merchandise'), { 'model': Merchandise, 'options': MerchandiseOptions, 'translate': True  } ),
     url( r'^products/postcards/', include('djangoplicity.products2.urls.postcards'), { 'model': PostCard, 'options': PostCardOptions, 'translate': True  } ),
     url( r'^products/presentations/', include('djangoplicity.products2.urls.presentations'), { 'model': Presentation, 'options': PresentationOptions, 'translate': True  } ),
-    url( r'^products/print-posters/', include('djangoplicity.products2.urls.print_posters'), { 'model': PrintedPoster, 'options': PrintedPosterOptions, 'translate': True  } ),
+    url( r'^products/print_posters/', include('djangoplicity.products2.urls.print_posters'), { 'model': PrintedPoster, 'options': PrintedPosterOptions, 'translate': True  } ),
     url(r'^press/kits/', include('djangoplicity.products2.urls.presskits'), {'model': PressKit, 'options': PressKitOptions}),
 
     url( r'^products/media/', include('djangoplicity.products2.urls.media'), { 'model': Media, 'options': MediaOptions } ),
