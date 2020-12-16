@@ -21,17 +21,18 @@ from djangoplicity.announcements.models import Announcement, WebUpdate
 from djangoplicity.announcements.options import AnnouncementOptions, WebUpdateOptions
 from djangoplicity.media.models import Image, Video, PictureOfTheWeek, ImageComparison
 from djangoplicity.media.options import ImageOptions, VideoOptions, PictureOfTheWeekOptions, ImageComparisonOptions
+from djangoplicity.menus.views import sitemap
 from djangoplicity.newsletters.models import Newsletter
 from djangoplicity.newsletters.options import NewsletterOptions
 from djangoplicity.pages.views import view_page
-from djangoplicity.products2.models import Calendar, Logo, Exhibition, Sticker, PostCard, \
+from djangoplicity.products2.models import Brochure, Calendar, Logo, Exhibition, Sticker, PostCard, \
     PrintedPoster, ConferencePoster, Merchandise, Presentation, Model3d, \
-    OnlineArtAuthor, Application, Media, OnlineArt
+    OnlineArtAuthor, Application, Media, OnlineArt, PressKit
 
-from djangoplicity.products2.options import CalendarOptions, LogoOptions, ExhibitionOptions, \
+from djangoplicity.products2.options import BrochureOptions, CalendarOptions, LogoOptions, ExhibitionOptions, \
     StickerOptions, PostCardOptions, PrintedPosterOptions, ConferencePosterOptions, \
     MerchandiseOptions, PresentationOptions, Model3dOptions, OnlineArtAuthorOptions, \
-    ApplicationOptions, MediaOptions, OnlineArtOptions
+    ApplicationOptions, MediaOptions, OnlineArtOptions, PressKitOptions
 from djangoplicity.releases.models import Release
 from djangoplicity.releases.options import ReleaseOptions
 from djangoplicity.science.models import ScienceAnnouncement
@@ -101,6 +102,7 @@ urlpatterns += [
     # url( r'^about/further_information/techdocs/', include('djangoplicity.products.urls.techdocs'), { 'model': TechnicalDocument, 'options': TechnicalDocumentOptions } ),
 
     # Products
+    url( r'^about/further_information/brochures/', include('djangoplicity.products2.urls.brochures'), {'model': Brochure, 'options': BrochureOptions} ),
     url( r'^products/models3d/', include('djangoplicity.products2.urls.models3d'), { 'model': Model3d, 'options': Model3dOptions, 'translate': True } ),
     url( r'^products/calendars/', include('djangoplicity.products2.urls.calendars'), { 'model': Calendar, 'options': CalendarOptions, 'translate': True  } ),
     url( r'^products/applications/', include('djangoplicity.products2.urls.applications'), { 'model': Application, 'options': ApplicationOptions } ),
@@ -111,6 +113,8 @@ urlpatterns += [
     url( r'^products/postcards/', include('djangoplicity.products2.urls.postcards'), { 'model': PostCard, 'options': PostCardOptions, 'translate': True  } ),
     url( r'^products/presentations/', include('djangoplicity.products2.urls.presentations'), { 'model': Presentation, 'options': PresentationOptions, 'translate': True  } ),
     url( r'^products/print-posters/', include('djangoplicity.products2.urls.print_posters'), { 'model': PrintedPoster, 'options': PrintedPosterOptions, 'translate': True  } ),
+    url(r'^press/kits/', include('djangoplicity.products2.urls.presskits'), {'model': PressKit, 'options': PressKitOptions}),
+
     url( r'^products/media/', include('djangoplicity.products2.urls.media'), { 'model': Media, 'options': MediaOptions } ),
     url( r'^products/stickers/', include('djangoplicity.products2.urls.stickers'), { 'model': Sticker, 'options': StickerOptions, 'translate': True  } ),
     url( r'^products/art/', include('djangoplicity.products2.urls.art'), { 'model': OnlineArt, 'options': OnlineArtOptions } ),
@@ -148,6 +152,9 @@ urlpatterns += [
 
     # Main view
     url( r'^$', cache_page(60 * 5)(FrontpageView.as_view()) ),
+
+    # Sitemap
+    url(r'^sitemap/$', sitemap),
 
     url( r'^d2d/$', d2d ),
 

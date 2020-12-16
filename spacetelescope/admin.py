@@ -34,12 +34,13 @@ from djangoplicity.contrib.admin import DjangoplicityModelAdmin
 from djangoplicity.products2.admin import register_if_installed, ExhibitionGroupAdmin, OnlineArtAuthorAdmin, \
     ConferenceAdmin
 from djangoplicity.products2.base.models import ArchiveCategory
-from djangoplicity.products2.models import Model3d, Calendar, Application, Logo, Exhibition, \
+from djangoplicity.products2.models import Model3d, Calendar, Application, Brochure, Logo, Exhibition, \
     Sticker, PostCard, PrintedPoster, ConferencePoster, Merchandise, Media, Presentation, OnlineArt, \
-    ExhibitionGroup, OnlineArtAuthor, ConferenceItem, Conference
+    ExhibitionGroup, OnlineArtAuthor, PressKit
 from djangoplicity.products2.options import Model3dOptions, CalendarOptions, ApplicationOptions, LogoOptions, \
     ExhibitionOptions, StickerOptions, PostCardOptions, PrintedPosterOptions, ConferencePosterOptions, \
-    MerchandiseOptions, MediaOptions, PresentationOptions, OnlineArtOptions, ConferenceItemOptions
+    MerchandiseOptions, MediaOptions, PresentationOptions, OnlineArtOptions, PressKitOptions, BrochureOptions
+
 
 # Register each applications admin interfaces with
 # an admin site.
@@ -96,6 +97,7 @@ def register_products_with_admin( admin_site ):
     register_if_installed( admin_site, Model3d, Model3dOptions )
     register_if_installed( admin_site, Calendar, CalendarOptions, name='Calendar' )
     register_if_installed( admin_site, Application, ApplicationOptions )
+    register_if_installed(admin_site, Brochure, BrochureOptions, exclude=['embargo_date', 'created', 'last_modified'])
     register_if_installed( admin_site, Logo, LogoOptions )
     register_if_installed( admin_site, Exhibition, ExhibitionOptions, extra={ 'list_display': ['group', 'group_order'], 'list_editable': ['group', 'group_order'], } )
     register_if_installed( admin_site, Sticker, StickerOptions )
@@ -105,6 +107,7 @@ def register_products_with_admin( admin_site ):
     register_if_installed( admin_site, Merchandise, MerchandiseOptions )
     register_if_installed( admin_site, Media, MediaOptions )
     register_if_installed( admin_site, Presentation, PresentationOptions )
+    register_if_installed( admin_site, PressKit, PressKitOptions )
     register_if_installed( admin_site, OnlineArt, OnlineArtOptions, name='Artist' )
 
     class ArchiveCategoryAdmin(DjangoplicityModelAdmin):
