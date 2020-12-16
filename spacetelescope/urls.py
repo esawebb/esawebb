@@ -21,6 +21,7 @@ from djangoplicity.announcements.models import Announcement, WebUpdate
 from djangoplicity.announcements.options import AnnouncementOptions, WebUpdateOptions
 from djangoplicity.media.models import Image, Video, PictureOfTheWeek, ImageComparison
 from djangoplicity.media.options import ImageOptions, VideoOptions, PictureOfTheWeekOptions, ImageComparisonOptions
+from djangoplicity.menus.views import sitemap
 from djangoplicity.newsletters.models import Newsletter
 from djangoplicity.newsletters.options import NewsletterOptions
 from djangoplicity.pages.views import view_page
@@ -145,6 +146,9 @@ urlpatterns += [
 
     # Main view
     url( r'^$', cache_page(60 * 5)(FrontpageView.as_view()) ),
+
+    # Sitemap
+    url(r'^sitemap/$', sitemap),
 
     url( r'^d2d/$', d2d ),
 
