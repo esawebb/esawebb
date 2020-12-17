@@ -3,10 +3,6 @@
 $medium-dark: #292929;
 $default-section-height: 307px;
 
-$section-header-height: 43px;
-$social-feed-width: 304px;
-$social-feed-height: 610px;
-
 .frontpage-title {
 	text-transform: uppercase;
 	font-size: 16px;
@@ -698,11 +694,6 @@ $social-feed-height: 610px;
 }
 
 .middle-section {
-  @media (min-width: $screen-md) {
-    display: flex;
-    flex-wrap: wrap;
-  }
-
   [id$="-carousel-wrapper"] {
     border: 1px solid $border-grey;
     margin-top: 1rem;
@@ -714,43 +705,28 @@ $social-feed-height: 610px;
     }
   }
 
-  #social-feeds-wrapper {
+  $section-header-height: 43px;
+  $social-feed-width: 304px;
+  $social-feed-height: 610px;
+
+  .social-feeds {
     display: flex;
-    justify-content: center;
-    align-items: center;
-    height: calc(100% - 1rem);
+    justify-content: space-around;
+    flex-wrap: wrap;
     margin-top: 1rem;
+    align-content: space-between;
 
-    .social-feeds {
-      display: flex;
-      align-items: center;
-      height: 100%;
-      overflow-x: auto;
+    .facebook-feeds, .twitter-feeds, .instagram-feeds {
+      width: $social-feed-width;
+      height: $social-feed-height + $section-header-height + 5px;
+      text-align: center;
+      border: 1px solid $border-grey;
+      overflow-y: hidden;
+      margin-bottom: 1rem;
 
-      @media (min-width: $screen-md) {
-        flex-direction: column;
-        flex-wrap: wrap;
-        justify-content: space-between;
-        overflow-x: visible;
-      }
-
-      .facebook-feeds, .twitter-feeds, .instagram-feeds {
-        height: calc(#{$social-feed-height} + #{$section-header-height} + 2px);
-        min-width: $social-feed-width;
-        text-align: center;
-        border: 1px solid $border-grey;
-        overflow-y: hidden;
-
-        .section-header {
-          text-align: left;
-          border-bottom: 1px solid $border-grey;
-        }
-
-        @media (max-width: $screen-md) {
-          &:not(:last-child) {
-            margin-right: 10px;
-          }
-        }
+      .section-header {
+        text-align: left;
+        border-bottom: 1px solid $border-grey;
       }
     }
   }
