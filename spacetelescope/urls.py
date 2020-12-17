@@ -106,7 +106,7 @@ urlpatterns += [
     url( r'^products/models3d/', include('djangoplicity.products2.urls.models3d'), { 'model': Model3d, 'options': Model3dOptions, 'translate': True } ),
     url( r'^products/calendars/', include('djangoplicity.products2.urls.calendars'), { 'model': Calendar, 'options': CalendarOptions, 'translate': True  } ),
     url( r'^products/applications/', include('djangoplicity.products2.urls.applications'), { 'model': Application, 'options': ApplicationOptions } ),
-    url( r'^products/conf-posters/', include('djangoplicity.products2.urls.conf_posters'), { 'model': ConferencePoster, 'options': ConferencePosterOptions, 'translate': True  } ),
+    url( r'^products/conf_posters/', include('djangoplicity.products2.urls.conf_posters'), { 'model': ConferencePoster, 'options': ConferencePosterOptions, 'translate': True  } ),
     url( r'^products/exhibitions/', include('djangoplicity.products2.urls.exhibitions'), { 'model': Exhibition, 'options': ExhibitionOptions, 'translate': True  } ),
     url( r'^products/logos/', include('djangoplicity.products2.urls.logos'), { 'model': Logo, 'options': LogoOptions, 'translate': True  } ),
     url( r'^products/merchandise/', include('djangoplicity.products2.urls.merchandise'), { 'model': Merchandise, 'options': MerchandiseOptions, 'translate': True  } ),
