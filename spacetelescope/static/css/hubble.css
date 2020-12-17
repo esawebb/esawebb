@@ -6097,11 +6097,6 @@ body {
       max-width: 100%;
       padding: 2rem 0; }
 
-@media (min-width: 992px) {
-  .middle-section {
-    display: flex;
-    flex-wrap: wrap; } }
-
 .middle-section [id$="-carousel-wrapper"] {
   border: 1px solid #dcdcdc;
   margin-top: 1rem; }
@@ -6109,35 +6104,22 @@ body {
 .middle-section #newsletter-carousel-wrapper img {
   width: 100%; }
 
-.middle-section #social-feeds-wrapper {
+.middle-section .social-feeds {
   display: flex;
-  justify-content: center;
-  align-items: center;
-  height: calc(100% - 1rem);
-  margin-top: 1rem; }
-  .middle-section #social-feeds-wrapper .social-feeds {
-    display: flex;
-    align-items: center;
-    height: 100%;
-    overflow-x: auto; }
-    @media (min-width: 992px) {
-      .middle-section #social-feeds-wrapper .social-feeds {
-        flex-direction: column;
-        flex-wrap: wrap;
-        justify-content: space-between;
-        overflow-x: visible; } }
-    .middle-section #social-feeds-wrapper .social-feeds .facebook-feeds, .middle-section #social-feeds-wrapper .social-feeds .twitter-feeds, .middle-section #social-feeds-wrapper .social-feeds .instagram-feeds {
-      height: calc(610px + 43px + 2px);
-      min-width: 304px;
-      text-align: center;
-      border: 1px solid #dcdcdc;
-      overflow-y: hidden; }
-      .middle-section #social-feeds-wrapper .social-feeds .facebook-feeds .section-header, .middle-section #social-feeds-wrapper .social-feeds .twitter-feeds .section-header, .middle-section #social-feeds-wrapper .social-feeds .instagram-feeds .section-header {
-        text-align: left;
-        border-bottom: 1px solid #dcdcdc; }
-      @media (max-width: 992px) {
-        .middle-section #social-feeds-wrapper .social-feeds .facebook-feeds:not(:last-child), .middle-section #social-feeds-wrapper .social-feeds .twitter-feeds:not(:last-child), .middle-section #social-feeds-wrapper .social-feeds .instagram-feeds:not(:last-child) {
-          margin-right: 10px; } }
+  justify-content: space-around;
+  flex-wrap: wrap;
+  margin-top: 1rem;
+  align-content: space-between; }
+  .middle-section .social-feeds .facebook-feeds, .middle-section .social-feeds .twitter-feeds, .middle-section .social-feeds .instagram-feeds {
+    width: 304px;
+    height: 658px;
+    text-align: center;
+    border: 1px solid #dcdcdc;
+    overflow-y: hidden;
+    margin-bottom: 1rem; }
+    .middle-section .social-feeds .facebook-feeds .section-header, .middle-section .social-feeds .twitter-feeds .section-header, .middle-section .social-feeds .instagram-feeds .section-header {
+      text-align: left;
+      border-bottom: 1px solid #dcdcdc; }
 
 .archive-search {
   margin-bottom: 20px; }
