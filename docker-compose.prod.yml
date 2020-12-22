@@ -46,7 +46,18 @@ services:
 
   flower:
     <<: *common
-    ports:
-      - "5555:5555" # TODO: better to use Nginx as a reverse proxy of this
+    command:
+      [
+        "celery",
+        "--app=spacetelescope",
+        "--concurrency=8",
+        "--db=/home/hubbleadm/tmp/flowerdb",
+        "--persistent",
+        "--port=5555",
+        "--url_prefix=admin/tasks",
+        "flower",
+      ]
+    expose:
+      - "5555"
 
   beat: *common
