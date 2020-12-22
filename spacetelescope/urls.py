@@ -25,12 +25,12 @@ from djangoplicity.menus.views import sitemap
 from djangoplicity.newsletters.models import Newsletter
 from djangoplicity.newsletters.options import NewsletterOptions
 from djangoplicity.pages.views import view_page
-from djangoplicity.products2.models import Brochure, Calendar, Logo, Exhibition, Sticker, PostCard, \
+from djangoplicity.products2.models import Brochure, Calendar, Logo, Exhibition, FITSImage, Sticker, PostCard, \
     PrintedPoster, ConferencePoster, Merchandise, Presentation, Model3d, \
     OnlineArtAuthor, Application, Media, OnlineArt, PressKit
 
 from djangoplicity.products2.options import BrochureOptions, CalendarOptions, LogoOptions, ExhibitionOptions, \
-    StickerOptions, PostCardOptions, PrintedPosterOptions, ConferencePosterOptions, \
+    FITSImageOptions, StickerOptions, PostCardOptions, PrintedPosterOptions, ConferencePosterOptions, \
     MerchandiseOptions, PresentationOptions, Model3dOptions, OnlineArtAuthorOptions, \
     ApplicationOptions, MediaOptions, OnlineArtOptions, PressKitOptions
 from djangoplicity.releases.models import Release
@@ -123,7 +123,7 @@ urlpatterns += [
 
     url( r'^forscientists/announcements/', include('djangoplicity.science.urls'), { 'model': ScienceAnnouncement, 'options': ScienceAnnouncementOptions } ),
 
-    # url( r'^projects/fits_liberator/fitsimages/', include('djangoplicity.products.urls.fitsimages'), { 'model': FITSImage, 'options': FITSImageOptions } ),
+    url( r'^projects/fits_liberator/fitsimages/', include('djangoplicity.products2.urls.fitsimages'), { 'model': FITSImage, 'options': FITSImageOptions } ),
 
     url( r'^rss/feed.xml$', RedirectView.as_view(url='http://feeds.feedburner.com/hubble_news/') ),
     url( r'^rss/vodcast.xml$', RedirectView.as_view(url='http://feeds.feedburner.com/hubblecast_sd/') ),
