@@ -1,0 +1,21 @@
+{% extends "base_onecolumn.html" %}
+{% load i18n %}
+
+{% block site_title %} {% trans "Page not found | ESA/Hubble" %} {% endblock %}
+
+{% block content %}
+    <div class="error-404-wrapper">
+        <h1 class="error-title">{% trans "404" %}</h1>
+        <p class="error-description">{% trans "Could not find the page you were looking for." %}</p>
+    </div>
+
+    <style>
+        .error-404-wrapper {
+            text-align: center;
+        }
+
+        .error-404-wrapper .error-title {
+            font-weight: bold;
+        }
+    </style>
+{% endblock %}
