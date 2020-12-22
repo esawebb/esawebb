@@ -36,10 +36,11 @@ from djangoplicity.products2.admin import register_if_installed, ExhibitionGroup
 from djangoplicity.products2.base.models import ArchiveCategory
 from djangoplicity.products2.models import Model3d, Calendar, Application, Brochure, Logo, Exhibition, \
     Sticker, PostCard, PrintedPoster, ConferencePoster, Merchandise, Media, Presentation, OnlineArt, \
-    ExhibitionGroup, OnlineArtAuthor, PressKit
+    ExhibitionGroup, OnlineArtAuthor, PressKit, FITSImage
 from djangoplicity.products2.options import Model3dOptions, CalendarOptions, ApplicationOptions, LogoOptions, \
     ExhibitionOptions, StickerOptions, PostCardOptions, PrintedPosterOptions, ConferencePosterOptions, \
-    MerchandiseOptions, MediaOptions, PresentationOptions, OnlineArtOptions, PressKitOptions, BrochureOptions
+    MerchandiseOptions, MediaOptions, PresentationOptions, OnlineArtOptions, PressKitOptions, BrochureOptions, \
+    FITSImageOptions
 
 
 # Register each applications admin interfaces with
@@ -100,6 +101,7 @@ def register_products_with_admin( admin_site ):
     register_if_installed(admin_site, Brochure, BrochureOptions, exclude=['embargo_date', 'created', 'last_modified'])
     register_if_installed( admin_site, Logo, LogoOptions )
     register_if_installed( admin_site, Exhibition, ExhibitionOptions, extra={ 'list_display': ['group', 'group_order'], 'list_editable': ['group', 'group_order'], } )
+    register_if_installed( admin_site, FITSImage, FITSImageOptions )
     register_if_installed( admin_site, Sticker, StickerOptions )
     register_if_installed( admin_site, PostCard, PostCardOptions )
     register_if_installed( admin_site, PrintedPoster, PrintedPosterOptions )
