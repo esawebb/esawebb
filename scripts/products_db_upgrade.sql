@@ -1,3 +1,7 @@
+/*
+IMPORTANT - Previously:
+./manage.py migrate products2 0007 --fake
+*/
 ALTER TABLE products_map RENAME TO products2_map;
 ALTER TABLE products_book RENAME TO products2_book;
 ALTER TABLE products_logo RENAME TO products2_logo;
