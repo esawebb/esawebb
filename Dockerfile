@@ -69,6 +69,9 @@ WORKDIR $USER_HOME
 
 USER hubbleadm
 
+# Copy ImageMagick settings
+COPY --chown=hubbleadm etc/policy.xml /etc/ImageMagick-6/
+
 # Copy pip install results from builder image
 COPY --from=builder --chown=hubbleadm /home/hubblebuilder/.local $USER_HOME/.local
 
