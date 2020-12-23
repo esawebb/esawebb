@@ -46,7 +46,7 @@ FROM python:3.8-slim-buster
 # - imagemagick is used for process images and generate derivatives
 # - libldap-2.4-2 are runtime libraries for the OpenLDAP use by django-auth-ldap
 # - libexempi-dev is required by python-avm-library(libavm) and python-xmp-toolkit
-# - rsync is required to synchronize files to CDN77
+# - rsync and openssh-client are required to synchronize files to CDN77
 RUN apt-get update && apt-get install -y \
     cssmin \
     ffmpeg \
@@ -55,7 +55,8 @@ RUN apt-get update && apt-get install -y \
     mplayer \
     node-uglify \
     libexempi-dev \
-    rsync
+    rsync \
+    openssh-client
 
 RUN echo "Europe/Berlin" > /etc/timezone && \
     rm /etc/localtime && \
