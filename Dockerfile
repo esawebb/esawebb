@@ -72,6 +72,9 @@ USER hubbleadm
 # Copy ImageMagick settings
 COPY --chown=hubbleadm etc/policy.xml /etc/ImageMagick-6/
 
+# Copy SSH settings with known_hosts so that SSH connections works with CDN77
+COPY --chown=hubbleadm etc/.ssh $USER_HOME/.ssh
+
 # Copy pip install results from builder image
 COPY --from=builder --chown=hubbleadm /home/hubblebuilder/.local $USER_HOME/.local
 
