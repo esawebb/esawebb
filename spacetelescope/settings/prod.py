@@ -32,9 +32,13 @@ if get_secret('DATABASE_URL'):
         'default': dj_database_url.config()
     }
 
-EMAIL_HOST = ''
-EMAIL_PORT = '25'
+# EMAIL: SMTP CONFIG
 EMAIL_SUBJECT_PREFIX = '[ESA/HUBBLE]'
+EMAIL_HOST = 'smtp.mailgun.org'
+EMAIL_HOST_USER = get_secret('EMAIL_USER')
+EMAIL_HOST_PASSWORD = get_secret('EMAIL_PASSWORD')
+EMAIL_PORT = '587'
+EMAIL_USE_TLS = True
 
 ARCHIVE_AUTO_RESOURCE_DELETION = True
 

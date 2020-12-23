@@ -16,6 +16,8 @@ x-common: &common
     CDN_STORAGE_PASSWORD:
     CDN_API_LOGIN:
     CDN_API_PASSWORD:
+    EMAIL_USER:
+    EMAIL_PASSWORD:
   volumes:
     - /mnt/volume_fra1_01/web/media:/home/hubbleadm/media
     - /mnt/volume_fra1_01/web/import:/home/hubbleadm/import

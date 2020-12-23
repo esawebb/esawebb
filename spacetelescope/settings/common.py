@@ -90,7 +90,7 @@ DEBUG_TOOLBAR_CONFIG = {}
 DEBUG_TOOLBAR_PANELS = []
 
 ADMINS = (
-    ('EPO Monitoring', 'esoepo-monitoring@eso.org'),
+    ('Edison Arango', 'edisonarangoabello@gmail.com'),
 )
 MANAGERS = ADMINS
 
@@ -410,13 +410,9 @@ SESSION_COOKIE_DOMAIN = None
 FILE_UPLOAD_TEMP_DIR = TMP_DIR
 FILE_UPLOAD_PERMISSIONS = 0o666
 
-SERVER_EMAIL = 'nobody@eso.org'
-DEFAULT_FROM_EMAIL = 'nobody@eso.org'
-EMAIL_HOST_PASSWORD = ''
-EMAIL_HOST_USER = ''
-EMAIL_HOST = 'localhost'
-EMAIL_PORT = '1025'
-EMAIL_USE_TLS = False
+# EMAIL CONFIG
+SERVER_EMAIL = 'nobody@esahubble.org'
+DEFAULT_FROM_EMAIL = 'nobody@esahubble.org'
 EMAIL_SUBJECT_PREFIX = '[SPACETELESCOPE-LOCAL]'
 
 ##################
