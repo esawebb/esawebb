@@ -2,3 +2,5 @@
 .git/
 local/
 temp/
+docs/
+volumes/

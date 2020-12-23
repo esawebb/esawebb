@@ -1,7 +1,7 @@
 #############################################
 # BUILDER IMAGE: Only for building the code #
 #############################################
-FROM python:3.8 AS builder
+FROM python:3.8-slim-buster AS builder
 # Follow Dockerfile RUN best practices (Keep packages organized alphabetically):
 # See: https://docs.docker.com/develop/develop-images/dockerfile_best-practices/#run
 # - gcc, libsasl2-dev, libsasl2-dev, libssl-dev and python-dev are required by django-auth-ldap
@@ -55,11 +55,22 @@ RUN apt-get update && apt-get install -y \
     node-uglify \
     libexempi-dev
 
-RUN useradd --create-home hubbleadm
+RUN echo "Europe/Berlin" > /etc/timezone && \
+    rm /etc/localtime && \
+    ln -s /usr/share/zoneinfo/Europe/Berlin /etc/localtime
+ENV LANG en_US.UTF-8
+ENV LC_ALL en_US.UTF-8
+
+RUN groupadd -g 2000 hubbleadm && \
+    useradd -u 2000 -g hubbleadm --create-home hubbleadm
+
 ENV USER_HOME=/home/hubbleadm
 WORKDIR $USER_HOME
 
 USER hubbleadm
+
+# Copy ImageMagick settings
+COPY --chown=hubbleadm etc/policy.xml /etc/ImageMagick-6/
 
 # Copy pip install results from builder image
 COPY --from=builder --chown=hubbleadm /home/hubblebuilder/.local $USER_HOME/.local
@@ -70,7 +81,7 @@ ENV PATH=$USER_HOME/.local/bin:$PATH
 # ENV DJANGO_SETTINGS_MODULE spacetelescope.settings
 
 RUN mkdir -p static \
-    docs/static/ \
+    media/archives/ \
     logs \
     tmp \
     import \

@@ -1,7 +1,6 @@
-# Last update: Upgrade djp_many_related_func_wrapper to support through_defaults
+# Last update: add fits liberator images and fix admin issues
 git+https://github.com/djangoplicity/djangoplicity-actions.git@release/python3
 git+https://github.com/djangoplicity/djangoplicity-customsearch.git@release/python3
 git+https://github.com/djangoplicity/djangoplicity-newsletters.git@release/python3
 git+https://github.com/djangoplicity/djangoplicity-products2@release/python3
 git+https://github.com/djangoplicity/djangoplicity@release/python3
-# git+https://github.com/djangoplicity/satchmo.git@develop

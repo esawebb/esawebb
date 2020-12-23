@@ -32,7 +32,7 @@ ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)
 ARCHIVE_IMPORT_ROOT = '%s/import' % ROOT
 PRJBASE = "%s/spacetelescope" % ROOT
 PRJNAME = 'spacetelescope.org'
-DJANGOPLICITY_ROOT = "%s/.local/lib/python2.7/site-packages/djangoplicity" % ROOT
+DJANGOPLICITY_ROOT = "%s/.local/lib/python3.8/site-packages/djangoplicity" % ROOT
 LOG_DIR = "%s/logs" % ROOT
 TMP_DIR = "%s/tmp" % ROOT
 SHARED_DIR = "%s/shared" % ROOT
@@ -96,9 +96,6 @@ MANAGERS = ADMINS
 
 SERVE_STATIC_MEDIA = False
 
-# Make this unique, and don't share it with anybody.
-SECRET_KEY = "g6ymvx$i1sv4k*g+nwfnx*3a1g&)^i6r9n6g4=f_$x^u(kwt8s"
-
 
 ##################
 # DATABASE SETUP #
@@ -154,11 +151,15 @@ TIME_FORMAT = ugettext('H:i T')
 YEAR_MONTH_FORMAT = ugettext('F Y')
 WIDGET_FORMAT = ugettext("j/m/Y")
 
-###############
-# MEDIA SETUP #
-###############
-MEDIA_ROOT = "%s/docs/static/" % ROOT
-MEDIA_URL = "/static/"
+# MEDIA
+MEDIA_ROOT = os.path.join(ROOT, 'media')
+MEDIA_URL = '/media/'
+
+# STATIC FILES (CSS, JavaScript, Images)
+# See: https://docs.djangoproject.com/en/1.11/howto/static-files/
+STATIC_ROOT = os.path.join(ROOT, 'static')
+STATIC_URL = '/assets/'
+
 
 # URL prefix for admin media -- CSS, JavaScript and images. Make sure to use a
 # trailing slash.
@@ -170,8 +171,6 @@ DJANGOPLICITY_MEDIA_ROOT = "%s/static" % DJANGOPLICITY_ROOT
 
 MIDENTIFY_PATH = '/usr/bin/midentify'
 
-STATIC_ROOT = "%s/static/djp/" % ROOT
-STATIC_URL = "/static/djp/"
 
 ##########
 # CACHE  #
@@ -425,7 +424,7 @@ EMAIL_SUBJECT_PREFIX = '[SPACETELESCOPE-LOCAL]'
 ##################
 
 AUTHENTICATION_BACKENDS = (
-    'django_auth_ldap.backend.LDAPBackend',
+    # 'django_auth_ldap.backend.LDAPBackend',
     'django.contrib.auth.backends.ModelBackend',
 )
 #AUTH_PROFILE_MODULE = ''
@@ -436,6 +435,8 @@ LOGIN_REDIRECT_URL = '/'
 #############
 # LDAP AUTH #
 #############
+'''
+Disabled when migrated to esahubble.org
 import ldap
 from django_auth_ldap.config import LDAPSearch, ActiveDirectoryGroupType
 
@@ -484,7 +485,7 @@ AUTH_TKT_HTACCESS = '.esoacc'
 # AUTH_TKT_IGNOREIP = 'off'
 # AUTH_TKT_TIMEOUT_URL = ''
 # AUTH_TKT_FILEPERMS =
-
+'''
 
 #########
 # PAGES #
@@ -577,7 +578,7 @@ VIDEOS_FORMATS_REMOVE = [
 RELEASE_LINK_PREFIX = "heic"
 
 DEFAULT_CREATOR = u"ESA/Hubble"
-DEFAULT_CREATOR_URL = "http://www.spacetelescope.org"
+DEFAULT_CREATOR_URL = "https://www.spacetelescope.org"
 DEFAULT_CONTACT_ADDRESS = u"Karl-Schwarzschild-Strasse 2"
 DEFAULT_CONTACT_CITY = u"Garching bei München"
 DEFAULT_CONTACT_STATE_PROVINCE = ""
@@ -674,8 +675,8 @@ CELERY_WORKER_HIJACK_ROOT_LOGGER = False
 CELERY_TASK_ALWAYS_EAGER = False
 
 # File to save revoked tasks across workers restart
-CELERY_WORKER_STATE_DB = "%s/tmp/celery_states" % ROOT
-CELERY_BEAT_SCHEDULE_FILENAME = '%s/tmp/celerybeat_schedule' % ROOT
+CELERY_WORKER_STATE_DB = os.path.join(TMP_DIR, 'celery_states')
+CELERY_BEAT_SCHEDULE_FILENAME = os.path.join(TMP_DIR, 'celerybeat_schedule')
 
 # Define Celery periodic tasks
 CELERY_BEAT_SCHEDULE = {
@@ -766,110 +767,6 @@ REGEX_REDIRECTS = (
 )
 
 SITE_DOMAIN = "www.spacetelescope.org"
-
-
-###########
-# LOGGING #
-###########
-LOGGING = {
-    'version': 1,
-    'disable_existing_loggers': False,
-    'formatters': {
-        'verbose': {
-            'format': '%(levelname)s %(asctime)s %(module)s %(process)d %(thread)d %(message)s'
-        },
-        'default': {
-            'format': '%(asctime)s %(name)-12s %(levelname)-8s %(message)s'
-        },
-    },
-    'filters': {
-        'require_debug_false': {
-            '()': 'django.utils.log.RequireDebugFalse'
-        }
-    },
-    'handlers': {
-        'null': {
-            'level': 'DEBUG',
-            'class': 'logging.NullHandler',
-        },
-        'console': {
-            'level': 'DEBUG',
-            'class': 'logging.StreamHandler',
-            'formatter': 'default'
-        },
-        'mail_admins': {
-            'level': 'ERROR',
-            'filters': ['require_debug_false'],
-            'class': 'django.utils.log.AdminEmailHandler',
-            'include_html': True,
-        },
-        'file': {
-            'level': 'DEBUG',
-            'class': 'logging.handlers.RotatingFileHandler',
-            'formatter': 'default',
-            'filename': os.path.join( LOG_DIR, "djangoplicity.log" ),
-            'maxBytes': 50 * 1024 * 1024,
-            'backupCount': 3,
-        }
-    },
-    'loggers': {
-        'django': {
-            'handlers': ['console'] if DEBUG else ['file'],
-            'propagate': True,
-            'level': 'DEBUG' if DEBUG else 'INFO',
-        },
-        'django.request': {
-            'handlers': ['mail_admins'],
-            'level': 'ERROR',
-            'propagate': False,
-        },
-        'django.security.DisallowedHost': {
-            'handlers': ['null'],
-            'propagate': False,
-        },
-        'django.template': {
-            'handlers': ['null'],
-            'propagate': False,
-        },
-        'django.utils.autoreload': {
-            'level': 'INFO',
-        },
-        'djangoplicity': {
-            'handlers': ['console'] if DEBUG else ['file'],
-            'level': 'DEBUG' if DEBUG else 'INFO',
-        },
-        'django.db.backends': {
-            'handlers': ['console'] if DEBUG else ['file'],
-            'propagate': False,
-            'level': 'INFO',
-        },
-        'sslurllib': {
-            'handlers': ['null', ],
-            'propagate': False,
-        },
-        'django_auth_ldap': {
-            'handlers': ['console'] if DEBUG else ['file'],
-            'propagate': True,
-            'level': 'DEBUG' if DEBUG else 'INFO',
-        },
-        'pycountry.db': {
-            'handlers': ['null'],
-            'propagate': False,
-        },
-        'iterchoices': {
-            'handlers': ['null'],
-            'propagate': False,
-        },
-        'tinymce': {
-            'handlers': ['null'],
-            'propagate': False,
-        },
-        'requests': {
-            'handlers': ['console'] if DEBUG else ['file'],
-            'level': 'WARNING',  # requests is too verbose by default
-        },
-    },
-}
 
 # ======================================================================
 # SITE SPECIFIC SECTIONS
@@ -998,8 +895,16 @@ RECAPTCHA_PRIVATE_KEY = ''
 #
 # Pipeline configuration (CSS/JS packing)
 #
-
-STATICFILES_STORAGE = 'djangoplicity.utils.storage.PipelineManifestStorage'
+# Only config this for the docker web service, not flower, celery, etc, to avoid:
+# ValueError: Missing staticfiles manifest entry for
+# And because the web service is the only that collect statics before
+if os.environ.get('SERVICE_TYPE') == 'web':
+    STATICFILES_STORAGE = 'djangoplicity.utils.storage.PipelineManifestStorage'
+    STATICFILES_FINDERS = (
+        'django.contrib.staticfiles.finders.FileSystemFinder',
+        'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+        'pipeline.finders.PipelineFinder',
+    )
 
 # We split the CSS into main and extras to load the more important first
 # and the rest in the end. This also solves a problem with IE9 which stops
@@ -1066,90 +971,8 @@ PIPELINE = {
     'DISABLE_WRAPPER': True,
 }
 
-STATICFILES_FINDERS = (
-    'django.contrib.staticfiles.finders.FileSystemFinder',
-    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
-    'pipeline.finders.PipelineFinder',
-)
-
-# Required since Django 1.5:
-ALLOWED_HOSTS = [
-    'localhost',
-    '.spacetelescope.org',
-    '.eso.org',
-]
-
 # Required since Django 1.6:
 TEST_RUNNER = 'django.test.runner.DiscoverRunner'
-
-MEDIA_CONTENT_SERVERS = {
-    'CDN77': CDN77ContentServer(
-        name='CDN77',
-        formats={
-            'djangoplicity.media.models.images.Image': (
-                'large',
-                'publicationjpg',
-                'screen',
-                'wallpaper1',
-                'wallpaper2',
-                'wallpaper3',
-                'wallpaper4',
-                'wallpaper5',
-                'thumb150y',
-                'thumb300y',
-                'thumb350x',
-                'thumb700x',
-                'newsfeature',
-                'news',
-                'banner1920',
-                'screen640',
-                'zoomable',
-            ),
-            'djangoplicity.media.models.videos.Video': (
-                'videoframe',
-                'small_flash',
-                'medium_podcast',
-                'medium_mpeg1',
-                'medium_flash',
-                'large_qt',
-                'broadcast_sd',
-                'hd_and_apple',
-                'hd_broadcast_720p50',
-                'hd_1080p25_screen',
-                'hd_1080p25_broadcast',
-                'ultra_hd',
-                'ultra_hd_h265',
-                'ultra_hd_broadcast',
-                'dome_8kmaster',
-                'dome_4kmaster',
-                'dome_2kmaster',
-                'dome_mov',
-                'dome_preview',
-                'cylindrical_4kmaster',
-                'cylindrical_8kmaster',
-                'cylindrical_16kmaster',
-                'news',
-            ),
-        },
-        url='https://cdn.spacetelescope.org/',
-        url_bigfiles='https://cdn2.spacetelescope.org/',
-        remote_dir='/www/',
-        host='m',
-        username='',
-        password='',
-        api_login='salmagro@eso.org',
-        api_password='',
-        cdn_id='33541',
-        cdn_id_bigfiles='31465',
-    ),
-}
-
-MEDIA_CONTENT_SERVERS_CHOICES = (
-    ('', 'Default'),
-    ('CDN77', 'CDN77'),
-)
-
-DEFAULT_MEDIA_CONTENT_SERVER = 'CDN77'
 
 YOUTUBE_TOKEN = '%s/youtube_oauth2_token.json' % SHARED_DIR
 YOUTUBE_DEFAULT_TAGS = ['Hubble', 'Hubble Space Telescope', 'Telescope', 'Space', 'Observatory', 'ESA']

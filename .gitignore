@@ -21,3 +21,5 @@ volumes/
 
 config/nginx-auth/*
 !config/nginx-auth/.keep
+
+*.env
