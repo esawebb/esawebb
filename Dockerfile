@@ -73,18 +73,13 @@ WORKDIR $USER_HOME
 USER hubbleadm
 
 # Copy ImageMagick settings
-COPY --chown=hubbleadm etc/policy.xml /etc/ImageMagick-6/
-
-# Copy SSH settings with known_hosts so that SSH connections works with CDN77
-COPY --chown=hubbleadm etc/.ssh $USER_HOME/.ssh
+COPY --chown=hubbleadm config/imagemagick/policy.xml /etc/ImageMagick-6/
 
 # Copy pip install results from builder image
 COPY --from=builder --chown=hubbleadm /home/hubblebuilder/.local $USER_HOME/.local
 
 # Make sure scripts installed by pip in .local are usable:
 ENV PATH=$USER_HOME/.local/bin:$PATH
-
-# ENV DJANGO_SETTINGS_MODULE spacetelescope.settings
 
 RUN mkdir -p static \
     media/archives/ \

@@ -22,6 +22,8 @@ x-common: &common
     - /mnt/volume_fra1_01/web/media:/home/hubbleadm/media
     - /mnt/volume_fra1_01/web/import:/home/hubbleadm/import
     - /mnt/volume_fra1_01/web/tmp:/home/hubbleadm/tmp
+    # The SSH key and known_hosts is required to push files to CDN77 Storage, See README
+    - ./config/.ssh:/home/hubbleadm/.ssh
     # - ./config/youtube:/home/hubbleadm/config/youtube
 
 services:

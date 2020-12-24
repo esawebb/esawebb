@@ -145,6 +145,22 @@ As expected in a Twelve Factors App the following services needs to be configure
 | :--- | :---: | :--- | :--- |
 | Postgres Database | `DATABASE_URL` | `postgresql://<user>:<pass>@<host>:<port>/<dbname>` | `postgresql://admin:1234@hubble-db.com:5432/hubble?sslmode=require` |
 
+#### SSH Key (CDN77)
+
+In order to push files to the CDN storage the system uses `rsync` which relies on an SSH connection, therefore an SSH Key must be added outside the container in:
+```
+config/.ssh
+```
+
+In the server use the following command to do so:
+```
+ssh-keygen -f /path/to/config/.ssh/id_rsa
+```
+> *IMPORTANT*: Do not add a passphrase to the key, otherwise the application won't be able to use it
+
+Finally configure the public key in the CDN Storage by following the next steps
+- https://client.cdn77.com/support/knowledgebase/cdn-resource/how-to-use-rsync-without-password
+
 ### Deployment
 
 When having all the prerequisites, clone the repository in the server, then deploy the containers with the command:
