@@ -65,3 +65,12 @@ services:
       - "5555"
 
   beat: *common
+
+  cache:
+    image: memcached:latest
+    container_name: hubble-cache
+    environment:
+      MEMCACHED_CACHE_SIZE: 1024
+    hostname: cache
+  expose:
+    - "11211"

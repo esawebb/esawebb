@@ -14,17 +14,17 @@ ALLOWED_HOSTS = [
 # Required to import a big number of images using the admin import form
 DATA_UPLOAD_MAX_NUMBER_FIELDS = 200000
 
-# CACHES = {
-#     'default': {
-#         'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
-#         'KEY_PREFIX': SHORT_NAME,
-#         'LOCATION': [
-#             '',
-#             '',
-#         ],
-#         'TIMEOUT': 86400
-#     }
-# }
+# CACHE
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
+        'KEY_PREFIX': SHORT_NAME,
+        'LOCATION': [
+            'cache:11211',
+        ],
+        'TIMEOUT': 86400
+    }
+}
 
 # DATABASE
 if get_secret('DATABASE_URL'):
