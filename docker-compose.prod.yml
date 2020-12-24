@@ -72,5 +72,5 @@ services:
     environment:
       MEMCACHED_CACHE_SIZE: 1024
     hostname: cache
-  expose:
-    - "11211"
+    expose:
+      - "11211"
