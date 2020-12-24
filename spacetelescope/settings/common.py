@@ -90,6 +90,7 @@ DEBUG_TOOLBAR_CONFIG = {}
 DEBUG_TOOLBAR_PANELS = []
 
 ADMINS = (
+    ('Web team ESAHubble', 'web@esahubble.org'),
     ('Edison Arango', 'edisonarangoabello@gmail.com'),
 )
 MANAGERS = ADMINS

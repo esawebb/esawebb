@@ -158,6 +158,11 @@ ssh-keygen -f /path/to/config/.ssh/id_rsa
 ```
 > *IMPORTANT*: Do not add a passphrase to the key, otherwise the application won't be able to use it
 
+Give the correct owner to the files:
+```
+sudo chown -R hubbleadm:hubbleadm config/.ssh/
+```
+
 Finally configure the public key in the CDN Storage by following the next steps
 - https://client.cdn77.com/support/knowledgebase/cdn-resource/how-to-use-rsync-without-password
 
