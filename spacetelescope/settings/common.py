@@ -39,6 +39,7 @@ SHARED_DIR = "%s/shared" % ROOT
 GA_ID = "UA-2368492-6"
 FACEBOOK_APP_ID = "144508505618279"
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+VIDEOS_THUMBNAIL_POSITION = 'middle'  # Used to generated thumbnails of videos when it's provideo
 
 CSRF_COOKIE_SECURE = False
 SESSION_COOKIE_SECURE = False
