@@ -1,4 +1,4 @@
-# Last update: fix compute checksums of videos
+# Last update: fix compute checksums of videos task
 git+https://github.com/djangoplicity/djangoplicity-actions.git@release/python3
 git+https://github.com/djangoplicity/djangoplicity-customsearch.git@release/python3
 git+https://github.com/djangoplicity/djangoplicity-newsletters.git@release/python3
