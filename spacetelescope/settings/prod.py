@@ -129,4 +129,7 @@ MEDIA_CONTENT_SERVERS_CHOICES = (
 
 DEFAULT_MEDIA_CONTENT_SERVER = 'CDN77'
 
-YOUTUBE_CLIENT_SECRET = '%s/etc/youtube_client_secret_prod.json' % PRJBASE
+# YOUTUBE
+YOUTUBE_CLIENT_SECRET = os.path.join(ROOT, 'config', 'youtube', 'client-secret.json')
+YOUTUBE_TOKEN = os.path.join(ROOT, 'config', 'youtube', 'youtube-oauth2-token.json')
+YOUTUBE_DEFAULT_TAGS = ['Hubble', 'Hubble Space Telescope', 'Telescope', 'Space', 'Observatory', 'ESA']

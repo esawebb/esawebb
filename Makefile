@@ -70,3 +70,5 @@ compilemessages:
 sass:
 	node-sass ./components/scss/hubble.scss ./spacetelescope/static/css/hubble.css
 
+youtube-token:
+	docker exec -it hubble python ./scripts/youtube-token.py

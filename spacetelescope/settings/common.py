@@ -972,10 +972,6 @@ PIPELINE = {
 # Required since Django 1.6:
 TEST_RUNNER = 'django.test.runner.DiscoverRunner'
 
-YOUTUBE_TOKEN = '%s/youtube_oauth2_token.json' % SHARED_DIR
-YOUTUBE_DEFAULT_TAGS = ['Hubble', 'Hubble Space Telescope', 'Telescope', 'Space', 'Observatory', 'ESA']
-YOUTUBE_CLIENT_SECRET = '%s/etc/youtube_client_secret.json' % PRJBASE
-
 TINYMCE_DEFAULT_CONFIG = {
     'height': 360,
     'width': 1120,

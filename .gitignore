@@ -24,3 +24,6 @@ config/nginx-auth/*
 
 *.env
 id_rsa*
+
+config/youtube/*
+!config/youtube/README.md
