@@ -1,4 +1,4 @@
-# Last update: fix potw in newsletter
+# Last update: hopefully latest fixes of djangoplicity core
 git+https://github.com/djangoplicity/djangoplicity-actions.git@release/python3
 git+https://github.com/djangoplicity/djangoplicity-customsearch.git@release/python3
 git+https://github.com/djangoplicity/djangoplicity-newsletters.git@release/python3
