@@ -14,6 +14,7 @@ x-common: &common
   volumes:
     - ./volumes/import:/home/hubbleadm/import
     - ./volumes/media:/home/hubbleadm/media
+    - ./volumes/shared:/home/hubbleadm/shared
     - ./spacetelescope:/home/hubbleadm/spacetelescope
     - ./local:/home/hubbleadm/local
     - ./htmlcov:/home/hubbleadm/htmlcov

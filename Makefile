@@ -41,6 +41,12 @@ missingmigrations:
 fasttest:
 	docker exec -it hubble coverage run --rcfile=.coveragerc-parallel manage.py test --no-input --keepdb --parallel --failfast
 
+testtag:
+	docker exec -it hubble ./manage.py test --noinput --tag=$(tag)
+
+testapp:
+	docker exec -it hubble ./manage.py test $(app) --noinput -v 3
+
 test:
 	docker exec -it hubble coverage run manage.py test --no-input
 
