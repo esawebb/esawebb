@@ -19,6 +19,7 @@ from django.views.generic.base import RedirectView
 import djangoplicity.views
 from djangoplicity.announcements.models import Announcement, WebUpdate
 from djangoplicity.announcements.options import AnnouncementOptions, WebUpdateOptions
+from djangoplicity.contacts.views import GroupSubscribe
 from djangoplicity.media.models import Image, Video, PictureOfTheWeek, ImageComparison
 from djangoplicity.media.options import ImageOptions, VideoOptions, PictureOfTheWeekOptions, ImageComparisonOptions
 from djangoplicity.menus.views import sitemap
@@ -124,6 +125,15 @@ urlpatterns += [
     url( r'^forscientists/announcements/', include('djangoplicity.science.urls'), { 'model': ScienceAnnouncement, 'options': ScienceAnnouncementOptions } ),
 
     url( r'^projects/fits_liberator/fitsimages/', include('djangoplicity.products2.urls.fitsimages'), { 'model': FITSImage, 'options': FITSImageOptions } ),
+
+
+    # Public contacts edit
+    # TODO: Check if these contacts URLs are required
+    # url( r'^contacts/', include('djangoplicity.contacts.urls') ),
+    # TODO: check these groups and update if necessary
+    # url( r'^contacts/subscribe/messenger/(?P<uid>.*)/', GroupSubscribe.as_view(group=27, template_name='contacts/messenger_public_subscribe.html'), name='messenger_subscribe'),
+
+
 
     url( r'^rss/feed.xml$', RedirectView.as_view(url='http://feeds.feedburner.com/hubble_news/') ),
     url( r'^rss/vodcast.xml$', RedirectView.as_view(url='http://feeds.feedburner.com/hubblecast_sd/') ),

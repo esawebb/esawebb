@@ -60,13 +60,14 @@ autoregister( admin_site, djangoplicity.metadata.admin )
 #autoregister( admin_site, djangoplicity.events.admin )
 autoregister( admin_site, djangoplicity.mailinglists.admin )
 autoregister( admin_site, djangoplicity.newsletters.admin )
-#autoregister( admin_site, djangoplicity.contacts.admin )
+autoregister( admin_site, djangoplicity.contacts.admin )
 autoregister( admin_site, djangoplicity.customsearch.admin )
 #autoregister( admin_site, djangoplicity.eventcalendar.admin )
 autoregister( admin_site, djangoplicity.science.admin )
 autoregister( admin_site, spacetelescope.frontpage.admin )
 
 autoregister( adminlogs_site, djangoplicity.actions.admin )
+autoregister( adminlogs_site, djangoplicity.admincomments.admin )
 
 
 #

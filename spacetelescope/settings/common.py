@@ -337,7 +337,7 @@ DJANGOPLICITY_APPS = [
     'djangoplicity.mailinglists',
     'djangoplicity.newsletters',
     'djangoplicity.iframe',
-    #'djangoplicity.contacts',
+    'djangoplicity.contacts',
     'djangoplicity.customsearch',
     'djangoplicity.admincomments',
     'djangoplicity.simplearchives',
@@ -377,6 +377,8 @@ THIRD_PARTY_APPS = [
     'rest_framework',
     'pipeline',
     'tinymce',
+    # CONTACTS
+    'crispy_forms',
 ]
 
 SPACETELESCOPE_APPS = [
@@ -598,6 +600,15 @@ ARCHIVE_WORKFLOWS = {
 VIDEO_RENAME_NOTIFY = ['hzodet@eso.org', 'mkornmes@eso.org']
 
 ARCHIVE_CROSSLINKS = djangoplicity.crosslinks.crosslinks_for_domain('spacetelescope.org')
+
+
+# CONTACTS APP
+# Hashids salt, used to encrype/decrypt Contacts' UIDs
+# TODO: Use secret if required
+HASHIDS_SALT = 'UbKopIrheasdGiwrked'
+HASHIDS_ALPHABET = 'abcdefghijkmnopqrstuvwxyz123456789'
+HASHIDS_ALPHABET_UPPER = 'ABCDEFGHJKMNPQRSTUVWXYZ123456789'
+
 
 ##########
 # SOCIAL #
