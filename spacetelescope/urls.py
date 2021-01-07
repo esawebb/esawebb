@@ -129,7 +129,7 @@ urlpatterns += [
 
     # Public contacts edit
     # TODO: Check if these contacts URLs are required
-    # url( r'^contacts/', include('djangoplicity.contacts.urls') ),
+    url( r'^contacts/', include('djangoplicity.contacts.urls') ),
     # TODO: check these groups and update if necessary
     # url( r'^contacts/subscribe/messenger/(?P<uid>.*)/', GroupSubscribe.as_view(group=27, template_name='contacts/messenger_public_subscribe.html'), name='messenger_subscribe'),
 
