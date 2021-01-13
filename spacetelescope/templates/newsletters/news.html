@@ -54,7 +54,7 @@
 {% endblock %}
 
 {% block footer %}
-    {% with followus="yes" org="ESA/Hubble" potw_feed_url="http://feeds.feedburner.com/hubble_potw/" reason="you subscribed to ESA/Hubble News." footer_potws=data.footer_potws %}
+    {% with followus="yes" org="ESA/Hubble" potw_feed_url="http://feeds.feedburner.com/hubble_potw/" reason="you subscribed to ESA/Hubble News." footer_potws=data.footer_potws address="ESA/Hubble, ESA Office, Space Telescope Science Institute, 3700 San Martin Dr, D-21218 Baltimore, United States" %}
         {% include "newsletters/includes/footer.html" with width="660" %}
     {% endwith %}
 {% endblock %}
