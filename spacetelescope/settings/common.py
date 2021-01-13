@@ -1,4 +1,3 @@
-
 # -*- coding: utf-8 -*-
 #
 # spacetelescope.org
@@ -578,12 +577,12 @@ VIDEOS_FORMATS_REMOVE = [
 RELEASE_LINK_PREFIX = "heic"
 
 DEFAULT_CREATOR = u"ESA/Hubble"
-DEFAULT_CREATOR_URL = "https://www.spacetelescope.org"
-DEFAULT_CONTACT_ADDRESS = u"Karl-Schwarzschild-Strasse 2"
-DEFAULT_CONTACT_CITY = u"Garching bei München"
-DEFAULT_CONTACT_STATE_PROVINCE = ""
-DEFAULT_CONTACT_POSTAL_CODE = u"D-85748"
-DEFAULT_CONTACT_COUNTRY = u"Germany"
+DEFAULT_CREATOR_URL = "https://esahubble.org"
+DEFAULT_CONTACT_ADDRESS = u"ESA Office, Space Telescope Science Institute, 3700 San Martin Dr"
+DEFAULT_CONTACT_CITY = u"Baltimore"
+DEFAULT_CONTACT_STATE_PROVINCE = "MD"
+DEFAULT_CONTACT_POSTAL_CODE = u"21218"
+DEFAULT_CONTACT_COUNTRY = u"United States"
 DEFAULT_RIGHTS = "Creative Commons Attribution 4.0 International License"
 DEFAULT_PUBLISHER = u"ESA/Hubble"
 DEFAULT_PUBLISHER_ID = u"esahubble"
