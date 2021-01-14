@@ -700,9 +700,38 @@ $default-section-height: 307px;
   }
 
   #newsletter-carousel-wrapper {
-    img {
-      width: 100%;
-    }
+    border: 1px solid $border-grey;
+
+    #newsletter-carousel {
+			&.slick-initialized .slide {
+				visibility: visible;
+			}
+
+			.slide-prev {
+				@extend .slide-prev;
+			}
+
+			.slide-next {
+				@extend .slide-next;
+			}
+
+			a {
+				color: $text-color;
+				text-decoration: none;
+			}
+
+			&:hover {
+				.slide-prev, .slide-next {
+					@extend .slide-prev-next-hover;
+				}
+			}
+
+			.newsletter-description {
+				@extend .frontpage-description;
+				white-space: nowrap;
+			}
+
+		}
   }
 
   $section-header-height: 43px;

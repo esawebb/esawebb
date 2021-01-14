@@ -135,14 +135,21 @@
         <div id="newsletter-carousel-wrapper">
             <div class="section-header">
                 <div class="section-title blue-title">
-                    {% trans "ESA/Hubble science Newsletter" %}
+                    <a href="newsletters/science">{% trans "ESA/Hubble science Newsletter" %}</a>
+                </div>
+                <div class="section-navigation">
                 </div>
             </div>
-            <div>
-                <a href="/newsletters/science">
-                    <img src="{% static 'frontpage/newsletters.jpg' %}" alt="Take a look to our newsletters">
-                </a>
-            </div>
+            <div id="newsletter-carousel">
+                <div class="slide">
+                    <a href="science_newsletter.get_absolute_url }}">
+                        <img draggable="false" data-lazy="{{ science_newsletter.resource_original.url }}" class="img-responsive" alt="Newsletter">
+                        <div class="newsletter-description">
+                            <div class="title">{{ science_newsletter.subject }}</div>
+                        </div>
+                    </a>
+                </div> <!-- slide -->
+            </div> <!-- newsletter-carousel -->
         </div>
     </div>
 
