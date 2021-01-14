@@ -725,6 +725,11 @@ $default-section-height: 307px;
 				}
 			}
 
+      .img-wrapper {
+        /* max-height: $top100-frontpage-carousel-height; */
+        overflow: hidden;
+      }
+
 			.newsletter-description {
 				@extend .frontpage-description;
 				white-space: nowrap;
