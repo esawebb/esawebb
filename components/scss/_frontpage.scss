@@ -700,7 +700,6 @@ $default-section-height: 307px;
   }
 
   #newsletter-carousel-wrapper {
-    border: 1px solid $border-grey;
 
     #newsletter-carousel {
 			&.slick-initialized .slide {
@@ -729,6 +728,11 @@ $default-section-height: 307px;
 			.newsletter-description {
 				@extend .frontpage-description;
 				white-space: nowrap;
+
+        .title {
+          padding: 8px;
+        }
+
 			}
 
 		}
