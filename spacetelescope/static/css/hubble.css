@@ -5472,27 +5472,27 @@ body {
   min-width: 50px;
   color: #fff; }
 
-.slide-prev, #pr-carousel-wrapper #pr-carousel .slide-prev, .frontpage-section #hubblecast-carousel-wrapper #hubblecast-carousel .slide-prev, .frontpage-section #potw-carousel-wrapper #potw-carousel .slide-prev, .frontpage-section #highlight-carousel-wrapper #highlight-carousel .slide-prev, .top100 #top100-frontpage-carousel-wrapper #top100-frontpage-carousel .slide-prev, .middle-section #newsletter-carousel-wrapper #newsletter-carousel .slide-prev, #top100-carousel-wrapper #top100-carousel .slide-prev {
+.slide-prev, #pr-carousel-wrapper #pr-carousel .slide-prev, .frontpage-section #hubblecast-carousel-wrapper #hubblecast-carousel .slide-prev, .frontpage-section #potw-carousel-wrapper #potw-carousel .slide-prev, .frontpage-section #highlight-carousel-wrapper #highlight-carousel .slide-prev, .top100 #top100-frontpage-carousel-wrapper #top100-frontpage-carousel .slide-prev, #top100-carousel-wrapper #top100-carousel .slide-prev {
   left: 0px;
   background: none;
   font-size: 35px;
   /* opacity: 0.2; */
   /* filter: alpha(opacity=20); */
   /* @include transition(opacity 0.3s);  */ }
-  .slide-prev.slick-disabled, #pr-carousel-wrapper #pr-carousel .slick-disabled.slide-prev, .frontpage-section #hubblecast-carousel-wrapper #hubblecast-carousel .slick-disabled.slide-prev, .frontpage-section #potw-carousel-wrapper #potw-carousel .slick-disabled.slide-prev, .frontpage-section #highlight-carousel-wrapper #highlight-carousel .slick-disabled.slide-prev, .top100 #top100-frontpage-carousel-wrapper #top100-frontpage-carousel .slick-disabled.slide-prev, .middle-section #newsletter-carousel-wrapper #newsletter-carousel .slick-disabled.slide-prev, #top100-carousel-wrapper #top100-carousel .slick-disabled.slide-prev {
+  .slide-prev.slick-disabled, #pr-carousel-wrapper #pr-carousel .slick-disabled.slide-prev, .frontpage-section #hubblecast-carousel-wrapper #hubblecast-carousel .slick-disabled.slide-prev, .frontpage-section #potw-carousel-wrapper #potw-carousel .slick-disabled.slide-prev, .frontpage-section #highlight-carousel-wrapper #highlight-carousel .slick-disabled.slide-prev, .top100 #top100-frontpage-carousel-wrapper #top100-frontpage-carousel .slick-disabled.slide-prev, #top100-carousel-wrapper #top100-carousel .slick-disabled.slide-prev {
     visibility: hidden; }
 
-.slide-next, #pr-carousel-wrapper #pr-carousel .slide-next, .frontpage-section #hubblecast-carousel-wrapper #hubblecast-carousel .slide-next, .frontpage-section #potw-carousel-wrapper #potw-carousel .slide-next, .frontpage-section #highlight-carousel-wrapper #highlight-carousel .slide-next, .top100 #top100-frontpage-carousel-wrapper #top100-frontpage-carousel .slide-next, .middle-section #newsletter-carousel-wrapper #newsletter-carousel .slide-next, #top100-carousel-wrapper #top100-carousel .slide-next {
+.slide-next, #pr-carousel-wrapper #pr-carousel .slide-next, .frontpage-section #hubblecast-carousel-wrapper #hubblecast-carousel .slide-next, .frontpage-section #potw-carousel-wrapper #potw-carousel .slide-next, .frontpage-section #highlight-carousel-wrapper #highlight-carousel .slide-next, .top100 #top100-frontpage-carousel-wrapper #top100-frontpage-carousel .slide-next, #top100-carousel-wrapper #top100-carousel .slide-next {
   right: 0px;
   background: none;
   font-size: 35px;
   /* opacity: 0.2; */
   /* filter: alpha(opacity=20); */
   /* @include transition(opacity 0.3s);  */ }
-  .slide-next.slick-disabled, #pr-carousel-wrapper #pr-carousel .slick-disabled.slide-next, .frontpage-section #hubblecast-carousel-wrapper #hubblecast-carousel .slick-disabled.slide-next, .frontpage-section #potw-carousel-wrapper #potw-carousel .slick-disabled.slide-next, .frontpage-section #highlight-carousel-wrapper #highlight-carousel .slick-disabled.slide-next, .top100 #top100-frontpage-carousel-wrapper #top100-frontpage-carousel .slick-disabled.slide-next, .middle-section #newsletter-carousel-wrapper #newsletter-carousel .slick-disabled.slide-next, #top100-carousel-wrapper #top100-carousel .slick-disabled.slide-next {
+  .slide-next.slick-disabled, #pr-carousel-wrapper #pr-carousel .slick-disabled.slide-next, .frontpage-section #hubblecast-carousel-wrapper #hubblecast-carousel .slick-disabled.slide-next, .frontpage-section #potw-carousel-wrapper #potw-carousel .slick-disabled.slide-next, .frontpage-section #highlight-carousel-wrapper #highlight-carousel .slick-disabled.slide-next, .top100 #top100-frontpage-carousel-wrapper #top100-frontpage-carousel .slick-disabled.slide-next, #top100-carousel-wrapper #top100-carousel .slick-disabled.slide-next {
     visibility: hidden; }
 
-.slide-prev-next-hover, #pr-carousel-wrapper:hover .slide-prev, #pr-carousel-wrapper:hover #pr-carousel .slide-prev, #pr-carousel-wrapper:hover .frontpage-section #hubblecast-carousel-wrapper #hubblecast-carousel .slide-prev, .frontpage-section #hubblecast-carousel-wrapper #hubblecast-carousel #pr-carousel-wrapper:hover .slide-prev, #pr-carousel-wrapper:hover .frontpage-section #potw-carousel-wrapper #potw-carousel .slide-prev, .frontpage-section #potw-carousel-wrapper #potw-carousel #pr-carousel-wrapper:hover .slide-prev, #pr-carousel-wrapper:hover .frontpage-section #highlight-carousel-wrapper #highlight-carousel .slide-prev, .frontpage-section #highlight-carousel-wrapper #highlight-carousel #pr-carousel-wrapper:hover .slide-prev, #pr-carousel-wrapper:hover .top100 #top100-frontpage-carousel-wrapper #top100-frontpage-carousel .slide-prev, .top100 #top100-frontpage-carousel-wrapper #top100-frontpage-carousel #pr-carousel-wrapper:hover .slide-prev, #pr-carousel-wrapper:hover .middle-section #newsletter-carousel-wrapper #newsletter-carousel .slide-prev, .middle-section #newsletter-carousel-wrapper #newsletter-carousel #pr-carousel-wrapper:hover .slide-prev, #pr-carousel-wrapper:hover #top100-carousel-wrapper #top100-carousel .slide-prev, #top100-carousel-wrapper #top100-carousel #pr-carousel-wrapper:hover .slide-prev, #pr-carousel-wrapper:hover .slide-next, #pr-carousel-wrapper:hover #pr-carousel .slide-next, #pr-carousel-wrapper:hover .frontpage-section #hubblecast-carousel-wrapper #hubblecast-carousel .slide-next, .frontpage-section #hubblecast-carousel-wrapper #hubblecast-carousel #pr-carousel-wrapper:hover .slide-next, #pr-carousel-wrapper:hover .frontpage-section #potw-carousel-wrapper #potw-carousel .slide-next, .frontpage-section #potw-carousel-wrapper #potw-carousel #pr-carousel-wrapper:hover .slide-next, #pr-carousel-wrapper:hover .frontpage-section #highlight-carousel-wrapper #highlight-carousel .slide-next, .frontpage-section #highlight-carousel-wrapper #highlight-carousel #pr-carousel-wrapper:hover .slide-next, #pr-carousel-wrapper:hover .top100 #top100-frontpage-carousel-wrapper #top100-frontpage-carousel .slide-next, .top100 #top100-frontpage-carousel-wrapper #top100-frontpage-carousel #pr-carousel-wrapper:hover .slide-next, #pr-carousel-wrapper:hover .middle-section #newsletter-carousel-wrapper #newsletter-carousel .slide-next, .middle-section #newsletter-carousel-wrapper #newsletter-carousel #pr-carousel-wrapper:hover .slide-next, #pr-carousel-wrapper:hover #top100-carousel-wrapper #top100-carousel .slide-next, #top100-carousel-wrapper #top100-carousel #pr-carousel-wrapper:hover .slide-next, .frontpage-section #hubblecast-carousel-wrapper #hubblecast-carousel:hover .slide-prev, .frontpage-section #hubblecast-carousel-wrapper #hubblecast-carousel:hover .slide-next, .frontpage-section #potw-carousel-wrapper #potw-carousel:hover .slide-prev, .frontpage-section #potw-carousel-wrapper #potw-carousel:hover .slide-next, .frontpage-section #highlight-carousel-wrapper #highlight-carousel:hover .slide-prev, .frontpage-section #highlight-carousel-wrapper #highlight-carousel:hover .slide-next, .top100 #top100-frontpage-carousel-wrapper #top100-frontpage-carousel:hover .slide-prev, .top100 #top100-frontpage-carousel-wrapper #top100-frontpage-carousel:hover .slide-next, .middle-section #newsletter-carousel-wrapper #newsletter-carousel:hover .slide-prev, .middle-section #newsletter-carousel-wrapper #newsletter-carousel:hover .slide-next, #top100-carousel-wrapper #top100-carousel:hover .slide-prev, #top100-carousel-wrapper #top100-carousel:hover .slide-next {
+.slide-prev-next-hover, #pr-carousel-wrapper:hover .slide-prev, #pr-carousel-wrapper:hover #pr-carousel .slide-prev, #pr-carousel-wrapper:hover .frontpage-section #hubblecast-carousel-wrapper #hubblecast-carousel .slide-prev, .frontpage-section #hubblecast-carousel-wrapper #hubblecast-carousel #pr-carousel-wrapper:hover .slide-prev, #pr-carousel-wrapper:hover .frontpage-section #potw-carousel-wrapper #potw-carousel .slide-prev, .frontpage-section #potw-carousel-wrapper #potw-carousel #pr-carousel-wrapper:hover .slide-prev, #pr-carousel-wrapper:hover .frontpage-section #highlight-carousel-wrapper #highlight-carousel .slide-prev, .frontpage-section #highlight-carousel-wrapper #highlight-carousel #pr-carousel-wrapper:hover .slide-prev, #pr-carousel-wrapper:hover .top100 #top100-frontpage-carousel-wrapper #top100-frontpage-carousel .slide-prev, .top100 #top100-frontpage-carousel-wrapper #top100-frontpage-carousel #pr-carousel-wrapper:hover .slide-prev, #pr-carousel-wrapper:hover #top100-carousel-wrapper #top100-carousel .slide-prev, #top100-carousel-wrapper #top100-carousel #pr-carousel-wrapper:hover .slide-prev, #pr-carousel-wrapper:hover .slide-next, #pr-carousel-wrapper:hover #pr-carousel .slide-next, #pr-carousel-wrapper:hover .frontpage-section #hubblecast-carousel-wrapper #hubblecast-carousel .slide-next, .frontpage-section #hubblecast-carousel-wrapper #hubblecast-carousel #pr-carousel-wrapper:hover .slide-next, #pr-carousel-wrapper:hover .frontpage-section #potw-carousel-wrapper #potw-carousel .slide-next, .frontpage-section #potw-carousel-wrapper #potw-carousel #pr-carousel-wrapper:hover .slide-next, #pr-carousel-wrapper:hover .frontpage-section #highlight-carousel-wrapper #highlight-carousel .slide-next, .frontpage-section #highlight-carousel-wrapper #highlight-carousel #pr-carousel-wrapper:hover .slide-next, #pr-carousel-wrapper:hover .top100 #top100-frontpage-carousel-wrapper #top100-frontpage-carousel .slide-next, .top100 #top100-frontpage-carousel-wrapper #top100-frontpage-carousel #pr-carousel-wrapper:hover .slide-next, #pr-carousel-wrapper:hover #top100-carousel-wrapper #top100-carousel .slide-next, #top100-carousel-wrapper #top100-carousel #pr-carousel-wrapper:hover .slide-next, .frontpage-section #hubblecast-carousel-wrapper #hubblecast-carousel:hover .slide-prev, .frontpage-section #hubblecast-carousel-wrapper #hubblecast-carousel:hover .slide-next, .frontpage-section #potw-carousel-wrapper #potw-carousel:hover .slide-prev, .frontpage-section #potw-carousel-wrapper #potw-carousel:hover .slide-next, .frontpage-section #highlight-carousel-wrapper #highlight-carousel:hover .slide-prev, .frontpage-section #highlight-carousel-wrapper #highlight-carousel:hover .slide-next, .top100 #top100-frontpage-carousel-wrapper #top100-frontpage-carousel:hover .slide-prev, .top100 #top100-frontpage-carousel-wrapper #top100-frontpage-carousel:hover .slide-next, #top100-carousel-wrapper #top100-carousel:hover .slide-prev, #top100-carousel-wrapper #top100-carousel:hover .slide-next {
   /* opacity: 1; */
   /* filter: alpha(opacity=100); */
   /* @include transition(opacity 0.3s);  */ }
@@ -5779,17 +5779,17 @@ body {
 .section-navigation {
   float: right; }
 
-.frontpage-description:hover, .frontpage-section #hubblecast-carousel-wrapper #hubblecast-carousel .hubblecast-description:hover, .frontpage-section #potw-carousel-wrapper #potw-carousel .potw-description:hover, .top100 #top100-frontpage-carousel-wrapper #top100-frontpage-carousel .top100-description:hover, .middle-section #newsletter-carousel-wrapper #newsletter-carousel .newsletter-description:hover {
+.frontpage-description:hover, .frontpage-section #hubblecast-carousel-wrapper #hubblecast-carousel .hubblecast-description:hover, .frontpage-section #potw-carousel-wrapper #potw-carousel .potw-description:hover, .top100 #top100-frontpage-carousel-wrapper #top100-frontpage-carousel .top100-description:hover, .middle-section #newsletter-preview-container #newsletter-preview .newsletter-description:hover {
   background-color: #3f9efa;
   color: #fff; }
-  .frontpage-description:hover .date, .frontpage-section #hubblecast-carousel-wrapper #hubblecast-carousel .hubblecast-description:hover .date, .frontpage-section #potw-carousel-wrapper #potw-carousel .potw-description:hover .date, .top100 #top100-frontpage-carousel-wrapper #top100-frontpage-carousel .top100-description:hover .date, .middle-section #newsletter-carousel-wrapper #newsletter-carousel .newsletter-description:hover .date {
+  .frontpage-description:hover .date, .frontpage-section #hubblecast-carousel-wrapper #hubblecast-carousel .hubblecast-description:hover .date, .frontpage-section #potw-carousel-wrapper #potw-carousel .potw-description:hover .date, .top100 #top100-frontpage-carousel-wrapper #top100-frontpage-carousel .top100-description:hover .date, .middle-section #newsletter-preview-container #newsletter-preview .newsletter-description:hover .date {
     color: #fff; }
 
-.frontpage-description .date, .frontpage-section #hubblecast-carousel-wrapper #hubblecast-carousel .hubblecast-description .date, .frontpage-section #potw-carousel-wrapper #potw-carousel .potw-description .date, .top100 #top100-frontpage-carousel-wrapper #top100-frontpage-carousel .top100-description .date, .middle-section #newsletter-carousel-wrapper #newsletter-carousel .newsletter-description .date {
+.frontpage-description .date, .frontpage-section #hubblecast-carousel-wrapper #hubblecast-carousel .hubblecast-description .date, .frontpage-section #potw-carousel-wrapper #potw-carousel .potw-description .date, .top100 #top100-frontpage-carousel-wrapper #top100-frontpage-carousel .top100-description .date, .middle-section #newsletter-preview-container #newsletter-preview .newsletter-description .date {
   padding: 10px 20px 0;
   color: #3f9efa; }
 
-.frontpage-description .title, .frontpage-section #hubblecast-carousel-wrapper #hubblecast-carousel .hubblecast-description .title, .frontpage-section #potw-carousel-wrapper #potw-carousel .potw-description .title, .top100 #top100-frontpage-carousel-wrapper #top100-frontpage-carousel .top100-description .title, .middle-section #newsletter-carousel-wrapper #newsletter-carousel .newsletter-description .title {
+.frontpage-description .title, .frontpage-section #hubblecast-carousel-wrapper #hubblecast-carousel .hubblecast-description .title, .frontpage-section #potw-carousel-wrapper #potw-carousel .potw-description .title, .top100 #top100-frontpage-carousel-wrapper #top100-frontpage-carousel .top100-description .title, .middle-section #newsletter-preview-container #newsletter-preview .newsletter-description .title {
   padding: 0 20px 10px;
   line-height: 16px;
   /* white-space: nowrap; */
@@ -6101,17 +6101,21 @@ body {
   border: 1px solid #dcdcdc;
   margin-top: 1rem; }
 
-.middle-section #newsletter-carousel-wrapper #newsletter-carousel.slick-initialized .slide {
-  visibility: visible; }
-
-.middle-section #newsletter-carousel-wrapper #newsletter-carousel a {
-  color: #333333;
-  text-decoration: none; }
-
-.middle-section #newsletter-carousel-wrapper #newsletter-carousel .newsletter-description {
-  white-space: nowrap; }
-  .middle-section #newsletter-carousel-wrapper #newsletter-carousel .newsletter-description .title {
-    padding: 8px; }
+.middle-section #newsletter-preview-container {
+  border: 1px solid #dcdcdc;
+  margin-top: 1rem; }
+  .middle-section #newsletter-preview-container #newsletter-preview a {
+    color: #333333;
+    text-decoration: none; }
+  .middle-section #newsletter-preview-container #newsletter-preview .img-wrapper {
+    /*max-height: $default-section-height;*/
+    overflow: hidden; }
+    .middle-section #newsletter-preview-container #newsletter-preview .img-wrapper img {
+      margin: 0 auto; }
+  .middle-section #newsletter-preview-container #newsletter-preview .newsletter-description {
+    white-space: nowrap; }
+    .middle-section #newsletter-preview-container #newsletter-preview .newsletter-description .title {
+      padding: 8px; }
 
 .middle-section .social-feeds {
   display: flex;
@@ -6121,7 +6125,7 @@ body {
   align-content: space-between; }
   .middle-section .social-feeds .facebook-feeds, .middle-section .social-feeds .twitter-feeds, .middle-section .social-feeds .instagram-feeds {
     width: 304px;
-    height: 658px;
+    height: 719px;
     text-align: center;
     border: 1px solid #dcdcdc;
     overflow-y: hidden;
@@ -6611,10 +6615,10 @@ a.thumbnail {
         margin-right: -10px; } }
     #top100-carousel-wrapper #top100-carousel.slick-initialized .slide {
       visibility: visible; }
-    #top100-carousel-wrapper #top100-carousel .frontpage-section #hubblecast-carousel-wrapper #hubblecast-carousel .slide-prev, .frontpage-section #hubblecast-carousel-wrapper #hubblecast-carousel #top100-carousel-wrapper #top100-carousel .slide-prev, #top100-carousel-wrapper #top100-carousel .frontpage-section #potw-carousel-wrapper #potw-carousel .slide-prev, .frontpage-section #potw-carousel-wrapper #potw-carousel #top100-carousel-wrapper #top100-carousel .slide-prev, #top100-carousel-wrapper #top100-carousel .frontpage-section #highlight-carousel-wrapper #highlight-carousel .slide-prev, .frontpage-section #highlight-carousel-wrapper #highlight-carousel #top100-carousel-wrapper #top100-carousel .slide-prev, #top100-carousel-wrapper #top100-carousel .top100 #top100-frontpage-carousel-wrapper #top100-frontpage-carousel .slide-prev, .top100 #top100-frontpage-carousel-wrapper #top100-frontpage-carousel #top100-carousel-wrapper #top100-carousel .slide-prev, #top100-carousel-wrapper #top100-carousel .middle-section #newsletter-carousel-wrapper #newsletter-carousel .slide-prev, .middle-section #newsletter-carousel-wrapper #newsletter-carousel #top100-carousel-wrapper #top100-carousel .slide-prev, #top100-carousel-wrapper #top100-carousel .slide-prev {
+    #top100-carousel-wrapper #top100-carousel .frontpage-section #hubblecast-carousel-wrapper #hubblecast-carousel .slide-prev, .frontpage-section #hubblecast-carousel-wrapper #hubblecast-carousel #top100-carousel-wrapper #top100-carousel .slide-prev, #top100-carousel-wrapper #top100-carousel .frontpage-section #potw-carousel-wrapper #potw-carousel .slide-prev, .frontpage-section #potw-carousel-wrapper #potw-carousel #top100-carousel-wrapper #top100-carousel .slide-prev, #top100-carousel-wrapper #top100-carousel .frontpage-section #highlight-carousel-wrapper #highlight-carousel .slide-prev, .frontpage-section #highlight-carousel-wrapper #highlight-carousel #top100-carousel-wrapper #top100-carousel .slide-prev, #top100-carousel-wrapper #top100-carousel .top100 #top100-frontpage-carousel-wrapper #top100-frontpage-carousel .slide-prev, .top100 #top100-frontpage-carousel-wrapper #top100-frontpage-carousel #top100-carousel-wrapper #top100-carousel .slide-prev, #top100-carousel-wrapper #top100-carousel .slide-prev {
       opacity: 1;
       filter: alpha(opacity=100); }
-    #top100-carousel-wrapper #top100-carousel .frontpage-section #hubblecast-carousel-wrapper #hubblecast-carousel .slide-next, .frontpage-section #hubblecast-carousel-wrapper #hubblecast-carousel #top100-carousel-wrapper #top100-carousel .slide-next, #top100-carousel-wrapper #top100-carousel .frontpage-section #potw-carousel-wrapper #potw-carousel .slide-next, .frontpage-section #potw-carousel-wrapper #potw-carousel #top100-carousel-wrapper #top100-carousel .slide-next, #top100-carousel-wrapper #top100-carousel .frontpage-section #highlight-carousel-wrapper #highlight-carousel .slide-next, .frontpage-section #highlight-carousel-wrapper #highlight-carousel #top100-carousel-wrapper #top100-carousel .slide-next, #top100-carousel-wrapper #top100-carousel .top100 #top100-frontpage-carousel-wrapper #top100-frontpage-carousel .slide-next, .top100 #top100-frontpage-carousel-wrapper #top100-frontpage-carousel #top100-carousel-wrapper #top100-carousel .slide-next, #top100-carousel-wrapper #top100-carousel .middle-section #newsletter-carousel-wrapper #newsletter-carousel .slide-next, .middle-section #newsletter-carousel-wrapper #newsletter-carousel #top100-carousel-wrapper #top100-carousel .slide-next, #top100-carousel-wrapper #top100-carousel .slide-next {
+    #top100-carousel-wrapper #top100-carousel .frontpage-section #hubblecast-carousel-wrapper #hubblecast-carousel .slide-next, .frontpage-section #hubblecast-carousel-wrapper #hubblecast-carousel #top100-carousel-wrapper #top100-carousel .slide-next, #top100-carousel-wrapper #top100-carousel .frontpage-section #potw-carousel-wrapper #potw-carousel .slide-next, .frontpage-section #potw-carousel-wrapper #potw-carousel #top100-carousel-wrapper #top100-carousel .slide-next, #top100-carousel-wrapper #top100-carousel .frontpage-section #highlight-carousel-wrapper #highlight-carousel .slide-next, .frontpage-section #highlight-carousel-wrapper #highlight-carousel #top100-carousel-wrapper #top100-carousel .slide-next, #top100-carousel-wrapper #top100-carousel .top100 #top100-frontpage-carousel-wrapper #top100-frontpage-carousel .slide-next, .top100 #top100-frontpage-carousel-wrapper #top100-frontpage-carousel #top100-carousel-wrapper #top100-carousel .slide-next, #top100-carousel-wrapper #top100-carousel .slide-next {
       opacity: 1;
       filter: alpha(opacity=100); }
     @media (min-width: 1025px) {

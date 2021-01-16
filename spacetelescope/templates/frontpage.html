@@ -132,26 +132,22 @@
             </div> <!-- hubblecast-carousel -->
         </div>
         {% endif %}
-        <div id="newsletter-carousel-wrapper">
+        <div id="newsletter-preview-container">
             <div class="section-header">
-                <div class="section-title blue-title">
+                <div class="section-title">
                     <a href="newsletters/science">{% trans "ESA/Hubble science Newsletter" %}</a>
                 </div>
-                <div class="section-navigation">
-                </div>
             </div>
-            <div id="newsletter-carousel">
-                <div class="slide">
-                    <a href="{{ science_newsletter.get_absolute_url }}">
-                        <div class="img-wrapper">
-                            <img draggable="false" src="{{ science_newsletter.resource_screen.url }}" class="img-responsive" alt="Newsletter">
-                        </div>
-                        <div class="newsletter-description">
-                            <div class="title">{{ science_newsletter.subject }}</div>
-                        </div>
-                    </a>
-                </div> <!-- slide -->
-            </div> <!-- newsletter-carousel -->
+            <div id="newsletter-preview">
+                <a href="{{ science_newsletter.get_absolute_url }}">
+                    <div class="img-wrapper">
+                        <img draggable="false" src="{{ science_newsletter.resource_medium.url }}" class="img-responsive" alt="Newsletter">
+                    </div>
+                    <div class="newsletter-description">
+                        <div class="title">{{ science_newsletter.subject }}</div>
+                    </div>
+                </a>
+            </div>
         </div>
     </div>
 
@@ -168,7 +164,7 @@
                     data-href="https://www.facebook.com/hubbleESA/"
                     data-tabs="timeline"
                     data-width="304"
-                    data-height="610"
+                    data-height="670"
                     data-small-header="true"
                     data-hide-cover="false"
                     data-show-facepile="false"
@@ -188,7 +184,7 @@
                     class="twitter-timeline"
                     href="https://twitter.com/HUBBLE_space?ref_src=twsrc%5Etfw"
                     data-width="304"
-                    data-height="610"
+                    data-height="670"
                 >
                     Tweets by HUBBLE_space
                 </a>

@@ -699,53 +699,39 @@ $default-section-height: 307px;
     margin-top: 1rem;
   }
 
-  #newsletter-carousel-wrapper {
+  #newsletter-preview-container {
+    border: 1px solid $border-grey;
+    margin-top: 1rem;
 
-    #newsletter-carousel {
-			&.slick-initialized .slide {
-				visibility: visible;
-			}
-
-			.slide-prev {
-				@extend .slide-prev;
-			}
-
-			.slide-next {
-				@extend .slide-next;
-			}
-
-			a {
-				color: $text-color;
-				text-decoration: none;
-			}
-
-			&:hover {
-				.slide-prev, .slide-next {
-					@extend .slide-prev-next-hover;
-				}
-			}
-
-      .img-wrapper {
-        /* max-height: $top100-frontpage-carousel-height; */
-        overflow: hidden;
+    #newsletter-preview {
+      a {
+        color: $text-color;
+        text-decoration: none;
       }
 
-			.newsletter-description {
-				@extend .frontpage-description;
-				white-space: nowrap;
+      .img-wrapper {
+        /*max-height: $default-section-height;*/
+        overflow: hidden;
+
+        img {
+          margin: 0 auto;
+        }
+      }
+
+      .newsletter-description {
+        @extend .frontpage-description;
+        white-space: nowrap;
 
         .title {
           padding: 8px;
         }
-
-			}
-
-		}
+      }
+    }
   }
 
   $section-header-height: 43px;
   $social-feed-width: 304px;
-  $social-feed-height: 610px;
+  $social-feed-height: 670px;
 
   .social-feeds {
     display: flex;
@@ -756,7 +742,7 @@ $default-section-height: 307px;
 
     .facebook-feeds, .twitter-feeds, .instagram-feeds {
       width: $social-feed-width;
-      height: $social-feed-height + $section-header-height + 5px;
+      height: $social-feed-height + $section-header-height + 6px;
       text-align: center;
       border: 1px solid $border-grey;
       overflow-y: hidden;
