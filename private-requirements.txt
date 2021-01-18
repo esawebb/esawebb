@@ -1,7 +1,7 @@
-# Last update: Fix BS attrs error
+# Last update: Use a new branch for esahubble
 git+https://github.com/djangoplicity/djangoplicity-actions.git@release/python3
 git+https://github.com/djangoplicity/djangoplicity-customsearch.git@release/python3
 git+https://github.com/djangoplicity/djangoplicity-newsletters.git@release/python3
 git+https://github.com/djangoplicity/djangoplicity-products2@release/python3
 git+https://github.com/djangoplicity/djangoplicity-contacts@release/python3
-git+https://github.com/djangoplicity/djangoplicity@release/python3
+git+https://github.com/djangoplicity/djangoplicity@djangoplicity-esahubble
