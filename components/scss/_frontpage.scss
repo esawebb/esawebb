@@ -673,7 +673,7 @@ $default-section-height: 307px;
       padding-right: 1rem;
 
       @media (max-width: $screen-md) {
-        margin-bottom: 1rem;
+        margin-bottom: 2rem;
       }
 
     }
@@ -710,11 +710,16 @@ $default-section-height: 307px;
       }
 
       .img-wrapper {
-        /*max-height: $default-section-height;*/
         overflow: hidden;
 
-        img {
-          margin: 0 auto;
+        .img-cropped {
+          width: 100%;
+          object-fit: cover;
+          object-position: center top;
+
+          @media (max-width: $screen-md) {
+
+          }
         }
       }
 
