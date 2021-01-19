@@ -717,8 +717,12 @@ $default-section-height: 307px;
           object-fit: cover;
           object-position: center top;
 
-          @media (max-width: $screen-md) {
+          @media (min-width: $screen-md) {
+            height: 355px;
+          }
 
+          @media (max-width: $screen-md) {
+            height: 540px;
           }
         }
       }
@@ -736,7 +740,7 @@ $default-section-height: 307px;
 
   $section-header-height: 43px;
   $social-feed-width: 304px;
-  $social-feed-height: 670px;
+  $social-feed-height: 625px;
 
   .social-feeds {
     display: flex;

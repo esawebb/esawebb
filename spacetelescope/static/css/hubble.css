@@ -6113,6 +6113,12 @@ body {
       width: 100%;
       object-fit: cover;
       object-position: center top; }
+      @media (min-width: 992px) {
+        .middle-section #newsletter-preview-container #newsletter-preview .img-wrapper .img-cropped {
+          height: 355px; } }
+      @media (max-width: 992px) {
+        .middle-section #newsletter-preview-container #newsletter-preview .img-wrapper .img-cropped {
+          height: 540px; } }
   .middle-section #newsletter-preview-container #newsletter-preview .newsletter-description {
     white-space: nowrap; }
     .middle-section #newsletter-preview-container #newsletter-preview .newsletter-description .title {
@@ -6126,7 +6132,7 @@ body {
   align-content: space-between; }
   .middle-section .social-feeds .facebook-feeds, .middle-section .social-feeds .twitter-feeds, .middle-section .social-feeds .instagram-feeds {
     width: 304px;
-    height: 719px;
+    height: 674px;
     text-align: center;
     border: 1px solid #dcdcdc;
     overflow-y: hidden;
