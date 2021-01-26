@@ -60,7 +60,7 @@ urlpatterns += [
     # Djangoplicity Adminstration
     url( r'^admin/cache/', include( ('djangoplicity.cache.urls', "cache"), namespace="admincache_site" )),
     url( r'^admin/history/', include( ('djangoplicity.adminhistory.urls', "history"), namespace="adminhistory_site" )),
-    url( r'^admin/doc/', include( 'django.contrib.admindocs.urls' )),
+    # url( r'^admin/doc/', include( 'django.contrib.admindocs.urls' )),
     # url( r'^admin/shop/', include( 'djangoplicity.archives.contrib.satchmo.urls_admin' ) ),
     # url( r'^admin/shop/', include(adminshop_site.urls), { 'extra_context': { 'ADMINSHOP_SITE': True } } ),
     url( r'^admin/system/', adminlogs_site.urls, { 'extra_context': { 'ADMINLOGS_SITE': True }  } ),
