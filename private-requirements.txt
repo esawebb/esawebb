@@ -1,4 +1,4 @@
-# Last update: Use ESA email in task media upload youtube
+# Last update: Use ESA email in AVM image_metadata task
 git+https://github.com/djangoplicity/djangoplicity-actions.git@release/python3
 git+https://github.com/djangoplicity/djangoplicity-customsearch.git@release/python3
 git+https://github.com/djangoplicity/djangoplicity-newsletters.git@release/python3
