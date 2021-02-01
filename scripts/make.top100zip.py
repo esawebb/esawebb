@@ -67,8 +67,9 @@ if __name__ == '__main__':
 
             if resource and os.path.exists( resource.path ):
                 ( impath, imfile ) = os.path.split( resource.path )
-                copyfiles.append( ( resource.path, os.path.join( tmppath100, imfile ) ) )
-                totalsize += os.path.getsize( resource.path )
+                if im.id != "heic1502a":
+                    copyfiles.append( ( resource.path, os.path.join( tmppath100, imfile ) ) )
+                    totalsize += os.path.getsize( resource.path )
             else:
                 print("Warning: Resource %s for %s does not exists." % ( fmt, im.id ))
 
