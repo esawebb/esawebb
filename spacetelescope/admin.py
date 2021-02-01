@@ -34,13 +34,13 @@ from djangoplicity.contrib.admin import DjangoplicityModelAdmin
 from djangoplicity.products2.admin import register_if_installed, ExhibitionGroupAdmin, OnlineArtAuthorAdmin, \
     ConferenceAdmin
 from djangoplicity.products2.base.models import ArchiveCategory
-from djangoplicity.products2.models import Model3d, Calendar, Application, Brochure, Logo, Exhibition, \
+from djangoplicity.products2.models import Model3d, Calendar, Application, Book, Brochure, Logo, Exhibition, \
     Sticker, PostCard, PrintedPoster, ConferencePoster, Merchandise, Media, Presentation, OnlineArt, \
     ExhibitionGroup, OnlineArtAuthor, PressKit, FITSImage
 from djangoplicity.products2.options import Model3dOptions, CalendarOptions, ApplicationOptions, LogoOptions, \
     ExhibitionOptions, StickerOptions, PostCardOptions, PrintedPosterOptions, ConferencePosterOptions, \
     MerchandiseOptions, MediaOptions, PresentationOptions, OnlineArtOptions, PressKitOptions, BrochureOptions, \
-    FITSImageOptions
+    FITSImageOptions, BookOptions
 
 
 # Register each applications admin interfaces with
@@ -99,6 +99,8 @@ def register_products_with_admin( admin_site ):
     register_if_installed( admin_site, Model3d, Model3dOptions )
     register_if_installed( admin_site, Calendar, CalendarOptions, name='Calendar' )
     register_if_installed( admin_site, Application, ApplicationOptions )
+    register_if_installed(admin_site, Book, BookOptions,
+                          extra={'search_fields': ['isbn'], 'fieldsets': [('Extra', {'fields': ('isbn', 'doi'), }), ]})
     register_if_installed(admin_site, Brochure, BrochureOptions, exclude=['embargo_date', 'created', 'last_modified'])
     register_if_installed( admin_site, Logo, LogoOptions )
     register_if_installed( admin_site, Exhibition, ExhibitionOptions, extra={ 'list_display': ['group', 'group_order'], 'list_editable': ['group', 'group_order'], } )
