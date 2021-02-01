@@ -6,10 +6,12 @@
 #   Luis Clara Gomes <lcgomes@eso.org>
 #
 import os
+import sys
 import tempfile
 import shutil
 import django
-
+sys.path.append('/home/hubbleadm')
+os.environ['DJANGO_SETTINGS_MODULE'] = 'spacetelescope.settings.dev'
 django.setup()
 
 from djangoplicity.media.models import Image
@@ -24,6 +26,7 @@ def sizeof_fmt(num):
         if num < 1024.0:
             return "%3.1f%s" % (num, x)
         num /= 1024.0
+
 
 if __name__ == '__main__':
     args = optionparser.get_options( [( 'o', 'output', 'Output directory', True ), ( 'f', 'format', 'Format to include', True ), ( 't', 'temp', 'Temporary directory', False ), ] )
@@ -67,13 +70,13 @@ if __name__ == '__main__':
                 copyfiles.append( ( resource.path, os.path.join( tmppath100, imfile ) ) )
                 totalsize += os.path.getsize( resource.path )
             else:
-                print "Warning: Resource %s for %s does not exists." % ( fmt, im.id )
+                print("Warning: Resource %s for %s does not exists." % ( fmt, im.id ))
 
         # Total file size
-        print "Total uncompressed size: %s" % sizeof_fmt(totalsize)
+        print("Total uncompressed size: %s" % sizeof_fmt(totalsize))
 
         for ( src, dst ) in copyfiles:
-            print "Copying %s to %s" % ( src, dst )
+            print("Copying %s to %s" % ( src, dst ))
             shutil.copy( src, dst )
 
         # Create zip file
@@ -84,14 +87,14 @@ if __name__ == '__main__':
         if os.path.exists( zippath ):
             # Remove old file.
             if os.path.exists( outputfile ):
-                print "Removing existing top100 file %s" % outputfile
+                print("Removing existing top100 file %s" % outputfile)
                 os.remove( outputfile )
 
             shutil.move( zippath, outputfile )
         else:
             raise Exception( "Couldn't generate zip file %s" % outputfile )
-    except Exception, e:
-        print "Error: %s" % unicode(e)
+    except Exception as e:
+        print("Error: {}".format(e) )
     finally:
         # Delete temporary directory if exists
         if tmppath and os.path.exists( tmppath ):
