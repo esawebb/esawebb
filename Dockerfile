@@ -56,7 +56,8 @@ RUN apt-get update && apt-get install -y \
     node-uglify \
     libexempi-dev \
     rsync \
-    openssh-client
+    openssh-client \
+    zip
 
 RUN echo "Europe/Berlin" > /etc/timezone && \
     rm /etc/localtime && \
