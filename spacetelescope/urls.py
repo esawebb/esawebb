@@ -26,14 +26,14 @@ from djangoplicity.menus.views import sitemap
 from djangoplicity.newsletters.models import Newsletter
 from djangoplicity.newsletters.options import NewsletterOptions
 from djangoplicity.pages.views import view_page
-from djangoplicity.products2.models import Brochure, Calendar, Logo, Exhibition, FITSImage, Sticker, PostCard, \
+from djangoplicity.products2.models import Book, Brochure, Calendar, Logo, Exhibition, FITSImage, Sticker, PostCard, \
     PrintedPoster, ConferencePoster, Merchandise, Presentation, Model3d, \
     OnlineArtAuthor, Application, Media, OnlineArt, PressKit
 
 from djangoplicity.products2.options import BrochureOptions, CalendarOptions, LogoOptions, ExhibitionOptions, \
     FITSImageOptions, StickerOptions, PostCardOptions, PrintedPosterOptions, ConferencePosterOptions, \
     MerchandiseOptions, PresentationOptions, Model3dOptions, OnlineArtAuthorOptions, \
-    ApplicationOptions, MediaOptions, OnlineArtOptions, PressKitOptions
+    ApplicationOptions, MediaOptions, OnlineArtOptions, PressKitOptions, BookOptions
 from djangoplicity.releases.models import Release
 from djangoplicity.releases.options import ReleaseOptions
 from djangoplicity.science.models import ScienceAnnouncement
@@ -90,7 +90,7 @@ urlpatterns += [
     url( r'^announcements/', include('djangoplicity.announcements.urls'), { 'model': Announcement, 'options': AnnouncementOptions } ),
 
     ### ENTIRE BLOCK REFERENCING djangoplicity.products
-    # url( r'^about/further_information/books/', include('djangoplicity.products.urls.books'), { 'model': Book, 'options': BookOptions } ),
+    url( r'^about/further_information/books/', include('djangoplicity.products2.urls.books'), { 'model': Book, 'options': BookOptions } ),
     # url( r'^about/further_information/brochures/', include('djangoplicity.products.urls.brochures'), { 'model': Brochure, 'options': BrochureOptions } ),
     # url( r'^about/further_information/flyers/', include('djangoplicity.products.urls.flyers'), { 'model': Flyer, 'options': FlyerOptions } ),
     # url( r'^about/further_information/handouts/', include('djangoplicity.products.urls.handouts'), { 'model': Handout, 'options': HandoutOptions } ),
