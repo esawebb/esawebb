@@ -94,3 +94,4 @@ COPY --chown=hubbleadm scripts/ scripts/
 COPY --chown=hubbleadm .coveragerc .
 COPY --chown=hubbleadm manage.py manage.py
 COPY --chown=hubbleadm spacetelescope/ spacetelescope/
+COPY --chown=hubbleadm spacetelescope/static/fonts/helvetica/ /usr/share/fonts/truetype/helvetica/
