@@ -33,6 +33,9 @@ gunicorn==20.0.4
 # Thumbnails for Django
 sorl-thumbnail==12.5.0
 
+# PDF: open source implementation of RML
+trml2pdf == 0.6
+
 # Python library to read/write Excel 2010 files
 openpyxl==2.6.4
 
