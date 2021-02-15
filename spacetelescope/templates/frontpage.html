@@ -104,32 +104,32 @@
             </div> <!-- potw-carousel -->
         </div>
         {% endif %}
-        {% if hubblecasts %}
+        {% if spacesparks %}
         <div id="hubblecast-carousel-wrapper">
             <div class="section-header">
                 <div class="section-title">
-                    <a href="{% url 'videos_query_category' 'hubblecast' %}">{% trans "Hubblecast" %}</a>
+                    <a href="{% url 'videos_query_category' 'spacesparks' %}">{% trans "Space sparks" %}</a>
                 </div>
                 <div class="section-navigation">
                 </div>
             </div>
             <div id="hubblecast-carousel">
                 <div class="slide">
-                    {% if hubblecasts.0.youtube_video_id and hubblecasts.0.use_youtube %}
+                    {% if spacesparks.0.youtube_video_id and spacesparks.0.use_youtube %}
                         <div class="youtube-wrapper">
                             <div id="youtube-player"></div>
                         </div>
                     {% else %}
-                        {% embedvideo_subs hubblecasts.0 'medium_podcast,h264' 'hd_and_apple,hd720p_screen,dome_preview' '' hubblecasts.0.videosubtitle_set.all 0 %}
+                        {% embedvideo_subs spacesparks.0 'medium_podcast,h264' 'hd_and_apple,hd720p_screen,dome_preview' '' spacesparks.0.videosubtitle_set.all 0 %}
                     {% endif %}
-                    <a href="{{ hubblecasts.0.get_absolute_url }}">
-                        <div class="hubblecast-description{% if not hubblecasts.0.youtube_video_id or not hubblecasts.0.use_youtube %} hubblecast-description-jwplayer{% endif %}">
-                            <div class="date">{{ hubblecasts.0.release_date|datetime:"DATE" }} — {{ hubblecasts.0.id }}</div>
-                            <div class="title">{{ hubblecasts.0.title }}</div>
+                    <a href="{{ spacesparks.0.get_absolute_url }}">
+                        <div class="hubblecast-description{% if not spacesparks.0.youtube_video_id or not spacesparks.0.use_youtube %} hubblecast-description-jwplayer{% endif %}">
+                            <div class="date">{{ spacesparks.0.release_date|datetime:"DATE" }} — {{ spacesparks.0.id }}</div>
+                            <div class="title">{{ spacesparks.0.title }}</div>
                     </div>
                     </a>
                 </div>
-            </div> <!-- hubblecast-carousel -->
+            </div> <!-- spacesparks-carousel -->
         </div>
         {% endif %}
         <div id="newsletter-preview-container">
@@ -273,14 +273,14 @@
 <script type="text/javascript">
 
 // Load YouTube or JwPlayer
-{% if hubblecasts.0 %}
-    {% if hubblecasts.0.youtube_video_id and hubblecasts.0.use_youtube %}
+{% if spacesparks.0 %}
+    {% if spacesparks.0.youtube_video_id and spacesparks.0.use_youtube %}
         var player;
         function onYouTubeIframeAPIReady() {
             player = new YT.Player('youtube-player', {
                 height: '263',
                 width: '468',
-                videoId: '{{ hubblecasts.0.youtube_video_id }}',
+                videoId: '{{ spacesparks.0.youtube_video_id }}',
                 playerVars: {
                     'modestbranding': 1,
                     'hl': '{{ LANGUAGE_CODE }}',
@@ -298,15 +298,15 @@
 {% endif %}
 
 $(document).ready(function(){
-    {% if hubblecasts.0 %}
-        {% if hubblecasts.0.youtube_video_id and hubblecasts.0.use_youtube %}
+    {% if spacesparks.0 %}
+        {% if spacesparks.0.youtube_video_id and spacesparks.0.use_youtube %}
             var tag = document.createElement('script');
 
             tag.src = "https://www.youtube.com/iframe_api";
             var firstScriptTag = document.getElementsByTagName('script')[0];
             firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
         {% else %}
-            setupVideoPlayer('{{ hubblecasts.0.id }}');
+            setupVideoPlayer('{{ spacesparks.0.id }}');
         {% endif %}
     {% endif %}
 
