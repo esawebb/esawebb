@@ -415,7 +415,7 @@ FILE_UPLOAD_PERMISSIONS = 0o666
 
 # EMAIL CONFIG
 SERVER_EMAIL = 'nobody@esahubble.org'
-DEFAULT_FROM_EMAIL = 'nobody@esahubble.org'
+DEFAULT_FROM_EMAIL = ['nobody@esahubble.org']
 DEFAULT_MAIL_USER = ['web@esahubble.org']
 DEFAULT_MAIL_TAGGING = 'zidmani@gmail.com'
 EMAIL_SUBJECT_PREFIX = '[SPACETELESCOPE-LOCAL]'
