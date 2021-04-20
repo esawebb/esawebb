@@ -1,4 +1,4 @@
-# Last update: Temporal workaround
+# Last update: New youtube token
 git+https://github.com/djangoplicity/djangoplicity-actions.git@release/python3
 git+https://github.com/djangoplicity/djangoplicity-customsearch.git@release/python3
 git+https://github.com/djangoplicity/djangoplicity-newsletters.git@newsletters-esahubble
