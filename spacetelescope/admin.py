@@ -36,11 +36,11 @@ from djangoplicity.products2.admin import register_if_installed, ExhibitionGroup
 from djangoplicity.products2.base.models import ArchiveCategory
 from djangoplicity.products2.models import Model3d, Calendar, Application, Book, Brochure, Logo, Exhibition, \
     Sticker, PostCard, PrintedPoster, ConferencePoster, Merchandise, Media, Presentation, OnlineArt, \
-    ExhibitionGroup, OnlineArtAuthor, PressKit, FITSImage
+    ExhibitionGroup, OnlineArtAuthor, PressKit, FITSImage, VideoConferenceBackground
 from djangoplicity.products2.options import Model3dOptions, CalendarOptions, ApplicationOptions, LogoOptions, \
     ExhibitionOptions, StickerOptions, PostCardOptions, PrintedPosterOptions, ConferencePosterOptions, \
     MerchandiseOptions, MediaOptions, PresentationOptions, OnlineArtOptions, PressKitOptions, BrochureOptions, \
-    FITSImageOptions, BookOptions
+    FITSImageOptions, BookOptions, VideoConferenceBackgroundOptions
 
 
 # Register each applications admin interfaces with
@@ -114,6 +114,7 @@ def register_products_with_admin( admin_site ):
     register_if_installed( admin_site, Presentation, PresentationOptions )
     register_if_installed( admin_site, PressKit, PressKitOptions )
     register_if_installed( admin_site, OnlineArt, OnlineArtOptions, name='Artist' )
+    register_if_installed( admin_site, VideoConferenceBackground, VideoConferenceBackgroundOptions)
 
     class ArchiveCategoryAdmin(DjangoplicityModelAdmin):
        list_display = ('fullname',)
