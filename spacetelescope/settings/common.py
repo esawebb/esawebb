@@ -541,6 +541,7 @@ ARCHIVES = (
     ('djangoplicity.products2.models.OnlineArt', 'djangoplicity.products2.options.OnlineArtOptions'),
     ('djangoplicity.products2.models.OnlineArtAuthor', 'djangoplicity.products2.options.OnlineArtAuthorOptions'),
     ('djangoplicity.products2.models.ConferenceItem', 'djangoplicity.products2.options.ConferenceItemOptions'),
+    ('djangoplicity.products2.models.VideoConferenceBackground', 'djangoplicity.products2.options.VideoConferenceBackgroundOptions'),
     ('djangoplicity.newsletters.models.Newsletter', 'djangoplicity.newsletters.options.NewsletterOptions'),
 )
 
