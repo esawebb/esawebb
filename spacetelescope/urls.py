@@ -28,12 +28,12 @@ from djangoplicity.newsletters.options import NewsletterOptions
 from djangoplicity.pages.views import view_page
 from djangoplicity.products2.models import Book, Brochure, Calendar, Logo, Exhibition, FITSImage, Sticker, PostCard, \
     PrintedPoster, ConferencePoster, Merchandise, Presentation, Model3d, \
-    OnlineArtAuthor, Application, Media, OnlineArt, PressKit
+    OnlineArtAuthor, Application, Media, OnlineArt, PressKit, VideoConferenceBackground
 
 from djangoplicity.products2.options import BrochureOptions, CalendarOptions, LogoOptions, ExhibitionOptions, \
     FITSImageOptions, StickerOptions, PostCardOptions, PrintedPosterOptions, ConferencePosterOptions, \
     MerchandiseOptions, PresentationOptions, Model3dOptions, OnlineArtAuthorOptions, \
-    ApplicationOptions, MediaOptions, OnlineArtOptions, PressKitOptions, BookOptions
+    ApplicationOptions, MediaOptions, OnlineArtOptions, PressKitOptions, BookOptions, VideoConferenceBackgroundOptions
 from djangoplicity.releases.models import Release
 from djangoplicity.releases.options import ReleaseOptions
 from djangoplicity.science.models import ScienceAnnouncement
@@ -118,6 +118,7 @@ urlpatterns += [
 
     url( r'^products/media/', include('djangoplicity.products2.urls.media'), { 'model': Media, 'options': MediaOptions } ),
     url( r'^products/stickers/', include('djangoplicity.products2.urls.stickers'), { 'model': Sticker, 'options': StickerOptions, 'translate': True  } ),
+    url( r'^products/video-conference-backgrounds/', include('djangoplicity.products2.urls.videobackgrounds'), { 'model': VideoConferenceBackground, 'options': VideoConferenceBackgroundOptions, } ),
     url( r'^products/art/', include('djangoplicity.products2.urls.art'), { 'model': OnlineArt, 'options': OnlineArtOptions } ),
     # Virtual tours
     url( r'^products/artists/', include('djangoplicity.products2.urls.artists'), { 'model': OnlineArtAuthor, 'options': OnlineArtAuthorOptions, 'translate': True  } ),
