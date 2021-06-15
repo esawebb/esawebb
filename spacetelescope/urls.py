@@ -40,7 +40,9 @@ from djangoplicity.science.models import ScienceAnnouncement
 from djangoplicity.science.options import ScienceAnnouncementOptions
 
 from spacetelescope.admin import admin_site, adminlogs_site, adminshop_site
+from spacetelescope.frontpage.api.views.image_views import ESASkyListView
 from spacetelescope.frontpage.views import FrontpageView, d2d
+
 
 urlpatterns = []
 
@@ -161,6 +163,9 @@ urlpatterns += [
 
     # Main view
     url( r'^$', cache_page(60 * 5)(FrontpageView.as_view()) ),
+
+    #ESASky JSONFeed
+    url(r'^zoomables/$', ESASkyListView.as_view()),
 
     # Sitemap
     url(r'^sitemap/$', sitemap),
