@@ -8,7 +8,7 @@ from djangoplicity.media.consts import MEDIA_CONTENT_SERVERS
 
 def get_tiles_for_instance(instance, fileclass=ResourceFile):
     """
-
+    Getting tile resources path from the CDN
     """
 
     resource_format = 'zoomable'
