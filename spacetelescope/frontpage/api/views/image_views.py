@@ -4,8 +4,7 @@ from rest_framework import generics, renderers
 from djangoplicity.media.models import Image
 from djangoplicity.media.options import ImageOptions
 
-from spacetelescope.frontpage.api.serializers import ESASkyImageSerializer, ESASkySerializer
-
+from spacetelescope.frontpage.api.serializers import ESASkySerializer
 from spacetelescope.frontpage.api.paginators import ESASkyPaginator
 
 
