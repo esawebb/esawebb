@@ -2,7 +2,7 @@ import os
 
 from django.core.files.storage import FileSystemStorage
 
-from djangoplicity.archives.resources import ImageFileType, ResourceFile
+from djangoplicity.archives.resources import ResourceFile
 from djangoplicity.media.consts import MEDIA_CONTENT_SERVERS
 
 
@@ -13,7 +13,6 @@ def get_tiles_for_instance(instance, fileclass=ResourceFile):
 
     resource_format = 'zoomable'
     localbase = os.path.join(instance.Archive.Meta.root, "{}{}{}".format(resource_format, os.sep, instance.id))
-    file_extension = ImageFileType.exts[0]
     storage = FileSystemStorage()
     resource = None
     tiles = []
@@ -28,7 +27,7 @@ def get_tiles_for_instance(instance, fileclass=ResourceFile):
             content_server = None
 
         if content_server:
-            archive_class_name = "".format(instance.__module__, instance.__class__.__name__)
+            archive_class_name = "{}.{}".format(instance.__module__, instance.__class__.__name__)
             try:
                 archive_formats = content_server.formats[archive_class_name]
             except KeyError:
@@ -37,12 +36,17 @@ def get_tiles_for_instance(instance, fileclass=ResourceFile):
 
             if resource_format in archive_formats:
                 tiles_location = os.path.join(
-                    storage.location, "{}{}{}".format(instance.Archive.Meta.root, os.sep, resource_format)
+                    storage.location, "{}{}".format(instance.Archive.Meta.root, resource_format)
                 )
-                base_url = os.path.join(content_server.get_url(resource, resource_format), instance.Archive.Meta.root)
-                tile_groups = os.listdir(tiles_location)
-                for tiles_dir in tile_groups:
-                    if os.path.isdir(tiles_dir):
-                        print(tiles_dir)
+                url = os.path.join(content_server.get_url(resource, resource_format), instance.Archive.Meta.root)
+                storage = FileSystemStorage(base_url=url, location=tiles_location)
+                tiles_folders = os.listdir(os.path.join(tiles_location, instance.id))
+                for folder in tiles_folders:
+                    tiles_path = os.path.join(tiles_location, instance.id, folder)
+                    if os.path.isdir(tiles_path):
+                        base_path = os.path.join(resource_format, instance.id, folder)
+                        tile_resource_base_url = fileclass(base_path, storage)
+                        for tile in os.listdir(tiles_path):
+                            tiles.append("{}/{}".format(tile_resource_base_url.absolute_url, tile))
 
     return tiles
