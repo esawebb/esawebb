@@ -1,3 +1,4 @@
+from django.db.models import Q
 from rest_framework import generics, renderers
 
 from djangoplicity.media.models import Image
@@ -18,5 +19,6 @@ class ESASkyListView(generics.ListAPIView):
     renderer_classes = (renderers.JSONRenderer, )
 
     def get_queryset(self):
-        qs = ImageOptions.Queries.zoomable.queryset(Image, ImageOptions, self.request)[0].order_by('-release_date')
+        qs = ImageOptions.Queries.zoomable.queryset(Image, ImageOptions, self.request)[0].order_by('-priority')
+        qs.filter(Q(type='Observation') | Q(spatial_quality='Full'))
         return qs
