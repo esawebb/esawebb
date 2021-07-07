@@ -10,10 +10,11 @@ from spacetelescope.frontpage.api.paginators import ESASkyPaginator
 
 class ESASkyListView(generics.ListAPIView):
     serializer_class = ESASkySerializer
-    pagination_class = ESASkyPaginator
+    # pagination_class = ESASkyPaginator
     renderer_classes = (renderers.JSONRenderer, )
 
     def get_queryset(self):
-        qs = ImageOptions.Queries.zoomable.queryset(Image, ImageOptions, self.request)[0].order_by('-priority')
-        qs.filter(Q(type='Observation') & Q(spatial_quality='Full'))
+        qs = ImageOptions.Queries.zoomable.queryset(
+            Image, ImageOptions, self.request
+        )[0].filter(Q(type='Observation') & Q(spatial_quality='Full')).order_by('-priority')
         return qs
