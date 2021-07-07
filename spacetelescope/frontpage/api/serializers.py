@@ -20,7 +20,10 @@ class ESASkySerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Image
-        fields = ('id', 'title', 'description', 'release_date', 'last_modified', 'coordinate_metadata', 'credit', 'tiles')
+        fields = (
+            'id', 'title', 'description', 'priority', 'release_date', 'last_modified',
+            'coordinate_metadata', 'credit', 'tiles'
+        )
 
     def get_tiles(self, obj):
         return get_tiles_for_instance(obj)
