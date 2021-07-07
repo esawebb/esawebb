@@ -45,8 +45,7 @@ def get_tiles_for_instance(instance, fileclass=ResourceFile):
                     tiles_path = os.path.join(tiles_location, instance.id, folder)
                     if os.path.isdir(tiles_path):
                         base_path = os.path.join(resource_format, instance.id, folder)
-                        tile_resource_base_url = fileclass(base_path, storage)
-                        for tile in os.listdir(tiles_path):
-                            tiles.append("{}/{}".format(tile_resource_base_url.absolute_url, tile))
+                        tile_resource_base = fileclass(base_path, storage)
+                        tiles.append("{}".format(tile_resource_base.absolute_url))
 
     return tiles
