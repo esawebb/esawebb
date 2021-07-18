@@ -1,5 +1,6 @@
 from rest_framework import serializers
 
+from djangoplicity.archives.utils import get_instance_d2d_resource
 from djangoplicity.media.models import Image
 from djangoplicity.utils.templatetags.djangoplicity_text_utils import remove_html_tags
 from djangoplicity.utils.datetimes import timezone
@@ -16,17 +17,21 @@ class ESASkySerializer(serializers.ModelSerializer):
     description = serializers.SerializerMethodField()
     release_date = serializers.SerializerMethodField()
     tiles = serializers.SerializerMethodField()
+    large = serializers.SerializerMethodField()
     coordinate_metadata = serializers.SerializerMethodField()
 
     class Meta:
         model = Image
         fields = (
             'id', 'title', 'description', 'priority', 'release_date', 'last_modified',
-            'coordinate_metadata', 'credit', 'tiles'
+            'coordinate_metadata', 'credit', 'tiles', 'large'
         )
 
     def get_tiles(self, obj):
         return get_tiles_for_instance(obj)
+
+    def get_large(self, obj):
+        return get_instance_d2d_resource(obj, 'large', 'Large', 'Image')
 
     def get_credit(self, obj):
         return remove_html_tags(obj.credit)
