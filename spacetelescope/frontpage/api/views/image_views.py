@@ -5,12 +5,10 @@ from djangoplicity.media.models import Image
 from djangoplicity.media.options import ImageOptions
 
 from spacetelescope.frontpage.api.serializers import ESASkySerializer
-from spacetelescope.frontpage.api.paginators import ESASkyPaginator
 
 
 class ESASkyListView(generics.ListAPIView):
     serializer_class = ESASkySerializer
-    # pagination_class = ESASkyPaginator
     renderer_classes = (renderers.JSONRenderer, )
 
     def get_queryset(self):

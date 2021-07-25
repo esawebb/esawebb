@@ -164,7 +164,7 @@ urlpatterns += [
     # Main view
     url( r'^$', cache_page(60 * 5)(FrontpageView.as_view()) ),
 
-    #ESASky JSONFeed
+    #ESASky API for JSONFeed
     url(r'^zoomables/$', ESASkyListView.as_view()),
 
     # Sitemap
