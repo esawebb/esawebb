@@ -2,7 +2,7 @@
     "scripts": {
       "dokku": {
         "predeploy": "./manage.py collectstatic --noinput",
-        "postdeploy": "./manage.py loaddata initial"
+        "postdeploy": "echo \"Environment: $ENVIRONMENT\" "
       }
     }
   }
