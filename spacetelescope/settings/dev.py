@@ -2,6 +2,7 @@ import sys
 import copy
 
 from .common import *
+import dj_database_url
 
 SECRET_KEY = "g6ymvx$i1sv4k*g+nwfnx*3a1g&)^i6r9n6g4=f_$x^u(kwt8s"
 SESSION_ENGINE = 'django.contrib.sessions.backends.db'
