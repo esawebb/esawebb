@@ -1,76 +1,76 @@
-version: "3.4"
+# version: "3.4"
 
-# DEV CONFIG: 'docker-compose up' reads it automatically along with the docker-compose.yml file
-# See: https://docs.docker.com/compose/extends/
+# # DEV CONFIG: 'docker-compose up' reads it automatically along with the docker-compose.yml file
+# # See: https://docs.docker.com/compose/extends/
 
-x-common: &common
-  build: .
-  environment:
-    ENVIRONMENT: "dev"
-  restart: "no"
-  volumes:
-    - media:/home/hubbleadm/media
-    - import:/home/hubbleadm/import
-    - shared:/home/hubbleadm/shared
-    - ./local:/home/hubbleadm/local
-    - ./docs/static:/home/hubbleadm/docs/static
-    - ./scripts:/home/hubbleadm/scripts
+# x-common: &common
+#   build: .
+#   environment:
+#     ENVIRONMENT: "dev"
+#   restart: "no"
+#   volumes:
+#     - media:/home/hubbleadm/media
+#     - import:/home/hubbleadm/import
+#     - shared:/home/hubbleadm/shared
+#     - ./local:/home/hubbleadm/local
+#     - ./docs/static:/home/hubbleadm/docs/static
+#     - ./scripts:/home/hubbleadm/scripts
 
-services:
-  nginx:
-    restart: always
-    volumes:
-      # Read only config volume
-      - ./config/nginx-devserver:/etc/nginx/conf.d:ro
-      - ./config/nginx-common/snippets:/etc/nginx/snippets:ro
-      - ./config/nginx-auth:/etc/nginx/auth
-    ports:
-      - "80:80"
+# services:
+#   nginx:
+#     restart: always
+#     volumes:
+#       # Read only config volume
+#       - ./config/nginx-devserver:/etc/nginx/conf.d:ro
+#       - ./config/nginx-common/snippets:/etc/nginx/snippets:ro
+#       - ./config/nginx-auth:/etc/nginx/auth
+#     ports:
+#       - "80:80"
 
-  web:
-    <<: *common
-    depends_on:
-      - db
-      - cache
-    command: ["./scripts/command-devserver.sh"]
+#   web:
+#     <<: *common
+#     depends_on:
+#       - db
+#       - cache
+#     command: ["./scripts/command-devserver.sh"]
 
-  broker:
-    restart: "no"
-    environment:
-      RABBITMQ_DEFAULT_USER: hubble
-      RABBITMQ_DEFAULT_PASS: hubble
+#   broker:
+#     restart: "no"
+#     environment:
+#       RABBITMQ_DEFAULT_USER: hubble
+#       RABBITMQ_DEFAULT_PASS: hubble
 
-  celery: *common
+#   celery: *common
 
-  flower:
-    <<: *common
-    ports:
-      - "5555:5555"
+#   flower:
+#     <<: *common
+#     ports:
+#       - "5555:5555"
 
-  beat: *common
+#   beat: *common
 
-  cache:
-    image: memcached:latest
-    container_name: hubble-cache
-    environment:
-      MEMCACHED_CACHE_SIZE: 1024
-    hostname: cache
+#   cache:
+#     image: memcached:latest
+#     container_name: hubble-cache
+#     environment:
+#       MEMCACHED_CACHE_SIZE: 1024
+#     hostname: cache
 
-  db:
-    image: postgres:10.5
-    container_name: hubble-db
-    restart: "no"
-    environment:
-      POSTGRES_DB: hubble
-      POSTGRES_USER: hubble
-      POSTGRES_PASSWORD: hubble
-    expose:
-      - "5432"
-    volumes:
-      - pgdata:/var/lib/postgresql/data
+#   db:
+#     image: postgres:10.5
+#     container_name: hubble-db
+#     restart: "no"
+#     environment:
+#       POSTGRES_DB: hubble
+#       POSTGRES_USER: hubble
+#       POSTGRES_PASSWORD: hubble
+#     expose:
+#       - "5432"
+#     volumes:
+#       - pgdata:/var/lib/postgresql/data
 
-volumes:
-  pgdata:
-  media:
-  import:
-  shared:
+# volumes:
+#   pgdata:
+#   media:
+#   import:
+#   shared:
