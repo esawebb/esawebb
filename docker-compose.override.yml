@@ -69,9 +69,16 @@ services:
 
   db:
     image: postgres:10.5
-    container_name: esawebb-postgres
-    environment: 
-      POSTGRES_PASSWORD: postgres
+    container_name: hubble-db
+    restart: "no"
+    environment:
+      POSTGRES_DB: hubble
+      POSTGRES_USER: hubble
+      POSTGRES_PASSWORD: hubble
+    ports:
+      - "50000:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
 
 volumes:
   pgdata:
