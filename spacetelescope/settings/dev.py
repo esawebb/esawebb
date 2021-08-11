@@ -2,6 +2,7 @@ import sys
 import copy
 
 from .common import *
+import dj_database_url
 
 SECRET_KEY = "g6ymvx$i1sv4k*g+nwfnx*3a1g&)^i6r9n6g4=f_$x^u(kwt8s"
 SESSION_ENGINE = 'django.contrib.sessions.backends.db'
@@ -46,16 +47,21 @@ DEBUG_TOOLBAR_PANELS = [
 ##################
 # DATABASE SETUP #
 ##################
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'hubble',
-        'USER': 'hubble',
-        'PASSWORD': 'hubble',
-        'HOST': 'hubble-db',
-        'PORT': 5432,
+if os.environ.get('DATABASE_URL', ''):
+    DATABASES = {
+        'default': dj_database_url.config()
     }
-}
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql',
+            'NAME': 'postgres',
+            'USER': 'postgres',
+            'PASSWORD': 'postgres',
+            'HOST': 'db',
+            'PORT': 5432,
+        }
+    }
 
 ##########
 # CACHE  #
