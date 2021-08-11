@@ -38,7 +38,7 @@ else:
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.postgresql',
-            'NAME': 'hubble-db',
+            'NAME': 'esawebb',
             'USER': POSTGRES_USER,
             'PASSWORD': POSTGRES_PASSWORD,
             'HOST': 'db',

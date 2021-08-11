@@ -101,16 +101,16 @@ SERVE_STATIC_MEDIA = False
 ##################
 # DATABASE SETUP #
 ##################
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'spacetelescope',
-        'USER': 'spacetelescope',
-        'PASSWORD': '',
-        'HOST': 'localhost',
-        'CONN_MAX_AGE': 600,
-    }
-}
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'spacetelescope',
+#         'USER': 'spacetelescope',
+#         'PASSWORD': '',
+#         'HOST': 'localhost',
+#         'CONN_MAX_AGE': 600,
+#     }
+# }
 
 ########################
 # INTERNATIONALIZAION  #

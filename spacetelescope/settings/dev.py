@@ -46,16 +46,21 @@ DEBUG_TOOLBAR_PANELS = [
 ##################
 # DATABASE SETUP #
 ##################
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'hubble',
-        'USER': 'hubble',
-        'PASSWORD': 'hubble',
-        'HOST': 'hubble-db',
-        'PORT': 5432,
+if os.environ.get('DATABASE_URL', ''):
+    DATABASES = {
+        'default': dj_database_url.config()
     }
-}
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql',
+            'NAME': 'postgres',
+            'USER': 'postgres',
+            'PASSWORD': 'postgres',
+            'HOST': 'db',
+            'PORT': 5432,
+        }
+    }
 
 ##########
 # CACHE  #
