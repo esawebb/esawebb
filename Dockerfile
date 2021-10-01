@@ -16,10 +16,10 @@ RUN apt-get update && apt-get install -y \
 
 
 # Create user for building and installing pip packages inside its home for security purposes
-RUN useradd --create-home hubblebuilder
-ENV BUILDER_HOME=/home/hubblebuilder
+RUN useradd --create-home esawebbbuilder
+ENV BUILDER_HOME=/home/esawebbbuilder
 WORKDIR $BUILDER_HOME
-USER hubblebuilder
+USER esawebbbuilder
 
 # Cache layer with private requirements
 COPY private-requirements.txt .
@@ -65,19 +65,19 @@ RUN echo "Europe/Berlin" > /etc/timezone && \
 ENV LANG en_US.UTF-8
 ENV LC_ALL en_US.UTF-8
 
-RUN groupadd -g 2000 hubbleadm && \
-    useradd -u 2000 -g hubbleadm --create-home hubbleadm
+RUN groupadd -g 2000 esawebbadm && \
+    useradd -u 2000 -g esawebbadm --create-home esawebbadm
 
-ENV USER_HOME=/home/hubbleadm
+ENV USER_HOME=/home/esawebbadm
 WORKDIR $USER_HOME
 
 USER hubbleadm
 
 # Copy ImageMagick settings
-COPY --chown=hubbleadm config/imagemagick/policy.xml /etc/ImageMagick-6/
+COPY --chown=esawebbadm config/imagemagick/policy.xml /etc/ImageMagick-6/
 
 # Copy pip install results from builder image
-COPY --from=builder --chown=hubbleadm /home/hubblebuilder/.local $USER_HOME/.local
+COPY --from=builder --chown=esawebbadm /home/esawebbbuilder/.local $USER_HOME/.local
 
 # Make sure scripts installed by pip in .local are usable:
 ENV PATH=$USER_HOME/.local/bin:$PATH
@@ -89,11 +89,11 @@ RUN mkdir -p static \
     import \
     shared
 
-COPY --chown=hubbleadm scripts/ scripts/
+COPY --chown=esawebbadm scripts/ scripts/
 
-COPY --chown=hubbleadm .coveragerc .
-COPY --chown=hubbleadm manage.py manage.py
-COPY --chown=hubbleadm spacetelescope/ spacetelescope/
-COPY --chown=hubbleadm spacetelescope/static/fonts/helvetica/ /usr/share/fonts/truetype/helvetica/
-COPY --chown=hubbleadm Procfile Procfile
-COPY --chown=hubbleadm app.json app.json
+COPY --chown=esawebbadm .coveragerc .
+COPY --chown=esawebbadm manage.py manage.py
+COPY --chown=esawebbadm spacetelescope/ spacetelescope/
+COPY --chown=esawebbadm spacetelescope/static/fonts/helvetica/ /usr/share/fonts/truetype/helvetica/
+COPY --chown=esawebbadm Procfile Procfile
+COPY --chown=esawebbadm app.json app.json
