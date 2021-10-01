@@ -19,7 +19,7 @@ services:
 
   web:
     image: *hubble-image
-    container_name: hubble
+    container_name: esawebb
     restart: always
     environment:
       SERVICE_TYPE: "web"
@@ -36,12 +36,12 @@ services:
 
   broker:
     image: rabbitmq:3.8.3
-    container_name: hubble-broker
+    container_name: esawebb-broker
     restart: always
 
   celery:
     image: *hubble-image
-    container_name: hubble-celery
+    container_name: esawebb-celery
     restart: always
     command:
       [
@@ -59,7 +59,7 @@ services:
 
   flower:
     image: *hubble-image
-    container_name: hubble-flower
+    container_name: esawebb-flower
     restart: always
     # TODO: Change url prefix to /admin/tasks when having nginx proxy
     command:
@@ -78,7 +78,7 @@ services:
 
   beat:
     image: *hubble-image
-    container_name: hubble-beat
+    container_name: esawebb-beat
     restart: always
     command:
       [
