@@ -71,7 +71,7 @@ RUN groupadd -g 2000 esawebbadm && \
 ENV USER_HOME=/home/esawebbadm
 WORKDIR $USER_HOME
 
-USER hubbleadm
+USER esawebbadm
 
 # Copy ImageMagick settings
 COPY --chown=esawebbadm config/imagemagick/policy.xml /etc/ImageMagick-6/
