@@ -65,6 +65,7 @@ else:
         }
     }
 
+
 # EMAIL: SMTP CONFIG
 EMAIL_SUBJECT_PREFIX = '[ESA/HUBBLE]'
 EMAIL_HOST = 'smtp.mailgun.org'
