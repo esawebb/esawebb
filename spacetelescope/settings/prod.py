@@ -27,6 +27,25 @@ CACHES = {
 }
 
 # DATABASE
+# if get_secret('DATABASE_URL'):
+#     DATABASES = {
+#         'default': dj_database_url.config()
+#     }
+# else:
+#     POSTGRES_USER = get_secret('POSTGRES_USER')
+#     POSTGRES_PASSWORD = get_secret('POSTGRES_PASSWORD')
+#
+#     DATABASES = {
+#         'default': {
+#             'ENGINE': 'django.db.backends.postgresql',
+#             'NAME': 'esawebb',
+#             'USER': POSTGRES_USER,
+#             'PASSWORD': POSTGRES_PASSWORD,
+#             'HOST': 'db',
+#             'PORT': 5432,
+#         }
+#     }
+
 if get_secret('DATABASE_URL'):
     DATABASES = {
         'default': dj_database_url.config()
@@ -38,9 +57,9 @@ else:
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.postgresql',
-            'NAME': 'esawebb',
-            'USER': POSTGRES_USER,
-            'PASSWORD': POSTGRES_PASSWORD,
+            'NAME': 'esawebb-db',
+            'USER': 'esawebb',
+            'PASSWORD': 'esawebb',
             'HOST': 'db',
             'PORT': 5432,
         }

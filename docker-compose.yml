@@ -10,7 +10,7 @@ x-hubble-image: &hubble-image hubble:0.9
 services:
   nginx:
     image: nginx:1.17
-    container_name: hubble-nginx
+    container_name: esawebb-nginx
     restart: always
     depends_on:
       - web
@@ -28,11 +28,11 @@ services:
     expose:
       - "8000"
 
-  db:
-    image: postgres:11
-    container_name: esawebb-postgres
-    environment:
-      POSTGRES_PASSWORD: postgres
+#  db:
+#    image: postgres:11
+#    container_name: esawebb-db
+#    environment:
+#      POSTGRES_PASSWORD: esawebb
 
   broker:
     image: rabbitmq:3.8.3

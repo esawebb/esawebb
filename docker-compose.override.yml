@@ -12,19 +12,19 @@ x-common: &common
     ENVIRONMENT: "dev"
   restart: "no"
   volumes:
-    - ./volumes/import:/home/hubbleadm/import
-    - ./volumes/media:/home/hubbleadm/media
-    - ./volumes/shared:/home/hubbleadm/shared
-    - ./spacetelescope:/home/hubbleadm/spacetelescope
-    - ./local:/home/hubbleadm/local
-    - ./htmlcov:/home/hubbleadm/htmlcov
-    - ./docs/static:/home/hubbleadm/docs/static
-    - ./test-utils:/home/hubbleadm/test-utils
-    - ./test-utils/sitecustomize.py:/home/hubbleadm/sitecustomize.py
-    - ./.coveragerc:/home/hubbleadm/.coveragerc
-    - ./.coveragerc-parallel:/home/hubbleadm/.coveragerc-parallel
-    - ./setup.py:/home/hubbleadm/setup.py
-    - ./scripts:/home/hubbleadm/scripts
+    - ./volumes/import:/home/esawebbadm/import
+    - ./volumes/media:/home/esawebbadm/media
+    - ./volumes/shared:/home/esawebbadm/shared
+    - ./spacetelescope:/home/esawebbadm/spacetelescope
+    - ./local:/home/esawebbadm/local
+    - ./htmlcov:/home/esawebbadm/htmlcov
+    - ./docs/static:/home/esawebbadm/docs/static
+    - ./test-utils:/home/esawebbadm/test-utils
+    - ./test-utils/sitecustomize.py:/home/esawebbadm/sitecustomize.py
+    - ./.coveragerc:/home/esawebbadm/.coveragerc
+    - ./.coveragerc-parallel:/home/esawebbadm/.coveragerc-parallel
+    - ./setup.py:/home/esawebbadm/setup.py
+    - ./scripts:/home/esawebbadm/scripts
 
 services:
   nginx:
@@ -62,19 +62,19 @@ services:
 
   cache:
     image: memcached:latest
-    container_name: hubble-cache
+    container_name: esawebb-cache
     environment:
       MEMCACHED_CACHE_SIZE: 1024
     hostname: cache
 
   db:
     image: postgres:10.5
-    container_name: hubble-db
+    container_name: esawebb-db
     restart: "no"
     environment:
-      POSTGRES_DB: hubble
-      POSTGRES_USER: hubble
-      POSTGRES_PASSWORD: hubble
+      POSTGRES_DB: esawebb
+      POSTGRES_USER: esawebb
+      POSTGRES_PASSWORD: esawebb
     ports:
       - "50000:5432"
     volumes:

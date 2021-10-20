@@ -47,18 +47,13 @@ DEBUG_TOOLBAR_PANELS = [
 ##################
 # DATABASE SETUP #
 ##################
-if os.environ.get('DATABASE_URL', ''):
-    DATABASES = {
-        'default': dj_database_url.config()
-    }
-else:
-    DATABASES = {
+DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.postgresql',
-            'NAME': 'postgres',
-            'USER': 'postgres',
-            'PASSWORD': 'postgres',
-            'HOST': 'db',
+            'NAME': 'esawebb',
+            'USER': 'esawebb',
+            'PASSWORD': 'esawebb',
+            'HOST': 'esawebb-db',
             'PORT': 5432,
         }
     }
@@ -69,7 +64,7 @@ else:
 CACHES = {
     'notdefault': {
         'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
-        'KEY_PREFIX': 'hubble',
+        'KEY_PREFIX': 'esawebb',
         'LOCATION': [
             'cache:11211',
         ],
@@ -83,7 +78,7 @@ CACHES = {
 ##########
 # CELERY #
 ##########
-CELERY_BROKER_URL = 'amqp://hubble:hubble@broker:5672/'
+CELERY_BROKER_URL = 'amqp://esawebb:esawebb@broker:5672/'
 
 # Avoid infinite wait times and retries
 CELERY_BROKER_TRANSPORT_OPTIONS = {

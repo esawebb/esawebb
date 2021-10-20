@@ -9,12 +9,12 @@ x-common: &common
     ENVIRONMENT: "dev"
   restart: "no"
   volumes:
-    - media:/home/hubbleadm/media
-    - import:/home/hubbleadm/import
-    - shared:/home/hubbleadm/shared
-    - ./local:/home/hubbleadm/local
-    - ./docs/static:/home/hubbleadm/docs/static
-    - ./scripts:/home/hubbleadm/scripts
+    - media:/home/esawebbadm/media
+    - import:/home/esawebbadm/import
+    - shared:/home/esawebbadm/shared
+    - ./local:/home/esawebbadm/local
+    - ./docs/static:/home/esawebbadm/docs/static
+    - ./scripts:/home/esawebbadm/scripts
 
 services:
   nginx:
@@ -37,8 +37,8 @@ services:
   broker:
     restart: "no"
     environment:
-      RABBITMQ_DEFAULT_USER: hubble
-      RABBITMQ_DEFAULT_PASS: hubble
+      RABBITMQ_DEFAULT_USER: esawebb
+      RABBITMQ_DEFAULT_PASS: esawebb
 
   celery: *common
 
@@ -51,19 +51,19 @@ services:
 
   cache:
     image: memcached:latest
-    container_name: hubble-cache
+    container_name: esawebb-cache
     environment:
       MEMCACHED_CACHE_SIZE: 1024
     hostname: cache
 
   db:
     image: postgres:10.5
-    container_name: hubble-db
+    container_name: esawebb-db
     restart: "no"
     environment:
-      POSTGRES_DB: hubble
-      POSTGRES_USER: hubble
-      POSTGRES_PASSWORD: hubble
+      POSTGRES_DB: esawebb
+      POSTGRES_USER: esawebb
+      POSTGRES_PASSWORD: esawebb
     expose:
       - "5432"
     volumes:

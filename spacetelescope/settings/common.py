@@ -26,7 +26,7 @@ from djangoplicity.contentserver import CDN77ContentServer
 #############################
 # ENVIRONMENT CONFIGURATION #
 #############################
-SHORT_NAME = 'hubble'
+SHORT_NAME = 'esawebb'
 ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 ARCHIVE_IMPORT_ROOT = '%s/import' % ROOT
 PRJBASE = "%s/spacetelescope" % ROOT
@@ -101,16 +101,16 @@ SERVE_STATIC_MEDIA = False
 ##################
 # DATABASE SETUP #
 ##################
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'spacetelescope',
-        'USER': 'spacetelescope',
-        'PASSWORD': '',
-        'HOST': 'localhost',
-        'CONN_MAX_AGE': 600,
-    }
-}
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'spacetelescope',
+#         'USER': 'spacetelescope',
+#         'PASSWORD': '',
+#         'HOST': 'localhost',
+#         'CONN_MAX_AGE': 600,
+#     }z
+# }
 
 ########################
 # INTERNATIONALIZAION  #
