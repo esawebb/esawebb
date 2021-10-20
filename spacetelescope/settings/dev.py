@@ -53,7 +53,7 @@ DATABASES = {
             'NAME': 'esawebb',
             'USER': 'esawebb',
             'PASSWORD': 'esawebb',
-            'HOST': 'qwe',
+            'HOST': 'esawebb',
             'PORT': 5432,
         }
     }
