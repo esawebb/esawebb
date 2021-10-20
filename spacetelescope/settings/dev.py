@@ -47,13 +47,18 @@ DEBUG_TOOLBAR_PANELS = [
 ##################
 # DATABASE SETUP #
 ##################
-DATABASES = {
+if os.environ.get('DATABASE_URL', ''):
+    DATABASES = {
+        'default': dj_database_url.config()
+    }
+else:
+    DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.postgresql',
-            'NAME': 'esawebb',
-            'USER': 'esawebb',
-            'PASSWORD': 'esawebb',
-            'HOST': 'esawebb',
+            'NAME': 'postgres',
+            'USER': 'postgres',
+            'PASSWORD': 'postgres',
+            'HOST': 'db',
             'PORT': 5432,
         }
     }
