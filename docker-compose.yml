@@ -28,11 +28,11 @@ services:
     expose:
       - "8000"
 
-#  db:
-#    image: postgres:11
-#    container_name: esawebb-db
-#    environment:
-#      POSTGRES_PASSWORD: esawebb
+  db:
+    image: postgres:11
+    container_name: esawebb-db
+    environment:
+      POSTGRES_PASSWORD: esawebb
 
   broker:
     image: rabbitmq:3.8.3
