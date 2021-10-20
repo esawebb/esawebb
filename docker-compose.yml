@@ -30,9 +30,9 @@ services:
 
   db:
     image: postgres:11
-    container_name: esawebb-db
+    container_name: esawebb-postgres
     environment:
-      POSTGRES_PASSWORD: esawebb
+      POSTGRES_PASSWORD: postgres
 
   broker:
     image: rabbitmq:3.8.3
