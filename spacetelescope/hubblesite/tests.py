@@ -1,3 +1,4 @@
+from __future__ import absolute_import
 # Djangoplicity
 # Copyright 2007-2008 ESA/Hubble
 #

@@ -314,4 +314,10 @@
                 background-size: 423px 167px;
             }
         }
-        
+
+.sprites-giphy_42px {
+  background-image: url('../sprites/giphy_42px.png');
+  background-repeat: no-repeat;
+  width: 44px;
+  height: 44px;
+}

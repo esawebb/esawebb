@@ -1,4 +1,3 @@
-
 # -*- coding: utf-8 -*-
 #
 # spacetelescope.org
@@ -32,13 +31,14 @@ ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)
 ARCHIVE_IMPORT_ROOT = '%s/import' % ROOT
 PRJBASE = "%s/spacetelescope" % ROOT
 PRJNAME = 'spacetelescope.org'
-DJANGOPLICITY_ROOT = "%s/.local/lib/python2.7/site-packages/djangoplicity" % ROOT
+DJANGOPLICITY_ROOT = "%s/.local/lib/python3.8/site-packages/djangoplicity" % ROOT
 LOG_DIR = "%s/logs" % ROOT
 TMP_DIR = "%s/tmp" % ROOT
 SHARED_DIR = "%s/shared" % ROOT
 GA_ID = "UA-2368492-6"
 FACEBOOK_APP_ID = "144508505618279"
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+VIDEOS_THUMBNAIL_POSITION = 'middle'  # Used to generated thumbnails of videos when it's provideo
 
 CSRF_COOKIE_SECURE = False
 SESSION_COOKIE_SECURE = False
@@ -90,14 +90,12 @@ DEBUG_TOOLBAR_CONFIG = {}
 DEBUG_TOOLBAR_PANELS = []
 
 ADMINS = (
-    ('EPO Monitoring', 'esoepo-monitoring@eso.org'),
+    ('Web team ESAHubble', 'web@esahubble.org'),
+    ('Daniel Restrepo', 'danielrestrepo9725@gmail.com')
 )
 MANAGERS = ADMINS
 
 SERVE_STATIC_MEDIA = False
-
-# Make this unique, and don't share it with anybody.
-SECRET_KEY = "g6ymvx$i1sv4k*g+nwfnx*3a1g&)^i6r9n6g4=f_$x^u(kwt8s"
 
 
 ##################
@@ -154,11 +152,15 @@ TIME_FORMAT = ugettext('H:i T')
 YEAR_MONTH_FORMAT = ugettext('F Y')
 WIDGET_FORMAT = ugettext("j/m/Y")
 
-###############
-# MEDIA SETUP #
-###############
-MEDIA_ROOT = "%s/docs/static/" % ROOT
-MEDIA_URL = "/static/"
+# MEDIA
+MEDIA_ROOT = os.path.join(ROOT, 'media')
+MEDIA_URL = '/media/'
+
+# STATIC FILES (CSS, JavaScript, Images)
+# See: https://docs.djangoproject.com/en/1.11/howto/static-files/
+STATIC_ROOT = os.path.join(ROOT, 'static')
+STATIC_URL = '/assets/'
+
 
 # URL prefix for admin media -- CSS, JavaScript and images. Make sure to use a
 # trailing slash.
@@ -170,8 +172,6 @@ DJANGOPLICITY_MEDIA_ROOT = "%s/static" % DJANGOPLICITY_ROOT
 
 MIDENTIFY_PATH = '/usr/bin/midentify'
 
-STATIC_ROOT = "%s/static/djp/" % ROOT
-STATIC_URL = "/static/djp/"
 
 ##########
 # CACHE  #
@@ -220,7 +220,7 @@ TEMPLATES = [
                 'djangoplicity.utils.context_processors.google_analytics_id',
                 'djangoplicity.utils.context_processors.djangoplicity_environment',
                 'djangoplicity.archives.context_processors.internal_request',
-                'satchmo_store.shop.context_processors.settings',
+                # 'satchmo_store.shop.context_processors.settings',
             ],
         },
     },
@@ -290,14 +290,14 @@ MIDDLEWARE += [
     # Module for URL redirection based on regular expressions
     'djangoplicity.utils.middleware.RegexRedirectMiddleware',  # Response
 
-    'djangoplicity.archives.contrib.satchmo.middleware.SatchmoSSLRedirectOverride',
+    # 'djangoplicity.archives.contrib.satchmo.middleware.SatchmoSSLRedirectOverride',
 ]
 
 DJANGO_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.sites',
     'django.contrib.postgres',
-    'satchmo_store.shop',
+    # 'satchmo_store.shop',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.redirects',
@@ -320,13 +320,13 @@ DJANGOPLICITY_APPS = [
     'djangoplicity.media',
     #'djangoplicity.contrib.redirects',
     'djangoplicity.archives',
-    'djangoplicity.archives.contrib.satchmo',
-    'djangoplicity.archives.contrib.satchmo.freeorder',
+    # 'djangoplicity.archives.contrib.satchmo',
+    # 'djangoplicity.archives.contrib.satchmo.freeorder',
     'djangoplicity.archives.contrib.security',
     'djangoplicity.announcements',
     'djangoplicity.science',
     'djangoplicity.releases',
-    'djangoplicity.products',
+    'djangoplicity.products2',
     'djangoplicity.metadata',
     'djangoplicity.cache',
     'djangoplicity.adminhistory',
@@ -336,7 +336,7 @@ DJANGOPLICITY_APPS = [
     'djangoplicity.mailinglists',
     'djangoplicity.newsletters',
     'djangoplicity.iframe',
-    #'djangoplicity.contacts',
+    'djangoplicity.contacts',
     'djangoplicity.customsearch',
     'djangoplicity.admincomments',
     'djangoplicity.simplearchives',
@@ -351,31 +351,33 @@ DJANGOPLICITY_APPS = [
 
 THIRD_PARTY_APPS = [
     'mptt',
-    'django_extensions',
+    # 'django_extensions',
     'django_mailman',
     # 'registration',
     'sorl.thumbnail',
-    'keyedcache',
+    # 'keyedcache',
     ### Satchmo
-    'livesettings',
-    'satchmo_utils',
-    'satchmo_store.contact',
-    'product',
-    'product.modules.configurable',
-    'shipping',
-    'payment',
-    'djangoplicity.concardis',
-    'l10n',
-    'tax',
-    'tax.modules.no',
-    'app_plugins',
-    'shipping.modules.tieredweight',
-    'captcha',
+    # 'livesettings',
+    # 'satchmo_utils',
+    # 'satchmo_store.contact',
+    # 'product',
+    # 'product.modules.configurable',
+    # 'shipping',
+    # 'payment',
+    # 'djangoplicity.concardis',
+    # 'l10n',
+    # 'tax',
+    # 'tax.modules.no',
+    # 'app_plugins',
+    # 'shipping.modules.tieredweight',
+    # 'captcha',
     'gunicorn',
     'django_ace',
     'rest_framework',
     'pipeline',
     'tinymce',
+    # CONTACTS
+    'crispy_forms',
 ]
 
 SPACETELESCOPE_APPS = [
@@ -409,15 +411,13 @@ SESSION_COOKIE_DOMAIN = None
 # FILE UPLOADS #
 ################
 FILE_UPLOAD_TEMP_DIR = TMP_DIR
-FILE_UPLOAD_PERMISSIONS = 0666
+FILE_UPLOAD_PERMISSIONS = 0o666
 
-SERVER_EMAIL = 'nobody@eso.org'
-DEFAULT_FROM_EMAIL = 'nobody@eso.org'
-EMAIL_HOST_PASSWORD = ''
-EMAIL_HOST_USER = ''
-EMAIL_HOST = 'localhost'
-EMAIL_PORT = '1025'
-EMAIL_USE_TLS = False
+# EMAIL CONFIG
+SERVER_EMAIL = 'nobody@esahubble.org'
+DEFAULT_FROM_EMAIL = 'nobody@esahubble.org'
+DEFAULT_MAIL_USER = ['web@esahubble.org']
+DEFAULT_MAIL_TAGGING = ['zidmani@gmail.com']
 EMAIL_SUBJECT_PREFIX = '[SPACETELESCOPE-LOCAL]'
 
 ##################
@@ -425,7 +425,7 @@ EMAIL_SUBJECT_PREFIX = '[SPACETELESCOPE-LOCAL]'
 ##################
 
 AUTHENTICATION_BACKENDS = (
-    'django_auth_ldap.backend.LDAPBackend',
+    # 'django_auth_ldap.backend.LDAPBackend',
     'django.contrib.auth.backends.ModelBackend',
 )
 #AUTH_PROFILE_MODULE = ''
@@ -436,6 +436,8 @@ LOGIN_REDIRECT_URL = '/'
 #############
 # LDAP AUTH #
 #############
+'''
+Disabled when migrated to esahubble.org
 import ldap
 from django_auth_ldap.config import LDAPSearch, ActiveDirectoryGroupType
 
@@ -484,7 +486,7 @@ AUTH_TKT_HTACCESS = '.esoacc'
 # AUTH_TKT_IGNOREIP = 'off'
 # AUTH_TKT_TIMEOUT_URL = ''
 # AUTH_TKT_FILEPERMS =
-
+'''
 
 #########
 # PAGES #
@@ -521,51 +523,25 @@ ARCHIVES = (
     ('djangoplicity.media.models.ImageComparison', 'djangoplicity.media.options.ImageComparisonOptions'),
     ('djangoplicity.releases.models.Release', 'djangoplicity.releases.options.ReleaseOptions'),
     #('djangoplicity.announcements.models.Announcement','djangoplicity.announcements.options.AnnouncementOptions'),
-    ('djangoplicity.products.models.Application', 'djangoplicity.products.options.ApplicationOptions'),
-
-    ('djangoplicity.products.models.AnnualReport', 'djangoplicity.products.options.AnnualReportOptions'),
-    ('djangoplicity.products.models.Book', 'djangoplicity.products.options.BookOptions'),
-    ('djangoplicity.products.models.Brochure', 'djangoplicity.products.options.BrochureOptions'),
-    ('djangoplicity.products.models.Calendar', 'djangoplicity.products.options.CalendarOptions'),
-    ('djangoplicity.products.models.Media', 'djangoplicity.products.options.MediaOptions'),
-    ('djangoplicity.products.models.ConferenceItem', 'djangoplicity.products.options.ConferenceItemOptions'),
-    #('djangoplicity.products.models.ConferencePoster','djangoplicity.products.options.ConferencePosterOptions'),
-    ('djangoplicity.products.models.EducationalMaterial', 'djangoplicity.products.options.EducationalMaterialOptions'),
-    ('djangoplicity.products.models.Exhibition', 'djangoplicity.products.options.ExhibitionOptions'),
-    ('djangoplicity.products.models.FITSImage', 'djangoplicity.products.options.FITSImageOptions'),
-    ('djangoplicity.products.models.Flyer', 'djangoplicity.products.options.FlyerOptions'),
-    ('djangoplicity.products.models.Handout', 'djangoplicity.products.options.HandoutOptions'),
-    #('djangoplicity.products.models.Handout','djangoplicity.products.options.HandoutOptions'),
-    ('djangoplicity.products.models.IMAXFilm', 'djangoplicity.products.options.IMAXFilmOptions'),
-    ('djangoplicity.products.models.KidsDrawing', 'djangoplicity.products.options.KidsDrawingOptions'),
-    ('djangoplicity.products.models.Logo', 'djangoplicity.products.options.LogoOptions'),
-    ('djangoplicity.products.models.Apparel', 'djangoplicity.products.options.ApparelOptions'),
-    ('djangoplicity.products.models.Map', 'djangoplicity.products.options.MapOptions'),
-    ('djangoplicity.products.models.Merchandise', 'djangoplicity.products.options.MerchandiseOptions'),
-    ('djangoplicity.products.models.MiniSite', 'djangoplicity.products.options.MiniSiteOptions'),
-    ('djangoplicity.products.models.Bulletin', 'djangoplicity.products.options.BulletinOptions'),
-    ('djangoplicity.products.models.Stationery', 'djangoplicity.products.options.StationeryOptions'),
-    ('djangoplicity.products.models.ScienceInSchool', 'djangoplicity.products.options.ScienceInSchoolOptions'),
-    ('djangoplicity.products.models.Messenger', 'djangoplicity.products.options.MessengerOptions'),
-    ('djangoplicity.products.models.CapJournal', 'djangoplicity.products.options.CapJournalOptions'),
-    ('djangoplicity.products.models.STECFNewsletter', 'djangoplicity.products.options.STECFNewsletterOptions'),
-    ('djangoplicity.products.models.OnlineArt', 'djangoplicity.products.options.OnlineArtOptions'),
-    ('djangoplicity.products.models.OnlineArtAuthor', 'djangoplicity.products.options.OnlineArtAuthorOptions'),
-    ('djangoplicity.products.models.PaperModel', 'djangoplicity.products.options.PaperModelOptions'),
-    ('djangoplicity.products.models.PlanetariumShow', 'djangoplicity.products.options.PlanetariumShowOptions'),
-    ('djangoplicity.products.models.Donation', 'djangoplicity.products.options.DonationOptions'),
-    ('djangoplicity.products.models.PostCard', 'djangoplicity.products.options.PostCardOptions'),
-    ('djangoplicity.products.models.PrintedPoster', 'djangoplicity.products.options.PrintedPosterOptions'),
-    ('djangoplicity.products.models.ConferencePoster', 'djangoplicity.products.options.ConferencePosterOptions'),
-    ('djangoplicity.products.models.ElectronicPoster', 'djangoplicity.products.options.ElectronicPosterOptions'),
-    ('djangoplicity.products.models.Presentation', 'djangoplicity.products.options.PresentationOptions'),
-    ('djangoplicity.products.models.PressKit', 'djangoplicity.products.options.PressKitOptions'),
-    ('djangoplicity.products.models.ElectronicCard', 'djangoplicity.products.options.ElectronicCardOptions'),
-    ('djangoplicity.products.models.Sticker', 'djangoplicity.products.options.StickerOptions'),
-    ('djangoplicity.products.models.TechnicalDocument', 'djangoplicity.products.options.TechnicalDocumentOptions'),
-    ('djangoplicity.products.models.UserVideo', 'djangoplicity.products.options.UserVideoOptions'),
-    ('djangoplicity.products.models.VirtualTour', 'djangoplicity.products.options.VirtualTourOptions'),
-    ('djangoplicity.products.models.Model3d', 'djangoplicity.products.options.Model3dOptions'),
+    ('djangoplicity.products2.models.Model3d', 'djangoplicity.products2.options.Model3dOptions'),
+    ('djangoplicity.products2.models.Calendar', 'djangoplicity.products2.options.CalendarOptions'),
+    ('djangoplicity.products2.models.Application', 'djangoplicity.products2.options.ApplicationOptions'),
+    ('djangoplicity.products2.models.Brochure', 'djangoplicity.products2.options.BrochureOptions'),
+    ('djangoplicity.products2.models.Logo', 'djangoplicity.products2.options.LogoOptions'),
+    ('djangoplicity.products2.models.Exhibition', 'djangoplicity.products2.options.ExhibitionOptions'),
+    ('djangoplicity.products2.models.FITSImage', 'djangoplicity.products2.options.FITSImageOptions'),
+    ('djangoplicity.products2.models.Sticker', 'djangoplicity.products2.options.StickerOptions'),
+    ('djangoplicity.products2.models.PostCard', 'djangoplicity.products2.options.PostCardOptions'),
+    ('djangoplicity.products2.models.PressKit', 'djangoplicity.products2.options.PressKitOptions'),
+    ('djangoplicity.products2.models.PrintedPoster', 'djangoplicity.products2.options.PrintedPosterOptions'),
+    ('djangoplicity.products2.models.ConferencePoster', 'djangoplicity.products2.options.ConferencePosterOptions'),
+    ('djangoplicity.products2.models.Merchandise', 'djangoplicity.products2.options.MerchandiseOptions'),
+    ('djangoplicity.products2.models.Media', 'djangoplicity.products2.options.MediaOptions'),
+    ('djangoplicity.products2.models.Presentation', 'djangoplicity.products2.options.PresentationOptions'),
+    ('djangoplicity.products2.models.OnlineArt', 'djangoplicity.products2.options.OnlineArtOptions'),
+    ('djangoplicity.products2.models.OnlineArtAuthor', 'djangoplicity.products2.options.OnlineArtAuthorOptions'),
+    ('djangoplicity.products2.models.ConferenceItem', 'djangoplicity.products2.options.ConferenceItemOptions'),
+    ('djangoplicity.products2.models.VideoConferenceBackground', 'djangoplicity.products2.options.VideoConferenceBackgroundOptions'),
     ('djangoplicity.newsletters.models.Newsletter', 'djangoplicity.newsletters.options.NewsletterOptions'),
 )
 
@@ -604,12 +580,12 @@ VIDEOS_FORMATS_REMOVE = [
 RELEASE_LINK_PREFIX = "heic"
 
 DEFAULT_CREATOR = u"ESA/Hubble"
-DEFAULT_CREATOR_URL = "http://www.spacetelescope.org"
-DEFAULT_CONTACT_ADDRESS = u"Karl-Schwarzschild-Strasse 2"
-DEFAULT_CONTACT_CITY = u"Garching bei München"
-DEFAULT_CONTACT_STATE_PROVINCE = ""
-DEFAULT_CONTACT_POSTAL_CODE = u"D-85748"
-DEFAULT_CONTACT_COUNTRY = u"Germany"
+DEFAULT_CREATOR_URL = "https://esahubble.org"
+DEFAULT_CONTACT_ADDRESS = u"ESA Office, Space Telescope Science Institute, 3700 San Martin Dr"
+DEFAULT_CONTACT_CITY = u"Baltimore"
+DEFAULT_CONTACT_STATE_PROVINCE = "MD"
+DEFAULT_CONTACT_POSTAL_CODE = u"21218"
+DEFAULT_CONTACT_COUNTRY = u"United States"
 DEFAULT_RIGHTS = "Creative Commons Attribution 4.0 International License"
 DEFAULT_PUBLISHER = u"ESA/Hubble"
 DEFAULT_PUBLISHER_ID = u"esahubble"
@@ -626,6 +602,15 @@ ARCHIVE_WORKFLOWS = {
 VIDEO_RENAME_NOTIFY = ['hzodet@eso.org', 'mkornmes@eso.org']
 
 ARCHIVE_CROSSLINKS = djangoplicity.crosslinks.crosslinks_for_domain('spacetelescope.org')
+
+
+# CONTACTS APP
+# Hashids salt, used to encrype/decrypt Contacts' UIDs
+# TODO: Use secret if required
+HASHIDS_SALT = 'UbKopIrheasdGiwrked'
+HASHIDS_ALPHABET = 'abcdefghijkmnopqrstuvwxyz123456789'
+HASHIDS_ALPHABET_UPPER = 'ABCDEFGHJKMNPQRSTUVWXYZ123456789'
+
 
 ##########
 # SOCIAL #
@@ -701,8 +686,8 @@ CELERY_WORKER_HIJACK_ROOT_LOGGER = False
 CELERY_TASK_ALWAYS_EAGER = False
 
 # File to save revoked tasks across workers restart
-CELERY_WORKER_STATE_DB = "%s/tmp/celery_states" % ROOT
-CELERY_BEAT_SCHEDULE_FILENAME = '%s/tmp/celerybeat_schedule' % ROOT
+CELERY_WORKER_STATE_DB = os.path.join(TMP_DIR, 'celery_states')
+CELERY_BEAT_SCHEDULE_FILENAME = os.path.join(TMP_DIR, 'celerybeat_schedule')
 
 # Define Celery periodic tasks
 CELERY_BEAT_SCHEDULE = {
@@ -794,107 +779,6 @@ REGEX_REDIRECTS = (
 
 SITE_DOMAIN = "www.spacetelescope.org"
 
-
-###########
-# LOGGING #
-###########
-LOGGING = {
-    'version': 1,
-    'disable_existing_loggers': False,
-    'formatters': {
-        'verbose': {
-            'format': '%(levelname)s %(asctime)s %(module)s %(process)d %(thread)d %(message)s'
-        },
-        'default': {
-            'format': '%(asctime)s %(name)-12s %(levelname)-8s %(message)s'
-        },
-    },
-    'filters': {
-        'require_debug_false': {
-            '()': 'django.utils.log.RequireDebugFalse'
-        }
-    },
-    'handlers': {
-        'null': {
-            'level': 'DEBUG',
-            'class': 'logging.NullHandler',
-        },
-        'console': {
-            'level': 'DEBUG',
-            'class': 'logging.StreamHandler',
-            'formatter': 'default'
-        },
-        'mail_admins': {
-            'level': 'ERROR',
-            'filters': ['require_debug_false'],
-            'class': 'django.utils.log.AdminEmailHandler',
-            'include_html': True,
-        },
-        'file': {
-            'level': 'DEBUG',
-            'class': 'logging.handlers.RotatingFileHandler',
-            'formatter': 'default',
-            'filename': os.path.join( LOG_DIR, "djangoplicity.log" ),
-            'maxBytes': 50 * 1024 * 1024,
-            'backupCount': 3,
-        }
-    },
-    'loggers': {
-        'django': {
-            'handlers': ['console'] if DEBUG else ['file'],
-            'propagate': True,
-            'level': 'DEBUG' if DEBUG else 'INFO',
-        },
-        'django.request': {
-            'handlers': ['mail_admins'],
-            'level': 'ERROR',
-            'propagate': False,
-        },
-        'django.security.DisallowedHost': {
-            'handlers': ['null'],
-            'propagate': False,
-        },
-        'django.template': {
-            'handlers': ['null'],
-            'propagate': False,
-        },
-        'djangoplicity': {
-            'handlers': ['console'] if DEBUG else ['file'],
-            'level': 'DEBUG' if DEBUG else 'INFO',
-        },
-        'django.db.backends': {
-            'handlers': ['console'] if DEBUG else ['file'],
-            'propagate': False,
-            'level': 'INFO',
-        },
-        'sslurllib': {
-            'handlers': ['null', ],
-            'propagate': False,
-        },
-        'django_auth_ldap': {
-            'handlers': ['console'] if DEBUG else ['file'],
-            'propagate': True,
-            'level': 'DEBUG' if DEBUG else 'INFO',
-        },
-        'pycountry.db': {
-            'handlers': ['null'],
-            'propagate': False,
-        },
-        'iterchoices': {
-            'handlers': ['null'],
-            'propagate': False,
-        },
-        'tinymce': {
-            'handlers': ['null'],
-            'propagate': False,
-        },
-        'requests': {
-            'handlers': ['console'] if DEBUG else ['file'],
-            'level': 'WARNING',  # requests is too verbose by default
-        },
-    },
-}
-
 # ======================================================================
 # SITE SPECIFIC SECTIONS
 # ======================================================================
@@ -921,11 +805,11 @@ SHOP_CONF = {
 DIRNAME = os.path.abspath( os.path.dirname( __file__ ) )
 LOCAL_DEV = True
 
-MIDDLEWARE += [
-    "threaded_multihost.middleware.ThreadLocalMiddleware",
-]
+# MIDDLEWARE += [
+#     "threaded_multihost.middleware.ThreadLocalMiddleware",
+# ]
 
-AUTHENTICATION_BACKENDS += ( 'satchmo_store.accounts.email-auth.EmailBackend', )
+# AUTHENTICATION_BACKENDS += ( 'satchmo_store.accounts.email-auth.EmailBackend', )
 
 SATCHMO_SETTINGS = {
     'SHOP_BASE': '/shop',
@@ -1022,8 +906,16 @@ RECAPTCHA_PRIVATE_KEY = ''
 #
 # Pipeline configuration (CSS/JS packing)
 #
-
-STATICFILES_STORAGE = 'djangoplicity.utils.storage.PipelineManifestStorage'
+# Only config this for the docker web service, not flower, celery, etc, to avoid:
+# ValueError: Missing staticfiles manifest entry for
+# And because the web service is the only that collect statics before
+if os.environ.get('SERVICE_TYPE') == 'web':
+    STATICFILES_STORAGE = 'djangoplicity.utils.storage.PipelineManifestStorage'
+    STATICFILES_FINDERS = (
+        'django.contrib.staticfiles.finders.FileSystemFinder',
+        'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+        'pipeline.finders.PipelineFinder',
+    )
 
 # We split the CSS into main and extras to load the more important first
 # and the rest in the end. This also solves a problem with IE9 which stops
@@ -1090,94 +982,8 @@ PIPELINE = {
     'DISABLE_WRAPPER': True,
 }
 
-STATICFILES_FINDERS = (
-    'django.contrib.staticfiles.finders.FileSystemFinder',
-    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
-    'pipeline.finders.PipelineFinder',
-)
-
-# Required since Django 1.5:
-ALLOWED_HOSTS = [
-    'localhost',
-    '.spacetelescope.org',
-    '.eso.org',
-]
-
 # Required since Django 1.6:
 TEST_RUNNER = 'django.test.runner.DiscoverRunner'
-
-MEDIA_CONTENT_SERVERS = {
-    'CDN77': CDN77ContentServer(
-        name='CDN77',
-        formats={
-            'djangoplicity.media.models.images.Image': (
-                'large',
-                'publicationjpg',
-                'screen',
-                'wallpaper1',
-                'wallpaper2',
-                'wallpaper3',
-                'wallpaper4',
-                'wallpaper5',
-                'thumb150y',
-                'thumb300y',
-                'thumb350x',
-                'thumb700x',
-                'newsfeature',
-                'news',
-                'banner1920',
-                'screen640',
-                'zoomable',
-            ),
-            'djangoplicity.media.models.videos.Video': (
-                'videoframe',
-                'small_flash',
-                'medium_podcast',
-                'medium_mpeg1',
-                'medium_flash',
-                'large_qt',
-                'broadcast_sd',
-                'hd_and_apple',
-                'hd_broadcast_720p50',
-                'hd_1080p25_screen',
-                'hd_1080p25_broadcast',
-                'ultra_hd',
-                'ultra_hd_h265',
-                'ultra_hd_broadcast',
-                'dome_8kmaster',
-                'dome_4kmaster',
-                'dome_2kmaster',
-                'dome_mov',
-                'dome_preview',
-                'cylindrical_4kmaster',
-                'cylindrical_8kmaster',
-                'cylindrical_16kmaster',
-                'news',
-            ),
-        },
-        url='https://cdn.spacetelescope.org/',
-        url_bigfiles='https://cdn2.spacetelescope.org/',
-        remote_dir='/www/',
-        host='m',
-        username='',
-        password='',
-        api_login='salmagro@eso.org',
-        api_password='',
-        cdn_id='33541',
-        cdn_id_bigfiles='31465',
-    ),
-}
-
-MEDIA_CONTENT_SERVERS_CHOICES = (
-    ('', 'Default'),
-    ('CDN77', 'CDN77'),
-)
-
-DEFAULT_MEDIA_CONTENT_SERVER = 'CDN77'
-
-YOUTUBE_TOKEN = '%s/youtube_oauth2_token.json' % SHARED_DIR
-YOUTUBE_DEFAULT_TAGS = ['Hubble', 'Hubble Space Telescope', 'Telescope', 'Space', 'Observatory', 'ESA']
-YOUTUBE_CLIENT_SECRET = '%s/etc/youtube_client_secret.json' % PRJBASE
 
 TINYMCE_DEFAULT_CONFIG = {
     'height': 360,

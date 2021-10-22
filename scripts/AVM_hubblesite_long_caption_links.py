@@ -1,3 +1,4 @@
+from __future__ import print_function
 #
 # eso.org
 # Copyright 2011 ESO
@@ -11,12 +12,15 @@
 # Mantis 12079 retrieves long_caption_links for images related to a NASA Press Release 
 #*************************************************************************************************************
 
+from future import standard_library
+standard_library.install_aliases()
+from builtins import str
 from djangoplicity.utils import optionparser
 from djangoplicity.media.models import Image
 from djangoplicity.releases.models import Release
 
 import re
-import urllib2
+import urllib.request, urllib.error, urllib.parse
 
 import logging, sys
 import socket
@@ -99,8 +103,8 @@ def check_reachability(url):
     result = True
     
     try:
-        urllib2.urlopen(url) #,data = '', timeout=5
-    except urllib2.URLError, e:
+        urllib.request.urlopen(url) #,data = '', timeout=5
+    except urllib.error.URLError as e:
         result = str(e.code) 
     return result
 
@@ -115,7 +119,7 @@ def get_long_caption_link(url, iterator, check_reachability_flag = True):
     '''
     long_c = None
     try:
-        remote   = urllib2.urlopen(url)
+        remote   = urllib.request.urlopen(url)
     except:
         remote  = 'timeout?'
     for line in remote:
@@ -176,10 +180,10 @@ def analyse(images):
             ldict[link] = 1
             dict[prefix] = ldict
     list.sort()
-    print list
-    for d in dict.keys():
-        print d, dict[d]
-    print linkdict
+    print(list)
+    for d in list(dict.keys()):
+        print(d, dict[d])
+    print(linkdict)
 
 def get_related_PR(id):
     temp = ''   
@@ -197,7 +201,7 @@ if __name__ == '__main__':
 
     images = Image.objects.all()#filter(image__long_caption_link != '')
     n_images = str(len(images))
-    print n_images, ' image objects'
+    print(n_images, ' image objects')
         
     hcount = 0
     savecount = 0
@@ -267,7 +271,7 @@ if __name__ == '__main__':
                     long_c = link_images + iterator + '/'
                     link_type = '''try link + /a/'''
             
-            print image.id,';\t', long_c,';\t', link_type
+            print(image.id,';\t', long_c,';\t', link_type)
      
             if(press_release_link  and image.press_release_link.find('http') == -1):
                 pcount = pcount + 1
@@ -276,7 +280,7 @@ if __name__ == '__main__':
                     image.save()
                     psavecount = psavecount + 1
                 except:
-                    print image.id, ': failed to store press_release_link ', press_release_link
+                    print(image.id, ': failed to store press_release_link ', press_release_link)
                     
             
             if (long_c): 
@@ -287,10 +291,10 @@ if __name__ == '__main__':
                     image.save()
                     savecount = savecount + 1
                 except:
-                    print image.id, ': failed to store long_caption_link ', long_c
+                    print(image.id, ': failed to store long_caption_link ', long_c)
                     
-    print str(hcount), 'long_caption_links found'
-    print str(pcount), 'press_release_link found'
-    print 'saved ', str(savecount), ' long_caption_links and ', str(psavecount), ' press_release_links.'
+    print(str(hcount), 'long_caption_links found')
+    print(str(pcount), 'press_release_link found')
+    print('saved ', str(savecount), ' long_caption_links and ', str(psavecount), ' press_release_links.')
  
                

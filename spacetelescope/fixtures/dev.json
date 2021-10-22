@@ -1,5 +1,19 @@
 [
   {
+    "model": "auth.user",
+    "pk": 1,
+    "fields": {
+      "username": "admin",
+      "first_name": "Admin",
+      "last_name": "",
+      "email": "admin@esahubble.org",
+      "password": "pbkdf2_sha256$36000$kxuO9QEDuPBK$fsjwtc0alWslTVkAG8AhBeBcWDx0UlvrxtF/euS63Ts=",
+      "is_staff": true,
+      "is_superuser": true,
+      "is_active": true
+    }
+  },
+  {
     "model": "sites.site",
     "pk": 1,
     "fields": {
@@ -307,74 +321,6 @@
       "url": "vnr",
       "type": 2,
       "name": "Video News Releases"
-    }
-  },
-  {
-    "model": "product.category",
-    "pk": 1000,
-    "fields": {
-      "site": 1,
-      "name": "Dev category",
-      "slug": "dev-cat"
-    }
-  },
-  {
-    "model": "product.product",
-    "pk": 1000,
-    "fields": {
-      "site": 1,
-      "name": "Dev product",
-      "featured": true,
-      "slug": "dev-product",
-      "sku": "dev-product",
-      "items_in_stock": 1000,
-      "category": [1000]
-    }
-  },
-  {
-    "model": "product.price",
-    "pk": 1000,
-    "fields": {
-      "product": 1000,
-      "price": 50.00,
-      "quantity": 1
-    }
-  },
-  {
-    "pk": 1000,
-    "model": "l10n.country",
-    "fields": {
-      "iso2_code": "DV",
-      "name": "DEV COUNTRY",
-      "printable_name": "Dev country",
-      "iso3_code": "DEV",
-      "continent": "EU"
-    }
-  },
-  {
-    "model": "contact.contactrole",
-    "fields": {
-      "key": "Customer",
-      "name": "Customer"
-    }
-  },
-  {
-    "model": "shop.config",
-    "fields": {
-      "site": 1,
-      "city": "Dev city",
-      "sales_country": 1000,
-      "phone": "",
-      "street1": "Dev Street",
-      "street2": "",
-      "store_name": "Hubble Dev Shop",
-      "state": "",
-      "postal_code": "85748",
-      "store_description": "This is a fake store used for testing",
-      "country": 1000,
-      "store_email": "dev@shop.com",
-      "in_country_only": 0,
-      "shipping_countries": [1000]
     }
   },
   {

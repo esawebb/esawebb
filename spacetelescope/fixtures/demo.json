@@ -11,7 +11,7 @@
   "model": "menus.menu",
   "pk": 1,
   "fields": {
-    "name": "MainMenu",
+    "name": "Main Menu",
     "hide_menu_root": true,
     "expansion_depth": 0,
     "max_depth": 0

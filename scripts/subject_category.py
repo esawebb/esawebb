@@ -1,3 +1,4 @@
+from __future__ import print_function
 #
 # -*- coding: utf-8 -*-
 #
@@ -15,6 +16,9 @@
 # 2011 Apr 18
 #*************************************************************************************************************
 
+from builtins import chr
+from builtins import str
+from builtins import range
 import pprint
 
 from djangoplicity.media.models import Image
@@ -48,13 +52,13 @@ def analyse_taxonomy(generate_code = False ):
             X_Tags[sc.avm_code()] = [name, number + 1]
             # print X_Tags[sc.avm_code()] 
       
-    keys = X_Tags.keys()
+    keys = list(X_Tags.keys())
     keys.sort()
     if generate_code:
         for key in keys:
-            print "    elif tag == '%s':       # '%s' %d" % (key, X_Tags[key][0], X_Tags[key][1]) 
-            print "        pass"
-        print '-----------------------'
+            print("    elif tag == '%s':       # '%s' %d" % (key, X_Tags[key][0], X_Tags[key][1])) 
+            print("        pass")
+        print('-----------------------')
     pprint.pprint(X_Tags) 
     return  
 
@@ -75,10 +79,10 @@ def get_toplevel(image):
 def print_tags(image):
     found = False
     scs = image.subject_category.exclude(top_level = 'X')
-    if len(scs) > 0: print image.id,
+    if len(scs) > 0: print(image.id, end=' ')
     for sc in  scs:
-        print sc.name,
-    print
+        print(sc.name, end=' ')
+    print()
     return found
 
 def scan_subjectnames(image, name):
@@ -97,11 +101,11 @@ def add_subjectname(image, subject_name):
     """
     added = False
     if not scan_subjectnames(image,subject_name): 
-        print "%-45s; %-9s; %s; subject_name ;%s; added;\t title: %s" % (image.id, sc.avm_code(), sc.name, subject_name, image.title)                                             
+        print("%-45s; %-9s; %s; subject_name ;%s; added;\t title: %s" % (image.id, sc.avm_code(), sc.name, subject_name, image.title))                                             
         new_name = SubjectName.objects.get(name = subject_name)
         image.subject_name.add(new_name)
         added = True
-    else: print "%-45s; %-9s; %s; subject_name ;%s; already exists;\t title: %s" % (image.id, sc.avm_code(), sc.name, subject_name, image.title)                                                     
+    else: print("%-45s; %-9s; %s; subject_name ;%s; already exists;\t title: %s" % (image.id, sc.avm_code(), sc.name, subject_name, image.title))                                                     
     return added
 
 def add_avmtag(image, name, code):
@@ -127,10 +131,10 @@ def add_avmtag(image, name, code):
                                                  level3 = level[3], 
                                                  level4 = level[4], 
                                                  level5 = level[5])
-        print "%-45s; %-9s; %s; replace with;%s; %s;\t title: %s" % (image.id, sc.avm_code(), sc.name, new_tag.avm_code(), new_tag.name, image.title)                                             
+        print("%-45s; %-9s; %s; replace with;%s; %s;\t title: %s" % (image.id, sc.avm_code(), sc.name, new_tag.avm_code(), new_tag.name, image.title))                                             
         image.subject_category.add(new_tag)
         added = True 
-    else: print "%-45s; %-9s; %s; already existing tag;%s; %s;\t title: %s" % (image.id, sc.avm_code(), sc.name, existing_tag.avm_code(), existing_tag.name, image.title)                                             
+    else: print("%-45s; %-9s; %s; already existing tag;%s; %s;\t title: %s" % (image.id, sc.avm_code(), sc.name, existing_tag.avm_code(), existing_tag.name, image.title))                                             
     return added
 
 def treat_x(sc, image, remove = True): 
@@ -145,7 +149,7 @@ def treat_x(sc, image, remove = True):
         # add subject_name JWST
         changed = add_subjectname(image,'JWST')
         # set image.type = 'Artwork'
-        print "%-45s; %-9s; %s; set image.type = 'Artwork'" % (image.id, sc.avm_code(), sc.name)
+        print("%-45s; %-9s; %s; set image.type = 'Artwork'" % (image.id, sc.avm_code(), sc.name))
         image.type = 'Artwork'
         image.subject_category.remove(sc)
         changed = True
@@ -157,13 +161,13 @@ def treat_x(sc, image, remove = True):
 
     elif tag == 'X.101.13':        # 'Miscellaneous  Images/Videos' 165
         # remove tag
-        print "%-45s; %-9s; %s; only removing tag" % (image.id, sc.avm_code(), sc.name)
+        print("%-45s; %-9s; %s; only removing tag" % (image.id, sc.avm_code(), sc.name))
         image.subject_category.remove(sc)
         changed = True     
         
     elif tag == 'X.101.21':        # 'Illustration Images' 237
         # set type to artwork and remove tag
-        print "%-45s; %-9s; %s; set image.type = 'Artwork'" % (image.id, sc.avm_code(), sc.name)
+        print("%-45s; %-9s; %s; set image.type = 'Artwork'" % (image.id, sc.avm_code(), sc.name))
         image.type = 'Artwork'
         image.subject_category.remove(sc)
         changed = True
@@ -245,7 +249,7 @@ def treat_x(sc, image, remove = True):
             changed = add_avmtag(image, 'AGN', type + '.5.3.2')    
             
         if changed: image.subject_category.remove(sc)
-        else: print "%-45s; %-9s; %s; BH or AGN? ; ; ;\t title: %s" % (image.id, sc.avm_code(), sc.name,  image.title)                                             
+        else: print("%-45s; %-9s; %s; BH or AGN? ; ; ;\t title: %s" % (image.id, sc.avm_code(), sc.name,  image.title))                                             
         
             
     elif tag == 'X.101.9':        # 'Cosmology Images/Videos' 241
@@ -265,14 +269,14 @@ if __name__ == '__main__':
     sys.stdout = codecs.getwriter('UTF-8')(sys.stdout)
     
     #little unicode test
-    star = unichr(9734)
-    print star
+    star = chr(9734)
+    print(star)
     
     changed_images = set()
 
     count = 0
     #  First process the easier tags, then in 2. round the newly created tags can be used to check the top_level       
-    print 'Images 1. round'
+    print('Images 1. round')
     for Img in Image.objects.all():
         n_tags = len(Img.subject_category.all()) 
         for sc in  Img.subject_category.all():
@@ -281,16 +285,16 @@ if __name__ == '__main__':
                 count = count + 1
                 changed_images.add(treat_x(sc, Img))
 
-    print "apply the changes"
+    print("apply the changes")
     for Img in changed_images:
         if Img:
             try: 
                 Img.save() # force_insert=True
                 # print "saved changes for tag %s in %s" % (sc.name, image.id)
             except Exception:
-                print "save failed with %s in %s" % (sc.name, Img.id)
+                print("save failed with %s in %s" % (sc.name, Img.id))
 
-    print 'Images 2. round'
+    print('Images 2. round')
     for Img in Image.objects.all():
         n_tags = len(Img.subject_category.all()) 
         for sc in  Img.subject_category.all():
@@ -299,16 +303,16 @@ if __name__ == '__main__':
                     count = count + 1
                     changed_images.add(treat_x(sc, Img))
 
-    print "apply the changes"
+    print("apply the changes")
     for Img in changed_images:
         if Img:
             try: 
                 Img.save() # force_insert=True
                 # print "saved changes for tag %s in %s" % (sc.name, image.id)
             except Exception:
-                print "save failed with %s in %s" % (sc.name, Img.id)
+                print("save failed with %s in %s" % (sc.name, Img.id))
             
-    print 'treated', count, 'tags'
+    print('treated', count, 'tags')
     
     
     
