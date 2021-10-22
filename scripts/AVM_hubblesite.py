@@ -1,4 +1,3 @@
-from __future__ import print_function
 #
 # eso.org
 # Copyright 2011 ESO
@@ -18,14 +17,11 @@ from __future__ import print_function
 
 #*************************************************************************************************************
 
-from future import standard_library
-standard_library.install_aliases()
-from builtins import str
 from djangoplicity.utils import optionparser
 from djangoplicity.media.models import Image
 
 import re
-import urllib.request, urllib.error, urllib.parse
+import urllib2
 
 import logging, sys
 import socket
@@ -39,7 +35,7 @@ def store_JSON(path_json, dict):
     '''
     f = open(path_json,'w')
     
-    ids = list(dict.keys())
+    ids = dict.keys()
     ids.sort()
     i = 1
     f.write('{\n')
@@ -69,7 +65,7 @@ def store_JSON(path_json, dict):
     f.write(']\n')
     f.write('}\n')
     f.close()
-    print("produced", path_json)
+    print "produced", path_json
     return
     
 def new_id(long_caption_link):
@@ -130,19 +126,19 @@ if __name__ == '__main__':
     dict = {} # {spacetelescope_id:[spacetelescope_thumb, hubblesite_id, hubblesite_thumb, hubblesite_huge, long_caption_link]}for the results
 
     images = Image.objects.all()
-    print("spacetelescope id\t hubblesite id\t spacetelescope url\t hubblesite url")
+    print "spacetelescope id\t hubblesite id\t spacetelescope url\t hubblesite url"
     n_images = str(len(images))
     count = 0
     now = datetime.datetime.now()
     jsonfile = '/Users/lnielsen/Desktop/Hubble/' + now.strftime("%Y-%m-%d") + 'a.js'
-    print('store results in ', jsonfile)
+    print 'store results in ', jsonfile
     for image in images:
         if image.long_caption_link.find('http://hubblesite.org') == -1: continue
         #if image.id[:3] == 'opo': continue  # all opo images until 01-03-2011 are opo.js and have been manually compared 
         count = count + 1
         #if count > 30: break
         try:
-            remote   = urllib.request.urlopen(image.long_caption_link)
+            remote   = urllib2.urlopen(image.long_caption_link)
         except:
             remote  = 'timeout?'
         #hubblesite = remote.readlines()
@@ -163,8 +159,8 @@ if __name__ == '__main__':
             #Check if hubblesite thumb can be found
             thumberror = ''
             try:
-                urllib.request.urlopen(hubblesite_thumb) #,data = '', timeout=5
-            except urllib.error.URLError as e:
+                urllib2.urlopen(hubblesite_thumb) #,data = '', timeout=5
+            except urllib2.URLError, e:
                 hubblesite_thumb = 'ERROR' + str(e.code) + ' ' + hubblesite_thumb               
                 thumberror = 'Thumb not found (' + str(e.code) + ') at ' + hubblesite_thumb
             
@@ -175,7 +171,7 @@ if __name__ == '__main__':
 
         dict[image.id] = [spacetelescope_thumb, spacetelescope_url, hubble_id, hubblesite_thumb, hubblesite_huge, image.long_caption_link]
         
-        print("%s\t%s\t%s\t%s" % (image.id, hubble_id, spacetelescope_url, image.long_caption_link))
+        print "%s\t%s\t%s\t%s" % (image.id, hubble_id, spacetelescope_url, image.long_caption_link)
         logger.info(str(count)+' / '+n_images + ' ' + image.id + ' ' + hubble_id + ' ' + middle  + ' ' + image.long_caption_link + ' ' + thumberror)
     store_JSON(jsonfile,dict)
            

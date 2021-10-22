@@ -1,4 +1,3 @@
-from __future__ import print_function
 #
 # -*- coding: utf-8 -*-
 #
@@ -12,11 +11,8 @@ from __future__ import print_function
 # Mantis 12079 helper to find information on hubblesite.org 
 #*************************************************************************************************************
 
-from future import standard_library
-standard_library.install_aliases()
-from builtins import str
 import re
-import urllib.request, urllib.error, urllib.parse 
+import urllib2 
 
 from datetime import datetime, tzinfo
 import pytz
@@ -30,7 +26,7 @@ def get_redirect(link):
     #returns link from urllib2.urlopen() or if this is not possilbe None is returned
     redirect = ''
     try:
-        remote   = urllib.request.urlopen(link) 
+        remote   = urllib2.urlopen(link) 
         redirect = remote.geturl()
     except:
         redirect = None            
@@ -62,7 +58,7 @@ def get_release_date(link):
     
     # read the website
     try:
-        site = urllib.request.urlopen(link)
+        site = urllib2.urlopen(link)
         text = site.read()
         # remove all line breaks and double whitespace
         text = remove_void(text)
@@ -98,17 +94,17 @@ def get_release_date(link):
                 tz = eastern
                 if Z == 'EDT': is_dts = True
             else:
-                print('unsupported timezone:', Z)
-                print('assuming UTC')
+                print 'unsupported timezone:', Z
+                print 'assuming UTC'
           
             aware = tz.localize(naive, is_dts)
             release_date = tz.normalize(aware)
             release_date = release_date.astimezone(utc)  
         except:
-            print("no datetime information found")
+            print "no datetime information found"
             pass
     except:
-        print(link, ' could not be read')
+        print link, ' could not be read'
         pass
     
     return release_date # in UTC
@@ -141,7 +137,7 @@ def list_links(url_images):   # [^>]
     '''
     newlinks = None
     try:
-        site = urllib.request.urlopen(url_images)
+        site = urllib2.urlopen(url_images)
         text = site.read()
         
         # remove all linebreaks and double whitespace
@@ -175,12 +171,12 @@ if __name__ == '__main__':
              r'http://hubblesite.org/newscenter/archive/releases/1990/06/image/a/']
 
     for t in tests:
-        print(t)
-        print(get_release_date(t).strftime('%Y-%B-%d %I:%M %p %Z'))   
+        print t
+        print get_release_date(t).strftime('%Y-%B-%d %I:%M %p %Z')   
           
     exit()
     
-    print("list_links:")
+    print "list_links:"
     release = r'''http://hubblesite.org/newscenter/archive/releases/2005/37'''
    # release = r'''http://hubblesite.org/newscenter/archive/releases/2008/16/image/ce/'''
     images = release_images(release)
@@ -188,10 +184,10 @@ if __name__ == '__main__':
 
     links = list_links(images)
 
-    print(images)
+    print images
     c = 0
     if links: 
         for link in links: 
             c = c + 1
-            print(c, '   ', link)
+            print c, '   ', link
       

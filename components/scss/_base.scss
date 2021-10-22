@@ -287,7 +287,7 @@ body {
 
     .main-menu {
       @media (min-width: $mobile-breakpoint) {
-        margin-left: $logo-max-size + 20px;
+        margin-left: calc(#{$logo-max-size} + 20px);
       }
     }
 	}

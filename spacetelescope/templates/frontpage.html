@@ -104,49 +104,42 @@
             </div> <!-- potw-carousel -->
         </div>
         {% endif %}
-        {% if spacesparks %}
+        {% if hubblecasts %}
         <div id="hubblecast-carousel-wrapper">
             <div class="section-header">
                 <div class="section-title">
-                    <a href="{% url 'videos_query_category' 'spacesparks' %}">{% trans "Space sparks" %}</a>
+                    <a href="{% url 'videos_query_category' 'hubblecast' %}">{% trans "Hubblecast" %}</a>
                 </div>
                 <div class="section-navigation">
                 </div>
             </div>
             <div id="hubblecast-carousel">
                 <div class="slide">
-                    {% if spacesparks.0.youtube_video_id and spacesparks.0.use_youtube %}
+                    {% if hubblecasts.0.youtube_video_id and hubblecasts.0.use_youtube %}
                         <div class="youtube-wrapper">
                             <div id="youtube-player"></div>
                         </div>
                     {% else %}
-                        {% embedvideo_subs spacesparks.0 'medium_podcast,h264' 'hd_and_apple,hd720p_screen,dome_preview' '' spacesparks.0.videosubtitle_set.all 0 %}
+                        {% embedvideo_subs hubblecasts.0 'medium_podcast,h264' 'hd_and_apple,hd720p_screen,dome_preview' '' hubblecasts.0.videosubtitle_set.all 0 %}
                     {% endif %}
-                    <a href="{{ spacesparks.0.get_absolute_url }}">
-                        <div class="hubblecast-description{% if not spacesparks.0.youtube_video_id or not spacesparks.0.use_youtube %} hubblecast-description-jwplayer{% endif %}">
-                            <div class="date">{{ spacesparks.0.release_date|datetime:"DATE" }} — {{ spacesparks.0.id }}</div>
-                            <div class="title">{{ spacesparks.0.title }}</div>
+                    <a href="{{ hubblecasts.0.get_absolute_url }}">
+                        <div class="hubblecast-description{% if not hubblecasts.0.youtube_video_id or not hubblecasts.0.use_youtube %} hubblecast-description-jwplayer{% endif %}">
+                            <div class="date">{{ hubblecasts.0.release_date|datetime:"DATE" }} — {{ hubblecasts.0.id }}</div>
+                            <div class="title">{{ hubblecasts.0.title }}</div>
                     </div>
                     </a>
                 </div>
-            </div> <!-- spacesparks-carousel -->
+            </div> <!-- hubblecast-carousel -->
         </div>
         {% endif %}
-        <div id="newsletter-preview-container">
+        <div id="newsletter-carousel-wrapper">
             <div class="section-header">
-                <div class="section-title">
-                    <a href="newsletters/science">{% trans "ESA/Hubble science Newsletter" %}</a>
+                <div class="section-title blue-title">
+                    {% trans "ESA/Hubble Newsletter" %}
                 </div>
             </div>
-            <div id="newsletter-preview">
-                <a href="{{ science_newsletter.get_absolute_url }}">
-                    <div class="img-wrapper">
-                        <img draggable="false" src="{{ science_newsletter.resource_screen.url }}" class="img-cropped" alt="Newsletter">
-                    </div>
-                    <div class="newsletter-description">
-                        <div class="title">{{ science_newsletter.subject }}</div>
-                    </div>
-                </a>
+            <div>
+                <img src="{% static 'frontpage/newsletters.jpg' %}" alt="Take a look to our newsletters">
             </div>
         </div>
     </div>
@@ -164,7 +157,7 @@
                     data-href="https://www.facebook.com/hubbleESA/"
                     data-tabs="timeline"
                     data-width="304"
-                    data-height="625"
+                    data-height="610"
                     data-small-header="true"
                     data-hide-cover="false"
                     data-show-facepile="false"
@@ -184,7 +177,7 @@
                     class="twitter-timeline"
                     href="https://twitter.com/HUBBLE_space?ref_src=twsrc%5Etfw"
                     data-width="304"
-                    data-height="625"
+                    data-height="610"
                 >
                     Tweets by HUBBLE_space
                 </a>
@@ -226,36 +219,47 @@
 <div class="frontpage-section subscribe-to-hubble">
     <div>
         <div class="row">
-            <div class="col-md-6">
+            <div class="col-md-4">
                 <div class="border">
                     <div class="section-header">
                         <div class="section-title blue-title">
-                            {% trans "ESA/Hubble Newsletters" %}
+                            {% trans "Newsletter" %}
+                        </div>
+                    </div>
+                    <div id="newsletters-link">
+                        <a href="/newsletters">
+                            <img src="{% static 'frontpage/newsletters.jpg' %}" alt="Take a look to our newsletters">
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="border">
+                    <div class="section-header">
+                        <div class="section-title blue-title">
+                            {% trans "Subscribe to Hubble news" %}
                         </div>
                     </div>
                     <div id="subscribe-link">
-                        <a href="/newsletters">
+                        <a href="/subscribe">
                             <img src="{% static 'frontpage/subscribe.jpg' %}" alt="Subscribe to Hubble news">
                         </a>
                     </div>
                 </div>
             </div>
-            <div class="col-md-6">
+            <div class="col-md-4">
                 <div class="border">
                     <div class="section-header">
                         <div class="section-title blue-title">
-                            {% trans "Link to Social Media Channels" %}
+                            {% trans "Link to socials" %}
                         </div>
                     </div>
                     <div class="social-links">
                         <div class="icons">
-                            <a href="http://www.facebook.com/HubbleESA"><div class="sprites-facebook_42px_flat"></div></a>
-                            <a href="http://twitter.com/hubble_space"><div class="sprites-twitter_42px_flat"></div></a>
                             <a href="http://www.youtube.com/user/HubbleESA"><div class="sprites-youtube_42px_flat"></div></a>
+                            <a href="http://itunes.apple.com/de/podcast/hubblecast-hd/id258935617 "><div class="sprites-apple_42px_flat"></div></a>
+                            <a href="http://www.vimeo.com/hubbleesa"><div class="sprites-vimeo_42px_flat"></div></a>
                             <a href="http://www.flickr.com/photos/hubble_esa "><div class="sprites-flickr_42px_flat"></div></a>
-                            <a href="https://www.instagram.com/hubbleesa/"><div class="sprites-instagram"></div></a>
-                            <a href="https://www.linkedin.com/company/esahubble/"><div class="sprites-linkedin_42px_flat"></div></a>
-                            <a href="https://giphy.com/channel/esahubble"><div class="sprites-giphy_42px"></div></a>
                         </div>
                     </div>
                 </div>
@@ -272,14 +276,14 @@
 <script type="text/javascript">
 
 // Load YouTube or JwPlayer
-{% if spacesparks.0 %}
-    {% if spacesparks.0.youtube_video_id and spacesparks.0.use_youtube %}
+{% if hubblecasts.0 %}
+    {% if hubblecasts.0.youtube_video_id and hubblecasts.0.use_youtube %}
         var player;
         function onYouTubeIframeAPIReady() {
             player = new YT.Player('youtube-player', {
                 height: '263',
                 width: '468',
-                videoId: '{{ spacesparks.0.youtube_video_id }}',
+                videoId: '{{ hubblecasts.0.youtube_video_id }}',
                 playerVars: {
                     'modestbranding': 1,
                     'hl': '{{ LANGUAGE_CODE }}',
@@ -297,15 +301,15 @@
 {% endif %}
 
 $(document).ready(function(){
-    {% if spacesparks.0 %}
-        {% if spacesparks.0.youtube_video_id and spacesparks.0.use_youtube %}
+    {% if hubblecasts.0 %}
+        {% if hubblecasts.0.youtube_video_id and hubblecasts.0.use_youtube %}
             var tag = document.createElement('script');
 
             tag.src = "https://www.youtube.com/iframe_api";
             var firstScriptTag = document.getElementsByTagName('script')[0];
             firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
         {% else %}
-            setupVideoPlayer('{{ spacesparks.0.id }}');
+            setupVideoPlayer('{{ hubblecasts.0.id }}');
         {% endif %}
     {% endif %}
 

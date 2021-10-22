@@ -673,7 +673,7 @@ $default-section-height: 307px;
       padding-right: 1rem;
 
       @media (max-width: $screen-md) {
-        margin-bottom: 2rem;
+        margin-bottom: 1rem;
       }
 
     }
@@ -699,48 +699,15 @@ $default-section-height: 307px;
     margin-top: 1rem;
   }
 
-  #newsletter-preview-container {
-    border: 1px solid $border-grey;
-    margin-top: 1rem;
-
-    #newsletter-preview {
-      a {
-        color: $text-color;
-        text-decoration: none;
-      }
-
-      .img-wrapper {
-        overflow: hidden;
-
-        .img-cropped {
-          width: 100%;
-          object-fit: cover;
-          object-position: center top;
-
-          @media (min-width: $screen-md) {
-            height: 355px;
-          }
-
-          @media (max-width: $screen-md) {
-            height: 540px;
-          }
-        }
-      }
-
-      .newsletter-description {
-        @extend .frontpage-description;
-        white-space: nowrap;
-
-        .title {
-          padding: 8px;
-        }
-      }
+  #newsletter-carousel-wrapper {
+    img {
+      width: 100%;
     }
   }
 
   $section-header-height: 43px;
   $social-feed-width: 304px;
-  $social-feed-height: 625px;
+  $social-feed-height: 610px;
 
   .social-feeds {
     display: flex;
@@ -751,7 +718,7 @@ $default-section-height: 307px;
 
     .facebook-feeds, .twitter-feeds, .instagram-feeds {
       width: $social-feed-width;
-      height: $social-feed-height + $section-header-height + 6px;
+      height: $social-feed-height + $section-header-height + 5px;
       text-align: center;
       border: 1px solid $border-grey;
       overflow-y: hidden;

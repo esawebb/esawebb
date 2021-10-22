@@ -1,4 +1,3 @@
-from __future__ import print_function
 #
 # -*- coding: utf-8 -*-
 #
@@ -12,14 +11,11 @@ from __future__ import print_function
 # Mantis 12079 helper to find information on hubblesite.org 
 #*************************************************************************************************************
 
-from future import standard_library
-standard_library.install_aliases()
-from builtins import str
 from datetime import datetime, tzinfo
 import pytz
 import re
 import socket
-import urllib.request, urllib.error, urllib.parse
+import urllib2
 from djangoplicity.utils.templatetags.djangoplicity_datetime import timezone
 
 
@@ -41,11 +37,11 @@ def get_url_content( url ):
     try:
         timeout = 60
         socket.setdefaulttimeout(timeout)
-        conn = urllib.request.urlopen( url )
+        conn = urllib2.urlopen( url )
         text = conn.read()
         redirect = conn.geturl() 
         conn.close()
-    except urllib.error.URLError as e:
+    except urllib2.URLError, e:
         text = None
         redirect = None
         
@@ -245,5 +241,5 @@ if __name__ == '__main__':
              'http://hubblesite.org/newscenter/archive/releases/2011/08/']
 
     for t in tests:
-        print(image_url_info(t))
+        print image_url_info(t)
         #print get_release_date(t).strftime('%Y-%B-%d %I:%M %p %Z')

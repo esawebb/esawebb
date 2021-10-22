@@ -58,7 +58,7 @@
 {% endblock %}
 
 {% block footer %} 
-    {% with followus="yes" reason="you subscribed to ESO & ESA/Hubble Media Newsletter." address="ESA/Hubble, ESA Office, Space Telescope Science Institute, 3700 San Martin Dr, D-21218 Baltimore, United States" %}
+    {% with followus="yes" reason="you subscribed to ESO & ESA/Hubble Media Newsletter." %}
     {% if data.release.release_date < now %}
         {% include "newsletters/includes/footer.html" with width="660" %}
     {% else %}

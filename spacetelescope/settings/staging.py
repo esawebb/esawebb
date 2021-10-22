@@ -2,9 +2,6 @@ import copy
 
 from .common import *
 
-# Make this unique, and don't share it with anybody.
-SECRET_KEY = "sssmvx$i1sv4k*g+nwfnx*3a1g&)^i6r9n6g4=f_$x^u(kwt8s"
-
 DATABASES = copy.deepcopy(DATABASES)
 DATABASES['default']['HOST'] = ""
 DATABASES['default']['PASSWORD'] = ""

@@ -3,18 +3,13 @@ version: "3.4"
 # DEV CONFIG: 'docker-compose up' reads it automatically along with the docker-compose.yml file
 # See: https://docs.docker.com/compose/extends/
 
-# Tip: Put djangoplicity source code with a symbolic link into the local folder, then add a volume like this one:
-# - ./local/djangoplicity/media/tasks.py:/home/hubbleadm/.local/lib/python3.8/site-packages/djangoplicity/media/tasks.py
-# To debug the code changes
 x-common: &common
   build: .
   environment:
     ENVIRONMENT: "dev"
+    URLS_BASEPATH: "public"
   restart: "no"
   volumes:
-    - ./volumes/import:/home/hubbleadm/import
-    - ./volumes/media:/home/hubbleadm/media
-    - ./volumes/shared:/home/hubbleadm/shared
     - ./spacetelescope:/home/hubbleadm/spacetelescope
     - ./local:/home/hubbleadm/local
     - ./htmlcov:/home/hubbleadm/htmlcov
@@ -23,33 +18,18 @@ x-common: &common
     - ./test-utils/sitecustomize.py:/home/hubbleadm/sitecustomize.py
     - ./.coveragerc:/home/hubbleadm/.coveragerc
     - ./.coveragerc-parallel:/home/hubbleadm/.coveragerc-parallel
-    - ./setup.py:/home/hubbleadm/setup.py
-    - ./scripts:/home/hubbleadm/scripts
 
 services:
-  nginx:
-    restart: "no"
-    ports:
-      - "8000:8000"
-    volumes:
-      # Read only config volume
-      - ./config/nginx-dev:/etc/nginx/conf.d:ro
-      - ./config/nginx-common/snippets:/etc/nginx/snippets:ro
-
   web:
     <<: *common
-    depends_on:
-      - db
-    environment:
-      BEAT: ${BEAT:-OFF}
-      SERVER: ${SERVER:-dev}
+    depends_on: 
+      - cache
     command: ["./scripts/command-dev.sh"]
+    ports:
+      - "8000:8000"
 
   broker:
     restart: "no"
-    environment:
-      RABBITMQ_DEFAULT_USER: hubble
-      RABBITMQ_DEFAULT_PASS: hubble
 
   celery: *common
 
@@ -66,10 +46,9 @@ services:
     environment:
       MEMCACHED_CACHE_SIZE: 1024
     hostname: cache
+    
 
   db:
-    image: postgres:10.5
-    container_name: hubble-db
     restart: "no"
     environment:
       POSTGRES_DB: hubble
@@ -77,8 +56,3 @@ services:
       POSTGRES_PASSWORD: hubble
     ports:
       - "50000:5432"
-    volumes:
-      - pgdata:/var/lib/postgresql/data
-
-volumes:
-  pgdata:

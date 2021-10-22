@@ -1,7 +1,6 @@
 {% load i18n %}
 {% load staticfiles %}
 {% spaceless %}
-
 {% if object.spatial_quality %}
     <div class="object-info">
     <h3>{% trans "Coordinates" %}</h3>
@@ -52,7 +51,7 @@
         {% if wwtlink %}
             <div class="wwtlink">
                 <div>{% trans "View in WorldWide Telescope" %}:</div>
-                <div align="center"><a href="{{wwtlink}}" title="View in WorldWide Telescope"><img src="{% static 'images/wwt.png' %}" alt="View in WorldWide Telescope" /></a></div>
+                <div align="center"><a href="{{wwtlink}}" title="View in WorldWide Telescope"><img src="{% static "djangoplicity/images/wwt.png" %}" alt="View in WorldWide Telescope" /></a></div>
             </div>
         {% endif %}
         {% endwith %}
@@ -60,10 +59,5 @@
         </table>
     {% endif %}
     </div>
-{% endif %}
-
-{% if object.type == 'Observation' and object.spatial_quality == 'Full' %}
-   {% include 'archives/image/aladin_lite.html' %}
-    <hr>
 {% endif %}
 {% endspaceless %}

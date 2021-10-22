@@ -3,49 +3,29 @@ version: "3.4"
 # BASE CONFIG: applies to all environments, does not work alone
 # See: https://docs.docker.com/compose/extends/
 
-# Extension fields
-# See: https://docs.docker.com/compose/compose-file/#extension-fields
-x-hubble-image: &hubble-image hubble:0.9
-
 services:
-  nginx:
-    image: nginx:1.17
-    container_name: hubble-nginx
-    restart: always
-    depends_on:
-      - web
-    volumes:
-      - statics:/home/hubbleadm/static
-
   web:
-    image: *hubble-image
+    build: .
     container_name: hubble
     restart: always
     environment:
-      SERVICE_TYPE: "web"
-    volumes:
-      - statics:/home/hubbleadm/static
-    expose:
-      - "8000"
-
-  db:
-    image: postgres:11
-    container_name: esawebb-postgres
-    environment:
-      POSTGRES_PASSWORD: postgres
-
-  broker:
-    image: rabbitmq:3.8.3
-    container_name: hubble-broker
-    restart: always
+      BEAT: ${BEAT:-OFF}
+      SERVER: ${SERVER:-dev}
+    depends_on:
+      - db
+    volumes: 
+      - media:/home/hubbleadm/media
+      - import:/home/hubbleadm/import
 
   celery:
-    image: *hubble-image
+    build: .
     container_name: hubble-celery
     restart: always
+    # TODO: -B flat embeds celery beat inside the worker, not recommended for production, rather start celery beat in its own process
     command:
       [
         "celery",
+        "-B",
         "--app=spacetelescope",
         "--concurrency=8",
         "--hostname=worker1@%h",
@@ -56,11 +36,19 @@ services:
     depends_on:
       - web
       - broker
+    volumes:
+      - media:/home/hubbleadm/media
+      - import:/home/hubbleadm/import
+
+  broker:
+    image: rabbitmq:3.8.3
+    container_name: hubble-broker
+    restart: always
+    hostname: broker
 
   flower:
-    image: *hubble-image
+    build: .
     container_name: hubble-flower
-    restart: always
     # TODO: Change url prefix to /admin/tasks when having nginx proxy
     command:
       [
@@ -77,20 +65,29 @@ services:
       - web
 
   beat:
-    image: *hubble-image
+    build: .
     container_name: hubble-beat
-    restart: always
     command:
       [
         "celery",
         "--app=spacetelescope",
         "--loglevel=INFO",
         "--pidfile=/home/hubbleadm/tmp/beat.pid",
+        "--schedule=/home/hubbleadm/celerybeat-schedule",
         "beat",
       ]
     depends_on:
       - broker
       - web
 
+  db:
+    image: postgres:10.5
+    container_name: hubble-db
+    restart: always
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
 volumes:
-  statics:
+  pgdata:
+  media:
+  import:

@@ -6,6 +6,3 @@ tblib==1.7.0
 
 sqlparse
 sqlalchemy
-
-# Used for futurize stages
-future==0.18

@@ -21,7 +21,6 @@ class TestFrontPageApp(TestCase):
 
         for section in homepage_sections:
             self.assertContains(response, section)
-
         self.assertContains(response, youtube_only_html, html=True)
 
         # first hubblecast with use_youtube = False

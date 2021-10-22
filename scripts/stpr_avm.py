@@ -1,4 +1,3 @@
-from __future__ import print_function
 #
 # -*- coding: utf-8 -*-
 #
@@ -12,7 +11,6 @@ from __future__ import print_function
 #   
 #*************************************************************************************************************
 
-from builtins import chr
 from spacetelescope.hubblesite import avm
 import os, sys
 import logging
@@ -23,8 +21,8 @@ def prepare4unicode():
     # this allows stdout > into a file
     sys.stdout = codecs.getwriter('UTF-8')(sys.stdout)
     # little unicode test
-    star = chr(9734)
-    print(star)
+    star = unichr(9734)
+    print star
     return 
 
 if __name__ == '__main__':
@@ -37,17 +35,17 @@ if __name__ == '__main__':
     
     jsonmapper = avm.jsonmapper()
     data = avm.load_json(json_file)
-    print(len(data), "entries in original data")
+    print len(data), "entries in original data"
     data = avm.remove_duplicates(data)
-    print(len(data), "after remove_duplicates")
+    print len(data), "after remove_duplicates"
     for dataset in data:
-        print("______________________________________________________________________________")
+        print "______________________________________________________________________________"
         jsonmapper.jsondict = dataset
         avmdict = jsonmapper.avmdict()
-        for key in list(avmdict.keys()):
+        for key in avmdict.keys():
             jsonkey = jsonmapper.mapping[key]['fieldname']
-            if jsonkey in list(dataset.keys()): jsondata = dataset[jsonkey]
-            print("%-30s: %-90s JSON: %s" % (key, avmdict[key], jsondata))
+            if jsonkey in dataset.keys(): jsondata = dataset[jsonkey]
+            print "%-30s: %-90s JSON: %s" % (key, avmdict[key], jsondata)
         
 
             
