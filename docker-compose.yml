@@ -10,7 +10,7 @@ x-hubble-image: &hubble-image hubble:0.9
 services:
   nginx:
     image: nginx:1.17
-    container_name: hubble-nginx
+    container_name: webb-nginx
     restart: always
     depends_on:
       - web
@@ -19,7 +19,7 @@ services:
 
   web:
     image: *hubble-image
-    container_name: hubble
+    container_name: webb
     restart: always
     environment:
       SERVICE_TYPE: "web"
@@ -30,12 +30,12 @@ services:
 
   broker:
     image: rabbitmq:3.8.3
-    container_name: hubble-broker
+    container_name: webb-broker
     restart: always
 
   celery:
     image: *hubble-image
-    container_name: hubble-celery
+    container_name: webb-celery
     restart: always
     command:
       [
@@ -53,7 +53,7 @@ services:
 
   flower:
     image: *hubble-image
-    container_name: hubble-flower
+    container_name: webb-flower
     restart: always
     # TODO: Change url prefix to /admin/tasks when having nginx proxy
     command:
@@ -72,7 +72,7 @@ services:
 
   beat:
     image: *hubble-image
-    container_name: hubble-beat
+    container_name: webb-beat
     restart: always
     command:
       [

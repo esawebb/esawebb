@@ -52,7 +52,7 @@ DATABASES = {
         'NAME': 'hubble',
         'USER': 'hubble',
         'PASSWORD': 'hubble',
-        'HOST': 'hubble-db',
+        'HOST': 'webb-db',
         'PORT': 5432,
     }
 }
@@ -77,7 +77,7 @@ CACHES = {
 ##########
 # CELERY #
 ##########
-CELERY_BROKER_URL = 'amqp://hubble:hubble@broker:5672/'
+CELERY_BROKER_URL = 'amqp://webb:webb@broker:5672/'
 
 # Avoid infinite wait times and retries
 CELERY_BROKER_TRANSPORT_OPTIONS = {

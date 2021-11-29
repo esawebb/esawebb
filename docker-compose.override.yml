@@ -48,8 +48,8 @@ services:
   broker:
     restart: "no"
     environment:
-      RABBITMQ_DEFAULT_USER: hubble
-      RABBITMQ_DEFAULT_PASS: hubble
+      RABBITMQ_DEFAULT_USER: webb
+      RABBITMQ_DEFAULT_PASS: webb
 
   celery: *common
 
@@ -62,14 +62,14 @@ services:
 
   cache:
     image: memcached:latest
-    container_name: hubble-cache
+    container_name: webb-cache
     environment:
       MEMCACHED_CACHE_SIZE: 1024
     hostname: cache
 
   db:
     image: postgres:10.5
-    container_name: hubble-db
+    container_name: webb-db
     restart: "no"
     environment:
       POSTGRES_DB: hubble
