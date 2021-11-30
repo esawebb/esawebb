@@ -383,6 +383,7 @@ THIRD_PARTY_APPS = [
 SPACETELESCOPE_APPS = [
     'spacetelescope',
     'spacetelescope.frontpage',
+    'spacetelescope.journey',
 ]
 
 INSTALLED_APPS = DJANGO_APPS + DJANGOPLICITY_APPS + SPACETELESCOPE_APPS + THIRD_PARTY_APPS
