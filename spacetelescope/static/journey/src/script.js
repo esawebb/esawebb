@@ -163,7 +163,6 @@ scene.add(floor)
 
 var loader = new GLTFLoader();
 var obj;
-var obj2;
 loader.load(model, function (gltf) {
     obj = gltf.scene
     obj.scale.set(0.30, 0.30, 0.30)
