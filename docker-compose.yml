@@ -15,7 +15,7 @@ services:
     depends_on:
       - web
     volumes:
-      - statics:/home/hubbleadm/static
+      - statics:/home/webbadm/static
 
   web:
     image: *hubble-image
@@ -24,7 +24,7 @@ services:
     environment:
       SERVICE_TYPE: "web"
     volumes:
-      - statics:/home/hubbleadm/static
+      - statics:/home/webbadm/static
     expose:
       - "8000"
 
@@ -61,7 +61,7 @@ services:
         "celery",
         "--app=spacetelescope",
         "--concurrency=8",
-        "--db=/home/hubbleadm/tmp/flowerdb",
+        "--db=/home/webbadm/tmp/flowerdb",
         "--persistent",
         "--port=5555",
         "flower",
@@ -79,7 +79,7 @@ services:
         "celery",
         "--app=spacetelescope",
         "--loglevel=INFO",
-        "--pidfile=/home/hubbleadm/tmp/beat.pid",
+        "--pidfile=/home/webbadm/tmp/beat.pid",
         "beat",
       ]
     depends_on:
