@@ -23,7 +23,7 @@ USER webbbuilder
 
 # Cache layer with private requirements
 COPY private-requirements.txt .
-RUN pip install --user -r private-requirements.txt --find-links https://www.djangoplicity.org/repository/packages/
+RUN pip install --user -r private-requirements.txt --find-links https://www.djangoplicity.org/repository/packages/ || true
 
 # Install third party dependencies and create layer cache of them
 COPY requirements.txt .
