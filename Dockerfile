@@ -16,14 +16,14 @@ RUN apt-get update && apt-get install -y \
 
 
 # Create user for building and installing pip packages inside its home for security purposes
-RUN useradd --create-home webbbuilder
-ENV BUILDER_HOME=/home/webbbuilder
+RUN useradd --create-home hubblebuilder
+ENV BUILDER_HOME=/home/hubblebuilder
 WORKDIR $BUILDER_HOME
-USER webbbuilder
+USER hubblebuilder
 
 # Cache layer with private requirements
 COPY private-requirements.txt .
-RUN pip install --user -r private-requirements.txt --find-links https://www.djangoplicity.org/repository/packages/ || true
+RUN pip install --user -r private-requirements.txt --find-links https://www.djangoplicity.org/repository/packages/
 
 # Install third party dependencies and create layer cache of them
 COPY requirements.txt .
@@ -65,19 +65,19 @@ RUN echo "Europe/Berlin" > /etc/timezone && \
 ENV LANG en_US.UTF-8
 ENV LC_ALL en_US.UTF-8
 
-RUN groupadd -g 2000 webbadm && \
-    useradd -u 2000 -g webbadm --create-home webbadm
+RUN groupadd -g 2000 hubbleadm && \
+    useradd -u 2000 -g hubbleadm --create-home hubbleadm
 
-ENV USER_HOME=/home/webbadm
+ENV USER_HOME=/home/hubbleadm
 WORKDIR $USER_HOME
 
-USER webbadm
+USER hubbleadm
 
 # Copy ImageMagick settings
-COPY --chown=webbadm config/imagemagick/policy.xml /etc/ImageMagick-6/
+COPY --chown=hubbleadm config/imagemagick/policy.xml /etc/ImageMagick-6/
 
 # Copy pip install results from builder image
-COPY --from=builder --chown=webbadm /home/webbbuilder/.local $USER_HOME/.local
+COPY --from=builder --chown=hubbleadm /home/hubblebuilder/.local $USER_HOME/.local
 
 # Make sure scripts installed by pip in .local are usable:
 ENV PATH=$USER_HOME/.local/bin:$PATH
@@ -89,9 +89,9 @@ RUN mkdir -p static \
     import \
     shared
 
-COPY --chown=webbadm scripts/ scripts/
+COPY --chown=hubbleadm scripts/ scripts/
 
-COPY --chown=webbadm .coveragerc .
-COPY --chown=webbadm manage.py manage.py
-COPY --chown=webbadm spacetelescope/ spacetelescope/
-COPY --chown=webbadm spacetelescope/static/fonts/helvetica/ /usr/share/fonts/truetype/helvetica/
+COPY --chown=hubbleadm .coveragerc .
+COPY --chown=hubbleadm manage.py manage.py
+COPY --chown=hubbleadm spacetelescope/ spacetelescope/
+COPY --chown=hubbleadm spacetelescope/static/fonts/helvetica/ /usr/share/fonts/truetype/helvetica/
