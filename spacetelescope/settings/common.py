@@ -90,8 +90,8 @@ DEBUG_TOOLBAR_CONFIG = {}
 DEBUG_TOOLBAR_PANELS = []
 
 ADMINS = (
-    ('Web team ESAHubble', 'web@esahubble.org'),
-    ('Daniel Restrepo', 'danielrestrepo9725@gmail.com')
+    ('Web team ESAHubble', 'alejo.vivas.av@gmail.com'),
+    ('Daniel Restrepo', 'dpalacios@encisosystems.com')
 )
 MANAGERS = ADMINS
 
@@ -581,7 +581,7 @@ VIDEOS_FORMATS_REMOVE = [
 RELEASE_LINK_PREFIX = "heic"
 
 DEFAULT_CREATOR = u"ESA/Hubble"
-DEFAULT_CREATOR_URL = "https://esahubble.org"
+DEFAULT_CREATOR_URL = "https://esawebb.org"
 DEFAULT_CONTACT_ADDRESS = u"ESA Office, Space Telescope Science Institute, 3700 San Martin Dr"
 DEFAULT_CONTACT_CITY = u"Baltimore"
 DEFAULT_CONTACT_STATE_PROVINCE = "MD"
