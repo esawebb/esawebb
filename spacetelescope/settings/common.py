@@ -977,7 +977,13 @@ PIPELINE = {
             ),
             'output_filename': 'js/openseadragon.js',
         },
-
+        'journey': {
+            'source_filenames': (
+                'journey/build/js/vendors.js',
+                'journey/build/js/app.js',
+            ),
+            'output_filename': 'js/main_journey.js',
+        },
     },
     'CSS_COMPRESSOR': 'pipeline.compressors.cssmin.CSSMinCompressor',
     'JS_COMPRESSOR': 'pipeline.compressors.uglifyjs.UglifyJSCompressor',
