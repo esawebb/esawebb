@@ -961,7 +961,6 @@ PIPELINE = {
                 'js/enquire/enquire.min.js',
                 'js/sorttable.js',
                 'js/hubble.js',
-                'journey/script.js',
             ),
             'output_filename': 'js/main.js',
         },
@@ -978,6 +977,7 @@ PIPELINE = {
             ),
             'output_filename': 'js/openseadragon.js',
         },
+
     },
     'CSS_COMPRESSOR': 'pipeline.compressors.cssmin.CSSMinCompressor',
     'JS_COMPRESSOR': 'pipeline.compressors.uglifyjs.UglifyJSCompressor',
