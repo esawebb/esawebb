@@ -961,6 +961,7 @@ PIPELINE = {
                 'js/enquire/enquire.min.js',
                 'js/sorttable.js',
                 'js/hubble.js',
+                'journey/script.js',
             ),
             'output_filename': 'js/main.js',
         },
