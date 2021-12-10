@@ -940,6 +940,12 @@ PIPELINE = {
             ),
             'output_filename': 'css/extras.css',
         },
+        'journey': {
+            'source_filenames': (
+                'journey/src/style.css',
+            ),
+            'output_filename': 'css/main_journey.css',
+        },
     },
     'JAVASCRIPT': {
         'main': {
