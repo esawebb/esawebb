@@ -944,9 +944,10 @@ PIPELINE = {
             'source_filenames': (
                 'journey/src/style.css',
             ),
-            'output_filename': 'css/main_journey.css',
+            'output_filename': 'css/journey.css',
         },
     },
+
     'JAVASCRIPT': {
         'main': {
             'source_filenames': (
@@ -983,7 +984,7 @@ PIPELINE = {
             ),
             'output_filename': 'js/openseadragon.js',
         },
-        'journey': {
+        'journey_js': {
             'source_filenames': (
                 'journey/build/js/vendors.js',
                 'journey/build/js/app.js',
