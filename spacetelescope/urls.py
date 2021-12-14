@@ -42,7 +42,7 @@ from djangoplicity.science.options import ScienceAnnouncementOptions
 from spacetelescope.admin import admin_site, adminlogs_site, adminshop_site
 from spacetelescope.frontpage.api.views.image_views import ESASkyListView
 from spacetelescope.frontpage.views import FrontpageView, d2d
-from spacetelescope.journey.views import JourneyView, SoonView
+from spacetelescope.journey.views import JourneyView
 
 
 urlpatterns = []
@@ -163,8 +163,7 @@ urlpatterns += [
     url( r'^facebook/', include('djangoplicity.iframe.urls')  ),
 
     # Main view
-    # url( r'^/$', cache_page(60 * 5)(FrontpageView.as_view()) ),
-    url( r'^/$', cache_page(60 * 5)(SoonView.as_view()) ),
+    url( r'^/$', cache_page(60 * 5)(FrontpageView.as_view()) ),
     url( r'^new22122021/$', cache_page(60 * 5)(JourneyView.as_view()) ),
 
     #ESASky API for JSONFeed
