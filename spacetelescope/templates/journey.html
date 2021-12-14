@@ -21,16 +21,16 @@
     body {
       /* overflow-y: hidden; */
       overflow-x: hidden;
-      background-color: rgb(0, 50, 71);
+
     }
   </style>
   {% load pipeline %}
   {% stylesheet 'journey' %}
-  
+
 </head>
 
 <body>
-  
+
   <!----------------------- logos ------------------------------------>
   <div id="logos" class="container-fluid">
     <div class="row position-relative ">
@@ -262,7 +262,10 @@
       <div class="col-6">
         <h4>1 million kilometers</h4>
       </div>
-
+      <div class="col-12 text-center">
+        <br>
+        <h6>Diagram not to scale</h6>
+      </div>
 
     </div>
   </section>
@@ -289,77 +292,89 @@
 
 
   <!----------------------- blog ------------------------------------>
-  <section id="blog" class="container">
+  <section id="blog" class="container" style="position:relative;">
     <div class="row mt-5">
       <h4 class="col-12 my-5 text-white text-center"><strong>What's New</strong></h4>
 
+
       <div class="col-12  col-xl-4 mb-4">
+        <div class="text-white text-center">
+          <h5>ESA/Hubble/JWST Science Newsletter</h5>
+        </div>
         <div id="new" class="card mx-auto">
           <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
-            <img
-              src="https://www.nasa.gov/sites/default/files/styles/full_width/public/thumbnails/image/stsci-j-p2152b-f-1807x2256.jpg?itok=vnKW18Y3"
+            <img src="https://cdn.spacetelescope.org/archives/images/thumb700x/potw2050a.jpg"
               class="img-fluid rounded" />
-            <a href="https://www.google.com">
+            <a href="https://esahubble.org/newsletters/science/html/469/">
               <div class="mask" style="background-color: rgba(249, 49, 84, 0.6);"></div>
             </a>
           </div>
           <div class="card-body ">
-            <h5 class="card-title ">Webb to Explore Forming Planetary Systems</h5>
+            <p class="text-start fs-6">11 October 2021</p>
             <br>
             <p class="card-text text-start">
-              Planetary systems take millions of years to form, which introduces quite a challenge for
-              astronomers. How do you identify which stage they are in, or categorize them?
+              What a roller coaster this summer has been! The COVID pandemic is still limiting our movements and we are
+              still mostly virtual. At STScI, we are now slowly returning to our offices, a few days a week.
             </p>
             <br>
             <br>
-            <a href="#!" class="btn btn-light border">Read more</a>
+
+            <a href="https://esahubble.org/newsletters/science/html/469/" class="read btn btn-light border">Read
+              more</a>
+
+
           </div>
         </div>
       </div>
 
       <div class="col-12 col-xl-4 mb-4">
+        <div class="text-white text-center">
+          <h5>Space Sparks video</h5>
+        </div>
         <div class="card mx-auto">
           <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
-            <img
-              src="https://www.nasa.gov/sites/default/files/styles/full_width/public/thumbnails/image/webp.net-resizeimage.jpg?itok=EG02Y0gH"
-              class="img-fluid rounded" />
-            <a href="#!">
-              <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
-            </a>
+            <iframe class="img-fluid rounded" src="https://www.youtube.com/embed/fuy1m8EsrmA" width="330" height="220"
+              title="YouTube video player" frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              style="width: 330px; height: 220px;" allowfullscreen></iframe>
           </div>
           <div class="card-body ">
-            <h5 class="card-title">Webb Telescope Prelaunch Events in French Guiana</h5>
+            <h5 class="card-title">Space Sparks Episode 8</h5>
             <br>
             <p class="card-text text-start">
-              NASA invites members of the media to register their interest in attending events in French
-              Guiana ahead of the launch of the James Webb Space Telescope, a mission led by NASA in
-              partnership with the European and Canadian space agencies.
+              The NASA/ESA Hubble Space Telescope has completed its annual grand tour of the outer Solar System for
+              2021.
             </p>
-            <a href="#!" class="btn btn-light border ">Read more</a>
+            <a href="https://esahubble.org/videos/heic2113a/" class="read btn btn-light border text-center">Read
+              more</a>
           </div>
         </div>
       </div>
 
       <div class="col-12 col-xl-4 mb-4">
+        <div class="text-white text-center">
+          <h5>NASA/ESA JWST blog</h5>
+        </div>
         <div class="card mx-auto">
           <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
             <img
-              src="https://www.nasa.gov/sites/default/files/styles/full_width/public/thumbnails/image/webb-far.jpg?itok=Q3pwkHnk"
+              src="https://blogs.nasa.gov/webb/wp-content/uploads/sites/326/2021/12/VA256_Transfert-CU1_S5B-BAF_032-1024x724.jpg"
               class="img-fluid rounded" />
-            <a href="#!">
+            <a href="https://blogs.nasa.gov/webb/">
               <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
             </a>
           </div>
           <div class="card-body">
-            <h5 class="card-title ">James Webb Space Telescope Testing Progress Continues</h5>
+            <h5 class="card-title ">Webb Moved to Meet its Rocket</h5>
             <br>
             <p class="card-text text-start">
-              Engineers have made considerable progress in checking off NASA’s James Webb Space
-              Telescope’s final series of tests. Three big milestones have recently been completed.
+
+              On Dec. 7, NASA’s James Webb Space Telescope was transferred to the final assembly building at Europe’s
+              Spaceport in French Guiana to meet its Ariane 5 launch vehicle.
             </p>
             <br>
             <br>
-            <a href="#!" class="btn btn-light border">Read more</a>
+            <a href="https://blogs.nasa.gov/webb/" class="read btn btn-light border text-center">Read more</a>
           </div>
         </div>
       </div>
@@ -402,6 +417,33 @@
   </section>
   <!----------------------- end social networks ------------------------------------>
 
+  <!----------------------- credits ------------------------------------>
+  <section id="credits" class="container-fluid" >
+    <div class="row">
+      <h3 class="col-12 text-center mb-5 my-5 text-white">Credits</h3>
+      <div id="" class="col-2 col-xl-3 text-center text-white d-none d-md-block">
+      </div>
+      <div id="" class="col-12 col-md-8 col-xl-6 text-white  my-3 mx-3">
+        <div>
+        
+        <p class="mt-5">ESA/Webb, ESA Office, Space Telescope Science Institute, 3700 San Martin Dr, D-21218 Baltimore, United States
+        </p>
+        <p>Content Credit: ESA/Webb</p>
+        <p>Telescope Model Credit: NASA, ATG
+        </p>
+        <p>Website developed and operated by Enciso Systems
+        </p>
+        <p>Accelerated by CDN77
+        </p>
+        <p><a class="text-white" href="https://esahubble.org/about/privacy/">Privacy Policy</a></p>
+        <p></p>
+      </div>
+      </div>
+
+    </div>
+  </section>
+  <!----------------------- end credits ------------------------------------>
+
 
   <!----------------------- start footer ------------------------------------>
   <footer class="footer bg-dark" style="">
@@ -411,6 +453,7 @@
         <div class="col-4 col-xl-4 text-center text-white d-none d-md-block">
           <div id="" class="mt-2">
             <p class="d-inline">James Webb Space Telescope</p>
+            
           </div>
         </div>
 
@@ -771,7 +814,7 @@
 
 
 
-  {% javascript 'journey_js' %}
+  
 
   <script src="{% static 'journey/src/audio.js' %}"></script>
 
@@ -786,7 +829,7 @@
     var n = 0;
     var arrowtop = document.getElementById('arrow-top');
     var arrowdown = document.getElementById('arrow-down');
-    let sectionpage = ["scene 1 model", "mission", "video", "scene 3 timeline", "scene 2 space", "blog", "social media"];
+    let sectionpage = ["scene 1 model", "mission", "video", "scene 3 timeline", "scene 2 space", "blog", "social media", "credits"];
 
     // $(document).ready(function () {
     //     setTimeout(function () {
@@ -866,7 +909,7 @@
 
   </script>
 
-  
+
 </body>
 
 </html>

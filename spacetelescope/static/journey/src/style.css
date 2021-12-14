@@ -71,7 +71,6 @@ body {
     height: 220px;
   }
   
-  
   section .card h4{
     font-weight: 600;
   }
@@ -188,7 +187,14 @@ body {
   font-size: 14px;
 }
 
-
+.read{
+  position: absolute;
+  top: 90%;
+  left: 30;
+  align-items: center;
+  text-align: center !important;
+  justify-content: center;
+}
 
 
 .point
@@ -273,6 +279,7 @@ body {
   font-weight: 100;
   font-size: 14px;
 }
+
 
 .statistics {
   position: absolute;

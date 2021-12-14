@@ -728,21 +728,24 @@ function animate() {
     renderer3.setSize(sizes.width, sizes.height)
     renderer3.render(scene3, camera)
 
-    sphere.rotation.y += 0.002;
-    sphereSun.rotation.y += 0.001;
-    particles.rotation.y += 0.001;
-    //sphere2.rotation.y += 0.003;
-    circlePlanet.rotation.y += 0.001;
+    if( sphere ){
+        sphere.rotation.y += 0.002;
+    }
+    if( circlePlanet ){
+        circlePlanet.rotation.y += 0.001;
+    }
 
     if (circlePo.position.z > -1 && distance == true) {
         circlePo.position.z -= 0.02;
         obj3.position.z -= 0.02;
 
     }
+    if( obj2 ){
+        obj2.position.y = Math.cos(elapsedTime / 2) * 2;
+        obj2.position.z = Math.sin(elapsedTime / 2) * 2;
+    }
 
-
-    obj2.position.y = Math.cos(elapsedTime / 2) * 2;
-    obj2.position.z = Math.sin(elapsedTime / 2) * 2;
+    
 
     if (camera.position.x < 5 && distance == true) {
         camera.position.x += 0.05;
@@ -771,7 +774,9 @@ function animate() {
     // }
 
     if (rotationModel == true) {
-        obj.rotation.y += 0.002;
+        if (obj){
+            obj.rotation.y += 0.002;
+        }
         //obj.position.z = Math.sin(elapsedTime/2) * 0.5;
     }
 
