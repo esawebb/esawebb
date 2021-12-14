@@ -30,15 +30,12 @@ const getRemainingTime = deadline => {
       
       `;
   
-      if(t.remainTime <= 1) {
-        clearInterval(timerUpdate);
-        el.innerHTML = finalMessage;
-      }
+     
   
     }, 1000)
   };
   
-  countdown('Dec 18 2021 00:00:00 GMT-0500', 'clock', '¡Go!','Journey to L2:');
+  countdown('Dec 12 2021 00:00:00 GMT-0500', 'clock', '¡Go!','Journey to L2:');
   countdown('Jun 18 2022 00:00:00 GMT-0500', 'clock2', '¡Go!','Orbit L2:');
   countdown('Jun 30 2022 00:00:00 GMT-0500', 'clock3', '¡Go!');
   

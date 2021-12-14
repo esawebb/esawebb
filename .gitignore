@@ -4,6 +4,7 @@
 .idea/
 temp/
 local/
+.DS_Store
 
 # coverage related files/folders
 htmlcov/*
