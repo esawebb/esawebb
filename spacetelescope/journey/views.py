@@ -12,3 +12,12 @@ class JourneyView(TemplateView):
         context = super(JourneyView, self).get_context_data(**kwargs)
 
         return context
+
+class SoonView(TemplateView):
+
+    template_name = 'soon.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(SoonView, self).get_context_data(**kwargs)
+
+        return context
