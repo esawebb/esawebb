@@ -23,7 +23,7 @@ from spacetelescope.frontpage.models import Highlight
 
 class FrontpageView(TemplateView):
 
-    template_name = 'soon.html'
+    template_name = 'frontpage.html'
 
     def get_context_data(self, **kwargs):
         context = super(FrontpageView, self).get_context_data(**kwargs)
