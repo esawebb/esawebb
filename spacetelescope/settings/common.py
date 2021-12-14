@@ -984,12 +984,12 @@ PIPELINE = {
             ),
             'output_filename': 'js/openseadragon.js',
         },
-        'journey_js': {
+        'journey': {
             'source_filenames': (
                 'journey/build/js/vendors.js',
                 'journey/build/js/app.js',
             ),
-            'output_filename': 'js/main_journey.js',
+            'output_filename': 'js/journey.js',
         },
     },
     'CSS_COMPRESSOR': 'pipeline.compressors.cssmin.CSSMinCompressor',
