@@ -328,11 +328,11 @@
       <h4 class="col-12 my-5 text-white text-center"><strong>What's New</strong></h4>
 
 
-      <div class="col-12  col-xl-4 mb-4">
+      <div class="col-12  col-xl-4 mb-4 ">
         <div class="text-white text-center">
           <h5>ESA/Hubble/JWST Science Newsletter</h5>
         </div>
-        <div id="new" class="card mx-auto">
+        <div id="new" class="card mx-auto mt-5">
           <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
             <img src="https://cdn.spacetelescope.org/archives/images/thumb700x/potw2050a.jpg"
               class="img-fluid rounded" />
@@ -358,11 +358,11 @@
         </div>
       </div>
 
-      <div class="col-12 col-xl-4 mb-4">
+      <div class="col-12 col-xl-4 mb-4 ">
         <div class="text-white text-center">
           <h5>Space Sparks video</h5>
         </div>
-        <div class="card mx-auto">
+        <div class="card mx-auto mt-5">
           <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
             <iframe class="img-fluid rounded" src="https://www.youtube.com/embed/fuy1m8EsrmA" width="330" height="220"
               title="YouTube video player" frameborder="0"
@@ -382,11 +382,11 @@
         </div>
       </div>
 
-      <div class="col-12 col-xl-4 mb-4">
+      <div class="col-12 col-xl-4 mb-4 ">
         <div class="text-white text-center">
           <h5>NASA/ESA JWST blog</h5>
         </div>
-        <div class="card mx-auto">
+        <div class="card mx-auto mt-5">
           <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
             <img
               src="https://blogs.nasa.gov/webb/wp-content/uploads/sites/326/2021/12/VA256_Transfert-CU1_S5B-BAF_032-1024x724.jpg"
@@ -486,20 +486,20 @@
     <div class="container-fluid mt-2">
       <div class="row my-2 mx-3">
 
-        <div class="col-4 col-xl-4 text-center text-white d-none d-md-block">
+        <div class="col-3 col-xl-4 text-center text-white d-none d-xl-block">
           <div id="" class="mt-2">
             <p class="d-inline">James Webb Space Telescope</p>
             
           </div>
         </div>
 
-        <div class="col-6 col-md-4 col-xl-4 text-center text-white">
+        <div class="col-md-6 col-xl-4 text-center text-white d-none d-md-block">
           <div id="clock" class="mt-2"></div>
 
         </div>
         <!-- <div class="col-2 text-white d-none d-xl-block"> -->
 
-        <div class="col-3 col-md-2 text-white text-center">
+        <div class="col-6 col-md-3 col-xl-2 text-white text-center">
           <a id="home" href="#scene 1 model" onclick="startSection()" class="text-white mx-xl-3">
             <ion-icon id="home-icon" name="home" size="large"></ion-icon>
           </a>
@@ -512,7 +512,7 @@
         </div>
 
 
-        <div class="col-3 col-md-2  text-white">
+        <div class="col-6 col-md-3 col-xl-2  text-white text-center">
           <audio id="audio" loop>
             <source src="{% static 'journey/src/media/audio.ogg' %}" type="audio/ogg">
           </audio>
@@ -527,9 +527,12 @@
           <a id="mailto" href="mailto:info@esawebb.org" type="button" onclick="" class="text-white mx-xl-1">
             <ion-icon id="mail" name="mail" size="large"></ion-icon>
           </a>
+          <a id="notifications" href="#blog" class="text-white mx-xl-1">
+            <ion-icon id="notifications" name="notifications" size="large"></ion-icon>
+          </a>
           <!-- Button trigger modal -->
 
-
+   
           <!-- <button id="pause" onclick="stop()" class="text-white mx-xl-1">
                   <ion-icon name="pause" size="large"></ion-icon>
               </button> -->
