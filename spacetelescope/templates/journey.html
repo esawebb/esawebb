@@ -29,8 +29,8 @@
 
 </head>
 
-<body>
-
+<body >
+  <div class="slider">
   <!----------------------- logos ------------------------------------>
   <div id="logos" class="container-fluid">
     <div class="row position-relative ">
@@ -199,12 +199,12 @@
   <!----------------------- end video ------------------------------------>
 
   <!----------------------- timeline ------------------------------------>
-  <section id="scene 3 timeline" class="container-fluid " style="position:relative;">
+  <section id="scene 3 timeline" class="container-fluid animated" style="position:relative;">
     <canvas id="scene3">
 
     </canvas>
-    <div class="timeline">
-      <h4>Where is Webb?</h4>
+    <div id="timewhere" class="timeline">
+      <h4 id="where">Where is Webb?</h4>
     </div>
     <!-- <div class="timeline2">
       <h5>L2</h5>
@@ -223,27 +223,58 @@
 
     <div class="pointLine pointLine-0 visible">
       <div class="label"></div>
-      <div class="text">Solar Array Deployment</div>
+      <div class="text">
+        Solar Array Deployment
+        <br>Time: 31 minutes from launch
+        <br>Distance: 2,300 KM
+      </div>
+
     </div>
 
     <div class="pointLine pointLine-1 visible">
       <div class="label"></div>
-      <div class="text">Communications Antenna Deployment</div>
+      <div class="text">
+        Communications Antenna Deployment
+        <br>Time: 1 day from launch
+        <br>Distance: 215,000 KM
+      </div>
+
     </div>
 
     <div class="pointLine pointLine-2 visible">
       <div class="label"></div>
-      <div class="text">Sunshield Deployment</div>
+      <div class="text">
+        JWST crosses mean lunar orbital distance
+        <br>Time: 58.8 Hours from launch
+        <br>Distance: 384,400 KM
+      </div>
     </div>
 
     <div class="pointLine pointLine-3 visible">
       <div class="label"></div>
-      <div class="text">Secondary Mirror Deployment</div>
+      <div class="text">
+        Sunshield  deployment
+        <br>Time: starts at day 3 and ends at day 8 from launch
+        <br>Distance:  starts at 436,000 KM ends at  775,000 KM
+      </div>
     </div>
 
     <div class="pointLine pointLine-4 visible">
       <div class="label"></div>
-      <div class="text">Primary Mirror Deployment</div>
+      <div class="text">
+        Secondary mirror deployment
+        <br>Time: day 10 from launch
+        <br>Distance: 872,000 KM
+
+      </div>
+    </div>
+    <div class="pointLine pointLine-5 visible">
+      <div class="label"></div>
+      <div class="text">
+        Primary mirror unfolding
+        <br>Time: starts day 12 ends day 15.5 from launch
+        <br>starts at ~955,000 ends at ~1,090,000 Kms
+      </div>
     </div>
     <div id="pointL2" class="pointLine pointLine-L2" style="visibility: hidden;">
       <div class="L2">L2</div>
@@ -254,13 +285,13 @@
         <h4>Days traveled:</h4>
       </div>
       <div class="col-6">
-        <h4>200</h4>
+        <h4>0</h4>
       </div>
       <div class="col-6">
         <h4>Distance traveled:</h4>
       </div>
       <div class="col-6">
-        <h4>1 million kilometers</h4>
+        <h4>0 kilometers</h4>
       </div>
       <div class="col-12 text-center">
         <br>
@@ -835,7 +866,7 @@
     var n = 0;
     var arrowtop = document.getElementById('arrow-top');
     var arrowdown = document.getElementById('arrow-down');
-    let sectionpage = ["scene 1 model", "mission", "video", "scene 3 timeline", "scene 2 space", "blog", "social media", "credits"];
+    let sectionpage = ["scene 1 model", "mission", "video", "scene 3 timeline", "blog", "social media", "credits"];
 
     // $(document).ready(function () {
     //     setTimeout(function () {
@@ -915,7 +946,7 @@
 
   </script>
 
-
+</div>
 </body>
 
 </html>
