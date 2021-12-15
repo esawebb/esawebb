@@ -1,18 +1,20 @@
 
 body {
     background-color: rgb(0, 50, 71) !important;
+
   }
   
   body section{
-    
     min-height: 90vmin;
     width: 100%;
+  
   }
   .container-fluid
 {
     margin: 0 !important;
     padding: 0 !important;
 }
+
   
   footer {
     position: fixed;
@@ -352,7 +354,7 @@ body {
     position: absolute;
     top: 30px;
     left: -120px;
-    width: 200px;
+    width: 400px;
     padding: 20px;
     border-radius: 4px;
     background: #00000077;

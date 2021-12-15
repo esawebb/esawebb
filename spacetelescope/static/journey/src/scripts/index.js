@@ -544,28 +544,32 @@ scene3.add(line);
 const pointsLine = [
     {
         //                            z   y  x
-        position: new THREE.Vector3(0, 0, 17),
+        position: new THREE.Vector3(0, 0, 16),
         element: document.querySelector('.pointLine-0')
     },
     {
         //                            z   y  x
-        position: new THREE.Vector3(0, 0, 8),
+        position: new THREE.Vector3(0, 0, 14),
         element: document.querySelector('.pointLine-1')
     },
     {
         //                            z   y  x
-        position: new THREE.Vector3(0, 0, 1),
+        position: new THREE.Vector3(0, 0, 11),
         element: document.querySelector('.pointLine-2')
     },
     {
         //                            z   y  x
-        position: new THREE.Vector3(0, 0, -1),
+        position: new THREE.Vector3(0, 0, 7),
         element: document.querySelector('.pointLine-3')
     },
     {
         //                            z   y  x
-        position: new THREE.Vector3(0, 0, -3),
+        position: new THREE.Vector3(0, 0, 3),
         element: document.querySelector('.pointLine-4')
+    },
+    {
+        position: new THREE.Vector3(0, 0, -1),
+        element: document.querySelector('.pointLine-5')
     },
     {
         position: new THREE.Vector3(0, 0.3, -4.6),
@@ -658,31 +662,57 @@ document.getElementById("timeOut").addEventListener("click", () => {
 
 
 })
-
 var distance = false;
 
-document.getElementById("distance").addEventListener("click", () => {
+let animated = document.getElementById("scene 3 timeline")
+let animatedOn = false;
+document.getElementById('timeNone').classList.add('d-none');
 
-    var playTimeOut = document.getElementById('distance');
-
-    if (distance == true) {
-        distance = false;
-        playTimeOut.innerHTML = `<ion-icon name="play" size="large"></ion-icon>`;
-
-
-    } else {
-        camera.position.z = 8;
-        distance = true;
-        document.getElementById('timeNone').classList.add('d-none');
-        document.getElementById('statistics').style.visibility = 'visible';
-        document.getElementById('pointL2').style.visibility = 'visible';
-        for (const pointLine of pointsLine) {
-            pointLine.element.classList.add('visible')
+function animatedScroll() {
+    if (animatedOn == false) {
+        let scrollTop = document.documentElement.scrollTop;
+        let heightAnimated = animated.offsetTop;
+        if (heightAnimated < scrollTop + 5) {
+            setTimeout(() => {
+                camera.position.z = 8;
+                distance = true;
+                document.getElementById('statistics').style.visibility = 'visible';
+                document.getElementById('pointL2').style.visibility = 'visible';
+                for (const pointLine of pointsLine) {
+                    pointLine.element.classList.add('visible')
+                }
+                animatedOn = true;
+            }, 1000);
         }
     }
+}
+
+window.addEventListener('scroll', animatedScroll);
 
 
-})
+
+// document.getElementById("distance").addEventListener("click", () => {
+
+//     var playTimeOut = document.getElementById('distance');
+
+//     if (distance == true) {
+//         distance = false;
+//         playTimeOut.innerHTML = `<ion-icon name="play" size="large"></ion-icon>`;
+
+
+//     } else {
+//         camera.position.z = 8;
+//         distance = true;
+//         document.getElementById('timeNone').classList.add('d-none');
+//         document.getElementById('statistics').style.visibility = 'visible';
+//         document.getElementById('pointL2').style.visibility = 'visible';
+//         for (const pointLine of pointsLine) {
+//             pointLine.element.classList.add('visible')
+//         }
+//     }
+
+
+// })
 
 var rotationModel = true;
 for (const pointModel of pointsModel) {
@@ -728,24 +758,24 @@ function animate() {
     renderer3.setSize(sizes.width, sizes.height)
     renderer3.render(scene3, camera)
 
-    if( sphere ){
+    if (sphere) {
         sphere.rotation.y += 0.002;
     }
-    if( circlePlanet ){
+    if (circlePlanet) {
         circlePlanet.rotation.y += 0.001;
     }
 
-    if (circlePo.position.z > -1 && distance == true) {
-        circlePo.position.z -= 0.02;
-        obj3.position.z -= 0.02;
+    // if (circlePo.position.z > -1 && distance == true) {
+    //     circlePo.position.z -= 0.02;
+    //     obj3.position.z -= 0.02;
 
-    }
-    if( obj2 ){
+    // }
+    if (obj2) {
         obj2.position.y = Math.cos(elapsedTime / 2) * 2;
         obj2.position.z = Math.sin(elapsedTime / 2) * 2;
     }
 
-    
+
 
     if (camera.position.x < 5 && distance == true) {
         camera.position.x += 0.05;
@@ -774,7 +804,7 @@ function animate() {
     // }
 
     if (rotationModel == true) {
-        if (obj){
+        if (obj) {
             obj.rotation.y += 0.002;
         }
         //obj.position.z = Math.sin(elapsedTime/2) * 0.5;
