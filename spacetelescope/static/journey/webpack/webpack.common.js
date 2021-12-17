@@ -46,15 +46,6 @@ module.exports = {
         type: 'javascript/auto',
       },
 
-    // CSS
-    {
-        test: /\.css$/,
-        use:
-            [
-                MiniCSSExtractPlugin.loader,
-                'css-loader'
-            ]
-    },
 
     // Images
     {
