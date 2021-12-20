@@ -32,7 +32,16 @@
   <div class="slider">
     <!----------------------- logos ------------------------------------>
     <div id="logos" class="container-fluid">
-      <div class="row position-relative ">
+    
+      <div class="row position-relative d-block d-md-none ">
+        <img
+          src="https://www.esa.int/var/esa/storage/images/esa_multimedia/images/2021/02/esa_webb_logo/23168175-2-eng-GB/ESA_Webb_logo_pillars.png"
+          alt="esa logo" style="width: 100px;  margin-left: 10px; margin-top: 10px;"
+          class="logo-iz position-absolute top-0 start-0" />
+        <img src="https://copernicus-masters.com/wp-content/uploads/2020/03/Logo_ESA_solid-white.png" alt="esa logo"
+          style="width: 120px; margin-top: 10px;" class="logo-ri position-absolute top-0 end-0" />
+      </div>
+      <div class="row position-relative d-none d-md-block">
         <img
           src="https://www.esa.int/var/esa/storage/images/esa_multimedia/images/2021/02/esa_webb_logo/23168175-2-eng-GB/ESA_Webb_logo_pillars.png"
           alt="esa logo" style="width: 170px;  margin-left: 10px; margin-top: 10px; "
@@ -40,12 +49,19 @@
         <img src="https://copernicus-masters.com/wp-content/uploads/2020/03/Logo_ESA_solid-white.png" alt="esa logo"
           style="width: 220px; margin-top: 10px; " class="logo-ri position-absolute top-0 end-0" />
       </div>
-
     </div>
     <!-----------------------end logos ------------------------------------>
 
     <!----------------------- model ------------------------------------>
-    <section id="scene 1 model" class="container-fluid scene1">
+    <section id="" class="container-fluid scene1 d-block d-md-none text-center mb-5 border-bottom-0">
+      <img src="{% static 'journey/src/imgWebb.png' %}" 
+      class="col-12 img-fluid mx-auto d-block align-items-center" alt="..."
+      style="width: 300px; margin-top: 100px; ">
+    </section>
+    <!----------------------- end model ------------------------------------>
+
+    <!----------------------- model ------------------------------------>
+    <section id="model" class="container-fluid scene1 d-none d-md-block">
       <canvas id="scene">
 
       </canvas>
@@ -107,7 +123,7 @@
     <!----------------------- Mission Overview ------------------------------------>
     <section id="mission" class="container-fluid">
       <div class="row">
-        <div id="Overview" class="col-12 col-xl-6 text-white  my-5 px-5">
+        <div id="Overview" class="col-12 col-xl-6 text-white  my-md-5 px-3">
           <h3 class="text-center mb-5">Mission Overview</h3>
           <p>The James Webb Space Telescope will be the next great space science observatory, designed to answer
             outstanding questions about the Universe and to make breakthrough discoveries in all fields of
@@ -132,7 +148,7 @@
           </p>
         </div>
 
-        <div id="Factsheet" class="col-12 col-xl-6 px-5 mb-5">
+        <div id="Factsheet" class="col-12 col-xl-6 px-3 mb-5 px-2">
           <h3 class="text-center text-white mt-5 mb-5">Fact Sheet</h3>
           <table class="table text-white ">
             <thead>
@@ -198,7 +214,7 @@
     <!----------------------- end video ------------------------------------>
 
     <!----------------------- timeline ------------------------------------>
-    <section id="scene 3 timeline" class="container-fluid animated" style="position:relative;">
+    <section id="timeline" class="container-fluid animated d-none d-md-block" style="position:relative;">
       <canvas id="scene3">
 
       </canvas>
@@ -302,7 +318,7 @@
     <!----------------------- end space ------------------------------------>
 
     <!----------------------- space ------------------------------------>
-    <section id="scene 2 space" class="space container-fluid d-none" style="position:relative;">
+    <section id="space" class="space container-fluid d-none" style="position:relative;">
       <canvas id="scene2">
 
       </canvas>
@@ -418,28 +434,27 @@
 
 
     <!----------------------- social media------------------------------------>
-    <section id="social media" class="container">
+    <section id="media" class="container">
       <div class="row my-5 ">
-
         <h4 class="my-5 text-white text-center"><strong>Social Media</strong></h4>
         <!-- <div class="fb-page col-12 col-xl-5 text-center my-3" data-href="https://www.facebook.com/hubbleESA/"
-          data-tabs="timeline" data-width="500" data-height="600" dataheader="true"
-          data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true">
-          <blockquote cite="https://www.facebook.com/hubbleESA/" class="fb-xfbml-parse-ignore"><a
-                  href="https://www.facebook.com/hubbleESA/">Hubble Space Telescope</a></blockquote>
-      </div> -->
-        <div class="embed-responsive embed-responsive-16by9 fb-page col-12 col-xl-6 text-center my-3 mx-auto">
-          <iframe
-            src="https://www.facebook.com/plugins/page.php?locale=en_US&href=https%3A%2F%2Fwww.facebook.com%2FhubbleESA%2F&tabs=timeline&width=500&height=600header=true&adapt_container_width=true&hide_cover=false&show_facepile=true&appId"
-            width="500" height="600" style="border:none;overflow:hidden" scrolling="no" frameborder="0"
+            data-tabs="timeline" data-width="500" data-height="600" data-small-header="true"
+            data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true">
+            <blockquote cite="https://www.facebook.com/hubbleESA/" class="fb-xfbml-parse-ignore"><a
+                    href="https://www.facebook.com/hubbleESA/">Hubble Space Telescope</a></blockquote>
+        </div> -->
+        <div class="embed-responsive embed-responsive-16by9 fb-page col-12 col-xl-6 text-center my-3">
+            <iframe 
+            src="https://www.facebook.com/plugins/page.php?locale=en_US&href=https%3A%2F%2Fwww.facebook.com%2FhubbleESA%2F&tabs=timeline&width=500&height=600&small_header=true&adapt_container_width=true&hide_cover=false&show_facepile=true&appId"
+            width="100%" height="600" style="border:none;overflow:hidden" scrolling="no" frameborder="0"
             allowfullscreen="true"
             allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe>
         </div>
 
 
         <div class="embed-responsive embed-responsive-16by9 fb-page col-12 col-xl-6 text-center my-3">
-          <a class="twitter-timeline" href="https://twitter.com/ESA_Webb?ref_src=twsrc%5Etfw" data-width="500"
-            data-height="600">Tweets by
+          <a class="twitter-timeline" href="https://twitter.com/ESA_Webb?ref_src=twsrc%5Etfw" data-width="450"
+         data-height="600">Tweets by
             NASAWebb</a>
           <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
         </div>
@@ -477,27 +492,32 @@
       <div class="container-fluid mt-2">
         <div class="row my-2 mx-3">
 
-          <div class="col-3 col-xl-4 text-center text-white d-none d-xl-block">
+          <div class="col-3 col-xl-3 text-center text-white d-none d-xl-block">
             <div id="" class="mt-2">
               <p class="d-inline">James Webb Space Telescope</p>
 
             </div>
           </div>
 
-          <div class="col-md-6 col-xl-4 text-center text-white d-none d-md-block">
+          <div class="col-md-6 col-xl-3 text-center text-white d-none d-md-block">
             <div id="clock" class="mt-2"></div>
-
           </div>
-          <!-- <div class="col-2 text-white d-none d-xl-block"> -->
+          <div class="col-2 text-white text-center d-none d-xl-block">
+            <div id="" class="mt-2">
+            <a id="notifications" href="#blog" class="text-white d-inline">
+              What's New
+            </a>
+          </div>
+          </div>
 
           <div class="col-6 col-md-3 col-xl-2 text-white text-center">
-            <a id="home" href="#scene 1 model" onclick="startSection()" class="text-white mx-xl-3">
+            <a id="home" href="#model" onclick="startSection()" class="text-white mx-xl-1 text-decoration-none">
               <ion-icon id="home-icon" name="home" size="large"></ion-icon>
             </a>
-            <a id="arrow-top" href="#blog" onclick="decreaseSection()" class="text-white">
+            <a id="arrow-top" href="#blog" onclick="decreaseSection()" class="text-white text-decoration-none">
               <ion-icon id="arrow-top-icon" name="arrow-dropup-circle" size="large"></ion-icon>
             </a>
-            <a id="arrow-down" href="#video" onclick="increaseSection()" class="text-white mx-xl-3">
+            <a id="arrow-down" href="#video" onclick="increaseSection()" class="text-white mx-xl-1 text-decoration-none">
               <ion-icon id="arrow-down-icon" name="arrow-dropdown-circle" size="large"></ion-icon>
             </a>
           </div>
@@ -512,21 +532,13 @@
               <ion-icon id="help-icon" name="help-circle-outline" size="large"></ion-icon>
             </a>
 
-            <a id="playPauseBTN" type="button" onclick="playPause()" class="text-white mx-xl-1">
+            <a id="playPauseBTN" type="button" onclick="playPause()" class="text-white ">
               <ion-icon id="mute-icon" name="volume-off" size="large"></ion-icon>
             </a>
             <a id="mailto" href="mailto:info@esawebb.org" type="button" onclick="" class="text-white mx-xl-1">
               <ion-icon id="mail" name="mail" size="large"></ion-icon>
             </a>
-            <a id="notifications" href="#blog" class="text-white mx-xl-1">
-              <ion-icon id="notifications" name="notifications" size="large"></ion-icon>
-            </a>
-            <!-- Button trigger modal -->
 
-
-            <!-- <button id="pause" onclick="stop()" class="text-white mx-xl-1">
-                  <ion-icon name="pause" size="large"></ion-icon>
-              </button> -->
           </div>
 
 
@@ -880,12 +892,11 @@
       </div>
     </div>
 
-    <script src="{% static 'journey/build/js/app.js' %}"></script>
-    <script src="{% static 'journey/build/js/vendors.js' %}"></script>
-
-
     <script async defer crossorigin="anonymous" src="https://connect.facebook.net/es_ES/sdk.js#xfbml=1&version=v11.0"
       nonce="vXp6ani2"></script>
+
+    <script src="{% static 'journey/build/js/app.js' %}"></script>
+    <script src="{% static 'journey/build/js/vendors.js' %}"></script>
 
     <script src="{% static 'journey/src/audio.js' %}"></script>
 
@@ -900,7 +911,7 @@
       var n = 0;
       var arrowtop = document.getElementById('arrow-top');
       var arrowdown = document.getElementById('arrow-down');
-      let sectionpage = ["scene 1 model", "mission", "video", "scene 3 timeline", "blog", "social media", "credits"];
+      let sectionpage = ["model", "mission", "video", "timeline", "blog", "media", "credits"];
 
       // $(document).ready(function () {
       //     setTimeout(function () {

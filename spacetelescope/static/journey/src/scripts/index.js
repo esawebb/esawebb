@@ -662,7 +662,7 @@ document.getElementById("timeOut").addEventListener("click", () => {
 })
 var distance = false;
 
-let animated = document.getElementById("scene 3 timeline")
+let animated = document.getElementById("timeline")
 let animatedOn = false;
 document.getElementById('timeNone').classList.add('d-none');
 
