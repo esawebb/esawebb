@@ -81,6 +81,13 @@ body {
     
   }
 
+  .card-text {
+    width:     100%;
+    Word-break: break-all;
+    height: 150px;
+    overflow: hidden;
+  }
+
   .cardCountdown {
     border-radius: 3px;
     background-color: white;
@@ -181,14 +188,6 @@ body {
   font-size: 14px;
 }
 
-.read{
-  position: absolute;
-  top: 90%;
-  left: 30;
-  align-items: center;
-  text-align: center !important;
-  justify-content: center;
-}
 
 
 .point

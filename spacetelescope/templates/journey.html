@@ -34,7 +34,7 @@
   <div class="slider">
     <!----------------------- logos ------------------------------------>
     <div id="logos" class="container-fluid">
-    
+
       <div class="row position-relative d-block d-md-none ">
         <img
           src="https://www.esa.int/var/esa/storage/images/esa_multimedia/images/2021/02/esa_webb_logo/23168175-2-eng-GB/ESA_Webb_logo_pillars.png"
@@ -56,9 +56,8 @@
 
     <!----------------------- model ------------------------------------>
     <section id="" class="container-fluid scene1 d-block d-md-none text-center mb-5 border-bottom-0">
-      <img src="{% static 'journey/src/imgWebb.png' %}" 
-      class="col-12 img-fluid mx-auto d-block align-items-center" alt="..."
-      style="width: 300px; margin-top: 100px; ">
+      <img src="{% static 'journey/src/imgWebb.png' %}" class="col-12 img-fluid mx-auto d-block align-items-center"
+        alt="..." style="width: 300px; margin-top: 100px; ">
     </section>
     <!----------------------- end model ------------------------------------>
 
@@ -351,28 +350,20 @@
           </div>
           <div id="new" class="card mx-auto mt-5">
             <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
-              <img src="https://cdn.spacetelescope.org/archives/images/thumb700x/potw2050a.jpg"
-                class="img-fluid rounded" />
-              <a href="https://esahubble.org/newsletters/science/html/469/">
+              <img src="https://cdn.spacetelescope.org/archives/images/newsfeature/sci21008a.jpg" class="img-fluid rounded" />
+              <a href="https://esahubble.org/forscientists/announcements/sci21008/">
                 <div class="mask" style="background-color: rgba(249, 49, 84, 0.6);"></div>
               </a>
             </div>
             <div class="card-body ">
-              <p class="text-start fs-6">11 October 2021</p>
+              <h6 class="card-title ">Call for ESA/Hubble & ESA/Webb Outreach Intern</h6>
               <br>
-              <p class="card-text text-start">
-                What a roller coaster this summer has been! The COVID pandemic is still limiting our movements and we
-                are
-                still mostly virtual. At STScI, we are now slowly returning to our offices, a few days a week.
+              <p class="card-text text-start form-text text-dark">
+                The ESA/Hubble & ESA/Webb Outreach team is looking for a motivated individual to join the team as an intern to support a variety of roles and activities pertaining to the work of bringing the images and science from the NASA/ESA Hubble Space Telescope and the NASA/ESA/CSA James Webb Space Telescope to the scientific community and the public for the European Space Agency (ESA). This is a unique opportunity to develop skills and experience in science communication, involving high-reach and high-impact products that are disseminated worldwide to showcase two well-known and loved science missions.
               </p>
-              <br>
-              <br>
-
-              <a href="https://esahubble.org/newsletters/science/html/469/" class="read btn btn-light border">Read
-                more</a>
-
-
+              <a href="https://esahubble.org/forscientists/announcements/sci21008/" class="btn btn-light border">Read more</a>
             </div>
+
           </div>
         </div>
 
@@ -388,13 +379,13 @@
                 style="width: 330px; height: 220px;" allowfullscreen></iframe>
             </div>
             <div class="card-body ">
-              <h5 class="card-title">Space Sparks Episode 8</h5>
+              <h6 class="card-title">Webb’s Science Goals: Space Sparks Episode 1</h6>
               <br>
-              <p class="card-text text-start">
-                The NASA/ESA Hubble Space Telescope has completed its annual grand tour of the outer Solar System for
-                2021.
+              <p class="card-text text-start form-text text-dark">
+                Watch this special Space Sparks episode to learn about the science goals of the NASA/ESA/CSA James Webb
+                Space Telescope.
               </p>
-              <a href="https://www.youtube.com/watch?v=rtpK5R9Rjs4" class="read btn btn-light border text-center">Read
+              <a href="https://www.youtube.com/watch?v=rtpK5R9Rjs4" class="btn btn-light border text-center">Read
                 more</a>
             </div>
           </div>
@@ -402,28 +393,24 @@
 
         <div class="col-12 col-xl-4 mb-4 ">
           <div class="text-white text-center">
-            <h5>NASA/ESA JWST blog</h5>
+            <h6>NASA/ESA JWST blog</h6>
           </div>
           <div class="card mx-auto mt-5">
             <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
               <img
-                src="https://blogs.nasa.gov/webb/wp-content/uploads/sites/326/2021/12/VA256_Transfert-CU1_S5B-BAF_032-1024x724.jpg"
+                src="{% static 'journey/src/blogLogo.jpg' %}"
                 class="img-fluid rounded" />
               <a href="https://blogs.nasa.gov/webb/">
                 <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
               </a>
             </div>
-            <div class="card-body">
-              <h5 class="card-title ">Webb Moved to Meet its Rocket</h5>
+            <div class="card-body ">
+              <h6 id="titleFeed" class="card-title "></h6>
               <br>
-              <p class="card-text text-start">
+              <p id="descriptionFeed" class="card-text text-start form-text text-dark">
 
-                On Dec. 7, NASA’s James Webb Space Telescope was transferred to the final assembly building at Europe’s
-                Spaceport in French Guiana to meet its Ariane 5 launch vehicle.
               </p>
-              <br>
-              <br>
-              <a href="https://blogs.nasa.gov/webb/" class="read btn btn-light border text-center">Read more</a>
+              <a href="https://blogs.nasa.gov/webb/" class="btn btn-light border">Read more</a>
             </div>
           </div>
         </div>
@@ -446,7 +433,7 @@
                     href="https://www.facebook.com/hubbleESA/">Hubble Space Telescope</a></blockquote>
         </div> -->
         <div class="embed-responsive embed-responsive-16by9 fb-page col-12 col-xl-6 text-center my-3">
-            <iframe 
+          <iframe
             src="https://www.facebook.com/plugins/page.php?locale=en_US&href=https%3A%2F%2Fwww.facebook.com%2FhubbleESA%2F&tabs=timeline&width=500&height=600&small_header=true&adapt_container_width=true&hide_cover=false&show_facepile=true&appId"
             width="100%" height="600" style="border:none;overflow:hidden" scrolling="no" frameborder="0"
             allowfullscreen="true"
@@ -456,7 +443,7 @@
 
         <div class="embed-responsive embed-responsive-16by9 fb-page col-12 col-xl-6 text-center my-3">
           <a class="twitter-timeline" href="https://twitter.com/ESA_Webb?ref_src=twsrc%5Etfw" data-width="450"
-         data-height="600">Tweets by
+            data-height="600">Tweets by
             NASAWebb</a>
           <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
         </div>
@@ -473,14 +460,16 @@
             <h5>Credits</h5>
           </div>
           <div class="text-secondary">
-            <p class="form-text" style="margin: 0px; padding: 0px;"> ESA/Webb, ESA Office, Space Telescope Science Institute, 3700 San Martin Dr, D-21218 Baltimore,
+            <p class="form-text" style="margin: 0px; padding: 0px;"> ESA/Webb, ESA Office, Space Telescope Science
+              Institute, 3700 San Martin Dr, D-21218 Baltimore,
               United States </p>
             <p class="form-text" style="margin: 0px; padding: 0px;"> Content Credit: ESA/Webb </p>
             <p class="form-text" style="margin: 0px; padding: 0px;"> Telescope Model Credit: NASA, ATG </p>
             <p class="form-text" style="margin: 0px; padding: 0px;"> Website
               developed and operated by Enciso Systems </p>
             <p class="form-text" style="margin: 0px; padding: 0px;"> Accelerated by CDN77 </p>
-            <p class="form-text" style="margin: 0px; padding: 0px;"> <a class="text-secondary" href="https://esahubble.org/about/privacy/">Privacy Policy</a></p>
+            <p class="form-text" style="margin: 0px; padding: 0px;"> <a class="text-secondary"
+                href="https://esahubble.org/about/privacy/">Privacy Policy</a></p>
           </div>
         </div>
         <br>
@@ -506,10 +495,10 @@
           </div>
           <div class="col-2 text-white text-center d-none d-xl-block">
             <div id="" class="mt-2">
-            <a id="notifications" href="#blog" class="text-white d-inline">
-              What's New
-            </a>
-          </div>
+              <a id="notifications" href="#blog" class="text-white d-inline">
+                What's New
+              </a>
+            </div>
           </div>
 
           <div class="col-6 col-md-3 col-xl-2 text-white text-center">
@@ -519,7 +508,8 @@
             <a id="arrow-top" href="#blog" onclick="decreaseSection()" class="text-white text-decoration-none">
               <ion-icon id="arrow-top-icon" name="arrow-dropup-circle" size="large"></ion-icon>
             </a>
-            <a id="arrow-down" href="#video" onclick="increaseSection()" class="text-white mx-xl-1 text-decoration-none">
+            <a id="arrow-down" href="#video" onclick="increaseSection()"
+              class="text-white mx-xl-1 text-decoration-none">
               <ion-icon id="arrow-down-icon" name="arrow-dropdown-circle" size="large"></ion-icon>
             </a>
           </div>
@@ -898,18 +888,18 @@
       nonce="vXp6ani2"></script>
 
     {% if request|is_pc %}
-      <script src="{% static 'journey/build/js/app.js' %}"></script>
-      <script src="{% static 'journey/build/js/vendors.js' %}"></script>
+    <script src="{% static 'journey/build/js/app.js' %}"></script>
+    <script src="{% static 'journey/build/js/vendors.js' %}"></script>
     {% endif %}
 
     {% if request|is_touch_capable %}
-      <script src="{% static 'journey/build/js/app.js' %}"></script>
-      <script src="{% static 'journey/build/js/vendors.js' %}"></script>
+    <script src="{% static 'journey/build/js/app.js' %}"></script>
+    <script src="{% static 'journey/build/js/vendors.js' %}"></script>
     {% endif %}
 
     {% if request|is_tablet %}
-      <script src="{% static 'journey/build/js/app.js' %}"></script>
-      <script src="{% static 'journey/build/js/vendors.js' %}"></script>
+    <script src="{% static 'journey/build/js/app.js' %}"></script>
+    <script src="{% static 'journey/build/js/vendors.js' %}"></script>
     {% endif %}
 
     <script src="{% static 'journey/src/audio.js' %}"></script>
@@ -919,7 +909,8 @@
     <script type="module" src="https://unpkg.com/ionicons@4.5.10-0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@4.5.10-0/dist/ionicons/ionicons.js"></script>
 
-
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+      integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 
     <script type="text/javascript">
       var n = 0;
@@ -1001,6 +992,28 @@
         audio.currentTime = 0;
         playPauseBTN.innerHTML = "Play &#9658"
       }
+
+      var titleFeed = document.getElementById('titleFeed');
+      var descriptionFeed = document.getElementById('descriptionFeed');
+      var i = 0;
+      var FEED_URL = 'https://blogs.nasa.gov/webb/feed/';
+      $.get(FEED_URL, function (data) {
+        console.log(data)
+        $(data).find("item").each(function () { // or "item" or whatever suits your feed
+          var el = $(this);
+          i += 1;
+          if (i == 1) {
+            titleFeed.innerHTML = el.find("title").text();
+            descriptionFeed.innerHTML = el.find("description").text();
+            console.log(i)
+            console.log("title      : " + el.find("title").text());
+            console.log("description: " + el.find("description").text());
+            console.log("content: " + el.find("pubDate").text());
+            console.log("------------------------");
+          }
+
+        });
+      });
 
 
     </script>
