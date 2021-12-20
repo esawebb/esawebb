@@ -1,5 +1,7 @@
 {% load i18n %}
+{% load user_agents %}
 {% load static %}
+
 
 
 <!DOCTYPE html>
@@ -895,8 +897,20 @@
     <script async defer crossorigin="anonymous" src="https://connect.facebook.net/es_ES/sdk.js#xfbml=1&version=v11.0"
       nonce="vXp6ani2"></script>
 
-    <script src="{% static 'journey/build/js/app.js' %}"></script>
-    <script src="{% static 'journey/build/js/vendors.js' %}"></script>
+    {% if request|is_pc %}
+      <script src="{% static 'journey/build/js/app.js' %}"></script>
+      <script src="{% static 'journey/build/js/vendors.js' %}"></script>
+    {% endif %}
+
+    {% if request|is_touch_capable %}
+      <script src="{% static 'journey/build/js/app.js' %}"></script>
+      <script src="{% static 'journey/build/js/vendors.js' %}"></script>
+    {% endif %}
+
+    {% if request|is_tablet %}
+      <script src="{% static 'journey/build/js/app.js' %}"></script>
+      <script src="{% static 'journey/build/js/vendors.js' %}"></script>
+    {% endif %}
 
     <script src="{% static 'journey/src/audio.js' %}"></script>
 

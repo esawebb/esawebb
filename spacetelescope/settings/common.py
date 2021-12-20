@@ -308,6 +308,7 @@ DJANGO_APPS = [
     'django.contrib.messages',
     'django.contrib.humanize',
     'django.contrib.sitemaps',
+    'django_user_agents',
 ]
 
 DJANGOPLICITY_APPS = [
@@ -387,6 +388,11 @@ SPACETELESCOPE_APPS = [
 ]
 
 INSTALLED_APPS = DJANGO_APPS + DJANGOPLICITY_APPS + SPACETELESCOPE_APPS + THIRD_PARTY_APPS
+
+MIDDLEWARE_CLASSES = (
+    # other middlewares...
+    'django_user_agents.middleware.UserAgentMiddleware',
+)
 
 if USE_I18N:
     INSTALLED_APPS += [
