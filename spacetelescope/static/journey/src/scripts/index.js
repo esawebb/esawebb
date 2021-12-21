@@ -59,9 +59,6 @@ window.addEventListener('resize', () => {
 
 // // create camera
 const camera = new THREE.PerspectiveCamera(75, sizes.width / sizes.height, 0.1, 4000)
-camera.position.z = 42
-camera.position.x = 0
-
 
 // // create camera
 const camera1 = new THREE.PerspectiveCamera(75, sizes.width / sizes.height, 0.1, 4000)
@@ -542,35 +539,35 @@ scene3.add(line);
 const pointsLine = [
     {
         //                            z   y  x
-        position: new THREE.Vector3(0, 0, 16),
+        position: new THREE.Vector3(0, 0, 14),
         element: document.querySelector('.pointLine-0')
     },
     {
         //                            z   y  x
-        position: new THREE.Vector3(0, 0, 14),
+        position: new THREE.Vector3(0, 0, 10),
         element: document.querySelector('.pointLine-1')
     },
     {
         //                            z   y  x
-        position: new THREE.Vector3(0, 0, 11),
+        position: new THREE.Vector3(0, 0, 8),
         element: document.querySelector('.pointLine-2')
     },
     {
         //                            z   y  x
-        position: new THREE.Vector3(0, 0, 7),
+        position: new THREE.Vector3(0, 0, 6),
         element: document.querySelector('.pointLine-3')
     },
     {
         //                            z   y  x
-        position: new THREE.Vector3(0, 0, 3),
+        position: new THREE.Vector3(0, 0, 0),
         element: document.querySelector('.pointLine-4')
     },
     {
-        position: new THREE.Vector3(0, 0, -1),
+        position: new THREE.Vector3(0, 0, -2),
         element: document.querySelector('.pointLine-5')
     },
     {
-        position: new THREE.Vector3(0, 0.3, -4.6),
+        position: new THREE.Vector3(0, 0.3, -5.6),
         element: document.querySelector('.pointLine-L2')
     }
 
@@ -660,32 +657,40 @@ document.getElementById("timeOut").addEventListener("click", () => {
 
 
 })
-var distance = false;
-
-let animated = document.getElementById("timeline")
-let animatedOn = false;
+//var distance = true;
+document.getElementById('statistics').style.visibility = 'visible';
+document.getElementById('pointL2').style.visibility = 'visible';
 document.getElementById('timeNone').classList.add('d-none');
-
-function animatedScroll() {
-    if (animatedOn == false) {
-        let scrollTop = document.documentElement.scrollTop;
-        let heightAnimated = animated.offsetTop;
-        if (heightAnimated < scrollTop + 5) {
-            setTimeout(() => {
-                camera.position.z = 8;
-                distance = true;
-                document.getElementById('statistics').style.visibility = 'visible';
-                document.getElementById('pointL2').style.visibility = 'visible';
-                for (const pointLine of pointsLine) {
-                    pointLine.element.classList.add('visible')
-                }
-                animatedOn = true;
-            }, 1000);
-        }
-    }
+for (const pointLine of pointsLine) {
+    pointLine.element.classList.add('visible')
 }
+camera.position.x = 3.049999999999994;
+camera.position.z = -6.140000000000022;
 
-window.addEventListener('scroll', animatedScroll);
+// let animated = document.getElementById("timeline")
+// let animatedOn = false;
+// document.getElementById('timeNone').classList.add('d-none');
+
+// function animatedScroll() {
+//     if (animatedOn == false) {
+//         let scrollTop = document.documentElement.scrollTop;
+//         let heightAnimated = animated.offsetTop;
+//         if (heightAnimated < scrollTop + 5) {
+//             setTimeout(() => {
+//                 camera.position.z = 8;
+//                 distance = true;
+//                 document.getElementById('statistics').style.visibility = 'visible';
+//                 document.getElementById('pointL2').style.visibility = 'visible';
+//                 for (const pointLine of pointsLine) {
+//                     pointLine.element.classList.add('visible')
+//                 }
+//                 animatedOn = true;
+//             }, 1000);
+//         }
+//     }
+// }
+
+// window.addEventListener('scroll', animatedScroll);
 
 
 
@@ -744,51 +749,51 @@ document.getElementById("rotationModel").addEventListener("click", () => {
 
 ///////////////////////////////// CLOCK ///////////////////////////////
 
-const getRemainingTime = deadline => {
-    let now = new Date(),
-        remainTime = (now - new Date(deadline) + 1000) / 1000,
-        remainSeconds = ('0' + Math.floor(remainTime % 60)).slice(-2),
-        remainMinutes = ('0' + Math.floor(remainTime / 60 % 60)).slice(-2),
-        remainHours = ('0' + Math.floor(remainTime / 3600 % 24)).slice(-2),
-        remainDays = Math.floor(remainTime / (3600 * 24));
-    return {
-      remainSeconds,
-      remainMinutes,
-      remainHours,
-      remainDays,
-      remainTime
-    }
-  };
-  const countdown = (deadline,elem,finalMessage, name) => {
-    const el = document.getElementById(elem);
-    const daysTraveled = document.getElementById('Days traveled');
-    // const distanceTravelend = document.getElementById('Distance traveled');
+// const getRemainingTime = deadline => {
+//     let now = new Date(),
+//         remainTime = (now - new Date(deadline) + 1000) / 1000,
+//         remainSeconds = ('0' + Math.floor(remainTime % 60)).slice(-2),
+//         remainMinutes = ('0' + Math.floor(remainTime / 60 % 60)).slice(-2),
+//         remainHours = ('0' + Math.floor(remainTime / 3600 % 24)).slice(-2),
+//         remainDays = Math.floor(remainTime / (3600 * 24));
+//     return {
+//       remainSeconds,
+//       remainMinutes,
+//       remainHours,
+//       remainDays,
+//       remainTime
+//     }
+//   };
+//   const countdown = (deadline,elem,finalMessage, name) => {
+//     const el = document.getElementById(elem);
+//     const daysTraveled = document.getElementById('Days traveled');
+//     // const distanceTravelend = document.getElementById('Distance traveled');
   
-    setInterval( () => {
-      let t = getRemainingTime(deadline);
-      el.innerHTML = `
+//     setInterval( () => {
+//       let t = getRemainingTime(deadline);
+//       el.innerHTML = `
       
-      <p class="d-inline ">${name} </p>              
-      <p class="d-inline cardCountdown"> ${t.remainDays}d</p>
-      <p class="d-inline cardCountdown"> ${t.remainHours}h</p>
-      <p class="d-inline cardCountdown"> ${t.remainMinutes}m</p>
-      <p class="d-inline cardCountdown"> ${t.remainSeconds}s</p>
+//       <p class="d-inline ">${name} </p>              
+//       <p class="d-inline cardCountdown"> ${t.remainDays}d</p>
+//       <p class="d-inline cardCountdown"> ${t.remainHours}h</p>
+//       <p class="d-inline cardCountdown"> ${t.remainMinutes}m</p>
+//       <p class="d-inline cardCountdown"> ${t.remainSeconds}s</p>
       
-      `;
-      daysTraveled.innerHTML = `${t.remainDays} days and ${t.remainHours} hours`
-    }, 1000)
-    setInterval( () => {
-    let j = getRemainingTime(deadline);
-    if (circlePo.position.z > (20 - (j.remainDays * 0.816))&& distance == true) {
-        circlePo.position.z -= 0.02;
-        obj3.position.z -= 0.02;
+//       `;
+//       daysTraveled.innerHTML = `${t.remainDays} days and ${t.remainHours} hours`
+//     }, 1000)
+//     setInterval( () => {
+//     let j = getRemainingTime(deadline);
+//     if (circlePo.position.z > (20 - (j.remainDays * 0.816))&& distance == true) {
+//         circlePo.position.z -= 0.02;
+//         obj3.position.z -= 0.02;
 
-    }
-    }, 5)
+//     }
+//     }, 5)
 
-  };
+//   };
   
-  countdown('Dec 12 2021 00:00:00 GMT-0500', 'clock', '¡Go!','Journey to L2:')
+  //countdown('Dec 12 2021 00:00:00 GMT-0500', 'clock', '¡Go!','Journey to L2:')
 
 ///////////////////////////////// END CLOCK ///////////////////////////////
 
@@ -825,15 +830,15 @@ function animate() {
 
 
 
-    if (camera.position.x < 5 && distance == true) {
-        camera.position.x += 0.05;
-        camera.position.z -= 0.14;
-    }
+    // if (camera.position.x < 5 && distance == true) {
+    //     camera.position.x += 0.05;
+    //     camera.position.z -= 0.14;
+    // }
 
-    if (camera.position.x > 3 && distance == false) {
-        camera.position.x -= 0.05;
-        camera.position.z += 0.14;
-    }
+    // if (camera.position.x > 3 && distance == false) {
+    //     camera.position.x -= 0.05;
+    //     camera.position.z += 0.14;
+    // }
 
 
 

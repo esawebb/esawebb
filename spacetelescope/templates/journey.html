@@ -124,7 +124,7 @@
     <!----------------------- Mission Overview ------------------------------------>
     <section id="mission" class="container-fluid">
       <div class="row">
-        <div id="Overview" class="col-12 col-xl-6 text-white  my-md-5 px-3">
+        <div id="Overview" class="col-12 col-xl-6 text-white  my-md-5 px-3 px-md-5">
           <h3 class="text-center mb-5">Mission Overview</h3>
           <p>The James Webb Space Telescope will be the next great space science observatory, designed to answer
             outstanding questions about the Universe and to make breakthrough discoveries in all fields of
@@ -149,7 +149,7 @@
           </p>
         </div>
 
-        <div id="Factsheet" class="col-12 col-xl-6 px-3 mb-5 px-2">
+        <div id="Factsheet" class="col-12 col-xl-6 px-3 mb-5 px-2 px-md-5">
           <h3 class="text-center text-white mt-5 mb-5">Fact Sheet</h3>
           <table class="table text-white ">
             <thead>
@@ -287,10 +287,11 @@
       <div class="pointLine pointLine-5 visible">
         <div class="label"></div>
         <div class="text">
-          Primary mirror unfolding
-          <br>Time: starts day 12 ends day 15.5 from launch
-          <br>Distance: starts at ~955,000 Kms ends at ~1,090,000 Kms
+          Primary mirror unfolding:
+          <br>Time: starts at day 12, ends at day 15.5.
+          <br>Distance: starts at ~955,000Km, ends at 1,090,000 Kms.
         </div>
+
       </div>
       <div id="pointL2" class="pointLine pointLine-L2" style="visibility: hidden;">
         <div class="L2">L2</div>
@@ -350,7 +351,7 @@
           </div>
           <div id="new" class="card mx-auto mt-5">
             <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
-              <img src="https://cdn.spacetelescope.org/archives/images/newsfeature/sci21008a.jpg" class="img-fluid rounded" />
+              <img src="https://cdn.spacetelescope.org/archives/images/newsfeature/sci21008a.jpg" class="rounded" />
               <a href="https://esahubble.org/forscientists/announcements/sci21008/">
                 <div class="mask" style="background-color: rgba(249, 49, 84, 0.6);"></div>
               </a>
@@ -373,7 +374,7 @@
           </div>
           <div class="card mx-auto mt-5">
             <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
-              <iframe class="img-fluid rounded" src="https://www.youtube.com/embed/rtpK5R9Rjs4" width="330" height="220"
+              <iframe class="img-fluid rounded" src="https://www.youtube.com/embed/LNzXtnHeD4k" width="330" height="220"
                 title="YouTube video player" frameborder="0"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                 style="width: 330px; height: 220px;" allowfullscreen></iframe>
@@ -434,7 +435,7 @@
         </div> -->
         <div class="embed-responsive embed-responsive-16by9 fb-page col-12 col-xl-6 text-center my-3">
           <iframe
-            src="https://www.facebook.com/plugins/page.php?locale=en_US&href=https%3A%2F%2Fwww.facebook.com%2FhubbleESA%2F&tabs=timeline&width=500&height=600&small_header=true&adapt_container_width=true&hide_cover=false&show_facepile=true&appId"
+            src="https://www.facebook.com/plugins/page.php?locale=en_US&href=https%3A%2F%2Fwww.facebook.com%2FEuropeanSpaceAgency%2F&tabs=timeline&width=500&height=600&small_header=true&adapt_container_width=true&hide_cover=false&show_facepile=true&appId"
             width="100%" height="600" style="border:none;overflow:hidden" scrolling="no" frameborder="0"
             allowfullscreen="true"
             allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe>
@@ -466,7 +467,8 @@
             <p class="form-text" style="margin: 0px; padding: 0px;"> Content Credit: ESA/Webb </p>
             <p class="form-text" style="margin: 0px; padding: 0px;"> Telescope Model Credit: NASA, ATG </p>
             <p class="form-text" style="margin: 0px; padding: 0px;"> Website
-              developed and operated by Enciso Systems </p>
+              developed and operated by <a class="text-secondary"
+              href="https://www.encisosystems.com/">Enciso Systems</a></p>
             <p class="form-text" style="margin: 0px; padding: 0px;"> Accelerated by CDN77 </p>
             <p class="form-text" style="margin: 0px; padding: 0px;"> <a class="text-secondary"
                 href="https://esahubble.org/about/privacy/">Privacy Policy</a></p>
@@ -491,7 +493,13 @@
           </div>
 
           <div class="col-md-6 col-xl-3 text-center text-white d-none d-md-block">
-            <div id="clock" class="mt-2"></div>
+            <div id="clock" class="mt-2">
+              <p class="d-inline ">Journey to L2:</p>              
+              <p class="d-inline cardCountdown"> 00d</p>
+              <p class="d-inline cardCountdown"> 00h</p>
+              <p class="d-inline cardCountdown"> 00m</p>
+              <p class="d-inline cardCountdown"> 00s</p>
+            </div>
           </div>
           <div class="col-2 text-white text-center d-none d-xl-block">
             <div id="" class="mt-2">
@@ -678,7 +686,7 @@
                 <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne"
                   data-bs-parent="#accordionExample">
                   <div class="accordion-body">
-                    <strong>Webb has a suite of four powerful instruments that will investigate the
+                      Webb has a suite of four powerful instruments that will investigate the
                       cosmos. They are located
                       in the Integrated Science Instrument Module, behind the primary mirror.
 
@@ -752,7 +760,7 @@
                 <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree"
                   data-bs-parent="#accordionExample">
                   <div class="accordion-body">
-                    <strong>Webb’s NIRCam is the observatory’s primary camera, and will simultaneously
+                      Webb’s NIRCam is the observatory’s primary camera, and will simultaneously
                       image the cosmos in
                       two different infrared ranges. Taking advantage of Webb’s exquisite image quality and large
                       primary mirror, the instrument will acquire some of the deepest (i.e. farthest away)
