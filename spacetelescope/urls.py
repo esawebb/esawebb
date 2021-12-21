@@ -163,8 +163,8 @@ urlpatterns += [
     url( r'^facebook/', include('djangoplicity.iframe.urls')  ),
 
     # Main view
-    url( r'^$', cache_page(60 * 5)(FrontpageView.as_view()) ),
-    url( r'^new22122021/$', cache_page(60 * 5)(JourneyView.as_view()) ),
+    url( r'^new22122021/$', cache_page(60 * 5)(FrontpageView.as_view()) ),
+    url( r'^$', cache_page(60 * 5)(JourneyView.as_view()) ),
 
     #ESASky API for JSONFeed
     url(r'^zoomables/$', ESASkyListView.as_view()),

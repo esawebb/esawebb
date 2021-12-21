@@ -567,7 +567,7 @@ const pointsLine = [
         element: document.querySelector('.pointLine-5')
     },
     {
-        position: new THREE.Vector3(0, 0.3, -5.6),
+        position: new THREE.Vector3(0, 0.3, -4.6),
         element: document.querySelector('.pointLine-L2')
     }
 
