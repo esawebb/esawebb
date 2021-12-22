@@ -350,19 +350,20 @@
             <h5>ESA/Hubble/JWST Science Newsletter</h5>
           </div>
           <div id="new" class="card mx-auto mt-5">
-            <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
-              <img src="https://cdn.spacetelescope.org/archives/images/newsfeature/sci21008a.jpg" class="rounded" />
-              <a href="https://esahubble.org/forscientists/announcements/sci21008/">
+            <div class="" data-mdb-ripple-color="light">
+              <img src="https://esahubble.org/media/archives/newsletters/medium/469.jpg" class="rounded" 
+              style="background-size: cover;"/>
+              <a href="https://esahubble.org/newsletters/science/html/469/">
                 <div class="mask" style="background-color: rgba(249, 49, 84, 0.6);"></div>
               </a>
             </div>
             <div class="card-body ">
-              <h6 class="card-title ">Call for ESA/Hubble & ESA/Webb Outreach Intern</h6>
+              <h6 class="card-title ">From the desk of the HST and JWST Project Scientist</h6>
               <br>
               <p class="card-text text-start form-text text-dark">
-                The ESA/Hubble & ESA/Webb Outreach team is looking for a motivated individual to join the team as an intern to support a variety of roles and activities pertaining to the work of bringing the images and science from the NASA/ESA Hubble Space Telescope and the NASA/ESA/CSA James Webb Space Telescope to the scientific community and the public for the European Space Agency (ESA). This is a unique opportunity to develop skills and experience in science communication, involving high-reach and high-impact products that are disseminated worldwide to showcase two well-known and loved science missions.
+                2021: what a roller coaster this summer has been! The COVID pandemic is still limiting our movements and we are still mostly virtual. At STScI, we are now slowly returning to our offices, a few days a week. The first meetings in person felt great — finally interactions in 3D! But in spite of the pandemic, support to the missions continues, as strong as usual.
               </p>
-              <a href="https://esahubble.org/forscientists/announcements/sci21008/" class="btn btn-light border">Read more</a>
+              <a href="https://esahubble.org/newsletters/science/html/469/" class="btn btn-light border">Read more</a>
             </div>
 
           </div>
@@ -1005,7 +1006,7 @@
       var descriptionFeed = document.getElementById('descriptionFeed');
       var i = 0;
       var FEED_URL = 'https://blogs.nasa.gov/webb/feed/';
-      $.get(FEED_URL, function (data) {
+      $.get(FEED_URL,{crossDomain: true, dataType: 'jsonp',} ,function (data) {
         console.log(data)
         $(data).find("item").each(function () { // or "item" or whatever suits your feed
           var el = $(this);
