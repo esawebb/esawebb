@@ -3,6 +3,7 @@
 
 <!DOCTYPE HTML>
 <html lang="{{ LANGUAGE_CODE }}">
+
 <head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb#">
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -11,12 +12,14 @@
     <meta name="author" content="information@eso.org" />
     {% spaceless %}
     {% endspaceless %}
-    <link href="http://www.spacetelescope.org/rss/feed.xml" rel="alternate" type="application/rss+xml" title="Hubble Space Telescope News">
-    <link href='//fonts.googleapis.com/css?family=Open+Sans:400italic,600italic,400,600' rel='stylesheet' type='text/css'>
+    <link href="http://www.spacetelescope.org/rss/feed.xml" rel="alternate" type="application/rss+xml"
+        title="Hubble Space Telescope News">
+    <link href='//fonts.googleapis.com/css?family=Open+Sans:400italic,600italic,400,600' rel='stylesheet'
+        type='text/css'>
 
     <title>{% block site_title %}ESA/Hubble{% endblock %}</title>
-{% load pipeline %}
-{% stylesheet 'main' %}
+    {% load pipeline %}
+    {% stylesheet 'main' %}
     <!-- TODO: Verify why favicon in root static folder is not being loaded by collectstatics -->
     <!--[if IE]><link rel="shortcut icon" href="{% static 'images/favicon.ico' %}"><![endif]-->
     <link rel="icon" href="{% static 'images/favicon.ico' %}">
@@ -31,85 +34,88 @@
     {% block extra_header %}
     {% endblock %}
     <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-LBBCNE9YYQ"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-LBBCNE9YYQ"></script>
+      <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
 
-      gtag('config', 'G-LBBCNE9YYQ');
-    </script>
-    
+        gtag('config', 'G-LBBCNE9YYQ');
+      </script>
+
     <!-- Google Tag Manager -->
-    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-    })(window,document,'script','dataLayer','GTM-WRJQR2R');</script>
+      <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+      new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+      j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+      'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+      })(window,document,'script','dataLayer','GTM-WRJQR2R');</script>
     <!-- End Google Tag Manager -->
 </head>
 
 <body>
-<!-- Google Tag Manager (noscript) -->
-<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WRJQR2R"
-height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-<!-- End Google Tag Manager (noscript) -->
+    <!-- Google Tag Manager (noscript) -->
+      <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WRJQR2R"
+      height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
 
-<nav class="navbar-general-wrapper" role="navigation">
-    <div class="navbar-general">
-        <a class="navbar-general__logo" href="/">
-            <img src="{% static 'images/logo.png' %}" alt="ESA/Hubble logo">
-        </a>
-        <div class="quicklinks">
-            <a href="/contact">Contact</a>
-            <a href="/subscribe/">Subscribe to Hubble News</a>
-            <a href="/sitemap/">Site Map</a>
-            <a href="/search/"><span class="fa fa-search"></span></a>
-        </div>
-        <a class="navbar-general__esa-logo" href="http://www.esa.int">
-            <img src="{% static 'images/esa-logo.png' %}" width="100px" alt="ESA logo">
-        </a>
-        {% load menus %}
-        {% init_menu 'Main Menu' as main_menu %}
-        <div class="main-menu">
-            <div class="mobile-menu clearfix">
-                <button class="menu-trigger"><span class="fa fa-navicon"></span> {% trans "Open Menu" %}</button>
+    <nav class="navbar-general-wrapper" role="navigation">
+        <div class="navbar-general">
+            <a class="navbar-general__logo" href="/">
+                <img src="{% static 'images/logo.png' %}" alt="ESA/Hubble logo">
+            </a>
+            <div class="quicklinks">
+                <a href="/contact">Contact</a>
+                <a href="/subscribe/">Subscribe to Hubble News</a>
+                <a href="/sitemap/">Site Map</a>
+                <a href="/search/"><span class="fa fa-search"></span></a>
             </div>
-            {% render_menu main_menu main %}
+            <a class="navbar-general__esa-logo" href="http://www.esa.int">
+                <img src="{% static 'images/esa-logo.png' %}" width="100px" alt="ESA logo">
+            </a>
+            {% load menus %}
+            {% init_menu 'Main Menu' as main_menu %}
+            <div class="main-menu">
+                <div class="mobile-menu clearfix">
+                    <button class="menu-trigger"><span class="fa fa-navicon"></span> {% trans "Open Menu" %}</button>
+                </div>
+                {% render_menu main_menu main %}
+            </div>
+        </div>
+    </nav>
+
+
+    <div id="content">
+        {% block content_area %}
+        {% endblock %}
+    </div>
+
+    <div class="row footernote">
+        <div class="col-xs-12 col-md-12">
+            <a href="/about/privacy/">{% trans "Privacy policy" %}</a>
+            <a href="http://www.cdn77.com">{% trans "Accelerated by CDN77" %}</a>
         </div>
     </div>
-</nav>
 
+    {% stylesheet 'extras' %}
 
-<div id="content">
-{% block content_area %}
-{% endblock %}
-</div>
+    <script type="text/javascript">var MEDIA_URL = "{{MEDIA_URL}}"</script>
+    {% javascript 'main' %}
+    {% block extra_scripts %}
+    {% endblock %}
 
-<div class="row footernote">
-    <div class="col-xs-12 col-md-12">
-        <a href="/about/privacy/">{% trans "Privacy policy" %}</a>
-        <a href="http://www.cdn77.com">{% trans "Accelerated by CDN77" %}</a>
-    </div>
-</div>
+    <!-- Google Analytics -->
+    <script>
+            (function (i, s, o, g, r, a, m) {
+                i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+                    (i[r].q = i[r].q || []).push(arguments)
+                }, i[r].l = 1 * new Date(); a = s.createElement(o),
+                    m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+            })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
 
-{% stylesheet 'extras' %}
+        ga('create', 'UA-2368492-6', 'auto');
+        ga('send', 'pageview');
 
-<script type="text/javascript">var MEDIA_URL = "{{MEDIA_URL}}"</script>
-{% javascript 'main' %}
-{% block extra_scripts %}
-{% endblock %}
-
-<!-- Google Analytics -->
-<script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-  ga('create', 'UA-2368492-6', 'auto');
-  ga('send', 'pageview');
-
-</script>
+    </script>
 </body>
+
 </html>

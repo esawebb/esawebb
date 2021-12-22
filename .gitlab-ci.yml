@@ -58,7 +58,7 @@ test:py27-django111:
       - build-cache
   services:
     - name: postgres:10.5
-      alias: hubble-db
+      alias: webb-db
   stage: test
   image: python:2.7-slim-buster
   before_script: *before_script_definition
@@ -88,7 +88,7 @@ test:py38-django111:
       - build-cache
   services:
     - name: postgres:10.5
-      alias: hubble-db
+      alias: webb-db
   stage: test
   image: python:3.8
   before_script: *before_script_definition

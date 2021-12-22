@@ -5,7 +5,7 @@ from djangoplicity.media.models import Image
 from djangoplicity.utils.templatetags.djangoplicity_text_utils import remove_html_tags
 from djangoplicity.utils.datetimes import timezone
 
-from spacetelescope.frontpage.api.utils import get_tiles_for_instance
+from spacetelescope.frontpage.api.utils import get_first_subject, get_zoomable_source
 
 
 class ESASkySerializer(serializers.ModelSerializer):
@@ -19,19 +19,22 @@ class ESASkySerializer(serializers.ModelSerializer):
     tiles = serializers.SerializerMethodField()
     large = serializers.SerializerMethodField()
     coordinate_metadata = serializers.SerializerMethodField()
+    pixel_size = serializers.SerializerMethodField()
+    object_name = serializers.SerializerMethodField()
 
     class Meta:
         model = Image
         fields = (
-            'id', 'title', 'description', 'priority', 'release_date', 'last_modified',
-            'coordinate_metadata', 'credit', 'tiles', 'large'
+            'id', 'title', 'description', 'priority', 'pixel_size', 'release_date', 'last_modified',
+            'coordinate_metadata', 'credit', 'object_name', 'tiles', 'large'
         )
 
     def get_tiles(self, obj):
-        return get_tiles_for_instance(obj)
+        return get_zoomable_source(obj)
 
     def get_large(self, obj):
-        return get_instance_d2d_resource(obj, 'large', 'Large', 'Image')
+        large_dict = get_instance_d2d_resource(obj, 'large', 'Large', 'Image')
+        return large_dict.get('URL', None)
 
     def get_credit(self, obj):
         return remove_html_tags(obj.credit)
@@ -68,3 +71,9 @@ class ESASkySerializer(serializers.ModelSerializer):
             "CoordinateSystemProjection": obj.spatial_coordsystem_projection,
             "Quality": obj.spatial_quality
         }
+
+    def get_pixel_size(self, obj):
+        return [obj.width, obj.height]
+
+    def get_object_name(self, obj):
+        return get_first_subject(obj)

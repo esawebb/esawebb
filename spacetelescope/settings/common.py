@@ -90,8 +90,8 @@ DEBUG_TOOLBAR_CONFIG = {}
 DEBUG_TOOLBAR_PANELS = []
 
 ADMINS = (
-    ('Web team ESAHubble', 'web@esahubble.org'),
-    ('Diego Palacios', 'dpalacios@encisosystems.com')
+    ('Web team ESAHubble', 'alejo.vivas.av@gmail.com'),
+    ('Daniel Restrepo', 'dpalacios@encisosystems.com')
 )
 MANAGERS = ADMINS
 
@@ -308,6 +308,7 @@ DJANGO_APPS = [
     'django.contrib.messages',
     'django.contrib.humanize',
     'django.contrib.sitemaps',
+    'django_user_agents',
 ]
 
 DJANGOPLICITY_APPS = [
@@ -383,9 +384,15 @@ THIRD_PARTY_APPS = [
 SPACETELESCOPE_APPS = [
     'spacetelescope',
     'spacetelescope.frontpage',
+    'spacetelescope.journey',
 ]
 
 INSTALLED_APPS = DJANGO_APPS + DJANGOPLICITY_APPS + SPACETELESCOPE_APPS + THIRD_PARTY_APPS
+
+MIDDLEWARE_CLASSES = (
+    # other middlewares...
+    'django_user_agents.middleware.UserAgentMiddleware',
+)
 
 if USE_I18N:
     INSTALLED_APPS += [
@@ -580,7 +587,7 @@ VIDEOS_FORMATS_REMOVE = [
 RELEASE_LINK_PREFIX = "heic"
 
 DEFAULT_CREATOR = u"ESA/Hubble"
-DEFAULT_CREATOR_URL = "https://esahubble.org"
+DEFAULT_CREATOR_URL = "https://esawebb.org"
 DEFAULT_CONTACT_ADDRESS = u"ESA Office, Space Telescope Science Institute, 3700 San Martin Dr"
 DEFAULT_CONTACT_CITY = u"Baltimore"
 DEFAULT_CONTACT_STATE_PROVINCE = "MD"
@@ -909,13 +916,13 @@ RECAPTCHA_PRIVATE_KEY = ''
 # Only config this for the docker web service, not flower, celery, etc, to avoid:
 # ValueError: Missing staticfiles manifest entry for
 # And because the web service is the only that collect statics before
-if os.environ.get('SERVICE_TYPE') == 'web':
-    STATICFILES_STORAGE = 'djangoplicity.utils.storage.PipelineManifestStorage'
-    STATICFILES_FINDERS = (
-        'django.contrib.staticfiles.finders.FileSystemFinder',
-        'django.contrib.staticfiles.finders.AppDirectoriesFinder',
-        'pipeline.finders.PipelineFinder',
-    )
+# if os.environ.get('SERVICE_TYPE') == 'web':
+#     # STATICFILES_STORAGE = 'djangoplicity.utils.storage.PipelineManifestStorage'
+#     STATICFILES_FINDERS = (
+#         'django.contrib.staticfiles.finders.FileSystemFinder',
+#         'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+#         'pipeline.finders.PipelineFinder',
+#     )
 
 # We split the CSS into main and extras to load the more important first
 # and the rest in the end. This also solves a problem with IE9 which stops
@@ -939,7 +946,14 @@ PIPELINE = {
             ),
             'output_filename': 'css/extras.css',
         },
+        'journey': {
+            'source_filenames': (
+                'journey/src/style.css',
+            ),
+            'output_filename': 'css/journey.css',
+        },
     },
+
     'JAVASCRIPT': {
         'main': {
             'source_filenames': (
@@ -975,6 +989,13 @@ PIPELINE = {
                 'djangoplicity/openseadragon/openseadragon.min.js',
             ),
             'output_filename': 'js/openseadragon.js',
+        },
+        'journey': {
+            'source_filenames': (
+                'journey/build/js/vendors.js',
+                'journey/build/js/app.js',
+            ),
+            'output_filename': 'js/journey.js',
         },
     },
     'CSS_COMPRESSOR': 'pipeline.compressors.cssmin.CSSMinCompressor',

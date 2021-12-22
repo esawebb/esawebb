@@ -1,76 +1,76 @@
-# version: "3.4"
+version: "3.4"
 
-# # PRODUCTION CONFIG: use it like this 'docker-compose -f docker-compose.yml -f docker-compose.prod.yml up'
-# # See: https://docs.docker.com/compose/extends/
+# PRODUCTION CONFIG: use it like this 'docker-compose -f docker-compose.yml -f docker-compose.prod.yml up'
+# See: https://docs.docker.com/compose/extends/
 
-# x-common: &common
-#   build: .
-#   environment:
-#     ENVIRONMENT: "prod"
-#     # The following variables are taken directly from shell env variables (Keep them empty)
-#     DJANGO_SECRET_KEY:
-#     DATABASE_URL:
-#     RABBITMQ_USER:
-#     RABBITMQ_PASS:
-#     CDN_STORAGE_USERNAME:
-#     CDN_STORAGE_PASSWORD:
-#     CDN_API_LOGIN:
-#     CDN_API_PASSWORD:
-#     EMAIL_USER:
-#     EMAIL_PASSWORD:
-#   volumes:
-#     - /mnt/volume_fra1_01/web/media:/home/hubbleadm/media
-#     - /mnt/volume_fra1_01/web/import:/home/hubbleadm/import
-#     - /mnt/volume_fra1_01/web/tmp:/home/hubbleadm/tmp
-#     # The SSH key and known_hosts is required to push files to CDN77 Storage, See README
-#     - ./config/.ssh:/home/hubbleadm/.ssh
-#     - ./config/youtube:/home/hubbleadm/config/youtube
+x-common: &common
+  build: .
+  environment:
+    ENVIRONMENT: "prod"
+    # The following variables are taken directly from shell env variables (Keep them empty)
+    DJANGO_SECRET_KEY:
+    DATABASE_URL:
+    RABBITMQ_USER:
+    RABBITMQ_PASS:
+    CDN_STORAGE_USERNAME:
+    CDN_STORAGE_PASSWORD:
+    CDN_API_LOGIN:
+    CDN_API_PASSWORD:
+    EMAIL_USER:
+    EMAIL_PASSWORD:
+  volumes:
+    - /mnt/volume_fra1_01/web/media:/home/webbadm/media
+    - /mnt/volume_fra1_01/web/import:/home/webbadm/import
+    - /mnt/volume_fra1_01/web/tmp:/home/webbadm/tmp
+    # The SSH key and known_hosts is required to push files to CDN77 Storage, See README
+    - ./config/.ssh:/home/webbadm/.ssh
+    - ./config/youtube:/home/webbadm/config/youtube
 
-# services:
-#   nginx:
-#     volumes:
-#       # Read only config volume
-#       - ./config/nginx-prod/nginx.conf:/etc/nginx/nginx.conf:ro
-#       - ./config/nginx-prod/conf.d:/etc/nginx/conf.d:ro
-#       - ./config/nginx-common/snippets:/etc/nginx/snippets:ro
-#       - /mnt/volume_fra1_01/web/media:/home/hubbleadm/media:ro
-#     ports:
-#       - "80:80"
+services:
+  nginx:
+    volumes:
+      # Read only config volume
+      - ./config/nginx-prod/nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./config/nginx-prod/conf.d:/etc/nginx/conf.d:ro
+      - ./config/nginx-common/snippets:/etc/nginx/snippets:ro
+      - /mnt/volume_fra1_01/web/media:/home/webbadm/media:ro
+    ports:
+      - "80:80"
 
-#   web:
-#     <<: *common
-#     command: ["./scripts/command-prod.sh"]
+  web:
+    <<: *common
+    command: ["./scripts/command-prod.sh"]
 
-#   broker:
-#     environment:
-#       RABBITMQ_DEFAULT_USER: ${RABBITMQ_USER}
-#       RABBITMQ_DEFAULT_PASS: ${RABBITMQ_PASS}
+  broker:
+    environment:
+      RABBITMQ_DEFAULT_USER: ${RABBITMQ_USER}
+      RABBITMQ_DEFAULT_PASS: ${RABBITMQ_PASS}
 
-#   celery: *common
+  celery: *common
 
-#   flower:
-#     <<: *common
-#     command:
-#       [
-#         "celery",
-#         "--app=spacetelescope",
-#         "--concurrency=8",
-#         "--db=/home/hubbleadm/tmp/flowerdb",
-#         "--persistent",
-#         "--port=5555",
-#         "--url_prefix=admin/tasks",
-#         "flower",
-#       ]
-#     expose:
-#       - "5555"
+  flower:
+    <<: *common
+    command:
+      [
+        "celery",
+        "--app=spacetelescope",
+        "--concurrency=8",
+        "--db=/home/webbadm/tmp/flowerdb",
+        "--persistent",
+        "--port=5555",
+        "--url_prefix=admin/tasks",
+        "flower",
+      ]
+    expose:
+      - "5555"
 
-#   beat: *common
+  beat: *common
 
-#   cache:
-#     image: memcached:latest
-#     container_name: hubble-cache
-#     environment:
-#       MEMCACHED_CACHE_SIZE: 1024
-#     hostname: cache
-#     expose:
-#       - "11211"
+  cache:
+    image: memcached:latest
+    container_name: webb-cache
+    environment:
+      MEMCACHED_CACHE_SIZE: 1024
+    hostname: cache
+    expose:
+      - "11211"

@@ -7,7 +7,7 @@ DEBUG = False
 SECRET_KEY = get_secret('DJANGO_SECRET_KEY')
 
 ALLOWED_HOSTS = [
-    '.esahubble.org',
+    '.esawebb.org',
     '.spacetelescope.org'
 ]
 
@@ -30,20 +30,6 @@ CACHES = {
 if get_secret('DATABASE_URL'):
     DATABASES = {
         'default': dj_database_url.config()
-    }
-else:
-    POSTGRES_USER = get_secret('POSTGRES_USER')
-    POSTGRES_PASSWORD = get_secret('POSTGRES_PASSWORD')
-
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.postgresql',
-            'NAME': 'esawebb',
-            'USER': POSTGRES_USER,
-            'PASSWORD': POSTGRES_PASSWORD,
-            'HOST': 'db',
-            'PORT': 5432,
-        }
     }
 
 # EMAIL: SMTP CONFIG

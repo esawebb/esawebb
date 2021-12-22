@@ -10,38 +10,32 @@ x-hubble-image: &hubble-image hubble:0.9
 services:
   nginx:
     image: nginx:1.17
-    container_name: hubble-nginx
+    container_name: webb-nginx
     restart: always
     depends_on:
       - web
     volumes:
-      - statics:/home/hubbleadm/static
+      - statics:/home/webbadm/static
 
   web:
     image: *hubble-image
-    container_name: hubble
+    container_name: webb
     restart: always
     environment:
       SERVICE_TYPE: "web"
     volumes:
-      - statics:/home/hubbleadm/static
+      - statics:/home/webbadm/static
     expose:
       - "8000"
 
-  db:
-    image: postgres:11
-    container_name: esawebb-postgres
-    environment:
-      POSTGRES_PASSWORD: postgres
-
   broker:
     image: rabbitmq:3.8.3
-    container_name: hubble-broker
+    container_name: webb-broker
     restart: always
 
   celery:
     image: *hubble-image
-    container_name: hubble-celery
+    container_name: webb-celery
     restart: always
     command:
       [
@@ -59,7 +53,7 @@ services:
 
   flower:
     image: *hubble-image
-    container_name: hubble-flower
+    container_name: webb-flower
     restart: always
     # TODO: Change url prefix to /admin/tasks when having nginx proxy
     command:
@@ -67,7 +61,7 @@ services:
         "celery",
         "--app=spacetelescope",
         "--concurrency=8",
-        "--db=/home/hubbleadm/tmp/flowerdb",
+        "--db=/home/webbadm/tmp/flowerdb",
         "--persistent",
         "--port=5555",
         "flower",
@@ -78,14 +72,14 @@ services:
 
   beat:
     image: *hubble-image
-    container_name: hubble-beat
+    container_name: webb-beat
     restart: always
     command:
       [
         "celery",
         "--app=spacetelescope",
         "--loglevel=INFO",
-        "--pidfile=/home/hubbleadm/tmp/beat.pid",
+        "--pidfile=/home/webbadm/tmp/beat.pid",
         "beat",
       ]
     depends_on:
