@@ -22,6 +22,12 @@ body {
     width: 100%;
   }
 
+  .loading{
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+  }
+
   body .angles {
     background: linear-gradient(to right, #a6afc0 2px, transparent 2px) 0 0, linear-gradient(to bottom, #a6afc0 2px, transparent 2px) 0 0, linear-gradient(to left, #a6afc0 2px, transparent 2px) 100% 0, linear-gradient(to bottom, #a6afc0 2px, transparent 2px) 100% 0, linear-gradient(to left, #a6afc0 2px, transparent 2px) 100% 100%, linear-gradient(to top, #a6afc0 2px, transparent 2px) 100% 100%, linear-gradient(to right, #a6afc0 2px, transparent 2px) 0 100%, linear-gradient(to top, #a6afc0 2px, transparent 2px) 0 100%;
     background-repeat: no-repeat;

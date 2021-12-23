@@ -38,18 +38,18 @@
       <div class="row position-relative d-block d-md-none ">
         <img
           src="https://www.esa.int/var/esa/storage/images/esa_multimedia/images/2021/02/esa_webb_logo/23168175-2-eng-GB/ESA_Webb_logo_pillars.png"
-          alt="esa logo" style="width: 100px;  margin-left: 10px; margin-top: 10px;"
+          alt="esa logo" style="width: 100px;  margin-left: 10px; margin-top: 10px; display: none;"
           class="logo-iz position-absolute top-0 start-0" />
         <img src="https://copernicus-masters.com/wp-content/uploads/2020/03/Logo_ESA_solid-white.png" alt="esa logo"
-          style="width: 120px; margin-top: 10px;" class="logo-ri position-absolute top-0 end-0" />
+          style="width: 120px; margin-top: 10px; display: none;" class="logo-ri position-absolute top-0 end-0" />
       </div>
       <div class="row position-relative d-none d-md-block">
         <img
           src="https://www.esa.int/var/esa/storage/images/esa_multimedia/images/2021/02/esa_webb_logo/23168175-2-eng-GB/ESA_Webb_logo_pillars.png"
-          alt="esa logo" style="width: 170px;  margin-left: 10px; margin-top: 10px; "
+          alt="esa logo" style="width: 170px;  margin-left: 10px; margin-top: 10px; display: none;"
           class="logo-iz position-absolute top-0 start-0" />
         <img src="https://copernicus-masters.com/wp-content/uploads/2020/03/Logo_ESA_solid-white.png" alt="esa logo"
-          style="width: 220px; margin-top: 10px; " class="logo-ri position-absolute top-0 end-0" />
+          style="width: 220px; margin-top: 10px; display: none;" class="logo-ri position-absolute top-0 end-0" />
       </div>
     </div>
     <!-----------------------end logos ------------------------------------>
@@ -57,7 +57,7 @@
     <!----------------------- model ------------------------------------>
     <section id="" class="container-fluid scene1 d-block d-md-none text-center mb-5 border-bottom-0">
       <img src="{% static 'journey/src/imgWebb.png' %}" class="col-12 img-fluid mx-auto d-block align-items-center"
-        alt="..." style="width: 300px; margin-top: 100px; ">
+        alt="..." style="width: 300px; margin-top: 100px; display: none;">
     </section>
     <!----------------------- end model ------------------------------------>
 
@@ -77,11 +77,12 @@
       <a id="zoomTwo" type="button" onclick="" class="text-white mx-xl-1">
           <ion-icon name="remove" size="large"></ion-icon>
       </a> -->
-        <a id="rotationModel" type="button" onclick="" class="stop mx-auto text-white" style="">
+        <a id="rotationModel" type="button" onclick="" class="stop mx-auto text-white"
+          style="display: none;display: none;">
           <ion-icon id="zoom" name="pause" size="large"></ion-icon>
         </a>
       </div>
-      <div class="point point-0 visible" style="">
+      <div class="point point-0 visible" style="display: none;">
         <a type="button" class="label" data-bs-toggle="modal" data-bs-target="#modalPoint0">
 
         </a>
@@ -92,17 +93,17 @@
 
       </a>
   </div> -->
-      <div class="point point-2 visible" style="">
+      <div class="point point-2 visible" style="display: none;">
         <a type="button" class="label" data-bs-toggle="modal" data-bs-target="#modalPoint3">
 
         </a>
       </div>
-      <div class="point point-3 visible" style="">
+      <div class="point point-3 visible" style="display: none;">
         <a type="button" class="label" data-bs-toggle="modal" data-bs-target="#modalPoint1">
 
         </a>
       </div>
-      <div class="point point-4 visible" style="">
+      <div class="point point-4 visible" style="display: none;">
         <a type="button" class="label" data-bs-toggle="modal" data-bs-target="#modalPoint4">
 
         </a>
@@ -117,6 +118,10 @@
 
       </a>
   </div> -->
+      <div class="loading d-flex align-items-center text-white">
+        <strong>Loading...</strong>
+        <div class="spinner-border ms-auto" role="status" aria-hidden="true"></div>
+      </div>
 
     </section>
     <!----------------------- end model ------------------------------------>
@@ -155,7 +160,7 @@
             <thead>
               <tr class="tableizer-firstrow">
                 <th scope="col">Launch date</th>
-                <th scope="col">24 December 2021</th>
+                <th scope="col">25 December 2021</th>
               </tr>
             </thead>
             <tbody>
@@ -398,7 +403,7 @@
 
         <div class="col-12 col-xl-4 mb-4 ">
           <div class="text-white text-center">
-            <h6>NASA/ESA JWST blog</h6>
+            <h6>NASA/ESA/CSA Blog</h6>
           </div>
           <div class="card mx-auto mt-5">
             <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
@@ -483,7 +488,7 @@
 
 
     <!----------------------- start footer ------------------------------------>
-    <footer class="footer bg-dark" style="">
+    <footer class="footer bg-dark" style="display: none;">
       <div class="container-fluid mt-2">
         <div class="row my-2 mx-3">
 
@@ -928,33 +933,33 @@
       var arrowdown = document.getElementById('arrow-down');
       let sectionpage = ["model", "mission", "video", "timeline", "blog", "media", "credits"];
 
-      // $(document).ready(function () {
-      //     setTimeout(function () {
-      //         $(".logo-start").css("display", "none");
-      //     }, 4000);
+      $(document).ready(function () {
 
-      //     setTimeout(function () {
-      //         $(".logo-iz").css("display", "block");
-      //     }, 3500);
+        setTimeout(function () {
+          $(".logo-iz").css("display", "block");
+        }, 2000);
 
-      //     setTimeout(function () {
-      //         $(".logo-ri").css("display", "block");
-      //     }, 3500);
+        setTimeout(function () {
+          $(".logo-ri").css("display", "block");
+        }, 2000);
 
-      //     setTimeout(function () {
-      //         $(".footer").css("display", "block");
-      //     }, 3500);
+        setTimeout(function () {
+          $(".footer").css("display", "block");
+        }, 2000);
 
-      //     setTimeout(function () {
-      //         $(".point").css("display", "block");
-      //     }, 3500);
+        setTimeout(function () {
+          $("#rotationModel").css("display", "block");
+        }, 2000);
 
-      //     setTimeout(function () {
-      //         $("#rotationModel").css("display", "block");
-      //     }, 3500);
+        setTimeout(function () {
+          $(".point").css("display", "block");
+        }, 2000);
 
+        setTimeout(function () {
+          $(".stop").css("display", "block");
+        }, 2000);
 
-      // });
+      });
 
 
 
