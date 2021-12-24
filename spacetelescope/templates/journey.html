@@ -27,31 +27,34 @@
     }
   </style>
   <link rel="stylesheet" href="{% static 'journey/src/style.css' %}">
-    <!-- Global site tag (gtag.js) - Google Analytics -->
-      <script async src="https://www.googletagmanager.com/gtag/js?id=G-LBBCNE9YYQ"></script>
-      <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-LBBCNE9YYQ"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
 
-        gtag('config', 'G-LBBCNE9YYQ');
-      </script>
+    gtag('config', 'G-LBBCNE9YYQ');
+  </script>
 
-    <!-- Google Tag Manager -->
-      <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-      new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-      j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-      'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-      })(window,document,'script','dataLayer','GTM-WRJQR2R');</script>
-    <!-- End Google Tag Manager -->
+  <!-- Google Tag Manager -->
+  <script>(function (w, d, s, l, i) {
+      w[l] = w[l] || []; w[l].push({
+        'gtm.start':
+          new Date().getTime(), event: 'gtm.js'
+      }); var f = d.getElementsByTagName(s)[0],
+        j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
+          'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
+    })(window, document, 'script', 'dataLayer', 'GTM-WRJQR2R');</script>
+  <!-- End Google Tag Manager -->
 </head>
 
 <body>
-    <!-- Google Tag Manager (noscript) -->
-      <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WRJQR2R"
-      height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-    <!-- End Google Tag Manager (noscript) -->
-    
+  <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WRJQR2R" height="0" width="0"
+      style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- End Google Tag Manager (noscript) -->
+
   <div class="slider">
     <!----------------------- logos ------------------------------------>
     <div id="logos" class="container-fluid">
@@ -455,23 +458,24 @@
     <section id="media" class="container">
       <div class="row my-5 ">
         <h4 class="my-5 text-white text-center"><strong>Social Media</strong></h4>
-        <!-- <div class="fb-page col-12 col-xl-5 text-center my-3" data-href="https://www.facebook.com/hubbleESA/"
-            data-tabs="timeline" data-width="500" data-height="600" data-small-header="true"
-            data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true">
-            <blockquote cite="https://www.facebook.com/hubbleESA/" class="fb-xfbml-parse-ignore"><a
-                    href="https://www.facebook.com/hubbleESA/">Hubble Space Telescope</a></blockquote>
-        </div> -->
-        <div class="embed-responsive embed-responsive-16by9 fb-page col-12 col-xl-6 text-center my-3">
+        <div class="embed-responsive embed-responsive-16by9 fb-page col-12 col-xl-6 text-center my-3 d-block d-md-none">
           <iframe
             src="https://www.facebook.com/plugins/page.php?locale=en_US&href=https%3A%2F%2Fwww.facebook.com%2FEuropeanSpaceAgency%2F&tabs=timeline&width=500&height=600&small_header=true&adapt_container_width=true&hide_cover=false&show_facepile=true&appId"
             width="100%" height="600" style="border:none;overflow:hidden" scrolling="no" frameborder="0"
             allowfullscreen="true"
             allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe>
         </div>
+        <div class="embed-responsive embed-responsive-16by9 fb-page col-12 col-xl-6 text-center my-3 d-none d-md-block">
+          <iframe
+            src="https://www.facebook.com/plugins/page.php?locale=en_US&href=https%3A%2F%2Fwww.facebook.com%2FEuropeanSpaceAgency%2F&tabs=timeline&width=500&height=600&small_header=true&adapt_container_width=true&hide_cover=false&show_facepile=true&appId"
+            width="500" height="600" style="border:none;overflow:hidden" scrolling="no" frameborder="0"
+            allowfullscreen="true"
+            allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe>
+        </div>
 
 
         <div class="embed-responsive embed-responsive-16by9 fb-page col-12 col-xl-6 text-center my-3">
-          <a class="twitter-timeline" href="https://twitter.com/ESA_Webb?ref_src=twsrc%5Etfw" data-width="450"
+          <a class="twitter-timeline" href="https://twitter.com/ESA_Webb?ref_src=twsrc%5Etfw" data-width="500"
             data-height="600">Tweets by
             NASAWebb</a>
           <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
@@ -494,6 +498,8 @@
               United States </p>
             <p class="form-text" style="margin: 0px; padding: 0px;"> Content Credit: ESA/Webb </p>
             <p class="form-text" style="margin: 0px; padding: 0px;"> Telescope Model Credit: NASA, ATG </p>
+            <p class="form-text" style="margin: 0px; padding: 0px;"> Learn more at <a class="text-secondary"
+                href="https://www.esa.int/">esa.int</a></p>
             <p class="form-text" style="margin: 0px; padding: 0px;"> Website
               developed and operated by <a class="text-secondary" href="https://www.encisosystems.com/">Enciso
                 Systems</a></p>

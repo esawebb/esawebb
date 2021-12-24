@@ -91,7 +91,6 @@ body {
 
   .card-text {
     width:     100%;
-    Word-break: break-all;
     height: 150px;
     overflow: hidden;
   }
