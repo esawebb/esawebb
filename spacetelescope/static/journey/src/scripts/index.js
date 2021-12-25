@@ -657,7 +657,7 @@ document.getElementById("timeOut").addEventListener("click", () => {
 
 
 })
-//var distance = true;
+var distance = true;
 document.getElementById('statistics').style.visibility = 'visible';
 document.getElementById('pointL2').style.visibility = 'visible';
 document.getElementById('timeNone').classList.add('d-none');
@@ -749,51 +749,51 @@ document.getElementById("rotationModel").addEventListener("click", () => {
 
 ///////////////////////////////// CLOCK ///////////////////////////////
 
-// const getRemainingTime = deadline => {
-//     let now = new Date(),
-//         remainTime = (now - new Date(deadline) + 1000) / 1000,
-//         remainSeconds = ('0' + Math.floor(remainTime % 60)).slice(-2),
-//         remainMinutes = ('0' + Math.floor(remainTime / 60 % 60)).slice(-2),
-//         remainHours = ('0' + Math.floor(remainTime / 3600 % 24)).slice(-2),
-//         remainDays = Math.floor(remainTime / (3600 * 24));
-//     return {
-//       remainSeconds,
-//       remainMinutes,
-//       remainHours,
-//       remainDays,
-//       remainTime
-//     }
-//   };
-//   const countdown = (deadline,elem,finalMessage, name) => {
-//     const el = document.getElementById(elem);
-//     const daysTraveled = document.getElementById('Days traveled');
-//     // const distanceTravelend = document.getElementById('Distance traveled');
+const getRemainingTime = deadline => {
+    let now = new Date(),
+        remainTime = (now - new Date(deadline) + 1000) / 1000,
+        remainSeconds = ('0' + Math.floor(remainTime % 60)).slice(-2),
+        remainMinutes = ('0' + Math.floor(remainTime / 60 % 60)).slice(-2),
+        remainHours = ('0' + Math.floor(remainTime / 3600 % 24)).slice(-2),
+        remainDays = Math.floor(remainTime / (3600 * 24));
+    return {
+      remainSeconds,
+      remainMinutes,
+      remainHours,
+      remainDays,
+      remainTime
+    }
+  };
+  const countdown = (deadline,elem,finalMessage, name) => {
+    const el = document.getElementById(elem);
+    const daysTraveled = document.getElementById('Days traveled');
+    // const distanceTravelend = document.getElementById('Distance traveled');
   
-//     setInterval( () => {
-//       let t = getRemainingTime(deadline);
-//       el.innerHTML = `
+    setInterval( () => {
+      let t = getRemainingTime(deadline);
+      el.innerHTML = `
       
-//       <p class="d-inline ">${name} </p>              
-//       <p class="d-inline cardCountdown"> ${t.remainDays}d</p>
-//       <p class="d-inline cardCountdown"> ${t.remainHours}h</p>
-//       <p class="d-inline cardCountdown"> ${t.remainMinutes}m</p>
-//       <p class="d-inline cardCountdown"> ${t.remainSeconds}s</p>
+      <p class="d-inline ">${name} </p>              
+      <p class="d-inline cardCountdown"> ${t.remainDays}d</p>
+      <p class="d-inline cardCountdown"> ${t.remainHours}h</p>
+      <p class="d-inline cardCountdown"> ${t.remainMinutes}m</p>
+      <p class="d-inline cardCountdown"> ${t.remainSeconds}s</p>
       
-//       `;
-//       daysTraveled.innerHTML = `${t.remainDays} days and ${t.remainHours} hours`
-//     }, 1000)
-//     setInterval( () => {
-//     let j = getRemainingTime(deadline);
-//     if (circlePo.position.z > (20 - (j.remainDays * 0.816))&& distance == true) {
-//         circlePo.position.z -= 0.02;
-//         obj3.position.z -= 0.02;
+      `;
+      daysTraveled.innerHTML = `${t.remainDays} days and ${t.remainHours} hours`
+    }, 1000)
+    setInterval( () => {
+    let j = getRemainingTime(deadline);
+    if (circlePo.position.z > (20 - (j.remainDays * 0.816))&& distance == true) {
+        circlePo.position.z -= 0.02;
+        obj3.position.z -= 0.02;
 
-//     }
-//     }, 5)
+    }
+    }, 5)
 
-//   };
+  };
   
-  //countdown('Dec 12 2021 00:00:00 GMT-0500', 'clock', '¡Go!','Journey to L2:')
+  countdown('Dec 25 2021 00:1:20 GMT-0500', 'clock', '','Journey to L2:')
 
 ///////////////////////////////// END CLOCK ///////////////////////////////
 
