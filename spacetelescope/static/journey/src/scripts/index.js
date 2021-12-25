@@ -793,7 +793,7 @@ const getRemainingTime = deadline => {
 
   };
   
-  countdown('Dec 25 2021 00:1:20 GMT-0500', 'clock', '','Journey to L2:')
+  countdown('Dec 25 2021 00:7:20 GMT-0500', 'clock', '','Journey to L2:')
 
 ///////////////////////////////// END CLOCK ///////////////////////////////
 
