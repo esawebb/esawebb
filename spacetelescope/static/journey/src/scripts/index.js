@@ -756,9 +756,6 @@ const getRemainingTime = deadline => {
         remainMinutes = ('0' + Math.floor(remainTime / 60 % 60)).slice(-2),
         remainHours = ('0' + Math.floor(remainTime / 3600 % 24)).slice(-2),
         remainDays = Math.floor(remainTime / (3600 * 24));
-        console.log(now);
-        console.log(new Date(deadline));
-        console.log(now-new Date(deadline));
 
     return {
       remainSeconds,
@@ -797,7 +794,7 @@ const getRemainingTime = deadline => {
 
   };
   
-  countdown('Dec 25 2021 00:7:00 GMT-0500', 'clock', '','Journey to L2:')
+  countdown('Dec 25 2021 07:20:00 GMT-0500', 'clock', '','Journey to L2:')
 
 ///////////////////////////////// END CLOCK ///////////////////////////////
 
