@@ -768,7 +768,8 @@ const getRemainingTime = deadline => {
   const countdown = (deadline,elem,finalMessage, name) => {
     const el = document.getElementById(elem);
     const daysTraveled = document.getElementById('Days traveled');
-    // const distanceTravelend = document.getElementById('Distance traveled');
+    const distanceTravelend = document.getElementById('Distance traveled');
+    let distanceKm= 0;
   
     setInterval( () => {
       let t = getRemainingTime(deadline);
@@ -782,6 +783,9 @@ const getRemainingTime = deadline => {
       
       `;
       daysTraveled.innerHTML = `${t.remainDays} days and ${t.remainHours} hours`
+      distanceKm = 50000 * t.remainDays;
+      distanceTravelend.innerHTML = `${distanceKm} Km traveled
+      the last day`
     }, 1000)
     setInterval( () => {
     let j = getRemainingTime(deadline);
