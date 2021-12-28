@@ -788,8 +788,11 @@ const getRemainingTime = deadline => {
     }, 1000)
     setInterval( () => {
     let j = getRemainingTime(deadline);
-    circlePo.position.z = 12 - (j.remainDays * 0.816);
-    obj3.position.z = 12 - (j.remainDays * 0.816);
+    if(circlePo.position && obj3){
+        circlePo.position.z = 12 - (j.remainDays * 0.816);
+        obj3.position.z = 12 - (j.remainDays * 0.816);
+    }
+   
     }, 5)
 
   };
