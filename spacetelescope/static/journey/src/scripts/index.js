@@ -657,7 +657,7 @@ document.getElementById("timeOut").addEventListener("click", () => {
 
 
 })
-var distance = true;
+//var distance = true;
 document.getElementById('statistics').style.visibility = 'visible';
 document.getElementById('pointL2').style.visibility = 'visible';
 document.getElementById('timeNone').classList.add('d-none');
@@ -784,12 +784,11 @@ const getRemainingTime = deadline => {
       `;
       daysTraveled.innerHTML = `${t.remainDays} days and ${t.remainHours} hours`
       distanceKm = 50000 * t.remainDays;
-      distanceTravelend.innerHTML = `${distanceKm} Km traveled
-      the last day`
+      distanceTravelend.innerHTML = `${distanceKm} Kms`
     }, 1000)
     setInterval( () => {
     let j = getRemainingTime(deadline);
-    if (circlePo.position.z > (20 - (j.remainDays * 0.816))&& distance == true) {
+    if (circlePo.position.z > (12 - (j.remainDays * 0.816))) {
         circlePo.position.z -= 0.02;
         obj3.position.z -= 0.02;
 
