@@ -804,7 +804,6 @@ const getRemainingTime = deadline => {
             if (arr[mid].elapsedSeconds===x){
               distanceKmMin = arr[mid].distanceTravelledKm;
               distanceKmMax = arr[mid+1].distanceTravelledKm;
-              distanceKm = 0;
               distanceKm = arr[mid].distanceTravelledKm;
               return true
             }else{
