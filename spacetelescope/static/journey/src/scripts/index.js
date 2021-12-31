@@ -817,10 +817,10 @@ const getRemainingTime = deadline => {
         return false
       }
       if(iterativeFunction(data.flightData, secondsTraveled, 0, data.flightData.length-1)){
-        distanceTraveled.innerHTML = `${numberWithCommas(distanceKm.toFixed(2))} Kms`
+        distanceTraveled.innerHTML = `${numberWithCommas(distanceKm.toFixed(2))} km`
       }else{
         distanceKm = (distanceKm * 1) +  ((distanceKmMax-distanceKmMin)/3600)
-        distanceTraveled.innerHTML = `${numberWithCommas(distanceKm.toFixed(2))} Kms`
+        distanceTraveled.innerHTML = `${numberWithCommas(distanceKm.toFixed(2))} km`
       }
     }, 1000)
     setInterval( () => {
