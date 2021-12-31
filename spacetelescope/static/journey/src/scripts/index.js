@@ -768,9 +768,6 @@ const getRemainingTime = deadline => {
       remainTime
     }
   };
-  var distanceKmMin = 0;
-  var distanceKmMax = 0;
-  var distanceKm = 0;
 
   function numberWithCommas(x) {
      var parts = x.toString().split(".");
@@ -796,29 +793,29 @@ const getRemainingTime = deadline => {
       daysTraveled.innerHTML = `${t.remainDays} days and ${t.remainHours} hours`
       var secondsTraveled = (t.remainDays * 86400) + (t.remainHours * 3600) + (t.remainMinutes * 60) + (t.remainSeconds * 1)
 
-      //Binary search to
-      let iterativeFunction = function (arr, x) {
-        let start=0, end=arr.length-1;
-        while (start<=end){
-            let mid=Math.floor((start + end)/2);
-            if (arr[mid].elapsedSeconds===x){
-              distanceKmMin = arr[mid].distanceTravelledKm;
-              distanceKmMax = arr[mid+1].distanceTravelledKm;
-              distanceKm = arr[mid].distanceTravelledKm;
-              return true
-            }else{
-              if (arr[mid].elapsedSeconds < x)
-                 start = mid + 1;
-              else
-                   end = mid - 1;
-            }
-        }
-        return false
-      }
-      if(iterativeFunction(data.flightData, secondsTraveled, 0, data.flightData.length-1)){
+      var closest = data.flightData.reduce((prev, curr) => {
+        return (Math.abs(curr.elapsedSeconds - secondsTraveled) < Math.abs(prev.elapsedSeconds - secondsTraveled) ? curr : prev);
+      });
+
+      var currentData
+      var futureData
+      var kmPerSecond
+      var sgDiference
+      var distanceKm
+
+      if((secondsTraveled-closest.elapsedSeconds)<0){
+        currentData = data.flightData[data.flightData.indexOf(closest)-1]
+        futureData = data.flightData[data.flightData.indexOf(closest)]
+        kmPerSecond = ((futureData.distanceTravelledKm - currentData.distanceTravelledKm) / 3600);
+        sgDiference = secondsTraveled - currentData.elapsedSeconds
+        distanceKm = currentData.distanceTravelledKm + (kmPerSecond * sgDiference)
         distanceTraveled.innerHTML = `${numberWithCommas(distanceKm.toFixed(2))} km`
       }else{
-        distanceKm = (distanceKm * 1) +  ((distanceKmMax-distanceKmMin)/3600)
+        currentData = data.flightData[data.flightData.indexOf(closest)]
+        futureData = data.flightData[data.flightData.indexOf(closest)+1]
+        kmPerSecond = ((futureData.distanceTravelledKm - currentData.distanceTravelledKm) / 3600);
+        sgDiference = secondsTraveled - currentData.elapsedSeconds
+        distanceKm = currentData.distanceTravelledKm + (kmPerSecond * sgDiference)
         distanceTraveled.innerHTML = `${numberWithCommas(distanceKm.toFixed(2))} km`
       }
     }, 1000)
