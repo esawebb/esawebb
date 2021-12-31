@@ -71,5 +71,7 @@
     "raw-loader": "^4.0.2",
     "three": "^0.135.0",
     "webpack-glsl-loader": "^1.0.1"
-  }
+  },
+  "homepage": "https://github.com/wbkd/webpack-starter#readme",
+  "main": "postcss.config.js"
 }
