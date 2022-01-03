@@ -101,7 +101,7 @@
       <a id="zoomTwo" type="button" onclick="" class="text-white mx-xl-1">
           <ion-icon name="remove" size="large"></ion-icon>
       </a> -->
-        <a id="rotationModel" type="button" onclick="" class="stop mx-auto text-white"
+        <a id="rotationModel" onclick="" class="stop mx-auto text-white"
           style="display: none;display: none;">
           <ion-icon id="zoom" name="pause" size="large"></ion-icon>
         </a>
@@ -167,7 +167,7 @@
             worldwide.</p>
 
           <p>Webb carries a suite of state-of-the-art astronomical instruments capable of addressing a very broad
-            range of outstanding questions in astrophysics. The instrument complement includes powerful cameras, 
+            range of outstanding questions in astrophysics. The instrument complement includes powerful cameras,
             coronagraphs, and spectrographs that will provide scientists with the data they need to analyse the
             materials that make up stars, nebulae, galaxies and the atmospheres of planets.</p>
 
@@ -370,28 +370,28 @@
     <section id="blog" class="container" style="position:relative;">
       <div class="row mt-5">
         <h4 class="col-12 my-5 text-white text-center"><strong>What's New</strong></h4>
-        
-          <div class="col-12 col-xl-4 mb-4 ">
-              <div class="text-white text-center">
-                <h6>NASA/ESA/CSA Blog</h6>
-              </div>
-              <div class="card mx-auto mt-5">
-                <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
-                  <img src="{% static 'journey/src/blogLogo.jpg' %}" class="img-fluid rounded" />
-                  <a href="https://blogs.nasa.gov/webb/">
-                    <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
-                  </a>
-                </div>
-                <div class="card-body ">
-                  <h6 id="titleFeed" class="card-title "></h6>
-                  <br>
-                  <p id="descriptionFeed" class="card-text text-start form-text text-dark">
 
-                  </p>
-                  <a href="https://blogs.nasa.gov/webb/" class="btn btn-light border">Read more</a>
-                </div>
-              </div>
+        <div class="col-12 col-xl-4 mb-4 ">
+          <div class="text-white text-center">
+            <h6>NASA/ESA/CSA Blog</h6>
           </div>
+          <div class="card mx-auto mt-5">
+            <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
+              <img src="{% static 'journey/src/blogLogo.jpg' %}" class="img-fluid rounded" />
+              <a href="https://blogs.nasa.gov/webb/">
+                <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
+              </a>
+            </div>
+            <div class="card-body ">
+              <h6 id="titleFeed" class="card-title "></h6>
+              <br>
+              <p id="descriptionFeed" class="card-text text-start form-text text-dark">
+
+              </p>
+              <a href="https://blogs.nasa.gov/webb/" class="btn btn-light border">Read more</a>
+            </div>
+          </div>
+        </div>
 
 
         <div class="col-12 col-xl-4 mb-4 ">
@@ -417,8 +417,8 @@
             </div>
           </div>
         </div>
-        
-          
+
+
         <div class="col-12  col-xl-4 mb-4 ">
           <div class="text-white text-center">
             <h5>ESA/Hubble/JWST Science Newsletter</h5>
@@ -436,13 +436,13 @@
               <br>
               <p class="card-text text-start form-text text-dark">
                 This has been a good week! In spite of the resurgence of COVID and its fast-moving Omicron variant,
-                as we approach the Holiday season we have many reasons  to celebrate.
+                as we approach the Holiday season we have many reasons to celebrate.
               </p>
               <a href="https://esahubble.org/newsletters/science/html/476/" class="btn btn-light border">Read more</a>
             </div>
           </div>
         </div>
-          
+
 
       </div>
     </section>
@@ -478,15 +478,35 @@
         </div>
 
       </div>
-      <h6 class="mb-5 text-white text-center"> Learn more at <a class="text-white"
-        href="https://www.esa.int/">esa.int</a></h6>
+      <h6 class="mb-1 text-white text-center"> Learn more at <a class="text-white"
+          href="https://www.esa.int/">esa.int</a></h6>
     </section>
     <!----------------------- end social networks ------------------------------------>
 
+    <div class="container animated" style="visibility: visible; animation-name: fadeIn;">
+
+      <div class="row">
+        <div class="col-md-12 col-sm-12 center-col text-center">
+          <a href="https://www.facebook.com/ESAWebb/" class="btn social-icon button text-white text-decoration-none" data-abc="true">
+            <ion-icon name="logo-facebook" size="large"></ion-icon>
+          </a>
+          <a href="https://www.instagram.com/esawebb/" class="btn social-icon button text-white text-decoration-none" data-abc="true">
+            <ion-icon name="logo-instagram" size="large"></ion-icon>
+          </a>
+          <a href="https://twitter.com/ESA_Webb" class="btn social-icon button text-white text-decoration-none" data-abc="true">
+            <ion-icon name="logo-twitter" size="large"></ion-icon>
+          </a>
+          <a href="https://youtube.com/playlist?list=PLYkdISzMpKQoYb65baAvLV3Nc5z70uJ0w" class="btn social-icon button text-white text-decoration-none" data-abc="true">
+            <ion-icon name="logo-youtube" size="large"></ion-icon>
+          </a>
+        </div>
+      </div>
+
+    </div>
     <!----------------------- credits ------------------------------------>
-    <div id="credits" class="container-fluid my-5">
+    <div id="credits" class="container my-5">
       <div class="row mb-1" style="height: 220px;">
-        <div class="col-12 mx-3 text-white text-center">
+        <div class="col-12 text-white text-center">
           <div class="text-secondary">
             <h5>Credits</h5>
           </div>
@@ -553,14 +573,14 @@
               <source src="{% static 'journey/src/media/audio.ogg' %}" type="audio/ogg">
             </audio>
 
-            <a type="button" class="text-white mx-xl-1" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+            <a class="text-white mx-xl-1 text-decoration-none" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
               <ion-icon id="help-icon" name="help-circle-outline" size="large"></ion-icon>
             </a>
 
-            <a id="playPauseBTN" type="button" onclick="playPause()" class="text-white ">
+            <a id="playPauseBTN" onclick="playPause()" class="text-white text-decoration-none">
               <ion-icon id="mute-icon" name="volume-off" size="large"></ion-icon>
             </a>
-            <a id="mailto" href="mailto:info@esawebb.org" type="button" onclick="" class="text-white mx-xl-1">
+            <a id="mailto" href="mailto:info@esawebb.org" onclick="" class="text-white mx-xl-1 text-decoration-none">
               <ion-icon id="mail" name="mail" size="large"></ion-icon>
             </a>
 
