@@ -78,3 +78,10 @@ sass:
 
 youtube-token:
 	docker exec -it webb python ./scripts/youtube-token.py
+
+npm-init:
+	npm install --prefix spacetelescope/static/journey
+
+npm-build:
+	npm start --prefix spacetelescope/static/journey
+
