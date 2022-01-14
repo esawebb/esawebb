@@ -3,7 +3,7 @@
 
 <ul class="nav navbar-nav ml-auto">
 {% for entry in submenu %}
-<li{% if entry.leaf_selected or entry.selected %} class="nav-item activate{% if entry.leaf_selected %} {% endif %}"{% endif %}><a href="{{ entry.link|default:"#" }}"{% if entry.on_click %} target="_blank"{% endif %}>{% trans entry.title|safe %}{% if entry.children|length %}<span class="fa fa-angle-down level0-children-arrows"></span>{% endif %}</a>
+<li{% if entry.leaf_selected or entry.selected %} class="nav-item dropdown active{% if entry.leaf_selected %} {% endif %}"{% endif %}><a href="{{ entry.link|default:"#" }}"{% if entry.on_click %} target="_blank"{% endif %}>{% trans entry.title|safe %}{% if entry.children|length %}<span class="fa fa-angle-down level0-children-arrows"></span>{% endif %}</a>
     {% if entry.children|length %}
     <div class="level1-wrapper">
         <div class="level1{% for child in entry.children %}{% if child.selected or child.leaf_selected %} current{% endif %}{% endfor %}">
