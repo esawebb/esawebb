@@ -496,7 +496,7 @@ loader.load(model2, function (gltf) {
     obj3.position.set(0, -1.2, 19.95);
     obj3.rotation.z = 0
     obj3.rotation.x = 0
-    obj3.scale.set(0.001, 0.001, 0.001)
+    obj3.scale.set(0.0005, 0.0005, 0.0005)
     scene3.add(obj3);
 });
 var light3 = new THREE.AmbientLight(0xffffff);
@@ -820,8 +820,8 @@ const countdown = (deadline,elem,finalMessage, name) => {
     setInterval( () => {
     let j = getRemainingTime(deadline);
     if(circlePo.position && obj3){
-        circlePo.position.z = 12 - (j.remainDays * 0.816);
-        obj3.position.z = 12 - (j.remainDays * 0.816);
+        circlePo.position.z = 13.9 - (j.remainDays * 0.816);
+        obj3.position.z = 14 - (j.remainDays * 0.816);
     }
    
     }, 5)
