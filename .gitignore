@@ -5,6 +5,7 @@
 temp/
 local/
 .DS_Store
+config/
 
 # coverage related files/folders
 htmlcov/*
