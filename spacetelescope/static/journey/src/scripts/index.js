@@ -820,8 +820,8 @@ const countdown = (deadline,elem,finalMessage, name) => {
     setInterval( () => {
     let j = getRemainingTime(deadline);
     if(circlePo.position && obj3){
-        circlePo.position.z = 13.9 - (j.remainDays * 0.816);
-        obj3.position.z = 14 - (j.remainDays * 0.816);
+        circlePo.position.z = 15.9 - (j.remainDays * 0.816);
+        obj3.position.z = 16 - (j.remainDays * 0.816);
     }
    
     }, 5)
