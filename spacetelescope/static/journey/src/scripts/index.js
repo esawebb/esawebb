@@ -493,10 +493,10 @@ scene3.add(circlePlanet);
 var obj3;
 loader.load(model2, function (gltf) {
     obj3 = gltf.scene;
-    obj3.position.set(0, -0.8, 19.95);
+    obj3.position.set(0, -0.6, 19.95);
     obj3.rotation.z = 0
     obj3.rotation.x = 0
-    obj3.scale.set(0.0005, 0.0005, 0.0005)
+    obj3.scale.set(0.0004, 0.0004, 0.0004)
     scene3.add(obj3);
 });
 var light3 = new THREE.AmbientLight(0xffffff);
@@ -818,10 +818,12 @@ const countdown = (deadline,elem,finalMessage, name) => {
       }
     }, 1000)
     setInterval( () => {
-    let j = getRemainingTime(deadline);
+    //let j = getRemainingTime(deadline);
     if(circlePo.position && obj3){
-        circlePo.position.z = 16.9 - (j.remainDays * 0.816);
-        obj3.position.z = 17 - (j.remainDays * 0.816);
+        // circlePo.position.z = 17.9 - (j.remainDays * 0.816);
+        // obj3.position.z = 18 - (j.remainDays * 0.816);
+        circlePo.position.z = -4.2;
+        obj3.position.z =-4.2;
     }
    
     }, 5)
