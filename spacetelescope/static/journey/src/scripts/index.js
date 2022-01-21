@@ -493,10 +493,10 @@ scene3.add(circlePlanet);
 var obj3;
 loader.load(model2, function (gltf) {
     obj3 = gltf.scene;
-    obj3.position.set(0, -1.2, 19.95);
+    obj3.position.set(0, -0.6, 19.95);
     obj3.rotation.z = 0
     obj3.rotation.x = 0
-    obj3.scale.set(0.0005, 0.0005, 0.0005)
+    obj3.scale.set(0.0004, 0.0004, 0.0004)
     scene3.add(obj3);
 });
 var light3 = new THREE.AmbientLight(0xffffff);
