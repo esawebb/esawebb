@@ -5,8 +5,6 @@
 temp/
 local/
 .DS_Store
-config/
-spacetelescope/settings/prod.py
 
 # coverage related files/folders
 htmlcov/*

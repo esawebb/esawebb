@@ -942,6 +942,5 @@ function animate() {
     //obj2.position.x = - Math.cos(elapsedTime /3) * 4;
     //obj2.position.z = Math.sin(elapsedTime /3) * 1.2
 
-
 }
 animate()

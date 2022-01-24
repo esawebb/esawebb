@@ -19,9 +19,9 @@ x-common: &common
     EMAIL_USER:
     EMAIL_PASSWORD:
   volumes:
-    - /mnt/volume_nyc1_02/web/media:/home/webbadmstaging/media
-    - /mnt/volume_nyc1_02/web/import:/home/webbadmstaging/import
-    - /mnt/volume_nyc1_02/web/tmp:/home/webbadmstaging/tmp
+    - /mnt/volume_fra1_01/web/media:/home/webbadm/media
+    - /mnt/volume_fra1_01/web/import:/home/webbadm/import
+    - /mnt/volume_fra1_01/web/tmp:/home/webbadm/tmp
     # The SSH key and known_hosts is required to push files to CDN77 Storage, See README
     - ./config/.ssh:/home/webbadm/.ssh
     - ./config/youtube:/home/webbadm/config/youtube
@@ -33,7 +33,7 @@ services:
       - ./config/nginx-prod/nginx.conf:/etc/nginx/nginx.conf:ro
       - ./config/nginx-prod/conf.d:/etc/nginx/conf.d:ro
       - ./config/nginx-common/snippets:/etc/nginx/snippets:ro
-      - /mnt/volume_nyc1_02/web/media:/home/webbadmstaging/media:ro
+      - /mnt/volume_fra1_01/web/media:/home/webbadm/media:ro
     ports:
       - "80:80"
 
