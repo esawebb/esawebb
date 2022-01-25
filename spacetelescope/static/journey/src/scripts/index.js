@@ -429,23 +429,6 @@ controls2.update();
 // //-------------------------------scene 3---------------------------------------------------------
 
 
-
-// ////////////////////// circle hubble start
-// const geometry3 = new THREE.CircleGeometry(0.03, 32);
-// const material3 = new THREE.MeshBasicMaterial({ color: 0xffffff });
-// const circle3 = new THREE.Mesh(geometry3, material3);
-// circle3.position.x = -1.8
-// circle3.position.y = 0.3
-// scene3.add(circle3);
-
-// ////////////////////// circle moon start
-// const geometry2 = new THREE.CircleGeometry(0.03, 32);
-// const material2 = new THREE.MeshBasicMaterial({ color: 0xffffff });
-// const circle2 = new THREE.Mesh(geometry2, material2);
-// circle2.position.x = -1.8
-// circle2.position.y = 0
-// scene3.add(circle2);
-
 ////////////////////// circle L2 start
 const geometryL2 = new THREE.SphereGeometry(0.05, 32, 16);
 const materialL2 = new THREE.MeshBasicMaterial({ color: 0xffffff });
@@ -500,30 +483,6 @@ loader.load(model2, function (gltf) {
 var light3 = new THREE.AmbientLight(0xffffff);
 scene3.add(light3);
 
-// ////////////////////// Hubble
-// const geometryHubblePosition = new THREE.PlaneGeometry(0.4, 0.4);
-// const materialHubblePosition = new THREE.MeshBasicMaterial({ color: 0xffffff, map: new THREE.TextureLoader().load(imageHubble), });
-// const circleHubblePosition = new THREE.Mesh(geometryHubblePosition, materialHubblePosition);
-// circleHubblePosition.position.x = -0.9
-// circleHubblePosition.position.y = 0.3
-// scene3.add(circleHubblePosition);
-
-// //sphere moon
-// const sphere2 = new THREE.Mesh(new THREE.SphereGeometry(0.5, 50, 50),
-//     new THREE.ShaderMaterial({
-//         vertexShader: vertexShaderMoon,
-//         fragmentShader: fragmentShaderMoon,
-//         uniforms: {
-//             globeTexture: {
-//                 value: new THREE.TextureLoader().load(imageMoon)
-//             }
-//         }
-
-//     })
-// )
-// scene3.add(sphere2)
-// sphere2.position.z = -9
-// sphere2.position.x = -15
 
 ////////////////// line L2
 const material = new THREE.LineBasicMaterial({
@@ -572,47 +531,6 @@ const pointsLine = [
     }
 
 ]
-// ////////////////// line Moon
-// const materialMoon = new THREE.LineBasicMaterial({
-//     color: 0xffffff
-// });
-// const pointsMoon = [];
-// pointsMoon.push(new THREE.Vector3(-1.8, 0, 0));
-// pointsMoon.push(new THREE.Vector3(-0.5, 0, 0));
-// const geometryMoon = new THREE.BufferGeometry().setFromPoints(pointsMoon);
-// const lineMoon = new THREE.Line(geometryMoon, materialMoon);
-// scene3.add(lineMoon);
-
-
-// ////////////////// line Hubble
-// const materialHubble = new THREE.LineBasicMaterial({
-//     color: 0xffffff
-// });
-// const pointsHubble = [];
-// pointsHubble.push(new THREE.Vector3(-1.8, 0.3, 0));
-// pointsHubble.push(new THREE.Vector3(-1.3, 0.3, 0));
-// const geometryHubble = new THREE.BufferGeometry().setFromPoints(pointsHubble);
-// const lineHubble = new THREE.Line(geometryHubble, materialHubble);
-// scene3.add(lineHubble);
-
-
-// ////////////////////// cone hubble
-// const geometryConeHubble = new THREE.ConeGeometry(0.05, 0.1, 32);
-// const materialConeHubble = new THREE.MeshBasicMaterial({ color: 0xffffff });
-// const coneHubble = new THREE.Mesh(geometryConeHubble, materialConeHubble);
-// coneHubble.rotation.z = -1.55
-// coneHubble.position.x = - 1.3
-// coneHubble.position.y = 0.3
-// scene3.add(coneHubble);
-
-// ////////////////////// cone Moon
-// const geometryConeMoon = new THREE.ConeGeometry(0.05, 0.1, 32);
-// const materialConeMoon = new THREE.MeshBasicMaterial({ color: 0xffffff });
-// const coneMoon = new THREE.Mesh(geometryConeMoon, materialConeMoon);
-// coneMoon.rotation.z = -1.55
-// coneMoon.position.x = - 0.5
-// coneMoon.position.y = 0
-// scene3.add(coneMoon);
 
 const controls3 = new OrbitControls(camera, renderer3.domElement);
 controls3.enableZoom = false;
@@ -667,56 +585,6 @@ for (const pointLine of pointsLine) {
 camera.position.x = 3.049999999999994;
 camera.position.z = -6.140000000000022;
 
-// let animated = document.getElementById("timeline")
-// let animatedOn = false;
-// document.getElementById('timeNone').classList.add('d-none');
-
-// function animatedScroll() {
-//     if (animatedOn == false) {
-//         let scrollTop = document.documentElement.scrollTop;
-//         let heightAnimated = animated.offsetTop;
-//         if (heightAnimated < scrollTop + 5) {
-//             setTimeout(() => {
-//                 camera.position.z = 8;
-//                 distance = true;
-//                 document.getElementById('statistics').style.visibility = 'visible';
-//                 document.getElementById('pointL2').style.visibility = 'visible';
-//                 for (const pointLine of pointsLine) {
-//                     pointLine.element.classList.add('visible')
-//                 }
-//                 animatedOn = true;
-//             }, 1000);
-//         }
-//     }
-// }
-
-// window.addEventListener('scroll', animatedScroll);
-
-
-
-// document.getElementById("distance").addEventListener("click", () => {
-
-//     var playTimeOut = document.getElementById('distance');
-
-//     if (distance == true) {
-//         distance = false;
-//         playTimeOut.innerHTML = `<ion-icon name="play" size="large"></ion-icon>`;
-
-
-//     } else {
-//         camera.position.z = 8;
-//         distance = true;
-//         document.getElementById('timeNone').classList.add('d-none');
-//         document.getElementById('statistics').style.visibility = 'visible';
-//         document.getElementById('pointL2').style.visibility = 'visible';
-//         for (const pointLine of pointsLine) {
-//             pointLine.element.classList.add('visible')
-//         }
-//     }
-
-
-// })
-
 var rotationModel = true;
 for (const pointModel of pointsModel) {
     pointModel.element.classList.remove('visible')
@@ -765,11 +633,7 @@ const getRemainingTime = deadline => {
         remainTime
     }
 };
-// function numberWithCommas(x) {
-//     var parts = x.toString().split(".");
-//     parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, " ");
-//     return parts.join(".");
-// }
+
 //const countdown = (deadline,elem,finalMessage, name) => {
 const countdown = (deadline) => {
     //const el = document.getElementById(elem);
@@ -778,52 +642,16 @@ const countdown = (deadline) => {
 
     setInterval( () => {
       let t = getRemainingTime(deadline);
-    //   el.innerHTML = `
-    //   <p class="d-inline ">${name} </p>              
-    //   <p class="d-inline cardCountdown"> ${t.remainDays}d</p>
-    //   <p class="d-inline cardCountdown"> ${t.remainHours}h</p>
-    //   <p class="d-inline cardCountdown"> ${t.remainMinutes}m</p>
-    //   <p class="d-inline cardCountdown"> ${t.remainSeconds}s</p>
-    //   `;
+
         if (t != null){
             daysTraveled.innerHTML = `${t.remainDays} days and ${t.remainHours} hours`
             distanceTraveled.innerHTML = `1.5 million kilometres`
             
         }
-      
-    //  var secondsTraveled = (t.remainDays * 86400) + (t.remainHours * 3600) + (t.remainMinutes * 60) + (t.remainSeconds * 1)
 
-    //   var closest = data.flightData.reduce((prev, curr) => {
-    //     return (Math.abs(curr.elapsedSeconds - secondsTraveled) < Math.abs(prev.elapsedSeconds - secondsTraveled) ? curr : prev);
-    //   });
-
-    //   var currentData
-    //   var futureData
-    //   var kmPerSecond
-    //   var sgDiference
-    //   var distanceKm
-
-    //   if((secondsTraveled-closest.elapsedSeconds)<0){
-    //     currentData = data.flightData[data.flightData.indexOf(closest)-1]
-    //     futureData = data.flightData[data.flightData.indexOf(closest)]
-    //     kmPerSecond = ((futureData.distanceTravelledKm - currentData.distanceTravelledKm) / 3600);
-    //     sgDiference = secondsTraveled - currentData.elapsedSeconds
-    //     distanceKm = currentData.distanceTravelledKm + (kmPerSecond * sgDiference)
-    //     distanceTraveled.innerHTML = `${numberWithCommas(distanceKm.toFixed(2))} km`
-    //   }else{
-    //     currentData = data.flightData[data.flightData.indexOf(closest)]
-    //     futureData = data.flightData[data.flightData.indexOf(closest)+1]
-    //     kmPerSecond = ((futureData.distanceTravelledKm - currentData.distanceTravelledKm) / 3600);
-    //     sgDiference = secondsTraveled - currentData.elapsedSeconds
-    //     distanceKm = currentData.distanceTravelledKm + (kmPerSecond * sgDiference)
-    //     distanceTraveled.innerHTML = `${numberWithCommas(distanceKm.toFixed(2))} km`
-    //   }
     }, 1000)
     setInterval( () => {
-    //let j = getRemainingTime(deadline);
     if(circlePo.position && obj3){
-        // circlePo.position.z = 17.9 - (j.remainDays * 0.816);
-        // obj3.position.z = 18 - (j.remainDays * 0.816);
         circlePo.position.z = -4.5;
         obj3.position.z =-4.5;
     }
@@ -837,6 +665,7 @@ countdown('Dec 25 2021 07:20:00 GMT-0500', 'clock', '', 'Journey to L2:')
 
 ///////////////////////////////// END CLOCK ///////////////////////////////
 
+
 function animate() {
     requestAnimationFrame(animate)
     const elapsedTime = clock.getElapsedTime()
@@ -846,61 +675,42 @@ function animate() {
 
     renderer.setSize(sizes.width, sizes.height)
     renderer.render(scene, camera1)
-    // renderer2.setSize(sizes.width, sizes.height)
-    // renderer2.render(scene2, camera2)
+    renderer2.setSize(sizes.width, sizes.height)
+    renderer2.render(scene2, camera2)
     renderer3.setSize(sizes.width, sizes.height)
     renderer3.render(scene3, camera)
 
     if (sphere) {
         sphere.rotation.y += 0.002;
+        sphereSun.rotation.y += 0.001;
+        particles.rotation.y += 0.001;
     }
     if (circlePlanet) {
         circlePlanet.rotation.y += 0.001;
     }
 
-    // if (circlePo.position.z > -1 && distance == true) {
-    //     circlePo.position.z -= 0.02;
-    //     obj3.position.z -= 0.02;
-
-    // }
     if (obj2) {
         obj2.position.y = Math.cos(elapsedTime / 2) * 2;
         obj2.position.z = Math.sin(elapsedTime / 2) * 2;
     }
-
-
-
-    // if (camera.position.x < 5 && distance == true) {
-    //     camera.position.x += 0.05;
-    //     camera.position.z -= 0.14;
-    // }
-
-    // if (camera.position.x > 3 && distance == false) {
-    //     camera.position.x -= 0.05;
-    //     camera.position.z += 0.14;
-    // }
-
-
-
-
-
-    // if (camera2.position.x < 20 && timeOut == true) {
-    //     camera2.position.x += 0.1;
-    //     camera2.position.z -= 0.06;
-    //     camera2.position.y = 0
-    // }
-
-    // if (camera2.position.x > 0 && timeOut == false) {
-    //     camera2.position.x -= 0.1;
-    //     camera2.position.z += 0.06;
-    //     camera2.position.y = 12
-    // }
 
     if (rotationModel == true) {
         if (obj) {
             obj.rotation.y += 0.002;
         }
         //obj.position.z = Math.sin(elapsedTime/2) * 0.5;
+    }
+
+    if (camera2.position.x < 20 && timeOut == true) {
+        camera2.position.x += 0.1;
+        camera2.position.z -= 0.06;
+        camera2.position.y = 0
+    }
+
+    if (camera2.position.x > 0 && timeOut == false) {
+        camera2.position.x -= 0.1;
+        camera2.position.z += 0.06;
+        camera2.position.y = 12
     }
 
     controls.update()
@@ -926,24 +736,7 @@ function animate() {
         pointLine.element.style.transform = `translateX(${translateLineX}px) translateY(${translateLineY}px)`
 
     }
-    // if (cursor.y>0.05){
-    //     obj.rotation.x += 0.001;
-    // } else if (cursor.y<-0.05){
-    //     obj.rotation.x -= 0.001;
-    // }
 
-    // obj.rotation.y += 0.001;
-    // obj.position.z = Math.sin(elapsedTime/2) * 0.5;
-
-    // sphere2.position.x = Math.cos(elapsedTime / 3) * 1.1;
-    // sphere2.position.z = Math.sin(elapsedTime / 3) * 1.1;
-
-    // camera2.position.x = Math.cos(elapsedTime / 10) * 4
-    // camera2.position.z = Math.sin(elapsedTime / 10) * 4
-
-    //obj2.rotation.y -= 0.004;
-    //obj2.position.x = - Math.cos(elapsedTime /3) * 4;
-    //obj2.position.z = Math.sin(elapsedTime /3) * 1.2
 
 }
 animate()
