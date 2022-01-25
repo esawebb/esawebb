@@ -770,24 +770,27 @@ const getRemainingTime = deadline => {
 //     parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, " ");
 //     return parts.join(".");
 // }
-
-const countdown = (deadline,elem,finalMessage, name) => {
-    const el = document.getElementById(elem);
+//const countdown = (deadline,elem,finalMessage, name) => {
+const countdown = (deadline) => {
+    //const el = document.getElementById(elem);
     const daysTraveled = document.getElementById('Days traveled');
     const distanceTraveled = document.getElementById('Distance traveled');
 
     setInterval( () => {
       let t = getRemainingTime(deadline);
-      el.innerHTML = `
-      <p class="d-inline ">${name} </p>              
-      <p class="d-inline cardCountdown"> ${t.remainDays}d</p>
-      <p class="d-inline cardCountdown"> ${t.remainHours}h</p>
-      <p class="d-inline cardCountdown"> ${t.remainMinutes}m</p>
-      <p class="d-inline cardCountdown"> ${t.remainSeconds}s</p>
-      `;
-
-      daysTraveled.innerHTML = `${t.remainDays} days and ${t.remainHours} hours`
-      distanceTraveled.innerHTML = `1.5 million kilometres`
+    //   el.innerHTML = `
+    //   <p class="d-inline ">${name} </p>              
+    //   <p class="d-inline cardCountdown"> ${t.remainDays}d</p>
+    //   <p class="d-inline cardCountdown"> ${t.remainHours}h</p>
+    //   <p class="d-inline cardCountdown"> ${t.remainMinutes}m</p>
+    //   <p class="d-inline cardCountdown"> ${t.remainSeconds}s</p>
+    //   `;
+        if (t != null){
+            daysTraveled.innerHTML = `${t.remainDays} days and ${t.remainHours} hours`
+            distanceTraveled.innerHTML = `1.5 million kilometres`
+            
+        }
+      
     //  var secondsTraveled = (t.remainDays * 86400) + (t.remainHours * 3600) + (t.remainMinutes * 60) + (t.remainSeconds * 1)
 
     //   var closest = data.flightData.reduce((prev, curr) => {
