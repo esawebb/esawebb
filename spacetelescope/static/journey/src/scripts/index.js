@@ -19,7 +19,6 @@ import imageParticle from '../1.png'
 //import imageOrbit from '../orbit.png'
 //import modelbin from '../scene.bin'
 import model from '../model/scene.gltf'
-import model2 from '../scene.gltf'
 
 
 // create scene for model
@@ -27,11 +26,6 @@ const scene = new THREE.Scene()
 
 // create scene for space
 const scene2 = new THREE.Scene()
-
-// create scene for timeline
-const scene3 = new THREE.Scene()
-
-
 
 // Sizes
 const sizes = {
@@ -53,8 +47,8 @@ window.addEventListener('resize', () => {
         camera2.updateProjectionMatrix(),
 
         renderer.setSize(sizes.width, sizes.height),
-        renderer2.setSize(sizes.width, sizes.height),
-        renderer3.setSize(sizes.width, sizes.height)
+        renderer2.setSize(sizes.width, sizes.height)
+       
 })
 
 // // create camera
@@ -97,15 +91,6 @@ renderer2.setClearColor(0x000000, 0);
 renderer2.setSize(sizes.width, sizes.height)
 renderer2.setPixelRatio(window.devicePixelRatio)
 
-// create render por timeline
-const renderer3 = new THREE.WebGLRenderer({
-    antialias: true,
-    canvas: document.getElementById('scene3'),
-    alpha: true
-})
-renderer3.setClearColor(0x000000, 0);
-renderer3.setSize(sizes.width, sizes.height)
-renderer3.setPixelRatio(window.devicePixelRatio)
 
 // //-------------------------------scene ---------------------------------------------------------
 
@@ -429,133 +414,10 @@ controls2.update();
 // //-------------------------------scene 3---------------------------------------------------------
 
 
-////////////////////// circle L2 start
-const geometryL2 = new THREE.SphereGeometry(0.05, 32, 16);
-const materialL2 = new THREE.MeshBasicMaterial({ color: 0xffffff });
-const circleL2 = new THREE.Mesh(geometryL2, materialL2);
-circleL2.position.z = 20
-scene3.add(circleL2);
-
-////////////////////// circle L2 end
-const geometryEnd = new THREE.SphereGeometry(0.05, 32, 16);
-const materialEnd = new THREE.MeshBasicMaterial({ color: 0xffffff });
-const circleEnd = new THREE.Mesh(geometryEnd, materialEnd);
-circleEnd.position.z = -4.5
-scene3.add(circleEnd);
-
-// ////////////////////// circle Po start
-const geometryPo = new THREE.SphereGeometry(0.05, 32, 16);
-const materialPo = new THREE.MeshBasicMaterial({ color: 0xffffff });
-const circlePo = new THREE.Mesh(geometryPo, materialPo);
-circlePo.position.z = 20
-circlePo.position.y = 0
-scene3.add(circlePo);
-
-
-////////////////////// planet start
-const circlePlanet = new THREE.Mesh(new THREE.SphereGeometry(5, 50, 50),
-    new THREE.ShaderMaterial({
-        vertexShader: vertexShaderMoon,
-        fragmentShader: fragmentShaderMoon,
-        uniforms: {
-            globeTexture: {
-                value: new THREE.TextureLoader().load(imageGlobe)
-            }
-        }
-
-    })
-)
-circlePlanet.position.x = 0
-circlePlanet.position.z = 30
-scene3.add(circlePlanet);
-
-////////////////////// JWST 
-//var loader3 = new GLTFLoader();
-var obj3;
-loader.load(model2, function (gltf) {
-    obj3 = gltf.scene;
-    obj3.position.set(0, -0.6, 19.95);
-    obj3.rotation.z = 0
-    obj3.rotation.x = 0
-    obj3.scale.set(0.0004, 0.0004, 0.0004)
-    scene3.add(obj3);
-});
-var light3 = new THREE.AmbientLight(0xffffff);
-scene3.add(light3);
-
-
-////////////////// line L2
-const material = new THREE.LineBasicMaterial({
-    color: 0xffffff
-});
-const points = [];
-points.push(new THREE.Vector3(0, 0, 20));
-points.push(new THREE.Vector3(0, 0, -4.5));
-const geometry = new THREE.BufferGeometry().setFromPoints(points);
-const line = new THREE.Line(geometry, material);
-scene3.add(line);
-
-const pointsLine = [
-    {
-        //                            z   y  x
-        position: new THREE.Vector3(0, 0, 14),
-        element: document.querySelector('.pointLine-0')
-    },
-    {
-        //                            z   y  x
-        position: new THREE.Vector3(0, 0, 10),
-        element: document.querySelector('.pointLine-1')
-    },
-    {
-        //                            z   y  x
-        position: new THREE.Vector3(0, 0, 8),
-        element: document.querySelector('.pointLine-2')
-    },
-    {
-        //                            z   y  x
-        position: new THREE.Vector3(0, 0, 6),
-        element: document.querySelector('.pointLine-3')
-    },
-    {
-        //                            z   y  x
-        position: new THREE.Vector3(0, 0, 3),
-        element: document.querySelector('.pointLine-4')
-    },
-    {
-        position: new THREE.Vector3(0, 0, 2),
-        element: document.querySelector('.pointLine-5')
-    },
-    {
-        position: new THREE.Vector3(0, 0.3, -4.6),
-        element: document.querySelector('.pointLine-L2')
-    }
-
-]
-
-const controls3 = new OrbitControls(camera, renderer3.domElement);
-controls3.enableZoom = false;
-controls3.enableRotate = false;
-controls3.update();
-
-
 const clock = new THREE.Clock()
 
 
-// document.getElementById("zoomOne").addEventListener("click", () => {
-//     camera1.position.z -= 0.5;
-//     camera1.updateProjectionMatrix();
-// })
-
-// document.getElementById("zoomTwo").addEventListener("click", () => {
-//     camera1.position.z += 0.5;
-//     camera1.updateProjectionMatrix();
-// })
-
 var timeOut = false;
-for (const pointLine of pointsLine) {
-    pointLine.element.classList.remove('visible')
-}
-
 
 document.getElementById("timeOut").addEventListener("click", () => {
 
@@ -575,15 +437,6 @@ document.getElementById("timeOut").addEventListener("click", () => {
 
 
 })
-//var distance = true;
-document.getElementById('statistics').style.visibility = 'visible';
-document.getElementById('pointL2').style.visibility = 'visible';
-document.getElementById('timeNone').classList.add('d-none');
-for (const pointLine of pointsLine) {
-    pointLine.element.classList.add('visible')
-}
-camera.position.x = 3.049999999999994;
-camera.position.z = -6.140000000000022;
 
 var rotationModel = true;
 for (const pointModel of pointsModel) {
@@ -638,26 +491,19 @@ const getRemainingTime = deadline => {
 const countdown = (deadline) => {
     //const el = document.getElementById(elem);
     const daysTraveled = document.getElementById('Days traveled');
-    const distanceTraveled = document.getElementById('Distance traveled');
+    //const distanceTraveled = document.getElementById('Distance traveled');
 
     setInterval( () => {
       let t = getRemainingTime(deadline);
 
         if (t != null){
             daysTraveled.innerHTML = `${t.remainDays} days and ${t.remainHours} hours`
-            distanceTraveled.innerHTML = `1.5 million kilometres`
+            //distanceTraveled.innerHTML = `1.5 million kilometres`
             
         }
 
     }, 1000)
-    setInterval( () => {
-    if(circlePo.position && obj3){
-        circlePo.position.z = -4.5;
-        obj3.position.z =-4.5;
-    }
-   
-    }, 5)
-
+ 
   };
 
 
@@ -671,22 +517,18 @@ function animate() {
     const elapsedTime = clock.getElapsedTime()
     controls.update();
     controls2.update();
-    controls3.update();
+    
 
     renderer.setSize(sizes.width, sizes.height)
     renderer.render(scene, camera1)
     renderer2.setSize(sizes.width, sizes.height)
     renderer2.render(scene2, camera2)
-    renderer3.setSize(sizes.width, sizes.height)
-    renderer3.render(scene3, camera)
+ 
 
     if (sphere) {
         sphere.rotation.y += 0.002;
         sphereSun.rotation.y += 0.001;
         particles.rotation.y += 0.001;
-    }
-    if (circlePlanet) {
-        circlePlanet.rotation.y += 0.001;
     }
 
     if (obj2) {
@@ -726,17 +568,6 @@ function animate() {
         pointModel.element.style.transform = `translateX(${translateX}px) translateY(${translateY}px)`
 
     }
-
-    for (const pointLine of pointsLine) {
-        const screenPositionLine = pointLine.position.clone()
-        screenPositionLine.project(camera)
-
-        const translateLineX = screenPositionLine.x * sizes.width * 0.5
-        const translateLineY = - screenPositionLine.y * sizes.height * 0.5
-        pointLine.element.style.transform = `translateX(${translateLineX}px) translateY(${translateLineY}px)`
-
-    }
-
 
 }
 animate()

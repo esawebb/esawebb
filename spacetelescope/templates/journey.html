@@ -254,140 +254,28 @@
 
       </canvas>
       <div class="orbit">
-        <h4>How does the JWST orbit?</h4>
+        <h4>Webb's orbit at L2</h4>
       </div>
-      <div class="timeOut">
-        <a id="timeOut" type="button" onclick="">
-          <ion-icon name="play" size="large"></ion-icon>
-        </a>
-      </div>
-    </section>
-    <!----------------------- end space ------------------------------------>
-
-
-    <!----------------------- timeline ------------------------------------>
-    <section id="timeline" class="container-fluid animated d-none d-md-block" style="position:relative;">
-      <canvas id="scene3">
-
-      </canvas>
-      <div id="timewhere" class="timeline">
-        <h4 id="where">Where is Webb?</h4>
-      </div>
-      <!-- <div class="timeline2">
-      <h5>L2</h5>
-  </div>
-  <div class="hubble-distance">
-      <p>570 km</p>
-  </div>
-  <div class="l2-distance">
-      <p>1.5 million km</p>
-  </div> -->
-      <div id="timeNone" class="distance">
-        <a id="distance" type="button" onclick="">
-          <ion-icon id="distance-help" name="play" size="large"></ion-icon>
-        </a>
-      </div>
-
-      <div class="pointLine pointLine-0 visible">
-        <div style="background: #f7050577;" class="label"></div>
-        <div class="text">
-          Solar Array Deployment
-          <br>Time: 31 minutes from launch
-          <br>Distance: 2,300 km
+      <div id="statistics" class="statistics  row text-center " style="">
+        <div class="col-6 ">
+          <h6>Days since launch:</h6>
         </div>
-
-      </div>
-
-      <div class="pointLine pointLine-1 visible">
-        <div style="background: #f7050577;" class="label"></div>
-        <div class="text">
-          Communications Antenna Deployment
-          <br>Time: 1 day from launch
-          <br>Distance: 215,000 km
+        <div class="col-6 ">
+          <h6 id="Days traveled"></h6>
         </div>
-
-      </div>
-
-      <div class="pointLine pointLine-2 visible">
-        <div style="background: #f7050577;" class="label"></div>
-        <div class="text">
-          JWST crosses mean lunar orbital distance
-          <br>Time: 58.8 Hours from launch
-          <br>Distance: 384,400 km
-        </div>
-      </div>
-
-      <div class="pointLine pointLine-3 visible">
-        <div style="background: #f7050577;" class="label"></div>
-        <div class="text">
-          Sunshield deployment
-          <br>Time: starts at day 3 and ends at day 8 from launch
-          <br>Distance: starts at 436,000 km ends at 775,000 km
-        </div>
-      </div>
-
-      <div class="pointLine pointLine-4 visible">
-        <div style="background: #f7050577;" class="label"></div>
-        <div class="text">
-          Secondary mirror deployment
-          <br>Time: day 10 from launch
-          <br>Distance: 872,000 km
-
-        </div>
-      </div>
-      <div class="pointLine pointLine-5 visible">
-        <div style="background: #f7050577;" class="label"></div>
-        <div class="text">
-          Primary mirror unfolding:
-          <br>Time: starts at day 12, ends at day 15.5.
-          <br>Distance: starts at ~955,000 km, ends at 1,090,000 km.
-        </div>
-
-      </div>
-      <div id="pointL2" class="pointLine pointLine-L2" style="visibility: hidden;">
-        <div class="L2">L2</div>
-      </div>
-
-      <div id="statistics" class="statistics  row text-center " style="visibility: hidden;">
-        <div class="col-6">
-          <h4>Days since launch:</h4>
-        </div>
-        <div class="col-6">
-          <h4 id="Days traveled"></h4>
-        </div>
-        <div class="col-6">
-          <h4>Distance traveled:</h4>
-        </div>
-        <div class="col-6">
-          <h4 id="Distance traveled"></h4>
-        </div>
-        <div class="col-12 text-center">
+        <div class="col-12 text-center ">
           <br>
           <h6>Diagram not to scale</h6>
         </div>
-
       </div>
-    </section>
-    <!----------------------- end space ------------------------------------>
 
-    <!----------------------- space ------------------------------------>
-    <section id="space" class="space container-fluid d-none" style="position:relative;">
-      <canvas id="scene2">
-
-      </canvas>
-      <div class="orbit">
-        <h4>How does the JWST orbit?</h4>
-      </div>
       <div class="timeOut">
         <a id="timeOut" type="button" onclick="">
           <ion-icon name="play" size="large"></ion-icon>
         </a>
       </div>
-
     </section>
     <!----------------------- end space ------------------------------------>
-
-
 
 
     <!----------------------- blog ------------------------------------>
@@ -539,19 +427,38 @@
         <div class="col-md-12 col-sm-12 center-col text-center">
           <a href="https://www.facebook.com/ESAWebb/" class="btn social-icon button text-white text-decoration-none"
             data-abc="true">
-            <ion-icon name="logo-facebook" size="large"></ion-icon>
+            <img
+            src="{% static 'images/facebook.png' %}"
+            alt="Giphy logo" style="width: 32px;"
+            class="" />
           </a>
           <a href="https://www.instagram.com/esawebb/" class="btn social-icon button text-white text-decoration-none"
             data-abc="true">
-            <ion-icon name="logo-instagram" size="large"></ion-icon>
+            <img
+            src="{% static 'images/instagram.png' %}"
+            alt="Giphy logo" style="width: 32px;"
+            class="" />
           </a>
           <a href="https://twitter.com/ESA_Webb" class="btn social-icon button text-white text-decoration-none"
             data-abc="true">
-            <ion-icon name="logo-twitter" size="large"></ion-icon>
+            <img
+            src="{% static 'images/twitter.png' %}"
+            alt="Giphy logo" style="width: 40px;"
+            class="" />
           </a>
           <a href="https://youtube.com/playlist?list=PLYkdISzMpKQoYb65baAvLV3Nc5z70uJ0w"
             class="btn social-icon button text-white text-decoration-none" data-abc="true">
-            <ion-icon name="logo-youtube" size="large"></ion-icon>
+            <img
+            src="{% static 'images/youtube.png' %}"
+            alt="Giphy logo" style="width: 45px;"
+            class="" />
+          </a>
+          <a href="https://giphy.com/esawebb"
+            class="btn social-icon button text-white text-decoration-none" data-abc="true">
+          <img
+            src="{% static 'images/Giphy.png' %}"
+            alt="Giphy logo" style="width: 32px;"
+            class="" />
           </a>
         </div>
       </div>
@@ -1024,7 +931,7 @@
       var n = 0;
       var arrowtop = document.getElementById('arrow-top');
       var arrowdown = document.getElementById('arrow-down');
-      let sectionpage = ["model", "mission", "video", "space", "timeline", "blog", "media", "credits"];
+      let sectionpage = ["model", "mission", "video", "space", "blog", "media", "credits"];
 
       $(document).ready(function () {
 
