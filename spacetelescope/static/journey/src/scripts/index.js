@@ -373,7 +373,7 @@ const particleTexture = textureLoader.load(imageParticle)
 
 // Geometry
 const particlesGeometry = new THREE.BufferGeometry()
-const count = 2000
+const count = 1500
 
 const positions = new Float32Array(count * 3);
 
@@ -528,7 +528,7 @@ function animate() {
     if (sphere) {
         sphere.rotation.y += 0.002;
         sphereSun.rotation.y += 0.001;
-        particles.rotation.y += 0.001;
+        particles.rotation.y += 0.0001;
     }
 
     if (obj2) {
