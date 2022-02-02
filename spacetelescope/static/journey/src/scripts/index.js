@@ -12,7 +12,7 @@ import vertexShaderMoon from '../shaders/vertexMoon.glsl';
 import fragmentShaderMoon from '../shaders/fragmentMoon.glsl';
 import imageGlobe from '../globe.jpeg'
 import imageSun from '../sun.jpeg'
-//import imageMoon from '../moon.jpeg'
+import imageMoon from '../moon.jpeg'
 //import imageJWST from '../jwst.png'
 //import imageHubble from '../hubble.png'
 import imageParticle from '../1.png'
@@ -309,6 +309,22 @@ const sphere = new THREE.Mesh(new THREE.SphereGeometry(1, 100, 100),
 scene2.add(sphere)
 sphere.position.x = 3
 
+//sphere Moon
+const sphereMoon = new THREE.Mesh(new THREE.SphereGeometry(0.2, 100, 100),
+    new THREE.ShaderMaterial({
+        vertexShader: vertexShaderMoon,
+        fragmentShader: fragmentShaderMoon,
+        uniforms: {
+            globeTexture: {
+                value: new THREE.TextureLoader().load(imageMoon)
+            }
+        }
+
+    })
+)
+scene2.add(sphereMoon)
+sphereMoon.position.x = 5
+
 //sphere sun
 const sphereSun = new THREE.Mesh(new THREE.SphereGeometry(4, 100, 100),
     new THREE.ShaderMaterial({
@@ -527,6 +543,7 @@ function animate() {
 
     if (sphere) {
         sphere.rotation.y += 0.002;
+        sphereMoon.rotation.y += 0.01;
         sphereSun.rotation.y += 0.001;
         particles.rotation.y += 0.0001;
     }
