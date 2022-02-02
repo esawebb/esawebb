@@ -12,14 +12,13 @@ import vertexShaderMoon from '../shaders/vertexMoon.glsl';
 import fragmentShaderMoon from '../shaders/fragmentMoon.glsl';
 import imageGlobe from '../globe.jpeg'
 import imageSun from '../sun.jpeg'
-//import imageMoon from '../moon.jpeg'
+import imageMoon from '../moon.jpeg'
 //import imageJWST from '../jwst.png'
 //import imageHubble from '../hubble.png'
 import imageParticle from '../1.png'
 //import imageOrbit from '../orbit.png'
 //import modelbin from '../scene.bin'
 import model from '../model/scene.gltf'
-import model2 from '../scene.gltf'
 
 
 // create scene for model
@@ -27,11 +26,6 @@ const scene = new THREE.Scene()
 
 // create scene for space
 const scene2 = new THREE.Scene()
-
-// create scene for timeline
-const scene3 = new THREE.Scene()
-
-
 
 // Sizes
 const sizes = {
@@ -53,8 +47,8 @@ window.addEventListener('resize', () => {
         camera2.updateProjectionMatrix(),
 
         renderer.setSize(sizes.width, sizes.height),
-        renderer2.setSize(sizes.width, sizes.height),
-        renderer3.setSize(sizes.width, sizes.height)
+        renderer2.setSize(sizes.width, sizes.height)
+       
 })
 
 // // create camera
@@ -97,15 +91,6 @@ renderer2.setClearColor(0x000000, 0);
 renderer2.setSize(sizes.width, sizes.height)
 renderer2.setPixelRatio(window.devicePixelRatio)
 
-// create render por timeline
-const renderer3 = new THREE.WebGLRenderer({
-    antialias: true,
-    canvas: document.getElementById('scene3'),
-    alpha: true
-})
-renderer3.setClearColor(0x000000, 0);
-renderer3.setSize(sizes.width, sizes.height)
-renderer3.setPixelRatio(window.devicePixelRatio)
 
 // //-------------------------------scene ---------------------------------------------------------
 
@@ -324,6 +309,22 @@ const sphere = new THREE.Mesh(new THREE.SphereGeometry(1, 100, 100),
 scene2.add(sphere)
 sphere.position.x = 3
 
+//sphere Moon
+const sphereMoon = new THREE.Mesh(new THREE.SphereGeometry(0.2, 100, 100),
+    new THREE.ShaderMaterial({
+        vertexShader: vertexShaderMoon,
+        fragmentShader: fragmentShaderMoon,
+        uniforms: {
+            globeTexture: {
+                value: new THREE.TextureLoader().load(imageMoon)
+            }
+        }
+
+    })
+)
+scene2.add(sphereMoon)
+sphereMoon.position.x = 5
+
 //sphere sun
 const sphereSun = new THREE.Mesh(new THREE.SphereGeometry(4, 100, 100),
     new THREE.ShaderMaterial({
@@ -388,7 +389,7 @@ const particleTexture = textureLoader.load(imageParticle)
 
 // Geometry
 const particlesGeometry = new THREE.BufferGeometry()
-const count = 2000
+const count = 1500
 
 const positions = new Float32Array(count * 3);
 
@@ -429,215 +430,10 @@ controls2.update();
 // //-------------------------------scene 3---------------------------------------------------------
 
 
-
-// ////////////////////// circle hubble start
-// const geometry3 = new THREE.CircleGeometry(0.03, 32);
-// const material3 = new THREE.MeshBasicMaterial({ color: 0xffffff });
-// const circle3 = new THREE.Mesh(geometry3, material3);
-// circle3.position.x = -1.8
-// circle3.position.y = 0.3
-// scene3.add(circle3);
-
-// ////////////////////// circle moon start
-// const geometry2 = new THREE.CircleGeometry(0.03, 32);
-// const material2 = new THREE.MeshBasicMaterial({ color: 0xffffff });
-// const circle2 = new THREE.Mesh(geometry2, material2);
-// circle2.position.x = -1.8
-// circle2.position.y = 0
-// scene3.add(circle2);
-
-////////////////////// circle L2 start
-const geometryL2 = new THREE.SphereGeometry(0.05, 32, 16);
-const materialL2 = new THREE.MeshBasicMaterial({ color: 0xffffff });
-const circleL2 = new THREE.Mesh(geometryL2, materialL2);
-circleL2.position.z = 20
-scene3.add(circleL2);
-
-////////////////////// circle L2 end
-const geometryEnd = new THREE.SphereGeometry(0.05, 32, 16);
-const materialEnd = new THREE.MeshBasicMaterial({ color: 0xffffff });
-const circleEnd = new THREE.Mesh(geometryEnd, materialEnd);
-circleEnd.position.z = -4.5
-scene3.add(circleEnd);
-
-// ////////////////////// circle Po start
-const geometryPo = new THREE.SphereGeometry(0.05, 32, 16);
-const materialPo = new THREE.MeshBasicMaterial({ color: 0xffffff });
-const circlePo = new THREE.Mesh(geometryPo, materialPo);
-circlePo.position.z = 20
-circlePo.position.y = 0
-scene3.add(circlePo);
-
-
-////////////////////// planet start
-const circlePlanet = new THREE.Mesh(new THREE.SphereGeometry(5, 50, 50),
-    new THREE.ShaderMaterial({
-        vertexShader: vertexShaderMoon,
-        fragmentShader: fragmentShaderMoon,
-        uniforms: {
-            globeTexture: {
-                value: new THREE.TextureLoader().load(imageGlobe)
-            }
-        }
-
-    })
-)
-circlePlanet.position.x = 0
-circlePlanet.position.z = 30
-scene3.add(circlePlanet);
-
-////////////////////// JWST 
-//var loader3 = new GLTFLoader();
-var obj3;
-loader.load(model2, function (gltf) {
-    obj3 = gltf.scene;
-    obj3.position.set(0, -0.6, 19.95);
-    obj3.rotation.z = 0
-    obj3.rotation.x = 0
-    obj3.scale.set(0.0004, 0.0004, 0.0004)
-    scene3.add(obj3);
-});
-var light3 = new THREE.AmbientLight(0xffffff);
-scene3.add(light3);
-
-// ////////////////////// Hubble
-// const geometryHubblePosition = new THREE.PlaneGeometry(0.4, 0.4);
-// const materialHubblePosition = new THREE.MeshBasicMaterial({ color: 0xffffff, map: new THREE.TextureLoader().load(imageHubble), });
-// const circleHubblePosition = new THREE.Mesh(geometryHubblePosition, materialHubblePosition);
-// circleHubblePosition.position.x = -0.9
-// circleHubblePosition.position.y = 0.3
-// scene3.add(circleHubblePosition);
-
-// //sphere moon
-// const sphere2 = new THREE.Mesh(new THREE.SphereGeometry(0.5, 50, 50),
-//     new THREE.ShaderMaterial({
-//         vertexShader: vertexShaderMoon,
-//         fragmentShader: fragmentShaderMoon,
-//         uniforms: {
-//             globeTexture: {
-//                 value: new THREE.TextureLoader().load(imageMoon)
-//             }
-//         }
-
-//     })
-// )
-// scene3.add(sphere2)
-// sphere2.position.z = -9
-// sphere2.position.x = -15
-
-////////////////// line L2
-const material = new THREE.LineBasicMaterial({
-    color: 0xffffff
-});
-const points = [];
-points.push(new THREE.Vector3(0, 0, 20));
-points.push(new THREE.Vector3(0, 0, -4.5));
-const geometry = new THREE.BufferGeometry().setFromPoints(points);
-const line = new THREE.Line(geometry, material);
-scene3.add(line);
-
-const pointsLine = [
-    {
-        //                            z   y  x
-        position: new THREE.Vector3(0, 0, 14),
-        element: document.querySelector('.pointLine-0')
-    },
-    {
-        //                            z   y  x
-        position: new THREE.Vector3(0, 0, 10),
-        element: document.querySelector('.pointLine-1')
-    },
-    {
-        //                            z   y  x
-        position: new THREE.Vector3(0, 0, 8),
-        element: document.querySelector('.pointLine-2')
-    },
-    {
-        //                            z   y  x
-        position: new THREE.Vector3(0, 0, 6),
-        element: document.querySelector('.pointLine-3')
-    },
-    {
-        //                            z   y  x
-        position: new THREE.Vector3(0, 0, 3),
-        element: document.querySelector('.pointLine-4')
-    },
-    {
-        position: new THREE.Vector3(0, 0, 2),
-        element: document.querySelector('.pointLine-5')
-    },
-    {
-        position: new THREE.Vector3(0, 0.3, -4.6),
-        element: document.querySelector('.pointLine-L2')
-    }
-
-]
-// ////////////////// line Moon
-// const materialMoon = new THREE.LineBasicMaterial({
-//     color: 0xffffff
-// });
-// const pointsMoon = [];
-// pointsMoon.push(new THREE.Vector3(-1.8, 0, 0));
-// pointsMoon.push(new THREE.Vector3(-0.5, 0, 0));
-// const geometryMoon = new THREE.BufferGeometry().setFromPoints(pointsMoon);
-// const lineMoon = new THREE.Line(geometryMoon, materialMoon);
-// scene3.add(lineMoon);
-
-
-// ////////////////// line Hubble
-// const materialHubble = new THREE.LineBasicMaterial({
-//     color: 0xffffff
-// });
-// const pointsHubble = [];
-// pointsHubble.push(new THREE.Vector3(-1.8, 0.3, 0));
-// pointsHubble.push(new THREE.Vector3(-1.3, 0.3, 0));
-// const geometryHubble = new THREE.BufferGeometry().setFromPoints(pointsHubble);
-// const lineHubble = new THREE.Line(geometryHubble, materialHubble);
-// scene3.add(lineHubble);
-
-
-// ////////////////////// cone hubble
-// const geometryConeHubble = new THREE.ConeGeometry(0.05, 0.1, 32);
-// const materialConeHubble = new THREE.MeshBasicMaterial({ color: 0xffffff });
-// const coneHubble = new THREE.Mesh(geometryConeHubble, materialConeHubble);
-// coneHubble.rotation.z = -1.55
-// coneHubble.position.x = - 1.3
-// coneHubble.position.y = 0.3
-// scene3.add(coneHubble);
-
-// ////////////////////// cone Moon
-// const geometryConeMoon = new THREE.ConeGeometry(0.05, 0.1, 32);
-// const materialConeMoon = new THREE.MeshBasicMaterial({ color: 0xffffff });
-// const coneMoon = new THREE.Mesh(geometryConeMoon, materialConeMoon);
-// coneMoon.rotation.z = -1.55
-// coneMoon.position.x = - 0.5
-// coneMoon.position.y = 0
-// scene3.add(coneMoon);
-
-const controls3 = new OrbitControls(camera, renderer3.domElement);
-controls3.enableZoom = false;
-controls3.enableRotate = false;
-controls3.update();
-
-
 const clock = new THREE.Clock()
 
 
-// document.getElementById("zoomOne").addEventListener("click", () => {
-//     camera1.position.z -= 0.5;
-//     camera1.updateProjectionMatrix();
-// })
-
-// document.getElementById("zoomTwo").addEventListener("click", () => {
-//     camera1.position.z += 0.5;
-//     camera1.updateProjectionMatrix();
-// })
-
 var timeOut = false;
-for (const pointLine of pointsLine) {
-    pointLine.element.classList.remove('visible')
-}
-
 
 document.getElementById("timeOut").addEventListener("click", () => {
 
@@ -657,65 +453,6 @@ document.getElementById("timeOut").addEventListener("click", () => {
 
 
 })
-//var distance = true;
-document.getElementById('statistics').style.visibility = 'visible';
-document.getElementById('pointL2').style.visibility = 'visible';
-document.getElementById('timeNone').classList.add('d-none');
-for (const pointLine of pointsLine) {
-    pointLine.element.classList.add('visible')
-}
-camera.position.x = 3.049999999999994;
-camera.position.z = -6.140000000000022;
-
-// let animated = document.getElementById("timeline")
-// let animatedOn = false;
-// document.getElementById('timeNone').classList.add('d-none');
-
-// function animatedScroll() {
-//     if (animatedOn == false) {
-//         let scrollTop = document.documentElement.scrollTop;
-//         let heightAnimated = animated.offsetTop;
-//         if (heightAnimated < scrollTop + 5) {
-//             setTimeout(() => {
-//                 camera.position.z = 8;
-//                 distance = true;
-//                 document.getElementById('statistics').style.visibility = 'visible';
-//                 document.getElementById('pointL2').style.visibility = 'visible';
-//                 for (const pointLine of pointsLine) {
-//                     pointLine.element.classList.add('visible')
-//                 }
-//                 animatedOn = true;
-//             }, 1000);
-//         }
-//     }
-// }
-
-// window.addEventListener('scroll', animatedScroll);
-
-
-
-// document.getElementById("distance").addEventListener("click", () => {
-
-//     var playTimeOut = document.getElementById('distance');
-
-//     if (distance == true) {
-//         distance = false;
-//         playTimeOut.innerHTML = `<ion-icon name="play" size="large"></ion-icon>`;
-
-
-//     } else {
-//         camera.position.z = 8;
-//         distance = true;
-//         document.getElementById('timeNone').classList.add('d-none');
-//         document.getElementById('statistics').style.visibility = 'visible';
-//         document.getElementById('pointL2').style.visibility = 'visible';
-//         for (const pointLine of pointsLine) {
-//             pointLine.element.classList.add('visible')
-//         }
-//     }
-
-
-// })
 
 var rotationModel = true;
 for (const pointModel of pointsModel) {
@@ -765,68 +502,24 @@ const getRemainingTime = deadline => {
         remainTime
     }
 };
-// function numberWithCommas(x) {
-//     var parts = x.toString().split(".");
-//     parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, " ");
-//     return parts.join(".");
-// }
 
-const countdown = (deadline,elem,finalMessage, name) => {
-    const el = document.getElementById(elem);
+//const countdown = (deadline,elem,finalMessage, name) => {
+const countdown = (deadline) => {
+    //const el = document.getElementById(elem);
     const daysTraveled = document.getElementById('Days traveled');
-    const distanceTraveled = document.getElementById('Distance traveled');
+    //const distanceTraveled = document.getElementById('Distance traveled');
 
     setInterval( () => {
       let t = getRemainingTime(deadline);
-      el.innerHTML = `
-      <p class="d-inline ">${name} </p>              
-      <p class="d-inline cardCountdown"> ${t.remainDays}d</p>
-      <p class="d-inline cardCountdown"> ${t.remainHours}h</p>
-      <p class="d-inline cardCountdown"> ${t.remainMinutes}m</p>
-      <p class="d-inline cardCountdown"> ${t.remainSeconds}s</p>
-      `;
 
-      daysTraveled.innerHTML = `${t.remainDays} days and ${t.remainHours} hours`
-      distanceTraveled.innerHTML = `1.5 million kilometres`
-    //  var secondsTraveled = (t.remainDays * 86400) + (t.remainHours * 3600) + (t.remainMinutes * 60) + (t.remainSeconds * 1)
+        if (t != null){
+            daysTraveled.innerHTML = `${t.remainDays} days and ${t.remainHours} hours`
+            //distanceTraveled.innerHTML = `1.5 million kilometres`
+            
+        }
 
-    //   var closest = data.flightData.reduce((prev, curr) => {
-    //     return (Math.abs(curr.elapsedSeconds - secondsTraveled) < Math.abs(prev.elapsedSeconds - secondsTraveled) ? curr : prev);
-    //   });
-
-    //   var currentData
-    //   var futureData
-    //   var kmPerSecond
-    //   var sgDiference
-    //   var distanceKm
-
-    //   if((secondsTraveled-closest.elapsedSeconds)<0){
-    //     currentData = data.flightData[data.flightData.indexOf(closest)-1]
-    //     futureData = data.flightData[data.flightData.indexOf(closest)]
-    //     kmPerSecond = ((futureData.distanceTravelledKm - currentData.distanceTravelledKm) / 3600);
-    //     sgDiference = secondsTraveled - currentData.elapsedSeconds
-    //     distanceKm = currentData.distanceTravelledKm + (kmPerSecond * sgDiference)
-    //     distanceTraveled.innerHTML = `${numberWithCommas(distanceKm.toFixed(2))} km`
-    //   }else{
-    //     currentData = data.flightData[data.flightData.indexOf(closest)]
-    //     futureData = data.flightData[data.flightData.indexOf(closest)+1]
-    //     kmPerSecond = ((futureData.distanceTravelledKm - currentData.distanceTravelledKm) / 3600);
-    //     sgDiference = secondsTraveled - currentData.elapsedSeconds
-    //     distanceKm = currentData.distanceTravelledKm + (kmPerSecond * sgDiference)
-    //     distanceTraveled.innerHTML = `${numberWithCommas(distanceKm.toFixed(2))} km`
-    //   }
     }, 1000)
-    setInterval( () => {
-    //let j = getRemainingTime(deadline);
-    if(circlePo.position && obj3){
-        // circlePo.position.z = 17.9 - (j.remainDays * 0.816);
-        // obj3.position.z = 18 - (j.remainDays * 0.816);
-        circlePo.position.z = -4.5;
-        obj3.position.z =-4.5;
-    }
-   
-    }, 5)
-
+ 
   };
 
 
@@ -834,70 +527,49 @@ countdown('Dec 25 2021 07:20:00 GMT-0500', 'clock', '', 'Journey to L2:')
 
 ///////////////////////////////// END CLOCK ///////////////////////////////
 
+
 function animate() {
     requestAnimationFrame(animate)
     const elapsedTime = clock.getElapsedTime()
     controls.update();
     controls2.update();
-    controls3.update();
+    
 
     renderer.setSize(sizes.width, sizes.height)
     renderer.render(scene, camera1)
-    // renderer2.setSize(sizes.width, sizes.height)
-    // renderer2.render(scene2, camera2)
-    renderer3.setSize(sizes.width, sizes.height)
-    renderer3.render(scene3, camera)
+    renderer2.setSize(sizes.width, sizes.height)
+    renderer2.render(scene2, camera2)
+ 
 
     if (sphere) {
         sphere.rotation.y += 0.002;
-    }
-    if (circlePlanet) {
-        circlePlanet.rotation.y += 0.001;
+        sphereMoon.rotation.y += 0.01;
+        sphereSun.rotation.y += 0.001;
+        particles.rotation.y += 0.0001;
     }
 
-    // if (circlePo.position.z > -1 && distance == true) {
-    //     circlePo.position.z -= 0.02;
-    //     obj3.position.z -= 0.02;
-
-    // }
     if (obj2) {
         obj2.position.y = Math.cos(elapsedTime / 2) * 2;
         obj2.position.z = Math.sin(elapsedTime / 2) * 2;
     }
-
-
-
-    // if (camera.position.x < 5 && distance == true) {
-    //     camera.position.x += 0.05;
-    //     camera.position.z -= 0.14;
-    // }
-
-    // if (camera.position.x > 3 && distance == false) {
-    //     camera.position.x -= 0.05;
-    //     camera.position.z += 0.14;
-    // }
-
-
-
-
-
-    // if (camera2.position.x < 20 && timeOut == true) {
-    //     camera2.position.x += 0.1;
-    //     camera2.position.z -= 0.06;
-    //     camera2.position.y = 0
-    // }
-
-    // if (camera2.position.x > 0 && timeOut == false) {
-    //     camera2.position.x -= 0.1;
-    //     camera2.position.z += 0.06;
-    //     camera2.position.y = 12
-    // }
 
     if (rotationModel == true) {
         if (obj) {
             obj.rotation.y += 0.002;
         }
         //obj.position.z = Math.sin(elapsedTime/2) * 0.5;
+    }
+
+    if (camera2.position.x < 20 && timeOut == true) {
+        camera2.position.x += 0.1;
+        camera2.position.z -= 0.06;
+        camera2.position.y = 0
+    }
+
+    if (camera2.position.x > 0 && timeOut == false) {
+        camera2.position.x -= 0.1;
+        camera2.position.z += 0.06;
+        camera2.position.y = 12
     }
 
     controls.update()
@@ -913,35 +585,6 @@ function animate() {
         pointModel.element.style.transform = `translateX(${translateX}px) translateY(${translateY}px)`
 
     }
-
-    for (const pointLine of pointsLine) {
-        const screenPositionLine = pointLine.position.clone()
-        screenPositionLine.project(camera)
-
-        const translateLineX = screenPositionLine.x * sizes.width * 0.5
-        const translateLineY = - screenPositionLine.y * sizes.height * 0.5
-        pointLine.element.style.transform = `translateX(${translateLineX}px) translateY(${translateLineY}px)`
-
-    }
-    // if (cursor.y>0.05){
-    //     obj.rotation.x += 0.001;
-    // } else if (cursor.y<-0.05){
-    //     obj.rotation.x -= 0.001;
-    // }
-
-    // obj.rotation.y += 0.001;
-    // obj.position.z = Math.sin(elapsedTime/2) * 0.5;
-
-    // sphere2.position.x = Math.cos(elapsedTime / 3) * 1.1;
-    // sphere2.position.z = Math.sin(elapsedTime / 3) * 1.1;
-
-    // camera2.position.x = Math.cos(elapsedTime / 10) * 4
-    // camera2.position.z = Math.sin(elapsedTime / 10) * 4
-
-    //obj2.rotation.y -= 0.004;
-    //obj2.position.x = - Math.cos(elapsedTime /3) * 4;
-    //obj2.position.z = Math.sin(elapsedTime /3) * 1.2
-
 
 }
 animate()
