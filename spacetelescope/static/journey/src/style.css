@@ -159,7 +159,7 @@ body {
 
 .timeOut{
   position: absolute;
-  top: 82%;
+  top: 84%;
   left: 85%;
   color: white;
   align-items: center;
@@ -284,8 +284,8 @@ body {
 .statistics {
   position: absolute;
   top: 80%;
-  width: 40%;
-  left: 35%;
+  width: 70%;
+  left: 10%;
 
   padding: 10px;
   border-radius: 4px;
