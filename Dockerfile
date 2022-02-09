@@ -90,6 +90,7 @@ RUN mkdir -p static \
     shared
 
 COPY --chown=webbadm scripts/ scripts/
+COPY --chown=webbadm scripts/newrelic.ini ./
 
 COPY --chown=webbadm .coveragerc .
 COPY --chown=webbadm manage.py manage.py
