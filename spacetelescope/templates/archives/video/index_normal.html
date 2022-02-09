@@ -54,6 +54,20 @@
         {% endif %}
             <div class="video-thumbnail">
                 <div class="img-wrapper">
+                    <script>
+                        var videos = [
+                    
+                            {
+                                id: '{{ video.youtube_video_id }}',
+                                title: '{{ video.title }}',
+                                src: '{{  video.pk }}',
+                                url: '{{ video.get_absolute_url }}',
+                                videoframe: '{{ video.resource_videoframe.url }}',
+                            },
+        
+                        ];
+                        console.log(videos)
+                        </script>
                 {% if video.youtube_video_id and video.use_youtube %}
                     <a class="popup-youtube" href="#popup-youtube" data-youtube-id="{{ video.youtube_video_id }}" data-title="{{ video.title }}" data-url="{{ video.get_absolute_url }}">
                 {% else %}
