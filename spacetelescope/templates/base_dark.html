@@ -24,14 +24,15 @@ We don't display the children pages widget in the dark pages
 
     <div class="container-fluid my-5 mx-3" style="">
         <div class="row no-page">
-            <div class="col-md-12">
+            
+            <div class="col-md-7 ">
+                <h1>{% if archive_title %}{% trans archive_title %}{% else %}{{ archive|capfirst }} {% trans "Archive"
+                    %}{% endif %}{% if listview_feed_url %} <a href="{{ listview_feed_url }}"
+                        class="listviewrsslink"><span class="fa fa-rss"></span></a>{% endif %}</h1>
+            </div>
+            <div class="col-11 col-md-4 ">
                 {% block archive_search %}
                 {% endblock %}
-            </div>
-            <div class="col-md-12">
-                <h3>{% if archive_title %}{% trans archive_title %}{% else %}{{ archive|capfirst }} {% trans "Archive"
-                    %}{% endif %}{% if listview_feed_url %} <a href="{{ listview_feed_url }}"
-                        class="listviewrsslink"><span class="fa fa-rss"></span></a>{% endif %}</h3>
             </div>
             {% if web_categories %}
             <div class="row">
