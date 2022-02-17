@@ -34,3 +34,57 @@ body {
 #navbar li:hover {
     background-color: #003247;
 }
+
+.video-title {
+    display: inline;
+    position: absolute;
+    color: white;
+    left: 0px;
+    width: 100%;
+    background-color: rgba(0, 50, 71, 1);
+    height: 70px;
+    display: flex;
+    align-items: center;
+}
+
+.play-icon {
+    display: inline;
+    position: absolute;
+    color: white;
+    left: 0px;
+    top: 45%;
+    width: 100%;
+
+    height: 70px;
+    display: flex;
+    align-items: center;
+
+
+}
+.youtube-body{
+    position: relative;
+    width: 100%;
+    height: 0;
+    padding-bottom: 56.25%;
+}
+
+.youtube-video{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.youtube-title {
+    display: inline;
+    position: absolute;
+    color: white;
+    left: 0px;
+    top: 100%;
+    width: 100%;
+    background-color: rgba(0, 50, 71, 1);
+    height: 70px;
+    display: flex;
+    align-items: center;
+}

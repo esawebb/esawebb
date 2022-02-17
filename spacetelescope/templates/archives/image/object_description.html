@@ -39,9 +39,28 @@
 </div> -->
 {% endif %} 
 
+<!-- Modal -->
+<div class="modal fade "  id="image-modal" tabindex="-1" aria-labelledby="image-modal" aria-hidden="true">
+    <div class="modal-dialog modal-xl">
+    <div class="modal-content" style="background: none; border: none;">
+        <div class="modal-header" style="border: none;">
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <img src="https://cdn.spacetelescope.org/archives/images/screen/{{object.pk}}.jpg" class="w-100" style="height: 70vh; object-fit: cover;">
+        </div>
+        <div class="modal-footer" style="border: none;">
+        <p class="text-white">{{ object.title }}</p>
+        </div>
+    </div>
+    </div>
+</div>
+
 <div class="bg-image hover-overlay ripple shadow-1-strong rounded my-3 px-1" data-ripple-color="light">
-    <img src="https://cdn.spacetelescope.org/archives/images/screen/heic2007a.jpg" class="w-100"
-        style="height: 500px; object-fit: cover;" />
+    <a class="" data-bs-toggle="modal" data-bs-target="#image-modal">
+        <img src="https://cdn.spacetelescope.org/archives/images/screen/{{object.pk}}.jpg" class="w-100"
+            style="height: 500px; object-fit: cover;" />
+    </a>
 </div>
 
 {% if object.headline %}<p>{{ object.headline }}</p>{% endif %}

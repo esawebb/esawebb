@@ -7,27 +7,9 @@
 {% spaceless %}
 
 {% for list in object_list|split_list:columns %}
-<div class="row">
+<div id="gallery" class="row">
     {% block index_row %}
 
-    <div id="popup-youtube" class="mfp-hide popup-youtube-content">
-        <div class="youtube-wrapper">
-            <div id="youtube-player"></div>
-        </div>
-        <div class="popup-caption">
-            <a href="">
-                <div class="row">
-                    <div class="col-md-9">
-                        <span class="title"></span>
-                    </div>
-                    <div class="col-md-3">
-                        <span class="download-info">{% trans "Info and downloads" %}</span>
-                        <span class="fa fa-download download-icon"></span>
-                    </div>
-                </div>
-            </a>
-        </div>
-    </div>
 
     <div id="popup-jwplayer" class="mfp-hide popup-jwplayer-content">
         <div id="videoplayer"></div>
@@ -47,13 +29,46 @@
     </div>
 
     {% for video in list %}
-        {% if columns == "4" %}
-        <div class="col-xs-12 col-md-6 col-lg-3">
-        {% else %}
-        <div class="col-md-6 col-lg-4">
-        {% endif %}
+
+    <div class="modal fade " id="popup-youtube" tabindex="-1" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content" style="background: none; border: none;">
+                <div class="modal-header" style="border: none;">
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                        aria-label="Close"></button>
+                </div>
+                <div class="modal-body youtube-body">
+                    <iframe width="560" height="315" src="https://www.youtube.com/embed/{{ video.youtube_video_id }}"
+                    class="youtube-video" 
+                    title="YouTube video player" frameborder="0" 
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                    allowfullscreen></iframe>
+                </div>
+                <div class="modal-footer m-0 p-0" style="border: none;">
+                    <a class="youtube-title form-text m-0 p-0 text-white btn btn-outline-secondary border-0 rounded-0"
+                        style="text-decoration: none;">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
+                            class="bi bi-download mx-3" viewBox="0 0 16 16">
+                            <path
+                                d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z" />
+                            <path
+                                d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z" />
+                        </svg>
+                        <p class="my-auto">{% trans "Info and downloads" %}</p>
+                    </a>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-12 col-md-6 col-lg-4 my-5">
+        
+        <div class="gallery">
+        
             <div class="video-thumbnail">
-                <div class="img-wrapper">
+                <div class="img-wrapper bg-image">
                     <script>
                         var videos = [
                     
@@ -66,34 +81,44 @@
                             },
         
                         ];
-                        console.log(videos)
+                        console.log("{{ video.youtube_video_id }}")
+                        console.log('{{ video.title }}')
+                        console.log('{{  video.pk }}')
+                        console.log('{{ video.get_absolute_url }}')
+                        console.log('{{ video.resource_videoframe.url }}')
                         </script>
                 {% if video.youtube_video_id and video.use_youtube %}
-                    <a class="popup-youtube" href="#popup-youtube" data-youtube-id="{{ video.youtube_video_id }}" data-title="{{ video.title }}" data-url="{{ video.get_absolute_url }}">
+                    <a class="popup-youtube" data-bs-toggle="modal" data-bs-target="#popup-youtube" data-youtube-id="{{ video.youtube_video_id }}" data-title="{{ video.title }}" data-url="{{ video.get_absolute_url }}">
                 {% else %}
-                    <a class="popup-jwplayer" href="#popup-jwplayer" data-video-id="{{ video.pk }}" data-title="{{ video.title }}" data-url="{{ video.get_absolute_url }}">
+                    <a class="popup-jwplayer" data-bs-toggle="modal" data-bs-target="#popup-youtube" data-video-id="{{ video.pk }}" data-title="{{ video.title }}" data-url="{{ video.get_absolute_url }}">
                 {% endif %}
-                        <span class="fa fa-play"></span>
-                        <img src="{{ video.resource_videoframe.url }}" class="img-responsive" alt="{{ video.title }}">
+                        <img src="https://cdn.spacetelescope.org/archives/images/screen/{{video.pk}}.jpg"
+                        class="w-100" style="height: 300px; object-fit: cover;" />
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                            class="bi bi-play-fill play-icon btn text-whi" viewBox="0 0 16 16">
+                            <path
+                                d="m11.596 8.697-6.363 3.692c-.54.313-1.233-.066-1.233-.697V4.308c0-.63.692-1.01 1.233-.696l6.363 3.692a.802.802 0 0 1 0 1.393z" />
+                        </svg>
                     </a>
-                {% if video.youtube_video_id and video.use_youtube %}
-                {% else %}
-                    {% if video.videosubtitle_set.all %}
-                        {% embedvideo_subs video "medium_podcast,h264" "hd_and_apple,hd720p_screen,dome_preview" "medium_podcast,h264" video.videosubtitle_set.all %}
-                    {% else %}
-                        {% embedvideo video "medium_podcast,h264" "hd_and_apple,hd720p_screen,dome_preview" "medium_podcast,h264" %}
-                    {% endif%}
-                {% endif %}
+                    
+                    <a class="video-title form-text mt-0 text-white btn btn-outline-secondary border-0 rounded-0"
+                    href="{{ video.get_absolute_url }}"
+                    style="text-decoration: none;">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
+                            class="bi bi-download mx-3" viewBox="0 0 16 16">
+                            <path
+                                d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z" />
+                            <path
+                                d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z" />
+                        </svg>
+                        <p class="my-auto">{{ video.title }}</p>
+                     
                     </a>
-                </div>
-                <div data-toggle="tooltip" data-placement="top" title="Info&nbsp;and&nbsp;downloads" class="caption">
-                    <a href="{{ video.get_absolute_url }}">
-                        <span class="title">{{ video.title }}</span>
-                        <span class="fa fa-download download-icon"></span>
-                    </a>
+
                 </div>
             </div>
         </div>
+    </div>
     {% endfor %}
     {% endblock index_row %}
 </div>
