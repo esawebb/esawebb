@@ -11,11 +11,11 @@
                 {% if link.url %}<a href="{{ link.url }}">{% trans link.title %}</a><br />{% endif %}
             {% endfor %}
             {% if admin.metadata %}
-                <table>
+                <table class="table form-text text-dark">
                 {% for metadata in admin.metadata %}
                     {% if metadata.field_value %}
                         {% trans metadata.field_name as field_name %}
-                        <tr><td class="title">{{ field_name|capfirst }}:</td><td>{{ metadata.field_value }}</td></tr>
+                        <tr><th scope="row" class="title">{{ field_name|capfirst }}:</th><td>{{ metadata.field_value }}</td></tr>
                     {% endif %}
                 {% endfor %}
                 </table>

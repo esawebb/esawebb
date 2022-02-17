@@ -1,7 +1,7 @@
 {% load i18n %}
 {% load djangoplicity_images %}
 {% include 'archives/embargo_notice.html' %}
-<h1>{{ object.title }}</h1>
+<h1 class="my-3">{{ object.title }}</h1>
 
 {% if object.resource_screen and object.resource_publicationjpg and object.fov_x == 360 and object.fov_y == 180 %}
     <script src="//storage.googleapis.com/vrview/2.0/build/vrview.min.js"></script>
@@ -19,9 +19,10 @@
     }
     </script>
 
-{% elif object.resource_medium %}
+<!-- {% elif object.resource_medium %}
 <div class="archive-image archive-image-dark{% if not object.zoomable %} popup{% endif %}">
     {% if object.resource_screen %}
+    <h1 class="text-danger">TEST1</h1>
     <a class="popup" href="{% if object.zoomable %}{{ object.get_absolute_url }}zoomable/{% else %}{{ object.resource_screen.url }}{% endif %}" title="{{object.title|safe}}"/>
         <img
             class="img-responsive"
@@ -33,9 +34,34 @@
     </a>
     {% else %}
         <img class="img-responsive" src="{{ object.resource_medium.url }}" alt="{{ object.title|safe }}" />
+        <h1 class="text-danger">TEST2</h1>
     {% endif %}
+</div> -->
+{% endif %} 
+
+<!-- Modal -->
+<div class="modal fade "  id="image-modal" tabindex="-1" aria-labelledby="image-modal" aria-hidden="true">
+    <div class="modal-dialog modal-xl">
+    <div class="modal-content" style="background: none; border: none;">
+        <div class="modal-header" style="border: none;">
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <img src="https://cdn.spacetelescope.org/archives/images/screen/{{object.pk}}.jpg" class="w-100" style="height: 70vh; object-fit: cover;">
+        </div>
+        <div class="modal-footer" style="border: none;">
+        <p class="text-white">{{ object.title }}</p>
+        </div>
+    </div>
+    </div>
 </div>
-{% endif %}
+
+<div class="bg-image hover-overlay ripple shadow-1-strong rounded my-3 px-1" data-ripple-color="light">
+    <a class="" data-bs-toggle="modal" data-bs-target="#image-modal">
+        <img src="https://cdn.spacetelescope.org/archives/images/screen/{{object.pk}}.jpg" class="w-100"
+            style="height: 500px; object-fit: cover;" />
+    </a>
+</div>
 
 {% if object.headline %}<p>{{ object.headline }}</p>{% endif %}
 <p>{{ object.description|safe }}</p>
