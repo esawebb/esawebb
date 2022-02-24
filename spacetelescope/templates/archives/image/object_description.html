@@ -19,27 +19,9 @@
     }
     </script>
 
-<!-- {% elif object.resource_medium %}
-<div class="archive-image archive-image-dark{% if not object.zoomable %} popup{% endif %}">
-    {% if object.resource_screen %}
-    <h1 class="text-danger">TEST1</h1>
-    <a class="popup" href="{% if object.zoomable %}{{ object.get_absolute_url }}zoomable/{% else %}{{ object.resource_screen.url }}{% endif %}" title="{{object.title|safe}}"/>
-        <img
-            class="img-responsive"
-            src="{% if object.resource_thumb700x %}{{ object.resource_thumb700x.url }}{% else %}{{ object.resource_screen.url }}{% endif %}"
-            alt="{{ object.title|safe }}"
-            srcset="{{ object|srcset }}"
-            sizes="(min-width: 1000px) 700px, 100vw"
-        />
-    </a>
-    {% else %}
-        <img class="img-responsive" src="{{ object.resource_medium.url }}" alt="{{ object.title|safe }}" />
-        <h1 class="text-danger">TEST2</h1>
-    {% endif %}
-</div> -->
 {% endif %} 
 
-<!-- Modal -->
+
 <div class="modal fade "  id="image-modal" tabindex="-1" aria-labelledby="image-modal" aria-hidden="true">
     <div class="modal-dialog modal-xl">
     <div class="modal-content" style="background: none; border: none;">
