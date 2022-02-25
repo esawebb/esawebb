@@ -20,7 +20,7 @@
                         <span class="title"></span>
                     </div>
                     <div class="col-md-3 col-sm-12">
-                        <span class="download-info">{% trans "Info and downloads" %}</span>
+                        <a href="{{ video.get_absolute_url }}"><span class="download-info">{% trans "Info and downloads" %}</span></a>
                         <span class="fa fa-download download-icon"></span>
                     </div>
                 </div>
@@ -30,7 +30,7 @@
 
     {% for video in list %}
 
-    <div class="modal fade " id="popup-youtube" tabindex="-1" aria-labelledby="exampleModalLabel"
+    <div class="modal fade " id="popup-youtube-{{ video.youtube_video_id }}" tabindex="-1" aria-labelledby="exampleModalLabel"
         aria-hidden="true">
         <div class="modal-dialog modal-xl">
             <div class="modal-content" style="background: none; border: none;">
@@ -47,6 +47,7 @@
                 </div>
                 <div class="modal-footer m-0 p-0" style="border: none;">
                     <a class="youtube-title form-text m-0 p-0 text-white btn btn-outline-secondary border-0 rounded-0"
+                        href="{{ video.get_absolute_url }}"
                         style="text-decoration: none;">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
                             class="bi bi-download mx-3" viewBox="0 0 16 16">
@@ -88,7 +89,7 @@
                         console.log('{{ video.resource_videoframe.url }}')
                         </script>
                 {% if video.youtube_video_id and video.use_youtube %}
-                    <a class="popup-youtube" data-bs-toggle="modal" data-bs-target="#popup-youtube" data-youtube-id="{{ video.youtube_video_id }}" data-title="{{ video.title }}" data-url="{{ video.get_absolute_url }}">
+                    <a class="popup-youtube" data-bs-toggle="modal" data-bs-target="#popup-youtube-{{ video.youtube_video_id }}" data-youtube-id="{{ video.youtube_video_id }}" data-title="{{ video.title }}" data-url="{{ video.get_absolute_url }}">
                 {% else %}
                     <a class="popup-jwplayer" data-bs-toggle="modal" data-bs-target="#popup-youtube" data-video-id="{{ video.pk }}" data-title="{{ video.title }}" data-url="{{ video.get_absolute_url }}">
                 {% endif %}
