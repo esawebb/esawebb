@@ -17,7 +17,7 @@
                     class="w-100" style="height: 200px; object-fit: cover;">
                 </div>
                 {% endif %}
-                <div class="pb-3" style="height: 450px;">
+                <div class="pb-3" style="height: 290px; overflow: hidden; text-overflow: ellipsis;">
                     <div class="news-id h6  text-primary" >{{ pr.id }} — {% trans pr.release_type.name %}</div>
                     <div class="news-title h5  text-primary" >{{ pr.title }}</div>
                     <div class="news-teaser">
@@ -26,7 +26,7 @@
                     </div>
                 </div>
                 <div class="news-readmore text-center">
-                    <p class="btn btn-outline-primary">{% trans "Read more" %}</p></div>
+                    <p class="btn btn-outline-primary mt-3">{% trans "Read more" %}</p></div>
             </div> 
         </a>
     </div>
