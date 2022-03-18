@@ -3,7 +3,8 @@
 
 <ul id="navbar" class="navbar-nav me-auto  mb-0">
 {% for entry in submenu %}
-<li class="nav-item me-3 py-2"><a class="nav-link text-white" href="{{ entry.link|default:"#" }}"{% if entry.on_click %} target="_blank"{% endif %}>{% trans entry.title|safe %}</a>
+<li class="nav-item dropdown me-3 py-2">
+    <a class="nav-link text-white" {% if entry.on_click %} target="_blank"{% endif %}>{% trans entry.title|safe %}</a>
     {% if entry.children|length %}
     <div class="level1-wrapper">
         <div class="level1{% for child in entry.children %}{% if child.selected or child.leaf_selected %} current{% endif %}{% endfor %}">
