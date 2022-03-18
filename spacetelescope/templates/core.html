@@ -84,7 +84,7 @@
                             </button>
                             {% load menus %}
                             {% init_menu 'Main Menu' as main_menu %}
-                            <div id="navigation" class="collapse navbar-collapse">
+                            <div id="main_nav" class="collapse navbar-collapse">
                                 {% render_menu main_menu main %}
                             </div>
                         </div>
@@ -166,6 +166,8 @@
     <!-- End Footer -->
 
     <script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
+
+    <script src="{% static 'js/index.js' %}"></script>
 
     <script type="text/javascript">var MEDIA_URL = "{{MEDIA_URL}}"</script>
 
