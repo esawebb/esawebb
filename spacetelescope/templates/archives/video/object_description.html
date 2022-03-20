@@ -1,17 +1,13 @@
 {% load i18n %}{% load media_video %}
 {% include 'archives/embargo_notice.html' %}
 <h1>{{ object.title }}</h1>
-{% if object.youtube_video_id and object.use_youtube %}
-    <div class="youtube-wrapper">
-        <div id="youtube-player"></div>
-    </div>
-{% else %}
-    {% if object.videosubtitle_set.all %}
-        {% embedvideo_subs object "medium_podcast,h264" "hd_and_apple,hd720p_screen,dome_preview" "medium_podcast,h264" object.videosubtitle_set.all %}
-    {% else %}
-        {% embedvideo object "medium_podcast,h264" "hd_and_apple,hd720p_screen,dome_preview" "medium_podcast,h264" %}
-    {% endif%}
-{% endif%}
+<div class="modal-body youtube-body">
+    <iframe width="560" height="315" src="https://www.youtube.com/embed/{{ object.youtube_video_id }}"
+    class="youtube-video" 
+    title="YouTube video player" frameborder="0" 
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+    allowfullscreen></iframe>
+</div>
 {% if object.headline %}<p>{{ object.headline }}</p>{% endif %}
 <p>{{ object.description|safe }}</p>
 <strong>{% trans "Credit" %}:</strong><div class="credit">{{ object.credit|safe }}</div>

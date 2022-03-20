@@ -8,21 +8,26 @@
 {% for row in object_list|split_list:4 %}
 <div class="row news-list">
     {% for pr in row %}
-    <div class="col-md-3 col-sm-6 col-xs-12">
-        <a href="{{ pr.get_absolute_url }}">
-            <div class="news-wrapper">
+    <div class="col-md-6 col-xl-4 col-xs-12">
+        <a href="{{ pr.get_absolute_url }}" style="text-decoration: none;">
+            <div class="box-image shadow  border my-3 p-3">
                 {% if pr.main_image and pr.main_image.resource_thumb350x %}
-                <div class="news-image">
-                    <img class="img-responsive" src="{{ pr.main_image.resource_thumb350x.url }}">
+                <div class="mb-4 primary-overlay">
+                    <img src="{{ pr.main_image.resource_thumb350x.url }}"
+                    class="w-100" style="height: 200px; object-fit: cover;">
                 </div>
                 {% endif %}
-                <div class="news-description">
-                    <div class="news-id">{{ pr.id }} — {% trans pr.release_type.name %}</div>
-                    <div class="news-title">{{ pr.title }}</div>
-                    <div class="news-teaser"><strong>{{ pr.release_date|datetime:"DATE" }}</strong>: {{ pr.headline|linebreaksbr }}</div>
+                <div class="pb-3" style="height: 290px; overflow: hidden; text-overflow: ellipsis;">
+                    <div class="news-id h6  text-primary" >{{ pr.id }} — {% trans pr.release_type.name %}</div>
+                    <div class="news-title h5  text-primary" >{{ pr.title }}</div>
+                    <div class="news-teaser">
+                        <p class="small text-uppercase text-mute" >{{ pr.release_date|datetime:"DATE" }}</p>
+                        <p class="small text-muted" >{{ pr.headline|linebreaksbr }}</p>
+                    </div>
                 </div>
-                <div class="news-readmore">{% trans "Read more" %}</div>
-            </div> <!-- news-wrapper -->
+                <div class="news-readmore text-center">
+                    <p class="btn btn-outline-primary mt-3">{% trans "Read more" %}</p></div>
+            </div> 
         </a>
     </div>
     {% endfor %}

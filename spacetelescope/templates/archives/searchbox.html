@@ -1,46 +1,76 @@
 {% load i18n %}{% if searchable %}
 {% load staticfiles %}
 {% spaceless %}
-<div class="archive-search{% if archive_search_position == "outside" %} outside{% endif %}">
+<div class="row archive-search my-3 {% if archive_search_position == "outside" %} outside{% endif %}">
+    <div class="col-11">
+        <form class="form-inline" role="form" action="{{ search_url }}" method="GET">
 
-    {% if archive == 'image' or archive == 'video' %}
-        <a href="{% if archive == 'image' %}{% url 'images_search' %}{% else %}{% url 'videos_search' %}{% endif %}" class="advanced-search" data-container="body" data-toggle="tooltip" data-placement="left" title="Advanced&nbsp;Search">
-            <span class="fa fa-plus"></span>
-        </a>
-    {% endif %}
+            {% comment %}
+            If search_str_verbose is set then the result comes from an advanced search in
+            which case the search_str cannot be used in the search box as it is meant for
+            the advanced search page, for example:
+                ?adv=&instrument=17
+            instead of:
+                ?vlt+orion
+            {% endcomment %}
 
-    <form class="form-inline" role="form" action="{{ search_url }}" method="GET">
+            <div class="form-group">
+                <div class="input-group">
+                    {% if archive == 'image' or archive == 'video' %}
+                    <a href="{% if archive == 'image' %}{% url 'images_search' %}{% else %}{% url 'videos_search' %}{% endif %}" 
+                        class="btn btn-primary text-white" data-container="body" data-toggle="tooltip" data-placement="left" title="Advanced&nbsp;Search">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                        class="bi bi-gear" viewBox="0 0 16 16">
+                                        <path
+                                            d="M8 4.754a3.246 3.246 0 1 0 0 6.492 3.246 3.246 0 0 0 0-6.492zM5.754 8a2.246 2.246 0 1 1 4.492 0 2.246 2.246 0 0 1-4.492 0z" />
+                                        <path
+                                            d="M9.796 1.343c-.527-1.79-3.065-1.79-3.592 0l-.094.319a.873.873 0 0 1-1.255.52l-.292-.16c-1.64-.892-3.433.902-2.54 2.541l.159.292a.873.873 0 0 1-.52 1.255l-.319.094c-1.79.527-1.79 3.065 0 3.592l.319.094a.873.873 0 0 1 .52 1.255l-.16.292c-.892 1.64.901 3.434 2.541 2.54l.292-.159a.873.873 0 0 1 1.255.52l.094.319c.527 1.79 3.065 1.79 3.592 0l.094-.319a.873.873 0 0 1 1.255-.52l.292.16c1.64.893 3.434-.902 2.54-2.541l-.159-.292a.873.873 0 0 1 .52-1.255l.319-.094c1.79-.527 1.79-3.065 0-3.592l-.319-.094a.873.873 0 0 1-.52-1.255l.16-.292c.893-1.64-.902-3.433-2.541-2.54l-.292.159a.873.873 0 0 1-1.255-.52l-.094-.319zm-2.633.283c.246-.835 1.428-.835 1.674 0l.094.319a1.873 1.873 0 0 0 2.693 1.115l.291-.16c.764-.415 1.6.42 1.184 1.185l-.159.292a1.873 1.873 0 0 0 1.116 2.692l.318.094c.835.246.835 1.428 0 1.674l-.319.094a1.873 1.873 0 0 0-1.115 2.693l.16.291c.415.764-.42 1.6-1.185 1.184l-.291-.159a1.873 1.873 0 0 0-2.693 1.116l-.094.318c-.246.835-1.428.835-1.674 0l-.094-.319a1.873 1.873 0 0 0-2.692-1.115l-.292.16c-.764.415-1.6-.42-1.184-1.185l.159-.291A1.873 1.873 0 0 0 1.945 8.93l-.319-.094c-.835-.246-.835-1.428 0-1.674l.319-.094A1.873 1.873 0 0 0 3.06 4.377l-.16-.292c-.415-.764.42-1.6 1.185-1.184l.292.159a1.873 1.873 0 0 0 2.692-1.115l.094-.319z" />
+                        </svg>
+                    </a>
+                    {% endif %}
+                    <input id="id_archivesearch" type="text" class="form-control border border-primary" value="{% if search_str and not search_str_verbose %}{{search_str}}{% endif %}" placeholder="{% trans "Search" %}{% if archive_title %} {% trans archive_title %}{% endif %}..." name="search" />
+                    
+                    <button class="btn btn-primary text-white" type="submit">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                            class="bi bi-search" viewBox="0 0 16 16">
+                            <path
+                                d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
+                        </svg>
+                    </button>
+                
+                </div>
+            </div>
 
-    {% comment %}
-    If search_str_verbose is set then the result comes from an advanced search in
-    which case the search_str cannot be used in the search box as it is meant for
-    the advanced search page, for example:
-        ?adv=&instrument=17
-    instead of:
-        ?vlt+orion
-    {% endcomment %}
-
-    <div class="form-group">
-        <div class="input-group">
-            <input id="id_archivesearch" type="text" value="{% if search_str and not search_str_verbose %}{{search_str}}{% endif %}" placeholder="{% trans "Search" %}{% if archive_title %} {% trans archive_title %}{% endif %}..." name="search" class="form-control input-sm" />
-            <span class="input-group-btn">
-                <button class="btn btn-default btn-sm" type="submit"><span class="fa fa-search"></span></button>
-            </span>
-        </div>
+        </form>
     </div>
-
-    </form>
     {% if archive_search_position == "outside" %}
         {% if archive == 'image' %}
-            <span class="creative">
-                <a href="/public/copyright/" data-toggle="tooltip" data-placement="bottom" title="Free&nbsp;Creative&nbsp;Commons&nbsp;images"><img src="{% static "images/cc.svg" %}" alt="Free Creative Commons images"></a>
+            <span class="col-1 creative">
+                <a href="/public/copyright/" data-toggle="tooltip" data-placement="bottom" title="Free&nbsp;Creative&nbsp;Commons&nbsp;images">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor"
+                    class="bi bi-badge-cc" viewBox="0 0 16 16">
+                    <path
+                        d="M3.708 7.755c0-1.111.488-1.753 1.319-1.753.681 0 1.138.47 1.186 1.107H7.36V7c-.052-1.186-1.024-2-2.342-2C3.414 5 2.5 6.05 2.5 7.751v.747c0 1.7.905 2.73 2.518 2.73 1.314 0 2.285-.792 2.342-1.939v-.114H6.213c-.048.615-.496 1.05-1.186 1.05-.84 0-1.319-.62-1.319-1.727v-.743zm6.14 0c0-1.111.488-1.753 1.318-1.753.682 0 1.139.47 1.187 1.107H13.5V7c-.053-1.186-1.024-2-2.342-2C9.554 5 8.64 6.05 8.64 7.751v.747c0 1.7.905 2.73 2.518 2.73 1.314 0 2.285-.792 2.342-1.939v-.114h-1.147c-.048.615-.497 1.05-1.187 1.05-.839 0-1.318-.62-1.318-1.727v-.743z" />
+                    <path
+                        d="M14 3a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h12zM2 2a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H2z" />
+                    </svg>
+                </a>
             </span>
         {% elif archive == 'video' %}
-            <span class="creative">
-                <a href="/public/copyright/" data-toggle="tooltip" data-placement="bottom" title="Free&nbsp;Creative&nbsp;Commons&nbsp;videos"><img src="{% static "images/cc.svg" %}" alt="Free Creative Commons videos"></a>
+            <span class="col-1 creative ">
+                <a href="/public/copyright/" data-toggle="tooltip" data-placement="bottom" title="Free&nbsp;Creative&nbsp;Commons&nbsp;videos">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor"
+                    class="bi bi-badge-cc" viewBox="0 0 16 16">
+                    <path
+                        d="M3.708 7.755c0-1.111.488-1.753 1.319-1.753.681 0 1.138.47 1.186 1.107H7.36V7c-.052-1.186-1.024-2-2.342-2C3.414 5 2.5 6.05 2.5 7.751v.747c0 1.7.905 2.73 2.518 2.73 1.314 0 2.285-.792 2.342-1.939v-.114H6.213c-.048.615-.496 1.05-1.186 1.05-.84 0-1.319-.62-1.319-1.727v-.743zm6.14 0c0-1.111.488-1.753 1.318-1.753.682 0 1.139.47 1.187 1.107H13.5V7c-.053-1.186-1.024-2-2.342-2C9.554 5 8.64 6.05 8.64 7.751v.747c0 1.7.905 2.73 2.518 2.73 1.314 0 2.285-.792 2.342-1.939v-.114h-1.147c-.048.615-.497 1.05-1.187 1.05-.839 0-1.318-.62-1.318-1.727v-.743z" />
+                    <path
+                        d="M14 3a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h12zM2 2a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H2z" />
+                    </svg>
+                </a>
             </span>
         {% endif %}
     {% endif %}
+    
 </div>
 {% endspaceless %}
 {% endif %}

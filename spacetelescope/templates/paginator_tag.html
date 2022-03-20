@@ -2,7 +2,7 @@
 {% load djangoplicity_utils %}
 {% if paginator and page_obj %}
 {% spaceless %}
-<div class="row statusbar">
+<div class="row mx-5">
     <div class="col-md-3">
         {% blocktrans with page_obj.start_index as start_index and page_obj.end_index as end_index and paginator.count as count %}Showing {{ start_index }} to {{ end_index }} of {{ count }}{% endblocktrans %}
     </div>

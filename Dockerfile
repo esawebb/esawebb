@@ -95,4 +95,4 @@ COPY --chown=webbadm scripts/newrelic.ini ./
 COPY --chown=webbadm .coveragerc .
 COPY --chown=webbadm manage.py manage.py
 COPY --chown=webbadm spacetelescope/ spacetelescope/
-COPY --chown=webbadm spacetelescope/static/fonts/helvetica/ /usr/share/fonts/truetype/helvetica/
+# COPY --chown=webbadm spacetelescope/static/fonts/helvetica/ /usr/share/fonts/truetype/helvetica/
