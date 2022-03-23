@@ -5,7 +5,7 @@
     {% for entry in submenu %}
 
         {% if entry.children|length %}
-        <li class="nav-item dropdown me-3 py-2">
+        <li class="nav-item me-3 py-2">
             
             <a class="nav-link dropdown-toggle text-danger" href="{{ entry.link|default:" #" }}"{% if entry.on_click %} target="_blank" {%
                 endif %}>{% trans entry.title|safe %}</a>
