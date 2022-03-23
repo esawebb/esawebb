@@ -9,12 +9,17 @@
             role="button" data-bs-toggle="dropdown" aria-expanded="false"
             href="{{ entry.link|default:"#" }}"{% if entry.on_click %} target="_blank"{% endif %}>{% trans entry.title|safe %}</a>
         
-            
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <li><a class="dropdown-item" href="#">Action</a></li>
+                <li><a class="dropdown-item" href="#">Another action</a></li>
+
+              </ul>
+
         <div class="level1-wrapper">
             <div class="level1{% for child in entry.children %}{% if child.selected or child.leaf_selected %} current{% endif %}{% endfor %}">
                 <ul id="submenu-aim-{{ entry.id }}" 
                     aria-labelledby="navbarDropdown"
-                    class="dropdown-menu {% if entry.leaf_selected or entry.selected %} selected{% endif %}{% for child in entry.children %}{% if child.selected or child.leaf_selected %} current{% if child.leaf_selected %} current-leaf{% endif %}{% endif %}{% endfor %}">
+                    class=" {% if entry.leaf_selected or entry.selected %} selected{% endif %}{% for child in entry.children %}{% if child.selected or child.leaf_selected %} current{% if child.leaf_selected %} current-leaf{% endif %}{% endif %}{% endfor %}">
                 {% render_submenu entry.children main_children %}
                 </ul>
             </div>
