@@ -3,21 +3,30 @@
 
 <ul id="navbar" class="navbar-nav me-auto  mb-0">
     {% for entry in submenu %}
-    <li class="nav-item me-3 py-2">
+    <li class="nav-item dropdown me-3 py-2">
         {% if entry.children|length %}
-        <a class="nav-link text-danger" href="{{ entry.link|default:"#" }}"{% if entry.on_click %} target="_blank"{% endif %}>{% trans entry.title|safe %}</a>
-        
+        <a class="nav-link dropdown-toggle text-danger" href="{{ entry.link|default:" #" }}"{% if entry.on_click %} target="_blank" {%
+            endif %}>{% trans entry.title|safe %}</a>
+
         <div class="level1-wrapper">
-            <div class="level1{% for child in entry.children %}{% if child.selected or child.leaf_selected %} current{% endif %}{% endfor %}">
-                <ul id="submenu-aim-{{ entry.id }}" class="dropdown-menu {% if entry.leaf_selected or entry.selected %} selected{% endif %}{% for child in entry.children %}{% if child.selected or child.leaf_selected %} current{% if child.leaf_selected %} current-leaf{% endif %}{% endif %}{% endfor %}">
-                {% render_submenu entry.children main_children %}
+            <div
+                class="level1{% for child in entry.children %}{% if child.selected or child.leaf_selected %} current{% endif %}{% endfor %}">
+                <ul id="submenu-aim-{{ entry.id }}"
+                    aria-labelledby="navbarDropdown"
+                    class="dropdown-menu {% if entry.leaf_selected or entry.selected %} selected{% endif %}{% for child in entry.children %}{% if child.selected or child.leaf_selected %} current{% if child.leaf_selected %} current-leaf{% endif %}{% endif %}{% endfor %}">
+                    {% render_submenu entry.children main_children %}
                 </ul>
             </div>
         </div>
-        {% else %}
-        <a class="nav-link text-white" href="{{ entry.link|default:"#" }}"{% if entry.on_click %} target="_blank"{% endif %}>{% trans entry.title|safe %}</a>
-        
-        {% endif %}
-        </li>
+    </li>
+
+    {% else %}
+
+    <li class="nav-item me-3 py-2">
+        <a class="nav-link text-white" href="{{ entry.link|default:" #" }}"{% if entry.on_click %} target="_blank" {%
+            endif %}>{% trans entry.title|safe %}</a>
+    </li>
+    {% endif %}
+
     {% endfor %}
-    </ul>
+</ul>
