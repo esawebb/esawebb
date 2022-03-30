@@ -3,7 +3,7 @@
 {% for entry in submenu %}
 <li
     class="">
-    <a class="dropdown-item btn btn-outline-primary" 
+    <a class="dropdown-item btn btn-outline-secondary" 
         href="{{ entry.link|default:" #" }}"{% if entry.on_click %} target="_blank" {% endif %}>
         {% trans entry.title|safe %}
         {% if entry.children|length %}
