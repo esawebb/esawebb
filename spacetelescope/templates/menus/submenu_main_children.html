@@ -11,11 +11,8 @@
         {% endif %}
     </a>
     {% if entry.children|length %}
-    <span class="mobile-children">
-        <span class="fa fa-angle-down"></span>
-    </span>
     <ul id="submenu-aim-{{ entry.id }}"
-        class="submenu-aim sublevel{% if entry.leaf_selected or entry.selected %} selected{% endif %}{% for child in entry.children %}{% if child.selected or child.leaf_selected %} current{% if child.leaf_selected %} current-leaf{% endif %}{% endif %}{% endfor %}">
+        class="submenu dropdown-menu {% if entry.leaf_selected or entry.selected %} selected{% endif %}{% for child in entry.children %}{% if child.selected or child.leaf_selected %} current{% if child.leaf_selected %} current-leaf{% endif %}{% endif %}{% endfor %}">
         {% render_submenu entry.children main_children %}
     </ul>
     {% endif %}
