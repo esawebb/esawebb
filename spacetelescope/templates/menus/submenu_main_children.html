@@ -2,7 +2,7 @@
 {% load i18n %}
 {% for entry in submenu %}
 <li
-    class="{% if entry.children|length %}submenu{% endif %}{% if entry.leaf_selected or entry.selected %} current{% if entry.leaf_selected %} current-leaf{% endif %}{% endif %}">
+    class="">
     <a class="dropdown-item" 
         href="{{ entry.link|default:" #" }}"{% if entry.on_click %} target="_blank" {% endif %}>
         {% trans entry.title|safe %}
