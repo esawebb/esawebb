@@ -71,10 +71,10 @@ class DisableInternalCDN(object):
                 internal_ips = IPSet([IPNetwork(i) for i in internal_ips])
                 if ip in internal_ips:
                     response.content = response.content.replace(
-                        '//cdn.spacetelescope.org/archives/',
+                        '//cdn.esawebb.org/archives/',
                         '//www.spacetelescope.org/static/archives/'
                     ).replace(
-                        '//cdn2.spacetelescope.org/archives/',
+                        '//cdn2.esawebb.org/archives/',
                         '//www.spacetelescope.org/static/archives/'
                     )
 
