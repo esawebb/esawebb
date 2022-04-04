@@ -7,10 +7,15 @@ module.exports = {
     entry: path.resolve(__dirname, '../src/script.js'),
     output:
     {
-        filename: 'bundle.[contenthash].js',
+        filename: 'js/[name].js',
         path: path.resolve(__dirname, '../dist')
     },
-    devtool: 'source-map',
+    optimization: {
+        splitChunks: {
+          chunks: 'all',
+          name: 'vendors',
+        },
+    },
     plugins:
         [
             new CopyWebpackPlugin({

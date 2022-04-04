@@ -17,6 +17,12 @@
 {% endblock %}
 
 {% block content_area %}
+<div class="container-fluid my-3">
+    <canvas id="webgl" class="webgl">
+        
+    </canvas>
+</div>
+
 <div id="fb-root"></div>
 
 <div id="pr-carousel-wrapper">
@@ -44,38 +50,39 @@
     </div> <!-- pr-carousel -->
 </div> <!-- pr-carousel-wrapper -->
 
-<div class="container" id="body">
+<div class="" id="body">
 
 {% embed_page_no_unpublished frontpage_main %}
 
 {% if announcements %}
-<div class="row announcements">
-    <div class="col-md-12">
-        <div id="ann-carousel-wrapper">
-            <div class="section-header">
-                <div class="section-title">
-                    <a href="{% url 'announcements_defaultquery' %}">{% trans 'What\'s New' %}</a>
-                </div>
-                <div class="section-navigation">
-                </div>
-            </div>
-            <div id="ann-carousel">
+    <section class=" ">
+        <div class="container py-4 my-5">
+
+            <header class="mb-3">
+                <h4 class="lined lined-center text-uppercase">WHAT'S NEW</h4>
+            </header>
+            <div class="row">
                 {% for announcement in announcements %}
-                <div class="slide">
-                    <a href="{{ announcement.get_absolute_url }}">
-                        <div class="ann-description">
-                            <div class="title">{{ announcement.title }}</div>
-                            <div class="date">{{ announcement.release_date|date:"j N Y" }} — {{ announcement.id }}</div>
+                <div class="col-lg-3 col-md-6 mb-3">
+                    <div class="box-image shadow  border">
+                        <div class="mb-4 primary-overlay">
+                            <img src="{{ announcement.main_visual.resource_thumb350x.url }}" alt="{{ announcement.main_visual.title }}"
+                                class="w-100 -top" style="height: 200px; object-fit: cover;" />
                         </div>
-                        <img draggable="false" data-lazy="{{ announcement.main_visual.resource_thumb350x.url }}" alt="{{ announcement.main_visual.title }}">
-                        <div class="readmore"></div>
-                    </a>
-                </div> <!-- slide -->
+                        <div class="text-center pb-3">
+                            <h5 class="new-title h6 text-uppercase text-primary mx-2">
+                                <a class="text-reset" href="blog-post.html" style="text-decoration: none;">{{ announcement.title }}</a>
+                            </h5>
+                            <p class="small text-uppercase text-muted">{{ announcement.release_date|date:"j N Y" }} — {{ announcement.id }}</p>
+                            <a class="btn btn-outline-primary" href="{{ announcement.get_absolute_url }}">Read More</a>
+                        </div>
+                    </div>
+                </div>
                 {% endfor %}
-            </div> <!-- ann-carousel -->
-        </div> <!-- ann-carousel-wrapper -->
-    </div>
-</div> <!-- announcements -->
+            </div>
+
+        </div>
+    </section> <!-- announcements -->
 {% endif %}
 
 <div class="row frontpage-section middle-section">

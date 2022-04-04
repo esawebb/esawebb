@@ -118,6 +118,22 @@ const mesh = new THREE.Mesh(geometry, material)
 
 scene.add(mesh)
 
+window.addEventListener('resize', () =>
+{
+       // Update sizes
+       sizes.width = window.innerWidth
+       sizes.height = window.innerHeight/2
+   
+       // Update camera
+       camera.aspect = sizes.width / sizes.height
+       camera.updateProjectionMatrix()
+   
+       // Update renderer
+       renderer.setSize(sizes.width, sizes.height)
+})
+
+
+
 const animate = () =>
 {   
     requestAnimationFrame(animate)
