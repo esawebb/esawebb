@@ -52,7 +52,6 @@
 
 <div class="" id="body">
 
-{% embed_page_no_unpublished frontpage_main %}
 
 {% if announcements %}
     <section class=" ">
@@ -75,6 +74,7 @@
                             </h5>
                             <p class="small text-uppercase text-muted">{{ announcement.release_date|date:"j N Y" }} — {{ announcement.id }}</p>
                             <a class="btn btn-outline-primary" href="{{ announcement.get_absolute_url }}">Read More</a>
+                            <p>{{ announcement.main_visual.resource_thumb350x.url }}</p>
                         </div>
                     </div>
                 </div>
