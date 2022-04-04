@@ -1,0 +1,11 @@
+body section{
+    
+    min-height: 90vmin;
+    width: 100%;
+  }
+
+  .container-fluid
+  {
+      margin: 0 !important;
+      padding: 0 !important;
+  }
