@@ -55,7 +55,7 @@
 
 {% if announcements %}
     <section class=" ">
-        <div class="container py-4 my-5">
+        <div class="container py-2 my-2">
 
             <header class="mb-3">
                 <h4 class="lined lined-center text-uppercase">WHAT'S NEW</h4>
@@ -74,7 +74,6 @@
                             </h5>
                             <p class="small text-uppercase text-muted">{{ announcement.release_date|date:"j N Y" }} — {{ announcement.id }}</p>
                             <a class="btn btn-outline-primary" href="{{ announcement.get_absolute_url }}">Read More</a>
-                            <p>{{ announcement.main_visual.resource_thumb350x.url }}</p>
                         </div>
                     </div>
                 </div>
