@@ -36,7 +36,7 @@ class FrontpageView(TemplateView):
         #context['potws'] = PictureOfTheWeekOptions.Queries.default.queryset(PictureOfTheWeek, PictureOfTheWeekOptions, self.request)[0][:10]
         #context['releases'] = Release.get_latest_release(5)
         #context['top100'] = ImageOptions.Queries.top100.queryset(Image, ImageOptions, self.request)[0][:20]
-        #context['science_newsletter'] = Newsletter.latest_for_type(NewsletterType.objects.get(slug='science'))
+        context['science_newsletter'] = Newsletter.latest_for_type(NewsletterType.objects.get(slug='science'))
 
         return context
 
