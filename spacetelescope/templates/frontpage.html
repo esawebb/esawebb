@@ -110,16 +110,17 @@
             </div> <!-- potw-carousel -->
         </div>
         {% endif %}
+
         {% if hubblecasts %}
-        <div id="hubblecast-carousel-wrapper">
-            <div class="section-header">
-                <div class="section-title">
+        <div id="hubblecast-carousel-wrapper border border-danger">
+            <div class="section-header border-danger">
+                <div class="section-title border-danger">
                     <a href="{% url 'videos_query_category' 'hubblecast' %}">{% trans "Hubblecast" %}</a>
                 </div>
                 <div class="section-navigation">
                 </div>
             </div>
-            <div id="hubblecast-carousel">
+            <div id="hubblecast-carousel border-danger">
                 <div class="slide">
                     {% if hubblecasts.0.youtube_video_id and hubblecasts.0.use_youtube %}
                         <div class="youtube-wrapper">
@@ -132,12 +133,14 @@
                         <div class="hubblecast-description{% if not hubblecasts.0.youtube_video_id or not hubblecasts.0.use_youtube %} hubblecast-description-jwplayer{% endif %}">
                             <div class="date">{{ hubblecasts.0.release_date|datetime:"DATE" }} — {{ hubblecasts.0.id }}</div>
                             <div class="title">{{ hubblecasts.0.title }}</div>
+                            <div>TEST</div>
                     </div>
                     </a>
                 </div>
             </div> <!-- hubblecast-carousel -->
         </div>
         {% endif %}
+
         <div id="newsletter-carousel-wrapper">
             <div class="section-header">
                 <div class="section-title blue-title">
