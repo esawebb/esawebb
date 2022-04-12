@@ -82,10 +82,6 @@
                             },
         
                         ];
-                        console.log("{{ video.youtube_video_id }}")
-                        console.log('{{ video.title }}')
-                        console.log('{{  video.pk }}')
-                        console.log('{{ video.get_absolute_url }}')
                         console.log('{{ video.resource_videoframe.url }}')
                         </script>
                 {% if video.youtube_video_id and video.use_youtube %}
@@ -93,7 +89,7 @@
                 {% else %}
                     <a class="popup-jwplayer" data-bs-toggle="modal" data-bs-target="#popup-youtube" data-video-id="{{ video.pk }}" data-title="{{ video.title }}" data-url="{{ video.get_absolute_url }}">
                 {% endif %}
-                        <img src="https://cdn.esawebb.org/archives/images/screen/{{video.pk}}.jpg"
+                        <img src="{{ video.resource_videoframe.url }}"
                         class="w-100" style="height: 300px; object-fit: cover;" />
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                             class="bi bi-play-fill play-icon btn text-whi" viewBox="0 0 16 16">
