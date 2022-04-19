@@ -1012,16 +1012,16 @@
       var descriptionFeed = document.getElementById('descriptionFeed');
       var i = 0;
       var myUrl = 'https://blogs.nasa.gov/webb/feed/';
-      var proxy = 'https://secret-ocean-49799.herokuapp.com/';
+      var proxy = 'https://api.allorigins.win/get?url=';
       var finalURL = proxy + myUrl;
       $.get(finalURL, function (data) {
         console.log(data)
-        $(data).find("item").each(function () { // or "item" or whatever suits your feed
+        $(data.contents).find("item").each(function () { // or "item" or whatever suits your feed
           var el = $(this);
           i += 1;
           if (i == 1) {
             titleFeed.innerHTML = el.find("title").text();
-            descriptionFeed.innerHTML = el.find("description").text();
+            descriptionFeed.innerHTML = el.find("pubDate").text();
 
           }
 
