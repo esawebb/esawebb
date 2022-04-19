@@ -375,7 +375,7 @@
               <p class="card-text text-start form-text text-dark">
                 The NASA/ESA/CSA James Webb Space Telescope (JWST) Early Release Observations (ERO) will be among the first spectacular images and spectra taken following the commissioning of the observatory. This release will represent Webb’s debut to the world by showcasing the observatory’s capabilities and is intended to have immediate and dramatic appeal for a broad audience.
               </p>
-              <a href="https://us17.campaign-archive.com/?e=[UNIQID]&u=c9d477c0347a0cff748ddb1d0&id=4f4c9846b8"
+              <a href="/ero-events-call"
                 class="btn btn-light border">Read more</a>
             </div>
           </div>
@@ -1012,16 +1012,16 @@
       var descriptionFeed = document.getElementById('descriptionFeed');
       var i = 0;
       var myUrl = 'https://blogs.nasa.gov/webb/feed/';
-      var proxy = 'https://secret-ocean-49799.herokuapp.com/';
+      var proxy = 'https://api.allorigins.win/get?url=';
       var finalURL = proxy + myUrl;
       $.get(finalURL, function (data) {
         console.log(data)
-        $(data).find("item").each(function () { // or "item" or whatever suits your feed
+        $(data.contents).find("item").each(function () { // or "item" or whatever suits your feed
           var el = $(this);
           i += 1;
           if (i == 1) {
             titleFeed.innerHTML = el.find("title").text();
-            descriptionFeed.innerHTML = el.find("description").text();
+            descriptionFeed.innerHTML = el.find("pubDate").text();
 
           }
 
