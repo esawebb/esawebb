@@ -370,13 +370,12 @@
               </a>
             </div>
             <div class="card-body ">
-              <h6 class="card-title ">Webb has arrived at L2</h6>
+              <h6 class="card-title ">ESA/Webb Early Release Observations Unveiling Solicitation Call</h6>
               <br>
               <p class="card-text text-start form-text text-dark">
-                Today, at 20:00 CET, the James Webb Space Telescope fired its onboard thrusters for nearly five minutes
-                (297 seconds) to complete the final post launch course correction to Webb’s trajectory.
+                The NASA/ESA/CSA James Webb Space Telescope (JWST) Early Release Observations (ERO) will be among the first spectacular images and spectra taken following the commissioning of the observatory. This release will represent Webb’s debut to the world by showcasing the observatory’s capabilities and is intended to have immediate and dramatic appeal for a broad audience.
               </p>
-              <a href="https://www.esa.int/Science_Exploration/Space_Science/Webb/Webb_has_arrived_at_L2"
+              <a href="https://us17.campaign-archive.com/?e=[UNIQID]&u=c9d477c0347a0cff748ddb1d0&id=4f4c9846b8"
                 class="btn btn-light border">Read more</a>
             </div>
           </div>
@@ -1016,7 +1015,7 @@
       var proxy = 'https://secret-ocean-49799.herokuapp.com/';
       var finalURL = proxy + myUrl;
       $.get(finalURL, function (data) {
-
+        console.log(data)
         $(data).find("item").each(function () { // or "item" or whatever suits your feed
           var el = $(this);
           i += 1;
