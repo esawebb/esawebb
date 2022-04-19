@@ -12,3 +12,12 @@ class JourneyView(TemplateView):
         context = super(JourneyView, self).get_context_data(**kwargs)
 
         return context
+
+class EroEventsCall(TemplateView):
+
+    template_name = 'ero-events-call.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(EroEventsCall, self).get_context_data(**kwargs)
+
+        return context

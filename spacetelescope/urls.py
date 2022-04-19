@@ -41,8 +41,8 @@ from djangoplicity.science.options import ScienceAnnouncementOptions
 
 from spacetelescope.admin import admin_site, adminlogs_site, adminshop_site
 from spacetelescope.frontpage.api.views.image_views import ESASkyListView
-from spacetelescope.frontpage.views import FrontpageView, d2d
-from spacetelescope.journey.views import JourneyView
+from spacetelescope.frontpage.views import FrontpageView,  d2d
+from spacetelescope.journey.views import JourneyView, EroEventsCall
 
 
 urlpatterns = []
@@ -175,6 +175,7 @@ urlpatterns += [
     url( r'^d2d/$', d2d ),
 
     # Static pages
+    url( r'^ero-events-call/$', cache_page(60 * 5)(EroEventsCall.as_view()) ),
     url(r'^(?P<url>.*/)$', view_page)
 ]
 
