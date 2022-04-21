@@ -27,6 +27,7 @@
 
 <div id="pr-carousel-wrapper">
     <div id="pr-carousel">
+        {% if release %}
         {% for release in releases %}
         <div class="slide">
             <a href="{{ release.get_absolute_url }}">
@@ -47,6 +48,7 @@
             </a>
         </div>  <!-- slide -->
         {% endfor %}
+        {% endif %}
     </div> <!-- pr-carousel -->
 </div> <!-- pr-carousel-wrapper -->
 
@@ -120,50 +122,23 @@
                 <div class="section-navigation">
                 </div>
             </div>
-            <div id="hubblecast-carousel border-danger">
-                <div class="slide">
-                    {% if hubblecasts.0.youtube_video_id and hubblecasts.0.use_youtube %}
-                        <div class="youtube-wrapper">
-                            <div id="youtube-player"></div>
-                        </div>
-                    {% else %}
-                        {% embedvideo_subs hubblecasts.0 'medium_podcast,h264' 'hd_and_apple,hd720p_screen,dome_preview' '' hubblecasts.0.videosubtitle_set.all 0 %}
-                    {% endif %}
-                    <a href="{{ hubblecasts.0.get_absolute_url }}">
-                        <div class="hubblecast-description{% if not hubblecasts.0.youtube_video_id or not hubblecasts.0.use_youtube %} hubblecast-description-jwplayer{% endif %}">
-                            <div class="date">{{ hubblecasts.0.release_date|datetime:"DATE" }} — {{ hubblecasts.0.id }}</div>
-                            <div class="title">{{ hubblecasts.0.title }}</div>
-                            <div>TEST</div>
-                    </div>
-                    </a>
-                </div>
-            </div> <!-- hubblecast-carousel -->
+            
         </div>
         {% endif %}
 
-        <div id="newsletter-carousel-wrapper">
-            <div class="section-header">
-                <div class="section-title blue-title">
-                    {% trans "ESA/Hubble Newsletter" %} TEST
-                </div>
-            </div>
-            <div>
-                <img src="{% static 'frontpage/newsletters.jpg' %}" alt="Take a look to our newsletters">
-            </div>
-        </div>
     </div>
 
     <div class="col-md-4">
         <div class="social-feeds">
-            <div class="facebook-feeds">
+            <div class="facebook-feeds mb-5">
                 <div class="section-header">
                     <div class="section-title blue-title">
-                        {% trans "ESA/Hubble Facebook" %}
+                        <h4 class="lined lined-center text-uppercase my-3">{% trans "ESA/Webb Facebook" %}</h4>
                     </div>
                 </div>
                 <div
                     class="fb-page"
-                    data-href="https://www.facebook.com/hubbleESA/"
+                    data-href="https://www.facebook.com/ESAWebb/"
                     data-tabs="timeline"
                     data-width="304"
                     data-height="610"
@@ -171,20 +146,20 @@
                     data-hide-cover="false"
                     data-show-facepile="false"
                 >
-                    <blockquote cite="https://www.facebook.com/hubbleESA/" class="fb-xfbml-parse-ignore">
-                        <a href="https://www.facebook.com/hubbleESA/">Hubble Space Telescope</a>
+                    <blockquote cite="https://www.facebook.com/ESAWebb/" class="fb-xfbml-parse-ignore">
+                        <a href="https://www.facebook.com/ESAWebb/">Webb Space Telescope</a>
                     </blockquote>
                 </div>
             </div>
-            <div class="twitter-feeds">
+            <div class="twitter-feeds mb-5">
                 <div class="section-header">
                     <div class="section-title blue-title">
-                        {% trans "ESA/Hubble on Twitter" %}
+                        <h4 class="lined lined-center text-uppercase my-3">{% trans "ESA/Webb on Twitter" %}</h4>
                     </div>
                 </div>
                 <a
                     class="twitter-timeline"
-                    href="https://twitter.com/HUBBLE_space?ref_src=twsrc%5Etfw"
+                    href="https://twitter.com/ESA_Webb?ref_src=twsrc%5Etfw"
                     data-width="304"
                     data-height="610"
                 >
@@ -227,52 +202,40 @@
 
 <div class="frontpage-section subscribe-to-hubble">
     <div>
-        <div class="row">
-            <div class="col-md-4">
-                <div class="border">
+        <div class="row mx-5 my-5">
+            <div class="col-md-6">
+                <div class="">
                     <div class="section-header">
                         <div class="section-title blue-title">
-                            {% trans "Newsletter" %}
+                            <h4 class="lined lined-center text-uppercase">{% trans "Newsletter" %}</h4>
+                            
                         </div>
                     </div>
-                    <div id="newsletters-link">
-                        <a href="/newsletters">
-                            <img src="{% static 'frontpage/newsletters.jpg' %}" alt="Take a look to our newsletters">
+                    <div id="newsletters-link ">
+                        <a class="shadow  border box-image" href="/n3w-fr0nt/newsletters">
+                            <img src="{% static 'frontpage/newsletters.jpg' %}" alt="Take a look to our newsletters"
+                                style="object-fit: cover; width: 100%; height: 300px;">
                         </a>
                     </div>
                 </div>
             </div>
-            <div class="col-md-4">
-                <div class="border">
+            <div class="col-md-6">
+                <div class="">
                     <div class="section-header">
                         <div class="section-title blue-title">
-                            {% trans "Subscribe to Hubble news" %}
+                            <h4 class="lined lined-center text-uppercase">{% trans "Subscribe to Hubble news" %}</h4>
+                            
                         </div>
                     </div>
                     <div id="subscribe-link">
-                        <a href="/subscribe">
-                            <img src="{% static 'frontpage/subscribe.jpg' %}" alt="Subscribe to Hubble news">
+                        <a class="shadow  border box-image" href="/n3w-fr0nt/subscribe">
+                            <img src="{% static 'frontpage/subscribe.jpg' %}" alt="Subscribe to Hubble news"
+                            style="object-fit: cover; width: 100%; height: 300px;">
                         </a>
                     </div>
                 </div>
             </div>
-            <div class="col-md-4">
-                <div class="border">
-                    <div class="section-header">
-                        <div class="section-title blue-title">
-                            {% trans "Link to socials" %}
-                        </div>
-                    </div>
-                    <div class="social-links">
-                        <div class="icons">
-                            <a href="http://www.youtube.com/user/HubbleESA"><div class="sprites-youtube_42px_flat"></div></a>
-                            <a href="http://itunes.apple.com/de/podcast/hubblecast-hd/id258935617 "><div class="sprites-apple_42px_flat"></div></a>
-                            <a href="http://www.vimeo.com/hubbleesa"><div class="sprites-vimeo_42px_flat"></div></a>
-                            <a href="http://www.flickr.com/photos/hubble_esa "><div class="sprites-flickr_42px_flat"></div></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            
         </div>
     </div>
 </div>
