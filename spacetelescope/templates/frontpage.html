@@ -114,15 +114,31 @@
         {% endif %}
 
         {% if hubblecasts %}
-        <div id="hubblecast-carousel-wrapper border border-danger">
-            <div class="section-header border-danger">
-                <div class="section-title border-danger">
+        <div id="hubblecast-carousel-wrapper">
+            <div class="section-header">
+                <div class="section-title">
                     <a href="{% url 'videos_query_category' 'hubblecast' %}">{% trans "Hubblecast" %}</a>
                 </div>
                 <div class="section-navigation">
                 </div>
             </div>
-            
+            <div id="hubblecast-carousel">
+                <div class="slide">
+                    {% if hubblecasts.0.youtube_video_id and hubblecasts.0.use_youtube %}
+                        <div class="youtube-wrapper">
+                            <div id="youtube-player"></div>
+                        </div>
+                    {% else %}
+                        {% embedvideo_subs hubblecasts.0 'medium_podcast,h264' 'hd_and_apple,hd720p_screen,dome_preview' '' hubblecasts.0.videosubtitle_set.all 0 %}
+                    {% endif %}
+                    <a href="{{ hubblecasts.0.get_absolute_url }}">
+                        <div class="hubblecast-description{% if not hubblecasts.0.youtube_video_id or not hubblecasts.0.use_youtube %} hubblecast-description-jwplayer{% endif %}">
+                            <div class="date">{{ hubblecasts.0.release_date|datetime:"DATE" }} — {{ hubblecasts.0.id }}</div>
+                            <div class="title">{{ hubblecasts.0.title }}</div>
+                    </div>
+                    </a>
+                </div>
+            </div> <!-- hubblecast-carousel -->
         </div>
         {% endif %}
 
