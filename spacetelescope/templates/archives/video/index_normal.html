@@ -5,30 +5,8 @@
 {% include "archives/search_results.html" %}
 
 {% spaceless %}
-
-{% for list in object_list|split_list:columns %}
 <div id="gallery" class="row">
-    {% block index_row %}
-
-
-    <div id="popup-jwplayer" class="mfp-hide popup-jwplayer-content">
-        <div id="videoplayer"></div>
-        <div class="popup-caption">
-            <a href="">
-                <div class="row">
-                    <div class="col-md-9 col-sm-12">
-                        <span class="title"></span>
-                    </div>
-                    <div class="col-md-3 col-sm-12">
-                        <a href="{{ video.get_absolute_url }}"><span class="download-info">{% trans "Info and downloads" %}</span></a>
-                        <span class="fa fa-download download-icon"></span>
-                    </div>
-                </div>
-            </a>
-        </div>
-    </div>
-
-    {% for video in list %}
+{% for video in object_list %}
 
     <div class="modal fade " id="popup-youtube-{{ video.youtube_video_id }}" tabindex="-1" aria-labelledby="exampleModalLabel"
         aria-hidden="true">
@@ -116,11 +94,9 @@
             </div>
         </div>
     </div>
-    {% endfor %}
-    {% endblock index_row %}
-</div>
-{% endfor %}
 
+{% endfor %}
+</div>
 {% endspaceless %}
 {% paginator paginator page_obj paginator_url paginator_prefix paginator_params %}
 {% statusbar paginator page_obj browsers searchable search_url search_str  %}
