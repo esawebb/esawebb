@@ -70,8 +70,8 @@
                             <img src="{{ announcement.main_visual.resource_thumb350x.url }}" alt="{{ announcement.main_visual.title }}"
                                 class="w-100 -top" style="height: 200px; object-fit: cover;" />
                         </div>
-                        <div class="text-center pb-3">
-                            <h5 class="new-title h6 text-uppercase text-primary mx-2">
+                        <div class="text-center pb-3" >
+                            <h5 class="new-title h6 text-uppercase text-primary mx-2" style="height: 70px;">
                                 <a class="text-reset" href="blog-post.html" style="text-decoration: none;">{{ announcement.title }}</a>
                             </h5>
                             <p class="small text-uppercase text-muted">{{ announcement.release_date|date:"j N Y" }} — {{ announcement.id }}</p>
@@ -86,49 +86,130 @@
     </section> <!-- announcements -->
 {% endif %}
 
+<div class="container py-2 my-2">
 <div class="row frontpage-section middle-section">
-    <div class="col-md-8">
+    <div class="col-md-6 col-lg-6 col-xl-8 pe-5">
+
         {% if potws %}
-        <div id="potw-carousel-wrapper">
-            <div class="section-header">
-                <div class="section-title">
-                    <a href="{% url 'potw_defaultquery' %}">{% trans "Picture of the Week" %}</a>
-                </div>
-                <div class="section-navigation">
-                </div>
-            </div>
+        <div id="potw-carousel-wrapper" class="mt-5">
+            
+            <h4 class="lined lined-center text-uppercase col-12 col-lg-7 col-xl-8">{% trans "Picture of the Week" %}</h4>
+            
             <div id="potw-carousel">
                 {% for potw in potws %}
+                <script>
+                    var potwArray = [
+                        {% for potw in potws %}
+                        {
+                            id: '{{ potw.id }}',
+                            pk: '{{ potw.pk }}',
+                            title: '{{ potw.visual.title }}',
+                            src: '{{ potw.visual.resource_screen640.url }}',
+                            url: '{{ potw.get_absolute_url }}',
+                            potw: '{{ potw.release_date }}'
+                        },
+                        {% endfor %}
+                    ];
+                    console.log(potwArray)
+                </script>
                 <div class="slide">
-                    <a href="{{ potw.get_absolute_url }}">
-                        <img draggable="false" data-lazy="{{ potw.visual.resource_screen640.url }}" class="img-responsive" alt="{{ potw.visual.title }}">
+                    <a href="{{ potw.get_absolute_url }}" style="text-decoration: none;">
+                        <img src="https://cdn.spacetelescope.org/archives/images/thumb700x/potw2217a.jpg" class="w-100 shadow" style="height: 400px; object-fit: cover;">
                         <div class="potw-description">
-                            <div class="date">{{ potw.release_date|datetime:"DATE" }} — {{ potw.id }}</div>
-                            <div class="title">{{ potw.visual.title }}</div>
+                            <span class="date">{{ potw.release_date|datetime:"DATE" }} — {{ potw.id }}</span>
+                            <span class="title mx-5">{{ potw.visual.title }}</span>
                         </div>
                     </a>
                 </div> <!-- slide -->
                 {% endfor %}
-            </div> <!-- potw-carousel -->
+            </div> <!-- potw-carousel -->   
+        </div>
+        {% endif %}
+
+        {% if spacesparks %}
+        <div class="my-5">
+            <div id="hubblecast-carousel">
+                <div class="">
+                    <h4 class="lined lined-center text-uppercase col-12 col-lg-7 col-xl-8">SPACE SPARKS</h4>
+                    <div class="youtube-body shadow  border box-image">
+                        <iframe width="560" height="315" src="https://www.youtube.com/embed/{{ spacesparks.0.youtube_video_id }}"
+                            class="youtube-video shadow" title="YouTube video player" frameborder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowfullscreen></iframe>
+                    </div>
+                    <a  href="{{ spacesparks.0.get_absolute_url }}" style="text-decoration: none;">
+                        <span class="pt-3" >
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20 "
+                                class="me-2"
+                                fill="currentColor" class="bi bi-box-arrow-in-right" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd"
+                                    d="M6 3.5a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-2a.5.5 0 0 0-1 0v2A1.5 1.5 0 0 0 6.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-8A1.5 1.5 0 0 0 5 3.5v2a.5.5 0 0 0 1 0v-2z" />
+                                <path fill-rule="evenodd"
+                                    d="M11.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H1.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3z" />
+                            </svg>
+                            {{ spacesparks.0.release_date|datetime:"DATE" }} — {{ spacesparks.0.id }}
+                        </span>
+                        <span class=" mx-5">
+                            {{ spacesparks.0.title }}
+                        </span>
+                    </a>
+                </div>
+            </div> <!-- spacesparks-carousel -->
+        </div>
+        {% endif %}
+
+        {% if potws %}
+        <div id="newsletter-preview-container">
+            <h4 class="lined lined-center text-uppercase col-12 col-lg-7 col-xl-8">ESA/Webb science Newsletter</h4>
+            <div id="newsletter-preview">
+                <a href="/newsletters/science/html/487/" style="text-decoration: none;">
+                    <div class="img-wrapper">
+                        <img draggable="false" src="https://esahubble.org/media/archives/newsletters/screen/487.jpg" class="w-100 shadow" style="height: 400px; object-fit: cover;" alt="Newsletter">
+                    </div>
+                    <div class="newsletter-description">
+                        <div class="title">ESA/Hubble/JWST Science Newsletter - April 2022</div>
+                    </div>
+                </a>
+            </div>
         </div>
         {% endif %}
 
         {% if hubblecasts %}
-        <div id="hubblecast-carousel-wrapper border border-danger">
-            <div class="section-header border-danger">
-                <div class="section-title border-danger">
+        <div id="hubblecast-carousel-wrapper">
+            <div class="section-header">
+                <div class="section-title">
                     <a href="{% url 'videos_query_category' 'hubblecast' %}">{% trans "Hubblecast" %}</a>
                 </div>
                 <div class="section-navigation">
                 </div>
             </div>
-            
+            <div id="hubblecast-carousel">
+                <div class="slide">
+                    {% if hubblecasts.0.youtube_video_id and hubblecasts.0.use_youtube %}
+                        <div class="youtube-wrapper">
+                            <div id="youtube-player"></div>
+                        </div>
+                    {% else %}
+                        {% embedvideo_subs hubblecasts.0 'medium_podcast,h264' 'hd_and_apple,hd720p_screen,dome_preview' '' hubblecasts.0.videosubtitle_set.all 0 %}
+                    {% endif %}
+                    <a href="{{ hubblecasts.0.get_absolute_url }}">
+                        <div class="hubblecast-description{% if not hubblecasts.0.youtube_video_id or not hubblecasts.0.use_youtube %} hubblecast-description-jwplayer{% endif %}">
+                            <div class="date">{{ hubblecasts.0.release_date|datetime:"DATE" }} — {{ hubblecasts.0.id }}</div>
+                            <div class="title">{{ hubblecasts.0.title }}</div>
+                    </div>
+                    </a>
+                </div>
+            </div> <!-- hubblecast-carousel -->
         </div>
         {% endif %}
-
     </div>
+    
 
-    <div class="col-md-4">
+   
+
+    
+
+    <div class="col-md-6 col-lg-6 col-xl-4 mt-4 ps-3">
         <div class="social-feeds">
             <div class="facebook-feeds mb-5">
                 <div class="section-header">
@@ -136,38 +217,28 @@
                         <h4 class="lined lined-center text-uppercase my-3">{% trans "ESA/Webb Facebook" %}</h4>
                     </div>
                 </div>
-                <div
-                    class="fb-page"
-                    data-href="https://www.facebook.com/ESAWebb/"
-                    data-tabs="timeline"
-                    data-width="304"
-                    data-height="610"
-                    data-small-header="true"
-                    data-hide-cover="false"
-                    data-show-facepile="false"
-                >
-                    <blockquote cite="https://www.facebook.com/ESAWebb/" class="fb-xfbml-parse-ignore">
-                        <a href="https://www.facebook.com/ESAWebb/">Webb Space Telescope</a>
-                    </blockquote>
+                <div class="embed-responsive embed-responsive-16by9 fb-page">
+                    <iframe
+                        src="https://www.facebook.com/plugins/page.php?locale=en_US&href=https%3A%2F%2Fwww.facebook.com%2FESAWebb%2F&tabs=timeline&width=360&height=700&small_header=true&adapt_container_width=true&hide_cover=false&show_facepile=true&appId"
+                        width="360" height="700" style="border:none;" scrolling="no" frameborder="0"
+                        class="box-image" allowfullscreen="true"
+                        allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe>
                 </div>
             </div>
-            <div class="twitter-feeds mb-5">
+            <div class="twitter-feeds mb-3 px-3">
                 <div class="section-header">
                     <div class="section-title blue-title">
                         <h4 class="lined lined-center text-uppercase my-3">{% trans "ESA/Webb on Twitter" %}</h4>
                     </div>
                 </div>
-                <a
-                    class="twitter-timeline"
-                    href="https://twitter.com/ESA_Webb?ref_src=twsrc%5Etfw"
-                    data-width="304"
-                    data-height="610"
-                >
-                    Tweets by HUBBLE_space
-                </a>
+                <a class="twitter-timeline" data-lang="en" data-height="620" data-theme="light"
+                        class="ms-1"
+                        href="https://twitter.com/ESA_Webb?ref_src=twsrc%5Etfw">Tweets by ESA_Webb</a>
+                    <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
             </div>
         </div>
     </div>
+</div>
 </div>
 
 {% if top100 %}
@@ -201,8 +272,8 @@
 {% endif %}
 
 <div class="frontpage-section subscribe-to-hubble">
-    <div>
-        <div class="row mx-5 my-5">
+    <div class="container py-2 my-2">
+        <div class="row my-3">
             <div class="col-md-6">
                 <div class="">
                     <div class="section-header">
@@ -214,7 +285,7 @@
                     <div id="newsletters-link ">
                         <a class="shadow  border box-image" href="/n3w-fr0nt/newsletters">
                             <img src="{% static 'frontpage/newsletters.jpg' %}" alt="Take a look to our newsletters"
-                                style="object-fit: cover; width: 100%; height: 300px;">
+                                style="object-fit: cover; width: 100%; height: 300px;" class="shadow">
                         </a>
                     </div>
                 </div>
@@ -230,7 +301,7 @@
                     <div id="subscribe-link">
                         <a class="shadow  border box-image" href="/n3w-fr0nt/subscribe">
                             <img src="{% static 'frontpage/subscribe.jpg' %}" alt="Subscribe to Hubble news"
-                            style="object-fit: cover; width: 100%; height: 300px;">
+                            style="object-fit: cover; width: 100%; height: 300px;" class="shadow">
                         </a>
                     </div>
                 </div>
