@@ -33,7 +33,7 @@ if get_secret('DATABASE_URL'):
     }
 
 # EMAIL: SMTP CONFIG
-EMAIL_SUBJECT_PREFIX = '[ESA/HUBBLE]'
+EMAIL_SUBJECT_PREFIX = '[ESA/WEBB]'
 EMAIL_HOST = 'smtp.mailgun.org'
 EMAIL_HOST_USER = get_secret('EMAIL_USER')
 EMAIL_HOST_PASSWORD = get_secret('EMAIL_PASSWORD')
@@ -132,4 +132,4 @@ DEFAULT_MEDIA_CONTENT_SERVER = 'CDN77'
 # YOUTUBE
 YOUTUBE_CLIENT_SECRET = os.path.join(ROOT, 'config', 'youtube', 'client-secret.json')
 YOUTUBE_TOKEN = os.path.join(ROOT, 'config', 'youtube', 'youtube-oauth2-token.json')
-YOUTUBE_DEFAULT_TAGS = ['Hubble', 'Hubble Space Telescope', 'Telescope', 'Space', 'Observatory', 'ESA']
+YOUTUBE_DEFAULT_TAGS = ['Webb', 'Webb Space Telescope', 'Telescope', 'Space', 'Observatory', 'ESA']
