@@ -424,8 +424,8 @@ FILE_UPLOAD_PERMISSIONS = 0o666
 SERVER_EMAIL = 'nobody@esawebb.org'
 DEFAULT_FROM_EMAIL = 'nobody@esawebb.org'
 DEFAULT_MAIL_USER = ['web@esawebb.org']
-DEFAULT_MAIL_TAGGING = ['zidmani@gmail.com']
-EMAIL_SUBJECT_PREFIX = '[SPACETELESCOPE-LOCAL]'
+DEFAULT_MAIL_TAGGING = ['dpalacios@encisosystems.com']
+EMAIL_SUBJECT_PREFIX = '[ESAWEBB-LOCAL]'
 
 ##################
 # AUTHENTICATION #
@@ -553,7 +553,7 @@ ARCHIVES = (
 )
 
 ARCHIVE_EMBARGO_LOGIN = ('hst', 'shtenvix')
-ARCHIVE_EMAIL_SENDER = "ESA/Webb Information Centre <hubble@eso.org>"
+ARCHIVE_EMAIL_SENDER = "ESA/Webb Information Centre <Webb@esawebb.org>"
 
 ARCHIVE_URL_QUERY_PREFIX = 'archive'
 ARCHIVE_URL_DETAIL_PREFIX = ''
@@ -574,7 +574,7 @@ ANNOUNCEMENTS_ARCHIVE_ROOT = 'archives/announcements/'
 NEWSLETTERS_ARCHIVE_ROOT = 'archives/newsletters/'
 SCIENCEANNOUNCEMENTS_ARCHIVE_ROOT = 'archives/science/'
 
-SHOP_NEWSLETTER_FROM = 'ESO & ESA/Webb'
+SHOP_NEWSLETTER_FROM = 'ESA/Webb'
 
 VIDEOS_FEATURED_SUBJECT = 'webbcast'
 
@@ -606,7 +606,7 @@ ARCHIVE_WORKFLOWS = {
     'media.video.rename': ('spacetelescope.workflows.media', 'video_rename'),
 }
 
-VIDEO_RENAME_NOTIFY = ['hzodet@eso.org', 'mkornmes@eso.org']
+VIDEO_RENAME_NOTIFY = ['dpalacios@encisosystems.com', 'ovivas@encisosystems.com']
 
 ARCHIVE_CROSSLINKS = djangoplicity.crosslinks.crosslinks_for_domain('spacetelescope.org')
 
@@ -784,7 +784,7 @@ REGEX_REDIRECTS = (
     ( re.compile( r'/videos/scripts/(.+)' ), r'/static/archives/videos/script/\g<1>' ),
 )
 
-SITE_DOMAIN = "www.spacetelescope.org"
+SITE_DOMAIN = "www.esawebb.org"
 
 # ======================================================================
 # SITE SPECIFIC SECTIONS
@@ -827,8 +827,8 @@ SATCHMO_SETTINGS = {
 #   )
 }
 
-SITE_NAME = "Hubbleshop"
-SITE_DOMAIN = "www.spacetelescope.org"
+SITE_NAME = "Webbshop"
+SITE_DOMAIN = "www.esawebb.org"
 LOGDIR = LOG_DIR
 LOGFILE = 'satchmo.log'
 CHECKOUT_SSL = True
