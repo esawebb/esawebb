@@ -1,7 +1,7 @@
 {% load i18n %}
 {% load djangoplicity_datetime %}
 {% include 'archives/embargo_notice.html' %}
-<h3 class="pr_typeid">{{ object.id }} &mdash; {% trans "Announcement" %}</h3>
+<h3 class="pr_typeid mt-5">{{ object.id }} &mdash; {% trans "Announcement" %}</h3>
 <h1 class="pr_title">{{ object.title }}</h1>
 {% if object.subtitle %}<h3>{{ object.subtitle }}</h3>{% endif %}
 <p class="date">{{ object.release_date|datetime:"DATE" }}</p>
