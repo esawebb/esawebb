@@ -5,7 +5,7 @@
     {% if resources.downloads %}
     <div{% if resources.name == "Ultra HD" %} style="background-color: #ffe8e8"{% endif %}>
         {% if resources.name %}
-            <h3  class="archivegrouptitle" >{% trans resources.name %}{% if resources.name == "Ultra HD" %} <a style="font-size: 14px" href="/public/videoformats/">(info)</a>{% endif %}</h3>
+            <h4  class="archivegrouptitle" >{% trans resources.name %}{% if resources.name == "Ultra HD" %} <a style="font-size: 14px" href="/public/videoformats/">(info)</a>{% endif %}</h4>
         {% endif %}
         {% for thumbnail, link in resources.thumbnails %}
             {% if link %}

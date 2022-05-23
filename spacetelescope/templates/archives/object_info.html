@@ -3,7 +3,7 @@
 <div class="object-info">
 {% for info in info_groups %}
 {% if info.links or info.metadata %}
-    {% if info.name %}<h3>{% trans info.name %}</h3>{% endif %}
+    {% if info.name %}<h4>{% trans info.name %}</h4>{% endif %}
     <div>
     {% for link in info.links %}
         {% if link.url %}<a href="{{ link.url }}">{% trans link.title %}</a><br /> {% endif %}
