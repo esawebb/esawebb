@@ -33,7 +33,7 @@ if get_secret('DATABASE_URL'):
     }
 
 # EMAIL: SMTP CONFIG
-EMAIL_SUBJECT_PREFIX = '[ESA/HUBBLE]'
+EMAIL_SUBJECT_PREFIX = '[ESA/WEBB]'
 EMAIL_HOST = 'smtp.mailgun.org'
 EMAIL_HOST_USER = get_secret('EMAIL_USER')
 EMAIL_HOST_PASSWORD = get_secret('EMAIL_PASSWORD')
@@ -112,7 +112,7 @@ MEDIA_CONTENT_SERVERS = {
         url='https://cdn.esawebb.org/',
         url_bigfiles='https://cdn2.esawebb.org/',
         remote_dir='/www/',
-        host='push-19.cdn77.com',
+        host='push-12.cdn77.com',
         username=get_secret('CDN_STORAGE_USERNAME'),
         password=get_secret('CDN_STORAGE_PASSWORD'),
         api_login=get_secret('CDN_API_LOGIN'),

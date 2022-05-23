@@ -90,8 +90,7 @@ DEBUG_TOOLBAR_CONFIG = {}
 DEBUG_TOOLBAR_PANELS = []
 
 ADMINS = (
-    ('Web team ESAHubble', 'alejo.vivas.av@gmail.com'),
-    ('Daniel Restrepo', 'dpalacios@encisosystems.com')
+    ('Web team ESAHubble', 'web@esawebb.org'),
 )
 MANAGERS = ADMINS
 
@@ -421,10 +420,10 @@ FILE_UPLOAD_TEMP_DIR = TMP_DIR
 FILE_UPLOAD_PERMISSIONS = 0o666
 
 # EMAIL CONFIG
-SERVER_EMAIL = 'nobody@esahubble.org'
-DEFAULT_FROM_EMAIL = 'nobody@esahubble.org'
-DEFAULT_MAIL_USER = ['web@esahubble.org']
-DEFAULT_MAIL_TAGGING = ['zidmani@gmail.com']
+SERVER_EMAIL = 'nobody@esawebb.org'
+DEFAULT_FROM_EMAIL = 'nobody@esawebb.org'
+DEFAULT_MAIL_USER = ['web@esawebb.org']
+DEFAULT_MAIL_TAGGING = ['dpalacios@encisosystems.com']
 EMAIL_SUBJECT_PREFIX = '[SPACETELESCOPE-LOCAL]'
 
 ##################
@@ -553,7 +552,7 @@ ARCHIVES = (
 )
 
 ARCHIVE_EMBARGO_LOGIN = ('hst', 'shtenvix')
-ARCHIVE_EMAIL_SENDER = "ESA/Hubble Information Centre <hubble@eso.org>"
+ARCHIVE_EMAIL_SENDER = "ESA/Webb Information Centre <web@esawebb.org>"
 
 ARCHIVE_URL_QUERY_PREFIX = 'archive'
 ARCHIVE_URL_DETAIL_PREFIX = ''
@@ -574,7 +573,7 @@ ANNOUNCEMENTS_ARCHIVE_ROOT = 'archives/announcements/'
 NEWSLETTERS_ARCHIVE_ROOT = 'archives/newsletters/'
 SCIENCEANNOUNCEMENTS_ARCHIVE_ROOT = 'archives/science/'
 
-SHOP_NEWSLETTER_FROM = 'ESO & ESA/Hubble'
+SHOP_NEWSLETTER_FROM = 'ESO & ESA/Webb'
 
 VIDEOS_FEATURED_SUBJECT = 'hubblecast'
 
@@ -586,7 +585,7 @@ VIDEOS_FORMATS_REMOVE = [
 
 RELEASE_LINK_PREFIX = "heic"
 
-DEFAULT_CREATOR = u"ESA/Hubble"
+DEFAULT_CREATOR = u"ESA/Webb"
 DEFAULT_CREATOR_URL = "https://esawebb.org"
 DEFAULT_CONTACT_ADDRESS = u"ESA Office, Space Telescope Science Institute, 3700 San Martin Dr"
 DEFAULT_CONTACT_CITY = u"Baltimore"
@@ -594,8 +593,8 @@ DEFAULT_CONTACT_STATE_PROVINCE = "MD"
 DEFAULT_CONTACT_POSTAL_CODE = u"21218"
 DEFAULT_CONTACT_COUNTRY = u"United States"
 DEFAULT_RIGHTS = "Creative Commons Attribution 4.0 International License"
-DEFAULT_PUBLISHER = u"ESA/Hubble"
-DEFAULT_PUBLISHER_ID = u"esahubble"
+DEFAULT_PUBLISHER = u"ESA/Webb"
+DEFAULT_PUBLISHER_ID = u"esawebb"
 
 DEFAULT_CREDIT = u"NASA &amp; ESA"
 
@@ -606,7 +605,7 @@ ARCHIVE_WORKFLOWS = {
     'media.video.rename': ('spacetelescope.workflows.media', 'video_rename'),
 }
 
-VIDEO_RENAME_NOTIFY = ['hzodet@eso.org', 'mkornmes@eso.org']
+VIDEO_RENAME_NOTIFY = ['web@esawebb.org', 'dpalacios@encisosystems.com']
 
 ARCHIVE_CROSSLINKS = djangoplicity.crosslinks.crosslinks_for_domain('spacetelescope.org')
 
@@ -631,7 +630,7 @@ SOCIAL_TWITTER_TUPLE = (
 )
 
 
-SOCIAL_FACEBOOK_WALL = 'http://www.facebook.com/hubbleESA?sk=wall'
+SOCIAL_FACEBOOK_WALL = 'http://www.facebook.com/ESAWebb?sk=wall'
 
 #########
 # FEEDS #
