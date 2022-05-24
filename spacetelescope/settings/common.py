@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 #
 # spacetelescope.org
-# Copyright 2010 ESO & ESA/Hubble
+# Copyright 2010 ESO & ESA/Webb
 #
 # Authors:
 #   Lars Holm Nielsen <lnielsen@eso.org>
@@ -424,7 +424,7 @@ SERVER_EMAIL = 'nobody@esawebb.org'
 DEFAULT_FROM_EMAIL = 'nobody@esawebb.org'
 DEFAULT_MAIL_USER = ['web@esawebb.org']
 DEFAULT_MAIL_TAGGING = ['dpalacios@encisosystems.com']
-EMAIL_SUBJECT_PREFIX = '[SPACETELESCOPE-LOCAL]'
+EMAIL_SUBJECT_PREFIX = '[ESAWEBB-LOCAL]'
 
 ##################
 # AUTHENTICATION #
@@ -443,7 +443,7 @@ LOGIN_REDIRECT_URL = '/'
 # LDAP AUTH #
 #############
 '''
-Disabled when migrated to esahubble.org
+Disabled when migrated to esawebb.org
 import ldap
 from django_auth_ldap.config import LDAPSearch, ActiveDirectoryGroupType
 
@@ -573,9 +573,9 @@ ANNOUNCEMENTS_ARCHIVE_ROOT = 'archives/announcements/'
 NEWSLETTERS_ARCHIVE_ROOT = 'archives/newsletters/'
 SCIENCEANNOUNCEMENTS_ARCHIVE_ROOT = 'archives/science/'
 
-SHOP_NEWSLETTER_FROM = 'ESO & ESA/Webb'
+SHOP_NEWSLETTER_FROM = 'ESA/Webb'
 
-VIDEOS_FEATURED_SUBJECT = 'hubblecast'
+VIDEOS_FEATURED_SUBJECT = 'webbcast'
 
 VIDEOS_SUBTITLES_FORMATS = ('hd_and_apple', 'medium_podcast')
 # List of extra formats which should be removed when importing new videos.
@@ -783,7 +783,7 @@ REGEX_REDIRECTS = (
     ( re.compile( r'/videos/scripts/(.+)' ), r'/static/archives/videos/script/\g<1>' ),
 )
 
-SITE_DOMAIN = "www.spacetelescope.org"
+SITE_DOMAIN = "www.esawebb.org"
 
 # ======================================================================
 # SITE SPECIFIC SECTIONS
@@ -826,8 +826,8 @@ SATCHMO_SETTINGS = {
 #   )
 }
 
-SITE_NAME = "Hubbleshop"
-SITE_DOMAIN = "www.spacetelescope.org"
+SITE_NAME = "Webbshop"
+SITE_DOMAIN = "www.esawebb.org"
 LOGDIR = LOG_DIR
 LOGFILE = 'satchmo.log'
 CHECKOUT_SSL = True

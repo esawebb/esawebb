@@ -23,6 +23,7 @@ x-common: &common
     - ${VOLUME_PATH}/media:/home/webbadm/media
     - ${VOLUME_PATH}/import:/home/webbadm/import
     - ${VOLUME_PATH}/tmp:/home/webbadm/tmp
+
     # The SSH key and known_hosts is required to push files to CDN77 Storage, See README
     - ./config/.ssh:/home/webbadm/.ssh
     - ./config/youtube:/home/webbadm/config/youtube
@@ -35,6 +36,7 @@ services:
       - ./config/nginx-prod/conf.d:/etc/nginx/conf.d:ro
       - ./config/nginx-common/snippets:/etc/nginx/snippets:ro
       - ${VOLUME_PATH}/media:/home/webbadm/media:ro
+
     ports:
       - "80:80"
 
