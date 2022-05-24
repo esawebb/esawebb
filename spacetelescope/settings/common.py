@@ -90,8 +90,7 @@ DEBUG_TOOLBAR_CONFIG = {}
 DEBUG_TOOLBAR_PANELS = []
 
 ADMINS = (
-    ('Web team ESAWebb', 'ovivas@encisosystems.com'),
-    ('Diego Palacios', 'dpalacios@encisosystems.com')
+    ('Web team ESAHubble', 'web@esawebb.org'),
 )
 MANAGERS = ADMINS
 
@@ -553,7 +552,7 @@ ARCHIVES = (
 )
 
 ARCHIVE_EMBARGO_LOGIN = ('hst', 'shtenvix')
-ARCHIVE_EMAIL_SENDER = "ESA/Webb Information Centre <Webb@esawebb.org>"
+ARCHIVE_EMAIL_SENDER = "ESA/Webb Information Centre <web@esawebb.org>"
 
 ARCHIVE_URL_QUERY_PREFIX = 'archive'
 ARCHIVE_URL_DETAIL_PREFIX = ''
@@ -606,7 +605,7 @@ ARCHIVE_WORKFLOWS = {
     'media.video.rename': ('spacetelescope.workflows.media', 'video_rename'),
 }
 
-VIDEO_RENAME_NOTIFY = ['dpalacios@encisosystems.com', 'ovivas@encisosystems.com']
+VIDEO_RENAME_NOTIFY = ['web@esawebb.org', 'dpalacios@encisosystems.com']
 
 ARCHIVE_CROSSLINKS = djangoplicity.crosslinks.crosslinks_for_domain('spacetelescope.org')
 
@@ -631,7 +630,7 @@ SOCIAL_TWITTER_TUPLE = (
 )
 
 
-SOCIAL_FACEBOOK_WALL = 'http://www.facebook.com/hubbleESA?sk=wall'
+SOCIAL_FACEBOOK_WALL = 'http://www.facebook.com/ESAWebb?sk=wall'
 
 #########
 # FEEDS #
