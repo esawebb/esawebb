@@ -4,8 +4,8 @@ from oauth2client.client import flow_from_clientsecrets
 from oauth2client.file import Storage
 from oauth2client.tools import argparser, run_flow
 
-TOKEN_FILE = '/home/hubbleadm/config/youtube/youtube-oauth2-token.json'
-CLIENT_SECRET = '/home/hubbleadm/config/youtube/client-secret.json'
+TOKEN_FILE = '/home/esawebb/config/youtube/youtube-oauth2-token.json'
+CLIENT_SECRET = '/home/esawebb/config/youtube/client-secret.json'
 
 
 message = '''
