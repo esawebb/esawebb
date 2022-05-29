@@ -3,7 +3,7 @@
 <h3>{% trans "Videos" %}</h3>
 {% for v in videos %}
 <div class="embedded-list-video">
-    <a href="{{ v.get_absolute_url }}"><img class="img-responsive" src="{{ v.resource_news.url }}" alt="{{ v.title }}" /></a>
+    <a href="{{ v.get_absolute_url }}"><img class="w-100 -top" style="height: 350px; object-fit: cover;" src="{{ v.resource_news.url }}" alt="{{ v.title }}" /></a>
     <div><a href="{{ v.get_absolute_url }}">{% trans "PR Video" %} {% if v.override_id %}{{ v.override_id }}{% else %}{{ v.source.id|default:v.id }}{% endif %}</a></div>
     <div>{{ v.title }} {% if not v.in_original_language %}<span class="langnote"><br />{% trans "in English only" %}</span>{% endif %}</div>
 </div>
