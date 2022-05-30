@@ -51,8 +51,8 @@
         var player, player_main;
         function onYouTubeIframeAPIReady() {
             player_main = new YT.Player('youtube-player-main', {
-                height: '263',
-                width: '468',
+                height: '315',
+                width: '560',
                 videoId: '{{ object_list.0.youtube_video_id }}',
                 playerVars: {
                     'modestbranding': 1,
@@ -67,8 +67,8 @@
                 // event.target.setPlaybackQuality('large');
             }
             player = new YT.Player('youtube-player', {
-                height: '387',
-                width: '688',
+                height: '315',
+                width: '560',
                 playerVars: {
                     'modestbranding': 1,
                     'hl': '{{ LANGUAGE_CODE }}'
