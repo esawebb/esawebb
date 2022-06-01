@@ -410,12 +410,12 @@
             "rght": 46, 
             "is_primary": 1, 
             "parent": 6, 
-            "title": "Picture of the Week", 
+            "title": "Picture of the Month", 
             "menu": null, 
             "tree_id": 1, 
             "on_click": 0, 
             "lft": 43, 
-            "link": "/images/potw/", 
+            "link": "/images/potm/", 
             "published": 1, 
             "level": 2
         }

@@ -22,10 +22,10 @@ class TestImage(TestCase):
         self.assertTrue(pagination_found)
 
     def test_images_potw(self):
-        response = self.client.get('/images/potw/')
+        response = self.client.get('/images/potm/')
         pagination_found = utils.eval_pagination_regex(response, self.potw_number, 'press releases')
 
-        self.assertContains(response, 'Picture of the Week')
+        self.assertContains(response, 'Picture of the Month')
         self.assertTrue(pagination_found)
 
     def test_image_comparisons(self):
