@@ -21,23 +21,23 @@
                     {% endif %}
                 </div>
                 <div class="news-description pb-3">
-                    <div class="news-id">{{ potw.id }} — {% trans "Picture of the Month" %}</div>
+                    <div class="news-id mx-2">{{ potw.id }} — {% trans "Picture of the Month" %}</div>
                     {% if potw.image %}
-                        <div class="news-title h6 text-uppercase text-primary mx-2" style="height: 70px;">{{ potw.image.title }}</div>
+                        <div class="news-title h6 text-uppercase text-primary mx-2" style="height: 60px;">{{ potw.image.title }}</div>
                     {% elif potw.video %}
-                        <div class="news-title h6 text-uppercase text-primary mx-2" style="height: 70px;">{{ potw.video.title }}</div>
+                        <div class="news-title h6 text-uppercase text-primary mx-2" style="height: 60px;">{{ potw.video.title }}</div>
                     {% elif potw.comparison %}
-                        <div class="news-title h6 text-uppercase text-primary mx-2" style="height: 70px;">{{ potw.comparison.title }}</div>
+                        <div class="news-title h6 text-uppercase text-primary mx-2" style="height: 60px;">{{ potw.comparison.title }}</div>
                     {% endif %}
                     {% if potw.image %}
-                        <div class="news-teaser small text-uppercase text-muted" style="height: 400px;"><strong>{{ potw.release_date|datetime:"DATE" }}</strong>: {{ potw.image.description|safe|striptags|truncatewords:150 }}</div>
+                        <div class="news-teaser small text-uppercase text-muted mx-2" style="height: 350px; overflow: hidden; text-overflow: ellipsis;"><strong>{{ potw.release_date|datetime:"DATE" }}</strong>: {{ potw.image.description|safe|striptags|truncatewords:150 }}</div>
                     {% elif potw.video %}
-                        <div class="news-teaser small text-uppercase text-muted" style="height: 400px;"><strong>{{ potw.release_date|datetime:"DATE" }}</strong>: {{ potw.video.description|safe|striptags|truncatewords:150 }}</div>
+                        <div class="news-teaser small text-uppercase text-muted mx-2" style="height: 350px; overflow: hidden; text-overflow: ellipsis;"><strong>{{ potw.release_date|datetime:"DATE" }}</strong>: {{ potw.video.description|safe|striptags|truncatewords:150 }}</div>
                     {% elif potw.comparison %}
-                        <div class="news-teaser small text-uppercase text-muted" style="height: 400px;"><strong>{{ potw.release_date|datetime:"DATE" }}</strong>: {{ potw.comparison.description|safe|striptags|truncatewords:150 }}</div>
+                        <div class="news-teaser small text-uppercase text-muted mx-2" style="height: 350px; overflow: hidden; text-overflow: ellipsis;"><strong>{{ potw.release_date|datetime:"DATE" }}</strong>: {{ potw.comparison.description|safe|striptags|truncatewords:150 }}</div>
                     {% endif %}
                 </div>
-                <div class="news-readmore btn btn-outline-primary">{% trans "Read more" %}</div>
+                <div class="news-readmore btn btn-outline-primary mx-auto text-center">{% trans "Read more" %}</div>
             </div> <!-- news-wrapper -->
         </a>
     </div>
