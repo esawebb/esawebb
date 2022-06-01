@@ -20,7 +20,7 @@
 {% block body %}
 
 <div class="row no-page">
-    <div class="col-md-12">
+    <div id="ann-list" class="col-md-12">
 {% block content %}
 <h1>{% if archive_title %}{% trans archive_title %}{% else %}{{ archive|capfirst }} {% trans "Archive" %}{% endif %}{% if listview_feed_url %} <a href="{{ listview_feed_url }}" class="listviewrsslink"><span class="fa fa-rss"></span></a>{% endif %}</h1>
 

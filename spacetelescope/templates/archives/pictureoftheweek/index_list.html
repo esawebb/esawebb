@@ -8,7 +8,7 @@
 {% for row in object_list|split_list:4 %}
 <div class="row news-list">
     {% for potw in row %}
-    <div class="col-lg-3 col-md-6 col-sm-12">
+    <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12">
         <a href="{{ potw.get_absolute_url }}">
             <div class="news-wrapper box-image shadow  border my-3">
                 <div class="news-image">
