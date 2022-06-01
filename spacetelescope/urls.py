@@ -80,7 +80,7 @@ urlpatterns += [
     url( r'^alive-check.dat$', djangoplicity.views.alive_check ),
 
     # Media Archive
-    url( r'^n3w-fr0nt/images/potw/', include('djangoplicity.media.urls_potw'), { 'model': PictureOfTheWeek, 'options': PictureOfTheWeekOptions } ),
+    url( r'^n3w-fr0nt/images/potm/', include('djangoplicity.media.urls_potw'), { 'model': PictureOfTheWeek, 'options': PictureOfTheWeekOptions } ),
     url( r'^n3w-fr0nt/images/comparisons/', include('djangoplicity.media.urls_imagecomparisons'), { 'model': ImageComparison, 'options': ImageComparisonOptions } ),
     url( r'^n3w-fr0nt/images/', include('djangoplicity.media.urls_images'), { 'model': Image, 'options': ImageOptions } ),
     #( r'^news/feed/(?P<url>.*)/?$', 'django.contrib.syndication.views.feed', { 'feed_dict': ReleaseOptions.get_feeds() } ),
