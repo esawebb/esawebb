@@ -30,11 +30,11 @@
                         <div class="news-title h6 text-uppercase text-primary mx-3 mt-2" style="height: 60px;">{{ potw.comparison.title }}</div>
                     {% endif %}
                     {% if potw.image %}
-                        <div class="news-teaser small text-uppercase text-muted mx-3" style="height: 355px; overflow: hidden; text-overflow: ellipsis;"><strong>{{ potw.release_date|datetime:"DATE" }}</strong>: {{ potw.image.description|safe|striptags|truncatewords:150 }}</div>
+                        <div class="news-teaser small  text-muted mx-3" style="height: 355px; overflow: hidden; text-overflow: ellipsis;"><strong>{{ potw.release_date|datetime:"DATE" }}</strong>: {{ potw.image.description|safe|striptags|truncatewords:150 }}</div>
                     {% elif potw.video %}
-                        <div class="news-teaser small text-uppercase text-muted mx-3" style="height: 355px; overflow: hidden; text-overflow: ellipsis;"><strong>{{ potw.release_date|datetime:"DATE" }}</strong>: {{ potw.video.description|safe|striptags|truncatewords:150 }}</div>
+                        <div class="news-teaser small  text-muted mx-3" style="height: 355px; overflow: hidden; text-overflow: ellipsis;"><strong>{{ potw.release_date|datetime:"DATE" }}</strong>: {{ potw.video.description|safe|striptags|truncatewords:150 }}</div>
                     {% elif potw.comparison %}
-                        <div class="news-teaser small text-uppercase text-muted mx-3" style="height: 355px; overflow: hidden; text-overflow: ellipsis;"><strong>{{ potw.release_date|datetime:"DATE" }}</strong>: {{ potw.comparison.description|safe|striptags|truncatewords:150 }}</div>
+                        <div class="news-teaser small  text-muted mx-3" style="height: 355px; overflow: hidden; text-overflow: ellipsis;"><strong>{{ potw.release_date|datetime:"DATE" }}</strong>: {{ potw.comparison.description|safe|striptags|truncatewords:150 }}</div>
                     {% endif %}
                 </div>
                 <div class="news-readmore text-center">
