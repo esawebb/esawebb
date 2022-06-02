@@ -28,7 +28,7 @@
                         </svg>
                     </a>
                     {% endif %}
-                    <input id="id_archivesearch" type="text" class="form-control border border-primary" value="{% if search_str and not search_str_verbose %}{{search_str}}{% endif %}" placeholder="{% trans "Search" %}{% if archive_title %} {% trans archive_title %}{% endif %}..." name="search" />
+                    <input id="id_archivesearch" type="text" class="form-control border border-primary" value="{% if search_str and not search_str_verbose %}{{search_str}}{% endif %}" placeholder="{% trans "Search" %}{% if archive_title %} {% if archive_title == 'Picture of the Week' %}Picture of the Month{% else %}{% trans archive_title %}{% endif %}{% endif %}..." name="search" />
                     
                     <button class="btn btn-primary text-white" type="submit">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
