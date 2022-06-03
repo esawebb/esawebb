@@ -1,12 +1,12 @@
 {% load i18n %}
 {% spaceless %}
-<div class="object-info">
+<div id="object_info_div" class="object-info">
 {% for info in info_groups %}
 {% if info.links or info.metadata %}
     {% if info.name %}<h4>{% trans info.name %}</h4>{% endif %}
     <div>
     {% for link in info.links %}
-        {% if link.url %}<a href="{{ link.url }}">{% trans link.title %}</a><br /> {% endif %}
+        {% if link.url %}<a id="object_info_a" href="{{ link.url }}">{% trans link.title %}</a><br /> {% endif %}
     {% endfor %}
     {% if info.metadata %}
         <table class="table form-text text-dark">
