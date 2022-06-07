@@ -2,13 +2,13 @@
 {% load djangoplicity_utils %}
 {% spaceless %}
 {% if admin_groups %}
-    <div class="object-info">
+    <div id="object_admin_div" class="object-info">
     {% for admin in admin_groups %}
         {% if admin.name %}<h3>{% trans admin.name %}</h3>{% endif %}
         {% if admin.links or admin.metadata %}
             <div>
             {% for link in admin.links %}
-                {% if link.url %}<a href="{{ link.url }}">{% trans link.title %}</a><br />{% endif %}
+                {% if link.url %}<a id="object_admin_a" class="btn btn-primary d-block" href="{{ link.url }}">{% trans link.title %}</a><br />{% endif %}
             {% endfor %}
             {% if admin.metadata %}
                 <table class="table form-text text-dark">
