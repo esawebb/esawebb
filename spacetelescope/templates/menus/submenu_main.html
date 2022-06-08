@@ -3,11 +3,13 @@
 
 <ul id="navbar" class="navbar-nav me-auto  mb-0">
     {% for entry in submenu %}
+
+    {% if entry.children|length %}
     <li class="nav-item py-2">
         <a class="nav-link text-white pe-0" href="{{ entry.link|default:"#" }}">{% trans entry.title|safe %}</a>
     </li>
     <li class="nav-item me-3 py-2 {% if entry.children|length %} dropdown {% endif %}">
-        {% if entry.children|length %}
+        
         <a class="nav-link dropdown-toggle text-white" 
             role="button" data-bs-toggle="dropdown" aria-expanded="false"
             href="{{ entry.link|default:"#" }}"{% if entry.on_click %} target="_blank"{% endif %}></a>
@@ -18,11 +20,13 @@
                 
                 {% render_submenu entry.children main_children %}
             </ul>
-      
-        {% else %}
+    </li> 
+    {% else %}
+
+    <li class="nav-item me-3 py-2">
         <a class="nav-link text-white" href="{{ entry.link|default:"#" }}"{% if entry.on_click %} target="_blank"{% endif %}>{% trans entry.title|safe %}</a>
+    </li>
+    {% endif %}
         
-        {% endif %}
-        </li>
     {% endfor %}
     </ul>
