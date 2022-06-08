@@ -127,7 +127,23 @@
         {% endif %}
 
         {% if spacesparks %}
-        <div class="my-5">
+        <div id="newsletter-preview-container my-5">
+            <h4 class="lined lined-center text-uppercase col-12 col-lg-7 col-xl-8">ESA/Hubble/Webb Science Newsletter</h4>
+            <div id="newsletter-preview shadow">
+                <a href="/newsletters/science/html/487/" style="text-decoration: none;">
+                    <div class="img-wrapper">
+                        <img draggable="false" src="https://cdn.esawebb.org/archives/images/screen/ann2203a.jpg" class="w-100 shadow" style="height: 400px; object-fit: cover; object-position: center top;" alt="Newsletter">
+                    </div>
+                    <div class="newsletter-description">
+                        <div class="title">ESA/Hubble/JWST Science Newsletter - April 2022</div>
+                    </div>
+                </a>
+            </div>
+        </div>
+        {% endif %}
+
+        {% if spacesparks %}
+        <div class="">
             <div id="hubblecast-carousel">
                 <div class="">
                     <h4 class="lined lined-center text-uppercase col-12 col-lg-7 col-xl-8">SPACE SPARKS</h4>
@@ -155,22 +171,6 @@
                     </a>
                 </div>
             </div> <!-- spacesparks-carousel -->
-        </div>
-        {% endif %}
-
-        {% if spacesparks %}
-        <div id="newsletter-preview-container">
-            <h4 class="lined lined-center text-uppercase col-12 col-lg-7 col-xl-8">ESA/Hubble/Webb Science Newsletter</h4>
-            <div id="newsletter-preview shadow">
-                <a href="/newsletters/science/html/487/" style="text-decoration: none;">
-                    <div class="img-wrapper">
-                        <img draggable="false" src="https://cdn.esawebb.org/archives/images/screen/ann2203a.jpg" class="w-100 shadow" style="height: 400px; object-fit: cover; object-position: center top;" alt="Newsletter">
-                    </div>
-                    <div class="newsletter-description">
-                        <div class="title">ESA/Hubble/JWST Science Newsletter - April 2022</div>
-                    </div>
-                </a>
-            </div>
         </div>
         {% endif %}
 
@@ -294,7 +294,7 @@
                 <div class="">
                     <div class="section-header">
                         <div class="section-title blue-title">
-                            <h4 class="lined lined-center text-uppercase">{% trans "Suscribirse a Webb News" %}</h4>
+                            <h4 class="lined lined-center text-uppercase">{% trans "Subscribe to Webb News" %}</h4>
                             
                         </div>
                     </div>
