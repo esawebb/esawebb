@@ -72,7 +72,7 @@
                         </div>
                         <div class="text-center pb-3" >
                             <h5 class="new-title h6 text-uppercase text-primary mx-2" style="height: 70px;">
-                                <a class="text-reset" href="blog-post.html" style="text-decoration: none;">{{ announcement.title }}</a>
+                                <a class="text-reset" href="{{ announcement.get_absolute_url }}" style="text-decoration: none;">{{ announcement.title }}</a>
                             </h5>
                             <p class="small text-uppercase text-muted">{{ announcement.release_date|date:"j N Y" }} — {{ announcement.id }}</p>
                             <a class="btn btn-outline-primary" href="{{ announcement.get_absolute_url }}">Read More</a>
@@ -278,7 +278,7 @@
                 <div class="">
                     <div class="section-header">
                         <div class="section-title blue-title">
-                            <h4 class="lined lined-center text-uppercase">{% trans "Newsletter" %}</h4>
+                            <h4 class="lined lined-center text-uppercase">{% trans "ESA/Hubble/Webb Newsletter" %}</h4>
                             
                         </div>
                     </div>
