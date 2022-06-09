@@ -60,7 +60,7 @@
         <div class="container py-2 my-2">
 
             <header class="mb-3">
-                <h4 class="lined lined-center text-uppercase">WHAT'S NEW</h4>
+                <h4 class="lined lined-center text-uppercase text-primary">WHAT'S NEW</h4>
             </header>
             <div class="row">
                 {% for announcement in announcements %}
@@ -75,7 +75,7 @@
                                 <a class="text-reset" href="{{ announcement.get_absolute_url }}" style="text-decoration: none;">{{ announcement.title }}</a>
                             </h5>
                             <p class="small text-uppercase text-muted">{{ announcement.release_date|date:"j N Y" }} — {{ announcement.id }}</p>
-                            <a class="btn btn-outline-primary" href="{{ announcement.get_absolute_url }}">Read More</a>
+                            <a class="btn btn-primary" href="{{ announcement.get_absolute_url }}">Read More</a>
                         </div>
                     </div>
                 </div>
@@ -93,7 +93,7 @@
         {% if potws %}
         <div id="potw-carousel-wrapper" class="mt-5">
             
-            <h4 class="lined lined-center text-uppercase col-12 col-lg-7 col-xl-8">{% trans "Picture of the Month" %}</h4>
+            <h4 class="lined lined-center text-uppercase text-primary col-12 col-lg-7 col-xl-8">{% trans "Picture of the Month" %}</h4>
             
             <div id="potw-carousel">
                 {% for potw in potws %}
@@ -128,7 +128,7 @@
 
         {% if spacesparks %}
         <div id="newsletter-preview-container" class="my-5">
-            <h4 class="lined lined-center text-uppercase col-12 col-lg-7 col-xl-8">ESA/Hubble/Webb Science Newsletter</h4>
+            <h4 class="lined lined-center text-uppercase text-primary col-12 col-lg-7 col-xl-8">ESA/Hubble/Webb Science Newsletter</h4>
             <div id="newsletter-preview shadow">
                 <a href="/newsletters/science/html/487/" style="text-decoration: none;">
                     <div class="img-wrapper">
@@ -146,7 +146,7 @@
         <div class="">
             <div id="hubblecast-carousel">
                 <div class="">
-                    <h4 class="lined lined-center text-uppercase col-12 col-lg-7 col-xl-8">SPACE SPARKS</h4>
+                    <h4 class="lined lined-center text-uppercase text-primary col-12 col-lg-7 col-xl-8">SPACE SPARKS</h4>
                     <div class="youtube-body shadow  border box-image">
                         <iframe width="560" height="315" src="https://www.youtube.com/embed/{{ spacesparks.0.youtube_video_id }}"
                             class="youtube-video shadow" title="YouTube video player" frameborder="0"
@@ -214,7 +214,7 @@
             <div class="facebook-feeds mb-5">
                 <div class="section-header">
                     <div class="section-title blue-title">
-                        <h4 class="lined lined-center text-uppercase my-3">{% trans "ESA/Webb Facebook" %}</h4>
+                        <h4 class="lined lined-center text-uppercase text-primary my-3">{% trans "ESA/Webb Facebook" %}</h4>
                     </div>
                 </div>
                 <div class="embed-responsive embed-responsive-16by9 fb-page">
@@ -228,7 +228,7 @@
             <div class="twitter-feeds mb-3 px-3 mt-3">
                 <div class="section-header">
                     <div class="section-title blue-title">
-                        <h4 class="lined lined-center text-uppercase my-3">{% trans "ESA/Webb on Twitter" %}</h4>
+                        <h4 class="lined lined-center text-uppercase text-primary my-3">{% trans "ESA/Webb on Twitter" %}</h4>
                     </div>
                 </div>
                 <a class="twitter-timeline" data-lang="en" data-height="620" data-theme="light"
@@ -278,7 +278,7 @@
                 <div class="">
                     <div class="section-header">
                         <div class="section-title blue-title">
-                            <h4 class="lined lined-center text-uppercase">{% trans "ESA/Hubble/Webb Newsletter" %}</h4>
+                            <h4 class="lined lined-center text-uppercase text-primary">{% trans "ESA/Hubble/Webb Newsletter" %}</h4>
                             
                         </div>
                     </div>
@@ -294,7 +294,7 @@
                 <div class="">
                     <div class="section-header">
                         <div class="section-title blue-title">
-                            <h4 class="lined lined-center text-uppercase">{% trans "Subscribe to Webb News" %}</h4>
+                            <h4 class="lined lined-center text-uppercase text-primary">{% trans "Subscribe to Webb News" %}</h4>
                             
                         </div>
                     </div>
