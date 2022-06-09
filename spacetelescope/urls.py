@@ -84,7 +84,7 @@ urlpatterns += [
     url( r'^n3w-fr0nt/images/comparisons/', include('djangoplicity.media.urls_imagecomparisons'), { 'model': ImageComparison, 'options': ImageComparisonOptions } ),
     url( r'^n3w-fr0nt/images/', include('djangoplicity.media.urls_images'), { 'model': Image, 'options': ImageOptions } ),
     #( r'^news/feed/(?P<url>.*)/?$', 'django.contrib.syndication.views.feed', { 'feed_dict': ReleaseOptions.get_feeds() } ),
-    url( r'^n3w-fr0nt/news/', include('djangoplicity.releases.urls'), { 'model': Release, 'options': ReleaseOptions } ),
+    url( r'^news/', include('djangoplicity.releases.urls'), { 'model': Release, 'options': ReleaseOptions } ),
     # url( r'^videos/uservideos/', include('djangoplicity.products.urls.uservideos'), { 'model': UserVideo, 'options': UserVideoOptions } ),
     url( r'^n3w-fr0nt/videos/', include('djangoplicity.media.urls_videos'), { 'model': Video, 'options': VideoOptions } ),
 
