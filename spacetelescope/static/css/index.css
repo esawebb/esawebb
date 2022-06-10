@@ -44,21 +44,13 @@ a {
 }
 
 #navbar li:hover {
-    text-decoration: none;
-    background-image: linear-gradient(white, white);
-    background-position: 75% 75%;
-    background-repeat: no-repeat;
-    background-size: 0% 2px;
-    transition: background-size .3s;
-}
-#navbar li:hover, #navbar li:focus {
-    background-size: 100% 2px;
-}
-
-/* #navbar li:hover {
     background-color: #003247;
-} */
+}
 
+.dropdown:hover .dropdown-menu-start {
+    display: block;
+    margin-top: 0;
+ }
 
 .video-title {
     display: inline;
