@@ -59,10 +59,10 @@
     <section class=" ">
         <div class="container py-2 my-2">
 
-            <header class="mb-3">
+            <header class="mb-3 px-5">
                 <h4 class="lined lined-center text-uppercase text-primary">WHAT'S NEW</h4>
             </header>
-            <div class="row">
+            <div class="row px-3">
                 {% for announcement in announcements %}
                 <div class="col-lg-3 col-md-6 mb-3">
                     <div class="box-image shadow  border">
@@ -88,12 +88,12 @@
 
 <div class="container py-2 my-2">
 <div class="row frontpage-section middle-section">
-    <div class="col-md-6 col-lg-6 col-xl-8 pe-5">
+    <div class="col-lg-6 col-xl-8 pe-5 px-5">
 
         {% if potws %}
         <div id="potw-carousel-wrapper" class="mt-5">
             
-            <h4 class="lined lined-center text-uppercase text-primary col-12 col-lg-7 col-xl-8">{% trans "Picture of the Month" %}</h4>
+            <h4 class="lined lined-center text-uppercase text-primary col-12 col-lg-7 col-xl-8 my-3">{% trans "Picture of the Month" %}</h4>
             
             <div id="potw-carousel">
                 {% for potw in potws %}
@@ -113,11 +113,11 @@
                     console.log(potwArray)
                 </script>
                 <div class="slide">
-                    <a href="{{ potw.get_absolute_url }}" style="text-decoration: none;">
-                        <img src="https://cdn.spacetelescope.org/archives/images/thumb700x/potw2217a.jpg" class="w-100 shadow" style="height: 400px; object-fit: cover;">
-                        <div class="potw-description">
-                            <span class="date">{{ potw.release_date|datetime:"DATE" }} — {{ potw.id }}</span>
-                            <span class="title mx-5">{{ potw.visual.title }}</span>
+                    <a class="card bg-primary" href="{{ potw.get_absolute_url }}" style="text-decoration: none;">
+                        <img src="https://cdn.spacetelescope.org/archives/images/thumb700x/potw2217a.jpg" class="w-100 card-img-top" style="height: 400px; object-fit: cover;">
+                        <div class="potw-description card-body text-white">
+                            <span class="date card-text">{{ potw.release_date|datetime:"DATE" }} — {{ potw.id }}</span>
+                            <span class="title card-text mx-5">{{ potw.visual.title }}</span>
                         </div>
                     </a>
                 </div> <!-- slide -->
@@ -128,14 +128,14 @@
 
         {% if spacesparks %}
         <div id="newsletter-preview-container" class="my-5">
-            <h4 class="lined lined-center text-uppercase text-primary col-12 col-lg-7 col-xl-8">ESA/Hubble/Webb Science Newsletter</h4>
-            <div id="newsletter-preview shadow">
-                <a href="/newsletters/science/html/487/" style="text-decoration: none;">
+            <h4 class="lined lined-center text-uppercase text-primary col-12 col-lg-7 col-xl-8 my-3">ESA/Hubble/Webb Science Newsletter</h4>
+            <div id="newsletter-preview ">
+                <a class="card bg-primary" href="/newsletters/science/html/487/" style="text-decoration: none;">
                     <div class="img-wrapper">
-                        <img draggable="false" src="https://cdn.esawebb.org/archives/images/screen/ann2203a.jpg" class="w-100 shadow" style="height: 400px; object-fit: cover; object-position: center top;" alt="Newsletter">
+                        <img draggable="false" src="https://cdn.esawebb.org/archives/images/screen/ann2203a.jpg" class="w-100 card-img-top" style="height: 400px; object-fit: cover; object-position: center top;" alt="Newsletter">
                     </div>
-                    <div class="newsletter-description">
-                        <div class="title">ESA/Hubble/JWST Science Newsletter - April 2022</div>
+                    <div class="newsletter-description card-body">
+                        <div class="title card-text text-white">ESA/Hubble/JWST Science Newsletter - April 2022</div>
                     </div>
                 </a>
             </div>
@@ -146,29 +146,32 @@
         <div class="">
             <div id="hubblecast-carousel">
                 <div class="">
-                    <h4 class="lined lined-center text-uppercase text-primary col-12 col-lg-7 col-xl-8">SPACE SPARKS</h4>
-                    <div class="youtube-body shadow  border box-image">
-                        <iframe width="560" height="315" src="https://www.youtube.com/embed/{{ spacesparks.0.youtube_video_id }}"
-                            class="youtube-video shadow" title="YouTube video player" frameborder="0"
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                            allowfullscreen></iframe>
+                    <h4 class="lined lined-center text-uppercase text-primary col-12 col-lg-7 col-xl-8 my-3">SPACE SPARKS</h4>
+
+                    <div class="card bg-primary">
+                        <div class="youtube-body card-img-top">
+                            <iframe width="560" height="315" src="https://www.youtube.com/embed/{{ spacesparks.0.youtube_video_id }}"
+                                class="youtube-video card-img-top" title="YouTube video player" frameborder="0"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                allowfullscreen></iframe>
+                        </div>
+                        <a class="card-body" href="{{ spacesparks.0.get_absolute_url }}" style="text-decoration: none;">
+                            <span class="pt-3 card-text text-white" >
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20 "
+                                    class="me-2"
+                                    fill="currentColor" class="bi bi-box-arrow-in-right" viewBox="0 0 16 16">
+                                    <path fill-rule="evenodd"
+                                        d="M6 3.5a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-2a.5.5 0 0 0-1 0v2A1.5 1.5 0 0 0 6.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-8A1.5 1.5 0 0 0 5 3.5v2a.5.5 0 0 0 1 0v-2z" />
+                                    <path fill-rule="evenodd"
+                                        d="M11.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H1.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3z" />
+                                </svg>
+                                {{ spacesparks.0.release_date|datetime:"DATE" }} — {{ spacesparks.0.id }}
+                            </span>
+                            <span class=" mx-5 card-text text-white">
+                                {{ spacesparks.0.title }}
+                            </span>
+                        </a>
                     </div>
-                    <a  href="{{ spacesparks.0.get_absolute_url }}" style="text-decoration: none;">
-                        <span class="pt-3" >
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20 "
-                                class="me-2"
-                                fill="currentColor" class="bi bi-box-arrow-in-right" viewBox="0 0 16 16">
-                                <path fill-rule="evenodd"
-                                    d="M6 3.5a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-2a.5.5 0 0 0-1 0v2A1.5 1.5 0 0 0 6.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-8A1.5 1.5 0 0 0 5 3.5v2a.5.5 0 0 0 1 0v-2z" />
-                                <path fill-rule="evenodd"
-                                    d="M11.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H1.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3z" />
-                            </svg>
-                            {{ spacesparks.0.release_date|datetime:"DATE" }} — {{ spacesparks.0.id }}
-                        </span>
-                        <span class=" mx-5">
-                            {{ spacesparks.0.title }}
-                        </span>
-                    </a>
                 </div>
             </div> <!-- spacesparks-carousel -->
         </div>
@@ -205,35 +208,36 @@
     </div>
     
 
-   
 
-    
-
-    <div class="col-md-6 col-lg-6 col-xl-4 mt-4 ps-3">
+    <div class=" col-lg-6 col-xl-4 mt-4 ps-3">
         <div class="social-feeds">
             <div class="facebook-feeds mb-5">
                 <div class="section-header">
                     <div class="section-title blue-title">
-                        <h4 class="lined lined-center text-uppercase text-primary my-3">{% trans "ESA/Webb Facebook" %}</h4>
+                        <h4 class="lined lined-center text-uppercase text-primary my-3 ms-5 ms-lg-1">{% trans "ESA/Webb Facebook" %}</h4>
                     </div>
                 </div>
-                <div class="embed-responsive embed-responsive-16by9 fb-page">
+                <div class="embed-responsive embed-responsive-16by9 fb-page ms-5 ms-lg-1">
                     <iframe
-                        src="https://www.facebook.com/plugins/page.php?locale=en_US&href=https%3A%2F%2Fwww.facebook.com%2FESAWebb%2F&tabs=timeline&width=360&height=700&small_header=true&adapt_container_width=true&hide_cover=false&show_facepile=true&appId"
-                        width="360" height="700" style="border:none;" scrolling="no" frameborder="0"
-                        class="box-image" allowfullscreen="true"
+                        src="https://www.facebook.com/plugins/page.php?locale=en_US&href=https%3A%2F%2Fwww.facebook.com%2FESAWebb%2F&tabs=timeline&width=360&height=750&small_header=true&adapt_container_width=true&hide_cover=false&show_facepile=true&appId"
+                        width="360" height="750" style="border:none;" scrolling="no" frameborder="0"
+                        class="rounded" allowfullscreen="true"
                         allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe>
                 </div>
             </div>
-            <div class="twitter-feeds mb-3 px-3 mt-3">
+            <div class="twitter-feeds mb-3 px-3 mt-5">
                 <div class="section-header">
                     <div class="section-title blue-title">
-                        <h4 class="lined lined-center text-uppercase text-primary my-3">{% trans "ESA/Webb on Twitter" %}</h4>
+                        <h4 class="lined lined-center text-uppercase text-primary my-3 ms-5 ms-lg-1">{% trans "ESA/Webb on Twitter" %}</h4>
                     </div>
                 </div>
-                <a class="twitter-timeline" data-lang="en" data-height="620" data-theme="light"
-                        class="ms-1"
-                        href="https://twitter.com/ESA_Webb?ref_src=twsrc%5Etfw">Tweets by ESA_Webb</a>
+                <a class="card twitter-timeline border rounded ms-5 ms-lg-1"
+                    href="https://twitter.com/ESA_Webb?ref_src=twsrc%5Etfw"
+                    data-lang="en"
+                    data-width="350"
+                    data-height="750">
+                    Tweets by ESA_Webb
+                </a>
                     <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
             </div>
         </div>
@@ -272,7 +276,7 @@
 {% endif %}
 
 <div class="frontpage-section subscribe-to-hubble">
-    <div class="container py-2 my-2">
+    <div class="container py-2 my-2 px-5">
         <div class="row my-3">
             <div class="col-md-6">
                 <div class="">
