@@ -47,6 +47,10 @@ a {
     background-color: #003247;
 }
 
+.dropdown:hover .dropdown-menu-start {
+    display: block;
+    margin-top: 0;
+ }
 
 .video-title {
     display: inline;
