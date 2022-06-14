@@ -237,8 +237,27 @@ cd /spacetelescope/static/journey/
 npm install
 ```
 3. Make the changes
+
 4. Performing the build
 ```
 npm start
 ```
 After executing the "npm start" command, Ctrl + c
+
+### Changes in the frontpage telescope
+In order to make changes you must have npm installed and install the dependencies to run it for the first time:
+
+1. Go to folder
+```
+cd /spacetelescope/static/home/
+```
+2. Install the dependencies(only the first time)
+```
+npm install
+```
+3. Make the changes
+
+4. Performing the build
+```
+npm run build
+```
