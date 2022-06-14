@@ -14,7 +14,7 @@ Djangoplicity CMS for the ESA Hubble Project (https://www.spacetelescope.org/)
 In your terminal run the command:
 
 ```` 
-git clone https://gitlab.com/esahubble/esahubble.git
+git clone https://github.com/esawebb/esawebb.git
 ````
 
 ### Running the project
@@ -63,7 +63,7 @@ make migrate
 The project contains a _demo seed_ that can be loaded in order to populate example data to the database, to load the demo data run the following command while the containers are running:
 
 ```
-docker exec -it hubble ./manage.py loaddata demo
+docker exec -it webb ./manage.py loaddata demo
 ```
 
 or
@@ -96,13 +96,13 @@ The system requires a big amount of storage size for the media archive, therefor
 them in a volume with enough size, currently the big volume should be located here:
 
 ```
-/mnt/volume_fra1_01
+/mnt/volume-nyc1-01
 ```
 
 And the subdirectory required by the project is:
 
 ```
-/mnt/volume_fra1_01/web
+/mnt/volume-nyc1-01/web
 ```
 
 **IMPORTANT:** The volume's subdirectory owner should be the same user as in the docker containers, currently `hubbleadm`,
@@ -110,12 +110,12 @@ the GUI and UID should be `2000`, otherwise the containers won't have enough per
 then the following commands may be needed:
 
 ```
-sudo groupadd -g 2000 hubbleadm
-sudo useradd -u 2000 -g hubbleadm --create-home hubbleadm
-sudo mkdir /mnt/volume_fra1_01/web/
-sudo chown -R hubbleadm:hubbleadm /mnt/volume_fra1_01/web/
+sudo groupadd -g 2000 webbadm
+sudo useradd -u 2000 -g webbadm --create-home webbadm
+sudo mkdir /mnt/volume-nyc1-01/web/
+sudo chown -R webbadm:webbadm /mnt/volume-nyc1-01/web/
 ```
-> This command: `sudo chown -R hubbleadm:hubbleadm /mnt/volume_fra1_01/web/` may be required after the containers startup again so that the permissions of the created volumes are set correctly
+> This command: `sudo chown -R webbadm:webbadm /mnt/volume-nyc1-01/web/` may be required after the containers startup again so that the permissions of the created volumes are set correctly
 
 #### Environment variables
 
@@ -143,7 +143,7 @@ As expected in a Twelve Factors App the following services needs to be configure
 
 | Service | Environment variable | Value | Example |
 | :--- | :---: | :--- | :--- |
-| Postgres Database | `DATABASE_URL` | `postgresql://<user>:<pass>@<host>:<port>/<dbname>` | `postgresql://admin:1234@hubble-db.com:5432/hubble?sslmode=require` |
+| Postgres Database | `DATABASE_URL` | `postgresql://<user>:<pass>@<host>:<port>/<dbname>` | `postgresql://admin:1234@webb-db.com:5432/webb?sslmode=require` |
 
 #### SSH Key (CDN77)
 
@@ -160,7 +160,7 @@ ssh-keygen -f /path/to/config/.ssh/id_rsa
 
 Give the correct owner to the files:
 ```
-sudo chown -R hubbleadm:hubbleadm config/.ssh/
+sudo chown -R webbadm:webbadm config/.ssh/
 ```
 
 Finally configure the public key in the CDN Storage by following the next steps
@@ -169,11 +169,19 @@ Finally configure the public key in the CDN Storage by following the next steps
 ### Deployment
 
 When having all the prerequisites, clone the repository in the server, then deploy the containers with the command:
+1. Go to the project folder
 ```
-docker-compose -f docker-compose.yml -f docker-compose.prod.yml up -d --build
+cd /home/webbadm/esawebb/
 ```
-
-Or if `make` is installed:
+2. Update the project
+```
+git pull
+```
+3.Stop containers.
+```
+docker stop $(docker ps -a -q)
+```
+4.Upload the containers with the new changes
 ```
 make prod-up-build
 ```
@@ -213,7 +221,7 @@ docker logs <container name>
 
 Examples:
 ```
-docker logs hubble
-docker logs hubble-celery
-docker logs hubble-broker
+docker logs webb
+docker logs webb-celery
+docker logs webb-broker
 ```
