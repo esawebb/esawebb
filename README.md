@@ -225,3 +225,20 @@ docker logs webb
 docker logs webb-celery
 docker logs webb-broker
 ```
+### Changes in Journey
+In order to make changes you must have npm installed and install the dependencies to run it for the first time:
+
+1. Go to folder
+```
+cd /spacetelescope/static/journey/
+```
+2. Install the dependencies(only the first time)
+```
+npm install
+```
+3. Make the changes
+4. Performing the build
+```
+npm start
+```
+After executing the "npm start" command, Ctrl + c
