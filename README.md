@@ -1,4 +1,4 @@
-# ESA Hubble
+# ESA Webb
 
 Djangoplicity CMS for the ESA Hubble Project (https://www.spacetelescope.org/)
 
