@@ -114,7 +114,7 @@
                 </script>
                 <div class="slide">
                     <a class="card bg-primary" href="{{ potw.get_absolute_url }}" style="text-decoration: none;">
-                        <img src="https://cdn.spacetelescope.org/archives/images/thumb700x/potw2217a.jpg" class="w-100 card-img-top" style="height: 400px; object-fit: cover;">
+                        <img src="{{ potw.visual.resource_screen640.url }}" class="w-100 card-img-top" style="height: 400px; object-fit: cover;" alt="{{ potw.visual.title }}">
                         <div class="potw-description card-body text-white">
                             <span class="date card-text">{{ potw.release_date|datetime:"DATE" }} — {{ potw.id }}</span>
                             <span class="title card-text mx-5">{{ potw.visual.title }}</span>
