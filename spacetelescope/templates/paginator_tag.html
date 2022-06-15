@@ -13,7 +13,7 @@
                 {% if page_num == 0 %}
                     <li><a href="#">...</a></li>
                 {% else %}
-                    <li{% if page_obj.number == page_num %} class="active"{% endif %}><a href="{{ paginator_url }}{{paginator_prefix}}/{{ page_num }}/{% if paginator_params %}?{{paginator_params}}{% endif %}">{{ page_num }}</a></li>
+                    <li{% if page_obj.number == page_num %} class="active"{% endif %}><a href="{{ paginator_url }}{{paginator_prefix}}/{{ page_num }}/{% if paginator_params %}?{{paginator_params}}{% endif %}" class="mx-2">{{ page_num }}</a></li>
                 {% endif %}
             {% endfor %}
             </ul>
