@@ -71,10 +71,10 @@
                                 class="w-100 -top" style="height: 200px; object-fit: cover;" />
                         </div>
                         <div class="text-center pb-3" >
-                            <h5 class="new-title h6 text-uppercase text-primary mx-2" style="height: 70px;">
+                            <h5 class="new-title h6 text-capitalize text-primary mx-2" style="height: 70px;">
                                 <a class="text-reset" href="{{ announcement.get_absolute_url }}" style="text-decoration: none;">{{ announcement.title }}</a>
                             </h5>
-                            <p class="small text-uppercase text-muted">{{ announcement.release_date|date:"j N Y" }} — {{ announcement.id }}</p>
+                            <p class="small text-capitalize text-muted">{{ announcement.release_date|date:"j N Y" }} — {{ announcement.id }}</p>
                             <a class="btn btn-primary" href="{{ announcement.get_absolute_url }}">Read More</a>
                         </div>
                     </div>
@@ -130,7 +130,7 @@
         <div id="newsletter-preview-container" class="my-5">
             <h4 class="lined lined-center text-uppercase text-primary col-12 col-lg-7 col-xl-8 my-3">ESA/Hubble/Webb Science Newsletter</h4>
             <div id="newsletter-preview ">
-                <a class="card bg-primary" href="/newsletters/science/html/487/" style="text-decoration: none;">
+                <a class="card bg-primary" href="https://esahubble.org/newsletters/science/html/492/" style="text-decoration: none;">
                     <div class="img-wrapper">
                         <img draggable="false" src="https://cdn.esawebb.org/archives/images/screen/ann2203a.jpg" class="w-100 card-img-top" style="height: 400px; object-fit: cover; object-position: center top;" alt="Newsletter">
                     </div>
@@ -156,7 +156,7 @@
                                 allowfullscreen></iframe>
                         </div>
                         <a class="card-body" href="{{ spacesparks.0.get_absolute_url }}" style="text-decoration: none;">
-                            <span class="pt-3 card-text text-white" >
+                            <p class="pt-3 card-text text-white" >
                                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20 "
                                     class="me-2"
                                     fill="currentColor" class="bi bi-box-arrow-in-right" viewBox="0 0 16 16">
@@ -166,10 +166,10 @@
                                         d="M11.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H1.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3z" />
                                 </svg>
                                 {{ spacesparks.0.release_date|datetime:"DATE" }} — {{ spacesparks.0.id }}
-                            </span>
-                            <span class=" mx-5 card-text text-white">
+                            </p>
+                            <p class=" card-text text-white">
                                 {{ spacesparks.0.title }}
-                            </span>
+                            </p>
                         </a>
                     </div>
                 </div>
@@ -278,23 +278,23 @@
 <div class="frontpage-section subscribe-to-hubble">
     <div class="container py-2 my-2 px-5">
         <div class="row my-3">
-            <div class="col-md-6">
+            <div class="col-lg-6">
                 <div class="">
                     <div class="section-header">
                         <div class="section-title blue-title">
-                            <h4 class="lined lined-center text-uppercase text-primary">{% trans "ESA/Hubble/Webb Newsletter" %}</h4>
+                            <h4 class="lined lined-center text-uppercase text-primary">{% trans "ESA/Webb Copyright" %}</h4>
                             
                         </div>
                     </div>
                     <div id="newsletters-link ">
-                        <a class="shadow  border box-image" href="/n3w-fr0nt/newsletters">
-                            <img src="https://cdn.esawebb.org/archives/images/screen/ESAHubbleWebb.jpg" alt="Take a look to our newsletters"
+                        <a class="shadow  border box-image" href="/n3w-fr0nt/copyright/">
+                            <img src="https://cdn.esawebb.org/archives/images/screen/ESAHubbleWebb-1.jpg" alt="Take a look to our newsletters"
                                 style="object-fit: cover; width: 100%; height: 400px;" class="shadow">
                         </a>
                     </div>
                 </div>
             </div>
-            <div class="col-md-6">
+            <div class="col-lg-6">
                 <div class="">
                     <div class="section-header">
                         <div class="section-title blue-title">
@@ -303,7 +303,7 @@
                         </div>
                     </div>
                     <div id="subscribe-link">
-                        <a class="shadow  border box-image" href="/n3w-fr0nt/subscribe">
+                        <a class="shadow  border box-image" href="/n3w-fr0nt/newsletters/ ">
                             <img src="https://cdn.esawebb.org/archives/images/screen/Updates-from.jpg" alt="Suscribirse a Webb News"
                             style="object-fit: cover; width: 100%; height: 400px;" class="shadow">
                         </a>
