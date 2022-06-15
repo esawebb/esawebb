@@ -71,10 +71,10 @@
                                 class="w-100 -top" style="height: 200px; object-fit: cover;" />
                         </div>
                         <div class="text-center pb-3" >
-                            <h5 class="new-title h6 text-uppercase text-primary mx-2" style="height: 70px;">
+                            <h5 class="new-title h6 text-capitalize text-primary mx-2" style="height: 70px;">
                                 <a class="text-reset" href="{{ announcement.get_absolute_url }}" style="text-decoration: none;">{{ announcement.title }}</a>
                             </h5>
-                            <p class="small text-uppercase text-muted">{{ announcement.release_date|date:"j N Y" }} — {{ announcement.id }}</p>
+                            <p class="small text-capitalize text-muted">{{ announcement.release_date|date:"j N Y" }} — {{ announcement.id }}</p>
                             <a class="btn btn-primary" href="{{ announcement.get_absolute_url }}">Read More</a>
                         </div>
                     </div>
@@ -156,7 +156,7 @@
                                 allowfullscreen></iframe>
                         </div>
                         <a class="card-body" href="{{ spacesparks.0.get_absolute_url }}" style="text-decoration: none;">
-                            <span class="pt-3 card-text text-white" >
+                            <p class="pt-3 card-text text-white" >
                                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20 "
                                     class="me-2"
                                     fill="currentColor" class="bi bi-box-arrow-in-right" viewBox="0 0 16 16">
@@ -166,10 +166,10 @@
                                         d="M11.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H1.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3z" />
                                 </svg>
                                 {{ spacesparks.0.release_date|datetime:"DATE" }} — {{ spacesparks.0.id }}
-                            </span>
-                            <span class=" mx-5 card-text text-white">
+                            </p>
+                            <p class=" card-text text-white">
                                 {{ spacesparks.0.title }}
-                            </span>
+                            </p>
                         </a>
                     </div>
                 </div>
@@ -278,7 +278,7 @@
 <div class="frontpage-section subscribe-to-hubble">
     <div class="container py-2 my-2 px-5">
         <div class="row my-3">
-            <div class="col-md-6">
+            <div class="col-lg-6">
                 <div class="">
                     <div class="section-header">
                         <div class="section-title blue-title">
@@ -294,7 +294,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-6">
+            <div class="col-lg-6">
                 <div class="">
                     <div class="section-header">
                         <div class="section-title blue-title">
