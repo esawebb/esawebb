@@ -137,3 +137,10 @@ a {
 
 }	
 /* ============ small devices .end// ============ */
+
+.news-teaser-potm::before{
+  content: "...";
+  position: absolute;
+  bottom: 0;
+  right: 0;
+}
