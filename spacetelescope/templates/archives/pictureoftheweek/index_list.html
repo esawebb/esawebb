@@ -22,22 +22,22 @@
                     {% endif %}
                 </div>
                 <div class="news-description pb-3">
-                    <div class="news-id mx-3">{{ potw.id }} — {% trans "Picture of the Month" %}</div>
+                    <div class="news-id mx-5">{{ potw.id }} — {% trans "Picture of the Month" %}</div>
                     {% if potw.image %}
-                        <div class="news-title h6 text-capitalize text-primary mx-3 mt-2 fw-bold" style="height: 40px;">{{ potw.image.title }}</div>
+                        <div class="news-title h6 text-capitalize text-primary mx-5 mt-2 fw-bold" style="height: 40px;">{{ potw.image.title }}</div>
                     {% elif potw.video %}
-                        <div class="news-title h6 text-capitalize text-primary mx-3 mt-2 fw-bold" style="height: 40px;">{{ potw.video.title }}</div>
+                        <div class="news-title h6 text-capitalize text-primary mx-5 mt-2 fw-bold" style="height: 40px;">{{ potw.video.title }}</div>
                     {% elif potw.comparison %}
-                        <div class="news-title h6 text-capitalize text-primary mx-3 mt-2 fw-bold" style="height: 40px;">{{ potw.comparison.title }}</div>
+                        <div class="news-title h6 text-capitalize text-primary mx-5 mt-2 fw-bold" style="height: 40px;">{{ potw.comparison.title }}</div>
                     {% endif %}
                     {% if potw.image %}
-                        <div class="news-teaser-potm small  text-muted mx-3" style="">
+                        <div class="news-teaser-potm small  text-muted mx-5" style="">
                             <strong>{{ potw.release_date|datetime:"DATE" }}</strong><br>{{ potw.image.description|safe|striptags|truncatewords:150 }}</div>
                     {% elif potw.video %}
-                        <div class="news-teaser-potm small  text-muted mx-3" style="">
+                        <div class="news-teaser-potm small  text-muted mx-5" style="">
                             <strong>{{ potw.release_date|datetime:"DATE" }}</strong><br>{{ potw.video.description|safe|striptags|truncatewords:150 }}</div>
                     {% elif potw.comparison %}
-                        <div class="news-teaser-potm small  text-muted mx-3" style="">
+                        <div class="news-teaser-potm small  text-muted mx-5" style="">
                             <strong>{{ potw.release_date|datetime:"DATE" }}</strong><br>{{ potw.comparison.description|safe|striptags|truncatewords:150 }}</div>
                     {% endif %}
                 </div>
