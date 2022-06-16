@@ -9,7 +9,7 @@
 {% for row in object_list|split_list:4 %}
 
     {% for potw in row %}
-    <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12">
+    <div class="col-lg-4 col-md-6 col-sm-12">
         <a href="{{ potw.get_absolute_url }}">
             <div class="news-wrapper box-image shadow  border my-3">
                 <div class="news-image">
@@ -31,14 +31,11 @@
                         <div class="news-title h6 text-capitalize text-primary mx-3 mt-2" style="height: 40px;">{{ potw.comparison.title }}</div>
                     {% endif %}
                     {% if potw.image %}
-                        <div class="news-teaser small  text-muted mx-3" style="height: 155px; overflow: hidden; text-overflow: ellipsis !important; display: -webkit-box;
-                        -webkit-line-clamp: 3; -webkit-box-orient: vertical;"><strong>{{ potw.release_date|datetime:"DATE" }}</strong>: {{ potw.image.description|safe|striptags|truncatewords:150 }}</div>
+                        <div class="news-teaser small  text-muted mx-3" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis !important;"><strong>{{ potw.release_date|datetime:"DATE" }}</strong>: {{ potw.image.description|safe|striptags|truncatewords:150 }}</div>
                     {% elif potw.video %}
-                        <div class="news-teaser small  text-muted mx-3" style="height: 155px; overflow: hidden; text-overflow: ellipsis !important; display: -webkit-box;
-                        -webkit-line-clamp: 3; -webkit-box-orient: vertical;"><strong>{{ potw.release_date|datetime:"DATE" }}</strong>: {{ potw.video.description|safe|striptags|truncatewords:150 }}</div>
+                        <div class="news-teaser small  text-muted mx-3" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis !important;"><strong>{{ potw.release_date|datetime:"DATE" }}</strong>: {{ potw.video.description|safe|striptags|truncatewords:150 }}</div>
                     {% elif potw.comparison %}
-                        <div class="news-teaser small  text-muted mx-3" style="height: 155px; overflow: hidden; text-overflow: ellipsis !important; display: -webkit-box;
-                        -webkit-line-clamp: 3; -webkit-box-orient: vertical;"><strong>{{ potw.release_date|datetime:"DATE" }}</strong>: {{ potw.comparison.description|safe|striptags|truncatewords:150 }}</div>
+                        <div class="news-teaser small  text-muted mx-3" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis !important;"><strong>{{ potw.release_date|datetime:"DATE" }}</strong>: {{ potw.comparison.description|safe|striptags|truncatewords:150 }}</div>
                     {% endif %}
                 </div>
                 <div class="news-readmore text-center">
