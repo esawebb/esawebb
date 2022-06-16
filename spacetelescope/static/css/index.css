@@ -138,9 +138,10 @@ a {
 }	
 /* ============ small devices .end// ============ */
 
-.news-teaser-potm::before{
-  content: "...";
-  position: absolute;
-  bottom: 0;
-  right: 0;
+.news-teaser-potm{
+    width: 100%;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
 }
