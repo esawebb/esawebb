@@ -40,7 +40,7 @@ We don't display the children pages widget in the dark pages
                     {% if archive == 'image' %}<a
                         class="me-3 border border-primary btn-outline-primary p-1 mt-2 d-inline-block"
                         style="text-decoration: none;"
-                        href="{% url 'images_defaultquery' %}viewall/{% if params_nosearch %}?{{ params_nosearch }}{% endif %}">{% trans "View All" %}</a>
+                        href="{% url 'images_defaultquery' %}{% if params_nosearch %}?{{ params_nosearch }}{% endif %}">{% trans "View All" %}</a>
                         {% endif %}
                     {% if archive == 'video' %}<a
                         class="me-3 border border-primary btn-outline-primary p-1 mt-2 d-inline-block"
@@ -50,13 +50,12 @@ We don't display the children pages widget in the dark pages
                     {% for category in web_categories %}
                     <a class="me-3 border border-primary btn-outline-primary p-1 mt-2 d-inline-block"
                         style="text-decoration: none;"
-                        href="{{ category.get_absolute_url}}{% if params_nosearch %}?{{ params_nosearch }}{% endif %}"
+                        href="{{ image.pk }}"
                         {% if category.selected %} class="selected" {% endif %}>{% trans category.name %}</a>
                     {% endfor %}
                 </p>
             </div>
             {% endif %}
-
             <div class="text-end">
                 <p title="{% trans 'Sort by:' %}">
                     <span class="me-3">Sort by:  </span>
