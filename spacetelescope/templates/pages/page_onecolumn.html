@@ -2,7 +2,7 @@
 
 {% load djangoplicity_utils %}
 
-{% block site_title %}{{page.title}} {{page.section.append_title}} | {{block.super}}{% endblock %}
+{% block site_title %}{{page.title}} {{page.section.append_title}} {% endblock site_title %}
 
 
 {% block extra_header %}
