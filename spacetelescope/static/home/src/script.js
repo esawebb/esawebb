@@ -109,7 +109,23 @@ directionalLight5.position.set(2, 2, 2)
 scene.add(directionalLight5)
 
 const controls = new OrbitControls(camera, renderer.domElement);
+var statezoom = "f";
+controls.enableZoom = false;
 controls.update();
+
+document.getElementById("webgl").addEventListener( 'click', (event) => {
+    
+    if(statezoom == "v"){
+        statezoom = "f";
+        controls.enableZoom = false;
+        controls.update();
+    }
+    else{
+        statezoom = "v"
+        controls.enableZoom = true;
+        controls.update();
+    }  
+});
 
 // Object
 const geometry = new THREE.BoxGeometry(0.001, 0.001, 0.001)
