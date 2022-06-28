@@ -41,19 +41,20 @@ from djangoplicity.science.options import ScienceAnnouncementOptions
 
 from spacetelescope.admin import admin_site, adminlogs_site, adminshop_site
 from spacetelescope.frontpage.api.views.image_views import ESASkyListView
-from spacetelescope.frontpage.views import FrontpageView,  d2d
+from spacetelescope.frontpage.views import FrontpageView, d2d
 from spacetelescope.journey.views import JourneyView, EroEventsCall
-
 
 urlpatterns = []
 
 if not settings.DEBUG:
     urlpatterns += [
-        url( r'^%s(?P<path>.*)' % settings.MEDIA_URL[1:], djangoplicity.archives.contrib.security.views.serve_static_file),
+        url(r'^%s(?P<path>.*)' % settings.MEDIA_URL[1:],
+            djangoplicity.archives.contrib.security.views.serve_static_file),
     ]
 
 if settings.DEBUG_TOOLBAR:
     import debug_toolbar
+
     urlpatterns += [
         url(r'^__debug__/', include(debug_toolbar.urls)),
     ]
@@ -61,39 +62,44 @@ if settings.DEBUG_TOOLBAR:
 urlpatterns += [
 
     # Djangoplicity Adminstration
-    url( r'^admin/cache/', include( ('djangoplicity.cache.urls', "cache"), namespace="admincache_site" )),
-    url( r'^admin/history/', include( ('djangoplicity.adminhistory.urls', "history"), namespace="adminhistory_site" )),
+    url(r'^admin/cache/', include(('djangoplicity.cache.urls', "cache"), namespace="admincache_site")),
+    url(r'^admin/history/', include(('djangoplicity.adminhistory.urls', "history"), namespace="adminhistory_site")),
     # url( r'^admin/doc/', include( 'django.contrib.admindocs.urls' )),
     # url( r'^admin/shop/', include( 'djangoplicity.archives.contrib.satchmo.urls_admin' ) ),
     # url( r'^admin/shop/', include(adminshop_site.urls), { 'extra_context': { 'ADMINSHOP_SITE': True } } ),
-    url( r'^admin/system/', adminlogs_site.urls, { 'extra_context': { 'ADMINLOGS_SITE': True }  } ),
-    url( r'^admin/', admin_site.urls, { 'extra_context': { 'ADMIN_SITE': True }  } ),
-    url( r'^admin/import/', include('djangoplicity.archives.importer.urls') ),
-    url( r'^admin/', include('djangoplicity.metadata.wtmlimport.urls'), { 'extra_context': { 'ADMIN_SITE': True }  } ),
-    url( r'^public/djangoplicity/admin/reportsdetails/', include( 'djangoplicity.reports.urls' ) ),
+    url(r'^admin/system/', adminlogs_site.urls, {'extra_context': {'ADMINLOGS_SITE': True}}),
+    url(r'^admin/', admin_site.urls, {'extra_context': {'ADMIN_SITE': True}}),
+    url(r'^admin/import/', include('djangoplicity.archives.importer.urls')),
+    url(r'^admin/', include('djangoplicity.metadata.wtmlimport.urls'), {'extra_context': {'ADMIN_SITE': True}}),
+    url(r'^public/djangoplicity/admin/reportsdetails/', include('djangoplicity.reports.urls')),
     url(r'^tinymce/', include('tinymce.urls')),
 
     # Djangoplicity pages API
-    url( r'^public/djangoplicity/admin/pages/', include('djangoplicity.pages.urls') ),
+    url(r'^public/djangoplicity/admin/pages/', include('djangoplicity.pages.urls')),
 
     # Server alive check (used for load balancers - called every 5 secs )
-    url( r'^alive-check.dat$', djangoplicity.views.alive_check ),
+    url(r'^alive-check.dat$', djangoplicity.views.alive_check),
 
     # Media Archive
-    url( r'^n3w-fr0nt/images/potm/', include('djangoplicity.media.urls_potw'), { 'model': PictureOfTheWeek, 'options': PictureOfTheWeekOptions } ),
-    url( r'^n3w-fr0nt/images/comparisons/', include('djangoplicity.media.urls_imagecomparisons'), { 'model': ImageComparison, 'options': ImageComparisonOptions } ),
-    url( r'^n3w-fr0nt/images/', include('djangoplicity.media.urls_images'), { 'model': Image, 'options': ImageOptions } ),
-    #( r'^news/feed/(?P<url>.*)/?$', 'django.contrib.syndication.views.feed', { 'feed_dict': ReleaseOptions.get_feeds() } ),
-    url( r'^news/', include('djangoplicity.releases.urls'), { 'model': Release, 'options': ReleaseOptions } ),
+    url(r'^images/potm/', include('djangoplicity.media.urls_potw'),
+        {'model': PictureOfTheWeek, 'options': PictureOfTheWeekOptions}),
+    url(r'^images/comparisons/', include('djangoplicity.media.urls_imagecomparisons'),
+        {'model': ImageComparison, 'options': ImageComparisonOptions}),
+    url(r'^images/', include('djangoplicity.media.urls_images'), {'model': Image, 'options': ImageOptions}),
+    # ( r'^news/feed/(?P<url>.*)/?$', 'django.contrib.syndication.views.feed', { 'feed_dict': ReleaseOptions.get_feeds() } ),
+    url(r'^news/', include('djangoplicity.releases.urls'), {'model': Release, 'options': ReleaseOptions}),
     # url( r'^videos/uservideos/', include('djangoplicity.products.urls.uservideos'), { 'model': UserVideo, 'options': UserVideoOptions } ),
-    url( r'^n3w-fr0nt/videos/', include('djangoplicity.media.urls_videos'), { 'model': Video, 'options': VideoOptions } ),
+    url(r'^videos/', include('djangoplicity.media.urls_videos'), {'model': Video, 'options': VideoOptions}),
 
     # Other archives
-    url( r'^n3w-fr0nt/announcements/webupdates/', include('djangoplicity.announcements.urls_webupdates'), { 'model': WebUpdate, 'options': WebUpdateOptions } ),
-    url( r'^n3w-fr0nt/announcements/', include('djangoplicity.announcements.urls'), { 'model': Announcement, 'options': AnnouncementOptions } ),
+    url(r'^announcements/webupdates/', include('djangoplicity.announcements.urls_webupdates'),
+        {'model': WebUpdate, 'options': WebUpdateOptions}),
+    url(r'^announcements/', include('djangoplicity.announcements.urls'),
+        {'model': Announcement, 'options': AnnouncementOptions}),
 
     ### ENTIRE BLOCK REFERENCING djangoplicity.products
-    url( r'^about/further_information/books/', include('djangoplicity.products2.urls.books'), { 'model': Book, 'options': BookOptions } ),
+    url(r'^about/further_information/books/', include('djangoplicity.products2.urls.books'),
+        {'model': Book, 'options': BookOptions}),
     # url( r'^about/further_information/brochures/', include('djangoplicity.products.urls.brochures'), { 'model': Brochure, 'options': BrochureOptions } ),
     # url( r'^about/further_information/flyers/', include('djangoplicity.products.urls.flyers'), { 'model': Flyer, 'options': FlyerOptions } ),
     # url( r'^about/further_information/handouts/', include('djangoplicity.products.urls.handouts'), { 'model': Handout, 'options': HandoutOptions } ),
@@ -106,50 +112,73 @@ urlpatterns += [
     # url( r'^about/further_information/techdocs/', include('djangoplicity.products.urls.techdocs'), { 'model': TechnicalDocument, 'options': TechnicalDocumentOptions } ),
 
     # Products
-    url( r'^n3w-fr0nt/about/further_information/brochures/', include('djangoplicity.products2.urls.brochures'), {'model': Brochure, 'options': BrochureOptions} ),
-    url( r'^n3w-fr0nt/products/models3d/', include('djangoplicity.products2.urls.models3d'), { 'model': Model3d, 'options': Model3dOptions, 'translate': True } ),
-    url( r'^n3w-fr0nt/products/calendars/', include('djangoplicity.products2.urls.calendars'), { 'model': Calendar, 'options': CalendarOptions, 'translate': True  } ),
-    url( r'^n3w-fr0nt/products/applications/', include('djangoplicity.products2.urls.applications'), { 'model': Application, 'options': ApplicationOptions } ),
-    url( r'^n3w-fr0nt/products/conf_posters/', include('djangoplicity.products2.urls.conf_posters'), { 'model': ConferencePoster, 'options': ConferencePosterOptions, 'translate': True  } ),
-    url( r'^n3w-fr0nt/products/exhibitions/', include('djangoplicity.products2.urls.exhibitions'), { 'model': Exhibition, 'options': ExhibitionOptions, 'translate': True  } ),
-    url( r'^n3w-fr0nt/products/logos/', include('djangoplicity.products2.urls.logos'), { 'model': Logo, 'options': LogoOptions, 'translate': True  } ),
-    url( r'^n3w-fr0nt/products/merchandise/', include('djangoplicity.products2.urls.merchandise'), { 'model': Merchandise, 'options': MerchandiseOptions, 'translate': True  } ),
-    url( r'^n3w-fr0nt/products/postcards/', include('djangoplicity.products2.urls.postcards'), { 'model': PostCard, 'options': PostCardOptions, 'translate': True  } ),
-    url( r'^n3w-fr0nt/products/presentations/', include('djangoplicity.products2.urls.presentations'), { 'model': Presentation, 'options': PresentationOptions, 'translate': True  } ),
-    url( r'^n3w-fr0nt/products/print_posters/', include('djangoplicity.products2.urls.print_posters'), { 'model': PrintedPoster, 'options': PrintedPosterOptions, 'translate': True  } ),
-    url(r'^n3w-fr0nt/press/kits/', include('djangoplicity.products2.urls.presskits'), {'model': PressKit, 'options': PressKitOptions}),
+    url(r'^about/further_information/brochures/', include('djangoplicity.products2.urls.brochures'),
+        {'model': Brochure, 'options': BrochureOptions}),
+    url(r'^products/models3d/', include('djangoplicity.products2.urls.models3d'),
+        {'model': Model3d, 'options': Model3dOptions, 'translate': True}),
+    url(r'^products/calendars/', include('djangoplicity.products2.urls.calendars'),
+        {'model': Calendar, 'options': CalendarOptions, 'translate': True}),
+    url(r'^products/applications/', include('djangoplicity.products2.urls.applications'),
+        {'model': Application, 'options': ApplicationOptions}),
+    url(r'^products/conf_posters/', include('djangoplicity.products2.urls.conf_posters'),
+        {'model': ConferencePoster, 'options': ConferencePosterOptions, 'translate': True}),
+    url(r'^products/exhibitions/', include('djangoplicity.products2.urls.exhibitions'),
+        {'model': Exhibition, 'options': ExhibitionOptions, 'translate': True}),
+    url(r'^products/logos/', include('djangoplicity.products2.urls.logos'),
+        {'model': Logo, 'options': LogoOptions, 'translate': True}),
+    url(r'^products/merchandise/', include('djangoplicity.products2.urls.merchandise'),
+        {'model': Merchandise, 'options': MerchandiseOptions, 'translate': True}),
+    url(r'^products/postcards/', include('djangoplicity.products2.urls.postcards'),
+        {'model': PostCard, 'options': PostCardOptions, 'translate': True}),
+    url(r'^products/presentations/', include('djangoplicity.products2.urls.presentations'),
+        {'model': Presentation, 'options': PresentationOptions, 'translate': True}),
+    url(r'^products/print_posters/', include('djangoplicity.products2.urls.print_posters'),
+        {'model': PrintedPoster, 'options': PrintedPosterOptions, 'translate': True}),
+    url(r'^press/kits/', include('djangoplicity.products2.urls.presskits'),
+        {'model': PressKit, 'options': PressKitOptions}),
 
-    url( r'^n3w-fr0nt/products/media/', include('djangoplicity.products2.urls.media'), { 'model': Media, 'options': MediaOptions } ),
-    url( r'^n3w-fr0nt/products/stickers/', include('djangoplicity.products2.urls.stickers'), { 'model': Sticker, 'options': StickerOptions, 'translate': True  } ),
-    url( r'^n3w-fr0nt/products/video-conference-backgrounds/', include('djangoplicity.products2.urls.videobackgrounds'), { 'model': VideoConferenceBackground, 'options': VideoConferenceBackgroundOptions, } ),
-    url( r'^n3w-fr0nt/products/art/', include('djangoplicity.products2.urls.art'), { 'model': OnlineArt, 'options': OnlineArtOptions } ),
+    url(r'^products/media/', include('djangoplicity.products2.urls.media'),
+        {'model': Media, 'options': MediaOptions}),
+    url(r'^products/stickers/', include('djangoplicity.products2.urls.stickers'),
+        {'model': Sticker, 'options': StickerOptions, 'translate': True}),
+    url(r'^products/video-conference-backgrounds/', include('djangoplicity.products2.urls.videobackgrounds'),
+        {'model': VideoConferenceBackground, 'options': VideoConferenceBackgroundOptions, }),
+    url(r'^products/art/', include('djangoplicity.products2.urls.art'),
+        {'model': OnlineArt, 'options': OnlineArtOptions}),
     # Virtual tours
-    url( r'^n3w-fr0nt/products/artists/', include('djangoplicity.products2.urls.artists'), { 'model': OnlineArtAuthor, 'options': OnlineArtAuthorOptions, 'translate': True  } ),
+    url(r'^products/artists/', include('djangoplicity.products2.urls.artists'),
+        {'model': OnlineArtAuthor, 'options': OnlineArtAuthorOptions, 'translate': True}),
 
-    url( r'^n3w-fr0nt/forscientists/announcements/', include('djangoplicity.science.urls'), { 'model': ScienceAnnouncement, 'options': ScienceAnnouncementOptions } ),
+    url(r'^forscientists/announcements/', include('djangoplicity.science.urls'),
+        {'model': ScienceAnnouncement, 'options': ScienceAnnouncementOptions}),
 
-    url( r'^n3w-fr0nt/projects/fits_liberator/fitsimages/', include('djangoplicity.products2.urls.fitsimages'), { 'model': FITSImage, 'options': FITSImageOptions } ),
-
+    url(r'^projects/fits_liberator/fitsimages/', include('djangoplicity.products2.urls.fitsimages'),
+        {'model': FITSImage, 'options': FITSImageOptions}),
 
     # Public contacts edit
     # TODO: Check if these contacts URLs are required
-    url( r'^contacts/', include('djangoplicity.contacts.urls') ),
+    url(r'^contacts/', include('djangoplicity.contacts.urls')),
     # TODO: check these groups and update if necessary
     # url( r'^contacts/subscribe/messenger/(?P<uid>.*)/', GroupSubscribe.as_view(group=27, template_name='contacts/messenger_public_subscribe.html'), name='messenger_subscribe'),
 
-    url( r'^rss/feed.xml$', RedirectView.as_view(url='http://feeds.feedburner.com/hubble_news/') ),
-    url( r'^rss/vodcast.xml$', RedirectView.as_view(url='http://feeds.feedburner.com/hubblecast_sd/') ),
-    url( r'^rss/vodcasthd.xml$', RedirectView.as_view(url='http://feeds.feedburner.com/hubblecast/') ),
-    url( r'^rss/vodcastfullhd.xml$', RedirectView.as_view(url='http://feeds.feedburner.com/hubblecast_fullhd/') ),
-    url( r'^rss/hubblecasthd_amp.xml$', RedirectView.as_view(url='http://feeds.feedburner.com/hubblecast/') ),
+    url(r'^rss/feed.xml$', RedirectView.as_view(url='http://feeds.feedburner.com/hubble_news/')),
+    url(r'^rss/vodcast.xml$', RedirectView.as_view(url='http://feeds.feedburner.com/hubblecast_sd/')),
+    url(r'^rss/vodcasthd.xml$', RedirectView.as_view(url='http://feeds.feedburner.com/hubblecast/')),
+    url(r'^rss/vodcastfullhd.xml$', RedirectView.as_view(url='http://feeds.feedburner.com/hubblecast_fullhd/')),
+    url(r'^rss/hubblecasthd_amp.xml$', RedirectView.as_view(url='http://feeds.feedburner.com/hubblecast/')),
 
     # User authentication
-    url( r'^login/$', django.contrib.auth.views.LoginView.as_view(template_name='login.html') ),
-    url( r'^logout/$', django.contrib.auth.views.LogoutView.as_view(template_name='logout.html') ),
-    url( r'^password_reset/$', django.contrib.auth.views.PasswordResetView.as_view(email_template_name='registration/password_reset_email.txt'), name='password_reset' ),
-    url( r'^password_reset/done/$', django.contrib.auth.views.PasswordResetDoneView.as_view(), name='password_reset_done' ),
-    url( r'^reset/(?P<uidb36>[0-9A-Za-z]+)-(?P<token>.+)/$', django.contrib.auth.views.PasswordResetConfirmView.as_view(), name='django.contrib.auth.views.password_reset_confirm' ),
-    url( r'^reset/done/$', django.contrib.auth.views.PasswordResetCompleteView.as_view(), name='password_reset_complete' ),
+    url(r'^login/$', django.contrib.auth.views.LoginView.as_view(template_name='login.html')),
+    url(r'^logout/$', django.contrib.auth.views.LogoutView.as_view(template_name='logout.html')),
+    url(r'^password_reset/$', django.contrib.auth.views.PasswordResetView.as_view(
+        email_template_name='registration/password_reset_email.txt'), name='password_reset'),
+    url(r'^password_reset/done/$', django.contrib.auth.views.PasswordResetDoneView.as_view(),
+        name='password_reset_done'),
+    url(r'^reset/(?P<uidb36>[0-9A-Za-z]+)-(?P<token>.+)/$',
+        django.contrib.auth.views.PasswordResetConfirmView.as_view(),
+        name='django.contrib.auth.views.password_reset_confirm'),
+    url(r'^reset/done/$', django.contrib.auth.views.PasswordResetCompleteView.as_view(),
+        name='password_reset_complete'),
 
     # Shop
     # url( r'^shop/terms/', RedirectView.as_view(url='/shop/terms_conditions/'), name='shop_terms' ),
@@ -157,33 +186,37 @@ urlpatterns += [
     # url( r'^shop/bulkorders/', RedirectView.as_view(url='/shop/bulk_orders/'), name='shop_bulkorders' ),
     # url( r'^shop/freeorder/', include( 'djangoplicity.archives.contrib.satchmo.freeorder.urls' ) ),
     # url( r'^shop/', include( 'djangoplicity.archives.contrib.satchmo.urls' ) ),
-    url( r'^n3w-fr0nt/newsletters/', include( ('djangoplicity.mailinglists.urls', 'djangoplicity_mailinglists'), namespace='djangoplicity_mailinglists' ) ),
-    url( r'^n3w-fr0nt/newsletters/', include( 'djangoplicity.newsletters.urls'), { 'model': Newsletter, 'options': NewsletterOptions, } ),
-    #( r'^public/djangoplicity/events/', include('djangoplicity.events.urls'), { 'model': Event, 'options': EventOptions } ),
-    url( r'^facebook/', include('djangoplicity.iframe.urls')  ),
+    url(r'^newsletters/', include(('djangoplicity.mailinglists.urls', 'djangoplicity_mailinglists'),
+                                            namespace='djangoplicity_mailinglists')),
+    url(r'^newsletters/', include('djangoplicity.newsletters.urls'),
+        {'model': Newsletter, 'options': NewsletterOptions, }),
+    # ( r'^public/djangoplicity/events/', include('djangoplicity.events.urls'), { 'model': Event, 'options': EventOptions } ),
+    url(r'^facebook/', include('djangoplicity.iframe.urls')),
 
     # Main view
-    url( r'^n3w-fr0nt/$', cache_page(60 * 5)(FrontpageView.as_view()) ),
-    url( r'^$', cache_page(60 * 5)(JourneyView.as_view()) ),
+    url(r'^$', cache_page(60 * 5)(FrontpageView.as_view())),
+    url(r'0ld_fr0nt^$', cache_page(60 * 5)(JourneyView.as_view())),
 
-    #ESASky API for JSONFeed
+    # ESASky API for JSONFeed
     url(r'^zoomables/$', ESASkyListView.as_view()),
 
     # Sitemap
     url(r'^sitemap/$', sitemap),
 
-    url( r'^d2d/$', d2d ),
+    url(r'^d2d/$', d2d),
 
     # Static pages
-    url( r'^ero-events-call/$', cache_page(60 * 5)(EroEventsCall.as_view()) ),
+    url(r'^ero-events-call/$', cache_page(60 * 5)(EroEventsCall.as_view())),
     url(r'^(?P<url>.*/)$', view_page)
 ]
 
-#handler404 = 'spacetelescope.views.page_not_found'
+# handler404 = 'spacetelescope.views.page_not_found'
 
 # Static files/media serving during development
 if settings.SERVE_STATIC_MEDIA:
     urlpatterns += [
-        url( r'^' + settings.DJANGOPLICITY_MEDIA_URL[1:] + r'(?P<path>.*)$', django.views.static.serve, {'document_root': settings.DJANGOPLICITY_MEDIA_ROOT, 'show_indexes': True } ),
-        url( r'^' + settings.MEDIA_URL[1:] + r'(?P<path>.*)$', django.views.static.serve, {'document_root': settings.MEDIA_ROOT, 'show_indexes': True } ),
+        url(r'^' + settings.DJANGOPLICITY_MEDIA_URL[1:] + r'(?P<path>.*)$', django.views.static.serve,
+            {'document_root': settings.DJANGOPLICITY_MEDIA_ROOT, 'show_indexes': True}),
+        url(r'^' + settings.MEDIA_URL[1:] + r'(?P<path>.*)$', django.views.static.serve,
+            {'document_root': settings.MEDIA_ROOT, 'show_indexes': True}),
     ]
