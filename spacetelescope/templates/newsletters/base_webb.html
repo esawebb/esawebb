@@ -17,9 +17,9 @@
 
 
 {% block header %}
-    {% with width="700" height="300" color="#00000" logo_width="140" logo_url=base_url|add:"/assets/images/"|add:"esa-logo.png" jwst_logo_width="100" jwst_logo_url=base_url|add:"/assets/images/"|add:"esa-jwst-logo.png" %}
+    {% with width="700" height="300" color="#00000" logo_width="140" logo_url=base_url|add:"/assets/images/"|add:"esa-logo.png" jwst_logo_width="100" jwst_logo_url=base_url|add:"/assets/images/"|add:"esa-jwst-logo.png" hubble_logo_width="100" hubble_logo_url=base_url|add:"/assets/images/"|add:"esa-hubble-logo.png" %}
         {% block header_content %}
-            {% with header_title="ESA/Webb" %}
+            {% with header_title="ESA/Hubble/Webb" %}
             {% include "newsletters/includes/header.html" %}
             {% endwith %}
         {% endblock %}
@@ -27,7 +27,7 @@
 {% endblock %}
 
 {% block footer %}
-    {% with org="ESA/Webb" %}
+    {% with org="ESA/Hubble/Webb" %}
     {% include "newsletters/includes/footer.html" %}
     {% endwith %}
 {% endblock %}

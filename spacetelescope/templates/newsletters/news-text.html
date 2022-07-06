@@ -1,4 +1,4 @@
-{% load djangoplicity_text_utils release_links djangoplicity_datetime %}{% with announcements=data.announcements potws=data.potws newon=data.newonhubble org="ESA/Webb" embargo="" reason="you subscribed to ESA/Webb News" email="info@esawebb.org" %}{% with signature_date=data.release.release_date signature1="ESA/Webb Information Centre" %}{% include "newsletters/includes/text/press_release.txt" %}{% endwith %}
+{% load djangoplicity_text_utils release_links djangoplicity_datetime %}{% with announcements=data.announcements potws=data.potws newon=data.newonhubble org="ESA/Hubble/Webb" embargo="" reason="you subscribed to ESA/Hubble/Webb News" email="info@esawebb.org" %}{% with signature_date=data.release.release_date signature1="ESA/Hubble/Webb Information Centre" %}{% include "newsletters/includes/text/press_release.txt" %}{% endwith %}
 {% if data.announcements or data.newonhubble or data.potws %}
 *************************************************************************
 
@@ -6,7 +6,7 @@ We would also like to direct your attention to the following:
 {% if announcements %}
 {% include "newsletters/includes/text/announcements.txt" %}{% endif %}{% if potws %}
 {% include "newsletters/includes/text/potws.txt" %}{% endif %}{% if newon %}
-{% include "newsletters/includes/text/newon.txt" with title="spacetelescope.org" %}
+{% include "newsletters/includes/text/newon.txt" with title="esawebb.org" %}
 {% endif %}{% endif %}
 {% include "newsletters/includes/text/footer.txt" %}
 {% endwith %}
