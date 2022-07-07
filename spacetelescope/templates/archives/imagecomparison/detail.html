@@ -39,7 +39,7 @@ javascript file at the bottom of the main template
         {% with i=image_before %}
         <div class="embedded-list-image">
             <a href="{{ i.get_absolute_url }}"><img class="w-100 -top" style="height: 200px; object-fit: cover;" src="{{ i.resource_medium.url }}" alt="{{ i.title }}" /></a>
-            <div><a href="{{ i.get_absolute_url }}">{% trans  "PR Image" %} {% if i.override_id %}{{ i.override_id }}{% else %}{{ i.source.id|default:i.id }}{% endif %}</a></div>
+            <div class="hiper-color"><a href="{{ i.get_absolute_url }}">{% trans  "PR Image" %} {% if i.override_id %}{{ i.override_id }}{% else %}{{ i.source.id|default:i.id }}{% endif %}</a></div>
             <div>{{ i.title }} {% if not i.in_original_language %}<span class="langnote"><br />{% trans "in English only" %}</span>{% endif %}</div>
         </div>
         {% endwith %}
@@ -47,7 +47,7 @@ javascript file at the bottom of the main template
         {% with i=image_after %}
         <div class="embedded-list-image">
             <a href="{{ i.get_absolute_url }}"><img class="w-100 -top" style="height: 200px; object-fit: cover;" src="{{ i.resource_medium.url }}" alt="{{ i.title }}" /></a>
-            <div><a href="{{ i.get_absolute_url }}">{% trans  "PR Image" %} {% if i.override_id %}{{ i.override_id }}{% else %}{{ i.source.id|default:i.id }}{% endif %}</a></div>
+            <div class="hiper-color"><a href="{{ i.get_absolute_url }}">{% trans  "PR Image" %} {% if i.override_id %}{{ i.override_id }}{% else %}{{ i.source.id|default:i.id }}{% endif %}</a></div>
             <div>{{ i.title }} {% if not i.in_original_language %}<span class="langnote"><br />{% trans "in English only" %}</span>{% endif %}</div>
         </div>
         {% endwith %}
