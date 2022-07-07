@@ -915,13 +915,13 @@ RECAPTCHA_PRIVATE_KEY = ''
 # Only config this for the docker web service, not flower, celery, etc, to avoid:
 # ValueError: Missing staticfiles manifest entry for
 # And because the web service is the only that collect statics before
-# if os.environ.get('SERVICE_TYPE') == 'web':
-#     # STATICFILES_STORAGE = 'djangoplicity.utils.storage.PipelineManifestStorage'
-#     STATICFILES_FINDERS = (
-#         'django.contrib.staticfiles.finders.FileSystemFinder',
-#         'django.contrib.staticfiles.finders.AppDirectoriesFinder',
-#         'pipeline.finders.PipelineFinder',
-#     )
+if os.environ.get('SERVICE_TYPE') == 'web':
+    # STATICFILES_STORAGE = 'djangoplicity.utils.storage.PipelineManifestStorage'
+    STATICFILES_FINDERS = (
+        'django.contrib.staticfiles.finders.FileSystemFinder',
+        'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+        'pipeline.finders.PipelineFinder',
+    )
 
 # We split the CSS into main and extras to load the more important first
 # and the rest in the end. This also solves a problem with IE9 which stops
