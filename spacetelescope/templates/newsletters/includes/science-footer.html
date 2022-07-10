@@ -17,7 +17,11 @@
                                                                 {% endif %}{% if obj.comparison %}
                                                                 <a href="{{base_url}}{{obj.comparison.get_absolute_url}}"><img style="border:0px;margin:2px;" src="{{base_url}}{{obj.comparison.resource_wallpaperthumbs.url}}" alt="{{obj.comparison.title}}"></img></a>&nbsp;{% endif %}
                                                                 {% endfor %}
-                                                                <div style="font-size:15px;color:white; padding-top: 5px;"><a href="{{potw_feed_url}}"><img border="0" src="{{base_url}}{{MEDIA_URL}}djangoplicity/images/rssicon.png"></a>&nbsp;<a style="font-size:15px;color:white;text-decoration:none;" href="{{base_url}}{% url 'potw_defaultquery' %}">{{ org }} {% trans "Pictures of the Month" %}</a>
+                                                                <div style="font-size:15px;color:white; padding-top: 5px;">
+                                                                    <a href="{{potw_feed_url}}">
+                                                                        <img border="0" src="{{base_url}}{{MEDIA_URL}}djangoplicity/images/rssicon.png">
+                                                                    </a>&nbsp;
+                                                                    <a style="font-size:15px;color:white;text-decoration:none;" href="{{base_url}}{% url 'potw_defaultquery' %}">{{ org }} {% trans "Pictures of the Month" %}</a>
                                                                 <hr size="1" style="color: #bbbbbb; background-color: #bbbbbb; border: 0; height: 1px;" />
                                                                 </div>
                                                                 {% endif %}
@@ -25,7 +29,7 @@
                                                                 {% if footer_note %}<p style="font-size: 11px;">{% trans footer_note %}</p>{% endif%}
                                                                 {% include "newsletters/includes/preferences_bottom.html" %}
                                                                 {% include "newsletters/includes/footer_followus.html" %}
-                                                                <p style="font-size: 11px; text-align:center; margin-bottom: 0px;">{% if address %}{{ address }}{% else %}ESA/Hubble, ESA Office, Space Telescope Science Institute, 3700 San Martin Dr, D-21218 Baltimore, United States"{% endif %}</p>
+                                                                <p style="font-size: 11px; text-align:center; margin-bottom: 0px;">{% if address %}{{ address }}{% else %}ESA/Hubble/Webb, ESA Office, Space Telescope Science Institute, 3700 San Martin Dr, D-21218 Baltimore, United States"{% endif %}</p>
                                                                 </div>
                                                             </div>
                                                         </td>
