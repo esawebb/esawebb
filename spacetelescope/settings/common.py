@@ -916,7 +916,7 @@ RECAPTCHA_PRIVATE_KEY = ''
 # ValueError: Missing staticfiles manifest entry for
 # And because the web service is the only that collect statics before
 if os.environ.get('SERVICE_TYPE') == 'web':
-    STATICFILES_STORAGE = 'djangoplicity.utils.storage.PipelineManifestStorage'
+    #STATICFILES_STORAGE = 'djangoplicity.utils.storage.PipelineManifestStorage'
     STATICFILES_FINDERS = (
         'django.contrib.staticfiles.finders.FileSystemFinder',
         'django.contrib.staticfiles.finders.AppDirectoriesFinder',
