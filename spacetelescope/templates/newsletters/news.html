@@ -31,7 +31,7 @@
 
     {% if data.release %}
     <br /><hr style="{{hr_style}}"><br />
-    {% with objects=data.releases org="ESA/Hubble/Webb" title="Press Releases" feed_url="https://feeds.feedburner.com/webb_pr" urlpattern="releases_defaultquery" %}
+    {% with objects=data.release org="ESA/Hubble/Webb" title="Press Releases" feed_url="https://feeds.feedburner.com/webb_pr" urlpattern="release_defaultquery" %}
         {% include "newsletters/includes/archiveobjects.html" %}
     {% endwith %}
     {% endif %}
