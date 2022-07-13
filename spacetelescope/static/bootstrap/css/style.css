@@ -9137,6 +9137,12 @@ fieldset:disabled .btn {
   }
 }
 
+@media (max-width: 1200px) {
+  .d-m-none{
+    display: none !important;
+  }
+}
+
 @media (min-width: 768px) {
   .float-md-start {
     float: left !important;
@@ -10290,7 +10296,11 @@ fieldset:disabled .btn {
     text-align: center !important;
   }
 }
-
+@media (min-width: 1600px) {
+  .d-xl-block-n {
+    display: block !important;
+  }
+}
 @media (min-width: 1200px) {
   .float-xl-start {
     float: left !important;

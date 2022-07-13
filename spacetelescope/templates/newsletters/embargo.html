@@ -49,9 +49,9 @@
     {% include "newsletters/includes/editorial.html" %}
     {% endif %}
     
-    {% if data.announcements %}
+    {% if data.releases %}
     <br /><hr style="{{hr_style}}"><br />
-    {% with objects=data.announcements org="ESA/Hubble/Webb" title="Announcements" feed_url="http://feeds.feedburner.com/hubble_announcements" urlpattern="announcements_defaultquery" %}
+    {% with objects=data.releases org="ESA/Hubble/Webb" title="Press Releases" feed_url="http://feeds.feedburner.com/webb_announcements" urlpattern="releases_defaultquery" %}
         {% include "newsletters/includes/archiveobjects.html" %}
     {% endwith %}
     {% endif %}

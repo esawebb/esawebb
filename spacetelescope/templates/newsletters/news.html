@@ -29,32 +29,16 @@
     {% include "newsletters/includes/editorial.html" %}
     {% endif %}
 
-    {% if data.announcements %}
+    {% if data.releases %}
     <br /><hr style="{{hr_style}}"><br />
-    {% with objects=data.announcements org="ESA/Hubble/Webb" title="Announcements" feed_url="https://feeds.feedburner.com/hubble_annoucements" urlpattern="announcements_defaultquery" %}
+    {% with objects=data.releases org="ESA/Hubble/Webb" title="Press Releases" feed_url="https://feeds.feedburner.com/webb_pr" urlpattern="releases_defaultquery" %}
         {% include "newsletters/includes/archiveobjects.html" %}
-    {% endwith %}
-    {% endif %}
-{% endblock %}
-
-{% block sidebar %}
-    {% if data.potws %}
-    {% if enable_sharing %}<br /><hr style="{{hr_style}}"><br />{% endif %}
-    {% with potws=data.potws feed_url="http://feeds.feedburner.com/hubble_potw/" %}
-        {% include "newsletters/includes/right_potws.html" %}
-    {% endwith %}
-    {% endif %}
-
-    {% if data.newonhubble %}
-    {% if data.potws %}<br /><hr style="{{hr_style}}"><br />{% endif %}
-    {% with newon=data.newonhubble newon_title="esawebb.org" %}
-        {% include "newsletters/includes/right_newon.html" %}
     {% endwith %}
     {% endif %}
 {% endblock %}
 
 {% block footer %}
     {% with followus="yes" org="ESA/Hubble/Webb" potw_feed_url="http://feeds.feedburner.com/hubble_potw/" reason="you subscribed to ESA/Hubble/Webb News." footer_potws=data.footer_potws address="ESA/Hubble/Webb, ESA Office, Space Telescope Science Institute, 3700 San Martin Dr, D-21218 Baltimore, United States" %}
-        {% include "newsletters/includes/footer.html" with width="660" %}
+        {% include "newsletters/includes/webb-footer.html" with width="660" %}
     {% endwith %}
 {% endblock %}

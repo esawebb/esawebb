@@ -50,7 +50,7 @@
 {% endwith %}
 <p></p>
 
-<p class="text_intro pr_first">{{ object.headline|linebreaksbr|description_links|release_ids|safe }}</p>
+<p class="text_intro pr_first"><strong>{{ object.headline|linebreaksbr|description_links|release_ids|safe }}</strong></p>
 {{ object.description|description_links|release_ids|safe }}
 {% if object.notes %}<h3>{% trans "Notes" %}</h3>{{ object.notes|notes_links|release_ids|safe }}{% endif %}
 {% if object.more_information %}<h3>{% trans "More information" %}</h3>{{ object.more_information|safe }}{% endif %}

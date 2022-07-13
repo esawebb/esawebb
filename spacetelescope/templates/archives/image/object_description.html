@@ -1,5 +1,7 @@
 {% load i18n %}
 {% load djangoplicity_images %}
+{% load static %}
+
 {% include 'archives/embargo_notice.html' %}
 <h1 class="my-3">{{ object.title }}</h1>
 
@@ -19,32 +21,29 @@
     }
     </script>
 
-{% endif %} 
+{% endif %}
 
+<link rel="stylesheet" href="{% static 'magnific-popup/magnific-popup.css' %}">
+<script src="{% static 'magnific-popup/jquery.min.js' %}"></script>
+<script src="{% static 'magnific-popup/jquery.magnific-popup.min.js' %}"></script>
 
-<div class="modal fade "  id="image-modal" tabindex="-1" aria-labelledby="image-modal" aria-hidden="true">
-    <div class="modal-dialog modal-xl">
-    <div class="modal-content" style="background: none; border: none;">
-        <div class="modal-header" style="border: none;">
-        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-            <img src="https://cdn.esawebb.org/archives/images/screen/{{object.pk}}.jpg" class="w-100" style="height: 70vh; object-fit: cover;">
-        </div>
-        <div class="modal-footer" style="border: none;">
-        <p class="text-white">{{ object.title }}</p>
-        </div>
-    </div>
-    </div>
-</div>
-
-<div class="bg-image hover-overlay ripple shadow-1-strong rounded my-3 px-1" data-ripple-color="light">
-    <a class="" data-bs-toggle="modal" data-bs-target="#image-modal">
-        <img src="https://cdn.esawebb.org/archives/images/screen/{{object.pk}}.jpg" class="w-100"
-            style="height: auto; max-width: 100%; object-fit: cover;" />
+<div class="bg-image hover-overlay ripple shadow-1-strong rounded my-3 px-1 popup-link" data-ripple-color="light">
+    <a href="https://cdn.esawebb.org/archives/images/screen/{{object.pk}}.jpg" title="{{ object.title }}">
+        <img src="https://cdn.esawebb.org/archives/images/screen/{{object.pk}}.jpg" class="w-100" style="height: auto; max-width: 100%; object-fit: cover;" />
     </a>
 </div>
 
+{#<a class="test-popup-link" title="{{ object.title }}" href="https://cdn.esawebb.org/archives/images/screen/{{object.pk}}.jpg">#}
+{#    <img src="http://farm9.staticflickr.com/8241/8589392310_7b6127e243_s.jpg" width="75" height="75" />#}
+{#</a>#}
+<script>
+    $(document).ready(function($){
+      $('.popup-link').magnificPopup({
+          delegate: 'a',
+          type: 'image'
+      });
+    })
+</script>
 {% if object.headline %}<p>{{ object.headline }}</p>{% endif %}
 <p>{{ object.description|safe }}</p>
 <strong>{% trans "Credit" %}:</strong><div class="credit">{{ object.credit|safe }}</div>

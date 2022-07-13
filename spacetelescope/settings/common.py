@@ -551,7 +551,7 @@ ARCHIVES = (
     ('djangoplicity.newsletters.models.Newsletter', 'djangoplicity.newsletters.options.NewsletterOptions'),
 )
 
-ARCHIVE_EMBARGO_LOGIN = ('hst', 'shtenvix')
+ARCHIVE_EMBARGO_LOGIN = ('stageweic', 'esawebbconfidential2022')
 ARCHIVE_EMAIL_SENDER = "ESA/Webb Information Centre <web@esawebb.org>"
 
 ARCHIVE_URL_QUERY_PREFIX = 'archive'
@@ -916,7 +916,7 @@ RECAPTCHA_PRIVATE_KEY = ''
 # ValueError: Missing staticfiles manifest entry for
 # And because the web service is the only that collect statics before
 if os.environ.get('SERVICE_TYPE') == 'web':
-    # STATICFILES_STORAGE = 'djangoplicity.utils.storage.PipelineManifestStorage'
+    #STATICFILES_STORAGE = 'djangoplicity.utils.storage.PipelineManifestStorage'
     STATICFILES_FINDERS = (
         'django.contrib.staticfiles.finders.FileSystemFinder',
         'django.contrib.staticfiles.finders.AppDirectoriesFinder',
