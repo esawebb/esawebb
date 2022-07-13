@@ -206,8 +206,6 @@
         </div>
         {% endif %}
     </div>
-    
-
 
     <div class=" col-lg-6 col-xl-4 mt-4 ps-3">
         <div class="social-feeds">
@@ -220,7 +218,7 @@
                 <div class="embed-responsive embed-responsive-16by9 fb-page ms-3 ms-lg-1">
                     <iframe
                         src="https://www.facebook.com/plugins/page.php?locale=en_US&href=https%3A%2F%2Fwww.facebook.com%2FESAWebb%2F&tabs=timeline&width=360&height=750&small_header=true&adapt_container_width=true&hide_cover=false&show_facepile=true&appId"
-                        width="360" height="750" style="border:none;" scrolling="no" frameborder="0"
+                        width="auto" height="750" style="border:none;" scrolling="no" frameborder="0"
                         class="rounded" allowfullscreen="true"
                         allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe>
                 </div>
@@ -274,6 +272,38 @@
     </div>
 </div>
 {% endif %}
+
+<!-- releasees -->
+{% if releases %}
+<section class=" ">
+    <div class="container py-2 my-2">
+        <header class="mb-3 px-5">
+            <h4 class="lined lined-center text-uppercase text-primary">RELEASES</h4>
+        </header>
+        <div class="row px-3">
+            {% for release in releases %}
+            <div class="col-lg-3 col-md-6 mb-3">
+                <div class="box-image shadow  border">
+                    <div class="mb-4 primary-overlay">
+                        <img src="{{ release.main_visual.resource_thumb350x.url }}" alt="{{ release.main_visual.title }}"
+                            class="w-100 -top" style="height: 200px; object-fit: cover;" />
+                    </div>
+                    <div class="text-center pb-3" >
+                        <h5 class="new-title h6 text-capitalize text-primary mx-2" style="height: 70px;">
+                            <a class="text-reset" href="{{ release.get_absolute_url }}" style="text-decoration: none;">{{ release.title }}</a>
+                        </h5>
+                        <p class="small text-capitalize text-muted">{{ release.release_date|date:"j N Y" }} — {{ release.id }}</p>
+                        <a class="btn btn-primary" href="{{ release.get_absolute_url }}">Read More</a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endif %}
+
+
 
 <div class="frontpage-section subscribe-to-hubble">
     <div class="container py-2 my-2 px-5">
