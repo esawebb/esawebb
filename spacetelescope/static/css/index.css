@@ -15,6 +15,18 @@ a {
     text-decoration: none !important;
 }
 
+p a {
+    color: #009bdb !important;
+}
+
+.hiper-color a {
+    color: #009bdb;
+}
+
+.tex-justify p {
+    text-align: justify;
+}
+
 #gallery .bg-image {
     position: relative;
 

@@ -36,7 +36,7 @@ We don't display the children pages widget in the dark pages
             </div>
             {% if web_categories %}
             <div class="row">
-                <p class="form-text ms-1">
+                <div class="form-text ms-1">
                     {% if archive == 'image' %}<a
                         class="me-3 border border-primary btn-outline-primary p-1 mt-2 d-inline-block"
                         style="text-decoration: none;"
@@ -53,11 +53,11 @@ We don't display the children pages widget in the dark pages
                         href="{{ category.get_absolute_url}}{% if params_nosearch %}?{{ params_nosearch }}{% endif %}"
                         {% if category.selected %} class="selected" {% endif %}>{% trans category.name %}</a>
                     {% endfor %}
-                </p>
+                </div>
             </div>
             {% endif %}
             <div class="text-end">
-                <p title="{% trans 'Sort by:' %}">
+                <div title="{% trans 'Sort by:' %}">
                     <span class="me-3">Sort by:  </span>
                     <a  style="text-decoration: none;" 
                         href="{{ request.path }}?{{params_nosort}}"{% if not request.GET.sort %} 
@@ -71,7 +71,7 @@ We don't display the children pages widget in the dark pages
                         {% else %}
                         class="me-3 border border-primary btn-outline-primary p-1 mt-2 d-inline-block"
                         {% endif %}>{% trans "Date" %}</a>
-                </p>
+                </div>
             </div>
         </div>
     </div>

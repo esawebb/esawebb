@@ -7,17 +7,17 @@
 {% load static %}
 
 {% block extra_header %}
-    <meta property="og:title" content="ESA/Hubble Space Telescope" />
-    <meta property="og:description" content="The ESA page for the Hubble Space Telescope, the space-based observatory that has revolutionised modern astronomy." />
-    <meta property="og:image" content="http://www.spacetelescope.org/static/archives/images/screen/hubble_earth_sp01.jpg" />
-    <meta property="og:image:secure_url" content="https://www.spacetelescope.org/static/archives/images/screen/hubble_earth_sp01.jpg" />
+    <meta property="og:title" content="ESA/Webb Space Telescope" />
+    <meta property="og:description" content="The ESA page for the James Webb Space Telescope, the space-based observatory that has revolutionised modern astronomy." />
+    <meta property="og:image" content="http://cdn.esawebb.org/archives/images/screen/ann2203a.jpg" />
+    <meta property="og:image:secure_url" content="https://cdn.esawebb.org/archives/images/screen/ann2203a.jpg" />
 
     <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v9.0" nonce="n9nP9JNb"></script>
     <script async src="https://platform.twitter.com/widgets.js" max-w charset="utf-8"></script>
 {% endblock %}
 
 {% block content_area %}
-<div class="container-fluid my-3">
+<div class="container-fluid my-3 d-none d-xl-block">
     <canvas id="webgl" class="webgl">
         
     </canvas>
@@ -217,7 +217,7 @@
                         <h4 class="lined lined-center text-uppercase text-primary my-3 ms-5 ms-lg-1">{% trans "ESA/Webb Facebook" %}</h4>
                     </div>
                 </div>
-                <div class="embed-responsive embed-responsive-16by9 fb-page ms-5 ms-lg-1">
+                <div class="embed-responsive embed-responsive-16by9 fb-page ms-3 ms-lg-1">
                     <iframe
                         src="https://www.facebook.com/plugins/page.php?locale=en_US&href=https%3A%2F%2Fwww.facebook.com%2FESAWebb%2F&tabs=timeline&width=360&height=750&small_header=true&adapt_container_width=true&hide_cover=false&show_facepile=true&appId"
                         width="360" height="750" style="border:none;" scrolling="no" frameborder="0"
@@ -282,14 +282,13 @@
                 <div class="">
                     <div class="section-header">
                         <div class="section-title blue-title">
-                            <h4 class="lined lined-center text-uppercase text-primary">{% trans "ESA/Webb Copyright" %}</h4>
-                            
+                            <h4 class="lined lined-center text-uppercase text-primary">{% trans "ESA/Webb Copyright" %}</h4>                            
                         </div>
                     </div>
                     <div id="newsletters-link ">
                         <a class="shadow  border box-image" href="/copyright/">
                             <img src="https://cdn.esawebb.org/archives/images/screen/ESAHubbleWebb-1.jpg" alt="Take a look to our newsletters"
-                                style="object-fit: cover; width: 100%; height: 400px;" class="shadow rounded">
+                                style="object-fit: cover; width: 100%;" class="img-fluid shadow rounded">
                         </a>
                     </div>
                 </div>
@@ -305,7 +304,7 @@
                     <div id="subscribe-link">
                         <a class="shadow  border box-image" href="/newsletters/ ">
                             <img src="https://cdn.esawebb.org/archives/images/screen/Updates-from.jpg" alt="Suscribirse a Webb News"
-                            style="object-fit: cover; width: 100%; height: 400px;" class="shadow rounded">
+                            style="object-fit: cover; width: 100%;" class="img-fluid shadow rounded">
                         </a>
                     </div>
                 </div>

@@ -8,7 +8,7 @@
         {% if admin.links or admin.metadata %}
             <div>
             {% for link in admin.links %}
-                {% if link.url %}<a id="object_admin_a" class="btn btn-primary d-block" href="{{ link.url }}">{% trans link.title %}</a><br />{% endif %}
+                {% if link.url %}<a id="object_admin_a" class="btn btn-primary d-block" style="color: #fff;" href="{{ link.url }}">{% trans link.title %}</a><br />{% endif %}
             {% endfor %}
             {% if admin.metadata %}
                 <table class="table form-text text-dark">
