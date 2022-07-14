@@ -37,7 +37,7 @@
                 <div class="box-image shadow  border">
                     <div class="mb-4 primary-overlay">
                         <img src="{{ release.main_visual.resource_thumb350x.url }}" alt="{{ release.main_visual.title }}"
-                            class="w-100 -top" style="height: 200px; object-fit: cover;" />
+                            class="img-fluid -top" style="object-fit: cover;" />
                     </div>
                     <div class="text-center pb-3" >
                         <h5 class="new-title h6 text-capitalize text-primary mx-2" style="height: 70px;">
@@ -99,7 +99,7 @@
                     <div class="box-image shadow  border">
                         <div class="mb-4 primary-overlay">
                             <img src="{{ announcement.main_visual.resource_thumb350x.url }}" alt="{{ announcement.main_visual.title }}"
-                                class="w-100 -top" style="height: 200px; object-fit: cover;" />
+                                class="img-fluid -top" style="object-fit: cover;" />
                         </div>
                         <div class="text-center pb-3" >
                             <h5 class="new-title h6 text-capitalize text-primary mx-2" style="height: 70px;">
@@ -145,7 +145,7 @@
                 </script>
                 <div class="slide">
                     <a class="card bg-primary" href="{{ potw.get_absolute_url }}" style="text-decoration: none;">
-                        <img src="{{ potw.visual.resource_screen640.url }}" class="w-100 card-img-top" style="height: 400px; object-fit: cover;" alt="{{ potw.visual.title }}">
+                        <img src="{{ potw.visual.resource_screen640.url }}" class="img-fluid card-img-top" style="object-fit: cover;" alt="{{ potw.visual.title }}">
                         <div class="potw-description card-body text-white">
                             <span class="date card-text">{{ potw.release_date|datetime:"DATE" }} — {{ potw.id }}</span>
                             <span class="title card-text mx-5">{{ potw.visual.title }}</span>
