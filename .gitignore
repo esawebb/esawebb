@@ -29,3 +29,5 @@ id_rsa*
 config/youtube/*
 config/.ssh/known_hosts
 !config/youtube/README.md
+config/nginx-prod/conf.d/webb.conf
+spacetelescope/settings/prod.py

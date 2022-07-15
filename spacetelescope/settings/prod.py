@@ -7,7 +7,7 @@ DEBUG = False
 SECRET_KEY = get_secret('DJANGO_SECRET_KEY')
 
 ALLOWED_HOSTS = [
-    '.esawebb.org',
+    get_secret('DOMAIN'),
     '.spacetelescope.org'
 ]
 
