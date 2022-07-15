@@ -29,14 +29,14 @@
 <section class=" ">
     <div class="container py-2 my-2">
         <header class="mb-3 px-5">
-            <h4 class="lined lined-center text-uppercase text-primary">RELEASES</h4>
+            <h4 class="lined lined-center text-uppercase text-primary">PRESS RELEASES</h4>
         </header>
         <div class="row px-3">
             {% for release in releases %}
             <div class="col-lg-3 col-md-6 mb-3">
                 <div class="box-image shadow  border">
                     <div class="mb-4 primary-overlay">
-                        <img src="https://cdn.esawebb.org/archives/images/banner1920/{{ releases.image.pk }}.jpg" alt="{{ release.main_visual.title }}"
+                        <img src="{{ release.main_visual.resource_thumb350x.url }}" alt="{{ release.main_visual.title }}"
                             class="img-fluid -top" style=" object-fit: cover;" />
                     </div>
                     <div class="text-center pb-3" >
@@ -98,7 +98,7 @@
                 <div class="col-lg-3 col-md-6 mb-3">
                     <div class="box-image shadow  border">
                         <div class="mb-4 primary-overlay">
-                            <img src="https://cdn.esawebb.org/archives/images/banner1920/{{ announcement.image.pk }}.jpg" alt="{{ announcement.main_visual.title }}"
+                            <img src="{{ announcement.main_visual.resource_thumb350x.url }}" alt="{{ announcement.main_visual.title }}"
                                 class="w-100 -top" style="height: 200px; object-fit: cover;" />
                         </div>
                         <div class="text-center pb-3" >
@@ -249,7 +249,7 @@
                 <div class="embed-responsive embed-responsive-16by9 fb-page ms-3 ms-lg-1">
                     <iframe
                         src="https://www.facebook.com/plugins/page.php?locale=en_US&href=https%3A%2F%2Fwww.facebook.com%2FESAWebb%2F&tabs=timeline&width=360&height=750&small_header=true&adapt_container_width=true&hide_cover=false&show_facepile=true&appId"
-                        width="auto" height="750" style="border:none;" scrolling="no" frameborder="0"
+                        width="360" height="750" style="border:none;" scrolling="no" frameborder="0"
                         class="rounded" allowfullscreen="true"
                         allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe>
                 </div>
