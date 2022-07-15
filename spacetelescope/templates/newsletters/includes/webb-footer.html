@@ -13,12 +13,27 @@
                                                             <div style="color: #707070;font-family: Helvetica, Arial;font-size: 10px;line-height: 125%;text-align: center;background-color:#292929; padding-top:5px;padding-bottom:0px;padding-left:0px;padding-right:0px;">
                                                                 {% if footer_potws %}
 
-                                                                    <div style="text-align: center">
-                                                                        <a href="https://esahubble.org/images/potw2228a/"><img src="{{base_url}}/assets/images/potw-hubble/potw2228a.jpg"></a>&nbsp;
-                                                                        <a href="https://esahubble.org/images/potw2227a/"><img src="{{base_url}}/assets/images/potw-hubble/potw2227a.jpg"></a>&nbsp;
-                                                                        <a href="https://esahubble.org/images/potw2226a/"><img src="{{base_url}}/assets/images/potw-hubble/potw2226a.jpg"></a>&nbsp;
-                                                                        <a href="https://esahubble.org/images/potw2225a/"><img src="{{base_url}}/assets/images/potw-hubble/potw2225a.jpg"></a>&nbsp;
-                                                                        <a href="https://esahubble.org/images/potw2224a/"><img src="{{base_url}}/assets/images/potw-hubble/potw2224a.jpg"></a>&nbsp;
+                                                                    <div id="potw-potm" style="padding-top: 5px;">
+                                                                        <script src="https://static.sekandocdn.net/static/feednami/feednami-client-v1.1.js"></script>
+                                                                        <script src="https://static.sekandocdn.net/static/feednami/feednami-client-v1.1.js"></script>
+                                                                        <script>
+                                                                            let url = 'http://feeds.feedburner.com/hubble_potw/';
+                                                                            const textarea = document.querySelector('#potw-potm');
+                                                                            feednami.load(url)
+                                                                            .then(feed => {
+                                                                              textarea.value = ''
+                                                                              for(var i=0;i<5;i++){
+                                                                                  //create a list element
+                                                                                  let potw = document.createElement('a');
+                                                                                  potw.href = `${feed.entries[i].link}`;
+                                                                                  //add HTML content to list items
+                                                                                  potw.innerHTML = `<img src="https://esahubble.org/media/archives/images/wallpaperthumbs/${feed.entries[i].link.split("/")[4]}.jpg">`;
+                                                                                  //append HTML content to list
+                                                                                  textarea.appendChild(potw);
+                                                                                  textarea.appendChild(document.createTextNode(' '));
+                                                                              }
+                                                                            });
+                                                                        </script>
                                                                     </div>
 
                                                                     <div style="font-size:15px;color:white; padding-top: 5px;">
