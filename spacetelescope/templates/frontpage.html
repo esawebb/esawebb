@@ -17,12 +17,6 @@
 {% endblock %}
 
 {% block content_area %}
-<!-- <div class="container-fluid my-3 d-none d-xl-block">
-    <canvas id="webgl" class="webgl">
-        
-    </canvas>
-</div>
-<div id="fb-root"></div>-->
 
 <!-- releasees -->
 {% if releases %}
@@ -53,35 +47,6 @@
     </div>
 </section>
 {% endif %}
-
-
-
-<div id="pr-carousel-wrapper">
-    <div id="pr-carousel">
-        {% if release %}
-        {% for release in releases %}
-        <div class="slide">
-            <a href="{{ release.get_absolute_url }}">
-            {% if release.main_image.resource_banner1920 %}
-                <img draggable="false" data-lazy="{{ release.main_image.resource_banner1920.url }}" alt="{{ release.main_image.title }}">
-            {% else %}
-                <img draggable="false" data-lazy="{{ release.main_image.resource_wallpaper3.url }}" alt="{{ release.main_image.title }}">
-            {% endif %}
-            <div class="pr-content">
-                <div class="pr-description">
-                    <div class="pr-type">{{ release.id }} — {{ release.release_type.name }}</div>
-                    <div class="pr-title">{{ release.title }}</div>
-                    <div class="pr-extra">
-                        <div class="pr-headline">{{ release.headline }}</div>
-                    </div>
-                </div>
-            </div>
-            </a>
-        </div>  <!-- slide -->
-        {% endfor %}
-        {% endif %}
-    </div> <!-- pr-carousel -->
-</div> <!-- pr-carousel-wrapper -->
 
 <div class="" id="body">
 
