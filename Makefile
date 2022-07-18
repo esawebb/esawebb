@@ -4,6 +4,9 @@ prod-up:
 prod-up-build:
 	docker-compose -f docker-compose.yml -f docker-compose.prod.yml up -d --build
 
+dev-up-build:
+	docker-compose -f docker-compose.yml -f docker-compose.devserver.yml up -d --build
+
 # Press Ctrl + Z to make it a background process, but "exit" finishes the process instead of logout
 prod-up-attached:
 	docker-compose -f docker-compose.yml -f docker-compose.prod.yml up
