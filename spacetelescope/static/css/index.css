@@ -19,6 +19,10 @@ p a {
     color: #009bdb !important;
 }
 
+.accordion a {
+    color: #009bdb !important;
+}
+
 .hiper-color a {
     color: #009bdb;
 }
