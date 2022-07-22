@@ -8,7 +8,17 @@
     <meta name="description" content="{{ archive_description }}" />{% endif %}
 {%endblock%}
 
-{% block site_title %}{% if archive_title %}{{archive_title}}{% else %}{{ archive|capfirst }} Archive{%endif%} | {{block.super}}{% endblock %}
+{% block site_title %}
+{% if archive_title %} 
+{% if archive_title == 'Picture of the Week' %} 
+Picture of the Month 
+{% else %}
+{% trans archive_title %} 
+{% endif %}
+{% else %}
+{{ archive|capfirst }}
+{% trans "Archive" %}{% endif %} | {{block.super}}
+{% endblock %}
 
 {% block archive_search %}
 {% with archive_search_position="outside" %}
@@ -18,7 +28,7 @@
 
 {% block body %}
 
-<div class="row no-page">
+<div class="row no-page mb-4">
     <div id="archive-list" class="col-md-12">
 {% block content %}
         <h1>{% if archive_title %} 
@@ -29,22 +39,36 @@
     </div>
 
     {% if 'products' in request.path %}
-    <div class="col-md-12 media-categories">
-        <ul>
-            <li><a href="/products/models3d/"{% if '/products/models3d/' in request.path %} class="selected"{% endif %}>{% trans "3D Models" %}</a></li>
-            <li><a href="/products/calendars/"{% if '/products/calendars/' in request.path %} class="selected"{% endif %}>{% trans "Calendars" %}</a></li>
-            <li><a href="/products/applications/"{% if '/products/applications/' in request.path %} class="selected"{% endif %}>{% trans "Apps" %}</a></li>
-            <li><a href="/products/exhibitions/"{% if '/products/exhibitions/' in request.path %} class="selected"{% endif %}>{% trans "Exhibition Panels" %}</a></li>
-            <li><a href="/products/stickers/"{% if '/products/stickers/' in request.path %} class="selected"{% endif %}>{% trans "Stickers" %}</a></li>
-            <li><a href="/products/postcards/"{% if '/products/postcards/' in request.path %} class="selected"{% endif %}>{% trans "Postcards" %}</a></li>
-            <li><a href="/products/print_posters/"{% if '/products/print_posters/' in request.path %} class="selected"{% endif %}>{% trans "Printed Posters" %}</a></li>
-            <li><a href="/products/conf_posters/"{% if '/products/conf_posters/' in request.path %} class="selected"{% endif %}>{% trans "Conferences Posters" %}</a></li>
-            <li><a href="/products/media/"{% if '/products/media/' in request.path %} class="selected"{% endif %}>{% trans "Media" %}</a></li>
-            <li><a href="/products/presentations/"{% if '/products/presentations/' in request.path %} class="selected"{% endif %}>{% trans "Presentations" %}</a></li>
-            <li><a href="/products/art/"{% if '/products/art/' in request.path %} class="selected"{% endif %}>{% trans "Space Art" %}</a></li>
-            <li><a href="/products/video-conference-backgrounds/"{% if '/products/video-conference-backgrounds/' in request.path %} class="selected"{% endif %}>{% trans "Virtual meeting backgrounds" %}</a></li>
-        </ul>
+    <div class="row">
+        <div class="form-text ms-1">
+            <a href="/products/models3d/"
+                class="me-3 border border-primary btn-outline-primary p-1 mt-2 d-inline-block" >{% trans "3D Models"%}</a>
+            <a href="/products/calendars/" 
+                class="me-3 border border-primary btn-outline-primary p-1 mt-2 d-inline-block" >{% trans "Calendars"%}</a>
+            <a href="/products/applications/" 
+                class="me-3 border border-primary btn-outline-primary p-1 mt-2 d-inline-block" >{% trans "Apps"%}</a>
+            <a href="/products/exhibitions/" 
+                class="me-3 border border-primary btn-outline-primary p-1 mt-2 d-inline-block" >{% trans "Exhibition Panels" %}</a>
+            <a href="/products/stickers/" 
+                class="me-3 border border-primary btn-outline-primary p-1 mt-2 d-inline-block" >{% trans "Stickers"%}</a>
+            <a href="/products/postcards/" 
+                class="me-3 border border-primary btn-outline-primary p-1 mt-2 d-inline-block" >{% trans "Postcards"%}</a>
+            <a href="/products/print_posters/" 
+                class="me-3 border border-primary btn-outline-primary p-1 mt-2 d-inline-block" >{% trans "Printed Posters" %}</a>
+            <a href="/products/conf_posters/" 
+                class="me-3 border border-primary btn-outline-primary p-1 mt-2 d-inline-block" >{% trans "Conferences Posters" %}</a>
+            <a href="/products/media/" 
+                class="me-3 border border-primary btn-outline-primary p-1 mt-2 d-inline-block" >{% trans "Media"%}</a>
+            <a href="/products/presentations/" 
+                class="me-3 border border-primary btn-outline-primary p-1 mt-2 d-inline-block" >{% trans "Presentations" %}</a>
+            <a href="/products/art/"
+                class="me-3 border border-primary btn-outline-primary p-1 mt-2 d-inline-block" >{% trans "Space Art"%}</a>
+            <a href="/products/video-conference-backgrounds/"
+                class="me-3 border border-primary btn-outline-primary p-1 mt-2 d-inline-block" >{% trans "Virtual meeting backgrounds" %}</a></li>
+        
+        </div>
     </div>
+    
     {% endif %}
 </div>
 
