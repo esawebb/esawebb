@@ -77,14 +77,19 @@ compilemessages:
 	docker exec -it webb django-admin compilemessages
 
 sass:
-	node-sass ./components/scss/webb.scss ./spacetelescope/static/css/webb.css
+	node-sass ./components/scss/webb.scss ./webb/static/css/webb.css
 
 youtube-token:
 	docker exec -it webb python ./scripts/youtube-token.py
 
 npm-init:
-	npm install --prefix spacetelescope/static/journey
+	npm install --prefix webb/static/journey
 
 npm-build:
-	npm start --prefix spacetelescope/static/journey
+	npm start --prefix webb/static/journey
 
+init:
+	test -n "$(name)"
+	rm -rf ./.git
+	find ./ -type f -exec perl -pi -e 's/webb/$(name)/g' *.* {} \;
+	mv ./webb ./$(name)

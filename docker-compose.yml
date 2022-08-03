@@ -40,7 +40,7 @@ services:
     command:
       [
         "celery",
-        "--app=spacetelescope",
+        "--app=webb",
         "--concurrency=8",
         "--hostname=worker1@%h",
         "--loglevel=INFO",
@@ -59,7 +59,7 @@ services:
     command:
       [
         "celery",
-        "--app=spacetelescope",
+        "--app=webb",
         "--concurrency=8",
         "--db=/home/webbadm/tmp/flowerdb",
         "--persistent",
@@ -77,7 +77,7 @@ services:
     command:
       [
         "celery",
-        "--app=spacetelescope",
+        "--app=webb",
         "--loglevel=INFO",
         "--pidfile=/home/webbadm/tmp/beat.pid",
         "beat",
