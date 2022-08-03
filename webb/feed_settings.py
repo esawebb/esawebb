@@ -22,9 +22,9 @@ class AnnouncementFeedSettings():
 
 
 class VideoPodcastFeedSettings():
-    title = 'Spacetelescope.org Video Feed'
+    title = 'Webb.org Video Feed'
     link = 'http://www.webb.org/videos/'
-    description = 'The Latest Videos from Spacetelescope.org'
+    description = 'The Latest Videos from Webb.org'
     enclosure_resources = {
             '': ['resource_hd_and_apple', 'resource_hd720p_screen', ],
             'hd': ['resource_hd_and_apple', 'resource_hd720p_screen', ],
