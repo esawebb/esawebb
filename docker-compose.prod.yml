@@ -56,7 +56,7 @@ services:
     command:
       [
         "celery",
-        "--app=spacetelescope",
+        "--app=webb",
         "--concurrency=8",
         "--db=/home/webbadm/tmp/flowerdb",
         "--persistent",

@@ -1,11 +1,11 @@
 
 syntax: regexp
-^src/spacetelescope\.egg-info/dependency_links\.txt$
-^src/spacetelescope\.egg-info/not-zip-safe$
-^src/spacetelescope\.egg-info/PKG-INFO$
-^src/spacetelescope\.egg-info/SOURCES\.txt$
-^src/spacetelescope\.egg-info/top_level\.txt$
-^src/spacetelescope\.egg-info$
+^src/webb\.egg-info/dependency_links\.txt$
+^src/webb\.egg-info/not-zip-safe$
+^src/webb\.egg-info/PKG-INFO$
+^src/webb\.egg-info/SOURCES\.txt$
+^src/webb\.egg-info/top_level\.txt$
+^src/webb\.egg-info$
 ^static/djangoplicity$
 ^celeryev\.pid$
 .DS_Store$

@@ -77,7 +77,7 @@ def similar_titles(titles):
     
 def analyse_links(pr_id):
     '''
-    in spacetelescope.org press releases are sometimes links to the corresponding NASA Press Release
+    in webb.org press releases are sometimes links to the corresponding NASA Press Release
     return the link that points to hubblesite.org and contains NASA in its description
     '''
     links = None
