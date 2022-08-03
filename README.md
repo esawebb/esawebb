@@ -1,6 +1,6 @@
 # ESA Webb
 
-Djangoplicity CMS for the ESA Hubble Project (https://www.spacetelescope.org/)
+Djangoplicity CMS for the ESA Hubble Project (https://www.webb.org/)
 
 ## Requirements
 
@@ -230,7 +230,7 @@ In order to make changes you must have npm installed and install the dependencie
 
 1. Go to folder
 ```
-cd /spacetelescope/static/journey/
+cd /webb/static/journey/
 ```
 2. Install the dependencies(only the first time)
 ```
@@ -249,7 +249,7 @@ In order to make changes you must have npm installed and install the dependencie
 
 1. Go to folder
 ```
-cd /spacetelescope/static/home/
+cd /webb/static/home/
 ```
 2. Install the dependencies(only the first time)
 ```

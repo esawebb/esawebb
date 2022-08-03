@@ -11,9 +11,9 @@ from __future__ import print_function
 #
 # Mantis 12079
 # 1. Task: Generate list:
-# hubblesite id, spacetelescope id, spacetele url, hubblesite url
+# hubblesite id, webb id, spacetele url, hubblesite url
 # 2. Generate HTML page:
-# each line: spacetelescope image thumb and hubblesite thumbnail 
+# each line: webb image thumb and hubblesite thumbnail 
 
 
 #*************************************************************************************************************
@@ -46,20 +46,20 @@ def store_JSON(path_json, dict):
     f.write('"items": [\n')
     nel = len(ids)
     count = 0
-    for spacetelescope_id in ids:
+    for webb_id in ids:
         count = count + 1
-        logger.info(spacetelescope_id)
-        element = dict[spacetelescope_id]
-        spacetelescope_thumb = element[0]
-        spacetelescope_url = element[1]
+        logger.info(webb_id)
+        element = dict[webb_id]
+        webb_thumb = element[0]
+        webb_url = element[1]
         hubblesite_id = element[2]
         hubblesite_thumb = element[3]
         hubblesite_huge  = element[4]
         long_caption_link = element[5]
         f.write('{' + '\n')
-        f.write('"spacetelescope_id": "'    + spacetelescope_id    + '",' + '\n')
-        f.write('"spacetelescope_thumb": "' + spacetelescope_thumb + '",'  + '\n')
-        f.write('"spacetelescope_url": "'   + spacetelescope_url   + '",'  + '\n')
+        f.write('"webb_id": "'    + webb_id    + '",' + '\n')
+        f.write('"webb_thumb": "' + webb_thumb + '",'  + '\n')
+        f.write('"webb_url": "'   + webb_url   + '",'  + '\n')
         f.write('"hubblesite_id": "'        + hubblesite_id        + '",  \n')
         f.write('"hubblesite_thumb": "'     + hubblesite_thumb     + '",' + '\n')
         f.write('"hubblesite_huge": "'      + hubblesite_huge      + '",' + '\n') 
@@ -100,7 +100,7 @@ if __name__ == '__main__':
     socket.setdefaulttimeout(timeout)
 
     # opo0328a  => link to thumbnail
-    # http://www.spacetelescope.org/static/archives/images/screen/opo0328a.jpg
+    # http://www.webb.org/static/archives/images/screen/opo0328a.jpg
     # opo0328a  => long_caption  
     # http://hubblesite.org/newscenter/archive/releases/2003/28/image/a/
     # the hubble site id is in a line like this:
@@ -113,24 +113,24 @@ if __name__ == '__main__':
     # link to thumbnail hubblesite:
     # http://imgsrc.hubblesite.org/hu/db/images/hs-2003-28-a-small_web.jpg
     
-    # link to spacetelescope thumbnail:
-    # http://www.spacetelescope.org/static/archives/images/screen/opo0328a.jpg
+    # link to webb thumbnail:
+    # http://www.webb.org/static/archives/images/screen/opo0328a.jpg
     
     
     hubble_pre = r'''http://imgsrc.hubblesite.org/hu/db/images/hs-'''
     hubble_thumb_post = r'''-small_web.jpg'''
     hubble_original_post = r'''-full_jpg.jpg'''
-    spacetelescope_site_pre = r'''http://www.spacetelescope.org/images/'''
-    spacetelescope_thumb_pre = r'''http://www.spacetelescope.org/static/archives/images/screen/'''
-    spacetelescope_thumb_post = r'''.jpg'''
+    webb_site_pre = r'''http://www.webb.org/images/'''
+    webb_thumb_pre = r'''http://www.webb.org/static/archives/images/screen/'''
+    webb_thumb_post = r'''.jpg'''
     
     test =  '''<h2 class="release-number"><strong>News Release Number:</strong> STScI-2006-25</h2>'''
     pattern = re.compile('''h2 class="release-number".*?:.*?>\s*(.*?)<.*?h2''')
         
-    dict = {} # {spacetelescope_id:[spacetelescope_thumb, hubblesite_id, hubblesite_thumb, hubblesite_huge, long_caption_link]}for the results
+    dict = {} # {webb_id:[webb_thumb, hubblesite_id, hubblesite_thumb, hubblesite_huge, long_caption_link]}for the results
 
     images = Image.objects.all()
-    print("spacetelescope id\t hubblesite id\t spacetelescope url\t hubblesite url")
+    print("webb id\t hubblesite id\t webb url\t hubblesite url")
     n_images = str(len(images))
     count = 0
     now = datetime.datetime.now()
@@ -154,8 +154,8 @@ if __name__ == '__main__':
         except:
             hubble_id = '?'
         middle = new_id(image.long_caption_link)
-        spacetelescope_thumb = spacetelescope_thumb_pre + image.id + spacetelescope_thumb_post
-        spacetelescope_url   = spacetelescope_site_pre + image.id + '/'
+        webb_thumb = webb_thumb_pre + image.id + webb_thumb_post
+        webb_url   = webb_site_pre + image.id + '/'
         if middle != '-':
             hubblesite_thumb = hubble_pre + middle + hubble_thumb_post
             hubblesite_huge = hubble_pre + middle + hubble_original_post
@@ -173,9 +173,9 @@ if __name__ == '__main__':
             hubblesite_huge  = '-'
         
 
-        dict[image.id] = [spacetelescope_thumb, spacetelescope_url, hubble_id, hubblesite_thumb, hubblesite_huge, image.long_caption_link]
+        dict[image.id] = [webb_thumb, webb_url, hubble_id, hubblesite_thumb, hubblesite_huge, image.long_caption_link]
         
-        print("%s\t%s\t%s\t%s" % (image.id, hubble_id, spacetelescope_url, image.long_caption_link))
+        print("%s\t%s\t%s\t%s" % (image.id, hubble_id, webb_url, image.long_caption_link))
         logger.info(str(count)+' / '+n_images + ' ' + image.id + ' ' + hubble_id + ' ' + middle  + ' ' + image.long_caption_link + ' ' + thumberror)
     store_JSON(jsonfile,dict)
            

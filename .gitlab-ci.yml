@@ -24,7 +24,7 @@ stages:
   PIP_FIND_LINKS: 'https://www.djangoplicity.org/repository/packages/'
   REQUIRED_FOLDERS: 'static docs/static logs tmp import shared'
   REQUIRED_APT_DEPS: 'gcc git libldap2-dev libsasl2-dev libssl-dev python-dev cssmin node-uglify'
-  DJANGO_SETTINGS_MODULE: 'spacetelescope.settings.test'
+  DJANGO_SETTINGS_MODULE: 'webb.settings.test'
 
 .before_script_template: &before_script_definition
   - echo $REQUIRED_FOLDERS $APT_CACHE_DIR $PIP_CACHE_DIR | xargs mkdir -pv

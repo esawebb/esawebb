@@ -8,7 +8,7 @@ $fields 	= $_POST['SPACEfields'];
 // Check mailto
 $mailval = explode('@', $mailto );
 
-if( !(count($mailval) == 2 && ($mailval[1] == 'hankat.dk') or ($mailval[1] == 'eso.org') or ($mailval[1] == 'spacetelescope.org')) ) {
+if( !(count($mailval) == 2 && ($mailval[1] == 'hankat.dk') or ($mailval[1] == 'eso.org') or ($mailval[1] == 'webb.org')) ) {
 	reportError("Invalid mail-to address");
 }
 
