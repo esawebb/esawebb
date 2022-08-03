@@ -1,12 +1,34 @@
 {% load i18n %}
 {% spaceless %}
+{% load static %}
 {% include 'archives/embargo_notice.html' %}
+
+<link rel="stylesheet" href="{% static 'magnific-popup/magnific-popup.css' %}">
+<script src="{% static 'magnific-popup/jquery.min.js' %}"></script>
+<script src="{% static 'magnific-popup/jquery.magnific-popup.min.js' %}"></script>
+
+<script>
+    $(document).ready(function($){
+      $('.popup-link').magnificPopup({
+          delegate: 'a',
+          type: 'image'
+      });
+    })
+</script>
+
 <h1>{{ object.title }}</h1>
 
 {% if object.resource_medium %}
-<div class="archive-image popup">
+
+<div class="bg-image hover-overlay ripple shadow-1-strong rounded my-3 px-1 popup-link" data-ripple-color="light">
+    <a href="{{ object.resource_screen.url }}" title="{{ object }}">
+        <img src="{{ object.resource_screen.url }}"
+        class="w-100" style="height: auto; max-width: 100%; object-fit: cover;" />
+    </a>
+</div>
+<!-- <div class="archive-image popup">
     {% if object.resource_screen %}
-        <a class="popup" href="{{ object.resource_screen.url }}" title="{{ object }}" />
+        <a class="popup" href="{{ object.resource_screen.url }}" title="{{ object }}">
             <div class="image-container">
                 <img class="w-100 -top" style="height: 350px; object-fit: cover;" src="{{ object.resource_medium.url }}" border="0" alt="{{ object }}" />
             </div>
@@ -16,7 +38,7 @@
             <img class="w-100 -top" style="height: 350px; object-fit: cover;" src="{{ object.resource_medium.url }}"  border="0" alt="{{ object }}" />
         </div>
     {% endif %}
-</div>
+</div> -->
 {% endif %}
 <p>{{ object.description|safe }}</p>
 {% comment %}
