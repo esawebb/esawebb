@@ -47,9 +47,9 @@ have individual archive items for each months, and though it's not possible
 to buy a single month, we don't want people to think that the whole calendar
 is not available for sale
 {% endcomment %}
-{% if not object.sale and archive|title|lower != "calendar" %}
+<!-- {% if not object.sale and archive|title|lower != "calendar" %}
     <p>This {{archive|title|lower}} is not available for sale.</p>
-{% endif %}
+{% endif %} -->
 
 {% include 'archives/extra_description.html' %}
 {% include 'archives/credit.html' %}
