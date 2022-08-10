@@ -16,7 +16,6 @@ x-common: &common
     CDN_STORAGE_PASSWORD:
     CDN_API_LOGIN:
     CDN_API_PASSWORD:
-    CDN_API_TOKEN:
     EMAIL_USER:
     EMAIL_PASSWORD:
     DOMAIN:
