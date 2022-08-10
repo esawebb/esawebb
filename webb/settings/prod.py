@@ -117,6 +117,7 @@ MEDIA_CONTENT_SERVERS = {
         password=get_secret('CDN_STORAGE_PASSWORD'),
         api_login=get_secret('CDN_API_LOGIN'),
         api_password=get_secret('CDN_API_PASSWORD'),
+        apiv3_token=get_secret('CDN_API_TOKEN'),
         cdn_id='33541',
         cdn_id_bigfiles='31465',
     ),
