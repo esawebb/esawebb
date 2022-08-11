@@ -1,7 +1,22 @@
 {% load i18n %}
 {% load djangoplicity_datetime %}
 {% load release_links %}
+{% load static %}
 {% include 'archives/embargo_notice.html' %}
+
+<link rel="stylesheet" href="{% static 'magnific-popup/magnific-popup.css' %}">
+<script src="{% static 'magnific-popup/jquery.min.js' %}"></script>
+<script src="{% static 'magnific-popup/jquery.magnific-popup.min.js' %}"></script>
+
+<script>
+    $(document).ready(function($){
+      $('.popup-link').magnificPopup({
+          delegate: 'a',
+          type: 'image'
+      });
+    })
+</script>
+
 {% if object.disclaimer %}
     <div class="disclaimer">{{ object.disclaimer|safe }}</div>
 {% endif %}
@@ -20,32 +35,48 @@
 <p class="date">{{ object.release_date|datetime:"DATE" }}{% if object.release_city %}, {{ object.release_city }}{% endif %}</p>
 
 {% with main_image.releaseimage_set.all.0.zoomable as zoomable %}
-<div class="archive-image popup">
-{% if main_video %}
-    {% if main_video.youtube_video_id and main_video.use_youtube %}
-        <div class="youtube-wrapper">
-            <div id="youtube-player"></div>
-        </div>
-    {% elif main_video.resource_newsfeature %}
-        <div class="archive-image popup">
-        {% if main_video.resource_medium_podcast %}
-            {% load media_video %}
-            {% if main_video.videosubtitle_set.all %}
-                {% embedvideo_subs main_video "medium_podcast,h264" "hd_and_apple,hd720p_screen,dome_preview" "medium_podcast,h264" main_video.videosubtitle_set.all %}
-            {% else %}
-                {% embedvideo main_video "medium_podcast,h264" "hd_and_apple,hd720p_screen,dome_preview" "medium_podcast,h264" %}
-            {% endif%}
+<div class="bg-image hover-overlay ripple shadow-1-strong rounded my-3 px-1 popup-link" data-ripple-color="light">
+    {% if main_video %}
+        {% if main_video.youtube_video_id and main_video.use_youtube %}
+            <div class="youtube-wrapper">
+                <div id="youtube-player"></div>
+            </div>
+        {% elif main_video.resource_newsfeature %}
+            <div class="bg-image hover-overlay ripple shadow-1-strong rounded my-3 px-1 popup-link" data-ripple-color="light">
+                {% if main_video.resource_medium_podcast %}
+                {% load media_video %}
+                {% if main_video.videosubtitle_set.all %}
+                {% embedvideo_subs main_video "medium_podcast,h264" "hd_and_apple,hd720p_screen,dome_preview"
+                "medium_podcast,h264" main_video.videosubtitle_set.all %}
+                {% else %}
+                {% embedvideo main_video "medium_podcast,h264" "hd_and_apple,hd720p_screen,dome_preview" "medium_podcast,h264"
+                %}
+                {% endif%}
+                {% endif %}
+            </div>
         {% endif %}
-        </div>
+    {% elif main_image %}
+        {% if main_image.resource_newsfeature %}
+        <!-- <a href="{% if zoomable %}{{ main_image.get_absolute_url }}zoomable/{% else %}{{ main_image.resource_screen.url }}{% endif %}" title="{{ main_image.title }}">
+            <div class="image-container">
+                <img id="main-press" src="{{ main_image.resource_newsfeature.url }}" class="w-100 -top" style="height: 350px; object-fit: cover;" />
+            </div>
+        </a> -->
+        <a href="{{ main_image.resource_screen.url }}" title="{{ main_image.title }}">
+            <img src="{{ main_image.resource_newsfeature.url }}" class="w-100"
+                style="height: auto; max-width: 100%; object-fit: cover;" />
+        </a>
+        {% endif %}
     {% endif %}
-{% elif main_image %}{% if main_image.resource_newsfeature %}
-    <a class="popup" href="{% if zoomable %}{{ main_image.get_absolute_url }}zoomable/{% else %}{{ main_image.resource_screen.url }}{% endif %}" title="{{ main_image.title }}">
-        <div class="image-container">
-            <img id="main-press" src="{{ main_image.resource_newsfeature.url }}" class="w-100 -top" style="height: 350px; object-fit: cover;" />
-        </div>
-    </a>
-{% endif %}{% endif %}
-{% if images %}{% for im in images %}{% if main_image != im %}<a class="popup" href="{{ im.resource_screen.url }}" title="{{ im.title }}" class="hidden"></a>{% endif %}{% endfor %}{% endif %}
+    {% if images %}
+        {% for im in images %}
+            {% if main_image != im %}
+                <a class="popup" href="{{ im.resource_screen.url }}"
+                    title="{{ im.title }}" class="hidden">
+                </a>
+            {% endif %}
+        {% endfor %}
+    {% endif %}
 </div>
 {% endwith %}
 <p></p>
