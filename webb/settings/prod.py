@@ -120,7 +120,8 @@ MEDIA_CONTENT_SERVERS = {
         apiv3_token=get_secret('CDN_API_TOKEN'),
         cdn_id='1495410064',
         cdnv3_id='1495410064',
-        cdn_id_bigfiles='31465',
+        cdn_id_bigfiles='1084865783',
+        cdnv3_id_bigfiles='1084865783',
     ),
 }
 
