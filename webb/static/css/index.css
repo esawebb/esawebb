@@ -50,7 +50,7 @@ p a {
     position: absolute;
     color: white;
     left: 0px;
-    top: 77%;
+    bottom: 77%;
     width: 100%;
     background-color: rgba(0, 50, 71, .6);
     height: 70px;
