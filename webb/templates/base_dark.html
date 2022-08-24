@@ -22,11 +22,11 @@ We don't display the children pages widget in the dark pages
     </div>
     {% endif %}
 
-    <div class="container-fluid py-5 px-4" style="background-color: #101010">
+    <div class="container-fluid py-5 px-4" style="background-color: #555">
         <div class="row no-page">
             
             <div class="col-md-7 ">
-                <h1>{% if archive_title %}{% trans archive_title %}{% else %}{{ archive|capfirst }} {% trans "Archive"
+                <h1 style="color: #FFFFFF;">{% if archive_title %}{% trans archive_title %}{% else %}{{ archive|capfirst }} {% trans "Archive"
                     %}{% endif %}{% if listview_feed_url %} <a href="{{ listview_feed_url }}"
                         class="listviewrsslink"><span class="fa fa-rss"></span></a>{% endif %}</h1>
             </div>
@@ -76,7 +76,7 @@ We don't display the children pages widget in the dark pages
         </div>
     </div>
 
-    <div class="container-fluid px-5" id="dark-body" style="background-color: #101010">
+    <div class="container-fluid px-5" id="dark-body" style="background-color: #555">
         {% block body %}
         {% endblock %}
     </div>
