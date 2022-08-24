@@ -38,17 +38,17 @@ We don't display the children pages widget in the dark pages
             <div class="row">
                 <div class="form-text ms-1">
                     {% if archive == 'image' %}<a
-                        class="me-3 border white-button p-1 mt-2 d-inline-block"
+                        class="me-3 border white-button btn-white-button p-1 mt-2 d-inline-block"
                         style="text-decoration: none;"
                         href="{% url 'images_defaultquery' %}{% if params_nosearch %}?{{ params_nosearch }}{% endif %}">{% trans "View All" %}</a>
                         {% endif %}
                     {% if archive == 'video' %}<a
-                        class="me-3 border white-button p-1 mt-2 d-inline-block"
+                        class="me-3 border white-button btn-white-button p-1 mt-2 d-inline-block"
                         style="text-decoration: none;"
                         href="{% url 'videos_defaultquery' %}{% if params_nosearch %}?{{ params_nosearch }}{% endif %}">{% trans "View All" %}</a>
                         {% endif %}
                     {% for category in web_categories %}
-                    <a class="me-3 border white-button p-1 mt-2 d-inline-block"
+                    <a class="me-3 border white-button btn-white-button p-1 mt-2 d-inline-block"
                         style="text-decoration: none;"
                         href="{{ category.get_absolute_url}}{% if params_nosearch %}?{{ params_nosearch }}{% endif %}"
                         {% if category.selected %} class="selected" {% endif %}>{% trans category.name %}</a>
@@ -61,15 +61,15 @@ We don't display the children pages widget in the dark pages
                     <span class="me-3">Sort by:  </span>
                     <a  style="text-decoration: none;" 
                         href="{{ request.path }}?{{params_nosort}}"{% if not request.GET.sort %} 
-                        class="me-3 border border-primary btn-primary p-1 mt-2 d-inline-block"
+                        class="me-3 border white-button btn-primary p-1 mt-2 d-inline-block"
                         {% else %}
-                        class="me-3 border border-primary btn-outline-primary p-1 mt-2 d-inline-block"
+                        class="me-3 border white-button btn-white-button p-1 mt-2 d-inline-block"
                         {% endif %}>{% trans "Ranking" %}</a>
                     <a  style="text-decoration: none;" 
                         href="{{ request.path }}?{{params_nosort}}&sort=-release_date"{% if request.GET.sort == '-release_date' %} 
-                        class="me-3 border border-primary btn-primary p-1 mt-2 d-inline-block"
+                        class="me-3 border white-button btn-primary p-1 mt-2 d-inline-block"
                         {% else %}
-                        class="me-3 border border-primary btn-outline-primary p-1 mt-2 d-inline-block"
+                        class="me-3 border white-button btn-white-button p-1 mt-2 d-inline-block"
                         {% endif %}>{% trans "Date" %}</a>
                 </div>
             </div>
