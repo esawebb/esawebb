@@ -50,7 +50,7 @@ p a {
     position: absolute;
     color: white;
     left: 0px;
-    top: 77%;
+    bottom: 0%;
     width: 100%;
     background-color: rgba(0, 50, 71, .6);
     height: 70px;
@@ -161,3 +161,42 @@ p a {
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 4;
 }
+
+.white-button{
+  border-color: #FFFFFF !important;
+}
+
+.btn-white-button {
+  color: #ffffff;
+  border-color: #003247;
+}
+
+.btn-white-button:hover {
+  color: #fff;
+  background-color: #003247;
+  border-color: #003247;
+}
+
+.btn-check:focus + .btn-white-button, .btn-white-button:focus {
+  -webkit-box-shadow: 0 0 0 0.25rem rgba(0, 50, 71, 0.5);
+          box-shadow: 0 0 0 0.25rem rgba(0, 50, 71, 0.5);
+}
+
+.btn-check:checked + .btn-white-button,
+.btn-check:active + .btn-white-button, .btn-white-button:active, .btn-white-button.active, .btn-white-button.dropdown-toggle.show {
+  color: #fff;
+  background-color: #003247;
+  border-color: #003247;
+}
+
+.btn-check:checked + .btn-white-button:focus,
+.btn-check:active + .btn-white-button:focus, .btn-white-button:active:focus, .btn-white-button.active:focus, .btn-white-button.dropdown-toggle.show:focus {
+  -webkit-box-shadow: 0 0 0 0.25rem rgba(0, 50, 71, 0.5);
+          box-shadow: 0 0 0 0.25rem rgba(0, 50, 71, 0.5);
+}
+
+.btn-white-button:disabled, .btn-white-button.disabled {
+  color: #003247;
+  background-color: transparent;
+}
+
