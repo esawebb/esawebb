@@ -62,7 +62,7 @@
     {% if data.release.release_date < now %}
         {% include "newsletters/includes/footer.html" with width="660" %}
     {% else %}
-        {% with %}
+        {% with footer_note=''%}
         {% include "newsletters/includes/footer.html" with width="660" %}
         {% endwith %}
     {% endif %}
