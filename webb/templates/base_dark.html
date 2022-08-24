@@ -38,17 +38,17 @@ We don't display the children pages widget in the dark pages
             <div class="row">
                 <div class="form-text ms-1">
                     {% if archive == 'image' %}<a
-                        class="me-3 border border-primary btn-outline-primary p-1 mt-2 d-inline-block"
+                        class="me-3 border white-button p-1 mt-2 d-inline-block"
                         style="text-decoration: none;"
                         href="{% url 'images_defaultquery' %}{% if params_nosearch %}?{{ params_nosearch }}{% endif %}">{% trans "View All" %}</a>
                         {% endif %}
                     {% if archive == 'video' %}<a
-                        class="me-3 border border-primary btn-outline-primary p-1 mt-2 d-inline-block"
+                        class="me-3 border white-button p-1 mt-2 d-inline-block"
                         style="text-decoration: none;"
                         href="{% url 'videos_defaultquery' %}{% if params_nosearch %}?{{ params_nosearch }}{% endif %}">{% trans "View All" %}</a>
                         {% endif %}
                     {% for category in web_categories %}
-                    <a class="me-3 border border-primary btn-outline-primary p-1 mt-2 d-inline-block"
+                    <a class="me-3 border white-button p-1 mt-2 d-inline-block"
                         style="text-decoration: none;"
                         href="{{ category.get_absolute_url}}{% if params_nosearch %}?{{ params_nosearch }}{% endif %}"
                         {% if category.selected %} class="selected" {% endif %}>{% trans category.name %}</a>
