@@ -161,3 +161,10 @@ p a {
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 4;
 }
+
+.white-button{
+  border-color: #FFFFFF !important;
+  color: #FFFFFF !important;
+}
+
+
