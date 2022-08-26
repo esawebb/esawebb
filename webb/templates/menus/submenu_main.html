@@ -7,7 +7,8 @@
         {% if entry.children|length %}
         <a class="nav-link dropdown-toggle text-white" 
             role="button" data-bs-toggle="dropdown" aria-expanded="false"
-            href="{{ entry.link|default:"#" }}"{% if entry.on_click %} target="_blank"{% endif %}>{% trans entry.title|safe %}</a>
+            href="{{ entry.link|default:"#" }}"{% if entry.on_click %} target="_blank"{% endif %}
+            style="font-size: 1rem !important;">{% trans entry.title|safe %}</a>
         
         <ul id="submenu-aim-{{ entry.id }}" aria-labelledby="navbarDropdown"
                 class="dropdown-menu-start dropdown-menu">
@@ -16,7 +17,8 @@
         </ul>
       
         {% else %}
-        <a class="nav-link text-white" href="{{ entry.link|default:"#" }}"{% if entry.on_click %} target="_blank"{% endif %}>{% trans entry.title|safe %}</a>
+        <a class="nav-link text-white" href="{{ entry.link|default:"#" }}"{% if entry.on_click %} target="_blank"{% endif %}
+        style="font-size: 1rem !important;">{% trans entry.title|safe %}</a>
         
         {% endif %}
         </li>
