@@ -1,4 +1,4 @@
-{% extends "base_threecolumn.html" %}{% load pages %}
+{% extends "base_twocolumn.html" %}{% load pages %}
 
 {% block site_title %}{{object.title}} | {{block.super}}{% endblock %}
 
@@ -11,7 +11,7 @@
 {% block rightcolumn %}
 {% include "archives/searchbox.html" %}
 {% include admin_template %}
-<!-- {% include info_template %} -->
+{% include info_template %}
 {% include "archives/image/object_observation.html" %}
 <hr>
 {% include "images/embedded_list.html" %}
