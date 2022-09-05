@@ -7,7 +7,7 @@
         {% blocktrans with page_obj.start_index as start_index and page_obj.end_index as end_index and paginator.count as count %}Showing {{ start_index }} to {{ end_index }} of {{ count }}{% endblocktrans %}
     </div>
     <div class="col-md-6">
-        <div class="text-center">
+        <div class="text-center d-flex justify-content-center">
             <ul class="pagination">
             {% for page_num in adj_range %}
                 {% if page_num == 0 %}
@@ -19,7 +19,7 @@
             </ul>
         </div>
     </div>
-    <div class="col-md-3 prev-next">
+    <div class="col-md-3 prev-next d-flex justify-content-end">
         {% if paginator and page_obj and page_obj.has_previous %}
             <a href="{{ paginator_url }}{{paginator_prefix}}/{{ page_obj.previous_page_number }}/{% if paginator_params %}?{{paginator_params}}{% endif %}">{% trans "Previous" %}</a>
         {% endif %}

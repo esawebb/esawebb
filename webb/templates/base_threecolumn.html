@@ -1,0 +1,128 @@
+{% extends "core.html" %}
+{% load i18n %}
+
+
+
+
+{% block content_area %}
+<div class="container-fluid" id="body">
+    <div class="row page mt-3 mx-lg-5 hiper-color">
+        <div class="col-md-12 col-lg-6 col-xl-2 left-column order-3 order-sm-3 order-lg-2 order-xl-1 mt-4">
+{% spaceless %}
+            <div id="object_info_div" class="object-info">
+                {% for info in info_groups %}
+                {% if info.links or info.metadata %}
+                {% if info.name == "About the Object" %}
+                
+                <h4>
+                    
+                    {% trans info.name %}
+                    
+                </h4>
+                
+                <div>
+                    {% for link in info.links %}
+                    {% if link.url %}<a id="object_info_a" href="{{ link.url }}">{% trans link.title %}</a><br /> {% endif %}
+                    {% endfor %}
+                    {% if info.metadata %}
+                    <table class="table form-text text-dark">
+                        {% for metadata in info.metadata %}
+                        {% if metadata.field_value %}
+        
+                        {% trans metadata.field_name as field_name %}
+                        <tr>
+                            <th scope="row">
+                                {{ field_name|capfirst }}:
+                            </th>
+                            <td colspan="2">
+                                {{ metadata.field_value }}
+                            </td>
+                        </tr>
+        
+                        {% endif %}
+                        {% endfor %}
+                    </table>
+                    {% endif %}
+                </div>
+                {% endif %}
+                {% endif %}
+                {% if not forloop.last %}{% if info.name or info.links or info.metadata %}
+                {% endif %} <hr>{% endif %}
+                {% endfor %}
+            </div>
+{% endspaceless %}
+{% include "archives/image/object_astrometry.html" %}
+{% include "archives/image/object_observation.html" %}
+        </div>
+        <div class="col-md-12 col-lg-12 col-xl-8 left-column px-md-3 px-xl-5 tex-justify order-1 order-sm-1 order-lg-1 order-xl-3">
+            {% block content %}
+            {% endblock %}
+        </div>
+        <div class="col-md-12 col-lg-6 col-xl-2 right-column order-2 order-sm-2 order-lg-3 order-xl-3">
+            {% include "archives/searchbox.html" %}
+            {% include admin_template %}
+            <div id="object_info_div" class="object-info">
+                {% for info in info_groups %}
+                {% if info.links or info.metadata %}
+                {% if not info.name == "About the Object" %}
+                
+                <h4>
+                    
+                    {% trans info.name %}
+                    
+                </h4>
+                
+                <div>
+                    {% for link in info.links %}
+                    {% if link.url %}<a id="object_info_a" href="{{ link.url }}">{% trans link.title %}</a><br /> {% endif %}
+                    {% endfor %}
+                    {% if info.metadata %}
+                    <table class="table form-text text-dark">
+                        {% for metadata in info.metadata %}
+                        {% if metadata.field_value %}
+        
+                        {% trans metadata.field_name as field_name %}
+                        <tr>
+                            <th scope="row">
+                                {{ field_name|capfirst }}:
+                            </th>
+                            <td colspan="2">
+                                {{ metadata.field_value }}
+                            </td>
+                        </tr>
+        
+                        {% endif %}
+                        {% endfor %}
+                    </table>
+                    {% endif %}
+                </div>
+                {% endif %}
+                {% endif %}
+                {% if not forloop.last %}{% if info.name or info.links or info.metadata %}
+                <hr>{% endif %} {% endif %}
+                {% endfor %}
+            </div>
+            
+
+            {% block rightcolumn %}
+            {% if archive == 'internal announcement' %}
+            {% include "archives/internalannouncement/tags_list.html" %}
+            {% endif %}
+            {% include "images/embedded_list.html" %}
+            {% include "videos/embedded_list.html" %}
+            {% include "archives/imagecomparison/embedded_list.html" %}
+            {% include "images/embedded_pl_list.html" %}
+            {% include "images/embedded_stock_list.html" %}
+            {% include resources_template %}
+            {% include "audiotracks/embedded_list.html" %}
+            {% include "broadcastaudiotracks/embedded_list.html" %}
+            {% include "subtitles/embedded_list.html" %}
+            
+            {{ right_column_page }}
+            {% include "archives/crosslinks.html" %}
+
+            {% endblock %}
+        </div>
+    </div>
+</div>
+{% endblock %}
