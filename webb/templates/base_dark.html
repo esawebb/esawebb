@@ -12,7 +12,7 @@ We don't display the children pages widget in the dark pages
 
 {% block content_area %}
 
-<div id="dark">
+<div id="dark" style="background-color: #101010">
     {% if request.NO_TRANSLATION %}
     <div class="notranslation-alert alert alert-info alert-dismissible" role="alert">
         <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span
@@ -22,11 +22,11 @@ We don't display the children pages widget in the dark pages
     </div>
     {% endif %}
 
-    <div class="container-fluid my-5 mx-3" style="">
+    <div class="container-fluid py-5 px-3">
         <div class="row no-page">
             
             <div class="col-md-7 ">
-                <h1>{% if archive_title %}{% trans archive_title %}{% else %}{{ archive|capfirst }} {% trans "Archive"
+                <h1 style="color: white">{% if archive_title %}{% trans archive_title %}{% else %}{{ archive|capfirst }} {% trans "Archive"
                     %}{% endif %}{% if listview_feed_url %} <a href="{{ listview_feed_url }}"
                         class="listviewrsslink"><span class="fa fa-rss"></span></a>{% endif %}</h1>
             </div>
@@ -38,18 +38,18 @@ We don't display the children pages widget in the dark pages
             <div class="row">
                 <div class="form-text ms-1">
                     {% if archive == 'image' %}<a
-                        class="me-3 border border-primary btn-outline-primary p-1 mt-2 d-inline-block"
-                        style="text-decoration: none; font-size: 1rem !important;"
+                        class="me-3 border border-white btn-outline-primary p-1 mt-2 d-inline-block"
+                        style="text-decoration: none; font-size: 1rem !important; color: white"
                         href="{% url 'images_defaultquery' %}{% if params_nosearch %}?{{ params_nosearch }}{% endif %}">{% trans "View All" %}</a>
                         {% endif %}
                     {% if archive == 'video' %}<a
-                        class="me-3 border border-primary btn-outline-primary p-1 mt-2 d-inline-block"
-                        style="text-decoration: none; font-size: 1rem !important;"
+                        class="me-3 border border-white btn-outline-primary p-1 mt-2 d-inline-block"
+                        style="text-decoration: none; font-size: 1rem !important; color: white"
                         href="{% url 'videos_defaultquery' %}{% if params_nosearch %}?{{ params_nosearch }}{% endif %}">{% trans "View All" %}</a>
                         {% endif %}
                     {% for category in web_categories %}
-                    <a class="me-3 border border-primary btn-outline-primary p-1 mt-2 d-inline-block"
-                        style="text-decoration: none; font-size: 1rem !important;"
+                    <a class="me-3 border border-white btn-outline-primary p-1 mt-2 d-inline-block"
+                        style="text-decoration: none; font-size: 1rem !important; color: white"
                         href="{{ category.get_absolute_url}}{% if params_nosearch %}?{{ params_nosearch }}{% endif %}"
                         {% if category.selected %} class="selected" {% endif %}>{% trans category.name %}</a>
                     {% endfor %}
@@ -58,18 +58,18 @@ We don't display the children pages widget in the dark pages
             {% endif %}
             <div class="text-end">
                 <div title="{% trans 'Sort by:' %}">
-                    <span class="me-3">Sort by:  </span>
-                    <a  style="text-decoration: none; font-size: 1rem !important;" 
+                    <span class="me-3" style="color: white">Sort by:  </span>
+                    <a  style="text-decoration: none; font-size: 1rem !important; color: white"
                         href="{{ request.path }}?{{params_nosort}}"{% if not request.GET.sort %} 
                         class="me-3 border border-primary btn-primary p-1 mt-2 d-inline-block"
                         {% else %}
-                        class="me-3 border border-primary btn-outline-primary p-1 mt-2 d-inline-block"
+                        class="me-3 border border-white btn-outline-primary p-1 mt-2 d-inline-block"
                         {% endif %}>{% trans "Ranking" %}</a>
-                    <a  style="text-decoration: none; font-size: 1rem !important;" 
+                    <a  style="text-decoration: none; font-size: 1rem !important; color: white"
                         href="{{ request.path }}?{{params_nosort}}&sort=-release_date"{% if request.GET.sort == '-release_date' %} 
-                        class="me-3 border border-primary btn-primary p-1 mt-2 d-inline-block"
+                        class="me-3 border border-white btn-primary p-1 mt-2 d-inline-block"
                         {% else %}
-                        class="me-3 border border-primary btn-outline-primary p-1 mt-2 d-inline-block"
+                        class="me-3 border border-white btn-outline-primary p-1 mt-2 d-inline-block"
                         {% endif %}>{% trans "Date" %}</a>
                 </div>
             </div>
