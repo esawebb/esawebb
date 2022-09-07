@@ -1,4 +1,4 @@
-{% extends "base_twocolumn.html" %}{% load pages %}
+{% extends "base_threeocolumn.html" %}{% load pages %}
 
 {% block site_title %}{{object.title}} | {{block.super}}{% endblock %}
 
@@ -8,28 +8,6 @@
 {% include description_template  %}
 {% endblock %}
 
-{% block rightcolumn %}
-{% include "archives/searchbox.html" %}
-{% include admin_template %}
-{% include info_template %}
-{% if archive == 'internal announcement' %}
-{% include "archives/internalannouncement/tags_list.html" %}
-{% endif %}
-{% include "images/embedded_list.html" %}
-{% include "videos/embedded_list.html" %}
-{% include "archives/imagecomparison/embedded_list.html" %}
-{% include "images/embedded_pl_list.html" %}
-{% include "images/embedded_stock_list.html" %}
-{% include resources_template %}
-{% include "audiotracks/embedded_list.html" %}
-{% include "broadcastaudiotracks/embedded_list.html" %}
-{% include "subtitles/embedded_list.html" %}
-{% include "archives/image/object_astrometry.html" %}
-{% include "archives/image/object_observation.html" %}
-{{ right_column_page }}
-{% include "archives/crosslinks.html" %}
-
-{% endblock %}
 
 {% block extra_scripts %}
 <!-- Disabled for now
