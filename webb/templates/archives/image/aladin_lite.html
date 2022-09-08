@@ -44,7 +44,7 @@
 <script type="text/javascript">
 function onVrViewLoad() {
     var aladin = A.aladin('#aladin-lite-div', {target: "0 0",fov: 100, cooFrame: 'ICRS'});
-    aladin.setBaseImageLayer("P/DSS2/color");
+    aladin.setBaseImageLayer("P/2MASS/color");
     var callback = function(ra, dec, fov) {
         // we must return true, so that the default action (set view to center of image) is performed
         return true;
