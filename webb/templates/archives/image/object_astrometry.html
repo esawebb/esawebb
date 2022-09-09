@@ -102,14 +102,16 @@
                     <tr><th scope="row"class="title">{% trans "Orientation" %}:</th><td>{{object.get_spatial_rotation_verbose|safe}}</td></tr>
                 {% endif %}
         </table>
-        {% if object.spatial_rotation %}
+        <div class="d-flex justify-content-center">
+            {% if object.spatial_rotation %}
             <script type="text/javascript">
             compass_src = "{% static 'djangoplicity/images/widgets/compassm.png' %}";
             spatial_rotation = {{ object.spatial_rotation }};
             </script>
             <canvas id="compass_canvas" width="240" height="140"></canvas>
         {% endif %}
-
+        </div>
+        
         <!--ESASky section-->
         <!-- {% if object.type == 'Observation' and object.spatial_quality == 'Full' %}
             {% with esaskylink="http://sky.esa.int/?hst_image="|add:object.id|add:"&hips=DSS2+color&sci=false&hide_welcome=true" %}
