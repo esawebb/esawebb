@@ -162,7 +162,6 @@
 
         
         {% if firstimages %}
-        console.log(firstimages)
         <div id="potw-carousel-wrapper" class="mt-5">
             {% for first in firstimages %}
             <h4 class="lined lined-center text-uppercase text-primary col-12 col-lg-7 col-xl-8 my-3">{% trans "Webb's First Images Release: "%}{{ first.release_date|date:"M, Y" }}</h4>
