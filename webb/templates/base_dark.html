@@ -23,18 +23,19 @@ We don't display the children pages widget in the dark pages
     {% endif %}
 
     <div class="container-fluid py-5 px-3">
-        <div class="row no-page">
+        <div class="row no-page me-5 me-lg-4 me-xl-2">
             
-            <div class="col-md-7 ">
+            <div class="col-sm-12 col-md-6 col-lg-8 col-xl-8 ">
                 <h1 style="color: white">{% if archive_title %}{% trans archive_title %}{% else %}{{ archive|capfirst }} {% trans "Archive"
                     %}{% endif %}{% if listview_feed_url %} <a href="{{ listview_feed_url }}"
                         class="listviewrsslink"><span class="fa fa-rss"></span></a>{% endif %}</h1>
             </div>
-            <div class="col-11 col-md-4 ">
+            <div class="col-sm-12 col-md-6 col-lg-4 col-xl-4">
                 {% block archive_search %}
                 {% endblock %}
             </div>
-            {% if web_categories %}
+        </div>
+        {% if web_categories %}
             <div class="row">
                 <div class="form-text ms-1">
                     {% if archive == 'image' %}<a
@@ -73,7 +74,6 @@ We don't display the children pages widget in the dark pages
                         {% endif %}>{% trans "Date" %}</a>
                 </div>
             </div>
-        </div>
     </div>
 
     <div class="container-fluid" id="dark-body">
