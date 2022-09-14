@@ -162,6 +162,7 @@
 
         
         {% if firstimages %}
+        console.log(firstimages)
         <div id="potw-carousel-wrapper" class="mt-5">
             {% for first in firstimages %}
             <h4 class="lined lined-center text-uppercase text-primary col-12 col-lg-7 col-xl-8 my-3">{% trans "Webb's First Images Release: "%}{{ first.release_date|date:"M, Y" }}</h4>
@@ -185,7 +186,7 @@
                 </script>
                 <div class="slide">
                     <a class="card bg-primary" href="/initiatives/webbs-first-images/" style="text-decoration: none;">
-                        <img src="{{ first.visual.resource_screen640.url }}" class="w-100 card-img-top" style="height: 400px; object-fit: cover;" alt="{{ first.visual.title }}">
+                        <img src="https://cdn.esawebb.org/archives/images/screen/{{ first.id }}.jpg" class="w-100 card-img-top" style="height: 400px; object-fit: cover;" alt="{{ first.visual.title }}">
                         <div class="first-description card-body text-white">
                             <span class="date card-text">{{ first.release_date|datetime:"DATE" }} — {{ first.id }}</span>
                             <span class="title card-text mx-5">{{ first.visual.title }}</span>
