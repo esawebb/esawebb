@@ -1,13 +1,20 @@
 {% extends "core.html" %}
 {% load i18n %}
 
-
+<style>
+@media (min-width: 992px){
+    .mr-lg-5 {
+    margin-right: 1rem !important;
+    margin-left: 1rem !important;
+}
+}
+</style>
 
 
 {% block content_area %}
 <div class="container" id="body">
-    <div class="row page mt-3 mx-lg-5 hiper-color">
-        <div class="col-md-12 col-lg-6 col-xl-3 left-column order-3 order-sm-3 order-lg-2 order-xl-1 mt-4">
+    <div class="row page mt-3 hiper-color">
+        <div class="col-md-12 col-lg-6 col-xl-2 left-column order-3 order-sm-3 order-lg-2 order-xl-1 mt-4">
             {% spaceless %}
             <div id="object_info_div" class="object-info">
                 {% for info in info_groups %}
@@ -54,11 +61,11 @@
             {% include "archives/image/object_astrometry.html" %}
             {% include "archives/image/object_observation.html" %}
         </div>
-        <div class="col-md-12 col-lg-12 col-xl-6 left-column px-md-3 px-xl-2 tex-justify order-1 order-sm-1 order-lg-1 order-xl-3">
+        <div class="col-md-12 col-lg-12 col-xl-8 left-column px-md-4 px-xl-3 tex-justify order-1 order-sm-1 order-lg-1 order-xl-3">
             {% block content %}
             {% endblock %}
         </div>
-        <div class="col-md-12 col-lg-6 col-xl-3 right-column order-2 order-sm-2 order-lg-3 order-xl-3">
+        <div class="col-md-12 col-lg-6 col-xl-2 right-column order-2 order-sm-2 order-lg-3 order-xl-3">
             {% include "archives/searchbox.html" %}
             {% include admin_template %}
             <div id="object_info_div" class="object-info">
