@@ -16,12 +16,12 @@ javascript file at the bottom of the main template
 {% load i18n %}{% include 'archives/embargo_notice.html' %}
 
 <h1>{{ object.title }}</h1>
-<div class="archive-image">
-    <div id="before_after_container">
-        <div><img id="img1" src="{{object.image_before.resource_screen.url}}" alt="{{ object.image_before.title }}" /></div>
-        <div><img id="img2" src="{{object.image_after.resource_screen.url}}" alt="{{ object.image_after.title }}" /></div>
-    </div>
-    <div class="enlarge">{% trans "Drag green handle to reveal images" %}</div>
+<div class="bg-image hover-overlay ripple shadow-1-strong rounded my-3 px-1 popup-link">
+    <img-comparison-slider>
+        <img slot="first" src="https://cdn.esawebb.org/archives/images/screen/{{ object.image_before.pk }}.jpg" alt="{{ object.image_before.title }}" class="w-100" style="height: auto; max-width: 100%; object-fit: cover;" />
+        <img slot="second" src="https://cdn.esawebb.org/archives/images/screen/{{ object.image_after.pk }}.jpg" alt="{{ object.image_after.title }}" class="w-100" style="height: auto; max-width: 100%; object-fit: cover;"/>
+    </img-comparison-slider>
+    <div class="d-flex justify-content-center">{% trans "Drag green handle to reveal images" %}</div>
 </div>
 
 <div class="row">
@@ -54,7 +54,8 @@ javascript file at the bottom of the main template
     </div>
 </div>
 
-
+<link rel="stylesheet"  href="https://unpkg.com/img-comparison-slider@7/dist/styles.css"/>
+<script defer src="https://unpkg.com/img-comparison-slider@7/dist/index.js"></script>
 
 {% endblock %}
 
