@@ -18,68 +18,78 @@
 
 {% block content_area %}
 
-<!-- Cart prueba -->
-{% if potms %}
+<!-- Carrusel prueba -->
+{% if releases %}
 <div class="section">
     <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
-        <div class="carousel-indicators">
-            {% for potm in potms %}
-            <button type="button"
-                data-bs-target="#{{carouselExampleCaptions}}" 
-                data-bs-slide-to="{{ forloop.counter0 }}"
-                class="{% if forloop.first %}active{% endif %}"
-                aria-current="true" aria-label="Slide 1">
-            </button>
-            {% endfor %}
+        <div class="row carousel-indicators mt-3 mb-0 mx-4">
+            <div class="col-2"></div>
+            <div class="col-8 ps-4 d-flex justify-content-center align-items-center">
+                {% for release in releases %}
+                <button type="button"
+                    data-bs-target="#{{carouselExampleCaptions}}" 
+                    data-bs-slide-to="{{ forloop.counter0 }}"
+                    class="{% if forloop.first %}active{% endif %}"
+                    aria-current="true" aria-label="Slide 1">
+                </button>
+                {% endfor %}
+            </div>
+            <div class="col-2 pb-2">
+                <a href="/news/"><button class="btn btn-primary" style="color: #fff; opacity: 80%;">Explore all Press Releases</button></a>
+            </div>
+            
         </div>
         <div class="carousel-inner">
-            {% for potm in potms %}
+            {% for release in releases %}
             <div class="carousel-item {% if forloop.first %}active{% endif %}">
-                <img src="{{ potm.visual.resource_banner1920.url }}"
-                class="d-block w-100 mh-75" alt="{{ potm.visual.title }}"
+                <img src="https://cdn.esawebb.org/archives/images/banner1920/{{ release.main_image.id}}.jpg"
+                class="d-block w-100 mh-75" alt="{{ release.title }}"
                 style="vertical-align: middle; height: 600px;">
                 <div class="carousel-caption d-none d-md-block">
-                    <h5>{{ potm.visual.title }}</h5>
-                    <p>{{ potm.release_date|datetime:"DATE" }} — {{ potm.id }}</p>
+                    <h5>{{ release.title }}</h5>
+                    <p>{{ release.release_date|datetime:"DATE" }} — {{ release.id }}</p>
                 </div>
             </div>
             {% endfor %}
         </div>
         <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions"
-            data-bs-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            data-bs-slide="prev" style="justify-content: flex-start;">
+            <span class="carousel-control-prev-icon" aria-hidden="true" style="height: 5rem; width: 5rem;"></span>
             <span class="visually-hidden">Previous</span>
         </button>
         <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions"
-            data-bs-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            data-bs-slide="next" style="justify-content: flex-end;">
+            <span class="carousel-control-next-icon" aria-hidden="true" style="height: 5rem; width: 5rem;"></span>
             <span class="visually-hidden">Next</span>
         </button>
     </div>
 </div>
 {% endif %}
+<!-- End carrusel -->
 
-<!-- releasees -->
-{% if releases %}
+<!-- Picture of the month -->
+{% if potms %}
 <section class=" ">
     <div class="container py-2 my-2">
         <header class="mb-3 px-5">
-            <h4 class="lined lined-center text-uppercase text-primary">PRESS RELEASES</h4>
+            <a href="/images/potm/">
+                <h4 class="lined lined-center text-uppercase text-primary" style="color: #009bdb !important;">Picture of the Month</h4>
+            </a>
         </header>
         <div class="row px-3">
-            {% for release in releases %}
+            {% for potm in potms %}
             <div class="col-lg-3 col-md-6 mb-3">
                 <div class="box-image shadow  border">
                     <div class="mb-4 primary-overlay">
-                        <img src="{{ release.main_image.resource_wallpaper1.url }}" alt="{{ release.main_visual.title }}"
+                        <img src="{{ potw.image.resource_wallpaper1.url }}" alt="{{ potm.main_visual.title }}"
                             class="img-fluid -top" style=" object-fit: cover;" />
                     </div>
                     <div class="text-center pb-3" >
                         <h5 class="new-title h6 text-capitalize text-primary mx-2 mb-0" style="height: 40px;">
-                            <a class="text-reset" href="{{ release.get_absolute_url }}" style="text-decoration: none;">{{ release.title }}</a>
+                            <a class="text-reset" href="{{ potm.get_absolute_url }}" style="text-decoration: none;">{{ potm.image.title }}</a>
                         </h5>
-                        <p class="small text-capitalize text-muted">{{ release.release_date|date:"j N Y" }} — {{ release.id }}</p>
-                        <a class="btn btn-primary" href="{{ release.get_absolute_url }}">Read More</a>
+                        <p class="small text-capitalize text-muted mt-3">{{ potm.release_date|date:"j N Y" }} — {{ potm.id }}</p>
+                        <a class="btn btn-primary" href="{{ potm.get_absolute_url }}">Read More</a>
                     </div>
                 </div>
             </div>
@@ -91,13 +101,15 @@
 
 <div class="" id="body">
 
-
+<!-- announcements -->
 {% if announcements %}
     <section class=" ">
         <div class="container py-2 my-2">
 
             <header class="mb-3 px-5">
-                <h4 class="lined lined-center text-uppercase text-primary">Announcements</h4>
+                <a href="/announcements/">
+                    <h4 class="lined lined-center text-uppercase text-primary" style="color: #009bdb !important;">Announcements</h4>
+                </a>
             </header>
             <div class="row px-3">
                 {% for announcement in announcements %}
@@ -111,7 +123,7 @@
                             <h5 class="new-title h6 text-capitalize text-primary mx-2 mb-0" style="height: 40px;">
                                 <a class="text-reset" href="{{ announcement.get_absolute_url }}" style="text-decoration: none;">{{ announcement.title }}</a>
                             </h5>
-                            <p class="small text-capitalize text-muted">{{ announcement.release_date|date:"j N Y" }} — {{ announcement.id }}</p>
+                            <p class="small text-capitalize text-muted mt-3">{{ announcement.release_date|date:"j N Y" }} — {{ announcement.id }}</p>
                             <a class="btn btn-primary" href="{{ announcement.get_absolute_url }}">Read More</a>
                         </div>
                     </div>
@@ -120,78 +132,85 @@
             </div>
 
         </div>
-    </section> <!-- announcements -->
+    </section>
+<!-- announcements -->
 {% endif %}
 
 <div class="container py-2 my-2">
 <div class="row frontpage-section middle-section">
     <div class="col-lg-6 col-xl-8 pe-5 px-5">
-
-        {% if spacesparks %}
-        <div id="newsletter-preview-container" class="my-5">
-            <h4 class="lined lined-center text-uppercase text-primary col-12 col-lg-7 col-xl-8 my-3">Space Sparks Video Series</h4>
-            <div id="newsletter-preview ">
-                <a class="card bg-primary" href="/videos/archive/category/spacesparks/" style="text-decoration: none;">
-                    <div class="img-wrapper">
-                        <img draggable="false" src="https://cdn.esawebb.org/archives/images/screen/ann2201a.jpg" class="w-100 card-img-top" style="height: 400px; object-fit: cover; object-position: center top;" alt="Newsletter">
-                    </div>
-                    <div class="newsletter-description card-body">
-                        <div class="title card-text text-white">ESA/Webb Space Sparks</div>
-                    </div>
-                </a>
-            </div>
-        </div>
-        {% endif %}
-
-
-        {% if spacesparks %}
-        <div id="newsletter-preview-container" class="my-5">
-            <h4 class="lined lined-center text-uppercase text-primary col-12 col-lg-7 col-xl-8 my-3">ESA/Hubble/Webb Science Newsletter</h4>
-            <div id="newsletter-preview ">
-                <a class="card bg-primary" href="https://esahubble.org/newsletters/science/html/492/" style="text-decoration: none;">
-                    <div class="img-wrapper">
-                        <img draggable="false" src="https://cdn.esawebb.org/archives/images/screen/ann2203a.jpg" class="w-100 card-img-top" style="height: 400px; object-fit: cover; object-position: center top;" alt="Newsletter">
-                    </div>
-                    <div class="newsletter-description card-body">
-                        <div class="title card-text text-white">ESA/Hubble/JWST Science Newsletter - April 2022</div>
-                    </div>
-                </a>
-            </div>
-        </div>
-        {% endif %}
-
-        
-        {% if firstimages %}
-        <div id="potw-carousel-wrapper" class="mt-5">
-            {% for first in firstimages %}
-            <h4 class="lined lined-center text-uppercase text-primary col-12 col-lg-7 col-xl-8 my-3">{% trans "Webb's First Images Release: "%}{{ first.release_date|date:"M, Y" }}</h4>
+        <!-- Space Sparks Video Series -->
+        {% if highlights %}
+        <div id="potw-carousel-wrapper" class="my-5">
+            {% for high in highlights %}
+            {% if high.name == 'SpaceSparks' %}
+            <h4 class="lined lined-center text-uppercase text-primary col-12 col-lg-7 col-xl-8 my-3">{{ high.title }}</h4>
+            {% endif %}
             {% endfor %}
             <div id="potw-carousel">
-                {% for first in firstimages %}
-                <script>
-                    var potwArray = [
-                        {% for first in firstimages %}
-                        {
-                            id: '{{ first.id }}',
-                            pk: '{{ first.pk }}',
-                            title: '{{ first.visual.title }}',
-                            src: '{{ first.visual.resource_screen640.url }}',
-                            url: '{{ first.get_absolute_url }}',
-                            first: '{{ first.release_date }}'
-                        },
-                        {% endfor %}
-                    ];
-                    console.log(potwArray)
-                </script>
+                {% for high in highlights %}
+                {% if high.name == 'SpaceSparks' %}
                 <div class="slide">
-                    <a class="card bg-primary" href="/initiatives/webbs-first-images/" style="text-decoration: none;">
-                        <img src="https://cdn.esawebb.org/archives/images/screen/{{ first.id }}.jpg" class="w-100 card-img-top" style="height: 400px; object-fit: cover;" alt="{{ first.visual.title }}">
+                    <a class="card bg-primary" href="{{ high.link }}" style="text-decoration: none;">
+                        <img src="{{ high.image }}" class="w-100 card-img-top" style="height: 400px; object-fit: cover;" alt="{{ high.title }}">
                         <div class="first-description card-body text-white">
-                            <span class="date card-text">{{ first.release_date|datetime:"DATE" }} — {{ first.id }}</span>
-                            <span class="title card-text mx-5">{{ first.visual.title }}</span>
+                            <span class="date card-text">{{ high.description }}</span>
+                            <!-- <span class="title card-text mx-5">{{ first.visual.title }}</span> -->
                         </div>
                     </a>
                 </div> <!-- slide -->
+                {% endif %}
+                {% endfor %}
+            </div> <!-- potw-carousel -->   
+        </div>
+        {% endif %}
+        <!-- ESA/Hubble/Webb Science Newsletter -->
+        {% if highlights %}
+        <div id="potw-carousel-wrapper" class="my-5">
+            {% for high in highlights %}
+            {% if high.name == 'ScienceNewsletter' %}
+            <h4 class="lined lined-center text-uppercase text-primary col-12 col-lg-7 col-xl-8 my-3">{{ high.title }}</h4>
+            {% endif %}
+            {% endfor %}
+            <div id="potw-carousel">
+                {% for high in highlights %}
+                {% if high.name == 'ScienceNewsletter' %}
+                <div class="slide">
+                    <a class="card bg-primary" href="{{ high.link }}" style="text-decoration: none;">
+                        <img src="{{ high.image }}" class="w-100 card-img-top" style="height: 400px; object-fit: cover;" alt="{{ high.title }}">
+                        <div class="first-description card-body text-white">
+                            <span class="date card-text">{{ high.description }}</span>
+                            <!-- <span class="title card-text mx-5">{{ first.visual.title }}</span> -->
+                        </div>
+                    </a>
+                </div> <!-- slide -->
+                {% endif %}
+                {% endfor %}
+            </div> <!-- potw-carousel -->   
+        </div>
+        {% endif %}
+
+        <!-- highlights -->
+        {% if highlights %}
+        <div id="potw-carousel-wrapper" class="mt-5">
+            {% for high in highlights %}
+            {% if high.name == 'Webfirts' %}
+            <h4 class="lined lined-center text-uppercase text-primary col-12 col-lg-7 col-xl-8 my-3">{{ high.title }}</h4>
+            {% endif %}
+            {% endfor %}
+            <div id="potw-carousel">
+                {% for high in highlights %}
+                {% if high.name == 'Webfirts' %}
+                <div class="slide">
+                    <a class="card bg-primary" href="{{ high.link }}" style="text-decoration: none;">
+                        <img src="{{ high.image }}" class="w-100 card-img-top" style="height: 400px; object-fit: cover;" alt="{{ high.title }}">
+                        <div class="first-description card-body text-white">
+                            <span class="date card-text">{{ high.description }}</span>
+                            <!-- <span class="title card-text mx-5">{{ first.visual.title }}</span> -->
+                        </div>
+                    </a>
+                </div> <!-- slide -->
+                {% endif %}
                 {% endfor %}
             </div> <!-- potw-carousel -->   
         </div>
@@ -229,7 +248,7 @@
 
     <div class=" col-lg-6 col-xl-4 mt-4 ps-3">
         <div class="social-feeds">
-            <div class="facebook-feeds mb-5">
+            <div class="facebook-feeds mb-2">
                 <div class="section-header">
                     <div class="section-title blue-title">
                         <h4 class="lined lined-center text-uppercase text-primary my-3 ms-5 ms-lg-1">{% trans "ESA/Webb Facebook" %}</h4>
@@ -243,10 +262,10 @@
                         allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe>
                 </div>
             </div>
-            <div class="twitter-feeds mb-3 px-3 mt-5">
+            <div class="twitter-feeds mb-3 px-3 ">
                 <div class="section-header">
                     <div class="section-title blue-title">
-                        <h4 class="lined lined-center text-uppercase text-primary my-3 ms-5 ms-lg-1">{% trans "ESA/Webb on Twitter" %}</h4>
+                        <h4 class="lined lined-center text-uppercase text-primary mt-3 mb-1 ms-5 ms-lg-1">{% trans "ESA/Webb on Twitter" %}</h4>
                     </div>
                 </div>
                 <a class="card twitter-timeline border rounded ms-5 ms-lg-1"
@@ -333,7 +352,6 @@
 </div>
 
 </div> <!-- #body -->
-
 {% endblock content_area %}
 
 {% block extra_scripts %}
