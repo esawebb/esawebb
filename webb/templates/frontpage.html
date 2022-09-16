@@ -34,7 +34,7 @@
                 </button>
                 {% endfor %}
             </div>
-            <div class="col-2 pb-2">
+            <div class="col-2 pb-2 d-none d-md-block">
                 <a href="/news/"><button class="btn btn-primary" style="color: #fff; opacity: 80%;">Explore all Press Releases</button></a>
             </div>
             
@@ -152,7 +152,7 @@
                 {% if high.name == 'SpaceSparks' %}
                 <div class="slide">
                     <a class="card bg-primary" href="{{ high.link }}" style="text-decoration: none;">
-                        <img src="{{ high.image }}" class="w-100 card-img-top" style="height: 400px; object-fit: cover;" alt="{{ high.title }}">
+                        <img src="{{ high.image }}" class="img-fluid card-img-top" style="object-fit: cover;" alt="{{ high.title }}">
                         <div class="first-description card-body text-white">
                             <span class="date card-text">{{ high.description }}</span>
                             <!-- <span class="title card-text mx-5">{{ first.visual.title }}</span> -->
@@ -177,7 +177,7 @@
                 {% if high.name == 'ScienceNewsletter' %}
                 <div class="slide">
                     <a class="card bg-primary" href="{{ high.link }}" style="text-decoration: none;">
-                        <img src="{{ high.image }}" class="w-100 card-img-top" style="height: 400px; object-fit: cover;" alt="{{ high.title }}">
+                        <img src="{{ high.image }}" class="img-fluid card-img-top" style="object-fit: cover;" alt="{{ high.title }}">
                         <div class="first-description card-body text-white">
                             <span class="date card-text">{{ high.description }}</span>
                             <!-- <span class="title card-text mx-5">{{ first.visual.title }}</span> -->
@@ -203,7 +203,7 @@
                 {% if high.name == 'Webfirts' %}
                 <div class="slide">
                     <a class="card bg-primary" href="{{ high.link }}" style="text-decoration: none;">
-                        <img src="{{ high.image }}" class="w-100 card-img-top" style="height: 400px; object-fit: cover;" alt="{{ high.title }}">
+                        <img src="{{ high.image }}" class="img-fluid card-img-top" style="object-fit: cover;" alt="{{ high.title }}">
                         <div class="first-description card-body text-white">
                             <span class="date card-text">{{ high.description }}</span>
                             <!-- <span class="title card-text mx-5">{{ first.visual.title }}</span> -->
