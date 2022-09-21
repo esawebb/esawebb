@@ -17,11 +17,11 @@ javascript file at the bottom of the main template
 
 <h1>{{ object.title }}</h1>
 <div class="bg-image hover-overlay ripple shadow-1-strong rounded my-3 px-1 popup-link">
-    <img-comparison-slider>
+    <img-comparison-slider style="cursor: pointer;">
         <img slot="first" src="https://cdn.esawebb.org/archives/images/screen/{{ object.image_before.pk }}.jpg" alt="{{ object.image_before.title }}" class="w-100" style="height: auto; max-width: 100%; object-fit: cover;" />
         <img slot="second" src="https://cdn.esawebb.org/archives/images/screen/{{ object.image_after.pk }}.jpg" alt="{{ object.image_after.title }}" class="w-100" style="height: auto; max-width: 100%; object-fit: cover;"/>
     </img-comparison-slider>
-    <div class="d-flex justify-content-center">{% trans "Drag green handle to reveal images" %}</div>
+    <div class="d-flex justify-content-center">{% trans "Drag handle to reveal images" %}</div>
 </div>
 
 <div class="row">
