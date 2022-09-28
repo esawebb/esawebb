@@ -25,7 +25,7 @@ javascript file at the bottom of the main template
 </div>
 
 <div class="row">
-    <div class="col-md-9 left-column">
+    <div class="col-md-9 left-column links">
         <p>{{ object.description|safe }}</p>
         <strong>{% trans "Credit" %}:</strong><div class="credit">{{ object.credit|safe }}</div>
         {% include 'archives/extra_footer.html' %}
@@ -56,7 +56,11 @@ javascript file at the bottom of the main template
 
 <link rel="stylesheet"  href="https://unpkg.com/img-comparison-slider@7/dist/styles.css"/>
 <script defer src="https://unpkg.com/img-comparison-slider@7/dist/index.js"></script>
-
+<style>
+    .links ul li a{
+        color: #009bdb !important;;
+    }
+</style>
 {% endblock %}
 
 {% block extra_header %}
