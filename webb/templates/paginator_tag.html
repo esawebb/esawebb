@@ -2,7 +2,7 @@
 {% load djangoplicity_utils %}
 {% if paginator and page_obj %}
 {% spaceless %}
-<div class="row statusbar mx-5">
+<div class="row mx-5">
     <div class="col-md-3">
         {% blocktrans with page_obj.start_index as start_index and page_obj.end_index as end_index and paginator.count as count %}Showing {{ start_index }} to {{ end_index }} of {{ count }}{% endblocktrans %}
     </div>
@@ -13,13 +13,13 @@
                 {% if page_num == 0 %}
                     <li><a href="#">...</a></li>
                 {% else %}
-                    <li{% if page_obj.number == page_num %} class="active"{% endif %}><a href="{{ paginator_url }}{{paginator_prefix}}/{{ page_num }}/{% if paginator_params %}?{{paginator_params}}{% endif %}">{{ page_num }}</a></li>
+                    <li{% if page_obj.number == page_num %} class="active"{% endif %}><a href="{{ paginator_url }}{{paginator_prefix}}/{{ page_num }}/{% if paginator_params %}?{{paginator_params}}{% endif %}" class="mx-2">{{ page_num }}</a></li>
                 {% endif %}
             {% endfor %}
             </ul>
         </div>
     </div>
-    <div class="col-md-3 prev-next">
+    <div class="col-md-3 prev-next d-flex justify-content-end">
         {% if paginator and page_obj and page_obj.has_previous %}
             <a href="{{ paginator_url }}{{paginator_prefix}}/{{ page_obj.previous_page_number }}/{% if paginator_params %}?{{paginator_params}}{% endif %}">{% trans "Previous" %}</a>
         {% endif %}

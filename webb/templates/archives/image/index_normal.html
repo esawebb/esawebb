@@ -1,6 +1,4 @@
-{% load i18n %}
-{% load djangoplicity_utils %}
-{% load static %}
+{% load i18n %}{% load djangoplicity_utils %}
 {% if not object_list %}
     <div align="center">{% trans "No images were found." %}</div>
 {% else %}
@@ -24,37 +22,30 @@ var images = [
 ];
 </script>
 
-<link rel="stylesheet" href="{% static 'css/justifiedGallery.min.css' %}">
+
 
 <div class="image-list image-list-300">
-    <div id="jGallery">
+    <div id="gallery" class="row mx-3">
 
     {% for image in object_list %}
-
-        <div data-ripple-color="light">
-            <a href="{{ image.get_absolute_url }}">
-                <img alt="{{ image.title }}" src="https://cdn.esawebb.org/archives/images/screen/{{ image.pk }}.jpg"/>
-            </a>
+        
+        <div class="col-12 col-md-6 col-lg-4 mb-4">
+            <div class="bg-image hover-overlay ripple shadow-1-strong rounded" data-ripple-color="light">
+                <a href="{{ image.get_absolute_url }}" data-mdb-toggle="modal" data-mdb-target="#ImageModal">
+                    <img src="https://cdn.esawebb.org/archives/images/banner1920/{{ image.pk }}.jpg" class="w-100"
+                    style="height: 300px; object-fit: cover;" /></a>
+                <span class="p-3">{{ image.title }}</span>
+            </div>
         </div>
+       
 
     {% endfor %}
 
     </div>
 </div>
 
-<script src="{% static 'magnific-popup/jquery.min.js' %}"></script>
-<script src="{% static 'js/jquery.justifiedGallery.min.js' %}"></script>
-
-<script>
-    $("#jGallery").justifiedGallery({
-      rowHeight: 350,
-      lastRow: "nojustify",
-      margins: 15
-    });
-</script>
-
 {% endspaceless %}
 {% paginator paginator page_obj paginator_url paginator_prefix paginator_params %}
 {% statusbar paginator page_obj browsers searchable search_url search_str  %}
 {% endif %}
-{% include 'archives/image/extra_footer.html' %}
+{% include 'archives/extra_footer.html' %}
