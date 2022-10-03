@@ -33,7 +33,7 @@ var images = [
 
         <div data-ripple-color="light">
             <a href="{{ image.get_absolute_url }}">
-                <img alt="{{ image.title }}" src="https://cdn.esawebb.org/archives/images/screen/{{ image.pk }}.jpg"/>
+                <img alt="{{ image.title }}" src="{{ image.resource_screen.url }}"/>
             </a>
         </div>
 

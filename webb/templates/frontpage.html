@@ -42,7 +42,7 @@
         <div class="carousel-inner">
             {% for release in releases %}
             <div class="carousel-item {% if forloop.first %}active{% endif %}">
-                <img src="https://cdn.esawebb.org/archives/images/banner1920/{{ release.main_image.id}}.jpg"
+                <img src="{{ release.main_image.resource_banner1920.url }}"
                 class="d-block w-100 mh-75" alt="{{ release.title }}"
                 style="vertical-align: middle; height: 600px;">
                 <div class="carousel-caption d-none d-md-block">
