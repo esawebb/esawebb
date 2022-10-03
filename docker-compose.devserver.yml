@@ -6,7 +6,7 @@ version: "3.4"
 x-common: &common
   build: .
   environment:
-    ENVIRONMENT: "prod"
+    ENVIRONMENT: "dev"
     # The following variables are taken directly from shell env variables (Keep them empty)
     DJANGO_SECRET_KEY:
     DATABASE_URL:

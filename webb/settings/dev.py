@@ -1,9 +1,10 @@
 import sys
-import copy
-
 from .common import *
+from .partials.util import get_secret
+import copy
+import dj_database_url
 
-SECRET_KEY = "g6ymvx$i1sv4k*g+nwfnx*3a1g&)^i6r9n6g4=f_$x^u(kwt8s"
+SECRET_KEY = get_secret('DJANGO_SECRET_KEY')
 SESSION_ENGINE = 'django.contrib.sessions.backends.db'
 SECURE_PROXY_SSL_HEADER = None
 
@@ -46,38 +47,31 @@ DEBUG_TOOLBAR_PANELS = [
 ##################
 # DATABASE SETUP #
 ##################
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'hubble',
-        'USER': 'hubble',
-        'PASSWORD': 'hubble',
-        'HOST': 'webb-db',
-        'PORT': 5432,
+if get_secret('DATABASE_URL'):
+    DATABASES = {
+        'default': dj_database_url.config()
     }
-}
 
 ##########
 # CACHE  #
 ##########
 CACHES = {
-    'notdefault': {
+    'default': {
         'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
-        'KEY_PREFIX': 'hubble',
+        'KEY_PREFIX': SHORT_NAME,
         'LOCATION': [
             'cache:11211',
         ],
         'TIMEOUT': 86400
-    },
-    'default': {
-        'BACKEND': 'django.core.cache.backends.dummy.DummyCache',
     }
 }
+
+
 
 ##########
 # CELERY #
 ##########
-CELERY_BROKER_URL = 'amqp://webb:webb@broker:5672/'
+CELERY_BROKER_URL = 'amqp://{}:{}@broker:5672/'.format(get_secret('RABBITMQ_USER'), get_secret('RABBITMQ_PASS'))
 
 # Avoid infinite wait times and retries
 CELERY_BROKER_TRANSPORT_OPTIONS = {
@@ -87,14 +81,19 @@ CELERY_BROKER_TRANSPORT_OPTIONS = {
     'interval_max': 0.2,
 }
 
+ARCHIVE_AUTO_RESOURCE_DELETION = True
 
 SERVE_STATIC_MEDIA = True
-
 
 #########
 # EMAIL #
 #########
-EMAIL_BACKEND = 'django.core.mail.backends.locmem.EmailBackend'
+EMAIL_SUBJECT_PREFIX = '[ESA/WEBB]'
+EMAIL_HOST = 'smtp.mailgun.org'
+EMAIL_HOST_USER = get_secret('EMAIL_USER')
+EMAIL_HOST_PASSWORD = get_secret('EMAIL_PASSWORD')
+EMAIL_PORT = '587'
+EMAIL_USE_TLS = True
 
 ##################
 # CATPCHA #
