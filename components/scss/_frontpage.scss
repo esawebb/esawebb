@@ -1,0 +1,138 @@
+#pr-carousel-wrapper {
+	position: relative;
+	background-color: #000;
+
+	&:hover {
+		.slide-prev, .slide-next {
+			@extend .slide-prev-next-hover;
+		}
+	}
+
+	#pr-carousel {
+		color: #fff;
+		font-weight: 600;
+
+		&.slick-initialized .slide {
+			visibility: visible;
+		}
+
+		.slide {
+			visibility: hidden; // slides are made visible by JS
+			position: relative;
+
+			@media (min-width: $mobile-breakpoint) {
+				height: $pr-carousel-height;
+			}
+
+			> a {
+				display: block;
+				height: 100%;
+			}
+
+			img {
+				position: relative;
+				width: 100%;
+				opacity: 1;
+
+				@media (min-width: $mobile-breakpoint) {
+					top: 50%;
+					@include transform(translateY(-50%));
+
+					@include transition(opacity 0.2s linear);
+
+					// Workaround for bug with Chrome where the image jumps by
+					// a few pixels onhover:
+					-webkit-backface-visibility: hidden;
+
+					&.hover {
+						opacity: 0.5 !important;  // Important to compensate for the slick loadin opacity
+						filter: alpha(opacity=50) !important;
+						@include transition(opacity 0.2s linear);
+					}
+				}
+			}
+
+			a {
+				color: #fff;
+			}
+
+			.pr-content {
+				margin-left: auto;
+				margin-right: auto;
+				height: 100%;
+				padding: $grid-gutter-width / 2;
+
+				@media (min-width: $mobile-breakpoint) {
+					width: $body-width;
+					position: absolute;
+					top: 0;
+					left: 0;
+					right: 0;
+					padding: 0;
+				}
+
+				.pr-description {
+					padding-bottom: 10px;
+					font-size: 14px;
+					text-shadow: 1px 1px 3px #000;
+					padding-top: 50px; // This is just to make the hover target larger
+
+					&:hover {
+						text-shadow: none;
+
+						.pr-extra {
+							max-height: 200px;
+							@include transition(max-height 0.2s);
+						}
+					}
+
+					@media (min-width: $mobile-breakpoint) {
+						width: $body-width;
+						position: absolute;
+						bottom: 0;
+					}
+
+					.pr-extra {
+						max-height: 0;
+						@include transition(max-height 0.2s);
+						overflow: hidden;
+
+						.pr-headline {
+							margin-bottom: 20px;
+						}
+					}
+
+					.pr-type {
+						text-transform: uppercase;
+						font-size: 14px;
+					}
+
+					.pr-title {
+						font-size: 30px;
+
+						@media (max-width: $mobile-breakpoint) {
+							line-height: 1.2;
+						}
+
+						a:hover {
+							text-decoration: none;
+							color: $hubble-blue;
+						}
+					}
+				}
+			}
+		}
+
+		button {
+			@extend .slide-button;
+		}
+
+		.slide-prev {
+			@extend .slide-prev;
+		}
+
+		.slide-next {
+			@extend .slide-next;
+		}
+	}
+}
