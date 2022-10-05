@@ -19,52 +19,30 @@
 {% block content_area %}
 
 <!-- Carrusel prueba -->
-{% if releases %}
-<div class="section">
-    <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
-        <div class="row carousel-indicators mt-3 mb-0 mx-4">
-            <div class="col-2"></div>
-            <div class="col-8 ps-4 d-flex justify-content-center align-items-center">
-                {% for release in releases %}
-                <button type="button"
-                    data-bs-target="#{{carouselExampleCaptions}}" 
-                    data-bs-slide-to="{{ forloop.counter0 }}"
-                    class="{% if forloop.first %}active{% endif %}"
-                    aria-current="true" aria-label="Slide 1">
-                </button>
-                {% endfor %}
-            </div>
-            <div class="col-2 pb-2 d-none d-md-block">
-                <a href="/news/"><button class="btn btn-primary" style="color: #fff; opacity: 80%;">Explore all Press Releases</button></a>
-            </div>
-            
-        </div>
-        <div class="carousel-inner">
-            {% for release in releases %}
-            <div class="carousel-item {% if forloop.first %}active{% endif %}">
-                <img src="{{ release.main_image.resource_banner1920.url }}"
-                class="d-block w-100 mh-75" alt="{{ release.title }}"
-                style="vertical-align: middle; height: 600px;">
-                <div class="carousel-caption d-none d-md-block">
-                    <h5>{{ release.title }}</h5>
-                    <p>{{ release.release_date|datetime:"DATE" }} — {{ release.id }}</p>
+<div id="pr-carousel-wrapper">
+    <div id="pr-carousel">
+        {% for release in releases %}
+        <div class="slide">
+            <a href="{{ release.get_absolute_url }}">
+            {% if release.main_image.resource_banner1920 %}
+                <img draggable="false" data-lazy="{{ release.main_image.resource_banner1920.url }}" alt="{{ release.main_image.title }}">
+            {% else %}
+                <img draggable="false" data-lazy="{{ release.main_image.resource_wallpaper3.url }}" alt="{{ release.main_image.title }}">
+            {% endif %}
+            <div class="pr-content">
+                <div class="pr-description">
+                    <div class="pr-type">{{ release.id }} — {{ release.release_type.name }}</div>
+                    <div class="pr-title">{{ release.title }}</div>
+                    <!-- <div class="pr-extra">
+                        <div class="pr-headline">{{ release.headline }}</div>
+                    </div> -->
                 </div>
             </div>
-            {% endfor %}
-        </div>
-        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions"
-            data-bs-slide="prev" style="justify-content: flex-start;">
-            <span class="carousel-control-prev-icon" aria-hidden="true" style="height: 5rem; width: 5rem;"></span>
-            <span class="visually-hidden">Previous</span>
-        </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions"
-            data-bs-slide="next" style="justify-content: flex-end;">
-            <span class="carousel-control-next-icon" aria-hidden="true" style="height: 5rem; width: 5rem;"></span>
-            <span class="visually-hidden">Next</span>
-        </button>
-    </div>
-</div>
-{% endif %}
+            </a>
+        </div>  <!-- slide -->
+        {% endfor %}
+    </div> <!-- pr-carousel -->
+</div> <!-- pr-carousel-wrapper -->
 <!-- End carrusel -->
 
 <!-- Picture of the month -->
