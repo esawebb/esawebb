@@ -25,9 +25,9 @@
         <div class="slide">
             <a href="{{ release.get_absolute_url }}">
             {% if release.main_image.resource_banner1920 %}
-                <img draggable="false" data-lazy="{{ release.main_image.resource_banner1920.url }}" alt="{{ release.main_image.title }}">
+                <img src="{{ release.main_image.resource_banner1920.url }}" draggable="false" data-lazy="{{ release.main_image.resource_banner1920.url }}" alt="{{ release.main_image.title }}">
             {% else %}
-                <img draggable="false" data-lazy="{{ release.main_image.resource_wallpaper3.url }}" alt="{{ release.main_image.title }}">
+                <img src="{{ release.main_image.resource_wallpaper3.url }}" draggable="false" data-lazy="{{ release.main_image.resource_wallpaper3.url }}" alt="{{ release.main_image.title }}">
             {% endif %}
             <div class="pr-content">
                 <div class="pr-description">
