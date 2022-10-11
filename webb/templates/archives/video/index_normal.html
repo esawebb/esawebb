@@ -60,7 +60,7 @@
                             },
         
                         ];
-                        // console.log('{{ video.resource_videoframe.url }}')
+                        console.log('{{ video.resource_videoframe.url }}')
                         </script>
                 {% if video.youtube_video_id and video.use_youtube %}
                     <a class="popup-youtube" data-bs-toggle="modal" data-bs-target="#popup-youtube-{{ video.youtube_video_id }}" data-youtube-id="{{ video.youtube_video_id }}" data-title="{{ video.title }}" data-url="{{ video.get_absolute_url }}">
