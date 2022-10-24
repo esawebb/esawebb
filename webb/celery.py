@@ -51,5 +51,5 @@ def rename_resources_under_cdn(self):
         try:
             new_pk = image.id.replace(remove_id, '')
             image.rename(new_pk)
-        except e:
+        except Exception as e:
             print(e)
