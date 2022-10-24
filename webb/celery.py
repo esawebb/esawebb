@@ -46,7 +46,7 @@ def rename_resources_under_cdn(self):
 
     date = datetime.now()
     date_pass = datetime.now() + timedelta(minutes=5)
-    staged_images = Image.objects.filter(release_date_gte=date, release_date_lte=date_pass)
+    staged_images = Image.objects.filter(release_date__gte=date, release_date__lte=date_pass)
     for image in staged_images:
         try:
             new_pk = image.id.replace(remove_id, '')

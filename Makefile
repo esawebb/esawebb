@@ -17,6 +17,9 @@ prod-up-build-attached:
 prod-stop:
 	docker-compose -f docker-compose.yml -f docker-compose.prod.yml stop
 
+dev-stop:
+	docker-compose -f docker-compose.yml -f docker-compose.devserver.yml stop
+
 reload-nginx:
 	docker exec -it webb-nginx service nginx reload
 
