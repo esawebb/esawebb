@@ -42,9 +42,14 @@ def debug_task(self):
 def rename_resources_under_cdn(self):
     from datetime import datetime, timedelta
     from djangoplicity.media.models import Video, Image
+    remove_id = '-h1dd3n'
 
     date = datetime.now()
     date_pass = datetime.now() + timedelta(minutes=5)
     staged_images = Image.objects.filter(release_date_gte=date, release_date_lte=date_pass)
     for image in staged_images:
-        image.rename(str(datetime.now()))
+        try:
+            new_pk = image.id.replace(remove_id, '')
+            image.rename(new_pk)
+        except e:
+            print(e)
