@@ -37,3 +37,15 @@ if 'celery' in sys.argv[0]:
 @app.task(bind=True)
 def debug_task(self):
     print('Request: {0!r}'.format(self.request))
+
+
+@app.task(bind=True)
+def rename_resources_under_cdn(self):
+    from datetime import datetime, timedelta
+    from djangoplicity.media.models import Video, Image
+
+    date = datetime.now()
+    date_pass = datetime.now() + timedelta(minutes=5)
+    staged_images = Image.objects.filter(release_date_gte=date, release_date_lte=date_pass)
+    for image in staged_images:
+        image.rename(str(datetime.now()))
