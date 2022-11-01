@@ -2,7 +2,7 @@
 {% load staticfiles %}
 {% spaceless %}
 <div class="row archive-search my-3 {% if archive_search_position == "outside" %} outside{% endif %}">
-    <div class="col-11">
+    <div class="col-12">
         <form class="form-inline" role="form" action="{{ search_url }}" method="GET">
 
             {% comment %}
@@ -45,8 +45,8 @@
     </div>
     {% if archive_search_position == "outside" %}
         {% if archive == 'image' %}
-            <span class="col-1 creative">
-                <a href="/copyright/" data-toggle="tooltip" data-placement="bottom" title="Free&nbsp;Creative&nbsp;Commons&nbsp;images">
+            <span class="col-1 creative" style="padding-left: 6px;">
+                <a href="/copyright/" data-toggle="tooltip" data-placement="bottom" title="Free&nbsp;Creative&nbsp;Commons&nbsp;images" style="color: white;">
                     <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor"
                     class="bi bi-badge-cc" viewBox="0 0 16 16">
                     <path
@@ -57,8 +57,8 @@
                 </a>
             </span>
         {% elif archive == 'video' %}
-            <span class="col-1 creative ">
-                <a href="/copyright/" data-toggle="tooltip" data-placement="bottom" title="Free&nbsp;Creative&nbsp;Commons&nbsp;videos">
+            <span class="col-1 creative" style="padding-left: 6px;">
+                <a href="/copyright/" data-toggle="tooltip" data-placement="bottom" title="Free&nbsp;Creative&nbsp;Commons&nbsp;videos" style="color: white;">
                     <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor"
                     class="bi bi-badge-cc" viewBox="0 0 16 16">
                     <path
