@@ -741,10 +741,6 @@ CELERY_BEAT_SCHEDULE = {
         'task': 'djangoplicity.celery.tasks.clearsessions',
         'schedule': crontab(minute=0, hour=3),
     },
-    'media-rename_images': {
-        'task': 'webb.celery.rename_resources_under_cdn',
-        'schedule': crontab(minute='*/5'),  # Every 5 minutes
-    },
 }
 
 ##############
