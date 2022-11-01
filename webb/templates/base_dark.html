@@ -12,7 +12,7 @@ We don't display the children pages widget in the dark pages
 
 {% block content_area %}
 
-<div id="dark" style="background-color: #101010">
+<div id="dark">
     {% if request.NO_TRANSLATION %}
     <div class="notranslation-alert alert alert-info alert-dismissible" role="alert">
         <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span
@@ -22,35 +22,34 @@ We don't display the children pages widget in the dark pages
     </div>
     {% endif %}
 
-    <div class="container-fluid py-5 px-3">
-        <div class="row no-page me-5 me-lg-4 me-xl-2">
+    <div class="container-fluid my-5 mx-3" style="">
+        <div class="row no-page">
             
-            <div class="col-sm-12 col-md-6 col-lg-8 col-xl-8 ">
-                <h1 style="color: white">{% if archive_title %}{% trans archive_title %}{% else %}{{ archive|capfirst }} {% trans "Archive"
+            <div class="col-md-7 ">
+                <h1>{% if archive_title %}{% trans archive_title %}{% else %}{{ archive|capfirst }} {% trans "Archive"
                     %}{% endif %}{% if listview_feed_url %} <a href="{{ listview_feed_url }}"
                         class="listviewrsslink"><span class="fa fa-rss"></span></a>{% endif %}</h1>
             </div>
-            <div class="col-sm-12 col-md-6 col-lg-4 col-xl-4">
+            <div class="col-11 col-md-4 ">
                 {% block archive_search %}
                 {% endblock %}
             </div>
-        </div>
-        {% if web_categories %}
+            {% if web_categories %}
             <div class="row">
                 <div class="form-text ms-1">
                     {% if archive == 'image' %}<a
-                        class="me-3 border border-white btn-outline-primary p-1 mt-2 d-inline-block"
-                        style="text-decoration: none; font-size: 1rem !important; color: white"
+                        class="me-3 border border-primary btn-outline-primary p-1 mt-2 d-inline-block"
+                        style="text-decoration: none; font-size: 1rem !important;"
                         href="{% url 'images_defaultquery' %}{% if params_nosearch %}?{{ params_nosearch }}{% endif %}">{% trans "View All" %}</a>
                         {% endif %}
                     {% if archive == 'video' %}<a
-                        class="me-3 border border-white btn-outline-primary p-1 mt-2 d-inline-block"
-                        style="text-decoration: none; font-size: 1rem !important; color: white"
+                        class="me-3 border border-primary btn-outline-primary p-1 mt-2 d-inline-block"
+                        style="text-decoration: none; font-size: 1rem !important;"
                         href="{% url 'videos_defaultquery' %}{% if params_nosearch %}?{{ params_nosearch }}{% endif %}">{% trans "View All" %}</a>
                         {% endif %}
                     {% for category in web_categories %}
-                    <a class="me-3 border border-white btn-outline-primary p-1 mt-2 d-inline-block"
-                        style="text-decoration: none; font-size: 1rem !important; color: white"
+                    <a class="me-3 border border-primary btn-outline-primary p-1 mt-2 d-inline-block"
+                        style="text-decoration: none; font-size: 1rem !important;"
                         href="{{ category.get_absolute_url}}{% if params_nosearch %}?{{ params_nosearch }}{% endif %}"
                         {% if category.selected %} class="selected" {% endif %}>{% trans category.name %}</a>
                     {% endfor %}
@@ -59,21 +58,22 @@ We don't display the children pages widget in the dark pages
             {% endif %}
             <div class="text-end">
                 <div title="{% trans 'Sort by:' %}">
-                    <span class="me-3" style="color: white">Sort by:  </span>
-                    <a  style="text-decoration: none; font-size: 1rem !important; color: white"
+                    <span class="me-3">Sort by:  </span>
+                    <a  style="text-decoration: none; font-size: 1rem !important;" 
                         href="{{ request.path }}?{{params_nosort}}"{% if not request.GET.sort %} 
                         class="me-3 border border-primary btn-primary p-1 mt-2 d-inline-block"
                         {% else %}
-                        class="me-3 border border-white btn-outline-primary p-1 mt-2 d-inline-block"
+                        class="me-3 border border-primary btn-outline-primary p-1 mt-2 d-inline-block"
                         {% endif %}>{% trans "Ranking" %}</a>
-                    <a  style="text-decoration: none; font-size: 1rem !important; color: white"
+                    <a  style="text-decoration: none; font-size: 1rem !important;" 
                         href="{{ request.path }}?{{params_nosort}}&sort=-release_date"{% if request.GET.sort == '-release_date' %} 
-                        class="me-3 border border-white btn-primary p-1 mt-2 d-inline-block"
+                        class="me-3 border border-primary btn-primary p-1 mt-2 d-inline-block"
                         {% else %}
-                        class="me-3 border border-white btn-outline-primary p-1 mt-2 d-inline-block"
+                        class="me-3 border border-primary btn-outline-primary p-1 mt-2 d-inline-block"
                         {% endif %}>{% trans "Date" %}</a>
                 </div>
             </div>
+        </div>
     </div>
 
     <div class="container-fluid" id="dark-body">

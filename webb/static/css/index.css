@@ -397,32 +397,3 @@ p a {
   .h6 {
     font-size: 12px;
   }
-  .statusbar{
-    
-    font-size: 14px;
-  }
-  #dark, div a{
-    color: #ffffff;
-    font-size: 14px;
-  }
-  .prev-next {
-    text-align: right;
-    font-weight: 600;
-    text-transform: uppercase;
-}
-.text-center {
-  text-align: center;
-}
-.pagination {
-  padding: 0; }
-  .pagination li {
-    display: inline; }
-    .pagination li + li:before {
-      content: '/'; }
-    .pagination li.active {
-      font-weight: 600; }
-      .pagination li.active a {
-        color: #333333; }
-    .pagination li a {
-      display: inline-block;
-      padding: 0px 6px; }

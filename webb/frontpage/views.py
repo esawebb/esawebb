@@ -17,7 +17,6 @@ from djangoplicity.media.models import Image, Video, PictureOfTheWeek
 from djangoplicity.media.options import ImageOptions, VideoOptions, PictureOfTheWeekOptions
 from djangoplicity.newsletters.models import Newsletter, NewsletterType
 from djangoplicity.releases.models import Release
-from djangoplicity.metadata.models import CategoryType
 
 from webb.frontpage.models import Highlight
 
@@ -30,7 +29,7 @@ class FrontpageView(TemplateView):
         context = super(FrontpageView, self).get_context_data(**kwargs)
 
         context['announcements'] = Announcement.get_latest_announcement(4, only_featured=True)
-        context['highlights'] = Highlight.objects.filter(published=True)
+        #context['highlights'] = Highlight.objects.filter(published=True)
         # TODO: Check why this is not working
         context['spacesparks'] = VideoOptions.Queries.category.queryset(Video, VideoOptions, self.request, stringparam='spacesparks')[0].order_by('-release_date',)[:4]
         #context['hubblecasts'] = VideoOptions.Queries.category.queryset(Video, VideoOptions, self.request, stringparam='hubblecast')[0].order_by('-release_date',)[:4]
