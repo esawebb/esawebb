@@ -30,14 +30,14 @@
             <td>
                 {% if e.facility %}
                     {% if e.facility.wiki_link %}
-                        <a href="{{ e.facility.wiki_link }}">{{ e.facility }}</a>
+                        <a href="{{ e.facility.wiki_link }}" style="font-size: 12px;">{{ e.facility }}</a>
                     {% else %}
                         {{ e.facility }}
                     {% endif %}
                     {% if e.instrument %}
                         <br/>
                         {% if e.instrument.wiki_link %}
-                            <a href="{{ e.instrument.wiki_link }}">{{ e.instrument }}</a>
+                            <a href="{{ e.instrument.wiki_link }}" style="font-size: 12px;">{{ e.instrument }}</a>
                         {% else %}
                             <span class="band_instrument">{{ e.instrument }}</span>
                         {% endif %}
