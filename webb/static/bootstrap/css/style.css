@@ -1750,6 +1750,21 @@ progress {
             flex: 0 0 auto;
     width: 100%;
   }
+
+  .col-xl-18 {
+    -webkit-box-flex: 0;
+        -ms-flex: 0 0 auto;
+            flex: 0 0 auto;
+    width: 20%;
+  }
+  .col-xl-64 {
+    -webkit-box-flex: 0;
+        -ms-flex: 0 0 auto;
+            flex: 0 0 auto;
+    width: 60%;
+  }
+
+
   .offset-xl-0 {
     margin-left: 0;
   }

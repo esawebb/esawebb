@@ -91,7 +91,7 @@
                         <h5 class="new-title h6 text-capitalize text-primary mx-2 mb-0" style="height: 40px;">
                             <a class="text-reset" href="{{ potm.get_absolute_url }}" style="text-decoration: none;">{{ potm.visual.title }}</a>
                         </h5>
-                        <p class="small text-capitalize text-muted mt-3">{{ potm.release_date|date:"j N Y" }} — {{ potm.id }}</p>
+                        <p class="small text-muted mt-3">{{ potm.release_date|date:"j N Y" }} — {{ potm.id }}</p>
                         <a class="btn btn-primary" href="{{ potm.get_absolute_url }}">Read More</a>
                     </div>
                 </div>
@@ -126,7 +126,7 @@
                             <h5 class="new-title h6 text-capitalize text-primary mx-2 mb-0" style="height: 40px;">
                                 <a class="text-reset" href="{{ announcement.get_absolute_url }}" style="text-decoration: none;">{{ announcement.title }}</a>
                             </h5>
-                            <p class="small text-capitalize text-muted mt-3">{{ announcement.release_date|date:"j N Y" }} — {{ announcement.id }}</p>
+                            <p class="small text-muted mt-3">{{ announcement.release_date|date:"j N Y" }} — {{ announcement.id }}</p>
                             <a class="btn btn-primary" href="{{ announcement.get_absolute_url }}">Read More</a>
                         </div>
                     </div>
