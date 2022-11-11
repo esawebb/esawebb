@@ -64,16 +64,60 @@ p a {
   margin-top: 0;
 }
 
-.video-title {
-  display: inline;
-  position: absolute;
-  color: white;
-  left: 0px;
-  width: 100%;
-  background-color: rgba(0, 50, 71, 1);
-  height: 70px;
-  display: flex;
-  align-items: center;
+@media (min-width: 576px) {
+  .video-title {
+    display: inline;
+    position: absolute;
+    color: white;
+    left: 0px;
+    width: 100%;
+    background-color: rgba(0, 50, 71, 1);
+    height: 90px;
+    display: flex;
+    align-items: center;
+  }
+}
+
+@media (min-width: 768px) {
+  .video-title {
+    display: inline;
+    position: absolute;
+    color: white;
+    left: 0px;
+    width: 100%;
+    background-color: rgba(0, 50, 71, 1);
+    height: 90px;
+    display: flex;
+    align-items: center;
+  }
+}
+
+@media (min-width: 1280px) {
+  .video-title {
+    display: inline;
+    position: absolute;
+    color: white;
+    left: 0px;
+    width: 100%;
+    background-color: rgba(0, 50, 71, 1);
+    height: 90px;
+    display: flex;
+    align-items: center;
+  }
+}
+
+@media (min-width: 1920px) {
+  .video-title {
+    display: inline;
+    position: absolute;
+    color: white;
+    left: 0px;
+    width: 100%;
+    background-color: rgba(0, 50, 71, 1);
+    height: 70px;
+    display: flex;
+    align-items: center;
+  }
 }
 
 .play-icon {
