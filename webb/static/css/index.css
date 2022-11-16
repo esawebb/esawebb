@@ -522,9 +522,9 @@ div a{
   color: #ffffff;
   font-size: 14px;
 }
-#dark ,
+#dark 
 div a:hover, a:focus{
-  color: #ffffff;
+  color: #333333;
 }
 
 .prev-next {
