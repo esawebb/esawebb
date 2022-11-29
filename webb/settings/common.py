@@ -423,7 +423,7 @@ FILE_UPLOAD_PERMISSIONS = 0o666
 SERVER_EMAIL = 'nobody@esawebb.org'
 DEFAULT_FROM_EMAIL = 'nobody@esawebb.org'
 DEFAULT_MAIL_USER = ['web@esawebb.org']
-DEFAULT_MAIL_TAGGING = ['dpalacios@encisosystems.com']
+DEFAULT_MAIL_TAGGING = ['zidmani@gmail.com']
 EMAIL_SUBJECT_PREFIX = '[ESAWEBB-LOCAL]'
 
 ##################
