@@ -116,7 +116,7 @@ urlpatterns += [
         {'model': Brochure, 'options': BrochureOptions}),
     url(r'^products/models3d/', include('djangoplicity.products2.urls.models3d'),
         {'model': Model3d, 'options': Model3dOptions, 'translate': True}),
-    url(r'^initiatives/public-resources/calendars/', include('djangoplicity.products2.urls.calendars'),
+    url(r'^products/calendars/', include('djangoplicity.products2.urls.calendars'),
         {'model': Calendar, 'options': CalendarOptions, 'translate': True}),
     url(r'^products/applications/', include('djangoplicity.products2.urls.applications'),
         {'model': Application, 'options': ApplicationOptions}),
