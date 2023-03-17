@@ -21,8 +21,8 @@
                 <div class="pb-3 px-3" style="height: 290px; overflow: hidden; text-overflow: ellipsis;">
                     <div class="news-id h6  text-primary" >{{ pr.id }} — {% trans pr.release_type.name %}</div>
                     <div class="news-title h5  text-primary" >{{ pr.title }}</div>
+                    <div class="news-id h6  text-primary pb-3" >{{ pr.release_date|datetime:"DATE" }}</div>
                     <div class="news-teaser">
-                        <p class="small text-uppercase text-mute" >{{ pr.release_date|datetime:"DATE" }}</p>
                         <p class="small text-muted" >{{ pr.headline|linebreaksbr }}</p>
                     </div>
                 </div>
