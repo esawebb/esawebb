@@ -22,7 +22,7 @@
                     {% endif %}
                 </div>
                 <div class="news-description pb-3">
-                    <div class="news-id mx-3">{{ potw.id }} — {% trans "Picture of the Month" %}</div>
+                    <div class="news-id mx-3 text-primary">{{ potw.id }} — {% trans "Picture of the Month" %}</div>
                     {% if potw.image %}
                         <div class="news-title h6 text-capitalize text-primary mx-3 mt-2 fw-bold" style="height: 40px;">{{ potw.image.title }}</div>
                     {% elif potw.video %}
