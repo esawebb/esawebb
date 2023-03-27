@@ -47,4 +47,13 @@
 {% if object.headline %}<p>{{ object.headline }}</p>{% endif %}
 <p>{{ object.description|safe }}</p>
 <strong>{% trans "Credit" %}:</strong><div class="credit">{{ object.credit|safe }}</div>
-{% include 'archives/image/extra_footer.html' %}
+<!-- {% include 'archives/image/extra_footer.html' %} -->
+<div class="row mb-1">
+    <div class="col-12 text-center my-3">
+        <div class="text-secondary">
+            <a class="form-text" style="margin: 0px; padding: 0px; color: #009bdb" href="/copyright/">{% trans "Usage of ESA/Hubble/Webb Images and Videos" %}</a><br />
+            <a class="form-text" style="margin: 0px; padding: 0px; color: #009bdb" href="/press/mailinglist">{% trans "Are you a journalist? Subscribe to the ESA/Hubble/Webb Media Newsletter." %}</a>
+        </div>
+    </div>
+    <br>
+</div>
