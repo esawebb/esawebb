@@ -12,6 +12,7 @@ body {
 }
 
 a {
+  color: #009bdb;
   text-decoration: none !important;
 }
 
@@ -520,15 +521,19 @@ h6,
 .statusbar .prev-next a {
   margin-left: 25px;
 }
-
-#dark,
-div a{
-  color: #ffffff;
+/* #release-list, li a{
+  color: #003247;
   font-size: 14px;
+} */
+
+#dark {
+  background-color: #101010;
+  font-weight: 600;
+  color: #fff; 
 }
-#dark 
-div a:hover, a:focus{
-  color: #333333;
+
+#dark .prev-next a{
+  color: #fff !important;
 }
 
 .prev-next {
@@ -564,4 +569,12 @@ div a:hover, a:focus{
 .pagination li a {
   display: inline-block;
   padding: 0px 6px;
+}
+
+#dark .pagination li.active a {
+  color: #fff;
+}
+
+#body .prev-next a{
+  color: #333333 !important;
 }
