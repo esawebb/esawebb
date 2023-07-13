@@ -12,19 +12,19 @@ x-common: &common
     ENVIRONMENT: "dev"
   restart: "no"
   volumes:
-    - ./volumes/import:/home/hubbleadm/import
-    - ./volumes/media:/home/hubbleadm/media
-    - ./volumes/shared:/home/hubbleadm/shared
-    - ./webb:/home/hubbleadm/webb
-    - ./local:/home/hubbleadm/local
-    - ./htmlcov:/home/hubbleadm/htmlcov
-    - ./docs/static:/home/hubbleadm/docs/static
-    - ./test-utils:/home/hubbleadm/test-utils
-    - ./test-utils/sitecustomize.py:/home/hubbleadm/sitecustomize.py
-    - ./.coveragerc:/home/hubbleadm/.coveragerc
-    - ./.coveragerc-parallel:/home/hubbleadm/.coveragerc-parallel
-    - ./setup.py:/home/hubbleadm/setup.py
-    - ./scripts:/home/hubbleadm/scripts
+    - ./volumes/import:/home/webbadm/import
+    - ./volumes/media:/home/webbadm/media
+    - ./volumes/shared:/home/webbadm/shared
+    - ./webb:/home/webbadm/webb
+    - ./local:/home/webbadm/local
+    - ./htmlcov:/home/webbadm/htmlcov
+    - ./docs/static:/home/webbadm/docs/static
+    - ./test-utils:/home/webbadm/test-utils
+    - ./test-utils/sitecustomize.py:/home/webbadm/sitecustomize.py
+    - ./.coveragerc:/home/webbadm/.coveragerc
+    - ./.coveragerc-parallel:/home/webbadm/.coveragerc-parallel
+    - ./setup.py:/home/webbadm/setup.py
+    - ./scripts:/home/webbadm/scripts
 
 services:
   nginx:
