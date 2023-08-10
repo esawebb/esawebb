@@ -11522,4 +11522,11 @@ fieldset:disabled .btn {
     display: none !important;
   }
 }
+
+
+@media (max-width: 720px){
+  .sm-none {
+      display: none;
+  } 
+}
 /*# sourceMappingURL=style.css.map */
