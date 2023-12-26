@@ -1,6 +1,6 @@
-var audio = document.getElementById('audio');
-var playPauseBTN = document.getElementById('playPauseBTN');
-var count = 0;
+let audio = document.getElementById('audio');
+let playPauseBTN = document.getElementById('playPauseBTN');
+let count = 0;
 
 function playPause(){
     if(count == 0){
