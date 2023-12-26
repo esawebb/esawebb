@@ -41,8 +41,8 @@ renderer.shadowMap.type = THREE.PCFSoftShadowMap
 renderer.setSize(sizes.width, sizes.height)
 renderer.setPixelRatio(window.devicePixelRatio)
 
-var loader = new GLTFLoader();
-var obj;
+let loader = new GLTFLoader();
+let obj;
 loader.load(model, function (gltf) {
     obj = gltf.scene
     obj.scale.set(0.30, 0.30, 0.30)
@@ -109,7 +109,7 @@ directionalLight5.position.set(2, 2, 2)
 scene.add(directionalLight5)
 
 const controls = new OrbitControls(camera, renderer.domElement);
-var statezoom = "f";
+let statezoom = "f";
 controls.enableZoom = false;
 controls.update();
 
