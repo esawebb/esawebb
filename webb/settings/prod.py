@@ -111,7 +111,7 @@ MEDIA_CONTENT_SERVERS = {
         },
         url='https://cdn.esawebb.org/',
         url_bigfiles='https://cdn2.esawebb.org/',
-        remote_dir='/www/',
+        remote_dir='',
         host='push-12.cdn77.com',
         username=get_secret('CDN_STORAGE_USERNAME'),
         password=get_secret('CDN_STORAGE_PASSWORD'),
@@ -122,6 +122,12 @@ MEDIA_CONTENT_SERVERS = {
         cdnv3_id='1495410064',
         cdn_id_bigfiles='1084865783',
         cdnv3_id_bigfiles='1084865783',
+        aws_access_key_id=get_secret('AWS_ACCESS_KEY_ID'),
+        aws_secret_access_key=get_secret('AWS_SECRET_ACCESS_KEY'),
+        aws_storage_bucket_name=get_secret('AWS_STORAGE_BUCKET_NAME'),
+        aws_s3_region_name=get_secret('AWS_S3_REGION_NAME'),
+        aws_s3_endpoint_url=get_secret('AWS_S3_ENDPOINT_URL'),
+        aws_s3_custom_domain=get_secret('AWS_S3_CUSTOM_DOMAIN')
     ),
 }
 
