@@ -161,8 +161,8 @@ scene.add(floor)
 
 // model
 
-var loader = new GLTFLoader();
-var obj;
+let loader = new GLTFLoader();
+let obj;
 loader.load(model, function (gltf) {
     obj = gltf.scene
     obj.scale.set(0.30, 0.30, 0.30)
@@ -371,8 +371,8 @@ scene2.add(ellipse)
 
 // model
 
-var loader2 = new GLTFLoader();
-var obj2;
+let loader2 = new GLTFLoader();
+let obj2;
 loader.load(model, function (gltf) {
     obj2 = gltf.scene;
     obj2.position.set(10, 0, 0);
@@ -381,7 +381,7 @@ loader.load(model, function (gltf) {
     obj2.scale.set(0.05, 0.05, 0.05)
     scene2.add(obj2);
 });
-var light2 = new THREE.HemisphereLight(0xffffff, 0x000000, 2);
+let light2 = new THREE.HemisphereLight(0xffffff, 0x000000, 2);
 scene2.add(light2);
 
 /**
@@ -491,8 +491,8 @@ circlePlanet.position.z = 30
 scene3.add(circlePlanet);
 
 ////////////////////// JWST 
-var loader3 = new GLTFLoader();
-var obj3;
+let loader3 = new GLTFLoader();
+let obj3;
 loader.load(model2, function (gltf) {
     obj3 = gltf.scene;
     obj3.position.set(0, -1.2, 19.95);
@@ -501,7 +501,7 @@ loader.load(model2, function (gltf) {
     obj3.scale.set(0.001, 0.001, 0.001)
     scene3.add(obj3);
 });
-var light3 = new THREE.AmbientLight(0xffffff);
+let light3 = new THREE.AmbientLight(0xffffff);
 scene3.add(light3);
 
 // ////////////////////// Hubble
@@ -633,7 +633,7 @@ const clock = new THREE.Clock()
 //     camera1.updateProjectionMatrix();
 // })
 
-var timeOut = false;
+let timeOut = false;
 for (const pointLine of pointsLine) {
     pointLine.element.classList.remove('visible')
 }
@@ -642,7 +642,7 @@ for (const pointLine of pointsLine) {
 document.getElementById("timeOut").addEventListener("click", () => {
 
 
-    var playTimeOut = document.getElementById('timeOut');
+    let playTimeOut = document.getElementById('timeOut');
 
     if (timeOut == true) {
         timeOut = false;
@@ -658,11 +658,11 @@ document.getElementById("timeOut").addEventListener("click", () => {
 
 })
 
-var distance = false;
+let distance = false;
 
 document.getElementById("distance").addEventListener("click", () => {
 
-    var playTimeOut = document.getElementById('distance');
+    let playTimeOut = document.getElementById('distance');
 
     if (distance == true) {
         distance = false;
@@ -683,14 +683,14 @@ document.getElementById("distance").addEventListener("click", () => {
 
 })
 
-var rotationModel = true;
+let rotationModel = true;
 for (const pointModel of pointsModel) {
     pointModel.element.classList.remove('visible')
 }
 
 document.getElementById("rotationModel").addEventListener("click", () => {
 
-    var playRotationModel = document.getElementById('rotationModel');
+    let playRotationModel = document.getElementById('rotationModel');
 
     if (rotationModel == true) {
         rotationModel = false;
