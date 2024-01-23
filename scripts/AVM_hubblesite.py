@@ -83,7 +83,18 @@ def new_id(long_caption_link):
         results = pattern.findall(long_caption_link)[0]
         id  = results[0]+'-'+results[1]
         if results[2] != '': id = id +'-'+results[2]
-    except:
+
+    except IndexError:
+        # Handle the case where no matches are found for the pattern
+        print("No matches found for the pattern in the long caption link")
+        id = '-'
+    except (TypeError, AttributeError) as e:
+        # Handle errors related to type or attribute
+        print(f"Error in type or attribute: {e}")
+        id = '-'
+    except Exception as e:
+        # Handle any other unforeseen exceptions
+        print(f"Unhandled error: {e}")
         id = '-'
     return id
 
@@ -143,15 +154,32 @@ if __name__ == '__main__':
         #if count > 30: break
         try:
             remote   = urllib.request.urlopen(image.long_caption_link)
-        except:
-            remote  = 'timeout?'
+
+        except urllib.error.URLError as e:
+            # Handle URL-related errors
+            print(f"URL error: {e}")
+            remote = 'timeout?'
+        except Exception as e:
+            # Handle any other unforeseen exceptions
+            print(f"Unhandled error: {e}")
+            remote = 'timeout?'
         #hubblesite = remote.readlines()
         for line in remote:
             if line.find('release-number') > -1:
                 break
         try:
-            hubble_id = pattern.findall(line)[0].strip()            
-        except:
+            hubble_id = pattern.findall(line)[0].strip()
+        except IndexError:
+            # Handle the case where no matches are found for the pattern
+            print("No matches found for the pattern in the line")
+            hubble_id = '?'
+        except (TypeError, AttributeError) as e:
+            # Handle errors related to type or attribute
+            print(f"Error in type or attribute: {e}")
+            hubble_id = '?'
+        except Exception as e:
+            # Handle any other unforeseen exceptions
+            print(f"Unhandled error: {e}")
             hubble_id = '?'
         middle = new_id(image.long_caption_link)
         webb_thumb = webb_thumb_pre + image.id + webb_thumb_post
@@ -179,5 +207,4 @@ if __name__ == '__main__':
         logger.info(str(count)+' / '+n_images + ' ' + image.id + ' ' + hubble_id + ' ' + middle  + ' ' + image.long_caption_link + ' ' + thumberror)
     store_JSON(jsonfile,dict)
            
-        
         
