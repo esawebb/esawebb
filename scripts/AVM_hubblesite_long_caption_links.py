@@ -18,7 +18,7 @@ from builtins import str
 from djangoplicity.utils import optionparser
 from djangoplicity.media.models import Image
 from djangoplicity.releases.models import Release
-
+from django.db import IntegrityError
 import re
 import urllib.request, urllib.error, urllib.parse
 
@@ -95,8 +95,13 @@ def analyse_links(pr_id):
                     else:
                         if get_ranking(long_caption_link) < get_ranking(link):
                             long_caption_link = link
-    except:
-        pass
+    except IndexError:
+        # Handle the case where no matches are found for the filter condition
+        print(f"No matches found for id starting with {pr_id}")
+
+    except Exception as e:
+        # Handle any other unforeseen exceptions
+        print(f"Unhandled error: {e}")
     return long_caption_link
 
 def check_reachability(url):
@@ -120,8 +125,14 @@ def get_long_caption_link(url, iterator, check_reachability_flag = True):
     long_c = None
     try:
         remote   = urllib.request.urlopen(url)
-    except:
-        remote  = 'timeout?'
+    except urllib.error.URLError as e:
+        # Handle URL-related errors
+        print(f"URL error: {e}")
+        remote = 'timeout?'
+    except Exception as e:
+        # Handle any other unforeseen exceptions
+        print(f"Unhandled error: {e}")
+        remote = 'timeout?'
     for line in remote:
         if line.find('<a href=') > -1:
             if line.find('''/image/''') > -1:
@@ -279,10 +290,13 @@ if __name__ == '__main__':
                 try:
                     image.save()
                     psavecount = psavecount + 1
-                except:
+                except IntegrityError as e:
+                    # Handle IntegrityError specifically
                     print(image.id, ': failed to store press_release_link ', press_release_link)
-                    
-            
+                except Exception as e:
+                    # Handle any other unforeseen exceptions
+                    print(f"Unhandled error: {e}")
+
             if (long_c): 
                 hcount = hcount + 1
                 image.long_caption_link = long_c
@@ -290,11 +304,14 @@ if __name__ == '__main__':
                 try:
                     image.save()
                     savecount = savecount + 1
-                except:
+                except IntegrityError as e:
+                    # Handle IntegrityError specifically
                     print(image.id, ': failed to store long_caption_link ', long_c)
+                except Exception as e:
+                    # Handle any other unforeseen exceptions
+                    print(f"Unhandled error: {e}")
                     
     print(str(hcount), 'long_caption_links found')
     print(str(pcount), 'press_release_link found')
     print('saved ', str(savecount), ' long_caption_links and ', str(psavecount), ' press_release_links.')
  
-               
