@@ -15,7 +15,7 @@
                 {% if ann.main_visual and ann.main_visual.resource_thumb350x %}
                 <div class="mb-4 primary-overlay">
                     <img class="w-100" style="height: 200px; object-fit: cover;"
-                        src="{{ ann.main_visual.resource_thumb350x.url }}">
+                        src="{{ ann.main_visual.resource_thumb350x.url }}" alt="{{ ann.title }}">
                 </div>
                 {% endif %}
                 <div class="pb-3 px-3" style="height: 290px; overflow: hidden; text-overflow: ellipsis;">

@@ -9,7 +9,7 @@
         {% endif %}
         {% for thumbnail, link in resources.thumbnails %}
             {% if link %}
-                <div class="archive_download_thumbnail"><a href="{{link}}" rel="shadowbox"><img src="{{thumbnail}}" /></div>
+                <div class="archive_download_thumbnail"><a href="{{link}}" rel="shadowbox"><img src="{{thumbnail}}"/></div>
             {% else %}
                 <div class="archive_download_thumbnail"><img src="{{thumbnail}}" /></div>
             {% endif %}

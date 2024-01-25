@@ -14,11 +14,11 @@
             <div class="news-wrapper box-image shadow  border my-3">
                 <div class="news-image">
                     {% if potw.image %}
-                        <img class="w-100" style="height: 200px; object-fit: cover;" src="{{ potw.image.resource_thumb350x.url }}">
+                        <img class="w-100" style="height: 200px; object-fit: cover;" src="{{ potw.image.resource_thumb350x.url }}" alt="{{ potw.image.title }}"/>
                     {% elif potw.video %}
-                        <img class="w-100" style="height: 200px; object-fit: cover;" src="{{ potw.video.resource_thumb350x.url }}">
+                        <img class="w-100" style="height: 200px; object-fit: cover;" src="{{ potw.video.resource_thumb350x.url }}" alt="{{ potw.video.title }}"/>
                     {% elif potw.comparison %}
-                        <img class="w-100" style="height: 200px; object-fit: cover;" src="{{ potw.comparison.resource_thumb350x.url }}">
+                        <img class="w-100" style="height: 200px; object-fit: cover;" src="{{ potw.comparison.resource_thumb350x.url }}" alt="{{ potw.comparison.title }}"/>
                     {% endif %}
                 </div>
                 <div class="news-description pb-3">
