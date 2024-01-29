@@ -47,7 +47,6 @@ p a {
 }
 
 #gallery .bg-image:hover>span {
-  display: inline;
   position: absolute;
   color: white;
   left: 0px;
@@ -71,7 +70,6 @@ p a {
 
 @media (min-width: 576px) {
   .video-title {
-    display: inline;
     position: absolute;
     color: white;
     left: 0px;
@@ -85,7 +83,6 @@ p a {
 
 @media (min-width: 768px) {
   .video-title {
-    display: inline;
     position: absolute;
     color: white;
     left: 0px;
@@ -99,7 +96,6 @@ p a {
 
 @media (min-width: 1280px) {
   .video-title {
-    display: inline;
     position: absolute;
     color: white;
     left: 0px;
@@ -113,7 +109,6 @@ p a {
 
 @media (min-width: 1920px) {
   .video-title {
-    display: inline;
     position: absolute;
     color: white;
     left: 0px;
@@ -126,7 +121,6 @@ p a {
 }
 
 .play-icon {
-  display: inline;
   position: absolute;
   color: white;
   left: 0px;
@@ -156,7 +150,6 @@ p a {
 }
 
 .youtube-title {
-  display: inline;
   position: absolute;
   color: white;
   left: 0px;

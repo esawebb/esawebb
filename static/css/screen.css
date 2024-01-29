@@ -376,7 +376,6 @@ html>body #mainmenu #mmselected {
 	display:block;
 	float: left;
 	position: relative;
-	vertical-align:bottom;
 	text-align:right;
 	vertical-align: middle;
 	font-family: Arial, "MS Trebuchet", sans-serif;
@@ -407,7 +406,6 @@ html>body #mainmenu #mmselected {
 	display:block;
 	padding-top:3px;
 	margin-left:10px;
-	padding-right:10px;
 	margin:0px;
 	padding-right:10px;
 	margin-right:-10px;
