@@ -50,7 +50,19 @@ class ESASkySerializer(serializers.ModelSerializer):
         def get_float(value):
             try:
                 return float(value)
-            except:  # pylint: disable=bare-except
+            except ValueError as ve:
+                # Handle the case where the conversion to float fails due to invalid input
+                print(f"ValueError: Unable to convert {value} to float: {ve}")
+                return None
+
+            except TypeError as te:
+                # Handle the case where the type of 'value' is not compatible with float conversion
+                print(f"TypeError: Unable to convert {type(value)} to float: {te}")
+                return None
+
+            except Exception as e:
+                # Handle any other unexpected exceptions
+                print(f"Unhandled error: {e}")
                 return None
 
         def s_to_f(array):

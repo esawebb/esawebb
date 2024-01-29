@@ -17,7 +17,7 @@ standard_library.install_aliases()
 from builtins import str
 import re
 import urllib.request, urllib.error, urllib.parse 
-
+import http.client
 from datetime import datetime, tzinfo
 import pytz
 from pytz import timezone
@@ -32,8 +32,15 @@ def get_redirect(link):
     try:
         remote   = urllib.request.urlopen(link) 
         redirect = remote.geturl()
-    except:
-        redirect = None            
+    except urllib.error.URLError as url_error:
+        # Handle URL-related errors
+        print(f"URL error: {url_error}")
+        redirect = None
+
+    except Exception as e:
+        # Handle any other unforeseen exceptions
+        print(f"Unhandled error: {e}")
+        redirect = None
     return redirect
 
 def remove_void(text):
@@ -104,11 +111,15 @@ def get_release_date(link):
             aware = tz.localize(naive, is_dts)
             release_date = tz.normalize(aware)
             release_date = release_date.astimezone(utc)  
-        except:
-            print("no datetime information found")
+        except(IndexError, ValueError, TypeError, pytz.UnknownTimeZoneError,
+                    pytz.AmbiguousTimeError, pytz.NonExistentTimeError) as e:
+            # Catch errors when processing date and time
+            print(f"no datetime information found: {e}")
+            release_date = None
             pass
-    except:
+    except Exception as e:
         print(link, ' could not be read')
+        print(f"Unhandled error: {e}")
         pass
     
     return release_date # in UTC
@@ -151,7 +162,14 @@ def list_links(url_images):   # [^>]
         links = None
         try:
             links = pat.findall(text)
-        except:
+        except IndexError:
+            print("No matches found for the pattern in the text")
+            pass
+        except (TypeError, AttributeError) as e:
+            print(f"Type or attribute error: {e}")
+            pass
+        except Exception as e:
+            print(f"Unhandled error: {e}")
             pass
         newlinks = []
         for l in links:
@@ -161,7 +179,14 @@ def list_links(url_images):   # [^>]
                 link = 'http://hubblesite.org' + link
             newl = [description,link]
             newlinks.append(newl)
-    except:
+    except urllib.error.URLError as e:
+        print(f"URL error: {e}")
+        newlinks = None
+    except http.client.HTTPException as e:
+        print(f"HTTP error: {e}")
+        newlinks = None
+    except Exception as e:
+        print(f"Unhandled error: {e}")
         newlinks = None
     return newlinks
       
@@ -194,4 +219,3 @@ if __name__ == '__main__':
         for link in links: 
             c = c + 1
             print(c, '   ', link)
-      

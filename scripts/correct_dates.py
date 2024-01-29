@@ -29,7 +29,7 @@ standard_library.install_aliases()
 from djangoplicity.utils import optionparser
 from djangoplicity.media.models import Image
 from djangoplicity.media.models import Video
-
+from django.db import Error
 import re
 import urllib.request, urllib.error, urllib.parse
 
@@ -66,9 +66,13 @@ def change_datetime(obj):
                 #print obj.id, obj.release_date.strftime('%Y-%B-%d %I:%M %p %Z')
                 obj.save()
                 success = True
-            except:
-                print(obj.id,' save failed!')
-                pass
+            except Error as db_error:
+                # Handle Django database-related errors specifically
+                print(f"Database Error: Save failed for {obj.id}: {db_error}")
+            except Exception as e:
+                # Handle any other unforeseen exceptions
+                print(f"Unhandled error: {e}")
+                success = False
     return success
 
 
@@ -130,4 +134,3 @@ if __name__ == '__main__':
     print(process_objects(Image.objects.all()), ' images have a new release_date')
 
 
-        

@@ -8,7 +8,7 @@ from __future__ import print_function
 #   Lars Holm Nielsen <lnielsen@eso.org>
 #   Dirk Neumayer <dirk.neumayer@gmail.com>
 #
-
+from django.db import IntegrityError, DataError, Error
 from djangoplicity.utils import optionparser
 #get mapping
 from djangoplicity.releases.models import Release
@@ -53,15 +53,23 @@ if __name__ == '__main__':
             #description = strip_tags(obj.description).encode('utf-8')
         try:
             links = obj.links.encode('utf-8')
-        except:
+        except (UnicodeEncodeError, AttributeError, TypeError) as e:
+            # Handle UnicodeEncodeError, AttributeError, or TypeError
+            print(f"Error encoding links attribute: {e}")
             links = strip_tags(obj.links).encode('utf-8')
-            print("PROBLEM with " + links) 
+            print("PROBLEM with " + links)
+        except Exception as e:
+            # Handle any other unforeseen exceptions
+            print(f"Unhandled error: {e}")
         obj_id = obj.id.encode('utf-8')
         new_text = doit(links, obj_id)
         if update_db:
             try:
                 obj.links = new_text
                 obj.save()
-            except:
-                print('Problem updating database for ' + id)
-  
+            except (IntegrityError, DataError, Error) as db_error:
+                # Handle Django database-related errors specifically
+                print(f"Database Error: Problem updating database for {id}: {db_error}")
+            except Exception as e:
+                # Handle any other unforeseen exceptions
+                print(f"Unhandled error: {e}")

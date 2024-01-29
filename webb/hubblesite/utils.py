@@ -74,7 +74,14 @@ def stsci_image_id( long_caption_link ):
         if results[2] == '':
             return None
         return "STScI-PRC-%s-%s-%s" % ( results[0], results[1], results[2] )
-    except:
+    except IndexError as ie:
+        # Handle the case where no matches are found
+        print(f"IndexError: No matches found in long_caption_link: {ie}")
+        return None
+
+    except Exception as e:
+        # Handle any other unexpected exceptions
+        print(f"Unhandled error: {e}")
         return None
 
 def get_cet_release_date( *args ):
@@ -118,7 +125,15 @@ def get_release_date( text ):
         # take care of timezones
         tz_eastern = pytz.timezone( 'US/Eastern' )
         release_date = tz_eastern.localize( release_date )
-    except:      # TODO: remove catch all
+    except (IndexError, ValueError, TypeError, pytz.UnknownTimeZoneError,
+                    pytz.AmbiguousTimeError, pytz.NonExistentTimeError) as e:
+        # Catch errors when processing date and time
+        print(f"no datetime information found: {e}")
+        release_date = None
+
+    except Exception as e:
+        # Handle any other unexpected exceptions
+        print(f"Unhandled error: {e}")
         release_date = None
 
     return release_date
@@ -174,8 +189,18 @@ def opo_image_list_links( url_images ):
     pat = re.compile(r'(<a href="(/newscenter/archive/[^"]+)">)[\s]?<span class="link">(.*?)</span>.*?</a>')  
     links = None
     try:
-        links = pat.findall( text )
-    except:      # TODO: remove catch all
+        links = pat.findall(text)
+    except AttributeError as ae:
+        # Handle the case where 'text' is not of type string or does not have the 'findall' method
+        print(f"AttributeError: {ae}")
+        pass
+    except re.error as re_error:
+        # Handle errors in the regular expression
+        print(f"Regular Expression Error: {re_error}")
+        pass
+    except Exception as e:
+        # Handle any other unexpected exceptions
+        print(f"Unhandled error: {e}")
         pass
     newlinks = []
     for l in links:
