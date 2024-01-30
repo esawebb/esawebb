@@ -48,7 +48,7 @@
                     {% archiveitem cartitem.product as object %}
                     <tr>
                         <td>
-                            {% if object.resource_thumb %}<img src="{{ object.resource_thumb.url}}" width="122px" />{% else %}{% thumbnail cartitem.product.main_image.picture 122x122 as image %}<img src="{{ image }}" width="122px" />{% endthumbnail %}{%endif%}
+                            {% if object.resource_thumb %}<img src="{{ object.resource_thumb.url}}" width="122px" alt="{{ object.title }}"/>{% else %}{% thumbnail cartitem.product.main_image.picture 122x122 as image %}<img src="{{ image }}" width="122px" alt="{{ image.title }}"/>{% endthumbnail %}{%endif%}
                         </td>
                         <td class="quantity">
                             {% url 'satchmo_cart_set_qty' as satchmo_cart_set_qty %}
