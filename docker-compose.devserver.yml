@@ -20,6 +20,12 @@ x-common: &common
     EMAIL_USER:
     EMAIL_PASSWORD:
     DOMAIN:
+    AWS_ACCESS_KEY_ID:
+    AWS_SECRET_ACCESS_KEY:
+    AWS_STORAGE_BUCKET_NAME:
+    AWS_S3_REGION_NAME:
+    AWS_S3_ENDPOINT_URL:
+    AWS_S3_CUSTOM_DOMAIN:
   volumes:
     - /mnt/volume-nyc1-02/web/media:/home/webbadm/media
     - /mnt/volume-nyc1-02/web/import:/home/webbadm/import
