@@ -12,7 +12,12 @@
                                                         <td valign="top" width="{{width}}" style="background-color:#292929">
                                                             <div style="color: #707070;font-family: Helvetica, Arial;font-size: 10px;line-height: 125%;text-align: center;background-color:#292929; padding-top:5px;padding-bottom:0px;padding-left:0px;padding-right:0px;">
                                                                 {% if footer_potws %}
-                                                                    <div id="potw" style="text-align: center">
+                                                                    <div style="text-align: center">
+                                                                        <a href="https://esahubble.org/images/potw2409a/"><img src="https://cdn.esahubble.org/archives/images/thumb350x/potw2409a.jpg" style="width: 122px; height: 92px;"></a>&nbsp;
+                                                                        <a href="https://esahubble.org/images/potw2408a/"><img src="https://cdn.esahubble.org/archives/images/thumb350x/potw2408a.jpg" style="width: 122px; height: 92px;"></a>&nbsp;
+                                                                        <a href="https://esahubble.org/images/potw2407a/"><img src="https://cdn.esahubble.org/archives/images/thumb350x/potw2407a.jpg" style="width: 122px; height: 92px;"></a>&nbsp;
+                                                                        <a href="https://esahubble.org/images/potw2406a/"><img src="https://cdn.esahubble.org/archives/images/thumb350x/potw2406a.jpg" style="width: 122px; height: 92px;"></a>&nbsp;
+                                                                        <a href="https://esahubble.org/images/potw2405a/"><img src="https://cdn.esahubble.org/archives/images/thumb350x/potw2405a.jpg" style="width: 122px; height: 92px;"></a>&nbsp;
                                                                     </div>
 
                                                                     <div style="font-size:15px;color:white; padding-top: 5px;">
@@ -50,42 +55,3 @@
                                         </tr>
                                     </table>
                                     <!-- // End Template Footer \\ -->
-
- <!-- // Fill the "Pictures of the month" automatically \\ -->
-<script>
-    document.addEventListener('DOMContentLoaded', async()=>{
-        {# We make a petition to the esahubble page for get the HTML content#}
-        fetch('https://esahubble.org/images/potw/page/1/').then((resp) => resp.text()).then(function (data) {
-            const parser = new DOMParser();
-            const domain = 'https://esahubble.org';
-            let html = parser.parseFromString(data, "text/html");
-            let container = document.getElementById('potw');
-            let iterationCount = 0;
-
-            {# We make scraping to get just the necessary elements#}
-            for (const item of html.querySelectorAll("div .col-sm-6")) {
-                let anchorElement = document.createElement('a');
-                let imageElement = document.createElement('img');
-
-                {# We passing some attributes and styles#}
-                anchorElement.href = domain + item.getElementsByTagName('a')[0].getAttribute('href')
-                anchorElement.style.marginRight = '10px'
-                imageElement.src = item.getElementsByTagName('img')[0].getAttribute('src')
-                imageElement.style.width = '122px';
-                imageElement.style.height = '92px';
-                anchorElement.appendChild(imageElement)
-
-                {# We fill the container with the images#}
-                container.append(anchorElement);
-
-                iterationCount++;
-                if (iterationCount >= 5) {
-                    break; // Exit the loop when the iteration count reaches 5
-                }
-            }
-            return html
-        }).catch(function (error) {
-            console.log(error);
-        });
-    });
-</script>
