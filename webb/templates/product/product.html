@@ -62,7 +62,7 @@ ProductVariations or CustomProducts, look for product/detail_xxx.html
         <p>{{ object.description|safe }}</p>
         {% if object and object.get_absolute_url %}<strong>Credit:</strong><div class="credit">{{ object.credit|safe }}</div>{% endif %}
         {% if object and object.get_absolute_url %}
-        <div class="checkoutdiv"><div align="left" style="line-height: 15px;">
+        <div class="checkoutdiv"><div  style="line-height: 15px; text-align: left;">
                 <strong>Note:</strong> The digital resources (images, videos, PDFs, etc.) for this product can be downloaded in the <a href="{% if object.image %}{{ object.image.get_absolute_url }}{% else %}{{ object.get_absolute_url }}{% endif %}">archive</a>
         </div></div>
         {% endif %}
