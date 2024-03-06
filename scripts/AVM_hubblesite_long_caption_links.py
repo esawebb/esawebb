@@ -30,9 +30,9 @@ import hubblesite as hb
 
 def get_root(link):
     '''
-    example: from http://hubblesite.org/newsarchive/..... get http://hubblesite.org
+    example: from https://hubblesite.org/newsarchive/..... get https://hubblesite.org
     '''
-    off = len('http://')
+    off = len('https://')
     end = off + link[off:].find('/')
     return link[:end]
     
@@ -82,7 +82,7 @@ def analyse_links(pr_id):
     '''
     links = None
     long_caption_link = None 
-    pat = re.compile(r'<a href="(http://[^"]+)">([^<]+)</a>')
+    pat = re.compile(r'<a href="(https://[^"]+)">([^<]+)</a>')
     try:
         related = Release.objects.filter(id__startswith = pr_id)[0]
         links = pat.findall(related.links)
@@ -131,7 +131,7 @@ def get_long_caption_link(url, iterator, check_reachability_flag = True):
                 long_c = line[start:end]
                 if long_c[0] == '''"''': long_c = long_c[1:]
                 if long_c[-1] == '''"''': long_c = long_c[:-1]
-                if long_c[0] == '/': long_c = 'http://hubblesite.org' + long_c
+                if long_c[0] == '/': long_c = 'https://hubblesite.org' + long_c
                 
                 # now replace the last letter in the link with the iterator (heic0515c) /a/ --> /c/
                 end = long_c.rfind('/')
