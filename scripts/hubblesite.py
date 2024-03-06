@@ -47,7 +47,7 @@ def remove_void(text):
 
 def get_release_date(link):
     '''
-    returns the release date in UTC found on the http://hubblesite.org/newsc...../image/ site
+    returns the release date in UTC found on the https://hubblesite.org/newsc...../image/ site
     
     <h2 class="date">  <strong>  August 13, 1990</strong> 12:00 AM (EDT) </h2>
     
@@ -116,7 +116,7 @@ def release_images(link):
     '''
     link = get_redirect(link)
     # some special cases that might occure
-    if link == '''http://hubblesite.org/newscenter/archive/''': link = None
+    if link == '''https://hubblesite.org/newscenter/archive/''': link = None
     
     if link:
         if link.find('image') == -1:
@@ -132,7 +132,7 @@ def release_images(link):
 def list_links(url_images):   # [^>]
     '''
     list all links and titles for image releases
-    example: http://hubblesite.org/newscenter/archive/releases/2005/37/image/:
+    example: https://hubblesite.org/newscenter/archive/releases/2005/37/image/:
     ['A Giant Hubble Mosaic of the Crab Nebula', '/newscenter/archive/releases/2005/37/image/a/']
     ['Crab Nebula: a Dead Star Creates Celestial Havoc', '/newscenter/archive/releases/2005/37/image/b/']
     '''
@@ -154,8 +154,8 @@ def list_links(url_images):   # [^>]
         for l in links:
             description = l[2]
             link        = l[1]
-            if link.find('http://hubblesite.org') == -1: 
-                link = 'http://hubblesite.org' + link
+            if link.find('https://hubblesite.org') == -1:
+                link = 'https://hubblesite.org' + link
             newl = [description,link]
             newlinks.append(newl)
     except:
@@ -168,8 +168,8 @@ if __name__ == '__main__':
     #routines to test the helper functions
     
 
-    tests = [r'http://hubblesite.org/newscenter/archive/releases/1990/06/', 
-             r'http://hubblesite.org/newscenter/archive/releases/1990/06/image/a/']
+    tests = [r'https://hubblesite.org/newscenter/archive/releases/1990/06/',
+             r'https://hubblesite.org/newscenter/archive/releases/1990/06/image/a/']
 
     for t in tests:
         print(t)
@@ -178,7 +178,7 @@ if __name__ == '__main__':
     exit()
     
     print("list_links:")
-    release = r'''http://hubblesite.org/newscenter/archive/releases/2005/37'''
+    release = r'''https://hubblesite.org/newscenter/archive/releases/2005/37'''
     images = release_images(release)
     
 
