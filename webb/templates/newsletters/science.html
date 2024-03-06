@@ -67,7 +67,7 @@
 {% endblock %}
 
 {% block footer %}
-{% with followus="yes" org="ESA/Hubble" potw_feed_url="http://feeds.feedburner.com/hubble_potw/" reason="you subscribed to the ESA/Hubble/JWST Science Newsletter" footer_potws=data.footer_potws footer_note='' unsubscribe_link='' preferences_link='' browser_link=base_url|add:"/newsletters/science/html/"|add:newsletter_id|add:"/" address="ESA/Hubble, ESA Office, Space Telescope Science Institute, 3700 San Martin Dr, D-21218 Baltimore, United States" %}
+{% with followus="yes" org="ESA/Hubble" potw_feed_url="https://feeds.feedburner.com/hubble_potw/" reason="you subscribed to the ESA/Hubble/JWST Science Newsletter" footer_potws=data.footer_potws footer_note='' unsubscribe_link='' preferences_link='' browser_link=base_url|add:"/newsletters/science/html/"|add:newsletter_id|add:"/" address="ESA/Hubble, ESA Office, Space Telescope Science Institute, 3700 San Martin Dr, D-21218 Baltimore, United States" %}
     {% include "newsletters/includes/webb-footer.html" with width="693" %}
 {% endwith %}
 {% endblock %}

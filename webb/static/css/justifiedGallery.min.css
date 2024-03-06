@@ -1,6 +1,6 @@
 /*!
  * justifiedGallery - v3.8.0
- * http://miromannino.github.io/Justified-Gallery/
+ * https://miromannino.github.io/Justified-Gallery/
  * Copyright (c) 2020 Miro Mannino
  * Licensed under the MIT license.
  */

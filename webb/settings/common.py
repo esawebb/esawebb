@@ -115,14 +115,14 @@ DATABASES = {
 # INTERNATIONALIZAION  #
 ########################
 # Local time zone for this installation. Choices can be found here:
-# http://www.postgresql.org/docs/8.1/static/datetime-keywords.html#DATETIME-TIMEZONE-SET-TABLE
+# https://www.postgresql.org/docs/8.1/static/datetime-keywords.html#DATETIME-TIMEZONE-SET-TABLE
 # although not all variations may be possible on all operating systems.
 # If running in a Windows environment this must be set to the same as your
 # system time zone.
 TIME_ZONE = 'Europe/Berlin'
 
 # Language code for this installation. All choices can be found here:
-# http://www.w3.org/TR/REC-html40/struct/dirlang.html#langcodes
+# https://www.w3.org/TR/REC-html40/struct/dirlang.html#langcodes
 
 LANGUAGES = (
     ( 'en', ugettext( 'English' ) ),
@@ -163,7 +163,7 @@ STATIC_URL = '/assets/'
 
 # URL prefix for admin media -- CSS, JavaScript and images. Make sure to use a
 # trailing slash.
-# Examples: "http://foo.com/media/", "/media/".
+# Examples: "https://foo.com/media/", "/media/".
 # ADMIN_MEDIA_PREFIX is necessary due to satchmo current version. TODO: remove when Satchmo is upgraded
 ADMIN_MEDIA_PREFIX = "/static/app/admin/"
 DJANGOPLICITY_MEDIA_URL = "/static/app/djangoplicity/"
@@ -630,7 +630,7 @@ SOCIAL_TWITTER_TUPLE = (
 )
 
 
-SOCIAL_FACEBOOK_WALL = 'http://www.facebook.com/ESAWebb?sk=wall'
+SOCIAL_FACEBOOK_WALL = 'https://www.facebook.com/ESAWebb?sk=wall'
 
 #########
 # FEEDS #
