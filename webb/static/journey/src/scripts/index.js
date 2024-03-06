@@ -393,9 +393,14 @@ const count = 1500
 
 const positions = new Float32Array(count * 3);
 
+function secureRandom() {
+  const array = new Uint32Array(1);
+  window.crypto.getRandomValues(array);
+  return (array[0] / 0xFFFFFFFF) - 0.5;
+}
 
 for (let i = 0; i < count * 3; i++) {
-    positions[i] = (Math.random() - 0.5) * 85
+    positions[i] = secureRandom() * 85
 
 }
 
