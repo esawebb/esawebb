@@ -18,7 +18,7 @@ def video_rename( pk=None, new_pk=None ):
     """
 
     msg_subject = 'Video renamed: %s -> %s' % (pk, new_pk)
-    msg_body = """http://www.webb.org/videos/%s/""" % new_pk
+    msg_body = """https://www.webb.org/videos/%s/""" % new_pk
     msg_from = settings.DEFAULT_FROM_EMAIL
     msg_to = settings.VIDEO_RENAME_NOTIFY
     print("Sending emails to: {}".format(msg_to))
