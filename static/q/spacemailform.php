@@ -8,7 +8,7 @@ $fields 	= $_POST['SPACEfields'];
 // Check mailto
 $mailval = explode('@', $mailto);
 
-if( !(count($mailval) == 2 && ($mailval[1] == 'hankat.dk') or ($mailval[1] == 'eso.org') or ($mailval[1] == 'webb.org'))){
+if( !(count($mailval) == 2 && ($mailval[1] == 'hankat.dk') or ($mailval[1] == 'eso.org') or ($mailval[1] == 'webb.org'))) {
   reportError("Invalid mail-to address");
 }
 
@@ -38,7 +38,7 @@ if(!mail($mailto, $subject, $fields)) {
 header('Location: ' . $redirect);
 exit;
 
-function reportError($x){
+function reportError($x) {
 	if(is_string($x)){
 		trigger_error( 'Space MAILFORM - ' . $x, E_USER_ERROR);
 	}

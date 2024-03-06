@@ -177,7 +177,7 @@ def analyse(images):
             if link not in ldict:
                 ldict[link] = 1
         my_dict[prefix] = ldict
-        if not prefix in my_dict:
+        if prefix not in my_dict:
             ldict = {}
             ldict[link] = 1
             my_dict[prefix] = ldict
