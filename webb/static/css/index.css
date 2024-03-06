@@ -49,7 +49,7 @@ p a {
 #gallery .bg-image:hover>span {
   position: absolute;
   color: white;
-  left: 0px;
+  left: 0;
   top: 77%;
   width: 100%;
   background-color: rgba(0, 50, 71, .6);
@@ -72,7 +72,7 @@ p a {
   .video-title {
     position: absolute;
     color: white;
-    left: 0px;
+    left: 0;
     width: 100%;
     background-color: rgba(0, 50, 71, 1);
     height: 90px;
@@ -85,7 +85,7 @@ p a {
   .video-title {
     position: absolute;
     color: white;
-    left: 0px;
+    left: 0;
     width: 100%;
     background-color: rgba(0, 50, 71, 1);
     height: 90px;
@@ -98,7 +98,7 @@ p a {
   .video-title {
     position: absolute;
     color: white;
-    left: 0px;
+    left: 0;
     width: 100%;
     background-color: rgba(0, 50, 71, 1);
     height: 90px;
@@ -111,7 +111,7 @@ p a {
   .video-title {
     position: absolute;
     color: white;
-    left: 0px;
+    left: 0;
     width: 100%;
     background-color: rgba(0, 50, 71, 1);
     height: 70px;
@@ -123,7 +123,7 @@ p a {
 .play-icon {
   position: absolute;
   color: white;
-  left: 0px;
+  left: 0;
   top: 45%;
   width: 100%;
 
@@ -152,7 +152,7 @@ p a {
 .youtube-title {
   position: absolute;
   color: white;
-  left: 0px;
+  left: 0;
   top: 100%;
   width: 100%;
   background-color: rgba(0, 50, 71, 1);
@@ -215,8 +215,8 @@ p a {
 @media (min-width: 2048px) {
   .col-xxxl {
     -webkit-box-flex: 1;
-    -ms-flex: 1 0 0%;
-    flex: 1 0 0%;
+    -ms-flex: 1 0 0;
+    flex: 1 0 0;
   }
 
   .row-cols-xxxl-auto>* {
@@ -561,7 +561,7 @@ h6,
 
 .pagination li a {
   display: inline-block;
-  padding: 0px 6px;
+  padding: 0 6px;
 }
 
 #dark .pagination li.active a {
