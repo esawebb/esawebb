@@ -85,7 +85,7 @@ def get_cet_release_date( *args ):
 
 def get_release_date( text ):
     """
-    returns the release date in UTC found on the http://hubblesite.org/newsc...../image/ site
+    returns the release date in UTC found on the https://hubblesite.org/newsc...../image/ site
     
     <h2 class="date">  <strong>  August 13, 1990</strong> 12:00 AM (EDT) </h2>
     
@@ -157,13 +157,13 @@ def id_vs_releasedate( object ):
 
 def long_caption_link_to_thumb( link ):
     results = long_caption_link_pattern.findall( link )[0]
-    return "http://imgsrc.hubblesite.org/hu/db/images/hs-%s-%s-%s-thumb.jpg" % ( results[0], results[1], results[2] )
+    return "https://imgsrc.hubblesite.org/hu/db/images/hs-%s-%s-%s-thumb.jpg" % ( results[0], results[1], results[2] )
     
 
 def opo_image_list_links( url_images ):
     '''
     list all links and titles for image releases
-    example: http://hubblesite.org/newscenter/archive/releases/2005/37/image/:
+    example: https://hubblesite.org/newscenter/archive/releases/2005/37/image/:
     ['A Giant Hubble Mosaic of the Crab Nebula', '/newscenter/archive/releases/2005/37/image/a/']
     ['Crab Nebula: a Dead Star Creates Celestial Havoc', '/newscenter/archive/releases/2005/37/image/b/']
     '''
@@ -181,8 +181,8 @@ def opo_image_list_links( url_images ):
     for l in links:
         description = l[2]
         link        = l[1]
-        if link.find('http://hubblesite.org') == -1: 
-            link = 'http://hubblesite.org' + link
+        if link.find('https://hubblesite.org') == -1:
+            link = 'https://hubblesite.org' + link
         newl = [description,link]
         newlinks.append(newl)
     return newlinks
@@ -191,7 +191,7 @@ def opo_image_list_links( url_images ):
 #   """
 #   returns link to the release images section for a press release link
 #   """
-#   if link == '''http://hubblesite.org/newscenter/archive/''': link = None
+#   if link == '''https://hubblesite.org/newscenter/archive/''': link = None
 #   
 #   if link:
 #       if link.find('image') == -1:
@@ -207,7 +207,7 @@ def opo_image_list_links( url_images ):
 #def list_links(url_images):   # [^>]
 #   '''
 #   list all links and titles for image releases
-#   example: http://hubblesite.org/newscenter/archive/releases/2005/37/image/:
+#   example: https://hubblesite.org/newscenter/archive/releases/2005/37/image/:
 #   ['A Giant Hubble Mosaic of the Crab Nebula', '/newscenter/archive/releases/2005/37/image/a/']
 #   ['Crab Nebula: a Dead Star Creates Celestial Havoc', '/newscenter/archive/releases/2005/37/image/b/']
 #   '''
@@ -229,8 +229,8 @@ def opo_image_list_links( url_images ):
 #       for l in links:
 #           description = l[2]
 #           link        = l[1]
-#           if link.find('http://hubblesite.org') == -1: 
-#               link = 'http://hubblesite.org' + link
+#           if link.find('https://hubblesite.org') == -1:
+#               link = 'https://hubblesite.org' + link
 #           newl = [description,link]
 #           newlinks.append(newl)
 #   except:
@@ -240,9 +240,9 @@ def opo_image_list_links( url_images ):
 
 
 if __name__ == '__main__':
-    tests = [r'http://hubblesite.org/newscenter/archive/releases/1990/06/', 
-             r'http://hubblesite.org/newscenter/archive/releases/1990/06/image/a/',
-             'http://hubblesite.org/newscenter/archive/releases/2011/08/']
+    tests = [r'https://hubblesite.org/newscenter/archive/releases/1990/06/',
+             r'https://hubblesite.org/newscenter/archive/releases/1990/06/image/a/',
+             'https://hubblesite.org/newscenter/archive/releases/2011/08/']
 
     for t in tests:
         print(image_url_info(t))
