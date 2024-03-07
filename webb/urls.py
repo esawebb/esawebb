@@ -42,7 +42,6 @@ from djangoplicity.science.options import ScienceAnnouncementOptions
 from webb.admin import admin_site, adminlogs_site, adminshop_site
 from webb.frontpage.api.views.image_views import ESASkyListView
 from webb.frontpage.views import FrontpageView, d2d
-from webb.journey.views import JourneyView, EroEventsCall
 
 urlpatterns = []
 
@@ -195,7 +194,6 @@ urlpatterns += [
 
     # Main view
     url(r'^$', cache_page(60 * 5)(FrontpageView.as_view())),
-    url(r'0ld_fr0nt/$', cache_page(60 * 5)(JourneyView.as_view())),
 
     # ESASky API for JSONFeed
     url(r'^zoomables/$', ESASkyListView.as_view()),
@@ -206,7 +204,6 @@ urlpatterns += [
     url(r'^d2d/$', d2d),
 
     # Static pages
-    url(r'^ero-events-call/$', cache_page(60 * 5)(EroEventsCall.as_view())),
     url(r'^(?P<url>.*/)$', view_page)
 ]
 
