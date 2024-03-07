@@ -42,7 +42,6 @@ from djangoplicity.science.options import ScienceAnnouncementOptions
 from webb.admin import admin_site, adminlogs_site, adminshop_site
 from webb.frontpage.api.views.image_views import ESASkyListView
 from webb.frontpage.views import FrontpageView, d2d
-from webb.journey.views import JourneyView, EroEventsCall
 
 urlpatterns = []
 
@@ -64,9 +63,6 @@ urlpatterns += [
     # Djangoplicity Adminstration
     url(r'^admin/cache/', include(('djangoplicity.cache.urls', "cache"), namespace="admincache_site")),
     url(r'^admin/history/', include(('djangoplicity.adminhistory.urls', "history"), namespace="adminhistory_site")),
-    # url( r'^admin/doc/', include( 'django.contrib.admindocs.urls' )),
-    # url( r'^admin/shop/', include( 'djangoplicity.archives.contrib.satchmo.urls_admin' ) ),
-    # url( r'^admin/shop/', include(adminshop_site.urls), { 'extra_context': { 'ADMINSHOP_SITE': True } } ),
     url(r'^admin/system/', adminlogs_site.urls, {'extra_context': {'ADMINLOGS_SITE': True}}),
     url(r'^admin/', admin_site.urls, {'extra_context': {'ADMIN_SITE': True}}),
     url(r'^admin/import/', include('djangoplicity.archives.importer.urls')),
@@ -86,9 +82,7 @@ urlpatterns += [
     url(r'^images/comparisons/', include('djangoplicity.media.urls_imagecomparisons'),
         {'model': ImageComparison, 'options': ImageComparisonOptions}),
     url(r'^images/', include('djangoplicity.media.urls_images'), {'model': Image, 'options': ImageOptions}),
-    # ( r'^news/feed/(?P<url>.*)/?$', 'django.contrib.syndication.views.feed', { 'feed_dict': ReleaseOptions.get_feeds() } ),
     url(r'^news/', include('djangoplicity.releases.urls'), {'model': Release, 'options': ReleaseOptions}),
-    # url( r'^videos/uservideos/', include('djangoplicity.products.urls.uservideos'), { 'model': UserVideo, 'options': UserVideoOptions } ),
     url(r'^videos/', include('djangoplicity.media.urls_videos'), {'model': Video, 'options': VideoOptions}),
 
     # Other archives
@@ -100,16 +94,6 @@ urlpatterns += [
     ### ENTIRE BLOCK REFERENCING djangoplicity.products
     url(r'^about/further_information/books/', include('djangoplicity.products2.urls.books'),
         {'model': Book, 'options': BookOptions}),
-    # url( r'^about/further_information/brochures/', include('djangoplicity.products.urls.brochures'), { 'model': Brochure, 'options': BrochureOptions } ),
-    # url( r'^about/further_information/flyers/', include('djangoplicity.products.urls.flyers'), { 'model': Flyer, 'options': FlyerOptions } ),
-    # url( r'^about/further_information/handouts/', include('djangoplicity.products.urls.handouts'), { 'model': Handout, 'options': HandoutOptions } ),
-    # url( r'^about/further_information/maps/', include('djangoplicity.products.urls.maps'), { 'model': Map, 'options': MapOptions } ),
-    # url( r'^about/further_information/messengers/', include('djangoplicity.products.urls.messengers'), { 'model': Messenger, 'options': MessengerOptions } ),
-    # url( r'^about/further_information/schools/', include('djangoplicity.products.urls.schools'), { 'model': ScienceInSchool, 'options': ScienceInSchoolOptions } ),
-    # url( r'^about/further_information/capjournals/', include('djangoplicity.products.urls.capjournals'), { 'model': CapJournal, 'options': CapJournalOptions } ),
-    # url( r'^about/further_information/stecfnewsletters/', include('djangoplicity.products.urls.stecfnewsletters'), { 'model': STECFNewsletter, 'options': STECFNewsletterOptions } ),
-    # url( r'^about/further_information/bulletins/', include('djangoplicity.products.urls.bulletins'), { 'model': Bulletin, 'options': BulletinOptions } ),
-    # url( r'^about/further_information/techdocs/', include('djangoplicity.products.urls.techdocs'), { 'model': TechnicalDocument, 'options': TechnicalDocumentOptions } ),
 
     # Products
     url(r'^about/further_information/brochures/', include('djangoplicity.products2.urls.brochures'),
@@ -159,7 +143,6 @@ urlpatterns += [
     # TODO: Check if these contacts URLs are required
     url(r'^contacts/', include('djangoplicity.contacts.urls')),
     # TODO: check these groups and update if necessary
-    # url( r'^contacts/subscribe/messenger/(?P<uid>.*)/', GroupSubscribe.as_view(group=27, template_name='contacts/messenger_public_subscribe.html'), name='messenger_subscribe'),
 
     url(r'^rss/feed.xml$', RedirectView.as_view(url='https://feeds.feedburner.com/hubble_news/')),
     url(r'^rss/vodcast.xml$', RedirectView.as_view(url='https://feeds.feedburner.com/hubblecast_sd/')),
@@ -179,23 +162,14 @@ urlpatterns += [
         name='django.contrib.auth.views.password_reset_confirm'),
     url(r'^reset/done/$', django.contrib.auth.views.PasswordResetCompleteView.as_view(),
         name='password_reset_complete'),
-
-    # Shop
-    # url( r'^shop/terms/', RedirectView.as_view(url='/shop/terms_conditions/'), name='shop_terms' ),
-    # url( r'^shop/ccv/', RedirectView.as_view(url='/shop/cvc_info/'), name='shop_ccv' ),
-    # url( r'^shop/bulkorders/', RedirectView.as_view(url='/shop/bulk_orders/'), name='shop_bulkorders' ),
-    # url( r'^shop/freeorder/', include( 'djangoplicity.archives.contrib.satchmo.freeorder.urls' ) ),
-    # url( r'^shop/', include( 'djangoplicity.archives.contrib.satchmo.urls' ) ),
     url(r'^newsletters/', include(('djangoplicity.mailinglists.urls', 'djangoplicity_mailinglists'),
                                             namespace='djangoplicity_mailinglists')),
     url(r'^newsletters/', include('djangoplicity.newsletters.urls'),
         {'model': Newsletter, 'options': NewsletterOptions, }),
-    # ( r'^public/djangoplicity/events/', include('djangoplicity.events.urls'), { 'model': Event, 'options': EventOptions } ),
     url(r'^facebook/', include('djangoplicity.iframe.urls')),
 
     # Main view
     url(r'^$', cache_page(60 * 5)(FrontpageView.as_view())),
-    url(r'0ld_fr0nt/$', cache_page(60 * 5)(JourneyView.as_view())),
 
     # ESASky API for JSONFeed
     url(r'^zoomables/$', ESASkyListView.as_view()),
@@ -206,11 +180,8 @@ urlpatterns += [
     url(r'^d2d/$', d2d),
 
     # Static pages
-    url(r'^ero-events-call/$', cache_page(60 * 5)(EroEventsCall.as_view())),
     url(r'^(?P<url>.*/)$', view_page)
 ]
-
-# handler404 = 'webb.views.page_not_found'
 
 # Static files/media serving during development
 if settings.SERVE_STATIC_MEDIA:

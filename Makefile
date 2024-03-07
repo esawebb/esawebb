@@ -85,12 +85,6 @@ sass:
 youtube-token:
 	docker exec -it webb python ./scripts/youtube-token.py
 
-npm-init:
-	npm install --prefix webb/static/journey
-
-npm-build:
-	npm start --prefix webb/static/journey
-
 init:
 	test -n "$(name)"
 	rm -rf ./.git

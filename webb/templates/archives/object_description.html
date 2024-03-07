@@ -26,19 +26,6 @@
         class="w-100" style="height: auto; max-width: 100%; object-fit: cover;" />
     </a>
 </div>
-<!-- <div class="archive-image popup">
-    {% if object.resource_screen %}
-        <a class="popup" href="{{ object.resource_screen.url }}" title="{{ object }}">
-            <div class="image-container">
-                <img class="w-100 -top" style="height: 350px; object-fit: cover;" src="{{ object.resource_medium.url }}" border="0" alt="{{ object }}" />
-            </div>
-        </a>
-    {% else %}
-        <div class="image-container">
-            <img class="w-100 -top" style="height: 350px; object-fit: cover;" src="{{ object.resource_medium.url }}"  border="0" alt="{{ object }}" />
-        </div>
-    {% endif %}
-</div> -->
 {% endif %}
 <p>{{ object.description|safe }}</p>
 {% comment %}
@@ -47,9 +34,6 @@ have individual archive items for each months, and though it's not possible
 to buy a single month, we don't want people to think that the whole calendar
 is not available for sale
 {% endcomment %}
-<!-- {% if not object.sale and archive|title|lower != "calendar" %}
-    <p>This {{archive|title|lower}} is not available for sale.</p>
-{% endif %} -->
 
 {% include 'archives/extra_description.html' %}
 {% include 'archives/credit.html' %}

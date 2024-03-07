@@ -57,11 +57,6 @@
         {% endif %}
     {% elif main_image %}
         {% if main_image.resource_newsfeature %}
-        <!-- <a href="{% if zoomable %}{{ main_image.get_absolute_url }}zoomable/{% else %}{{ main_image.resource_screen.url }}{% endif %}" title="{{ main_image.title }}">
-            <div class="image-container">
-                <img id="main-press" src="{{ main_image.resource_newsfeature.url }}" class="w-100 -top" style="height: 350px; object-fit: cover;" />
-            </div>
-        </a> -->
         <a href="{{ main_image.resource_screen.url }}" title="{{ main_image.title }}">
             <img src="{{ main_image.resource_newsfeature.url }}" class="w-100"
                 style="height: auto; max-width: 100%; object-fit: cover;" />

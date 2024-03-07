@@ -540,11 +540,7 @@ table.archive_normal {
 table.archive_normal td  {
 	text-align: center;
 	background: #EEE;
-
-}
-
-table.archive_normal td {
-	vertical-align:middle;
+  vertical-align:middle;
 }
 
 table.archive_normal .breaker  {
@@ -703,6 +699,7 @@ width:700px;
 	float:left;
 	width:460px;
 	margin-right:20px;
+  line-height: 15px;
 }
 
 #rightcolumn {
@@ -920,11 +917,6 @@ margin-bottom:20px;
 	background: url('../images/fp-news-bg.png') no-repeat 0 32px;
 }
 
-.fp_news .entry {
-	display:block;
-	height:50px;	
-}
-
 .fp_news .entry img  {
 	float:left;
 	width: 60px;
@@ -958,9 +950,10 @@ margin-bottom:20px;
 
 .fp_news .entry {
 	display:block;
+  height:50px;
 	clear:both;
 	line-height:1.5;
-	margin-top: 10px;	
+	margin-top: 10px;
 }
 
 .price {
@@ -1241,10 +1234,6 @@ a.teasertext:hover {
 	background-color: red;
 	float: left;
 	margin-right: 10px;
-}
-
-#maincolumn {
-	line-height: 15px;
 }
 
 .left, .middle {
