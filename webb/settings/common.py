@@ -383,7 +383,6 @@ THIRD_PARTY_APPS = [
 WEBB_APPS = [
     'webb',
     'webb.frontpage',
-    'webb.journey',
 ]
 
 INSTALLED_APPS = DJANGO_APPS + DJANGOPLICITY_APPS + WEBB_APPS + THIRD_PARTY_APPS
@@ -945,12 +944,6 @@ PIPELINE = {
             ),
             'output_filename': 'css/extras.css',
         },
-        'journey': {
-            'source_filenames': (
-                'journey/src/style.css',
-            ),
-            'output_filename': 'css/journey.css',
-        },
     },
 
     'JAVASCRIPT': {
@@ -988,13 +981,6 @@ PIPELINE = {
                 'djangoplicity/openseadragon/openseadragon.min.js',
             ),
             'output_filename': 'js/openseadragon.js',
-        },
-        'journey': {
-            'source_filenames': (
-                'journey/build/js/vendors.js',
-                'journey/build/js/app.js',
-            ),
-            'output_filename': 'js/journey.js',
         },
     },
     'CSS_COMPRESSOR': 'pipeline.compressors.cssmin.CSSMinCompressor',
