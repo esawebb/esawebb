@@ -41,7 +41,6 @@ def store_JSON(path_json, dict):
     
     ids = list(dict.keys())
     ids.sort()
-    i = 1
     f.write('{\n')
     f.write('"items": [\n')
     nel = len(ids)
@@ -77,7 +76,6 @@ def new_id(long_caption_link):
     creates 2003-28-a out of the long caption link ...eases/2003/28/image/a/
     returns '-' if failed
     '''
-    id = ''
     pattern = re.compile('.*?([0-9]*?)/([0-9]*?)/image/([a-z]?)')
     try:
         results = pattern.findall(long_caption_link)[0]

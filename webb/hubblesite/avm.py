@@ -167,7 +167,6 @@ class jsonmapper(object):
     def strings2stringlist(self, strings):
         ''' converts comma (;,) separated values to a list of strings
         '''
-        list = None
         strings = strings.replace(',',';') 
         list = self.semicolonstrings2stringlist(strings)
         return list
@@ -283,7 +282,6 @@ class jsonmapper(object):
         try:
             CV = CV[text]
         except KeyError:
-            type = None
             logger.error("ValueError in string2spatialqualityCV trying to convert %s" % text)    
         return CV
     
@@ -298,7 +296,6 @@ class jsonmapper(object):
         try:
             CV = CV[text]
         except KeyError:
-            type = None
             logger.error("ValueError in string2coordprojectionsCV trying to convert %s" % text)    
         return CV   
     
@@ -309,11 +306,9 @@ class jsonmapper(object):
         avmdata = {}
         for key in list(self.mapping.keys()):
             json_fieldname = self.mapping[key]['fieldname']
-            value = None
             try:
                 value = self.jsondict[json_fieldname]       
             except KeyError:
-                value = None
                 logger.debug(" for avm field %s, invalid fieldname %s" % (key, json_fieldname))
             else:
                 if 'func' in self.mapping[key]:
@@ -326,8 +321,3 @@ class jsonmapper(object):
                     value = self.jsondict[json_fieldname]
                 avmdata.update( { key: value })                        
         return avmdata
-    
-                             
-    
-    
-
