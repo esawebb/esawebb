@@ -28,18 +28,13 @@ class FrontpageView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super(FrontpageView, self).get_context_data(**kwargs)
-
         context['announcements'] = Announcement.get_latest_announcement(4, only_featured=True)
         context['highlights'] = Highlight.objects.filter(published=True)
         # TODO: Check why this is not working
         context['spacesparks'] = VideoOptions.Queries.category.queryset(Video, VideoOptions, self.request, stringparam='spacesparks')[0].order_by('-release_date',)[:4]
-        #context['hubblecasts'] = VideoOptions.Queries.category.queryset(Video, VideoOptions, self.request, stringparam='hubblecast')[0].order_by('-release_date',)[:4]
         context['potws'] = PictureOfTheWeekOptions.Queries.default.queryset(PictureOfTheWeek, PictureOfTheWeekOptions, self.request, stringparam='potws')[0].order_by('-release_date',)[:1]
         context['potms'] = PictureOfTheWeekOptions.Queries.default.queryset(PictureOfTheWeek, PictureOfTheWeekOptions, self.request, stringparam='potws')[0].order_by('-release_date',)[:4]
-        #context['firstimages'] = ImageOptions.Queries.category.queryset(Image, ImageOptions, self.request, stringparam='firstimages')[0].order_by('-release_date',)[:1]
         context['releases'] = Release.get_latest_release(4)
-        #context['top100'] = ImageOptions.Queries.top100.queryset(Image, ImageOptions, self.request)[0][:20]
-        #context['science_newsletter'] = Newsletter.latest_for_type(NewsletterType.objects.get(slug='science'))
 
         return context
 
