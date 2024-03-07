@@ -38,12 +38,10 @@ def analyse_taxonomy(generate_code = False ):
 
 
     for xth in TaxonomyHierarchy.objects.filter(top_level = 'X'):
-        X_Tags[xth.avm_code()] = [xth.name,0]    
-    #pprint.pprint(X_Tags) 
+        X_Tags[xth.avm_code()] = [xth.name,0]
         
-    for Img in Image.objects.all():#.filter(pk = 'eso9212d'):
+    for Img in Image.objects.all():
         x_tag  = False
-        n_tags = len(Img.subject_category.all()) 
         for sc in  Img.subject_category.all():
             if sc.top_level == 'X': x_tag = True
         if x_tag:
@@ -117,7 +115,6 @@ def add_avmtag(image, name, code):
     existing_tag = scan_tags(image, name)
     if not existing_tag:
         codes = code.split('.')
-        toplevel = codes[0]
         level = [None,None,None,None,None,None]
         level[0] = codes[0]
         for i in range(1,len(codes),1):
@@ -143,8 +140,6 @@ def treat_x(sc, image, remove = True):
         image.subject_category.remove(sc)
         
     elif tag == 'X.101.11':        # 'JWST Images/Videos' 24
-        # add subject_name JWST
-        changed = add_subjectname(image,'JWST')
         # set image.type = 'Artwork'
         print("%-45s; %-9s; %s; set image.type = 'Artwork'" % (image.id, sc.avm_code(), sc.name))
         image.type = 'Artwork'
@@ -308,25 +303,3 @@ if __name__ == '__main__':
                 print("save failed with %s in %s" % (sc.name, Img.id))
             
     print('treated', count, 'tags')
-    
-    
-    
-    
-    
-    
-# 'X.101.1': [u'Hubble Images Videos', 0],
-# 'X.101.10': [u'Extrasolar Planets Videos', 1],
-# O.K. 'X.101.11': [u'JWST Images/Videos', 24],
-# O.K. 'X.101.12': [u'Spacecraft Images/Videos', 20],
-# ? remove tag ? 'X.101.13': [u'Hubble DVD Videos', 165],
-# O.K. 'X.101.21': [u'Illustration Images', 228],
-# 'X.101.22': [u'Mission', 124],
-# O.K. 'X.101.3': [u'Solar System Images/Videos', 518],
-# O.K. 'X.101.4': [u'Stars Images/Videos', 166],
-# O.K. 'X.101.5': [u'Star Clusters Images/Videos', 84],
-# O.K. 'X.101.6': [u'Nebulae Images/Videos', 249],
-# O.K. 'X.101.7': [u'Galaxies Images/Videos', 379],
-# if there is no Milky Way tag (B) use C for BH and AGN and D for Quasar 'X.101.8': [u'Quasars/AGN/Black Hole Images/Videos', 72],
-# O.K.'X.101.9': [u'Cosmology Images/Videos', 205]
-
-

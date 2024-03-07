@@ -28,7 +28,6 @@ socket.setdefaulttimeout(timeout)
 
 def get_redirect(link):
     #returns link from urllib2.urlopen() or if this is not possilbe None is returned
-    redirect = ''
     try:
         remote   = urllib.request.urlopen(link) 
         redirect = remote.geturl()
@@ -66,8 +65,6 @@ def get_release_date(link):
         text = site.read()
         # remove all line breaks and double whitespace
         text = remove_void(text)
-              
-        date = None
         try:
             date = pat.findall(text)[0]
             B = str(date[0])  # %B     Locale's full month name.  'December'#
@@ -75,7 +72,6 @@ def get_release_date(link):
             Y = str(date[2])  # %Y     Year with century as a decimal number.
             I = str(date[3])  # %I     Hour (12-hour clock) as a decimal number [01,12].
             M = str(date[4])  # %M     Minute as a decimal number [00,59].
-            S = '00'          # %S     Second as a decimal number [00,61].
             p = str(date[5])  # %p     Locale's equivalent of either AM or PM.
             Z = str(date[6])  # (%Z)   Time zone name (unfortunately only UTC is working).
             datestring = Y + '-' + B + '-' + d + ' ' + I + ':' + M  + ' ' + p
@@ -136,7 +132,6 @@ def list_links(url_images):   # [^>]
     ['A Giant Hubble Mosaic of the Crab Nebula', '/newscenter/archive/releases/2005/37/image/a/']
     ['Crab Nebula: a Dead Star Creates Celestial Havoc', '/newscenter/archive/releases/2005/37/image/b/']
     '''
-    newlinks = None
     try:
         site = urllib.request.urlopen(url_images)
         text = site.read()
