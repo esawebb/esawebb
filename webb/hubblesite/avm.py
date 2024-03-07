@@ -196,9 +196,6 @@ class jsonmapper(object):
         return list
     
     def starttimes2datetimelist( self, starttimes ):
-        '''
-        starttimes: 2005-03-18;2007-06-14;2002-06-15;2002-06-14;2002-06-13;2002-06-12,"-","-"
-        '''
         dates = []
         list = self.strings2stringlist( starttimes )
         for l in list:

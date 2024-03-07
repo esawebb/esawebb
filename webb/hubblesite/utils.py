@@ -95,9 +95,7 @@ def get_release_date( text ):
     release_date = None
     text = remove_void( text )
     pat = re.compile(r'<h2 class="date">.*?<strong>([\S]+)[\s]+([\S]+),[\s]*?([\S]+)[\s]*?</strong>[\s]+([\S]+):([\S]+)[\s]+([\S]+)[\s]+\(?([A-Z]+)\)?[\s]+</h2>') 
-    
-    # link = release_images(link) # link now ends with .../image/ and points to the release images
-    # pat = re.compile(r'<h2 class="date">.*?<strong>([\S]+)[\s]+([\S]+),[\s]*?([\S]+)[\s]*?</strong>[\s]+([\S]+):([\S]+)[\s]+([\S]+)[\s]+([\S]+)[\s]+</h2>') 
+
     date = None
     try:
         date = pat.findall( text )[0]
@@ -107,7 +105,7 @@ def get_release_date( text ):
         Y = str( date[2] )  # %Y     Year with century as a decimal number.
         I = str( date[3] )  # %I     Hour (12-hour clock) as a decimal number [01,12].
         M = str( date[4] )  # %M     Minute as a decimal number [00,59].
-        S = '00'          # %S   Second as a decimal number [00,61].
+        S = '00'            # %S   Second as a decimal number [00,61].
         p = str( date[5] )  # %p     Locale's equivalent of either AM or PM.
         Z = str( date[6] )  # (%Z)   Time zone name (unfortunately only UTC is working).
         
@@ -187,57 +185,6 @@ def opo_image_list_links( url_images ):
         newlinks.append(newl)
     return newlinks
 
-#def release_images_link( linkt ):
-#   """
-#   returns link to the release images section for a press release link
-#   """
-#   if link == '''https://hubblesite.org/newscenter/archive/''': link = None
-#   
-#   if link:
-#       if link.find('image') == -1:
-#           if link[-1] == '/':
-#               link = link + 'image/'
-#           else:
-#               link = link + '/image/'
-#       else:
-#           end = link.find('image')
-#           link = link[:end] + 'image/'
-#   return link
-#
-#def list_links(url_images):   # [^>]
-#   '''
-#   list all links and titles for image releases
-#   example: https://hubblesite.org/newscenter/archive/releases/2005/37/image/:
-#   ['A Giant Hubble Mosaic of the Crab Nebula', '/newscenter/archive/releases/2005/37/image/a/']
-#   ['Crab Nebula: a Dead Star Creates Celestial Havoc', '/newscenter/archive/releases/2005/37/image/b/']
-#   '''
-#   newlinks = None
-#   try:
-#       site = urllib2.urlopen(url_images)
-#       text = site.read()
-#       
-#       # remove all linebreaks and double whitespace
-#       text = remove_void(text)
-#        
-#       pat = re.compile(r'(<a href="(/newscenter/archive/[^"]+)">)[\s]?<span class="link">(.*?)</span>.*?</a>')  
-#       links = None
-#       try:
-#           links = pat.findall(text)
-#       except:
-#           pass
-#       newlinks = []
-#       for l in links:
-#           description = l[2]
-#           link        = l[1]
-#           if link.find('https://hubblesite.org') == -1:
-#               link = 'https://hubblesite.org' + link
-#           newl = [description,link]
-#           newlinks.append(newl)
-#   except:
-#       newlinks = None
-#   return newlinks
-#     
-
 
 if __name__ == '__main__':
     tests = [r'https://hubblesite.org/newscenter/archive/releases/1990/06/',
@@ -246,4 +193,3 @@ if __name__ == '__main__':
 
     for t in tests:
         print(image_url_info(t))
-        #print get_release_date(t).strftime('%Y-%B-%d %I:%M %p %Z')

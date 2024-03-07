@@ -57,12 +57,10 @@ autoregister( admin_site, djangoplicity.pages.admin )
 autoregister( admin_site, djangoplicity.media.admin )
 autoregister( admin_site, djangoplicity.releases.admin )
 autoregister( admin_site, djangoplicity.metadata.admin )
-#autoregister( admin_site, djangoplicity.events.admin )
 autoregister( admin_site, djangoplicity.mailinglists.admin )
 autoregister( admin_site, djangoplicity.newsletters.admin )
 autoregister( admin_site, djangoplicity.contacts.admin )
 autoregister( admin_site, djangoplicity.customsearch.admin )
-#autoregister( admin_site, djangoplicity.eventcalendar.admin )
 autoregister( admin_site, djangoplicity.science.admin )
 autoregister( admin_site, webb.frontpage.admin )
 
@@ -75,23 +73,13 @@ autoregister( adminlogs_site, djangoplicity.admincomments.admin )
 #
 djangoplicity.reports.admin.advanced_register_with_admin(admin_site)
 
-adminlogs_site.register(django.contrib.redirects.models.Redirect,
-                        django.contrib.redirects.admin.RedirectAdmin)
+adminlogs_site.register(django.contrib.redirects.models.Redirect, django.contrib.redirects.admin.RedirectAdmin)
 
-adminlogs_site.register(django.contrib.sites.models.Site,
-                        django.contrib.sites.admin.SiteAdmin)
+adminlogs_site.register(django.contrib.sites.models.Site, django.contrib.sites.admin.SiteAdmin)
 
-admin_site.register(django.contrib.auth.models.User,
-                    django.contrib.auth.admin.UserAdmin)
+admin_site.register(django.contrib.auth.models.User, django.contrib.auth.admin.UserAdmin)
 
-admin_site.register(django.contrib.auth.models.Group,
-                    django.contrib.auth.admin.GroupAdmin)
-
-
-# from djangoplicity.archives.contrib.satchmo.admin import satchmo_admin
-# adminshop_site = satchmo_admin( adminshop_site )
-
-# autoregister( adminshop_site, djangoplicity.archives.contrib.satchmo.freeorder.admin )
+admin_site.register(django.contrib.auth.models.Group, django.contrib.auth.admin.GroupAdmin)
 
 # Products 2 admin register
 
@@ -103,7 +91,8 @@ def register_products_with_admin( admin_site ):
                           extra={'search_fields': ['isbn'], 'fieldsets': [('Extra', {'fields': ('isbn', 'doi'), }), ]})
     register_if_installed(admin_site, Brochure, BrochureOptions, exclude=['embargo_date', 'created', 'last_modified'])
     register_if_installed( admin_site, Logo, LogoOptions )
-    register_if_installed( admin_site, Exhibition, ExhibitionOptions, extra={ 'list_display': ['group', 'group_order'], 'list_editable': ['group', 'group_order'], } )
+    register_if_installed( admin_site, Exhibition, ExhibitionOptions,
+                           extra={ 'list_display': ['group', 'group_order'], 'list_editable': ['group', 'group_order'],})
     register_if_installed( admin_site, FITSImage, FITSImageOptions )
     register_if_installed( admin_site, Sticker, StickerOptions )
     register_if_installed( admin_site, PostCard, PostCardOptions )
