@@ -2,17 +2,17 @@
 {% load i18n %}
 
 {% block body %}
-<DIV class="row page">
-    <div class="col-md-12">
-        <div class="page-content one-column links m-4">
-            <h1>{% trans "Site Map" %}</h1>
+    <div class="row page">
+        <div class="col-md-12">
+            <div class="page-content one-column links m-4">
+                <h1>{% trans "Site Map" %}</h1>
 
-            {% load menus %}
-            {% init_menu 'Main Menu' as main_menu %}
-            <ul id="sitemap">
-                {% render_menu main_menu sitemap %}
-            </ul>
+                {% load menus %}
+                {% init_menu 'Main Menu' as main_menu %}
+                <ul id="sitemap">
+                    {% render_menu main_menu sitemap %}
+                </ul>
+            </div>
         </div>
     </div>
-</div>
 {% endblock %}

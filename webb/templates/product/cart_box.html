@@ -1,46 +1,48 @@
 {% if cart %}
-{% load satchmo_currency satchmo_category %}
-{% load normalize_decimal %}
-{% load satchmo_util satchmo_discounts %}
-{% load menus %}
-{% load i18n %}
-{% load djangoplicity_text_utils %}
-<div class="side-shopping-cart">
-    <h3>Shopping Cart</h3>
-    <table class="table">
-    <tr>
-        <th colspan="2">Items</th>
-        <th>Price</th>
-    </tr>
-    {% for cartitem in cart %}
-    <tr>
-        <td>{{ cartitem.quantity|normalize_decimal }}&nbsp;x&nbsp;</td>
-        <td><a href="{{cartitem.product.get_absolute_url}}">{{ cartitem.description }}</a></td>
-        <td style="text-align: right;">{{ cartitem|discount_line_total:sale|currency|sp2nbsp }}</td>
-    </tr>
-    {% endfor %}
-    </table>
+    {% load satchmo_currency satchmo_category %}
+    {% load normalize_decimal %}
+    {% load satchmo_util satchmo_discounts %}
+    {% load menus %}
+    {% load i18n %}
+    {% load djangoplicity_text_utils %}
+    <div class="side-shopping-cart">
+        <h3>Shopping Cart</h3>
+        <table class="table">
+            <tr>
+                <th colspan="2">Items</th>
+                <th>Price</th>
+            </tr>
+            {% for cartitem in cart %}
+                <tr>
+                    <td>{{ cartitem.quantity|normalize_decimal }}&nbsp;x&nbsp;</td>
+                    <td>
+                        <a href="{{ cartitem.product.get_absolute_url }}">{{ cartitem.description }}</a>
+                    </td>
+                    <td style="text-align: right;">{{ cartitem|discount_line_total:sale|currency|sp2nbsp }}</td>
+                </tr>
+            {% endfor %}
+        </table>
 
-    <div class="total">
-        Price without Shipping &amp; Handling
-        <div class="price">
-            {{ cart|discount_cart_total:sale|currency|sp2nbsp }}
+        <div class="total">
+            Price without Shipping &amp; Handling
+            <div class="price">
+                {{ cart|discount_cart_total:sale|currency|sp2nbsp }}
+            </div>
         </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <form class="form-inline" action="{% url 'satchmo_cart' %}" method="get">
+                    <button type="submit" class="btn btn-default">{% trans 'View Cart' %}</button>
+                </form>
+            </div>
+            <div class="col-md-6">
+                <form class="form-inline" action="{% url 'satchmo_checkout-step1' %}" method="get">
+                    <button type="submit" class="btn btn-default">{% trans 'Checkout' %}</button>
+                </form>
+            </div>
+        </div>
+
     </div>
-
-    <div class="row">
-        <div class="col-md-6">
-            <form class="form-inline" action="{% url 'satchmo_cart' %}" method="get">
-                <button type="submit" class="btn btn-default">{% trans 'View Cart' %}</button>
-            </form>
-        </div>
-        <div class="col-md-6">
-            <form class="form-inline" action="{% url 'satchmo_checkout-step1' %}" method="get">
-                <button type="submit" class="btn btn-default">{% trans 'Checkout' %}</button>
-            </form>
-        </div>
-    </div>
-
-</div>
 
 {% endif %}

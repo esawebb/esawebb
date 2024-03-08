@@ -2,34 +2,34 @@
 {% if not object_list %}
     <div style="text-align: center;">{% trans "No images were found." %}</div>
 {% else %}
-{% include "archives/search_results.html" %}
+    {% include "archives/search_results.html" %}
+    {% spaceless %}
+        <script>
+            var images = [
+                {% for image in object_list %}
+                    {% if image.width and image.height %}
+                        {
+                            id: '{{ image.pk }}',
+                            title: '{{ image.title }}',
+                            width: {{ image.width }},
+                            height: {{ image.height }},
+                            src: '{{ image.resource_thumb300y.url }}',
+                            url: '{{ image.get_absolute_url }}',
+                            potw: '{% if image.pictureoftheweek_set.all %}{{ image.pictureoftheweek_set.all.0.release_date|date:"DATE_FORMAT" }}{% endif %}'
+                        },
+                    {% endif %}
+                {% endfor %}
+            ];
+        </script>
 
-{% spaceless %}
+        <div class="image-list image-list-150">
+            {% for image in object_list %}
+                <h1 class="text-danger">test</h1>
+            {% endfor %}
+        </div>
 
-<script>
-var images = [
-    {% for image in object_list %}{% if image.width and image.height %}
-    {
-        id: '{{ image.pk }}',
-        title: '{{ image.title }}',
-        width: {{ image.width }},
-        height: {{ image.height }},
-        src: '{{ image.resource_thumb300y.url }}',
-        url: '{{ image.get_absolute_url }}',
-        potw: '{% if image.pictureoftheweek_set.all %}{{ image.pictureoftheweek_set.all.0.release_date|date:"DATE_FORMAT" }}{% endif %}'
-    },
-    {% endif %}{% endfor %}
-];
-</script>
-
-<div class="image-list image-list-150">
-    {% for image in object_list %}
-    <h1 class="text-danger">test</h1>
-    {% endfor %}
-</div>
-
-{% endspaceless %}
-{% paginator paginator page_obj paginator_url paginator_prefix paginator_params %}
-{% statusbar paginator page_obj browsers searchable search_url search_str  %}
+    {% endspaceless %}
+    {% paginator paginator page_obj paginator_url paginator_prefix paginator_params %}
+    {% statusbar paginator page_obj browsers searchable search_url search_str %}
 {% endif %}
 {% include 'archives/extra_footer.html' %}

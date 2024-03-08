@@ -4,57 +4,53 @@
 {% if not object_list %}
     <div style="text-align: center;">{% trans "No images were found." %}</div>
 {% else %}
-{% include "archives/search_results.html" %}
+    {% include "archives/search_results.html" %}
 
-{% spaceless %}
+    {% spaceless %}
+        <script>
+            var images = [
+                {% for image in object_list %}
+                    {% if image.width and image.height %}
+                        {
+                            id: '{{ image.pk }}',
+                            title: '{{ image.title }}',
+                            width: {{ image.width }},
+                            height: {{ image.height }},
+                            src: '{{ image.resource_thumb300y.url }}',
+                            url: '{{ image.get_absolute_url }}',
+                            potw: '{% if image.pictureoftheweek_set.all %}{{ image.pictureoftheweek_set.all.0.release_date|date:"DATE_FORMAT" }}{% endif %}'
+                        },
+                    {% endif %}
+                {% endfor %}
+            ];
+        </script>
 
-<script>
-var images = [
-    {% for image in object_list %}{% if image.width and image.height %}
-    {
-        id: '{{ image.pk }}',
-        title: '{{ image.title }}',
-        width: {{ image.width }},
-        height: {{ image.height }},
-        src: '{{ image.resource_thumb300y.url }}',
-        url: '{{ image.get_absolute_url }}',
-        potw: '{% if image.pictureoftheweek_set.all %}{{ image.pictureoftheweek_set.all.0.release_date|date:"DATE_FORMAT" }}{% endif %}'
-    },
-    {% endif %}{% endfor %}
-];
-</script>
+        <link rel="stylesheet" href="{% static 'css/justifiedGallery.min.css' %}">
 
-<link rel="stylesheet" href="{% static 'css/justifiedGallery.min.css' %}">
-
-<div class="image-list image-list-300">
-    <div id="jGallery">
-
-    {% for image in object_list %}
-
-        <div data-ripple-color="light">
-            <a href="{{ image.get_absolute_url }}">
-                <img alt="{{ image.title }}" src="https://cdn.esawebb.org/archives/images/screen/{{ image.pk }}.jpg"/>
-            </a>
+        <div class="image-list image-list-300">
+            <div id="jGallery">
+                {% for image in object_list %}
+                    <div data-ripple-color="light">
+                        <a href="{{ image.get_absolute_url }}">
+                            <img alt="{{ image.title }}" src="https://cdn.esawebb.org/archives/images/screen/{{ image.pk }}.jpg"/>
+                        </a>
+                    </div>
+                {% endfor %}
+            </div>
         </div>
 
-    {% endfor %}
+        <script src="{% static 'magnific-popup/jquery.min.js' %}"></script>
+        <script src="{% static 'js/jquery.justifiedGallery.min.js' %}"></script>
 
-    </div>
-</div>
-
-<script src="{% static 'magnific-popup/jquery.min.js' %}"></script>
-<script src="{% static 'js/jquery.justifiedGallery.min.js' %}"></script>
-
-<script>
-    $("#jGallery").justifiedGallery({
-      rowHeight: 350,
-      lastRow: "nojustify",
-      margins: 15
-    });
-</script>
-
-{% endspaceless %}
-{% paginator paginator page_obj paginator_url paginator_prefix paginator_params %}
-{% statusbar paginator page_obj browsers searchable search_url search_str  %}
+        <script>
+            $("#jGallery").justifiedGallery({
+                rowHeight: 350,
+                lastRow: "nojustify",
+                margins: 15
+            });
+        </script>
+    {% endspaceless %}
+    {% paginator paginator page_obj paginator_url paginator_prefix paginator_params %}
+    {% statusbar paginator page_obj browsers searchable search_url search_str %}
 {% endif %}
 {% include 'archives/image/extra_footer.html' %}

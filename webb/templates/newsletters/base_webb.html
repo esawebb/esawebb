@@ -1,18 +1,18 @@
 {% extends "newsletters/base.html" %}
 
 {% block preheader %}
-<!-- // Begin Module: Standard Preheader \ --> 
-<table border="0" cellpadding="0" cellspacing="0" width="100%"> 
-    <tr> 
-        <td valign="top"> 
-            <div style="color: #505050;font-family: Helvetica, Arial, sans-serif;font-size: 10px;line-height: 100%;text-align: left;">
-         {% block text_only %}{% endblock %}
-         </div> 
-         </td> 
-     </tr>
-    {% include "newsletters/includes/preferences_top.html" %}
-</table> 
-<!-- // End Module: Standard Preheader \ --> 
+    <!-- // Begin Module: Standard Preheader \ -->
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+        <tr>
+            <td valign="top">
+                <div style="color: #505050;font-family: Helvetica, Arial, sans-serif;font-size: 10px;line-height: 100%;text-align: left;">
+                    {% block text_only %}{% endblock %}
+                </div>
+            </td>
+        </tr>
+        {% include "newsletters/includes/preferences_top.html" %}
+    </table>
+    <!-- // End Module: Standard Preheader \ -->
 {% endblock %}
 
 
@@ -20,7 +20,7 @@
     {% with width="700" height="300" color="#00000" logo_width="140" logo_url=base_url|add:"/assets/images/"|add:"esa-logo.png" jwst_logo_width="100" jwst_logo_url=base_url|add:"/assets/images/"|add:"esa-jwst-logo.png" hubble_logo_width="100" hubble_logo_url=base_url|add:"/assets/images/"|add:"esa-hubble-logo.png" %}
         {% block header_content %}
             {% with header_title="ESA/Hubble/Webb" %}
-            {% include "newsletters/includes/header.html" %}
+                {% include "newsletters/includes/header.html" %}
             {% endwith %}
         {% endblock %}
     {% endwith %}
@@ -28,6 +28,6 @@
 
 {% block footer %}
     {% with org="ESA/Hubble/Webb" %}
-    {% include "newsletters/includes/footer.html" %}
+        {% include "newsletters/includes/footer.html" %}
     {% endwith %}
 {% endblock %}

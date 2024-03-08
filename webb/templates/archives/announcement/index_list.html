@@ -3,41 +3,41 @@
 {% if not object_list %}
     <div style="text-align: center;">{% trans "No announcements were found." %}</div>
 {% else %}
-{% include "archives/search_results.html" %}
+    {% include "archives/search_results.html" %}
 
-<div class="row news-list">
-{% for row in object_list|split_list:4 %}
-
-    {% for ann in row %}
-    <div class="col-md-6 col-xl-4 col-xs-12">
-        <a href="{{ ann.get_absolute_url }}" style="text-decoration: none;">
-            <div class="box-image shadow  border my-3">
-                {% if ann.main_visual and ann.main_visual.resource_thumb350x %}
-                <div class="mb-4 primary-overlay">
-                    <img class="w-100" style="height: 200px; object-fit: cover;"
-                        src="{{ ann.main_visual.resource_thumb350x.url }}">
+    <div class="row news-list">
+        {% for row in object_list|split_list:4 %}
+            {% for ann in row %}
+                <div class="col-md-6 col-xl-4 col-xs-12">
+                    <a href="{{ ann.get_absolute_url }}" style="text-decoration: none;">
+                        <div class="box-image shadow  border my-3">
+                            {% if ann.main_visual and ann.main_visual.resource_thumb350x %}
+                                <div class="mb-4 primary-overlay">
+                                    <img class="w-100" style="height: 200px; object-fit: cover;"
+                                         src="{{ ann.main_visual.resource_thumb350x.url }}">
+                                </div>
+                            {% endif %}
+                            <div class="pb-3 px-3" style="height: 290px; overflow: hidden; text-overflow: ellipsis;">
+                                <div class="news-id h6  text-primary">{{ ann.id }} — {% trans "Announcement" %}</div>
+                                <div class="news-title h5  text-primary">{{ ann.title }}</div>
+                                <div class="news-id h6  text-primary pb-3">{{ ann.release_date|datetime:"DATE" }}</div>
+                                <div class="news-teaser">
+                                    <p class="small text-muted">
+                                        {{ ann.description|safe|striptags|truncatewords:150 }}
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="news-readmore text-center">
+                                <p class="btn btn-primary mt-3">{% trans "Read more" %}</p>
+                            </div>
+                        </div>
+                    </a>
                 </div>
-                {% endif %}
-                <div class="pb-3 px-3" style="height: 290px; overflow: hidden; text-overflow: ellipsis;">
-                    <div class="news-id h6  text-primary">{{ ann.id }} — {% trans "Announcement" %}</div>
-                    <div class="news-title h5  text-primary">{{ ann.title }}</div>
-                    <div class="news-id h6  text-primary pb-3">{{ ann.release_date|datetime:"DATE" }}</div>
-                    <div class="news-teaser">
-                        <p class="small text-muted" >{{ ann.description|safe|striptags|truncatewords:150 }}</p>
-                    </div>
-                </div>
-                <div class="news-readmore text-center">
-                    <p class="btn btn-primary mt-3">{% trans "Read more" %}</p>
-                </div>
-            </div> 
-        </a>
+            {% endfor %}
+        {% endfor %}
     </div>
-    {% endfor %}
 
-{% endfor %}
-</div>
-
-{% paginator paginator page_obj paginator_url paginator_prefix paginator_params %}
-{% statusbar paginator page_obj browsers searchable search_url search_str  %}
+    {% paginator paginator page_obj paginator_url paginator_prefix paginator_params %}
+    {% statusbar paginator page_obj browsers searchable search_url search_str %}
 {% endif %}
 {% include 'archives/extra_footer.html' %}

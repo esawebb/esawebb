@@ -1,66 +1,100 @@
 {% extends "base_onecolumn.html" %}{% load pages %}
 
 {% comment %}
-Tue Feb 25 09:24:51 CET 2014 - Mathias Andre
-This template is a copy of the default detail imagecomparision template from 
-djangoplicity, however the extra_scripts block is left empty as the setup and
-initialisation of the image comparison is done in the merged "base.js" 
-javascript file at the bottom of the main template
+    Tue Feb 25 09:24:51 CET 2014 - Mathias Andre
+    This template is a copy of the default detail imagecomparision template from
+    djangoplicity, however the extra_scripts block is left empty as the setup and
+    initialisation of the image comparison is done in the merged "base.js"
+    javascript file at the bottom of the main template
 {% endcomment %}
 
-{% block site_title %}{{object.title}} | {{block.super}}{% endblock %}
+{% block site_title %}
+    {{ object.title }} | {{ block.super }}
+{% endblock %}
 
 {% load menus %}
 
 {% block content %}
-{% load i18n %}{% include 'archives/embargo_notice.html' %}
+    {% load i18n %}{% include 'archives/embargo_notice.html' %}
 
-<h1>{{ object.title }}</h1>
-<div class="bg-image hover-overlay ripple shadow-1-strong rounded my-3 px-1 popup-link">
-    <img-comparison-slider style="cursor: pointer;">
-        <img slot="first" src="https://cdn.esawebb.org/archives/images/screen/{{ object.image_before.pk }}.jpg" alt="{{ object.image_before.title }}" class="w-100" style="height: auto; max-width: 100%; object-fit: cover;" />
-        <img slot="second" src="https://cdn.esawebb.org/archives/images/screen/{{ object.image_after.pk }}.jpg" alt="{{ object.image_after.title }}" class="w-100" style="height: auto; max-width: 100%; object-fit: cover;"/>
-    </img-comparison-slider>
-    <div class="d-flex justify-content-center">{% trans "Drag handle to reveal images" %}</div>
-</div>
-
-<div class="row">
-    <div class="col-md-9 left-column links">
-        <p>{{ object.description|safe }}</p>
-        <strong>{% trans "Credit" %}:</strong><div class="credit">{{ object.credit|safe }}</div>
-        {% include 'archives/extra_footer.html' %}
+    <h1>{{ object.title }}</h1>
+    <div class="bg-image hover-overlay ripple shadow-1-strong rounded my-3 px-1 popup-link">
+        <img-comparison-slider style="cursor: pointer;">
+            <img slot="first" src="https://cdn.esawebb.org/archives/images/screen/{{ object.image_before.pk }}.jpg"
+                 alt="{{ object.image_before.title }}" class="w-100"
+                 style="height: auto; max-width: 100%; object-fit: cover;"/>
+            <img slot="second" src="https://cdn.esawebb.org/archives/images/screen/{{ object.image_after.pk }}.jpg"
+                 alt="{{ object.image_after.title }}" class="w-100"
+                 style="height: auto; max-width: 100%; object-fit: cover;"/>
+        </img-comparison-slider>
+        <div class="d-flex justify-content-center">{% trans "Drag handle to reveal images" %}</div>
     </div>
-    <div class="col-md-3 right-column">
-        {% include admin_template %}
-        {% include info_template %}
-        
-        {% load i18n %}
-        <h3 class="archivegrouptitle">{% trans "Images" %}</h3>
-        {% with i=image_before %}
-        <div class="embedded-list-image">
-            <a href="{{ i.get_absolute_url }}"><img class="w-100 -top" style="height: 200px; object-fit: cover;" src="{{ i.resource_medium.url }}" alt="{{ i.title }}" /></a>
-            <div class="hiper-color"><a href="{{ i.get_absolute_url }}">{% trans  "PR Image" %} {% if i.override_id %}{{ i.override_id }}{% else %}{{ i.source.id|default:i.id }}{% endif %}</a></div>
-            <div>{{ i.title }} {% if not i.in_original_language %}<span class="langnote"><br />{% trans "in English only" %}</span>{% endif %}</div>
-        </div>
-        {% endwith %}
-        
-        {% with i=image_after %}
-        <div class="embedded-list-image">
-            <a href="{{ i.get_absolute_url }}"><img class="w-100 -top" style="height: 200px; object-fit: cover;" src="{{ i.resource_medium.url }}" alt="{{ i.title }}" /></a>
-            <div class="hiper-color"><a href="{{ i.get_absolute_url }}">{% trans  "PR Image" %} {% if i.override_id %}{{ i.override_id }}{% else %}{{ i.source.id|default:i.id }}{% endif %}</a></div>
-            <div>{{ i.title }} {% if not i.in_original_language %}<span class="langnote"><br />{% trans "in English only" %}</span>{% endif %}</div>
-        </div>
-        {% endwith %}
-    </div>
-</div>
 
-<link rel="stylesheet"  href="https://unpkg.com/img-comparison-slider@7/dist/styles.css"/>
-<script defer src="https://unpkg.com/img-comparison-slider@7/dist/index.js"></script>
-<style>
-    .links ul li a{
-        color: #009bdb !important;;
-    }
-</style>
+    <div class="row">
+        <div class="col-md-9 left-column links">
+            <p>{{ object.description|safe }}</p>
+            <strong>{% trans "Credit" %}:</strong>
+            <div class="credit">{{ object.credit|safe }}</div>
+            {% include 'archives/extra_footer.html' %}
+        </div>
+        <div class="col-md-3 right-column">
+            {% include admin_template %}
+            {% include info_template %}
+
+            {% load i18n %}
+            <h3 class="archivegrouptitle">{% trans "Images" %}</h3>
+            {% with i=image_before %}
+                <div class="embedded-list-image">
+                    <a href="{{ i.get_absolute_url }}">
+                        <img class="w-100 -top" style="height: 200px; object-fit: cover;" src="{{ i.resource_medium.url }}" alt="{{ i.title }}"/>
+                    </a>
+                    <div class="hiper-color">
+                        <a href="{{ i.get_absolute_url }}">
+                            {% trans "PR Image" %}
+                            {% if i.override_id %}
+                                {{ i.override_id }}
+                            {% else %}
+                                {{ i.source.id|default:i.id }}
+                            {% endif %}
+                        </a>
+                    </div>
+                    <div>{{ i.title }} {% if not i.in_original_language %}
+                        <span class="langnote"><br/>{% trans "in English only" %}</span>{% endif %}
+                    </div>
+                </div>
+            {% endwith %}
+
+            {% with i=image_after %}
+                <div class="embedded-list-image">
+                    <a href="{{ i.get_absolute_url }}">
+                        <img class="w-100 -top" style="height: 200px; object-fit: cover;" src="{{ i.resource_medium.url }}" alt="{{ i.title }}"/>
+                    </a>
+                    <div class="hiper-color">
+                        <a href="{{ i.get_absolute_url }}">{% trans "PR Image" %}
+                            {% if i.override_id %}
+                                {{ i.override_id }}
+                            {% else %}
+                                {{ i.source.id|default:i.id }}
+                            {% endif %}
+                        </a>
+                    </div>
+                    <div>{{ i.title }}
+                        {% if not i.in_original_language %}
+                            <span class="langnote"><br/>{% trans "in English only" %}</span>
+                        {% endif %}
+                    </div>
+                </div>
+            {% endwith %}
+        </div>
+    </div>
+
+    <link rel="stylesheet" href="https://unpkg.com/img-comparison-slider@7/dist/styles.css"/>
+    <script defer src="https://unpkg.com/img-comparison-slider@7/dist/index.js"></script>
+    <style>
+        .links ul li a {
+            color: #009bdb !important;;
+        }
+    </style>
 {% endblock %}
 
 {% block extra_header %}

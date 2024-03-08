@@ -3,7 +3,9 @@
 {% include 'archives/embargo_notice.html' %}
 <h3 class="pr_typeid mt-5">{{ object.id }} &mdash; {% trans "Announcement" %}</h3>
 <h1 class="pr_title">{{ object.title }}</h1>
-{% if object.subtitle %}<h3>{{ object.subtitle }}</h3>{% endif %}
+{% if object.subtitle %}
+    <h3>{{ object.subtitle }}</h3>
+{% endif %}
 <p class="date">{{ object.release_date|datetime:"DATE" }}</p>
 
 {% if main_visual %}
@@ -13,23 +15,24 @@
         </div>
     {% elif main_visual.resource_newsfeature %}
         <div class="archive-image popup">
-        {% if main_visual.resource_medium_podcast %}
-            {% load media_video %}
-            {% if main_visual.videosubtitle_set.all %}
-                {% embedvideo_subs main_visual "medium_podcast,h264" "hd_and_apple,hd720p_screen,dome_preview" "medium_podcast,h264" main_visual.videosubtitle_set.all %}
-            {% else %}
-                {% embedvideo main_visual "medium_podcast,h264" "hd_and_apple,hd720p_screen,dome_preview" "medium_podcast,h264" %}
-            {% endif%}
-        {% elif main_visual.resource_newsfeature %}
-            <a class="popup" href="{{ main_visual.resource_screen.url }}" title="{{ main_visual.title }}">
-                <img class="w-100 -top" style="height: 350px; object-fit: cover;" src="{{ main_visual.resource_newsfeature.url }}" />
-                {% if images %}
-                    {% for im in images %}
-                        {% if main_visual != im %}<a class="popup" href="{{ im.resource_screen.url }}" title="{{ im.title }}" class="hidden"></a>{% endif %}
-                    {% endfor %}
+            {% if main_visual.resource_medium_podcast %}
+                {% load media_video %}
+                {% if main_visual.videosubtitle_set.all %}
+                    {% embedvideo_subs main_visual "medium_podcast,h264" "hd_and_apple,hd720p_screen,dome_preview" "medium_podcast,h264" main_visual.videosubtitle_set.all %}
+                {% else %}
+                    {% embedvideo main_visual "medium_podcast,h264" "hd_and_apple,hd720p_screen,dome_preview" "medium_podcast,h264" %}
                 {% endif %}
-            </a>
-        {% endif %}
+            {% elif main_visual.resource_newsfeature %}
+                <a class="popup" href="{{ main_visual.resource_screen.url }}" title="{{ main_visual.title }}">
+                    <img class="w-100 -top" style="height: 350px; object-fit: cover;" src="{{ main_visual.resource_newsfeature.url }}"/>
+                    {% if images %}
+                        {% for im in images %}
+                            {% if main_visual != im %}
+                                <a class="popup hidden" href="{{ im.resource_screen.url }}" title="{{ im.title }}" ></a>{% endif %}
+                        {% endfor %}
+                    {% endif %}
+                </a>
+            {% endif %}
         </div>
     {% elif main_visual.resource_news %}
         <div class="archive-image popup">
@@ -45,11 +48,11 @@
 
 <p>{{ object.description|safe }}</p>
 {% if object.links %}
-<h3>{% trans "Links" %}</h3>
-<p>{{ object.links|safe }}</p>
+    <h3>{% trans "Links" %}</h3>
+    <p>{{ object.links|safe }}</p>
 {% endif %}
 {% if object.contacts %}
-<h3>{% trans "Contacts" %}</h3>
-<p>{{ object.contacts|safe }}</p>
+    <h3>{% trans "Contacts" %}</h3>
+    <p>{{ object.contacts|safe }}</p>
 {% endif %}
 {% include 'archives/extra_footer.html' %}
