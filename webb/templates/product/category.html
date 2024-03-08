@@ -9,97 +9,112 @@
 
 {% load djangoplicity_utils djangoplicity_satchmo %}
 
-{% block site_title %} {{ category.translated_name }} | {{ shop_name }} {% endblock %}
+{% block site_title %}
+    {{ category.translated_name }} | {{ shop_name }}
+{% endblock %}
 
 
 {% block extra_header %}
-{% if category.meta %}
-    <meta name="description" content="{{ category.meta|escape }}">
-{% endif %}
+    {% if category.meta %}
+        <meta name="description" content="{{ category.meta|escape }}">
+    {% endif %}
 {% endblock %}
 
 {% block body %}
 
-<div class="row no-page shop">
-    <div class="col-md-12">
-        <h1>{{ shop_name }}:{% for parent in category.parents %} {{ parent.translated_name }} &raquo;{% endfor %} {{ category.translated_name }}</h1>
-
-        {% if categories %}
-            <div class="col-md-12 media-categories">
-                <ul>
-                {% for cat in categories %}
-                    {% if not cat.parent %}
-                        <li><a href="{{ cat.get_absolute_url }}"{% if category.name == cat.name %} class="selected"{% endif %}>{{ cat.name }}</a></li>
-                    {%endif%}
+    <div class="row no-page shop">
+        <div class="col-md-12">
+            <h1>{{ shop_name }}:
+                {% for parent in category.parents %}
+                    {{ parent.translated_name }}&raquo;
                 {% endfor %}
-                </ul>
-            </div>
-        {% endif %}
+                {{ category.translated_name }}
+            </h1>
+
+            {% if categories %}
+                <div class="col-md-12 media-categories">
+                    <ul>
+                        {% for cat in categories %}
+                            {% if not cat.parent %}
+                                <li>
+                                    <a href="{{ cat.get_absolute_url }}"{% if category.name == cat.name %} class="selected"{% endif %}>
+                                        {{ cat.name }}
+                                    </a>
+                                </li>
+                            {% endif %}
+                        {% endfor %}
+                    </ul>
+                </div>
+            {% endif %}
+        </div>
     </div>
-</div>
 
-{% spaceless %}
-<div class="row no-page shop">
-    <div class="col-md-9">
-        {% if category.description %}
-            <p class="product_category_description">{{ category.description|safe }}</p>
-        {% endif %}
-        {% if category.get_active_children %}
+    {% spaceless %}
+        <div class="row no-page shop">
+            <div class="col-md-9">
+                {% if category.description %}
+                    <p class="product_category_description">{{ category.description|safe }}</p>
+                {% endif %}
+                {% if category.get_active_children %}
 
-            <div class="archive-list clearfix">
-            {% for list in category.get_active_children|split_list:"3" %}
-                {% for category in list %}
-                    <div class="item">
-                        <a href="{{ category.get_absolute_url }}" class="thumbnail">
-                            <img src="{{ MEDIA_URL }}images/shopcategories/{{ category.slug }}.png" class="img-responsive" alt="{{ category.name }}">
-                            <div class="caption">
-                                <p>{{ category.name }}</p>
-                            </div>
-                        </a>
+                    <div class="archive-list clearfix">
+                        {% for list in category.get_active_children|split_list:"3" %}
+                            {% for category in list %}
+                                <div class="item">
+                                    <a href="{{ category.get_absolute_url }}" class="thumbnail">
+                                        <img src="{{ MEDIA_URL }}images/shopcategories/{{ category.slug }}.png"
+                                             class="img-responsive" alt="{{ category.name }}">
+                                        <div class="caption">
+                                            <p>{{ category.name }}</p>
+                                        </div>
+                                    </a>
+                                </div>
+                            {% endfor %}
+                        {% endfor %}
                     </div>
-                {% endfor %}
-            {% endfor %}
-            </div>
-        {% endif %}
+                {% endif %}
 
-        {% if products %}
-            <div class="archive-list clearfix">
-            {% for list in products|split_list:"4" %}
-                {% for product in list %}{% archiveitem product as item %}
-                    <div class="item">
-                        <a href="{{ product.get_absolute_url }}" class="thumbnail">
-                            <img src="{% if item.resource_thumb350x %}{{ item.resource_thumb350x.url }}{% else %}{{ item.resource_medium.url }}{% endif %}" class="img-responsive" alt="{{ item.title }}">
-                            <div class="caption">
-                                <p class="price">Price:&nbsp;{{ product.unit_price|currency }}{% if item.free %}<img src="{{ MEDIA_URL }}/educators-small.png" alt="Educators" width="60" /> {% endif %}</p>
-                                <p>{% if item %}{{ item.title }}{% else %}{{ product.name }}{% endif %}</p>
-                            </div>
-                        </a>
+                {% if products %}
+                    <div class="archive-list clearfix">
+                        {% for list in products|split_list:"4" %}
+                            {% for product in list %}
+                                {% archiveitem product as item %}
+                                    <div class="item">
+                                        <a href="{{ product.get_absolute_url }}" class="thumbnail">
+                                            <img src="{% if item.resource_thumb350x %}{{ item.resource_thumb350x.url }}{% else %}{{ item.resource_medium.url }}{% endif %}"
+                                                 class="img-responsive" alt="{{ item.title }}">
+                                            <div class="caption">
+                                                <p class="price">Price:&nbsp;{{ product.unit_price|currency }}
+                                                    {% if item.free %}
+                                                        <img src="{{ MEDIA_URL }}/educators-small.png" alt="Educators" width="60"/>
+                                                    {% endif %}
+                                                </p>
+                                                <p>{% if item %}{{ item.title }}{% else %}{{ product.name }}{% endif %}</p>
+                                            </div>
+                                        </a>
+                                    </div>
+                                {% endarchiveitem %}
+                            {% endfor %}
+                        {% endfor %}
                     </div>
-                {% endarchiveitem %}{% endfor %}
-            {% endfor %}
+                {% elif category.get_active_children|length == 0 %}
+                    <br/>
+                    <p>Products coming soon, please check this page later!</p>
+                {% endif %}
+
+
+                <div id="product_category">
+                    {% if sale %}
+                        {% include "product/some_discount_eligible.html" %}
+                    {% endif %}
+                </div>
             </div>
-        {% elif category.get_active_children|length == 0 %}
-            <br />
-            <p>Products coming soon, please check this page later!</p>
-        {% endif %}
-
-
-<div id="product_category">
-
-
-{% if sale %}
-{% include "product/some_discount_eligible.html" %}
-{% endif %}
-</div>
-    </div>
-    <div class="col-md-3 shop-right-column">
-        {% include "product/shop_logo.html" %}{% include "product/cart_box.html" %}
-        <hr>
-        {% embed_page shop-category-right-column %}
-    </div>
-</div>
-{% endspaceless %}
+            <div class="col-md-3 shop-right-column">
+                {% include "product/shop_logo.html" %}
+                {% include "product/cart_box.html" %}
+                <hr>
+                {% embed_page shop-category-right-column %}
+            </div>
+        </div>
+    {% endspaceless %}
 {% endblock %}
-
-
-<!-- -->
