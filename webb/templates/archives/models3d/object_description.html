@@ -1,36 +1,40 @@
 {% load i18n %}
 {% spaceless %}
-{% include 'archives/embargo_notice.html' %}
-<h1>{{ object.title }}</h1>
+    {% include 'archives/embargo_notice.html' %}
+    <h1>{{ object.title }}</h1>
 
-{% if object.sketchfab_id %}
-<div class="archive-image">
-    <iframe width="100%" height="480" src="https://sketchfab.com/models/{{ object.sketchfab_id }}/embed" frameborder="0" allowfullscreen mozallowfullscreen="true" webkitallowfullscreen="true" onmousewheel=""></iframe>
-</div>
-{% elif object.resource_medium %}
-<div class="archive-image popup">
-    {% if object.resource_screen %}
-        <a class="popup" href="{{ object.resource_screen.url }}" title="{{ object }}" />
-            <div class="image-container">
-                <img class="img-responsive" src="{{ object.resource_screen.url }}" border="0" alt="{{ object }}" />
-            </div>
-        </a>
-    {% else %}
-        <div class="image-container">
-            <img class="img-responsive" src="{{ object.resource_medium.url }}" width="320" border="0" alt="{{ object }}" />
+    {% if object.sketchfab_id %}
+        <div class="archive-image">
+            <iframe width="100%" height="480" src="https://sketchfab.com/models/{{ object.sketchfab_id }}/embed"
+                    frameborder="0" allowfullscreen mozallowfullscreen="true" webkitallowfullscreen="true"
+                    onmousewheel="">
+            </iframe>
+        </div>
+    {% elif object.resource_medium %}
+        <div class="archive-image popup">
+            {% if object.resource_screen %}
+                <a class="popup" href="{{ object.resource_screen.url }}" title="{{ object }}">
+                    <div class="image-container">
+                        <img class="img-responsive" src="{{ object.resource_screen.url }}" border="0" alt="{{ object }}"/>
+                    </div>
+                </a>
+            {% else %}
+                <div class="image-container">
+                    <img class="img-responsive" src="{{ object.resource_medium.url }}" width="320" border="0"
+                         alt="{{ object }}"/>
+                </div>
+            {% endif %}
         </div>
     {% endif %}
-</div>
-{% endif %}
-<p>{{ object.description|safe }}</p>
-{% comment %}
-We don't display the "not available for sale" message for calendars as we
-have individual archive items for each months, and though it's not possible
-to buy a single month, we don't want people to think that the whole calendar
-is not available for sale
-{% endcomment %}
+    <p>{{ object.description|safe }}</p>
+    {% comment %}
+        We don't display the "not available for sale" message for calendars as we
+        have individual archive items for each month, and though it's not possible
+        to buy a single month, we don't want people to think that the whole calendar
+        is not available for sale
+    {% endcomment %}
 
-{% include 'archives/extra_description.html' %}
-{% include 'archives/credit.html' %}
-{% include 'archives/extra_footer.html' %}
+    {% include 'archives/extra_description.html' %}
+    {% include 'archives/credit.html' %}
+    {% include 'archives/extra_footer.html' %}
 {% endspaceless %}

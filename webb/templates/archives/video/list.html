@@ -1,54 +1,67 @@
 {% extends "base_onecolumn_dark.html" %}
 {% load i18n %}
 
-{% block extra_header %}{{block.super}}{% for furl,title in feed_urls %}<link href='{{furl}}' rel="alternate" type="application/rss+xml" title='{{title}}' />{%endfor%}{% if archive_title %}
-    <meta property="og:title" content="{{ archive_title }}" />{% endif %}{% if archive_opengraph_image %}
-    <meta property="og:image" content="{{ archive_opengraph_image }}" />{% endif %}{% if archive_description %}
-    <meta property="og:description" content="{{ archive_description }}" />
-    <meta name="description" content="{{ archive_description }}" />{% endif %}
-{%endblock%}
+{% block extra_header %}{{ block.super }}
+    {% for furl,title in feed_urls %}
+        <link href='{{ furl }}' rel="alternate" type="application/rss+xml" title='{{ title }}'/>
+    {% endfor %}
+    {% if archive_title %}
+        <meta property="og:title" content="{{ archive_title }}"/>
+    {% endif %}
+    {% if archive_opengraph_image %}
+        <meta property="og:image" content="{{ archive_opengraph_image }}"/>
+    {% endif %}
+    {% if archive_description %}
+        <meta property="og:description" content="{{ archive_description }}"/>
+        <meta name="description" content="{{ archive_description }}"/>
+    {% endif %}
+{% endblock %}
 
-{% block site_title %}{% if archive_title %}{{archive_title}}{% else %}{{ archive|capfirst }} Archive{%endif%} | {{block.super}}{% endblock %}
+{% block site_title %}
+    {% if archive_title %}{{ archive_title }}{% else %}{{ archive|capfirst }} Archive{% endif %} |{{ block.super }}
+{% endblock %}
 
 {% block archive_search %}
-{% with archive_search_position="outside" %}
-    {% include "archives/image/searchbox.html" %}
-{% endwith %}
+    {% with archive_search_position="outside" %}
+        {% include "archives/image/searchbox.html" %}
+    {% endwith %}
 {% endblock %}
 
 {% block content %}
 
-{% include index_template with columns="4" %}
+    {% include index_template with columns="4" %}
 
 {% endblock %}
 
 {% block extra_scripts %}
-<script type="text/javascript">
-var tag = document.createElement('script');
+    <script type="text/javascript">
+        var tag = document.createElement('script');
 
-tag.src = "https://www.youtube.com/iframe_api";
-var firstScriptTag = document.getElementsByTagName('script')[0];
-firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+        tag.src = "https://www.youtube.com/iframe_api";
+        var firstScriptTag = document.getElementsByTagName('script')[0];
+        firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
-var player;
-function onYouTubeIframeAPIReady() {
-    player = new YT.Player('youtube-player', {
-        height: '315',
-        width: '560',
-        playerVars: {
-            'modestbranding': 1,
-            'hl': '{{ LANGUAGE_CODE }}',
-            'rel': 0
-        },
-        events: {
-            'onReady': onPlayerReady,
+        var player;
+
+        function onYouTubeIframeAPIReady() {
+            player = new YT.Player('youtube-player', {
+                height: '315',
+                width: '560',
+                playerVars: {
+                    'modestbranding': 1,
+                    'hl': '{{ LANGUAGE_CODE }}',
+                    'rel': 0
+                },
+                events: {
+                    'onReady': onPlayerReady,
+                }
+            });
+
+            function onPlayerReady(event) {
+                // event.target.setPlaybackQuality('large');
+            }
         }
-    });
-    function onPlayerReady(event) {
-        // event.target.setPlaybackQuality('large');
-    }
-}
-</script>
+    </script>
 {% endblock %}
 
 {% include 'archives/extra_footer.html' %}

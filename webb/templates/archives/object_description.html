@@ -1,41 +1,42 @@
 {% load i18n %}
 {% spaceless %}
-{% load static %}
-{% include 'archives/embargo_notice.html' %}
+    {% load static %}
+    {% include 'archives/embargo_notice.html' %}
 
-<link rel="stylesheet" href="{% static 'magnific-popup/magnific-popup.css' %}">
-<script src="{% static 'magnific-popup/jquery.min.js' %}"></script>
-<script src="{% static 'magnific-popup/jquery.magnific-popup.min.js' %}"></script>
+    <link rel="stylesheet" href="{% static 'magnific-popup/magnific-popup.css' %}">
+    <script src="{% static 'magnific-popup/jquery.min.js' %}"></script>
+    <script src="{% static 'magnific-popup/jquery.magnific-popup.min.js' %}"></script>
 
-<script>
-    $(document).ready(function($){
-      $('.popup-link').magnificPopup({
-          delegate: 'a',
-          type: 'image'
-      });
-    })
-</script>
+    <script>
+        $(document).ready(function ($) {
+            $('.popup-link').magnificPopup({
+                delegate: 'a',
+                type: 'image'
+            });
+        })
+    </script>
 
-<h1>{{ object.title }}</h1>
+    <h1>{{ object.title }}</h1>
 
-{% if object.resource_medium %}
+    {% if object.resource_medium %}
 
-<div class="bg-image hover-overlay ripple shadow-1-strong rounded my-3 px-1 popup-link" data-ripple-color="light">
-    <a href="{{ object.resource_screen.url }}" title="{{ object }}">
-        <img src="{{ object.resource_screen.url }}"
-        class="w-100" style="height: auto; max-width: 100%; object-fit: cover;" />
-    </a>
-</div>
-{% endif %}
-<p>{{ object.description|safe }}</p>
-{% comment %}
-We don't display the "not available for sale" message for calendars as we
-have individual archive items for each months, and though it's not possible
-to buy a single month, we don't want people to think that the whole calendar
-is not available for sale
-{% endcomment %}
+        <div class="bg-image hover-overlay ripple shadow-1-strong rounded my-3 px-1 popup-link"
+             data-ripple-color="light">
+            <a href="{{ object.resource_screen.url }}" title="{{ object }}">
+                <img src="{{ object.resource_screen.url }}"
+                     class="w-100" style="height: auto; max-width: 100%; object-fit: cover;"/>
+            </a>
+        </div>
+    {% endif %}
+    <p>{{ object.description|safe }}</p>
+    {% comment %}
+        We don't display the "not available for sale" message for calendars as we
+        have individual archive items for each month, and though it's not possible
+        to buy a single month, we don't want people to think that the whole calendar
+        is not available for sale
+    {% endcomment %}
 
-{% include 'archives/extra_description.html' %}
-{% include 'archives/credit.html' %}
-{% include 'archives/extra_footer.html' %}
+    {% include 'archives/extra_description.html' %}
+    {% include 'archives/credit.html' %}
+    {% include 'archives/extra_footer.html' %}
 {% endspaceless %}

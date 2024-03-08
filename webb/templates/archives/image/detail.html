@@ -1,13 +1,14 @@
 {% extends "base_threecolumn.html" %}{% load pages %}
 
-{% block site_title %}{{object.title}} | {{block.super}}{% endblock %}
+{% block site_title %}
+    {{object.title}} | {{block.super}}
+{% endblock %}
 
 {% load menus %}
 
 {% block content %}
-{% include description_template  %}
+    {% include description_template  %}
 {% endblock %}
-
 
 {% block extra_scripts %}
 
