@@ -1,50 +1,69 @@
 {% load i18n %}
 {% load djangoplicity_utils %}
 {% spaceless %}
-{% if admin_groups %}
-    <div id="object_admin_div" class="object-info">
-    {% for admin in admin_groups %}
-        {% if admin.name %}<h3>{% trans admin.name %}</h3>{% endif %}
-        {% if admin.links or admin.metadata %}
-            <div>
-            {% for link in admin.links %}
-                {% if link.url %}<a id="object_admin_a" class="btn btn-primary d-block" style="color: #fff;" href="{{ link.url }}">{% trans link.title %}</a><br />{% endif %}
+    {% if admin_groups %}
+        <div id="object_admin_div" class="object-info">
+            {% for admin in admin_groups %}
+                {% if admin.name %}
+                    <h3>{% trans admin.name %}</h3>
+                {% endif %}
+                {% if admin.links or admin.metadata %}
+                    <div>
+                        {% for link in admin.links %}
+                            {% if link.url %}
+                                <a id="object_admin_a" class="btn btn-primary d-block" style="color: #fff;" href="{{ link.url }}">
+                                    {% trans link.title %}
+                                </a><br/>
+                            {% endif %}
+                        {% endfor %}
+                        {% if admin.metadata %}
+                            <table class="table form-text text-dark">
+                                {% for metadata in admin.metadata %}
+                                    {% if metadata.field_value %}
+                                        {% trans metadata.field_name as field_name %}
+                                        <tr>
+                                            <th scope="row" class="title">{{ field_name|capfirst }}:</th>
+                                            <td>{{ metadata.field_value }}</td>
+                                        </tr>
+                                    {% endif %}
+                                {% endfor %}
+                            </table>
+                        {% endif %}
+                    </div>
+                {% endif %}
             {% endfor %}
-            {% if admin.metadata %}
-                <table class="table form-text text-dark">
-                {% for metadata in admin.metadata %}
-                    {% if metadata.field_value %}
-                        {% trans metadata.field_name as field_name %}
-                        <tr><th scope="row" class="title">{{ field_name|capfirst }}:</th><td>{{ metadata.field_value }}</td></tr>
-                    {% endif %}
-                {% endfor %}
-                </table>
-            {% endif %}
-            </div>
-        {% endif %}
-    {% endfor %}
-    </div>
-{% if translations.countries %}
-    <div class="panel-group" id="translation-accordion">
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                <a data-toggle="collapse" data-parent="#translation-accordion" href="#collapseOne">Translations</a>
-            </div>
-            <div id="collapseOne" class="panel-collapse collapse">
-                <div class="panel-body">
-                    <ul>
-                        {% with original=translations.languages.0.object.source %}
-                            <li><a href="{{ original.get_absolute_url}}?nolang"><strong>Original ({{ original.lang }})</strong></a></li>
-                        {% endwith %}
-                    {% for language, translation in translations.translations|sort_list %}
-                        <li><a href="{{ translation.get_absolute_url }}?nolang">{{ language }} - {{ language|code_to_local_language }}</a></li>
-                    {% endfor %}
-                    </ul>
+        </div>
+        {% if translations.countries %}
+            <div class="panel-group" id="translation-accordion">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <a data-toggle="collapse" data-parent="#translation-accordion"
+                           href="#collapseOne">Translations
+                        </a>
+                    </div>
+                    <div id="collapseOne" class="panel-collapse collapse">
+                        <div class="panel-body">
+                            <ul>
+                                {% with original=translations.languages.0.object.source %}
+                                    <li>
+                                        <a href="{{ original.get_absolute_url }}?nolang">
+                                            <strong>Original ({{ original.lang }})</strong>
+                                        </a>
+                                    </li>
+                                {% endwith %}
+                                {% for language, translation in translations.translations|sort_list %}
+                                    <li>
+                                        <a href="{{ translation.get_absolute_url }}?nolang">
+                                            {{ language }} - {{ language|code_to_local_language }}
+                                        </a>
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
-    </div>
-{% endif %}
-<hr>
-{% endif %}
+        {% endif %}
+        <hr>
+    {% endif %}
 {% endspaceless %}

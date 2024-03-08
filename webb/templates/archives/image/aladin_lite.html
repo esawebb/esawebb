@@ -40,37 +40,38 @@
     </div>
 </div>
 
-<script type="text/javascript" src="https://aladin.u-strasbg.fr/AladinLite/api/v2/latest/aladin.min.js" charset="utf-8"></script>
+<script type="text/javascript" src="https://aladin.u-strasbg.fr/AladinLite/api/v2/latest/aladin.min.js"
+        charset="utf-8"></script>
 <script type="text/javascript">
-function onVrViewLoad() {
-    var aladin = A.aladin('#aladin-lite-div', {target: "0 0",fov: 100, cooFrame: 'ICRS'});
-    aladin.setBaseImageLayer("P/2MASS/color");
-    var callback = function(ra, dec, fov) {
-        // we must return true, so that the default action (set view to center of image) is performed
-        return true;
-    };
-    aladin.displayJPG('{{ SITE_DOMAIN }}{{ object.resource_screen.url }}', null, callback);
+    function onVrViewLoad() {
+        var aladin = A.aladin('#aladin-lite-div', {target: "0 0", fov: 100, cooFrame: 'ICRS'});
+        aladin.setBaseImageLayer("P/2MASS/color");
+        var callback = function (ra, dec, fov) {
+            // we must return true, so that the default action (set view to center of image) is performed
+            return true;
+        };
+        aladin.displayJPG('{{ SITE_DOMAIN }}{{ object.resource_screen.url }}', null, callback);
 
-    var syncImageAlpha = function(value) {
-        aladin.getOverlayImageLayer().setAlpha(value);
-    };
+        var syncImageAlpha = function (value) {
+            aladin.getOverlayImageLayer().setAlpha(value);
+        };
 
-    $("#slider").on('input', function() {
-        var value = $(this).val();
-        syncImageAlpha(value);
-        $("#sliderFullScreen").val(value);
-    });
+        $("#slider").on('input', function () {
+            var value = $(this).val();
+            syncImageAlpha(value);
+            $("#sliderFullScreen").val(value);
+        });
 
-    $("#sliderFullScreen").on('input', function() {
-        var value = $(this).val();
-        syncImageAlpha(value);
-        $("#slider").val(value);
-    });
+        $("#sliderFullScreen").on('input', function () {
+            var value = $(this).val();
+            syncImageAlpha(value);
+            $("#slider").val(value);
+        });
 
-    $('input[name=survey]').change(function() {
-        aladin.setImageSurvey($(this).val());
-    });
-}
+        $('input[name=survey]').change(function () {
+            aladin.setImageSurvey($(this).val());
+        });
+    }
 
-window.addEventListener('load', onVrViewLoad);
+    window.addEventListener('load', onVrViewLoad);
 </script>

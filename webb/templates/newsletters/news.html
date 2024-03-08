@@ -3,18 +3,20 @@
 
 {% block html_title %}ESA/Hubble/Webb News{% endblock %}
 {% block facebook_title %}ESA/Hubble/Webb News{% endblock %}
-{% block text_only %}{% include "newsletters/includes/text_only_release.html" with org="ESA/Hubble/Webb" %}{% endblock %}
+{% block text_only %}
+    {% include "newsletters/includes/text_only_release.html" with org="ESA/Hubble/Webb" %}
+{% endblock %}
 
 {% block header_content %}
     {% if data.release %}
         {% with text_color="#ffffff" header_title="ESA/Hubble/Webb News" header_subtitle=data.release.release_date|date %}
-        {% with release_date=data.release.release_date link_url=base_url|add:data.release.get_absolute_url pretitle="ESA/Hubble/Webb "|add:data.release.release_type.name|add:" "|add:data.release.id embargo="" title=data.release.title subtitle=data.release.subtitle main_image=data.release.main_image %}
-        {% include "newsletters/includes/header.html" %}
-        {% endwith %}
+            {% with release_date=data.release.release_date link_url=base_url|add:data.release.get_absolute_url pretitle="ESA/Hubble/Webb "|add:data.release.release_type.name|add:" "|add:data.release.id embargo="" title=data.release.title subtitle=data.release.subtitle main_image=data.release.main_image %}
+                {% include "newsletters/includes/header.html" %}
+            {% endwith %}
         {% endwith %}
     {% else %}
         {% with text_color="#ffffff" header_title="ESA/Hubble/Webb News" header_subtitle="" %}
-        {% include "newsletters/includes/header.html" %}
+            {% include "newsletters/includes/header.html" %}
         {% endwith %}
     {% endif %}
 {% endblock %}
@@ -25,15 +27,17 @@
     {% endwith %}
 
     {% if editorial %}
-    <br /><hr style="{{hr_style}}"><br />
-    {% include "newsletters/includes/editorial.html" %}
+        <br/>
+        <hr style="{{ hr_style }}"><br/>
+        {% include "newsletters/includes/editorial.html" %}
     {% endif %}
 
     {% if data.releases %}
-    <br /><hr style="{{hr_style}}"><br />
-    {% with objects=data.releases org="ESA/Hubble/Webb" title="Press Releases" feed_url="https://feeds.feedburner.com/webb_pr" urlpattern="releases_defaultquery" %}
-        {% include "newsletters/includes/archiveobjects.html" %}
-    {% endwith %}
+        <br/>
+        <hr style="{{ hr_style }}"><br/>
+        {% with objects=data.releases org="ESA/Hubble/Webb" title="Press Releases" feed_url="https://feeds.feedburner.com/webb_pr" urlpattern="releases_defaultquery" %}
+            {% include "newsletters/includes/archiveobjects.html" %}
+        {% endwith %}
     {% endif %}
 {% endblock %}
 

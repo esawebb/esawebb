@@ -1,89 +1,96 @@
 {% load i18n %}{% load djangoplicity_utils %}{% load media_video %}
 {% if not object_list %}
-    <div style="text-align: center;">{% trans "No entries were found."%}</div>
+    <div style="text-align: center;">{% trans "No entries were found." %}</div>
 {% else %}
-{% include "archives/search_results.html" %}
+    {% include "archives/search_results.html" %}
 
-{% spaceless %}
-<div id="gallery" class="row">
-{% for video in object_list %}
+    {% spaceless %}
+        <div id="gallery" class="row">
+            {% for video in object_list %}
 
-    <div class="modal fade " id="popup-youtube-{{ video.youtube_video_id }}" tabindex="-1" aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog modal-xl">
-            <div class="modal-content" style="background: none; border: none;">
-                <div class="modal-header" style="border: none;">
-                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
-                        aria-label="Close"></button>
-                </div>
-                <div class="modal-body youtube-body">
-                    <iframe width="560" height="315" src="https://www.youtube.com/embed/{{ video.youtube_video_id }}"
-                    class="youtube-video" 
-                    title="YouTube video player" frameborder="0" 
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                    allowfullscreen></iframe>
-                </div>
-                <div class="modal-footer m-0 p-0" style="border: none;">
-                    <a class="youtube-title form-text m-0 p-0 text-white btn btn-outline-secondary border-0 rounded-0"
-                        href="{{ video.get_absolute_url }}"
-                        style="text-decoration: none;">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
-                            class="bi bi-download mx-3" viewBox="0 0 16 16">
-                            <path
-                                d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z" />
-                            <path
-                                d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z" />
-                        </svg>
-                        <p class="my-auto">{% trans "Info and downloads" %}</p>
-                    </a>
+                <div class="modal fade " id="popup-youtube-{{ video.youtube_video_id }}" tabindex="-1"
+                     aria-labelledby="exampleModalLabel"
+                     aria-hidden="true">
+                    <div class="modal-dialog modal-xl">
+                        <div class="modal-content" style="background: none; border: none;">
+                            <div class="modal-header" style="border: none;">
+                                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body youtube-body">
+                                <iframe width="560" height="315"
+                                        src="https://www.youtube.com/embed/{{ video.youtube_video_id }}"
+                                        class="youtube-video"
+                                        title="YouTube video player" frameborder="0"
+                                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                        allowfullscreen>
+                                </iframe>
+                            </div>
+                            <div class="modal-footer m-0 p-0" style="border: none;">
+                                <a class="youtube-title form-text m-0 p-0 text-white btn btn-outline-secondary border-0 rounded-0"
+                                   href="{{ video.get_absolute_url }}"
+                                   style="text-decoration: none;">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
+                                         class="bi bi-download mx-3" viewBox="0 0 16 16">
+                                        <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
+                                        <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/>
+                                    </svg>
+                                    <p class="my-auto">{% trans "Info and downloads" %}</p>
+                                </a>
 
+                            </div>
+                        </div>
+                    </div>
                 </div>
-            </div>
+
+                <div class="col-12 col-md-6 col-lg-4 my-5">
+
+                    <div class="gallery">
+
+                        <div class="video-thumbnail">
+                            <div class="img-wrapper bg-image">
+                                {% if video.youtube_video_id and video.use_youtube %}
+                                    <a class="popup-youtube" data-bs-toggle="modal"
+                                       data-bs-target="#popup-youtube-{{ video.youtube_video_id }}"
+                                       data-youtube-id="{{ video.youtube_video_id }}" data-title="{{ video.title }}"
+                                       data-url="{{ video.get_absolute_url }}">
+                                {% else %}
+                                    <a class="popup-jwplayer" data-bs-toggle="modal" data-bs-target="#popup-youtube"
+                                       data-video-id="{{ video.pk }}" data-title="{{ video.title }}"
+                                       data-url="{{ video.get_absolute_url }}">
+                                {% endif %}
+                                <img src="{{ video.resource_videoframe.url }}"
+                                     class="w-100" style="height: 300px; object-fit: cover;"/>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                     class="bi bi-play-fill play-icon btn text-whi" viewBox="0 0 16 16">
+                                    <path
+                                        d="m11.596 8.697-6.363 3.692c-.54.313-1.233-.066-1.233-.697V4.308c0-.63.692-1.01 1.233-.696l6.363 3.692a.802.802 0 0 1 0 1.393z"/>
+                                </svg>
+                                </a>
+
+                                <a class="video-title form-text mt-0 text-white btn btn-outline-secondary border-0 rounded-0"
+                                   href="{{ video.get_absolute_url }}" style="text-decoration: none;">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
+                                         class="bi bi-download mx-3"
+                                         viewBox="0 0 16 16">
+                                        <path
+                                            d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
+                                        <path
+                                            d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/>
+                                    </svg>
+                                    <p class="my-auto"
+                                       style="overflow:hidden; WHITE-space: nowrap;">{{ video.title }}</p>
+
+                                </a>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            {% endfor %}
         </div>
-    </div>
-    
-    <div class="col-12 col-md-6 col-lg-4 my-5">
-        
-        <div class="gallery">
-        
-            <div class="video-thumbnail">
-                <div class="img-wrapper bg-image">
-                {% if video.youtube_video_id and video.use_youtube %}
-                    <a class="popup-youtube" data-bs-toggle="modal" data-bs-target="#popup-youtube-{{ video.youtube_video_id }}" data-youtube-id="{{ video.youtube_video_id }}" data-title="{{ video.title }}" data-url="{{ video.get_absolute_url }}">
-                {% else %}
-                    <a class="popup-jwplayer" data-bs-toggle="modal" data-bs-target="#popup-youtube" data-video-id="{{ video.pk }}" data-title="{{ video.title }}" data-url="{{ video.get_absolute_url }}">
-                {% endif %}
-                        <img src="{{ video.resource_videoframe.url }}"
-                        class="w-100" style="height: 300px; object-fit: cover;" />
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                            class="bi bi-play-fill play-icon btn text-whi" viewBox="0 0 16 16">
-                            <path
-                                d="m11.596 8.697-6.363 3.692c-.54.313-1.233-.066-1.233-.697V4.308c0-.63.692-1.01 1.233-.696l6.363 3.692a.802.802 0 0 1 0 1.393z" />
-                        </svg>
-                    </a>
-                    
-                    <a class="video-title form-text mt-0 text-white btn btn-outline-secondary border-0 rounded-0"
-                        href="{{ video.get_absolute_url }}" style="text-decoration: none;">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-download mx-3"
-                            viewBox="0 0 16 16">
-                            <path
-                                d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z" />
-                            <path
-                                d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z" />
-                        </svg>
-                        <p class="my-auto" style="overflow:hidden; WHITE-space: nowrap;">{{ video.title }}</p>
-                    
-                    </a>
-
-                </div>
-            </div>
-        </div>
-    </div>
-
-{% endfor %}
-</div>
-{% endspaceless %}
-{% paginator paginator page_obj paginator_url paginator_prefix paginator_params %}
-{% statusbar paginator page_obj browsers searchable search_url search_str  %}
+    {% endspaceless %}
+    {% paginator paginator page_obj paginator_url paginator_prefix paginator_params %}
+    {% statusbar paginator page_obj browsers searchable search_url search_str %}
 {% endif %}
 {% include 'archives/image/extra_footer.html' %}

@@ -54,20 +54,21 @@
     {% endwith %}
 
     {% if editorial %}
-    {% include "newsletters/includes/editorial.html" %}
+        {% include "newsletters/includes/editorial.html" %}
     {% endif %}
 
     {% if data.scienceannouncements %}
-    <br /><hr style="{{hr_style}}"><br />
-    {% with objects=data.scienceannouncements org="" title="Science Announcements" urlpattern="scienceannouncements_defaultquery" truncatelength=60 %}
-        {% include "newsletters/includes/archiveobjects.html" with width_right="100%" %}
-    {% endwith %}
+        <br/>
+        <hr style="{{ hr_style }}"><br/>
+        {% with objects=data.scienceannouncements org="" title="Science Announcements" urlpattern="scienceannouncements_defaultquery" truncatelength=60 %}
+            {% include "newsletters/includes/archiveobjects.html" with width_right="100%" %}
+        {% endwith %}
     {% endif %}
 
 {% endblock %}
 
 {% block footer %}
-{% with followus="yes" org="ESA/Hubble" potw_feed_url="https://feeds.feedburner.com/hubble_potw/" reason="you subscribed to the ESA/Hubble/JWST Science Newsletter" footer_potws=data.footer_potws footer_note='' unsubscribe_link='' preferences_link='' browser_link=base_url|add:"/newsletters/science/html/"|add:newsletter_id|add:"/" address="ESA/Hubble, ESA Office, Space Telescope Science Institute, 3700 San Martin Dr, D-21218 Baltimore, United States" %}
-    {% include "newsletters/includes/webb-footer.html" with width="693" %}
-{% endwith %}
+    {% with followus="yes" org="ESA/Hubble" potw_feed_url="https://feeds.feedburner.com/hubble_potw/" reason="you subscribed to the ESA/Hubble/JWST Science Newsletter" footer_potws=data.footer_potws footer_note='' unsubscribe_link='' preferences_link='' browser_link=base_url|add:"/newsletters/science/html/"|add:newsletter_id|add:"/" address="ESA/Hubble, ESA Office, Space Telescope Science Institute, 3700 San Martin Dr, D-21218 Baltimore, United States" %}
+        {% include "newsletters/includes/webb-footer.html" with width="693" %}
+    {% endwith %}
 {% endblock %}

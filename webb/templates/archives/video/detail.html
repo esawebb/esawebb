@@ -1,61 +1,62 @@
 {% extends "base_twocolumn.html" %}{% load pages %}
 
-{% block site_title %}{{object.title}} | {{block.super}}{% endblock %}
+{% block site_title %}{{ object.title }} | {{ block.super }}{% endblock %}
 
 {% load menus %}
 
 {% block content %}
-{% include description_template  %}
+    {% include description_template %}
 {% endblock %}
 
 {% block rightcolumn %}
-{% include "archives/searchbox.html" %}
-{% include admin_template %}
-{% include info_template %}
-{% include "archives/image/object_observation.html" %}
-<hr>
-{% include "images/embedded_list.html" %}
-{% include "videos/embedded_list.html" %}
-{% include resources_template %}
-{% include "scripts/embedded_list.html" %}
-{% include "audiotracks/embedded_list.html" %}
-{% include "broadcastaudiotracks/embedded_list.html" %}
-{% include "subtitles/embedded_list.html" %}
-{{ right_column_page }}
-{% include "archives/crosslinks.html" %}
+    {% include "archives/searchbox.html" %}
+    {% include admin_template %}
+    {% include info_template %}
+    {% include "archives/image/object_observation.html" %}
+    <hr>
+    {% include "images/embedded_list.html" %}
+    {% include "videos/embedded_list.html" %}
+    {% include resources_template %}
+    {% include "scripts/embedded_list.html" %}
+    {% include "audiotracks/embedded_list.html" %}
+    {% include "broadcastaudiotracks/embedded_list.html" %}
+    {% include "subtitles/embedded_list.html" %}
+    {{ right_column_page }}
+    {% include "archives/crosslinks.html" %}
 
 {% endblock %}
 
 {% block extra_scripts %}
-<script type="text/javascript">
-{% if object.youtube_video_id and object.use_youtube %}
-var tag = document.createElement('script');
+    <script type="text/javascript">
+        {% if object.youtube_video_id and object.use_youtube %}
+            var tag = document.createElement('script');
 
-tag.src = "https://www.youtube.com/iframe_api";
-var firstScriptTag = document.getElementsByTagName('script')[0];
-firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+            tag.src = "https://www.youtube.com/iframe_api";
+            var firstScriptTag = document.getElementsByTagName('script')[0];
+            firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
-var player;
-function onYouTubeIframeAPIReady() {
-    player = new YT.Player('youtube-player', {
-        height: '315',
-        width: '560',
-        videoId: '{{ object.youtube_video_id }}',
-        playerVars: {
-            'modestbranding': 1,
-            'hl': '{{ LANGUAGE_CODE }}',
-            'rel': 0
-        },
-        events: {
-            'onReady': onPlayerReady,
-        }
-    });
-    function onPlayerReady(event) {
-        // event.target.setPlaybackQuality('large');
-    }
-}
-{% else %}
-    setupVideoPlayer('{{ object.id }}');
-{% endif %}
-</script>
+            var player;
+            function onYouTubeIframeAPIReady() {
+                player = new YT.Player('youtube-player', {
+                    height: '315',
+                    width: '560',
+                    videoId: '{{ object.youtube_video_id }}',
+                    playerVars: {
+                        'modestbranding': 1,
+                        'hl': '{{ LANGUAGE_CODE }}',
+                        'rel': 0
+                    },
+                    events: {
+                        'onReady': onPlayerReady,
+                    }
+                });
+
+                function onPlayerReady(event) {
+                    // event.target.setPlaybackQuality('large');
+                }
+            }
+        {% else %}
+            setupVideoPlayer('{{ object.id }}');
+        {% endif %}
+    </script>
 {% endblock %}

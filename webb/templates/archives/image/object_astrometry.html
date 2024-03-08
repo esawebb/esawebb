@@ -2,148 +2,162 @@
 {% load staticfiles %}
 {% spaceless %}
 
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-        compass_init();
-    }, false);
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            compass_init();
+        }, false);
 
+        // Compas widget
+        // Expects one compass_canvas canvas:
+        //    <canvas id="compass_canvas" width="240" height="140"></canvas>
+        // Expects two variables set in page:
+        //    spatial_rotation: spatial rotation in degrees
+        //    compass_src: path to the compass image file
 
-    // Compas widget
-    // Expects one compass_canvas canvas:
-    //    <canvas id="compass_canvas" width="240" height="140"></canvas>
-    // Expects two variables set in page:
-    //    spatial_rotation: spatial rotation in degrees
-    //    compass_src: path to the compass image file
+        function compass_init() {
+            // Set variables
+            angle = 0;
+            speed = 5;
+            max_speed = 20;
+            min_speed = 5;
+            canvas = document.getElementById('compass_canvas');
+            if (!canvas)
+                return;
 
-    function compass_init() {
-        // Set variables
-        angle = 0;
-        speed = 5;
-        max_speed = 20;
-        min_speed = 5;
-        canvas = document.getElementById('compass_canvas');
-        if (!canvas)
-            return;
+            ctx = canvas.getContext('2d');
+            if (!ctx) {
+                // Canvas not supported
+                canvas.style.display = 'none';
+                return;
+            }
 
-        ctx = canvas.getContext('2d');
-        if (!ctx) {
-            // Canvas not supported
-            canvas.style.display = 'none';
-            return;
-        }
-
-        compass = new Image();
-        compass.src = compass_src;
-        compass.onload = compass_loaded;
-        if (spatial_rotation < 0)
-            direction = 'ccw';
-        else
-            direction = 'cw';
-    }
-
-    function compass_loaded() {
-        compass_interval_id = setInterval(compass_draw, 50);
-    }
-
-    function compass_draw() {
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        ctx.save();
-        ctx.translate(canvas.width / 2, canvas.height / 2);
-        if (angle == spatial_rotation) {
-            clearInterval(compass_interval_id);
-        }
-        if (direction == 'cw') {
-            if (angle + speed > spatial_rotation)
-                angle = spatial_rotation;
+            compass = new Image();
+            compass.src = compass_src;
+            compass.onload = compass_loaded;
+            if (spatial_rotation < 0)
+                direction = 'ccw';
             else
-                angle += speed;
-            if (spatial_rotation / 2 > angle) {
-                // increase speed
-                if (speed < max_speed)
-                    speed += 1;
-            }
-            else if (spatial_rotation / 2 < angle) {
-                // decrease speed
-                if (speed > min_speed)
-                    speed -= 1;
-            }
-        } else {
-            if (angle - speed < spatial_rotation)
-                angle = spatial_rotation;
-            else
-                angle -= speed;
-            if (spatial_rotation / 2 < angle) {
-                // increase speed
-                if (speed < max_speed)
-                    speed += 1;
-            }
-            else if (spatial_rotation / 2 < angle) {
-                // decrease speed
-                if (speed > min_speed)
-                    speed -= 1;
-            }
+                direction = 'cw';
         }
-        // we rotate by -angle as the compas turns, not the image
-        ctx.rotate(-angle * Math.PI / 180);
-        ctx.drawImage(compass, -compass.width / 2, -compass.height / 2);
-        ctx.restore();
-    }
-</script>
 
-{% if object.spatial_quality %}
-    <div id="object_astrometry_div" class="object-info">
-        <h3>{% trans "Coordinates" %}</h3>
-        <table class="table form-text text-dark">
-            {% if object.get_ra_verbose %}<tr><th scope="row" class="title">{% trans "Position (RA)" %}:</th><td>{{object.get_ra_verbose}}</td></tr>{% endif %}
-            {% if object.get_dec_verbose %}<tr><th scope="row" class="title">{% trans "Position (Dec)" %}:</th><td>{{object.get_dec_verbose|safe}}</td></tr>{% endif %}
-            {% if object.spatial_quality == 'Full' %}
-                <tr><th scope="row" class="title">{% trans "Field of view" %}:</th><td>{{object.get_fov_verbose}}</td></tr>
-                {% if object.spatial_rotation %}
-                    <tr><th scope="row"class="title">{% trans "Orientation" %}:</th><td>{{object.get_spatial_rotation_verbose|safe}}</td></tr>
-                {% endif %}
-        </table>
-        <div class="d-flex justify-content-center">
-            {% if object.spatial_rotation %}
-            <script type="text/javascript">
-            compass_src = "{% static 'djangoplicity/images/widgets/compassm.png' %}";
-            spatial_rotation = {{ object.spatial_rotation }};
-            </script>
-            <canvas id="compass_canvas" width="240" height="140"></canvas>
-        {% endif %}
-        </div>
-        
-        <!--ESASky section-->
-        {% if object.type == 'Observation' and object.spatial_quality == 'Full' %}
-            {% with esaskylink="https://sky.esa.int/?hips="|add:"2MASS+color+JHK&sci=false&lang=en&hide_welcome=true"|add:"&jwst_image="|add:object.id %}
-                {% if esaskylink %}
-                    <div class="wwtlink">
-                        <div>{% trans "View in ESASky" %}:</div>
-                        <div class="d-flex justify-content-center" style="padding: 5px 0 5px 0;">
-                            <a href="{{esaskylink}}" title="View in ESASky"><img src="{% static 'images/esasky.png' %}" width="200" alt="ESASky" /></a>
-                        </div>
+        function compass_loaded() {
+            compass_interval_id = setInterval(compass_draw, 50);
+        }
+
+        function compass_draw() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx.save();
+            ctx.translate(canvas.width / 2, canvas.height / 2);
+            if (angle == spatial_rotation) {
+                clearInterval(compass_interval_id);
+            }
+            if (direction == 'cw') {
+                if (angle + speed > spatial_rotation)
+                    angle = spatial_rotation;
+                else
+                    angle += speed;
+                if (spatial_rotation / 2 > angle) {
+                    // increase speed
+                    if (speed < max_speed)
+                        speed += 1;
+                } else if (spatial_rotation / 2 < angle) {
+                    // decrease speed
+                    if (speed > min_speed)
+                        speed -= 1;
+                }
+            } else {
+                if (angle - speed < spatial_rotation)
+                    angle = spatial_rotation;
+                else
+                    angle -= speed;
+                if (spatial_rotation / 2 < angle) {
+                    // increase speed
+                    if (speed < max_speed)
+                        speed += 1;
+                } else if (spatial_rotation / 2 < angle) {
+                    // decrease speed
+                    if (speed > min_speed)
+                        speed -= 1;
+                }
+            }
+            // we rotate by -angle as the compas turns, not the image
+            ctx.rotate(-angle * Math.PI / 180);
+            ctx.drawImage(compass, -compass.width / 2, -compass.height / 2);
+            ctx.restore();
+        }
+    </script>
+
+    {% if object.spatial_quality %}
+        <div id="object_astrometry_div" class="object-info">
+            <h3>{% trans "Coordinates" %}</h3>
+            <table class="table form-text text-dark">
+                {% if object.get_ra_verbose %}
+                    <tr>
+                        <th scope="row" class="title">{% trans "Position (RA)" %}:</th>
+                        <td>{{ object.get_ra_verbose }}</td>
+                    </tr>{% endif %}
+                {% if object.get_dec_verbose %}
+                    <tr>
+                        <th scope="row" class="title">{% trans "Position (Dec)" %}:</th>
+                        <td>{{ object.get_dec_verbose|safe }}</td>
+                    </tr>{% endif %}
+                {% if object.spatial_quality == 'Full' %}
+                    <tr>
+                        <th scope="row" class="title">{% trans "Field of view" %}:</th>
+                        <td>{{ object.get_fov_verbose }}</td>
+                    </tr>
+                    {% if object.spatial_rotation %}
+                        <tr>
+                            <th scope="row" class="title">{% trans "Orientation" %}:</th>
+                            <td>{{ object.get_spatial_rotation_verbose|safe }}</td>
+                        </tr>
+                    {% endif %}
+                    </table>
+                    <div class="d-flex justify-content-center">
+                        {% if object.spatial_rotation %}
+                            <script type="text/javascript">
+                                compass_src = "{% static 'djangoplicity/images/widgets/compassm.png' %}";
+                                spatial_rotation = {{ object.spatial_rotation }};
+                            </script>
+                            <canvas id="compass_canvas" width="240" height="140"></canvas>
+                        {% endif %}
+                    </div>
+
+                    <!--ESASky section-->
+                    {% if object.type == 'Observation' and object.spatial_quality == 'Full' %}
+                        {% with esaskylink="https://sky.esa.int/?hips="|add:"2MASS+color+JHK&sci=false&lang=en&hide_welcome=true"|add:"&jwst_image="|add:object.id %}
+                            {% if esaskylink %}
+                                <div class="wwtlink">
+                                    <div>{% trans "View in ESASky" %}:</div>
+                                    <div class="d-flex justify-content-center" style="padding: 5px 0 5px 0;">
+                                        <a href="{{ esaskylink }}" title="View in ESASky"><img
+                                            src="{% static 'images/esasky.png' %}" width="200" alt="ESASky"/></a>
+                                    </div>
+                                </div>
+                            {% endif %}
+                        {% endwith %}
+                    {% endif %}
+
+                    <!--WWT section-->
+                    {% with wwtlink=object.get_wwt_url %}
+                        {% if wwtlink %}
+                            <div class="wwtlink">
+                                <div>{% trans "View in WorldWide Telescope" %}:</div>
+                                <div>
+                                    <a href="{{ wwtlink }}" title="View in WorldWide Telescope">
+                                        <img class="img-fluid" src="{% static 'images/wwt.png' %}" alt="View in WorldWide Telescope"/>
+                                    </a>
+                                </div>
+                            </div>
+                        {% endif %}
+                    {% endwith %}
+
+                    <!--Aladin section-->
+                    {% if object.type == 'Observation' and object.spatial_quality == 'Full' %}
+                        {% include 'archives/image/aladin_lite.html' %}
+                        <hr>
+                    {% endif %}
                     </div>
                 {% endif %}
-            {% endwith %}
-        {% endif %}
-
-        <!--WWT section-->
-        {% with wwtlink=object.get_wwt_url %}
-            {% if wwtlink %}
-                <div class="wwtlink">
-                    <div>{% trans "View in WorldWide Telescope" %}:</div>
-                    <div>
-                        <a href="{{wwtlink}}" title="View in WorldWide Telescope"><img class="img-fluid" src="{% static 'images/wwt.png' %}" alt="View in WorldWide Telescope" /></a>
-                    </div>
-                </div>
-            {% endif %}
-        {% endwith %}
-
-        <!--Aladin section-->
-        {% if object.type == 'Observation' and object.spatial_quality == 'Full' %}
-           {% include 'archives/image/aladin_lite.html' %}
-            <hr>
-        {% endif %}
-    </div>
-{% endif %}
-{% endif %}
+    {% endif %}
 {% endspaceless %}

@@ -10,15 +10,16 @@
     <div id="vrview"></div>
 
     <script>
-    window.addEventListener('load', onVrViewLoad)
-    function onVrViewLoad() {
-        var vrView = new VRView.Player('#vrview', {
-            preview: '{{ object.resource_screen.url }}',
-            image: '{{ object.resource_publicationjpg.url }}',
-            width: '100%',
-            height: '400px'
-        });
-    }
+        window.addEventListener('load', onVrViewLoad)
+
+        function onVrViewLoad() {
+            var vrView = new VRView.Player('#vrview', {
+                preview: '{{ object.resource_screen.url }}',
+                image: '{{ object.resource_publicationjpg.url }}',
+                width: '100%',
+                height: '400px'
+            });
+        }
     </script>
 
 {% endif %}
@@ -28,31 +29,34 @@
 <script src="{% static 'magnific-popup/jquery.magnific-popup.min.js' %}"></script>
 
 <div class="bg-image hover-overlay ripple shadow-1-strong rounded my-3 px-1 popup-link" data-ripple-color="light">
-    <a href="https://cdn.esawebb.org/archives/images/screen/{{object.pk}}.jpg" title="{{ object.title }}">
-        <img src="https://cdn.esawebb.org/archives/images/screen/{{object.pk}}.jpg" class="w-100" style="height: auto; max-width: 100%; object-fit: cover;" />
+    <a href="https://cdn.esawebb.org/archives/images/screen/{{ object.pk }}.jpg" title="{{ object.title }}">
+        <img src="https://cdn.esawebb.org/archives/images/screen/{{ object.pk }}.jpg" class="w-100"
+             style="height: auto; max-width: 100%; object-fit: cover;"/>
     </a>
 </div>
 
-{#<a class="test-popup-link" title="{{ object.title }}" href="https://cdn.esawebb.org/archives/images/screen/{{object.pk}}.jpg">#}
-{#    <img src="http://farm9.staticflickr.com/8241/8589392310_7b6127e243_s.jpg" width="75" height="75" />#}
-{#</a>#}
 <script>
-    $(document).ready(function($){
-      $('.popup-link').magnificPopup({
-          delegate: 'a',
-          type: 'image'
-      });
+    $(document).ready(function ($) {
+        $('.popup-link').magnificPopup({
+            delegate: 'a',
+            type: 'image'
+        });
     })
 </script>
-{% if object.headline %}<p>{{ object.headline }}</p>{% endif %}
+{% if object.headline %}
+    <p>{{ object.headline }}</p>
+{% endif %}
 <p>{{ object.description|safe }}</p>
-<strong>{% trans "Credit" %}:</strong><div class="credit">{{ object.credit|safe }}</div>
+<strong>{% trans "Credit" %}:</strong>
+<div class="credit">{{ object.credit|safe }}</div>
 <!-- {% include 'archives/image/extra_footer.html' %} -->
 <div class="row mb-1">
     <div class="col-12 text-center my-3">
         <div class="text-secondary">
-            <a class="form-text" style="margin: 0px; padding: 0px; color: #009bdb" href="/copyright/">{% trans "Usage of ESA/Hubble/Webb Images and Videos" %}</a><br />
-            <a class="form-text" style="margin: 0px; padding: 0px; color: #009bdb" href="/press/mailinglist">{% trans "Are you a journalist? Subscribe to the ESA/Hubble/Webb Media Newsletter." %}</a>
+            <a class="form-text" style="margin: 0px; padding: 0px; color: #009bdb"
+               href="/copyright/">{% trans "Usage of ESA/Hubble/Webb Images and Videos" %}</a><br/>
+            <a class="form-text" style="margin: 0px; padding: 0px; color: #009bdb"
+               href="/press/mailinglist">{% trans "Are you a journalist? Subscribe to the ESA/Hubble/Webb Media Newsletter." %}</a>
         </div>
     </div>
     <br>

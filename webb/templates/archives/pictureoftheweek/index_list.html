@@ -3,56 +3,67 @@
 {% if not object_list %}
     <div style="text-align: center;">{% trans "No press releases were found." %}</div>
 {% else %}
-{% include "archives/search_results.html" %}
+    {% include "archives/search_results.html" %}
 
-<div class="row news-list">
-{% for row in object_list|split_list:4 %}
+    <div class="row news-list">
+        {% for row in object_list|split_list:4 %}
 
-    {% for potw in row %}
-    <div class="col-lg-4 col-md-6 col-sm-12">
-        <a href="{{ potw.get_absolute_url }}">
-            <div class="news-wrapper box-image shadow  border my-3">
-                <div class="news-image">
-                    {% if potw.image %}
-                        <img class="w-100" style="height: 200px; object-fit: cover;" src="{{ potw.image.resource_thumb350x.url }}">
-                    {% elif potw.video %}
-                        <img class="w-100" style="height: 200px; object-fit: cover;" src="{{ potw.video.resource_thumb350x.url }}">
-                    {% elif potw.comparison %}
-                        <img class="w-100" style="height: 200px; object-fit: cover;" src="{{ potw.comparison.resource_thumb350x.url }}">
-                    {% endif %}
+            {% for potw in row %}
+                <div class="col-lg-4 col-md-6 col-sm-12">
+                    <a href="{{ potw.get_absolute_url }}">
+                        <div class="news-wrapper box-image shadow  border my-3">
+                            <div class="news-image">
+                                {% if potw.image %}
+                                    <img class="w-100" style="height: 200px; object-fit: cover;" src="{{ potw.image.resource_thumb350x.url }}">
+                                {% elif potw.video %}
+                                    <img class="w-100" style="height: 200px; object-fit: cover;" src="{{ potw.video.resource_thumb350x.url }}">
+                                {% elif potw.comparison %}
+                                    <img class="w-100" style="height: 200px; object-fit: cover;" src="{{ potw.comparison.resource_thumb350x.url }}">
+                                {% endif %}
+                            </div>
+                            <div class="news-description pb-3">
+                                <div class="news-id mx-3 text-primary">
+                                    {{ potw.id }} — {% trans "Picture of the Month" %}
+                                </div>
+                                {% if potw.image %}
+                                    <div class="news-title h6 text-capitalize text-primary mx-3 mt-2 fw-bold"
+                                         style="height: 40px;">{{ potw.image.title }}
+                                    </div>
+                                {% elif potw.video %}
+                                    <div class="news-title h6 text-capitalize text-primary mx-3 mt-2 fw-bold"
+                                         style="height: 40px;">{{ potw.video.title }}
+                                    </div>
+                                {% elif potw.comparison %}
+                                    <div class="news-title h6 text-capitalize text-primary mx-3 mt-2 fw-bold"
+                                         style="height: 40px;">{{ potw.comparison.title }}
+                                    </div>
+                                {% endif %}
+                                {% if potw.image %}
+                                    <div class="news-teaser-potm small  text-muted mx-3">
+                                        <strong>{{ potw.release_date|datetime:"DATE" }}</strong><br>{{ potw.image.description|safe|striptags|truncatewords:150 }}
+                                    </div>
+                                {% elif potw.video %}
+                                    <div class="news-teaser-potm small  text-muted mx-3">
+                                        <strong>{{ potw.release_date|datetime:"DATE" }}</strong><br>{{ potw.video.description|safe|striptags|truncatewords:150 }}
+                                    </div>
+                                {% elif potw.comparison %}
+                                    <div class="news-teaser-potm small  text-muted mx-3">
+                                        <strong>{{ potw.release_date|datetime:"DATE" }}</strong><br>{{ potw.comparison.description|safe|striptags|truncatewords:150 }}
+                                    </div>
+                                {% endif %}
+                            </div>
+                            <div class="news-readmore text-center">
+                                <p class="btn btn-primary mt-3">{% trans "Read more" %}</p>
+                            </div>
+                        </div> <!-- news-wrapper -->
+                    </a>
                 </div>
-                <div class="news-description pb-3">
-                    <div class="news-id mx-3 text-primary">{{ potw.id }} — {% trans "Picture of the Month" %}</div>
-                    {% if potw.image %}
-                        <div class="news-title h6 text-capitalize text-primary mx-3 mt-2 fw-bold" style="height: 40px;">{{ potw.image.title }}</div>
-                    {% elif potw.video %}
-                        <div class="news-title h6 text-capitalize text-primary mx-3 mt-2 fw-bold" style="height: 40px;">{{ potw.video.title }}</div>
-                    {% elif potw.comparison %}
-                        <div class="news-title h6 text-capitalize text-primary mx-3 mt-2 fw-bold" style="height: 40px;">{{ potw.comparison.title }}</div>
-                    {% endif %}
-                    {% if potw.image %}
-                        <div class="news-teaser-potm small  text-muted mx-3" >
-                            <strong>{{ potw.release_date|datetime:"DATE" }}</strong><br>{{ potw.image.description|safe|striptags|truncatewords:150 }}</div>
-                    {% elif potw.video %}
-                        <div class="news-teaser-potm small  text-muted mx-3" >
-                            <strong>{{ potw.release_date|datetime:"DATE" }}</strong><br>{{ potw.video.description|safe|striptags|truncatewords:150 }}</div>
-                    {% elif potw.comparison %}
-                        <div class="news-teaser-potm small  text-muted mx-3" >
-                            <strong>{{ potw.release_date|datetime:"DATE" }}</strong><br>{{ potw.comparison.description|safe|striptags|truncatewords:150 }}</div>
-                    {% endif %}
-                </div>
-                <div class="news-readmore text-center">
-                    <p class="btn btn-primary mt-3">{% trans "Read more" %}</p>
-                </div>
-            </div> <!-- news-wrapper -->
-        </a>
+            {% endfor %}
+
+        {% endfor %}
     </div>
-    {% endfor %}
 
-{% endfor %}
-</div>
-
-{% paginator paginator page_obj paginator_url paginator_prefix paginator_params %}
-{% statusbar paginator page_obj browsers searchable search_url search_str  %}
+    {% paginator paginator page_obj paginator_url paginator_prefix paginator_params %}
+    {% statusbar paginator page_obj browsers searchable search_url search_str %}
 {% endif %}
 {% include 'archives/extra_footer.html' %}

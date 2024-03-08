@@ -2,32 +2,52 @@
 
 {% load i18n %}
 
-{% block site_title %}{% if archive_title %}{{archive_title}}{% else %}{{ archive|capfirst }} Archive{%endif%} | {{block.super}}{% endblock %}
+{% block site_title %}
+    {% if archive_title %}{{ archive_title }}{% else %}{{ archive|capfirst }} Archive{% endif %} | {{ block.super }}
+{% endblock %}
 
-{% block extra_header %}{{block.super}}{% for furl,title in feed_urls %}<link href='{{furl}}' rel="alternate" type="application/rss+xml" title='{{title}}' />{%endfor%}{% if archive_title %}
-    <meta property="og:title" content="{{ archive_title }}" />{% endif %}{% if archive_opengraph_image %}
-    <meta property="og:image" content="{{ archive_opengraph_image }}" />{% endif %}{% if archive_description %}
-    <meta property="og:description" content="{{ archive_description }}" />
-    <meta name="description" content="{{ archive_description }}" />{% endif %}
-{%endblock%}
+{% block extra_header %}{{ block.super }}
+    {% for furl,title in feed_urls %}
+        <link href='{{ furl }}' rel="alternate" type="application/rss+xml" title='{{ title }}'/>
+    {% endfor %}
+    {% if archive_title %}
+        <meta property="og:title" content="{{ archive_title }}"/>
+    {% endif %}
+    {% if archive_opengraph_image %}
+        <meta property="og:image" content="{{ archive_opengraph_image }}"/>
+    {% endif %}
+    {% if archive_description %}
+        <meta property="og:description" content="{{ archive_description }}"/>
+        <meta name="description" content="{{ archive_description }}"/>
+    {% endif %}
+{% endblock %}
 
 {% block archive_search %}
-{% with archive_search_position="outside" %}
-    {% include "archives/searchbox.html" %}
-{% endwith %}
+    {% with archive_search_position="outside" %}
+        {% include "archives/searchbox.html" %}
+    {% endwith %}
 {% endblock %}
 
 {% block body %}
 
-<div class="row no-page">
-    <div id="release-list" class="col-md-12">
-{% block content %}
-<h1>{% if archive_title %}{% trans archive_title %}{% else %}{{ archive|capfirst }} {% trans "Archive" %}{% endif %}{% if listview_feed_url %} <a href="{{ listview_feed_url }}" class="listviewrsslink"><span class="fa fa-rss"></span></a>{% endif %}</h1>
+    <div class="row no-page">
+        <div id="release-list" class="col-md-12">
+            {% block content %}
+                <h1>
+                    {% if archive_title %}
+                        {% trans archive_title %}
+                    {% else %}
+                        {{ archive|capfirst }}{% trans "Archive" %}
+                    {% endif %}
+                    {% if listview_feed_url %}
+                        <a href="{{ listview_feed_url }}" class="listviewrsslink"><span class="fa fa-rss"></span></a>
+                    {% endif %}
+                </h1>
 
-{% include index_template %}
-{% endblock %}
+                {% include index_template %}
+            {% endblock %}
+        </div>
     </div>
-</div>
 {% endblock %}
 
 

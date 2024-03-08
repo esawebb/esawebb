@@ -9,11 +9,11 @@
 <script src="{% static 'magnific-popup/jquery.magnific-popup.min.js' %}"></script>
 
 <script>
-    $(document).ready(function($){
-      $('.popup-link').magnificPopup({
-          delegate: 'a',
-          type: 'image'
-      });
+    $(document).ready(function ($) {
+        $('.popup-link').magnificPopup({
+            delegate: 'a',
+            type: 'image'
+        });
     })
 </script>
 
@@ -23,7 +23,9 @@
 
 {% if object.kids_title and object.kids_description %}
     <div style="float: right; margin-top: 15px;">
-        <a href="kids/" class="noicon" title="Kids"><img src="{{ MEDIA_URL }}/app/djangoplicity/kids/unawe-flag-en.png" alt="Kids" class="nopadding"></a>
+        <a href="kids/" class="noicon" title="Kids">
+            <img src="{{ MEDIA_URL }}/app/djangoplicity/kids/unawe-flag-en.png" alt="Kids" class="nopadding">
+        </a>
     </div>
 {% endif %}
 
@@ -31,63 +33,71 @@
 
 <h1 class="pr_title">{{ object.title }}</h1>
 
-{% if object.subtitle %}<h3>{{ object.subtitle }}</h3>{% endif %}
-<p class="date">{{ object.release_date|datetime:"DATE" }}{% if object.release_city %}, {{ object.release_city }}{% endif %}</p>
+{% if object.subtitle %}
+    <h3>{{ object.subtitle }}</h3>
+{% endif %}
+
+<p class="date"> {{ object.release_date|datetime:"DATE" }}{% if object.release_city %}, {{ object.release_city }}{% endif %}</p>
 
 {% with main_image.releaseimage_set.all.0.zoomable as zoomable %}
-<div class="bg-image hover-overlay ripple shadow-1-strong rounded my-3 px-1 popup-link" data-ripple-color="light">
-    {% if main_video %}
-        {% if main_video.youtube_video_id and main_video.use_youtube %}
-            <div class="youtube-wrapper">
-                <div id="youtube-player"></div>
-            </div>
-        {% elif main_video.resource_newsfeature %}
-            <div class="bg-image hover-overlay ripple shadow-1-strong rounded my-3 px-1 popup-link" data-ripple-color="light">
-                {% if main_video.resource_medium_podcast %}
-                {% load media_video %}
-                {% if main_video.videosubtitle_set.all %}
-                {% embedvideo_subs main_video "medium_podcast,h264" "hd_and_apple,hd720p_screen,dome_preview"
-                "medium_podcast,h264" main_video.videosubtitle_set.all %}
-                {% else %}
-                {% embedvideo main_video "medium_podcast,h264" "hd_and_apple,hd720p_screen,dome_preview" "medium_podcast,h264"
-                %}
-                {% endif%}
-                {% endif %}
-            </div>
-        {% endif %}
-    {% elif main_image %}
-        {% if main_image.resource_newsfeature %}
-        <a href="{{ main_image.resource_screen.url }}" title="{{ main_image.title }}">
-            <img src="{{ main_image.resource_newsfeature.url }}" class="w-100"
-                style="height: auto; max-width: 100%; object-fit: cover;" />
-        </a>
-        {% endif %}
-    {% endif %}
-    {% if images %}
-        {% for im in images %}
-            {% if main_image != im %}
-                <a class="popup" href="{{ im.resource_screen.url }}"
-                    title="{{ im.title }}" class="hidden">
+    <div class="bg-image hover-overlay ripple shadow-1-strong rounded my-3 px-1 popup-link" data-ripple-color="light">
+        {% if main_video %}
+            {% if main_video.youtube_video_id and main_video.use_youtube %}
+                <div class="youtube-wrapper">
+                    <div id="youtube-player"></div>
+                </div>
+            {% elif main_video.resource_newsfeature %}
+                <div class="bg-image hover-overlay ripple shadow-1-strong rounded my-3 px-1 popup-link"
+                     data-ripple-color="light">
+                    {% if main_video.resource_medium_podcast %}
+                        {% load media_video %}
+                        {% if main_video.videosubtitle_set.all %}
+                            {% embedvideo_subs main_video "medium_podcast,h264" "hd_and_apple,hd720p_screen,dome_preview" "medium_podcast,h264" main_video.videosubtitle_set.all %}
+                        {% else %}
+                            {% embedvideo main_video "medium_podcast,h264" "hd_and_apple,hd720p_screen,dome_preview" "medium_podcast,h264" %}
+                        {% endif %}
+                    {% endif %}
+                </div>
+            {% endif %}
+        {% elif main_image %}
+            {% if main_image.resource_newsfeature %}
+                <a href="{{ main_image.resource_screen.url }}" title="{{ main_image.title }}">
+                    <img src="{{ main_image.resource_newsfeature.url }}" class="w-100" style="height: auto; max-width: 100%; object-fit: cover;"/>
                 </a>
             {% endif %}
-        {% endfor %}
-    {% endif %}
-</div>
+        {% endif %}
+        {% if images %}
+            {% for im in images %}
+                {% if main_image != im %}
+                    <a class="popup" href="{{ im.resource_screen.url }}"
+                       title="{{ im.title }}" class="hidden">
+                    </a>
+                {% endif %}
+            {% endfor %}
+        {% endif %}
+    </div>
 {% endwith %}
 <p></p>
 
 <p class="text_intro pr_first"><strong>{{ object.headline|linebreaksbr|description_links|release_ids|safe }}</strong></p>
 {{ object.description|description_links|release_ids|safe }}
-{% if object.notes %}<h3>{% trans "Notes" %}</h3>{{ object.notes|notes_links|release_ids|safe }}{% endif %}
-{% if object.more_information %}<h3>{% trans "More information" %}</h3>{{ object.more_information|safe }}{% endif %}
-{% if object.links %}<h3>{% trans "Links" %}</h3>{{ object.links|safe  }}{% endif %}
+{% if object.notes %}
+    <h3>{% trans "Notes" %}</h3>{{ object.notes|notes_links|release_ids|safe }}
+{% endif %}
+{% if object.more_information %}
+    <h3>{% trans "More information" %}</h3>{{ object.more_information|safe }}
+{% endif %}
+{% if object.links %}
+    <h3>{% trans "Links" %}</h3>{{ object.links|safe }}
+{% endif %}
 {% if object.releasecontact_set.all %}
     <h3>{% trans "Contacts" %}</h3>
 
     {% for c in object.releasetranslationcontact_set.all %}<p>
         {% if c.name %}{{ c.name }}<br>{% endif %}
         {% if c.affiliation %}{{ c.affiliation }}<br>{% endif %}
-        {% if c.city %}{{ c.city }}{% endif %}{% if c.country %}{% if c.city %}, {% endif %}{{ c.country }}{% endif %}{% if c.city or c.country %}<br>{% endif %}
+        {% if c.city %}{{ c.city }}{% endif %}{% if c.country %}{% if c.city %}, {% endif %}{{ c.country }}{% endif %}
+        {% if c.city or c.country %}<br>{% endif %}
         {% if c.telephone %}{% trans "Tel" %}: {{ c.telephone }}<br>{% endif %}
         {% if c.cellular %}{% trans "Cell" %}: {{ c.cellular }}<br>{% endif %}
         {% if c.email %}{% trans "Email" %}: <a href="mailto:{{ c.email }}">{{ c.email }}</a>{% endif %}</p>
@@ -96,7 +106,8 @@
     {% for c in object.releasecontact_set.all %}<p>
         {% if c.name %}{{ c.name }}<br>{% endif %}
         {% if c.affiliation %}{{ c.affiliation }}<br>{% endif %}
-        {% if c.city %}{{ c.city }}{% endif %}{% if c.country %}{% if c.city %}, {% endif %}{{ c.country }}{% endif %}{% if c.city or c.country %}<br>{% endif %}
+        {% if c.city %}{{ c.city }}{% endif %}{% if c.country %}{% if c.city %}, {% endif %}{{ c.country }}{% endif %}
+        {% if c.city or c.country %}<br>{% endif %}
         {% if c.telephone %}{% trans "Tel" %}: {{ c.telephone }}<br>{% endif %}
         {% if c.cellular %}{% trans "Cell" %}: {{ c.cellular }}<br>{% endif %}
         {% if c.email %}{% trans "Email" %}: <a href="mailto:{{ c.email }}">{{ c.email }}</a>{% endif %}</p>
@@ -104,7 +115,8 @@
 {% endif %}
 
 {% if object.is_translation %}
-    {% blocktrans with object.source.id as source_id %}This is a translation of ESO Press Release {{ source_id }}.{% endblocktrans %}
+    {% blocktrans with object.source.id as source_id %}This is a translation of ESO Press Release {{ source_id }}.
+    {% endblocktrans %}
 {% endif %}
 
 {% include 'archives/release/extra_footer.html' %}
