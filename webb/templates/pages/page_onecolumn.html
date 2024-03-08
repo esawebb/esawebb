@@ -2,55 +2,65 @@
 
 {% load djangoplicity_utils %}
 
-{% block site_title %}{{page.title}} {{page.section.append_title}} {% endblock site_title %}
+{% block site_title %}{{ page.title }} {{ page.section.append_title }} {% endblock site_title %}
 
 
 {% block extra_header %}
-    <meta property="og:title" content="{{ page.title }}" />{% if page.opengraph_image %}
-    <meta property="og:image" content="{{ page.opengraph_image }}" />{% endif %}{% if page.description %}
-    <meta property="og:description" content="{{ page.description }}" />
-    <meta name="description" content="{{page.description}}" />{% endif %}{% if page.keywords %}
-    <meta name="keywords" content="{{page.keywords}}" />{% endif %}
+    <meta property="og:title" content="{{ page.title }}"/>
+    {% if page.opengraph_image %}
+        <meta property="og:image" content="{{ page.opengraph_image }}"/>
+    {% endif %}
+    {% if page.description %}
+        <meta property="og:description" content="{{ page.description }}"/>
+        <meta name="description" content="{{ page.description }}"/>
+    {% endif %}
+    {% if page.keywords %}
+        <meta name="keywords" content="{{ page.keywords }}"/>
+    {% endif %}
 {% endblock %}
 
 {% block content %}
 
-{% load pages %}
-{% user_can_edit user page as can_edit_page %}
-{% if can_edit_page %}{% include "pages/adminbar.html" %}{% endif %}
+    {% load pages %}
+    {% user_can_edit user page as can_edit_page %}
+    {% if can_edit_page %}{% include "pages/adminbar.html" %}{% endif %}
 
-{% include "pages/edit-block.html" %}
+    {% include "pages/edit-block.html" %}
 
-<div class='page-content'>
+    <div class='page-content'>
 
-{% if not page.is_online %}
-<div class="alert alert-warning alert-preview" role="alert">
-    <strong>Preview</strong>
-    The following page is not publicly accessible:
-    {% if not page.published %}
-        Page is <strong>unpublished</strong>.</p>
-    {% elif page.is_translation and not page.translation_ready %}
-    Transation is not ready.
-    {% else %}
-        {% if page.start_publishing %}Page goes online {{ page.start_publishing|date }} at {{ page.start_publishing|date:"H:i" }}<br />{% endif %}
-        {% if page.end_publishing %}Page goes offline {{ page.end_publishing|date }} at {{ page.end_publishing|date:"H:i" }}{% endif %}
-    {% endif %}
-</div>
-{% endif %}
-<div id="editable-content" class="links">
-{{ page.content }}
-</div>
+        {% if not page.is_online %}
+            <div class="alert alert-warning alert-preview" role="alert">
+                <strong>Preview</strong>
+                The following page is not publicly accessible:
+                {% if not page.published %}
+                    Page is <strong>unpublished</strong>.
+                {% elif page.is_translation and not page.translation_ready %}
+                    Translation is not ready.
+                {% else %}
+                    {% if page.start_publishing %}
+                        Page goes online {{ page.start_publishing|date }} at {{ page.start_publishing|date:"H:i" }}<br/>
+                    {% endif %}
+                    {% if page.end_publishing %}
+                        Page goes offline {{ page.end_publishing|date }} at {{ page.end_publishing|date:"H:i" }}
+                    {% endif %}
+                {% endif %}
+            </div>
+        {% endif %}
+        <div id="editable-content" class="links">
+            {{ page.content }}
+        </div>
 
-</div>
+    </div>
 {% endblock %}
 
 {% block extra_scripts %}
-{{ block.super }}
+    {{ block.super }}
 
-{% if page.script %}
-    <script type="text/javascript">
-    {{ page.script|safe }}
-    </script>
-{% endif %}
+    {% if page.script %}
+        <script type="text/javascript">
+            {{ page.script|safe }}
+        </script>
+    {% endif %}
 
 {% endblock %}
