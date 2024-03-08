@@ -1,1 +1,12 @@
-{% if obj.image %}{% if obj.image.resource_news %}<img src="http://www.webb.org{{obj.image.resource_news.url}}" border="0" style="text-align: left;" />{% endif %}{{ obj.image.description|safe }}{% endif %}{% if obj.video %}{% if obj.video.resource_thumb %}<img src="{{obj.video.resource_thumb.url}}" border="0" style="text-align: left;" />{% endif %}{{ obj.video.description|safe }}{% endif %}
+{% if obj.image %}
+    {% if obj.image.resource_news %}
+    <img src="https://www.webb.org{{ obj.image.resource_news.url }}" border="0" style="text-align: left;"/>
+    {% endif %}
+    {{ obj.image.description|safe }}
+{% endif %}
+{% if obj.video %}
+    {% if obj.video.resource_thumb %}
+        <img src="{{ obj.video.resource_thumb.url }}" border="0" style="text-align: left;"/>
+    {% endif %}
+    {{ obj.video.description|safe }}
+{% endif %}
