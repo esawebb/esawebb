@@ -51,12 +51,12 @@
                                     {% for obj in footer_potws %}
                                         {% if obj.image %}
                                             <a href="{{ base_url }}{{ obj.image.get_absolute_url }}">
-                                                <img style="border:0px;margin:2px;" src="{{ base_url }}{{ obj.image.resource_wallpaperthumbs.url }}" alt="{{ obj.image.title }}">
+                                                <img style="width: 122px; height: 92px;" src="{{ base_url }}{{ obj.image.resource_wallpaperthumbs.url }}" alt="{{ obj.image.title }}">
                                             </a>&nbsp;
                                         {% endif %}
                                         {% if obj.comparison %}
                                             <a href="{{ base_url }}{{ obj.comparison.get_absolute_url }}">
-                                                <img style="border:0px;margin:2px;" src="{{ base_url }}{{ obj.comparison.resource_wallpaperthumbs.url }}" alt="{{ obj.comparison.title }}">
+                                                <img style="width: 122px; height: 92px;" src="{{ base_url }}{{ obj.comparison.resource_wallpaperthumbs.url }}" alt="{{ obj.comparison.title }}">
                                             </a>&nbsp
                                         {% endif %}
                                     {% endfor %}
