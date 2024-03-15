@@ -1,9 +1,10 @@
 import subprocess
 import os
+import datetime
 
 log_file = "/var/log/backup"
 
-def upload_files_to_drive(source_path, destination_path):
+def upload_files_to_drive(source_path, destination_path, file):
     with open(log_file, 'a') as log:
         try:
             # Verify if destination exists in remote
@@ -12,11 +13,11 @@ def upload_files_to_drive(source_path, destination_path):
                 return
 
             # Upload files to drive
-            command = f"rclone copy {source_path} {destination_path} --checksum"
+            command = f"rclone copy {source_path} {destination_path.rstrip(file)}"
             subprocess.run(command, shell=True, check=True)
-            log.write("Upload successful.\n")
+            log.write("{} --- Upload successful.\n".format(datetime.datetime.now()))
         except subprocess.CalledProcessError as e:
-            log.write("Error uploading: {}\n".format(e.output))
+            log.write("{} --- Error uploading: {}\n".format(datetime.datetime.now(),e.output))
 
 def check_remote_file(remote_path):
     try:
@@ -37,8 +38,8 @@ def calculate_checksum(file_path):
         return None
 
 def main():
-    source_directory = "/mnt/volume-nyc1-01/web/media/archives/"
-    remote_drive = "drive:/mnt/volume-nyc1-01/web/media/archives/"
+    source_directory = "/mnt/volume-nyc1-01/web/media/"
+    remote_drive = "drive:/mnt/volume-nyc1-01/web/media/"
 
     for root, dirs, files in os.walk(source_directory):
         for file in files:
@@ -46,10 +47,10 @@ def main():
             relative_path = os.path.relpath(file_path, source_directory)
             remote_file_path = os.path.join(remote_drive, relative_path)
             with open(log_file, 'a') as log:
-                log.write("Processing: {}\n".format(file_path))
+                log.write("{} --- Processing: {}\n".format(datetime.datetime.now(),file_path))
 
                 # Upload files to drive
-                upload_files_to_drive(file_path, remote_file_path)
+                upload_files_to_drive(file_path, remote_file_path, file)
 
                 # Verify checksum
                 uploaded_checksum = calculate_checksum(remote_file_path)
