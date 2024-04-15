@@ -1,7 +1,7 @@
 {% if obj.resource_news %}
-    <img src="https://www.webb.org{{ obj.resource_news.url }}" border="0" style="text-align: left;"/>
+    <img src="https://www.webb.org{{ obj.resource_news.url }}" border="0" style="text-align: left;" alt="{{ obj.title }}"/>
 {% endif %}
 {% if obj.resource_thumb %}
-    <img src="https://www.webb.org{{ obj.resource_thumb.url }}" border="0" style="text-align: left;"/>
+    <img src="https://www.webb.org{{ obj.resource_thumb.url }}" border="0" style="text-align: left;" alt="{{ obj.title }}"/>
 {% endif %}
 {{ obj.description|safe }}

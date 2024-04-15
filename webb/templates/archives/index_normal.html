@@ -13,7 +13,7 @@
                     <div class="bg-image hover-overlay ripple shadow-1-strong rounded" data-ripple-color="light">
                         <a href="{{ item.get_absolute_url }}" data-mdb-toggle="modal" data-mdb-target="#ImageModal">
                             <img src="{% if item.resource_thumb350x %}{{ item.resource_thumb350x.url }}{% else %}{{ item.resource_screen.url }}{% endif %}"
-                                 class="img-fluid" style="object-fit: cover;"/>
+                                 class="img-fluid" style="object-fit: cover;" alt="{{ item.title }}"/>
                         </a>
                         <span class="p-3" style="height: 23%;">{{ item.title }}</span>
                     </div>

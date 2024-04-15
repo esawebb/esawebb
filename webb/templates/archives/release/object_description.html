@@ -62,7 +62,7 @@
         {% elif main_image %}
             {% if main_image.resource_newsfeature %}
                 <a href="{{ main_image.resource_screen.url }}" title="{{ main_image.title }}">
-                    <img src="{{ main_image.resource_newsfeature.url }}" class="w-100" style="height: auto; max-width: 100%; object-fit: cover;"/>
+                    <img src="{{ main_image.resource_newsfeature.url }}" class="w-100" style="height: auto; max-width: 100%; object-fit: cover;" alt="{{ main_image.title }}"/>
                 </a>
             {% endif %}
         {% endif %}
