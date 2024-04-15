@@ -85,7 +85,7 @@
                     {% if object.kids_image.resource_newsfeature %}
                         <div class="pr_news_feature" style="padding:0;">
                             <a href="{{ object.kids_image.resource_screen.url }}" title="{{ object.kids_image.title }}">
-                                <img src="{{ object.kids_image.resource_newsfeature.url }}" class="pr_news_feature_img" style="padding:0;"/>
+                                <img src="{{ object.kids_image.resource_newsfeature.url }}" class="pr_news_feature_img" style="padding:0;" alt="{{ object.kids_image.title }}"/>
                             </a>
                         </div>
                     {% endif %}
@@ -94,7 +94,7 @@
                         {% if main_image.resource_newsfeature %}
                             <div class="pr_news_feature" style="padding:0;">
                                 <a href="{{ main_image.resource_screen.url }}" title="{{ main_image.title }}">
-                                    <img src="{{ main_image.resource_newsfeature.url }}" class="pr_news_feature_img" style="padding:0;"/>
+                                    <img src="{{ main_image.resource_newsfeature.url }}" class="pr_news_feature_img" style="padding:0;" alt="{{ main_image.title }}"/>
                                 </a>
                             </div>
                         {% endif %}
