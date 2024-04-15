@@ -51,9 +51,9 @@
                             <tr>
                                 <td>
                                     {% if object.resource_thumb %}
-                                        <img src="{{ object.resource_thumb.url }}" width="122px"/>
+                                        <img src="{{ object.resource_thumb.url }}" width="122px" alt="{{ object.title }}"/>
                                         {% else %}{% thumbnail cartitem.product.main_image.picture 122x122 as image %}
-                                            <img src="{{ image }}" width="122px"/>{% endthumbnail %}{% endif %}
+                                            <img src="{{ image }}" width="122px" alt="{{ object.title }}"/>{% endthumbnail %}{% endif %}
                                 </td>
                                 <td class="quantity">
                                     {% url 'satchmo_cart_set_qty' as satchmo_cart_set_qty %}
@@ -74,9 +74,12 @@
                                 <td><p><a href="{{ cartitem.product.get_absolute_url }}">
                                     {% if object %}{{ object.title }}{% else %}
                                         {{ cartitem.product.name }}{% endif %}</a>{% if object.free %}
-                                    <span class="price"><a href="{% url 'free_order_form' %}"><img
-                                        src="{{ MEDIA_URL }}/educators-small.png" alt="Educators" width="60"/></a><a
-                                        class="freetext" href="{% url 'free_order_form' %}">Available for free for educators and media</a></span>{% endif %}
+                                    <span class="price">
+                                        <a href="{% url 'free_order_form' %}">
+                                            <img src="{{ MEDIA_URL }}/educators-small.png" alt="Educators" width="60"/>
+                                        </a>
+                                        <a class="freetext" href="{% url 'free_order_form' %}">Available for free for educators and media</a>
+                                    </span>{% endif %}
                                 </p>
                                     <p>{% if object %}{{ object.description|striptags|truncatewords:50}}{% else %}
                                         {{ cartitem.product.description|striptags|truncatewords:50}}{% endif %}</p></td>

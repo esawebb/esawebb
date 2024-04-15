@@ -5,11 +5,11 @@
         <div class="image_container">
             {% if object.resource_screen %}
                 <a href="{{ object.resource_screen.url }}" rel="shadowbox" title="{{ object }}">
-                    <img src="{{ object.resource_medium.url }}" width="320" border="0" alt="{{ object }}">
+                    <img src="{{ object.resource_medium.url }}" width="320" border="0" alt="{{ object.title }}">
                     <br/><p>Click to Enlarge</p>
                 </a>
             {% else %}
-                <img src="{{ object.resource_medium.url }}" width="320" border="0" alt="{{ object }}">
+                <img src="{{ object.resource_medium.url }}" width="320" border="0" alt="{{ object.title }}">
             {% endif %}
         </div>
     </div>
@@ -19,13 +19,13 @@
 <div class="">
     {% if object.itunes_link %}
         <a class="noicon" href="{{ object.itunes_link }}" target="_blank">
-            <img src="{{ MEDIA_URL }}archives/applications/appstore.png">
+            <img src="{{ MEDIA_URL }}archives/applications/appstore.png" alt="Available on the AppStore">
         </a>
         <br/>
     {% endif %}
     {% if object.marketplace_link %}
         <a class="noicon" href="{{ object.marketplace_link }}" target="_blank">
-            <img src="{{ MEDIA_URL }}archives/applications/google-play.png">
+            <img src="{{ MEDIA_URL }}archives/applications/google-play.png" alt="Available on the Google Play store">
         </a>
         <br/>
     {% endif %}

@@ -15,13 +15,13 @@
             {% if object.resource_screen %}
                 <a class="popup" href="{{ object.resource_screen.url }}" title="{{ object }}">
                     <div class="image-container">
-                        <img class="img-responsive" src="{{ object.resource_screen.url }}" border="0" alt="{{ object }}"/>
+                        <img class="img-responsive" src="{{ object.resource_screen.url }}" border="0" alt="{{ object.title }}"/>
                     </div>
                 </a>
             {% else %}
                 <div class="image-container">
                     <img class="img-responsive" src="{{ object.resource_medium.url }}" width="320" border="0"
-                         alt="{{ object }}"/>
+                         alt="{{ object.title }}"/>
                 </div>
             {% endif %}
         </div>

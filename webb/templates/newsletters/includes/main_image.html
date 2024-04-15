@@ -10,7 +10,7 @@
         {% endif %}
         <!-- Outlook 2007 only -->
         <!--[if gte mso 9]>
-        <img src="{{base_url}}{% url 'images_defaultquery' %}{{image_url}}" width="{{width}}" height="{{height}}" />
+        <img src="{{base_url}}{% url 'images_defaultquery' %}{{image_url}}" width="{{width}}" height="{{height}}"  alt="{{ title }}"/>
         <![endif]-->
         {% if title %}
             {% if titlesize == "small" %}
