@@ -90,7 +90,7 @@
     {% if object.spatial_quality %}
         <div id="object_astrometry_div" class="object-info">
             <h3>{% trans "Coordinates" %}</h3>
-            <table class="table form-text text-dark">
+            <table class="table form-text text-dark" aria-describedby="Object coordinates">
                 {% if object.get_ra_verbose %}
                     <tr>
                         <th scope="row" class="title">{% trans "Position (RA)" %}:</th>

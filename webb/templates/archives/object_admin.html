@@ -17,7 +17,7 @@
                             {% endif %}
                         {% endfor %}
                         {% if admin.metadata %}
-                            <table class="table form-text text-dark">
+                            <table class="table form-text text-dark" aria-describedby="Admin metadata">
                                 {% for metadata in admin.metadata %}
                                     {% if metadata.field_value %}
                                         {% trans metadata.field_name as field_name %}

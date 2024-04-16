@@ -32,7 +32,7 @@
                     {% if link.url %}<a id="object_info_a" href="{{ link.url }}">{% trans link.title %}</a><br /> {% endif %}
                     {% endfor %}
                     {% if info.metadata %}
-                    <table class="table form-text text-dark">
+                    <table class="table form-text text-dark" aria-describedby="{{ info.name }}">
                         {% for metadata in info.metadata %}
                         {% if metadata.field_value %}
         
@@ -84,7 +84,7 @@
                     {% if link.url %}<a id="object_info_a" href="{{ link.url }}">{% trans link.title %}</a><br /> {% endif %}
                     {% endfor %}
                     {% if info.metadata %}
-                    <table class="table form-text text-dark">
+                    <table class="table form-text text-dark" aria-describedby="{{ info.name }}">
                         {% for metadata in info.metadata %}
                         {% if metadata.field_value %}
         
