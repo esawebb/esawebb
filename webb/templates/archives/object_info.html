@@ -21,7 +21,7 @@
                         {% endif %}
                     {% endfor %}
                     {% if info.metadata %}
-                        <table class="table form-text text-dark">
+                        <table class="table form-text text-dark" aria-describedby="{% if info.name == 'About the Video Conference Background' %}Virtual Meeting Backgrounds{% elif info.name == 'About the Image Comparison' %}About the Images{% else %}{% trans info.name %}{% endif %}">
                             {% for metadata in info.metadata %}
                                 {% if metadata.field_value %}
                                     {% trans metadata.field_name as field_name %}
