@@ -571,3 +571,11 @@ h6,
 #body .prev-next a{
   color: #333333 !important;
 }
+
+.overflow-ellipsis{
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
