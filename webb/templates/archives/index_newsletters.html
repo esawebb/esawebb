@@ -18,7 +18,7 @@
                 <div class="col-md-6 col-xl-4 col-xs-12 mb-3">
                     <a href="{{ item.get_absolute_url }}" class="thumbnail" aria-label="{{ item.title}}">
                         <div class="box-image shadow  border">
-                            <img src="https://esawebb.org/media/archives/newsletters/medium/112.jpg"
+                            <img src="{% if item.resource_thumb350x %}{{ item.resource_thumb350x.url }}{% else %}{{ item.resource_medium.url }}{% endif %}"
                             class="w-100" alt="{{ item.title }}">
                             <div class="caption p-3 news-title h5 text-primary" style="height: 80px;">
                                 <p class="overflow-ellipsis">
