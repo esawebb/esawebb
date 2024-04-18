@@ -5,18 +5,19 @@
     </div>
 {% endcomment %}
 <!-- // Begin Template Footer \\ -->
-<table border="0" cellpadding="0" cellspacing="0" width="{% include "newsletters/includes/width.html" %}" id="templateFooter" style="background-color: #FFFFFF;border-top: 0;" aria-describedby="Newsletter Footer">
+<table style="border-collapse: collapse; width: {% include "newsletters/includes/width.html" %}; border: none;" id="templateFooter" style="background-color: #FFFFFF;border-top: 0;" aria-describedby="Newsletter Footer">
     <tr>
-        <td valign="top" class="footerContent">
+        <td style="vertical-align: top;" class="footerContent">
             <!-- // Begin Module: Standard Footer \\ -->
-            <table border="0" cellpadding="0" cellspacing="0" width="100%" aria-describedby="Newsletter Footer">
+            <table style="border-collapse: collapse; width:100%; border: none;" aria-describedby="Newsletter Footer">
                 <tr>
-                    <td colspan="3" style="background-color:#292929" height="5"></td>
+                    <td colspan="3" style="background-color:#292929; height: 5px;"></td>
                 </tr>
                 <tr>
-                    <td width="20" style="background-color:#292929">&nbsp;</td>
-                    <td valign="top" width="{{ width }}" style="background-color:#292929">
-                        <div style="color: #707070;font-family: Helvetica, Arial, sans-serif;font-size: 10px;line-height: 125%;text-align: center;background-color:#292929; padding-top:5px;padding-bottom:0px;padding-left:0px;padding-right:0px;">
+                    <td style="background-color:#292929; width: 20px;">&nbsp;</td>
+                    <td style="background-color:#292929; vertical-align: top; width: {{ width }}px">
+                        <div style="color: #707070;font-family: Helvetica, Arial, sans-serif;font-size: 10px;
+                                    line-height: 125%; text-align: center; background-color:#292929; padding: 5px 0 0 0;">
                             {% if footer_potws %}
                                 <div style="text-align: center">
                                     <a href="https://esahubble.org/images/potw2410a/">
@@ -44,7 +45,7 @@
                                         </svg>
                                     </a>&nbsp;
                                     <a style="font-size:15px;color:white;text-decoration:none;" href="https://esahubble.org/images/potw/">{{ "ESA/Hubble" }} {% trans "Pictures of the Week" %}</a>
-                                    <hr size="1" style="color: #bbbbbb; background-color: #bbbbbb; border: 0; height: 1px;"/>
+                                    <hr style="color: #bbbbbb; background-color: #bbbbbb; border: 0; height: 1px;"/>
                                 </div>
 
                                 <div style="text-align: center">
@@ -70,21 +71,21 @@
                                         </svg>
                                     </a>&nbsp;
                                     <a style="font-size:15px;color:white;text-decoration:none;" href=" {{ base_url }}{% url 'potw_defaultquery' %}">{{ "ESA/Webb" }} {% trans "Pictures of the Month" %}</a>
-                                    <hr size="1" style="color: #bbbbbb; background-color: #bbbbbb; border: 0; height: 1px;"/>
+                                    <hr style="color: #bbbbbb; background-color: #bbbbbb; border: 0; height: 1px;"/>
                                 </div>
                             {% endif %}
                             <div style="text-align:left;padding-top:5px;color:white; background-color:#292929;">
                                 {% if footer_note %}<p style="font-size: 11px;">{% trans footer_note %}</p>{% endif %}
                                 {% include "newsletters/includes/preferences_bottom.html" %}
                                 {% include "newsletters/includes/footer_followus.html" %}
-                                <p style="font-size: 11px; text-align:center; margin-bottom: 0px;"> {% if address %}{{ address }}{% else %}ESA/Hubble/Webb, ESA Office, Space Telescope Science Institute, 3700 San Martin Dr, D-21218 Baltimore, United States"{% endif %}</p>
+                                <p style="font-size: 11px; text-align:center; margin-bottom: 0"> {% if address %}{{ address }}{% else %}ESA/Hubble/Webb, ESA Office, Space Telescope Science Institute, 3700 San Martin Dr, D-21218 Baltimore, United States"{% endif %}</p>
                             </div>
                         </div>
                     </td>
-                    <td width="20" style="background-color:#292929">&nbsp;</td>
+                    <td style="background-color:#292929; width: 20px;">&nbsp;</td>
                 </tr>
                 <tr>
-                    <td colspan="3" style="background-color:#292929" height="10">&nbsp;</td>
+                    <td colspan="3" style="background-color:#292929; height: 10px;">&nbsp;</td>
                 </tr>
             </table>
             <!-- // End Module: Standard Footer \\ -->

@@ -87,8 +87,7 @@
             <div class="product-detail">
                 <h2 style="">{% trans "Price" %}{% if default_view_tax %} {% trans '(incl. tax)' %}{% endif %}:
                     {% if sale %}
-                        <strike id="fullprice" style="display: block;">
-                        {{ product|discount_price:""|currency }}</strike>
+                        <span id="fullprice" style="display: block; text-decoration: line-through;">{{ product|discount_price:""|currency }}</span>
                     {% endif %}
                     <span id="price">{{ product|discount_price:sale|currency }}</span>
                 </h2>
@@ -132,27 +131,27 @@
                                 <td>{{ object.id }}</td>
                             </tr>
                             {% if object.isbn %}
-                                <tr valign="top">
+                                <tr style="vertical-align: top;">
                                     <td><strong>ISBN</strong></td>
                                     <td>{{ object.isbn }}</td>
                                 </tr>{% endif %}
                             {% if object.size %}
-                                <tr valign="top">
+                                <tr style="vertical-align: top;">
                                     <td><strong>Dimensions</strong></td>
                                     <td>{{ object.size }}</td>
                                 </tr>{% endif %}
                             {% if object.pages %}
-                                <tr valign="top">
+                                <tr style="vertical-align: top;">
                                     <td><strong>Pages</strong></td>
                                     <td>{{ object.pages }}</td>
                                 </tr>{% endif %}
                             {% if object.cover %}
-                                <tr valign="top">
+                                <tr style="vertical-align: top;">
                                     <td><strong>Cover</strong></td>
                                     <td>{{ object.cover }}</td>
                                 </tr>{% endif %}
                             {% if object.language %}
-                                <tr valign="top">
+                                <tr style="vertical-align: top;">
                                     <td><strong>Language</strong></td>
                                     <td>{{ object.get_language_display }}</td>
                                 </tr>{% endif %}

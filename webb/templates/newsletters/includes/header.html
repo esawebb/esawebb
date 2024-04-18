@@ -1,22 +1,22 @@
 <!-- // Begin Template Header \\ -->
-<table border="0" cellpadding="0" cellspacing="0" width="{{width}}" id="templateHeader" style="background-color: {{ color }};" aria-describedby="Newsletter header">
-    <tr style="color:white;"> 
-        <td style="padding:15px;" width="{{hubble_logo_width}}">
-            <table border="0" cellpadding="0" cellspacing="0" aria-describedby="Newsletter header">
+<table style="border-collapse: collapse; width: {{width}}px;" id="templateHeader" style="background-color: {{ color }};" aria-describedby="Newsletter header">
+    <tr style="color:white;">
+        <td style="padding:15px; width: {{hubble_logo_width}}px;">
+            <table style="border-collapse: collapse;" aria-describedby="Newsletter header">
                 <tr>
-                    <td>
-                        <a href="{{base_url}}"><img src="{{hubble_logo_url}}" width="{{hubble_logo_width}}" border="0" alt="ESA/Hubble logo"/></a>
+                    <td style="padding: 0;">
+                        <a href="{{base_url}}"><img src="{{hubble_logo_url}}" width="{{hubble_logo_width}}" style="border: none" alt="ESA/Hubble logo"/></a>
                     </td>
-                    <td>
-                        <img src="{{jwst_logo_url}}" width="{{jwst_logo_width}}" border="0" alt="ESA/Webb logo"/>
+                    <td style="padding: 0;">
+                        <img src="{{jwst_logo_url}}" width="{{jwst_logo_width}}" style="border: none" alt="ESA/Webb logo"/>
                     </td>
                 </tr>
             </table>
         </td>
-        <td style="text-align:right; padding: 20px;  font-family: Helvetica,Arial, sans-serif; font-size: 26px; color: {% if text_color %}{{text_color}}{% else %}#ffffff{% endif %}" width="542">
+        <td style="text-align:right; padding: 20px; width: 542px;  font-family: Helvetica,Arial, sans-serif; font-size: 26px; color: {% if text_color %}{{text_color}}{% else %}#ffffff{% endif %}">
             <div class="row" style="padding-bottom: 10px;">
                 <div class="col">
-                    <a href="{{base_url}}"><img src="{{logo_url}}" width="{{logo_width}}" border="0" alt="ESA LOGO"/></a>
+                    <a href="{{base_url}}"><img src="{{logo_url}}" width="{{logo_width}}" style="border: none" alt="ESA LOGO"/></a>
                 </div>
             </div>
             <div class="row">

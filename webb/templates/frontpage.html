@@ -292,9 +292,9 @@
                 <div class="embed-responsive embed-responsive-16by9 fb-page ms-3 ms-lg-1">
                     <iframe
                         src="https://www.facebook.com/plugins/page.php?locale=en_US&href=https%3A%2F%2Fwww.facebook.com%2FESAWebb%2F&tabs=timeline&width=360&height=750&small_header=true&adapt_container_width=true&hide_cover=false&show_facepile=true&appId"
-                        width="360" height="750" style="border:none;" scrolling="no" frameborder="0"
-                        class="rounded" allowfullscreen="true"
-                        allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe>
+                        width="360" height="750" style="border:none; overflow: hidden;" title="Facebook Feed"
+                        allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
+                        class="rounded" allowfullscreen></iframe>
                 </div>
             </div>
             <div class="twitter-feeds mb-3 mt-5 px-3 ">
@@ -333,7 +333,8 @@
                 <div class="slide">
                     <a href="{{ image.get_absolute_url }}">
                         <div class="img-wrapper">
-                            <img draggable="false" data-lazy="{{ image.resource_wallpaper1.url }}" class="img-responsive" alt="{{ image.title }}">
+                            <img draggable="false" data-lazy="{{ image.resource_wallpaper1.url }}"
+                                 class="img-responsive" alt="{{ image.title }}">
                         </div>
                         <div class="top100-description">
                             <div class="title">{{ image.title }}</div>
