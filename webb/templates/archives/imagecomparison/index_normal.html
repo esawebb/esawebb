@@ -10,7 +10,7 @@
                     {% for item in list %}
                         <div class="col-md-6 col-xl-4 col-xs-12">
                             <a href="{{ item.get_absolute_url }}" class="thumbnail" aria-label="{{ item.title}}">
-                                <div class="box-image shadow  border">
+                                <div class="box-image shadow border my-3">
                                     <img src="{% if item.resource_thumb350x %}{{ item.resource_thumb350x.url }}{% else %}{{ item.resource_thumb.url }}{% endif %}"
                                     class="w-100" alt="{{ item.title }}">
                                     <div class="caption mt-2 ms-3 news-title h5 text-primary">
