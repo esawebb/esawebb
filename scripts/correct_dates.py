@@ -65,7 +65,6 @@ def change_datetime(obj):
                 success = True
             except:
                 print(obj.id,' save failed!')
-                pass
     return success
 
 

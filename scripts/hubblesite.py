@@ -99,10 +99,8 @@ def get_release_date(link):
             release_date = release_date.astimezone(utc)  
         except:
             print("no datetime information found")
-            pass
     except:
         print(link, ' could not be read')
-        pass
     
     return release_date # in UTC
 
