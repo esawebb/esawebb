@@ -49,7 +49,8 @@ def get_url_content( url ):
     except urllib.error.URLError as e:
         text = None
         redirect = None
-        logging.error('e')
+        logger= logging.getLogger()
+        logger.error('Failed get content from URL', e)
     return (text,redirect)
 
 def remove_void(text):
