@@ -567,7 +567,7 @@ ARCHIVE_WORKFLOWS = {
     'media.video.rename': ('webb.workflows.media', 'video_rename'),
 }
 
-VIDEO_RENAME_NOTIFY = ['web@esawebb.org', 'dpalacios@encisosystems.com']
+VIDEO_RENAME_NOTIFY = ['web@esawebb.org']
 
 ARCHIVE_CROSSLINKS = djangoplicity.crosslinks.crosslinks_for_domain('webb.org')
 

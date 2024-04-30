@@ -21,6 +21,7 @@ import re
 import socket
 import urllib.request, urllib.error, urllib.parse
 from djangoplicity.utils.templatetags.djangoplicity_datetime import timezone
+import logging
 
 
 def image_info( url ):
@@ -48,7 +49,7 @@ def get_url_content( url ):
     except urllib.error.URLError as e:
         text = None
         redirect = None
-        
+        logging.error('e')
     return (text,redirect)
 
 def remove_void(text):
