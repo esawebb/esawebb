@@ -69,7 +69,6 @@ def store_JSON(path_json, dict):
     f.write('}\n')
     f.close()
     print("produced", path_json)
-    return
     
 def new_id(long_caption_link):
     '''

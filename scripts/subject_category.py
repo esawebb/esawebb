@@ -55,8 +55,7 @@ def analyse_taxonomy(generate_code = False ):
             print("    elif tag == '%s':       # '%s' %d" % (key, X_Tags[key][0], X_Tags[key][1])) 
             print("        pass")
         print('-----------------------')
-    pprint.pprint(X_Tags) 
-    return  
+    pprint.pprint(X_Tags)   
 
 def scan_tags(image, name):
     found = None
