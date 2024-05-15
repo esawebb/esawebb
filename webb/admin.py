@@ -15,9 +15,7 @@ from djangoplicity.contrib.admin.discover import autoregister
 import django.contrib.auth.admin
 import django.contrib.redirects.admin
 import django.contrib.sites.admin
-# import djangoplicity.actions.admin
 import djangoplicity.announcements.admin
-# import djangoplicity.archives.contrib.satchmo.freeorder.admin
 import djangoplicity.customsearch.admin
 import djangoplicity.mailinglists.admin
 import djangoplicity.media.admin

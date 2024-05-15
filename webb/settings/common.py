@@ -285,8 +285,6 @@ MIDDLEWARE += [
 
     # Module for URL redirection based on regular expressions
     'djangoplicity.utils.middleware.RegexRedirectMiddleware',  # Response
-
-    # 'djangoplicity.archives.contrib.satchmo.middleware.SatchmoSSLRedirectOverride',
 ]
 
 DJANGO_APPS = [
@@ -395,10 +393,8 @@ EMAIL_SUBJECT_PREFIX = '[ESAWEBB-LOCAL]'
 ##################
 
 AUTHENTICATION_BACKENDS = (
-    # 'django_auth_ldap.backend.LDAPBackend',
     'django.contrib.auth.backends.ModelBackend',
 )
-#AUTH_PROFILE_MODULE = ''
 LOGIN_URL = '/login/'
 LOGOUT_URL = '/logout/'
 LOGIN_REDIRECT_URL = '/'
@@ -683,14 +679,6 @@ CELERY_BEAT_SCHEDULE = {
         'task': 'djangoplicity.contentserver.tasks.check_content_server_resources',
         'schedule': crontab(minute=0, hour=4),
     },
-    # Mon 29 Apr 10:53:57 CEST 2019 - Mathias
-    # Disabled as CDN77 complained it created too many hits (and forced
-    # pre-fetch of the full archive)
-    #  'check-content-server-resources-all': {
-    #      'task': 'djangoplicity.contentserver.tasks.check_content_server_resources',
-    #      'schedule': crontab(minute=0, hour=10, day_of_week='sun'),
-    #      'kwargs': {'last': 15000},  # Large enough to check all resources
-    #  },
     'cdn77-purge-prefetch': {
         'task': 'djangoplicity.contentserver.cdn77_tasks.purge_prefetch',
         'schedule': crontab(minute='*/10'),  # Every 10 minutes
@@ -772,19 +760,10 @@ SHOP_CONF = {
 DIRNAME = os.path.abspath( os.path.dirname( __file__ ) )
 LOCAL_DEV = True
 
-# MIDDLEWARE += [
-#     "threaded_multihost.middleware.ThreadLocalMiddleware",
-# ]
-
-# AUTHENTICATION_BACKENDS += ( 'satchmo_store.accounts.email-auth.EmailBackend', )
-
 SATCHMO_SETTINGS = {
     'SHOP_BASE': '/shop',
     'MULTISHOP': False,
     'SSL': True,
-#   'SHOP_URLS': patterns('',
-#       ( r'^checkout/', 'webb.views.shop_closed' ),
-#   )
 }
 
 SITE_NAME = "Webbshop"

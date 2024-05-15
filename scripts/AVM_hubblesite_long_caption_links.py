@@ -95,7 +95,7 @@ def analyse_links(pr_id):
                     else:
                         if get_ranking(long_caption_link) < get_ranking(link):
                             long_caption_link = link
-    except:
+    except IndexError:
         pass
     return long_caption_link
 
@@ -120,27 +120,26 @@ def get_long_caption_link(url, iterator, check_reachability_flag = True):
     long_c = None
     try:
         remote   = urllib.request.urlopen(url)
-    except:
+    except urllib.error.URLError:
         remote  = 'timeout?'
     for line in remote:
-        if line.find('<a href=') > -1:
-            if line.find('''/image/''') > -1:
-                look_for = '''<a href='''
-                start = line.find(look_for) + len(look_for)
-                end   = line[start:].find('''>''')
-                long_c = line[start:end]
-                if long_c[0] == '''"''': long_c = long_c[1:]
-                if long_c[-1] == '''"''': long_c = long_c[:-1]
-                if long_c[0] == '/': long_c = 'https://hubblesite.org' + long_c
-                
-                # now replace the last letter in the link with the iterator (heic0515c) /a/ --> /c/
-                end = long_c.rfind('/')
-                start = long_c[:end].rfind('/')
-                long_c = long_c[:start] +'/' + iterator + '/'
-                if check_reachability_flag == True:
-                    check =  check_reachability(long_c)
-                    if check != True: long_c = None 
-                break
+        if line.find('<a href=') > -1 and line.find('''/image/''') > -1:
+            look_for = '''<a href='''
+            start = line.find(look_for) + len(look_for)
+            end   = line[start:].find('''>''')
+            long_c = line[start:end]
+            if long_c[0] == '''"''': long_c = long_c[1:]
+            if long_c[-1] == '''"''': long_c = long_c[:-1]
+            if long_c[0] == '/': long_c = 'https://hubblesite.org' + long_c
+
+            # now replace the last letter in the link with the iterator (heic0515c) /a/ --> /c/
+            end = long_c.rfind('/')
+            start = long_c[:end].rfind('/')
+            long_c = long_c[:start] +'/' + iterator + '/'
+            if check_reachability_flag == True:
+                check =  check_reachability(long_c)
+                if check != True: long_c = None
+            break
     return long_c
 
     
@@ -187,9 +186,9 @@ def analyse(images):
         print(d, my_dict[d])
     print(link_dict)
 
-def get_related_PR(id):
+def get_related_pr(id):
     temp = ''   
-    pattern = re.compile(r'''([a-z]*)([0-9]*)''')
+    pattern = re.compile(r'''([a-z]*)(\d*)''')
     temp = pattern.findall(id)
     related = temp[0][0] + temp[0][1]
     iterator = temp[1][0]
@@ -226,7 +225,7 @@ if __name__ == '__main__':
         if image.long_caption_link.find('http') == -1:
             if image.press_release_link.find('http') == -1:
                 # get id of related press release 
-                related, iterator = get_related_PR(image.id)
+                related, iterator = get_related_pr(image.id)
                 # find the link to hubblesite.org NASA Press Release
                 result =  analyse_links(related)
                 if result:
@@ -279,7 +278,7 @@ if __name__ == '__main__':
                 try:
                     image.save()
                     psavecount = psavecount + 1
-                except:
+                except Exception:
                     print(image.id, ': failed to store press_release_link ', press_release_link)
                     
             
@@ -289,7 +288,7 @@ if __name__ == '__main__':
                 try:
                     image.save()
                     savecount = savecount + 1
-                except:
+                except Exception:
                     print(image.id, ': failed to store long_caption_link ', long_c)
                     
     print(str(hcount), 'long_caption_links found')

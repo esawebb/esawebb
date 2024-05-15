@@ -35,7 +35,7 @@ class TestNewsletters(TestCase):
                 },
                 follow=True
             )
-            utils.check_redirection_to(self, response, r'/admin/newsletters/newsletter/[0-9]+/change/')
+            utils.check_redirection_to(self, response, r'/admin/newsletters/newsletter/\d+/change/')
 
     def test_newsletter_list(self):
         url = '/newsletters/{}/'.format(self.newsletter.type.slug)
