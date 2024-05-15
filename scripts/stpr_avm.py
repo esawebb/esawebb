@@ -25,7 +25,6 @@ def prepare4unicode():
     # little unicode test
     star = chr(9734)
     print(star)
-    return 
 
 if __name__ == '__main__':
     # for testing
