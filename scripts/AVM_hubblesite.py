@@ -76,7 +76,7 @@ def new_id(long_caption_link):
     creates 2003-28-a out of the long caption link ...eases/2003/28/image/a/
     returns '-' if failed
     '''
-    pattern = re.compile('.*?([0-9]*?)/([0-9]*?)/image/([a-z]?)')
+    pattern = re.compile('.*?(\d*?)/(\d*?)/image/([a-z]?)')
     try:
         results = pattern.findall(long_caption_link)[0]
         id  = results[0]+'-'+results[1]
