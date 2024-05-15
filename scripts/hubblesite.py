@@ -31,7 +31,7 @@ def get_redirect(link):
     try:
         remote   = urllib.request.urlopen(link) 
         redirect = remote.geturl()
-    except:
+    except urllib.error.URLError:
         redirect = None            
     return redirect
 
@@ -97,10 +97,10 @@ def get_release_date(link):
             aware = tz.localize(naive, is_dts)
             release_date = tz.normalize(aware)
             release_date = release_date.astimezone(utc)  
-        except:
+        except Exception:
             print("no datetime information found")
             pass
-    except:
+    except urllib.error.URLError:
         print(link, ' could not be read')
         pass
     
@@ -143,7 +143,7 @@ def list_links(url_images):   # [^>]
         links = None
         try:
             links = pat.findall(text)
-        except:
+        except IndexError:
             pass
         newlinks = []
         for l in links:
@@ -153,7 +153,9 @@ def list_links(url_images):   # [^>]
                 link = 'https://hubblesite.org' + link
             newl = [description,link]
             newlinks.append(newl)
-    except:
+    except urllib.error.URLError:
+        newlinks = None
+    except IndexError:
         newlinks = None
     return newlinks
       

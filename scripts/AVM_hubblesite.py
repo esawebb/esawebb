@@ -81,7 +81,7 @@ def new_id(long_caption_link):
         results = pattern.findall(long_caption_link)[0]
         id  = results[0]+'-'+results[1]
         if results[2] != '': id = id +'-'+results[2]
-    except:
+    except IndexError:
         id = '-'
     return id
 
@@ -139,15 +139,15 @@ if __name__ == '__main__':
         count = count + 1
         try:
             remote   = urllib.request.urlopen(image.long_caption_link)
-        except:
+        except Exception as e:
             remote  = 'timeout?'
         for line in remote:
             if line.find('release-number') > -1:
                 break
-        try:
-            hubble_id = pattern.findall(line)[0].strip()            
-        except:
-            hubble_id = '?'
+            try:
+                hubble_id = pattern.findall(line)[0].strip()
+            except IndexError as error:
+                hubble_id = '?'
         middle = new_id(image.long_caption_link)
         webb_thumb = webb_thumb_pre + image.id + webb_thumb_post
         webb_url   = webb_site_pre + image.id + '/'

@@ -95,7 +95,7 @@ def analyse_links(pr_id):
                     else:
                         if get_ranking(long_caption_link) < get_ranking(link):
                             long_caption_link = link
-    except:
+    except IndexError:
         pass
     return long_caption_link
 
@@ -120,7 +120,7 @@ def get_long_caption_link(url, iterator, check_reachability_flag = True):
     long_c = None
     try:
         remote   = urllib.request.urlopen(url)
-    except:
+    except urllib.error.URLError:
         remote  = 'timeout?'
     for line in remote:
         if line.find('<a href=') > -1:
@@ -279,7 +279,7 @@ if __name__ == '__main__':
                 try:
                     image.save()
                     psavecount = psavecount + 1
-                except:
+                except Exception:
                     print(image.id, ': failed to store press_release_link ', press_release_link)
                     
             
@@ -289,7 +289,7 @@ if __name__ == '__main__':
                 try:
                     image.save()
                     savecount = savecount + 1
-                except:
+                except Exception:
                     print(image.id, ': failed to store long_caption_link ', long_c)
                     
     print(str(hcount), 'long_caption_links found')
