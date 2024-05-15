@@ -8,7 +8,7 @@ from __future__ import absolute_import
 import os
 
 from webb.hubblesite.avm import jsonmapper, remove_duplicates, load_json
-from webb.hubblesite.utils import *
+from webb.hubblesite.utils import get_url_content, remove_void
 from django.test import TestCase, tag
 import pytz
 
