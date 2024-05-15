@@ -76,14 +76,14 @@ def new_id(long_caption_link):
     creates 2003-28-a out of the long caption link ...eases/2003/28/image/a/
     returns '-' if failed
     '''
-    pattern = re.compile('.*?(\d*?)/(\d*?)/image/([a-z]?)')
+    pattern_to_recompile = re.compile('.*?(\d*?)/(\d*?)/image/([a-z]?)')
     try:
-        results = pattern.findall(long_caption_link)[0]
-        id  = results[0]+'-'+results[1]
-        if results[2] != '': id = id +'-'+results[2]
+        results = pattern_to_recompile.findall(long_caption_link)[0]
+        id_new  = results[0]+'-'+results[1]
+        if results[2] != '': id_new = id_new +'-'+results[2]
     except IndexError:
-        id = '-'
-    return id
+        id_new = '-'
+    return id_new
 
 
 if __name__ == '__main__':

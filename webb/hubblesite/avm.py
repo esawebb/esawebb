@@ -53,19 +53,19 @@ def remove_duplicates(data):
     in the jsondata are often more than one entries for each ID, one with tiff, one with jpeg
     take all the jpeg versions and add all other image IDs that do not have a jpeg version
     '''
-    list = []
+    image_list = []
     list_ids = []
     other = []
     for dataset in data:
         if dataset['Image Format'] == u'image/jpeg': 
-            list.append(dataset)
+            image_list.append(dataset)
             list_ids.append(dataset['Identifier'])
         else: other.append(dataset)
     for o in other:
         if o['Identifier'] not in list_ids:
-            list.append(o)
+            image_list.append(o)
             list_ids.append(o['Identifier'])          
-    return list
+    return image_list
 
 class jsonmapper(object):
     '''
@@ -168,15 +168,15 @@ class jsonmapper(object):
         ''' converts comma (;,) separated values to a list of strings
         '''
         strings = strings.replace(',',';') 
-        list = self.semicolonstrings2stringlist(strings)
-        return list
+        string_list = self.semicolonstrings2stringlist(strings)
+        return string_list
     
     def semicolonstrings2stringlist(self, strings):
         ''' converts semicolon (;) separated values to a list of strings
         '''
-        list = None  
-        if strings and strings.find(';'): list = [s.strip() for s in strings.split(';')]
-        return list
+        string_list = None
+        if strings and strings.find(';'): string_list = [s.strip() for s in strings.split(';')]
+        return string_list
     
     def replace_html(self, text):
         '''
@@ -189,15 +189,15 @@ class jsonmapper(object):
         ''' skip X., return list with category objects
         '''
         strings = self.replace_html(strings)
-        list = self.strings2stringlist(strings)
-        for l in list: 
-            if l[0] == 'X': list.remove(l) 
-        return list
+        string_list = self.strings2stringlist(strings)
+        for l in string_list:
+            if l[0] == 'X': string_list.remove(l)
+        return string_list
     
     def starttimes2datetimelist( self, starttimes ):
         dates = []
-        list = self.strings2stringlist( starttimes )
-        for l in list:
+        string_list = self.strings2stringlist( starttimes )
+        for l in string_list:
             try:
                 date = self.datestring2datetime( l )
             except ValueError:    # "-", '-', -, other format?
@@ -243,7 +243,7 @@ class jsonmapper(object):
     
     def string2coordinateframeCV(self, frame):
         
-        CV = {'ICRS': 'ICRS', # – celestial epoch-independent system 
+        cv = {'ICRS': 'ICRS', # – celestial epoch-independent system
               'FK5': 'FK5',   # – celestial, default J2000 epoch 
               'FK4': 'FK4',   # – celestial, default B1950 epoch 
               'ECL': 'ECL',   # – ecliptic coordinates 
@@ -252,16 +252,14 @@ class jsonmapper(object):
               }
         frame = frame.upper()
         try:
-            frameCV = CV[frame]
+            frameCV = cv[frame]
         except KeyError:
             frameCV = None
             logger.error("ValueError in string2coordinateframeCV trying to convert %s" % frame)    
         return frameCV
     
-        return frame
-    
     def string2filetypeCV(self, filetype):
-        CV = {'image/tiff': 'TIFF',
+        cv = {'image/tiff': 'TIFF',
               'image/jpeg': 'JPEG',
               'image/png':  'PNG',
               'image/gif':  'GIF',
@@ -269,11 +267,11 @@ class jsonmapper(object):
               'image/pdf':  'PDF'}
         filetype = filetype.lower()
         try:
-            type = CV[filetype]
+            my_type = cv[filetype]
         except KeyError:
-            type = None
+            my_type = None
             logger.error("ValueError in string2filetypeCV trying to convert %s" % filetype)    
-        return type
+        return my_type
     
     def string2spatialqualityCV(self, text):
         CV = {'Full': 'Full',           # – Verified full WCS information (though may exclude CD matrix). 
