@@ -32,7 +32,7 @@ import socket
 
 import datetime
 
-def store_JSON(path_json, dict):
+def store_json(path_json, dict):
     '''
     stores the data in dict in JSON format
     the JSON data will be presented by the website using dynamic.js
@@ -171,6 +171,6 @@ if __name__ == '__main__':
         
         print("%s\t%s\t%s\t%s" % (image.id, hubble_id, webb_url, image.long_caption_link))
         logger.info(str(count)+' / '+n_images + ' ' + image.id + ' ' + hubble_id + ' ' + middle  + ' ' + image.long_caption_link + ' ' + thumberror)
-    store_JSON(jsonfile,dict)
+    store_json(jsonfile,dict)
            
         

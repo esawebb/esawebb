@@ -138,14 +138,14 @@ def treat_x(sc, image, remove = True):
         changed = add_avmtag(image,  'Planetary System','B.3.7.1')    
         image.subject_category.remove(sc)
         
-    elif tag == 'X.101.11':        # 'JWST Images/Videos' 24
+    elif tag == 'X.101.11' tag == 'X.101.21':        # 'JWST Images/Videos' 24
         # set image.type = 'Artwork'
         print("%-45s; %-9s; %s; set image.type = 'Artwork'" % (image.id, sc.avm_code(), sc.name))
         image.type = 'Artwork'
         image.subject_category.remove(sc)
         changed = True
 
-    elif tag == 'X.101.12':        # 'Spacecraft Images/Videos' 20
+    elif tag == 'X.101.12' or tag == 'X.101.22':        # 'Spacecraft Images/Videos' 20
         # replace with 8.2 Spacecraft 
         changed = add_avmtag(image,  'Spacecraft','E.8.2')    
         image.subject_category.remove(sc)
@@ -154,19 +154,7 @@ def treat_x(sc, image, remove = True):
         # remove tag
         print("%-45s; %-9s; %s; only removing tag" % (image.id, sc.avm_code(), sc.name))
         image.subject_category.remove(sc)
-        changed = True     
-        
-    elif tag == 'X.101.21':        # 'Illustration Images' 237
-        # set type to artwork and remove tag
-        print("%-45s; %-9s; %s; set image.type = 'Artwork'" % (image.id, sc.avm_code(), sc.name))
-        image.type = 'Artwork'
-        image.subject_category.remove(sc)
         changed = True
-        
-    elif tag == 'X.101.22':        # 'Mission' 132
-        # replace with 8.2 Spacecraft
-        changed = add_avmtag(image,  'Spacecraft','E.8.2')
-        image.subject_category.remove(sc)
         
     elif tag == 'X.101.3':        # 'Solar System Images/Videos' 577
         # A

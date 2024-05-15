@@ -50,7 +50,7 @@ def get_url_content( url ):
         text = None
         redirect = None
         logger= logging.getLogger()
-        logger.error('Failed get content from URL', e)
+        logger.error('Failed get content from URL %s', e)
     return (text,redirect)
 
 def remove_void(text):
