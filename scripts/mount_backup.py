@@ -1,6 +1,7 @@
 import subprocess
 import os
 import datetime
+import logging
 
 log_file = "/var/log/backup"
 
@@ -25,6 +26,8 @@ def check_remote_file(remote_path):
         subprocess.check_output(command, shell=True, stderr=subprocess.STDOUT, universal_newlines=True)
         return True  # File exists
     except subprocess.CalledProcessError as e:
+        logger= logging.getLogger()
+        logger.error('Failed process rclone', e)
         return False  # File does not exist
 
 def calculate_checksum(file_path):

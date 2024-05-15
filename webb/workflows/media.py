@@ -22,5 +22,4 @@ def video_rename( pk=None, new_pk=None ):
     msg_from = settings.DEFAULT_FROM_EMAIL
     msg_to = settings.VIDEO_RENAME_NOTIFY
     print("Sending emails to: {}".format(msg_to))
-    # TODO: ESA/Hubble uses Mailgun to send emails. Please check how to add the msg_to emails to the recipients
-    # send_mail( msg_subject, msg_body, msg_from, msg_to, fail_silently=False )
+    send_mail( msg_subject, msg_body, msg_from, msg_to, fail_silently=False )
