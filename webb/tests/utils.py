@@ -41,7 +41,7 @@ def eval_pagination_regex(response, entries_count, no_results_name='entries'):
     """
     Common regex used to test list views for some models
     """
-    regex = r'(Showing 1 to [0-9]+ of {})|(No {} were found.)'.format(entries_count, no_results_name)
+    regex = r'(Showing 1 to \d+ of {})|(No {} were found.)'.format(entries_count, no_results_name)
     return bool(re.search(regex, response.content.decode('utf-8')))
 
 

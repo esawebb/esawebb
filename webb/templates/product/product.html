@@ -85,7 +85,7 @@
         </div>
         <div class="col-md-3">
             <div class="product-detail">
-                <h2 style="">{% trans "Price" %}{% if default_view_tax %} {% trans '(incl. tax)' %}{% endif %}:
+                <h2>{% trans "Price" %}{% if default_view_tax %} {% trans '(incl. tax)' %}{% endif %}:
                     {% if sale %}
                         <span id="fullprice" style="display: block; text-decoration: line-through;">{{ product|discount_price:""|currency }}</span>
                     {% endif %}

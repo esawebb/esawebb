@@ -27,7 +27,7 @@ def check_remote_file(remote_path):
         return True  # File exists
     except subprocess.CalledProcessError as e:
         logger= logging.getLogger()
-        logger.error('Failed process rclone', e)
+        logger.error('Failed process rclone %s', e)
         return False  # File does not exist
 
 def calculate_checksum(file_path):

@@ -57,7 +57,7 @@
                                 </td>
                                 <td class="quantity">
                                     {% url 'satchmo_cart_set_qty' as satchmo_cart_set_qty %}
-                                    <form role="form" id="form-{{ cartitem.id }}" action="{{ satchmo_cart_set_qty }}"
+                                    <form aria-label="Satchmo Cart" role="form" id="form-{{ cartitem.id }}" action="{{ satchmo_cart_set_qty }}"
                                           method="post">{% csrf_token %}
                                         <input type="hidden" name="cartitem" value="{{ cartitem.id }}"/>
                                         <input type="text" class="form-control" name="quantity" id="id_quantity"
@@ -66,7 +66,7 @@
                                                 id="id_update_submit">{% trans 'Update' %}</button>
                                     </form>
                                     {% url 'satchmo_cart_remove' as satchmo_cart_remove %}
-                                    <form role="form" action="{{ satchmo_cart_remove }}" method="post">{% csrf_token %}
+                                    <form aria-label="Satchmo cart remove" role="form" action="{{ satchmo_cart_remove }}" method="post">{% csrf_token %}
                                         <input type="hidden" name="cartitem" value="{{ cartitem.id }}"/>
                                         <button type="submit" class="btn btn-default">{% trans 'Remove' %}</button>
                                     </form>
