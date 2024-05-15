@@ -138,14 +138,14 @@ if __name__ == '__main__':
         count = count + 1
         try:
             remote   = urllib.request.urlopen(image.long_caption_link)
-        except Exception as e:
+        except Exception:
             remote  = 'timeout?'
         for line in remote:
             if line.find('release-number') > -1:
                 break
             try:
                 hubble_id = pattern.findall(line)[0].strip()
-            except IndexError as error:
+            except IndexError:
                 hubble_id = '?'
         middle = new_id(image.long_caption_link)
         webb_thumb = webb_thumb_pre + image.id + webb_thumb_post

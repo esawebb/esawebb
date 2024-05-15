@@ -52,7 +52,7 @@ if __name__ == '__main__':
     for obj in releases:
         try:
             links = obj.links.encode('utf-8')
-        except Exception as e:
+        except Exception:
             links = strip_tags(obj.links).encode('utf-8')
             print("PROBLEM with " + links) 
         obj_id = obj.id.encode('utf-8')
@@ -61,5 +61,5 @@ if __name__ == '__main__':
             try:
                 obj.links = new_text
                 obj.save()
-            except Exception as e:
+            except Exception:
                 print('Problem updating database for ' + id)
