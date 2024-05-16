@@ -3,7 +3,7 @@
 {% for entry in submenu %}
     <li
         class="">
-        <a class="dropdown-item " href="{{ entry.link|default:" #" }}"{% if entry.on_click %} target="_blank" {% endif %}>
+        <a class="dropdown-item " href="{{ entry.link|default:" #" }}"{% if entry.on_click %} target="_blank" rel="noopener" {% endif %}>
             {% trans entry.title|safe %}
             {% if entry.children|length %}
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
