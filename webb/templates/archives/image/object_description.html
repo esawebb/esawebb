@@ -6,7 +6,9 @@
 <h1 class="my-3">{{ object.title }}</h1>
 
 {% if object.resource_screen and object.resource_publicationjpg and object.fov_x == 360 and object.fov_y == 180 %}
-    <script src="//storage.googleapis.com/vrview/2.0/build/vrview.min.js"></script>
+    <script src="//storage.googleapis.com/vrview/2.0/build/vrview.min.js" 
+            integrity="sha384-qK4uRHw6CcexWRMp6QhFQa9foawR4EEuy0pf8d/DUHTZ4WDEpEgPDGFUI/fso4it" 
+            crossorigin="anonymous"></script>
     <div id="vrview"></div>
 
     <script>

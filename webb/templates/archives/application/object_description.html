@@ -18,13 +18,13 @@
 
 <div class="">
     {% if object.itunes_link %}
-        <a class="noicon" href="{{ object.itunes_link }}" target="_blank">
+        <a class="noicon" href="{{ object.itunes_link }}" target="_blank" rel="noopener">
             <img src="{{ MEDIA_URL }}archives/applications/appstore.png" alt="Available on the AppStore">
         </a>
         <br/>
     {% endif %}
     {% if object.marketplace_link %}
-        <a class="noicon" href="{{ object.marketplace_link }}" target="_blank">
+        <a class="noicon" href="{{ object.marketplace_link }}" target="_blank" rel="noopener">
             <img src="{{ MEDIA_URL }}archives/applications/google-play.png" alt="Available on the Google Play store">
         </a>
         <br/>

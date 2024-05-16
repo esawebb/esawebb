@@ -9,6 +9,7 @@
 #
 
 from __future__ import absolute_import
+from .partials.util import get_secret
 import os
 import re
 
@@ -68,20 +69,7 @@ class internal_ips( list ):
         return is_internal
 
 
-INTERNAL_IPS = internal_ips( [
-    '127.0.0.1',
-    '134.171.',
-    '~134.171.86.',
-    '~134.171.172.',
-    '~134.171.185.',
-    '~134.171.80.85',
-] )
-
-GARCHING_INTERNAL_IPS = (
-    '134.171.0.0/18',
-    '134.171.64.0/20',
-    '127.0.0.1',
-)
+INTERNAL_IPS = internal_ips(get_secret('INTERNAL_IPS'))
 
 SITE_ENVIRONMENT = os.environ.get('ENVIRONMENT', 'dev')
 DEBUG = SITE_ENVIRONMENT == 'dev'
