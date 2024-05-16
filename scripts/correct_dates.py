@@ -82,8 +82,6 @@ def process_objects(objs):
     finddate1 = datetime.strptime('2011-03-03 18:00:00','%Y-%m-%d %H:%M:%S')
     finddate2 = datetime.strptime('2011-03-03 19:00:00','%Y-%m-%d %H:%M:%S')
     for obj in objs:
-
-        YY = None
         dt = obj.release_date
         if (dt):
             # process all objects with 2011-03-03 18:00:00 - 19:00:00
@@ -100,8 +98,6 @@ def process_objects(objs):
                     if YY != dt.strftime('%y'):
                         if change_datetime(obj): count = count + 1
                         print(obj.id, 'old: ', dt, '\t new: ', obj.release_date ,'\t\t reason: ', YY,' != ', dt.strftime('%y'))
-        else:
-            pass
     return count
 
 
