@@ -28,7 +28,6 @@ def prepare4unicode():
 
 if __name__ == '__main__':
     # for testing
-    logging.basicConfig()
     prepare4unicode()
     
     script_path = os.path.dirname(sys.argv[0])
