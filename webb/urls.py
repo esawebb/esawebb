@@ -19,7 +19,6 @@ from django.views.generic.base import RedirectView
 import djangoplicity.views
 from djangoplicity.announcements.models import Announcement, WebUpdate
 from djangoplicity.announcements.options import AnnouncementOptions, WebUpdateOptions
-from djangoplicity.contacts.views import GroupSubscribe
 from djangoplicity.media.models import Image, Video, PictureOfTheWeek, ImageComparison
 from djangoplicity.media.options import ImageOptions, VideoOptions, PictureOfTheWeekOptions, ImageComparisonOptions
 from djangoplicity.menus.views import sitemap
@@ -140,8 +139,6 @@ urlpatterns += [
         {'model': FITSImage, 'options': FITSImageOptions}),
 
     # Public contacts edit
-    # TODO: Check if these contacts URLs are required
-    url(r'^contacts/', include('djangoplicity.contacts.urls')),
     # TODO: check these groups and update if necessary
 
     url(r'^rss/feed.xml$', RedirectView.as_view(url='https://feeds.feedburner.com/hubble_news/')),
