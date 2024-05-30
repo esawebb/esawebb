@@ -311,7 +311,6 @@ DJANGOPLICITY_APPS = [
     'djangoplicity.mailinglists',
     'djangoplicity.newsletters',
     'djangoplicity.iframe',
-    'djangoplicity.contacts',
     'djangoplicity.customsearch',
     'djangoplicity.admincomments',
     'djangoplicity.simplearchives',
