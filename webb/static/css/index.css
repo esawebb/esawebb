@@ -579,3 +579,34 @@ h6,
   overflow: hidden;
   text-overflow: ellipsis;
 }
+
+
+.adv_search tr {
+  border: 1px solid #dcdcdc;
+}
+
+.adv_search th, .adv_search td {
+  padding: 0.5rem;
+}
+
+.adv_search_submit {
+  padding: 1rem 0;
+}
+
+#adv_submit{
+  border-radius: 5px;
+  color: #fff;
+  background-color: #003247;
+  border-color: #003247;
+  display: inline-block;
+  font-weight: 400;
+  line-height: 1.5;
+  text-align: center;
+  text-decoration: none;
+  vertical-align: middle;
+  cursor: pointer;
+  border: 1px solid transparent;
+  padding: .375rem .75rem;
+  font-size: 1rem;
+  border-radius: .25rem;
+}
