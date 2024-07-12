@@ -21,6 +21,7 @@ services:
     restart: always
     environment:
       SERVICE_TYPE: "web"
+      INTERNAL_IPS: ${INTERNAL_IPS}
     volumes:
       - statics:/home/webbadm/static
     expose:
@@ -35,6 +36,8 @@ services:
     image: *hubble-image
     container_name: webb-celery
     restart: always
+    environment:
+      INTERNAL_IPS: ${INTERNAL_IPS}
     command:
       [
         "celery",
@@ -54,6 +57,8 @@ services:
     container_name: webb-flower
     restart: always
     # TODO: Change url prefix to /admin/tasks when having nginx proxy
+    environment:
+      INTERNAL_IPS: ${INTERNAL_IPS}
     command:
       [
         "celery",
@@ -72,6 +77,8 @@ services:
     image: *hubble-image
     container_name: webb-beat
     restart: always
+    environment:
+      INTERNAL_IPS: ${INTERNAL_IPS}
     command:
       [
         "celery",
