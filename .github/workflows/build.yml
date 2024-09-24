@@ -17,3 +17,22 @@ jobs:
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
           SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
+
+name: Test SSH connection
+
+on:
+  push:
+    branches:
+      - develop
+
+jobs:
+  test-ssh:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Set up SSH
+      uses: webfactory/ssh-agent@v0.5.3
+      with:
+        ssh-private-key: ${{ secrets.SSH_KEY }}
+
+    - name: Test SSH connection
+      run: ssh -o StrictHostKeyChecking=no root@159.65.230.117 "echo 'SSH connection successful'"
