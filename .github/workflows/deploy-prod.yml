@@ -1,9 +1,9 @@
-name: Deploy to DigitalOcean
+name: Deploy to Production
 
 on:
   push:
     branches:
-      - github  # Cambia esto si usas otra rama para despliegue
+      - main  # Cambia esto si usas otra rama para despliegue
 
 jobs:
   deploy:
@@ -20,11 +20,11 @@ jobs:
 
     - name: Deploy to server
       run: |
-        ssh -o StrictHostKeyChecking=no root@159.65.230.117 << 'EOF'
+        ssh -o StrictHostKeyChecking=no root@137.184.73.182 << 'EOF'
           echo 'SSH connection successful'
           cd /home/webbadm/esawebb/
           git pull
-          make dev-stop
-          make dev-up-build
+          make prod-stop
+          make prod-up-build
           echo 'Completed Deployment'
         EOF
