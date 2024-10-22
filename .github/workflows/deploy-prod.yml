@@ -1,0 +1,30 @@
+name: Deploy to Production
+
+on:
+  push:
+    branches:
+      - main  # Cambia esto si usas otra rama para despliegue
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Set up SSH
+      uses: webfactory/ssh-agent@v0.5.3
+      with:
+        ssh-private-key: ${{ secrets.SSH_KEY }}
+
+    - name: Deploy to server
+      run: |
+        ssh -o StrictHostKeyChecking=no root@137.184.73.182 << 'EOF'
+          echo 'SSH connection successful'
+          cd /home/webbadm/esawebb/
+          git pull
+          make prod-stop
+          make prod-up-build
+          echo 'Completed Deployment'
+        EOF
